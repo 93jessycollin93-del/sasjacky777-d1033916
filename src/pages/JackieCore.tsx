@@ -99,8 +99,9 @@ export default function JackieCore() {
     setBusy(true);
     const { data, error } = await supabase.functions.invoke("core-sync");
     setBusy(false);
-    if (error) {
-      toast({ title: "Sync failed", description: error.message, variant: "destructive" });
+    const failure = error?.message ?? ((data as { ok?: boolean; error?: string })?.ok === false ? (data as { error?: string }).error : undefined);
+    if (failure) {
+      toast({ title: "Sync failed", description: failure, variant: "destructive" });
       return;
     }
     toast({ title: `Synced ${(data as { synced?: number })?.synced ?? 0} documents` });
