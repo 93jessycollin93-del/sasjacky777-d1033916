@@ -62,7 +62,8 @@ async function handle(req: Request): Promise<Response> {
 
   const { data: userData, error: userErr } = await asUser.auth.getUser();
   const user = userData?.user;
-  if (userErr || !user?.email) return json({ error: "Invalid session" }, 401);
+  if (userErr || !user?.email) // 200 + verdict: the preview treats a 401 as a crash and blanks the screen.
+    return json({ granted: false, reason: "invalid_session", error: "Sign in with an email account to claim Jackie Core." }, 200);
 
   if (!user.email_confirmed_at) {
     return json({ granted: false, reason: "email_not_verified" }, 403);

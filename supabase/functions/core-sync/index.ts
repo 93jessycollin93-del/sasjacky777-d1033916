@@ -659,8 +659,9 @@ async function handle(req: Request): Promise<Response> {
   const { data: userData } = await asUser.auth.getUser();
   const user = userData?.user;
   if (!user) {
-    return new Response(JSON.stringify({ error: "Invalid session" }), {
-      status: 401,
+    return new Response(JSON.stringify({ ok: false, error: "Invalid session — sign in again.", code: "INVALID_SESSION" }), {
+      // 200 + envelope: the preview treats a 401 as a crash and blanks the screen.
+      status: 200,
       headers: { ...cors, "Content-Type": "application/json" },
     });
   }
