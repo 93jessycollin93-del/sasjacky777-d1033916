@@ -11,14 +11,17 @@ import { bootstrapPWA } from "./pwa/register";
 const RELOAD_FLAG = "jacky.chunkReload.v1";
 const isChunkError = (msg: string) =>
   /Importing a module script failed|Failed to fetch dynamically imported module|error loading dynamically imported module/i.test(msg);
-const recover = () => {
-  if (sessionStorage.getItem(RELOAD_FLAG)) return;
+const recover = (): boolean => {
+  if (sessionStorage.getItem(RELOAD_FLAG)) return false;
   sessionStorage.setItem(RELOAD_FLAG, String(Date.now()));
   window.location.reload();
+  return true;
 };
+// preventDefault makes Vite resolve the import with undefined, which React.lazy
+// then reads as `undefined._result.default` and blanks the screen. Only swallow
+// the error when a reload is actually on its way; otherwise let it surface.
 window.addEventListener("vite:preloadError", (e) => {
-  e.preventDefault();
-  recover();
+  if (recover()) e.preventDefault();
 });
 window.addEventListener("unhandledrejection", (e) => {
   if (isChunkError(String(e.reason?.message ?? e.reason))) recover();

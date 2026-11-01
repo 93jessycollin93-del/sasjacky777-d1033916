@@ -7,7 +7,18 @@ import { AuthProvider, useAuth } from "@/hooks/useAuth";
 import { ThemeProvider } from "@/hooks/useTheme";
 import { I18nProvider } from "@/game/i18n";
 import { LocalAIProvider } from "@/providers/LocalAIProvider";
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect, lazy as reactLazy, Suspense } from "react";
+
+// A swallowed chunk-load error (Vite's preloadError while a reload is pending)
+// resolves the import with undefined, and React.lazy then crashes reading
+// `_result.default`. Turn that into a real error the boundary can show.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const lazy = <T extends React.ComponentType<any>>(load: () => Promise<{ default: T }>) =>
+  reactLazy(async () => {
+    const mod = await load();
+    if (!mod || !mod.default) throw new Error("This page failed to load. Reload to get the latest version.");
+    return mod;
+  });
 import { supabase } from "@/integrations/supabase/client";
 // Share one attempt across route mounts; a completed attempt must not trap
 // a later sign-out behind a loading screen.
