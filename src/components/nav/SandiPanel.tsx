@@ -19,6 +19,9 @@ import { Bot, CornerDownLeft, Loader2, Mic, MicOff, Settings2, X } from "lucide-
 import { cn } from "@/lib/utils";
 import { listLocal } from "@/lib/forge/store";
 import { filterCommands, type CommandHit } from "@/lib/forge/commands";
+import { allApps } from "@/lib/appShortNames";
+
+const apps = allApps();
 import { listenOnce, speechSupported } from "@/lib/forge/voice";
 import type { CraftedIndex } from "@/lib/forge/types";
 import { ContextRouterService, defaultEngines } from "@/lib/microai/contextRouterService";
@@ -277,6 +280,7 @@ export function SandiPanel({
           <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
             Commands — no model, no wait
           </p>
+          {query.trim() ? (
           <ul className="grid grid-cols-2 gap-x-3 gap-y-1">
             {commands.map((command: CommandHit) => (
               <li key={`${command.path}:${command.label}`}>
@@ -290,6 +294,22 @@ export function SandiPanel({
               </li>
             ))}
           </ul>
+          ) : (
+          <ul className="grid max-h-64 grid-cols-4 gap-x-3 gap-y-1 overflow-y-auto" aria-label="All apps">
+            {apps.map((app) => (
+              <li key={app.path}>
+                <button
+                  onClick={() => { close(); navigate(app.path); }}
+                  className="w-full truncate text-left font-mono text-[11px] text-muted-foreground hover:text-primary"
+                  title={`${app.name} — ${app.path}`}
+                  aria-label={`Open ${app.name}`}
+                >
+                  · {app.short}
+                </button>
+              </li>
+            ))}
+          </ul>
+          )}
         </div>
       </div>
 
