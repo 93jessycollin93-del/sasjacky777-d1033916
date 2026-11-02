@@ -1,0 +1,283 @@
+# Developer Tooling
+
+## Playtesting pull requests
+
+From the repository root, download and launch a PR's tiles build without compiling locally:
+
+```sh
+gh auth login
+just playtest 10443
+just playtest https://github.com/cataclysmbn/Cataclysm-BN/pull/10443
+just playtest --os linux https://github.com/cataclysmbn/Cataclysm-BN/pull/10443
+just playtest "Exact PR title"
+just playtest branch-name
+```
+
+The first argument accepts a PR number, URL, branch, or exact title. Titles must match exactly one PR;
+quote titles containing spaces. The optional `--os` is `linux`, `windows`, `macos`, or `android`, and defaults
+to the host OS. Desktop builds must run on their matching OS. Linux builds require x86_64; macOS selects
+Intel or ARM according to the host architecture.
+
+Install [just](https://just.systems/), [Deno](https://deno.com/), and the
+[GitHub CLI](https://cli.github.com/). The repository's justfile also requires Bash, including on Windows.
+Linux extraction requires GNU tar; macOS uses the built-in `hdiutil`, `ditto`, and `open` tools.
+The downloaded game still needs its platform's runtime libraries.
+
+For Android, connect an ARM64 device with USB debugging enabled and ensure `adb devices` shows one
+authorized target, then run `just playtest --os android https://github.com/cataclysmbn/Cataclysm-BN/pull/10443`. This installs or updates the experimental app
+with `adb install -r` and launches it. An existing app signed with a different key cannot be updated
+this way.
+
+> [!WARNING]
+> Only playtest PRs you trust: their artifacts execute code on your computer or Android device.
+
+The command selects the newest unexpired artifact matching the PR's current head SHA. If none exists,
+check the PR's `matrix` workflow: the build may be pending, skipped, failed, or expired. Older commits
+are not used as a fallback.
+
+Desktop downloads are cached under
+`/tmp/cataclysm-bn/artifacts/PR-<number>-<SHA>/<os>/build-<artifact-id>/`.
+On Windows, the root is `%TEMP%\cataclysm-bn\artifacts` (the repository directory is used if `TEMP` is unset).
+Repeated launches reuse the same artifact directory and preserve its saves and configuration;
+a new SHA or artifact ID gets a separate directory. Temporary-directory cleanup can remove these files,
+so copy any saves you want to keep elsewhere. Android saves remain on the device.
+
+## Code style (C++)
+
+C++ formatting uses [Artistic Style](http://astyle.sourceforge.net/) only for top-level
+`src/*.cpp` and `src/*.h`. Most other C++ files use
+[clang-format](https://clang.llvm.org/docs/ClangFormat.html). Formatter-sensitive fixtures such as
+`tools/clang-tidy-plugin/test/` are left unchanged. Use the repository helpers so each file goes
+through the right formatter.
+
+### Invoking C++ formatting
+
+```sh
+just fmt
+# or, for C++ only
+just fmt-cpp
+```
+
+### Invoking C++ formatting through CMake
+
+If you have configured a CMake build tree with `bash` available, this target calls the same C++ helper:
+
+```sh
+cmake --build <build-dir> --target format
+```
+
+### Invoking formatting via pre-commit hook
+
+Install the optional hook with:
+
+```sh
+just hooks-setup
+```
+
+### Astyle extensions for Visual Studio
+
+Use these only for top-level `src/*.cpp` and `src/*.h`; use `just fmt-cpp` for repository style.
+There are astyle extensions in the Visual Studio Marketplace, but none of them have been confirmed
+(yet) to correctly work for our purposes on VS2019 or VS2022.
+
+#### Visual Studio 2022
+
+Head over to <https://github.com/olanti-p/BN_Astyle> and follow instructions in the
+[README.md](https://github.com/olanti-p/BN_Astyle/blob/master/README.md). You may compile and
+install the extension from source, or take advantage of the pre-built version in
+[releases section](https://github.com/olanti-p/BN_Astyle/releases).
+
+#### Visual Studio 2019
+
+Extensions's source code lives over at https://github.com/lukamicoder/astyle-extension. To install
+and compile it:
+
+1. Add the `Visual Studio extension development` workload through Visual Studio installer to your
+   VS2019
+2. Download and extract the source code, or clone the repository (a simple
+   `git clone --depth 1 https://github.com/lukamicoder/astyle-extension.git` should do).
+3. From the root folder, open `astyle-extension/AStyleExtension2017.sln`
+4. Select `Release` build configuration (most likely VS will select `Debug` configuration by
+   default)
+5. Build the solution
+6. If the build succeeded, you'll see the compiled extension in `AStyleExtension\bin\Release`.
+   Double click it to install.
+7. Configure the extension according to
+   [Configuration instructions (Visual Studio 2019 or older)](#configuration-instructions-visual-studio-2019-or-older)
+   section.
+
+#### Visual Studio 2017 or earlier
+
+You may follow the steps for VS2019 to compile from source, but there are pre-built versions
+[available](https://marketplace.visualstudio.com/items?itemName=Lukamicoder.AStyleExtension2017) on
+Visual Studio Marketplace, you should be able to install the extension through VS's extension
+manager and then configure it the same way.
+
+#### Configuration instructions (Visual Studio 2019 or older):
+
+1. Go to `Tools` - `Options` - `AStyle Formatter` - `General`.
+
+2. Import
+   `https://github.com/cataclysmbn/Cataclysm-BN/blob/main/msvc-full-features/AStyleExtension-Cataclysm-BN.cfg`
+   on `Export/Import` tab using `Import` button:
+
+![image](./img/VS_Astyle_Step_1.png)
+
+3. After import is successful you can see imported rules on `C/C++` tab:
+
+![image](./img/VS_Astyle_Step_2.png)
+
+4. Close `Options` menu, open file to be astyled and use `Format Document (Astyle)` or
+   `Format Selection (Astyle)` commands from `Edit` - `Advanced` menu.
+
+![image](./img/VS_Astyle_Step_3.png)
+
+_Note:_ You can also configure keybindings for aforementioned commands in `Tools` - `Options` -
+`Environment` - `Keybindings` menu:
+
+![image](./img/VS_Astyle_Step_4.png)
+
+## JSON style
+
+See the [JSON style guide](../../mod/json/explanation/json_style).
+
+## ctags
+
+In addition to the usual means of creating a `tags` file via e.g.
+[`ctags`](http://ctags.sourceforge.net/), we provide `tools/json_tools/cddatags.py` to augment a
+`tags` file with locations of definitions taken from CDDA JSON data. `cddatags.py` is designed to
+safely update a tags file containing source code tags, so if you want both types of tag in your
+`tags` file then you can run `ctags -R . && tools/json_tools/cddatags.py`.
+
+## clang-tidy
+
+Cataclysm has a
+[clang-tidy configuration file](https://github.com/cataclysmbn/Cataclysm-BN/blob/main/.clang-tidy)
+and if you have `clang-tidy` available you can run it to perform static analysis of the codebase. We
+test with `clang-tidy` from LLVM 22 with CI, so for the most consistent results, you might want to
+use that version.
+
+To run it, you have a few options.
+
+- `clang-tidy` ships with a wrapper script `run-clang-tidy.py`.
+
+- Use CMake's built-in support by adding `-DCMAKE_CXX_CLANG_TIDY=clang-tidy` or similar, pointing it
+  to your chosen clang-tidy version.
+
+- To run `clang-tidy` directly try something like
+
+```sh
+grep '"file": "' build/compile_commands.json | \
+    sed "s+.*$PWD/++;s+\"$++" | \
+    egrep '.' | \
+    xargs -P 9 -n 1 clang-tidy -quiet
+```
+
+To focus on a subset of files add their names into the `egrep` regex in the middle of the
+command-line.
+
+## Custom clang-tidy plugin
+
+We have written our own clang-tidy checks in a custom plugin. refer to
+[clang-tidy.yml](https://github.com/cataclysmbn/Cataclysm-BN/blob/main/.github/workflows/clang-tidy.yml)
+for the exact steps to build the plugin on ubuntu 24.04.
+
+### Build plugin on Ubuntu 24.04
+
+Follow exact steps in [cmake guide](../../dev/guides/building/cmake.md) with following changes:
+
+Also install these additional dependencies:
+
+```sh
+sudo apt-get install \
+  clang-22 libclang-22-dev llvm-22 llvm-22-dev clang-tidy-22
+```
+
+add `CATA_CLANG_TIDY_PLUGIN=ON` to cmake flags when configuring the build.
+
+### Build plugin on Fedora 40
+
+Follow exact steps in [atomic cmake guide](../../dev/guides/building/atomic_cmake.md) with following
+changes:
+
+Also install these additional dependencies:
+
+```sh
+sudo dnf install clang-devel llvm-devel clang-tools-extra-devel
+```
+
+add `CATA_CLANG_TIDY_PLUGIN=ON` to cmake flags when configuring the build.
+
+### Using the plugin
+
+To run the plugin on a single file, run following command on project root:
+
+```sh
+$ ./build-scripts/clang-tidy-wrapper.sh -fix src/achievement.cpp
+```
+
+To run the plugin on multiple files, use [GNU parallel](https://www.gnu.org/software/parallel/):
+
+```sh
+$ parallel ./build-scripts/clang-tidy-wrapper.sh -fix ::: src/*.cpp
+```
+
+## include-what-you-use
+
+[include-what-you-use](https://github.com/include-what-you-use/include-what-you-use) (IWYU) is a
+project intended to optimise includes. It will calculate the required headers and add and remove
+includes as appropriate.
+
+Running on this codebase revealed some issues. You will need a version of IWYU where the following
+PR has been merged (which has not yet happened at time of writing, but with luck might make it into
+the clang-10 release of IWYU):
+
+- https://github.com/include-what-you-use/include-what-you-use/pull/775
+
+Once you have IWYU built, build the codebase using cmake, with `CMAKE_EXPORT_COMPILE_COMMANDS=ON` on
+to create a compilation database (Look for `compile_commands.json` in the build dir to see whether
+that worked).
+
+Then run:
+
+```sh
+iwyu_tool.py -p $CMAKE_BUILD_DIR/compile_commands.json -- -Xiwyu --mapping_file=$PWD/tools/iwyu/cata.imp | fix_includes.py --nosafe_headers --reorder
+```
+
+IWYU will sometimes add C-style library headers which clang-tidy doesn't like, so you might need to
+run clang-tidy (as described above) and then re-run IWYU a second time.
+
+There are mapping files in `tools/iwyu` intended to help IWYU pick the right headers. Mostly they
+should be fairly obvious, but the SDL mappings might warrant further explanation. We want to force
+most SDL includes to go via `sdl_wrappers.h`, because that handles the platform-dependence issues
+(the include paths are different on Windows). There are a couple of exceptions (`SDL_version.h` and
+`SDL_mixer.h`). The former is because `main.cpp` can't include all SDL headers, because they
+`#define WinMain`. All the mappings in `sdl.imp` are designed to make this happen.
+
+We have to use IWYU pragmas in some situations. Some of the reasons are:
+
+- IWYU has a concept of
+  [associated headers](https://github.com/include-what-you-use/include-what-you-use/blob/master/docs/IWYUPragmas.md#iwyu-pragma-associated),
+  where each cpp file can have some number of such headers. The cpp file is expected to define the
+  things declared in those headers. In Cata, the mapping between headers and cpp files is not nearly
+  so simple, so there are files with multiple associated headers, and files with none. Headers that
+  are not the associated header of any cpp file will not get their includes updated, which could
+  lead to broken builds, so ideally all headers would be associated to some cpp file. You can use
+  the following command to get a list of headers which are not currently associated to any cpp file
+  (requires GNU sed):
+
+```sh
+diff <(ls src/*.h | sed 's!.*/!!') <(for i in src/*.cpp; do echo $i; sed -n '/^#include/{p; :loop n; p; /^$/q; b loop}' $i; done | grep 'e "' | grep -o '"[^"]*"' | sort -u | tr -d '"')
+```
+
+- Due to a [clang bug](https://bugs.llvm.org/show_bug.cgi?id=20666), uses in template arguments to
+  explicit instantiations are not counted, which leads to some need for `IWYU pragma: keep`.
+
+- Due to
+  [these](https://github.com/include-what-you-use/include-what-you-use/blob/4909f206b46809775e9b5381f852eda62cbf4bf7/iwyu.cc#L1617)
+  [missing](https://github.com/include-what-you-use/include-what-you-use/blob/4909f206b46809775e9b5381f852eda62cbf4bf7/iwyu.cc#L1629)
+  features of IWYU, it does not count uses in template arguments to return types, which leads to
+  other requirements for `IWYU pragma: keep`.
+
+- IWYU seems to have particular trouble with types used in maps. Have not looked into this in
+  detail, but again worked around it with pragmas.

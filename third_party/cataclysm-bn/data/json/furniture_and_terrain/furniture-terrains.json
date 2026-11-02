@@ -1,0 +1,1376 @@
+[
+  {
+    "id": "f_tatami",
+    "type": "furniture",
+    "name": "tatami mat",
+    "description": "A tatami is a type of mat used as a flooring material in traditional Japanese-style rooms.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost_mod": 0,
+    "comfort": 2,
+    "floor_bedding_warmth": -1500,
+    "required_str": 7,
+    "bash": {
+      "str_min": 8,
+      "str_max": 30,
+      "sound": "crunch.",
+      "sound_fail": "whump.",
+      "items": [
+        { "item": "straw_pile", "count": [ 5, 8 ] },
+        { "item": "rag", "count": [ 2, 4 ] },
+        { "item": "string_36", "count": [ 1, 2 ] }
+      ]
+    },
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "ORGANIC" ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_pillow_fort",
+    "name": "pillow fort",
+    "symbol": "^",
+    "description": "A comfy place to hide from the world.  Not very defensible, though.",
+    "color": "white",
+    "move_cost_mod": 3,
+    "coverage": 90,
+    "comfort": 4,
+    "floor_bedding_warmth": 1000,
+    "required_str": -1,
+    "deconstruct": { "items": [ { "item": "pillow", "count": 19 }, { "item": "blanket", "count": 3 } ] },
+    "flags": [
+      "TRANSPARENT",
+      "FLAMMABLE_ASH",
+      "PLACE_ITEM",
+      "ORGANIC",
+      "REDUCE_SCENT",
+      "EASY_DECONSTRUCT",
+      "BASHABLE",
+      "HIDE_PLACE",
+      "NO_SIGHT"
+    ],
+    "bash": {
+      "str_min": 1,
+      "str_max": 1,
+      "sound": "paf!",
+      "sound_fail": "poof.",
+      "items": [ { "item": "pillow", "count": 19 }, { "item": "blanket", "count": 3 } ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_cardboard_fort",
+    "name": "cardboard fort",
+    "symbol": "^",
+    "description": "A fort built by tipping a cardboard box on its side, lining it with blankets, and partly weather sealing it with a plastic sheet.",
+    "color": "brown",
+    "move_cost_mod": 3,
+    "coverage": 95,
+    "comfort": 4,
+    "floor_bedding_warmth": 700,
+    "required_str": 3,
+    "deconstruct": {
+      "items": [
+        { "item": "box_large", "count": 1 },
+        { "item": "plastic_sheet", "count": 1 },
+        { "item": "blanket", "count": 2 },
+        { "item": "pillow", "count": 4 }
+      ]
+    },
+    "flags": [
+      "TRANSPARENT",
+      "FLAMMABLE_ASH",
+      "PLACE_ITEM",
+      "ORGANIC",
+      "REDUCE_SCENT",
+      "EASY_DECONSTRUCT",
+      "BASHABLE",
+      "HIDE_PLACE",
+      "NO_SIGHT",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 4,
+      "str_max": 15,
+      "sound": "crumple!",
+      "sound_fail": "thud.",
+      "items": [
+        { "item": "cardboard", "charges": [ 30, 60 ] },
+        { "item": "plastic_chunk", "charges": [ 5, 10 ] },
+        { "item": "rag", "charges": [ 20, 40 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_cardboard_wall",
+    "name": "cardboard wall",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost_mod": -1,
+    "coverage": 100,
+    "description": "This is a pile of cardboard boxes that have been filled with rags and junk and stacked together like bricks to form a wall.",
+    "required_str": -1,
+    "flags": [ "NOITEM", "BLOCKSDOOR", "FLAMMABLE_ASH", "ORGANIC", "EASY_DECONSTRUCT", "BLOCK_WIND" ],
+    "deconstruct": {
+      "items": [
+        { "item": "box_large", "count": 1 },
+        { "item": "box_medium", "count": 2 },
+        { "item": "box_small", "count": 4 },
+        { "item": "rag", "count": 50 },
+        { "item": "paper", "count": 50 },
+        { "item": "plastic_chunk", "count": 20 },
+        { "item": "plastic_sheet", "count": 2 }
+      ]
+    },
+    "bash": {
+      "str_min": 6,
+      "str_max": 20,
+      "sound": "crash!",
+      "sound_fail": "whump.",
+      "items": [
+        { "item": "box_large", "count": [ 0, 1 ] },
+        { "item": "box_medium", "count": [ 0, 2 ] },
+        { "item": "box_small", "count": [ 0, 4 ] },
+        { "item": "rag", "count": [ 20, 50 ] },
+        { "item": "paper", "count": [ 20, 40 ] },
+        { "item": "plastic_chunk", "count": [ 5, 20 ] },
+        { "item": "plastic_sheet", "count": [ 0, 2 ] }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 3, 6 ], "destroy_threshold": 20 }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_cardboard_floor",
+    "name": "cardboard floor",
+    "symbol": "_",
+    "color": "brown",
+    "looks_like": "f_tatami",
+    "move_cost_mod": 0,
+    "description": "A flat floor made of sheets of cardboard duct-taped together overtop a plastic sheet.",
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "FLAT", "ORGANIC", "EASY_DECONSTRUCT" ],
+    "deconstruct": {
+      "items": [ { "item": "cardboard", "count": 10 }, { "item": "paper", "count": 50 }, { "item": "plastic_sheet", "count": 2 } ]
+    },
+    "bash": {
+      "str_min": 1,
+      "str_max": 10,
+      "sound": "crash!",
+      "sound_fail": "whump.",
+      "items": [
+        { "item": "cardboard", "count": [ 5, 9 ] },
+        { "item": "paper", "count": [ 10, 40 ] },
+        { "item": "plastic_sheet", "count": [ 1, 2 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_cardboard_roof",
+    "name": "cardboard roof",
+    "symbol": "_",
+    "color": "brown",
+    "looks_like": "f_tatami",
+    "move_cost_mod": 0,
+    "description": "A sloped roof made of cardboard boxes, stuffed with scrap cardboard and paper and layered atop each other.  Sheets of plastic are carefully arrayed on top to shed water.  It looks like it could last a season or two at least before crumbling.",
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "FLAT", "ORGANIC", "EASY_DECONSTRUCT", "ALLOW_ON_OPEN_AIR" ],
+    "deconstruct": {
+      "items": [
+        { "item": "box_small", "count": 10 },
+        { "item": "cardboard", "count": 10 },
+        { "item": "rag", "count": 10 },
+        { "item": "paper", "count": 50 },
+        { "item": "plastic_sheet", "count": 2 }
+      ]
+    },
+    "bash": {
+      "str_min": 1,
+      "str_max": 10,
+      "sound": "crash!",
+      "sound_fail": "whump.",
+      "items": [
+        { "item": "box_small", "count": [ 0, 10 ] },
+        { "item": "cardboard", "count": [ 5, 9 ] },
+        { "item": "paper", "count": [ 10, 40 ] },
+        { "item": "rag", "count": [ 0, 10 ] },
+        { "item": "plastic_sheet", "count": [ 1, 2 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_cardboard_door_o",
+    "name": "cardboard door",
+    "symbol": ".",
+    "color": "brown",
+    "looks_like": "f_tatami",
+    "move_cost_mod": 1,
+    "coverage": 100,
+    "description": "This is a pile of cardboard boxes that have been filled with rags and junk and stacked together like bricks to form a wall.  The largest box has been cut open and folded to form a makeshift door, which is open.",
+    "required_str": -1,
+    "flags": [ "NOITEM", "BLOCKSDOOR", "FLAMMABLE_ASH", "ORGANIC", "EASY_DECONSTRUCT", "BLOCK_WIND", "DOOR" ],
+    "close": "f_cardboard_door",
+    "deconstruct": {
+      "items": [
+        { "item": "box_large", "count": 1 },
+        { "item": "box_medium", "count": 2 },
+        { "item": "box_small", "count": 4 },
+        { "item": "rag", "count": 50 },
+        { "item": "paper", "count": [ 30, 80 ] },
+        { "item": "plastic_chunk", "count": 20 },
+        { "item": "plastic_sheet", "count": 2 }
+      ]
+    },
+    "bash": {
+      "str_min": 4,
+      "str_max": 12,
+      "sound": "crash!",
+      "sound_fail": "whump.",
+      "items": [
+        { "item": "box_large", "count": [ 0, 1 ] },
+        { "item": "box_medium", "count": [ 0, 2 ] },
+        { "item": "box_small", "count": [ 0, 4 ] },
+        { "item": "rag", "count": [ 20, 50 ] },
+        { "item": "paper", "count": [ 30, 80 ] },
+        { "item": "plastic_chunk", "count": [ 5, 20 ] },
+        { "item": "plastic_sheet", "count": [ 0, 2 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_cardboard_door",
+    "name": "cardboard door",
+    "symbol": "+",
+    "color": "brown",
+    "looks_like": "f_cardboard_box",
+    "move_cost_mod": -1,
+    "coverage": 100,
+    "description": "This is a pile of cardboard boxes that have been filled with rags and junk and stacked together like bricks to form a wall.  The largest box has been cut open and folded to form a makeshift door, which is closed.",
+    "required_str": -1,
+    "flags": [ "NOITEM", "FLAMMABLE_ASH", "ORGANIC", "EASY_DECONSTRUCT", "BLOCK_WIND", "DOOR" ],
+    "open": "f_cardboard_door_o",
+    "deconstruct": {
+      "items": [
+        { "item": "box_large", "count": 1 },
+        { "item": "box_medium", "count": 2 },
+        { "item": "box_small", "count": 4 },
+        { "item": "rag", "count": 50 },
+        { "item": "paper", "count": [ 30, 80 ] },
+        { "item": "plastic_chunk", "count": 20 },
+        { "item": "plastic_sheet", "count": 2 }
+      ]
+    },
+    "bash": {
+      "str_min": 4,
+      "str_max": 13,
+      "sound": "crash!",
+      "sound_fail": "whump.",
+      "items": [
+        { "item": "box_large", "count": [ 0, 1 ] },
+        { "item": "box_medium", "count": [ 0, 2 ] },
+        { "item": "box_small", "count": [ 0, 4 ] },
+        { "item": "rag", "count": [ 20, 50 ] },
+        { "item": "paper", "count": [ 50, 150 ] },
+        { "item": "plastic_chunk", "count": [ 5, 20 ] },
+        { "item": "plastic_sheet", "count": [ 0, 2 ] }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 2, 4 ], "destroy_threshold": 13 }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_beaded_door",
+    "name": "beaded curtain",
+    "description": "This beaded curtain could be pulled aside.",
+    "symbol": "+",
+    "color": "pink",
+    "looks_like": "f_canvas_door",
+    "move_cost_mod": 6,
+    "coverage": 90,
+    "required_str": -1,
+    "flags": [ "NOITEM", "DOOR", "PERMEABLE", "FLAMMABLE_ASH", "MOUNTABLE" ],
+    "open": "f_beaded_door_o",
+    "deconstruct": {
+      "items": [ { "item": "stick_long", "count": 1 }, { "item": "string_36", "count": 20 }, { "item": "wooden_bead", "count": 500 } ]
+    },
+    "bash": {
+      "str_min": 1,
+      "str_max": 1,
+      "sound": "clickity clack… clack… clack",
+      "sound_fail": "clickity clack… clack",
+      "sound_vol": "75 dB",
+      "items": [
+        { "item": "string_36", "count": [ 3, 15 ] },
+        { "item": "stick_long", "count": 1 },
+        { "item": "wooden_bead", "count": [ 200, 500 ] }
+      ],
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_beaded_door_o",
+    "name": "open beaded curtain",
+    "description": "This beaded curtain has been pulled aside.",
+    "symbol": ".",
+    "color": "pink",
+    "looks_like": "f_canvas_door_o",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "FLAT" ],
+    "close": "f_beaded_door",
+    "deconstruct": {
+      "items": [ { "item": "stick_long", "count": 1 }, { "item": "string_36", "count": 20 }, { "item": "wooden_bead", "count": 2000 } ]
+    },
+    "bash": {
+      "str_min": 1,
+      "str_max": 1,
+      "sound": "clickity clack… clack… clack!",
+      "sound_fail": "clickity clack… clack",
+      "sound_vol": "75 dB",
+      "items": [
+        { "item": "string_36", "count": [ 3, 15 ] },
+        { "item": "stick_long", "count": 1 },
+        { "item": "wooden_bead", "count": [ 200, 500 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_canvas_floor",
+    "name": "canvas floor",
+    "description": "Flooring made out of stretched, waterproof cloth.  Helps keep the dirt out of the tent.",
+    "symbol": "#",
+    "color": "white",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE", "SUN_ROOF_ABOVE", "FLAT", "PLACE_ITEM" ],
+    "deconstruct": { "items": [ { "item": "sheet", "count": 1 } ] }
+  },
+  {
+    "type": "furniture",
+    "id": "f_skylight_canvas_floor",
+    "name": "skylight canvas floor",
+    "description": "Flooring made out of stretched, waterproof cloth.  Helps keep the dirt out of the tent. Has a plastic skylight to let light",
+    "symbol": "#",
+    "color": "white",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE", "FLAT", "PLACE_ITEM" ],
+    "deconstruct": { "items": [ { "item": "sheet", "count": 1 }, { "item": "plastic_sheet", "count": 1 } ] }
+  },
+  {
+    "type": "furniture",
+    "id": "f_canvas_wall",
+    "name": "canvas wall",
+    "description": "A wall made of stretched, waterproof cloth and supported by wooden or metal stakes.",
+    "symbol": "#",
+    "color": "blue",
+    "move_cost_mod": -1,
+    "coverage": 95,
+    "required_str": -1,
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "SUN_ROOF_ABOVE", "NO_SCENT", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" },
+      "items": [ { "item": "rag", "count": [ 10, 20 ] }, { "item": "pointy_stick_long", "count": [ 0, 1 ] } ]
+    },
+    "deconstruct": { "items": [ { "item": "sheet", "count": 1 }, { "item": "pointy_stick_long", "count": 1 } ] }
+  },
+  {
+    "type": "furniture",
+    "id": "f_large_canvas_wall",
+    "name": "heavy-duty canvas wall",
+    "description": "A wall made of stretched, waterproof cloth and supported by wooden or metal stakes. It has been strenghtened with plastic sheets.",
+    "symbol": "#",
+    "color": "blue",
+    "move_cost_mod": -1,
+    "coverage": 95,
+    "required_str": -1,
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "SUN_ROOF_ABOVE", "NO_SCENT", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 4,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" },
+      "items": [
+        { "item": "rag", "count": [ 10, 20 ] },
+        { "item": "plastic_chunk", "count": [ 10, 20 ] },
+        { "item": "pointy_stick_long", "count": [ 0, 1 ] }
+      ]
+    },
+    "deconstruct": {
+      "items": [
+        { "item": "sheet", "count": 1 },
+        { "item": "plastic_sheet", "count": 1 },
+        { "item": "pointy_stick_long", "count": 1 }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_canvas_door",
+    "name": "canvas flap",
+    "description": "This canvas flap door could be pulled aside. If you examine it closely, you could peek outside.",
+    "symbol": "+",
+    "color": "blue",
+    "looks_like": "f_canvas_door",
+    "move_cost_mod": -1,
+    "coverage": 95,
+    "required_str": -1,
+    "flags": [ "FLAMMABLE_HARD", "DOOR", "NOITEM", "SUN_ROOF_ABOVE", "NO_SCENT", "BLOCK_WIND" ],
+    "open": "f_canvas_door_o",
+    "examine_action": "door_peephole",
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" },
+      "items": [ { "item": "rag", "count": [ 10, 20 ] } ]
+    },
+    "deconstruct": { "items": [ { "item": "sheet", "count": 1 } ] }
+  },
+  {
+    "type": "furniture",
+    "id": "f_canvas_door_o",
+    "name": "open canvas flap",
+    "description": "This canvas flap door has been pulled aside.",
+    "symbol": ".",
+    "color": "blue",
+    "move_cost_mod": 2,
+    "coverage": 95,
+    "required_str": -1,
+    "flags": [ "FLAMMABLE", "TRANSPARENT" ],
+    "close": "f_canvas_door",
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" },
+      "items": [ { "item": "rag", "count": [ 10, 20 ] } ]
+    },
+    "deconstruct": { "items": [ { "item": "sheet", "count": 1 } ] }
+  },
+  {
+    "type": "furniture",
+    "id": "f_large_canvas_door",
+    "name": "heavy-duty canvas flap",
+    "description": "This canvas flap door could be pulled aside. If you examine it closely, you could peek outside.",
+    "symbol": "+",
+    "color": "blue",
+    "looks_like": "f_large_canvas_door",
+    "move_cost_mod": -1,
+    "coverage": 95,
+    "required_str": -1,
+    "flags": [ "FLAMMABLE_HARD", "DOOR", "NOITEM", "SUN_ROOF_ABOVE", "NO_SCENT", "BLOCK_WIND" ],
+    "open": "f_large_canvas_door_o",
+    "examine_action": "door_peephole",
+    "bash": {
+      "str_min": 4,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" },
+      "items": [
+        { "item": "rag", "count": [ 10, 20 ] },
+        { "item": "plastic_chunk", "count": [ 10, 20 ] },
+        { "item": "pointy_stick_long", "count": [ 0, 1 ] }
+      ]
+    },
+    "deconstruct": {
+      "items": [
+        { "item": "sheet", "count": 1 },
+        { "item": "plastic_sheet", "count": 1 },
+        { "item": "pointy_stick_long", "count": 1 }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_large_canvas_door_o",
+    "name": "open heavy-duty canvas flap",
+    "description": "This canvas flap door has been pulled aside.",
+    "symbol": ".",
+    "color": "blue",
+    "move_cost_mod": 2,
+    "coverage": 95,
+    "required_str": -1,
+    "flags": [ "FLAMMABLE", "TRANSPARENT" ],
+    "close": "f_large_canvas_door",
+    "bash": {
+      "str_min": 4,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" },
+      "items": [
+        { "item": "rag", "count": [ 10, 20 ] },
+        { "item": "plastic_chunk", "count": [ 10, 20 ] },
+        { "item": "pointy_stick_long", "count": [ 0, 1 ] }
+      ]
+    },
+    "deconstruct": {
+      "items": [
+        { "item": "sheet", "count": 1 },
+        { "item": "plastic_sheet", "count": 1 },
+        { "item": "pointy_stick_long", "count": 1 }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_groundsheet",
+    "name": "groundsheet",
+    "description": "This plastic groundsheet could keep you dry.",
+    "symbol": ";",
+    "color": "green",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "NOCOLLIDE", "SUN_ROOF_ABOVE" ],
+    "examine_action": "portable_structure",
+    "deployed_item": "tent_kit",
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "items": [ { "item": "broketent" } ],
+      "tent_centers": [ "f_groundsheet", "f_fema_groundsheet", "f_skin_groundsheet" ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_large_groundsheet",
+    "name": "groundsheet",
+    "description": "This large plastic groundsheet could keep you dry.",
+    "symbol": ";",
+    "color": "green",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "NOCOLLIDE", "SUN_ROOF_ABOVE" ],
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "collapse_radius": 2,
+      "tent_centers": [ "f_center_groundsheet" ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_center_groundsheet",
+    "name": "groundsheet",
+    "description": "This plastic groundsheet could keep you dry.",
+    "symbol": ";",
+    "color": "green",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "NOCOLLIDE", "SUN_ROOF_ABOVE" ],
+    "examine_action": "portable_structure",
+    "deployed_item": "large_tent_kit",
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "collapse_radius": 2,
+      "items": [ { "item": "largebroketent" } ],
+      "tent_centers": [ "f_center_groundsheet" ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_fema_groundsheet",
+    "name": "groundsheet",
+    "description": "This plastic government-issue groundsheet could keep you dry, but was made by the lowest bidder.",
+    "symbol": ";",
+    "color": "green",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "ORGANIC", "NOCOLLIDE", "SUN_ROOF_ABOVE" ],
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "tent_centers": [ "f_groundsheet", "f_fema_groundsheet", "f_skin_groundsheet" ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_skin_wall",
+    "name": "animalskin wall",
+    "symbol": "#",
+    "description": "Wall made out of animal skin.  Either an amazing or horrifying sight.",
+    "color": "brown",
+    "move_cost_mod": -1,
+    "coverage": 95,
+    "required_str": -1,
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "BLOCK_WIND", "SUN_ROOF_ABOVE" ],
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "tent_centers": [ "f_groundsheet", "f_fema_groundsheet", "f_skin_groundsheet" ],
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_skin_door",
+    "name": "animalskin flap",
+    "description": "This animal skin flap could be pulled aside.",
+    "symbol": "+",
+    "color": "white",
+    "move_cost_mod": -1,
+    "coverage": 95,
+    "required_str": -1,
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "BLOCK_WIND", "SUN_ROOF_ABOVE" ],
+    "open": "f_skin_door_o",
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "tent_centers": [ "f_groundsheet", "f_fema_groundsheet", "f_skin_groundsheet" ],
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_skin_door_o",
+    "name": "open animalskin flap",
+    "description": "This animal skin flap has been pulled aside.",
+    "symbol": ".",
+    "color": "white",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT" ],
+    "close": "f_skin_door",
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "tent_centers": [ "f_groundsheet", "f_fema_groundsheet", "f_skin_groundsheet" ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_skin_groundsheet",
+    "name": "animalskin floor",
+    "description": "This animal skin groundsheet could keep you dry.",
+    "symbol": ";",
+    "color": "brown",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "NOCOLLIDE", "SUN_ROOF_ABOVE" ],
+    "examine_action": "portable_structure",
+    "deployed_item": "shelter_kit",
+    "bash": {
+      "str_min": 1,
+      "str_max": 8,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "items": [ { "item": "damaged_shelter_kit" } ],
+      "tent_centers": [ "f_groundsheet", "f_fema_groundsheet", "f_skin_groundsheet" ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_rubble",
+    "name": "pile of rubble",
+    "symbol": "^",
+    "description": "Pile of various metals, bricks, and other building materials.  You could clear it with a shovel.",
+    "color": "light_gray",
+    "move_cost_mod": 6,
+    "max_volume": "750 L",
+    "required_str": -1,
+    "flags": [
+      "TRANSPARENT",
+      "UNSTABLE",
+      "ROUGH",
+      "PLACE_ITEM",
+      "MOUNTABLE",
+      "CONTAINER",
+      "SEALED",
+      "ALLOW_FIELD_EFFECT",
+      "TINY",
+      "RUBBLE"
+    ],
+    "examine_action": "rubble",
+    "bash": {
+      "str_min": 32,
+      "str_max": 80,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [
+        { "item": "nail", "charges": [ 5, 10 ] },
+        { "item": "splinter", "count": [ 5, 10 ] },
+        { "group": "building_rubble", "count": [ 1, 3 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_rubble_rock",
+    "name": "pile of rocky rubble",
+    "description": "Pile of rocks.  Useless?",
+    "symbol": "^",
+    "color": "dark_gray",
+    "move_cost_mod": 6,
+    "max_volume": "750 L",
+    "required_str": -1,
+    "flags": [
+      "TRANSPARENT",
+      "UNSTABLE",
+      "ROUGH",
+      "PLACE_ITEM",
+      "MOUNTABLE",
+      "CONTAINER",
+      "SEALED",
+      "ALLOW_FIELD_EFFECT",
+      "SHORT",
+      "RUBBLE"
+    ],
+    "examine_action": "rubble",
+    "bash": {
+      "str_min": 32,
+      "str_max": 80,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [ { "item": "rock", "count": [ 5, 10 ] }, { "item": "sharp_rock", "count": [ 1, 5 ] } ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_rubble_landfill",
+    "name": "pile of trashy rubble",
+    "description": "Trash topped with dirt and grass, it smells gross, but another man's trash…",
+    "symbol": "#",
+    "color": "green",
+    "move_cost_mod": 8,
+    "max_volume": "750 L",
+    "required_str": -1,
+    "flags": [
+      "TRANSPARENT",
+      "UNSTABLE",
+      "ROUGH",
+      "PLACE_ITEM",
+      "MOUNTABLE",
+      "CONTAINER",
+      "SEALED",
+      "ALLOW_FIELD_EFFECT",
+      "SHORT",
+      "RUBBLE"
+    ],
+    "examine_action": "rubble",
+    "bash": {
+      "str_min": 32,
+      "str_max": 80,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [ { "group": "trash", "count": [ 3, 6 ] } ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_rubble_water",
+    "name": "pile of floating trash",
+    "looks_like": "f_rubble_landfill",
+    "description": "Trash floating in the water. I guess it really does all end up here...",
+    "symbol": "#",
+    "color": "green",
+    "move_cost_mod": 8,
+    "max_volume": "750 L",
+    "required_str": -1,
+    "flags": [
+      "TRANSPARENT",
+      "UNSTABLE",
+      "ROUGH",
+      "PLACE_ITEM",
+      "MOUNTABLE",
+      "CONTAINER",
+      "SEALED",
+      "ALLOW_FIELD_EFFECT",
+      "SHORT",
+      "RUBBLE"
+    ],
+    "bash": {
+      "str_min": 8,
+      "str_max": 20,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [
+        { "group": "recycle_paper", "count": [ 1, 3 ] },
+        { "group": "recycle_plastic", "count": [ 1, 3 ] },
+        { "item": "plastic_chunk", "count": [ 8, 12 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_wreckage",
+    "name": "metal wreckage",
+    "description": "Pile of various bent and twisted metals.",
+    "symbol": "#",
+    "color": "cyan",
+    "move_cost_mod": 6,
+    "max_volume": "750 L",
+    "required_str": -1,
+    "flags": [
+      "TRANSPARENT",
+      "UNSTABLE",
+      "ROUGH",
+      "SHARP",
+      "PLACE_ITEM",
+      "MOUNTABLE",
+      "CONTAINER",
+      "SEALED",
+      "ALLOW_FIELD_EFFECT",
+      "SHORT",
+      "RUBBLE"
+    ],
+    "examine_action": "rubble",
+    "bash": {
+      "str_min": 32,
+      "str_max": 80,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [
+        { "item": "steel_chunk", "count": [ 1, 5 ] },
+        { "item": "scrap", "count": [ 5, 10 ] },
+        { "group": "wreckage", "count": [ 0, 2 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_ash",
+    "name": "pile of ash",
+    "symbol": "#",
+    "description": "Some ash, from wood or possibly bodies.",
+    "color": "light_gray",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "NOCOLLIDE", "CONTAINER", "SEALED", "PLACE_ITEM", "RUBBLE" ],
+    "examine_action": "rubble",
+    "bash": {
+      "str_min": 32,
+      "str_max": 80,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [ { "item": "ash", "charges": [ 1, 100 ] } ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_boulder_small",
+    "name": "small boulder",
+    "description": "Blocking your path.  Should be easy to move.  It can be used as a primitive anvil.",
+    "symbol": "o",
+    "color": "dark_gray",
+    "move_cost_mod": 3,
+    "coverage": 30,
+    "required_str": 10,
+    "crafting_pseudo_item": "boulder_anvil",
+    "flags": [ "TRANSPARENT", "MINEABLE", "UNSTABLE", "MOUNTABLE", "TINY" ],
+    "examine_action": "harvest_furn",
+    "transforms_into": "f_boulder_small_harvested",
+    "harvest_by_season": [
+      {
+        "seasons": [ "spring", "autumn", "summer" ],
+        "entries": [ { "drop": "assorted_bugs", "base_num": [ 0, 4 ], "scale_num": [ 0, 0.001 ] } ]
+      }
+    ],
+    "bash": {
+      "str_min": 16,
+      "str_max": 40,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [
+        { "item": "rock", "count": [ 16, 32 ] },
+        { "item": "sharp_rock", "count": [ 0, 6 ] },
+        { "item": "material_limestone", "charges": [ 100, 300 ], "prob": 80 },
+        { "group": "rock_mining_extra", "prob": 8 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 32, 32 ], "destroy_threshold": 32, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_boulder_small_harvested",
+    "copy-from": "f_boulder_small",
+    "name": "upturned small boulder",
+    "symbol": "o",
+    "color": "light_gray",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvest_furn",
+    "transforms_into": "f_boulder_small",
+    "harvest_by_season": [  ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_boulder_small_underwater",
+    "copy-from": "f_boulder_small",
+    "symbol": "o",
+    "color": "dark_gray",
+    "examine_action": "harvest_furn",
+    "transforms_into": "f_boulder_small_underwater_harvested",
+    "harvest_by_season": [
+      {
+        "seasons": [ "spring", "autumn", "summer", "winter" ],
+        "entries": [ { "drop": "clam", "base_num": [ 0, 3 ], "scale_num": [ 0, 0.001 ] } ]
+      }
+    ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_boulder_small_underwater_harvested",
+    "copy-from": "f_boulder_small",
+    "symbol": "o",
+    "color": "dark_gray",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvest_furn",
+    "transforms_into": "f_boulder_small_underwater",
+    "harvest_by_season": [  ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_boulder_medium",
+    "name": "medium boulder",
+    "description": "Blocking your path.  It'll be a struggle to move.  It can be used as a primitive anvil.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "move_cost_mod": 6,
+    "coverage": 60,
+    "required_str": 16,
+    "crafting_pseudo_item": "boulder_anvil",
+    "flags": [ "NOITEM", "TRANSPARENT", "MINEABLE", "UNSTABLE", "MOUNTABLE", "SHORT", "BASHABLE" ],
+    "bash": {
+      "str_min": 32,
+      "str_max": 80,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [
+        { "item": "rock", "count": [ 35, 50 ] },
+        { "item": "sharp_rock", "count": [ 3, 7 ] },
+        { "item": "material_limestone", "charges": [ 250, 400 ], "prob": 80 },
+        { "group": "rock_mining_extra", "prob": 15 }
+      ],
+      "ranged": { "reduction": [ 64, 64 ], "destroy_threshold": 64, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_boulder_large",
+    "name": "large boulder",
+    "description": "Now how are you going to move this?",
+    "symbol": "O",
+    "color": "dark_gray",
+    "move_cost_mod": -1,
+    "coverage": 65,
+    "required_str": 32,
+    "flags": [ "NOITEM", "MINEABLE", "BASHABLE", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 64,
+      "str_max": 160,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [
+        { "item": "rock", "count": [ 50, 70 ] },
+        { "item": "sharp_rock", "count": [ 4, 7 ] },
+        { "item": "material_limestone", "charges": [ 500, 800 ], "prob": 80 },
+        { "group": "rock_mining_extra", "prob": 20 }
+      ],
+      "ranged": { "reduction": [ 128, 128 ], "destroy_threshold": 128 }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_street_light",
+    "name": "street light",
+    "looks_like": "f_utility_pole",
+    "description": "Raised source of light which used to illuminate streets and their surrounding area, but it's useless without electricity.",
+    "symbol": "Y",
+    "color": "light_gray",
+    "move_cost_mod": -1,
+    "coverage": 40,
+    "required_str": -1,
+    "flags": [ "BASHABLE", "TRANSPARENT" ],
+    "deconstruct": {
+      "items": [
+        { "item": "pipe", "count": 8 },
+        { "item": "sheet_metal", "count": 2 },
+        { "item": "amplifier", "count": 4 },
+        { "item": "light_bulb", "count": 2 },
+        { "item": "cable", "charges": 4 },
+        { "item": "plastic_chunk", "count": 4 }
+      ]
+    },
+    "bash": {
+      "str_min": 30,
+      "str_max": 100,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "items": [
+        { "item": "pipe", "count": [ 1, 7 ] },
+        { "item": "scrap", "count": [ 3, 12 ] },
+        { "item": "amplifier", "count": [ 1, 3 ] },
+        { "item": "light_bulb", "count": [ 0, 2 ] },
+        { "item": "cable", "charges": [ 1, 2 ] },
+        { "item": "plastic_chunk", "count": [ 2, 4 ] }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 15, 30 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_traffic_light",
+    "name": "traffic light",
+    "looks_like": "f_utility_pole",
+    "description": "Signaling device positioned at road intersections and pedestrian crossings to control flows of traffic, but it's useless without electricity.",
+    "symbol": "P",
+    "color": "white",
+    "move_cost_mod": -1,
+    "coverage": 40,
+    "required_str": 32,
+    "flags": [ "BASHABLE", "TRANSPARENT" ],
+    "bash": {
+      "str_min": 30,
+      "str_max": 100,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "items": [
+        { "item": "pipe", "count": [ 1, 5 ] },
+        { "item": "amplifier", "count": [ 1, 3 ] },
+        { "item": "light_bulb", "count": [ 1, 3 ] },
+        { "item": "plastic_chunk", "count": [ 1, 3 ] },
+        { "item": "cable", "charges": [ 1, 3 ] },
+        { "item": "scrap", "count": [ 3, 12 ] }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 15, 30 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_utility_pole",
+    "name": "utility pole",
+    "description": "A long wooden post which used to support overhead power lines and other public utilities, but it doesn't work anymore.",
+    "symbol": "i",
+    "color": "brown",
+    "move_cost_mod": -1,
+    "coverage": 40,
+    "required_str": 26,
+    "flags": [ "BASHABLE" ],
+    "bash": {
+      "str_min": 20,
+      "str_max": 100,
+      "sound": "crunch!",
+      "sound_fail": "whack!",
+      "items": [
+        { "item": "stick_long", "count": [ 3, 10 ] },
+        { "item": "splinter", "count": [ 10, 20 ] },
+        { "item": "steel_chunk", "count": [ 2, 4 ] },
+        { "item": "cable", "charges": [ 0, 1 ] },
+        { "item": "scrap", "count": [ 3, 5 ] }
+      ],
+      "ranged": { "reduction": [ 20, 20 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_concrete_lump",
+    "looks_like": "f_boulder_medium",
+    "name": "concrete lump",
+    "description": "The result of you pouring concrete over mi-go gas emitters.  It's stuck to the floor.  It can be used as a primitive anvil.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "move_cost_mod": 6,
+    "coverage": 60,
+    "required_str": -1,
+    "crafting_pseudo_item": "boulder_anvil",
+    "flags": [ "NOITEM", "TRANSPARENT", "MINEABLE", "UNSTABLE", "MOUNTABLE", "SHORT", "BASHABLE" ],
+    "bash": {
+      "str_min": 32,
+      "str_max": 80,
+      "sound": "smash!",
+      "sound_fail": "thump.",
+      "items": [ { "item": "rock", "count": [ 35, 50 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 64, 64 ], "destroy_threshold": 64, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_flagpole_metal",
+    "name": "flagpole",
+    "looks_like": "f_dancing_pole",
+    "description": "An old metal flagpole, with no flag to fly.  Don't lick it if it's cold out.",
+    "symbol": "i",
+    "color": "light_gray",
+    "move_cost_mod": -1,
+    "coverage": 40,
+    "required_str": -1,
+    "flags": [ "BASHABLE", "TRANSPARENT" ],
+    "deconstruct": {
+      "items": [ { "item": "pipe", "count": 8 }, { "item": "sheet_metal", "count": 2 }, { "item": "rope_30", "count": 1 } ]
+    },
+    "bash": {
+      "str_min": 30,
+      "str_max": 100,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "items": [
+        { "item": "pipe", "count": [ 1, 7 ] },
+        { "item": "scrap", "count": [ 3, 12 ] },
+        { "item": "rope_6", "count": [ 1, 3 ] }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 15, 30 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_us_flag_metal",
+    "copy-from": "f_flagpole_metal",
+    "name": "flagpole with American flag",
+    "looks_like": "american_flag",
+    "description": "An old metal flagpole flying an American flag.  A leftover from before the world ended, you could take it down if you need one for some reason.",
+    "symbol": "i",
+    "color": "light_red",
+    "extend": { "flags": [ "EASY_DECONSTRUCT" ] },
+    "deconstruct": { "furn_set": "f_flagpole_metal", "items": [ { "item": "american_flag", "count": 1 } ] },
+    "bash": {
+      "str_min": 30,
+      "str_max": 100,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "items": [
+        { "item": "pipe", "count": [ 1, 7 ] },
+        { "item": "scrap", "count": [ 3, 12 ] },
+        { "item": "rope_6", "count": [ 1, 3 ] },
+        { "item": "american_flag", "count": 1 }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 15, 30 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_flagpole_wood",
+    "name": "wooden flagpole",
+    "description": "A makeshift flagpole constructed from a wooden beam and rope.",
+    "symbol": "i",
+    "color": "brown",
+    "looks_like": "f_utility_pole",
+    "move_cost_mod": -1,
+    "coverage": 40,
+    "required_str": -1,
+    "flags": [ "BASHABLE", "TRANSPARENT" ],
+    "deconstruct": { "items": [ { "item": "wood_beam", "count": 1 }, { "item": "rope_makeshift_30", "count": 1 } ] },
+    "bash": {
+      "str_min": 20,
+      "str_max": 100,
+      "sound": "crunch!",
+      "sound_fail": "whack!",
+      "items": [
+        { "item": "log", "count": [ 1, 2 ] },
+        { "item": "splinter", "count": [ 10, 20 ] },
+        { "item": "rope_makeshift_6", "count": [ 1, 3 ] }
+      ],
+      "ranged": { "reduction": [ 20, 20 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_us_flag_wood",
+    "copy-from": "f_flagpole_wood",
+    "name": "wooden flagpole with American flag",
+    "looks_like": "american_flag",
+    "description": "Someone's hoisted an old American flag from this makeshift flagpole.",
+    "symbol": "i",
+    "color": "light_red",
+    "extend": { "flags": [ "EASY_DECONSTRUCT" ] },
+    "deconstruct": { "furn_set": "f_flagpole_wood", "items": [ { "item": "american_flag", "count": 1 } ] },
+    "bash": {
+      "str_min": 20,
+      "str_max": 100,
+      "sound": "crunch!",
+      "sound_fail": "whack!",
+      "items": [
+        { "item": "log", "count": [ 1, 2 ] },
+        { "item": "splinter", "count": [ 10, 20 ] },
+        { "item": "rope_makeshift_6", "count": [ 1, 3 ] },
+        { "item": "american_flag", "count": 1 }
+      ],
+      "ranged": { "reduction": [ 20, 20 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_pirate_flag_metal",
+    "copy-from": "f_us_flag_metal",
+    "name": "flagpole with Jolly Roger",
+    "looks_like": "pirate_flag",
+    "description": "An old metal flagpole, now flying a black pirate flag.",
+    "symbol": "i",
+    "color": "dark_gray",
+    "deconstruct": { "furn_set": "f_flagpole_metal", "items": [ { "item": "pirate_flag", "count": 1 } ] },
+    "bash": {
+      "str_min": 30,
+      "str_max": 100,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "items": [
+        { "item": "pipe", "count": [ 1, 7 ] },
+        { "item": "scrap", "count": [ 3, 12 ] },
+        { "item": "rope_6", "count": [ 1, 3 ] },
+        { "item": "pirate_flag", "count": 1 }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 15, 30 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_pirate_flag_wood",
+    "copy-from": "f_us_flag_wood",
+    "name": "wooden flagpole with Jolly Roger",
+    "looks_like": "pirate_flag",
+    "description": "Someone's hoisted a black pirate flag from this makeshift flagpole.",
+    "symbol": "i",
+    "color": "light_red",
+    "deconstruct": { "furn_set": "f_flagpole_wood", "items": [ { "item": "pirate_flag", "count": 1 } ] },
+    "bash": {
+      "str_min": 20,
+      "str_max": 100,
+      "sound": "crunch!",
+      "sound_fail": "whack!",
+      "items": [
+        { "item": "log", "count": [ 1, 2 ] },
+        { "item": "splinter", "count": [ 10, 20 ] },
+        { "item": "rope_makeshift_6", "count": [ 1, 3 ] },
+        { "item": "pirate_flag", "count": 1 }
+      ],
+      "ranged": { "reduction": [ 20, 20 ], "destroy_threshold": 100, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_room_divider",
+    "name": "room divider",
+    "description": "A tall piece of furniture used to divide rooms into separate areas.",
+    "move_cost_mod": -1,
+    "required_str": 8,
+    "coverage": 80,
+    "symbol": "#",
+    "color": "light_gray",
+    "looks_like": "f_curtain",
+    "flags": [ "THIN_OBSTACLE", "TRANSPARENT", "CLIMBABLE", "BLOCKSDOOR", "NOITEM", "PERMEABLE" ],
+    "examine_action": "chainfence",
+    "bash": {
+      "str_min": 8,
+      "str_max": 30,
+      "sound": "smash!",
+      "sound_fail": "whump.",
+      "items": [
+        { "item": "pipe", "count": [ 0, 2 ] },
+        { "item": "scrap", "count": [ 1, 3 ] },
+        { "item": "plastic_chunk", "count": [ 1, 6 ] }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 4, 8 ], "destroy_threshold": 30, "block_unaimed_chance": "75%" }
+    }
+  },
+  {
+    "id": "f_tarptent",
+    "type": "furniture",
+    "name": "tarp lean-to",
+    "description": "A small shelter covered by waterproof tarp, that can be used to take refuge from the elements.",
+    "symbol": ";",
+    "looks_like": "t_tarptent",
+    "color": [ "light_blue" ],
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "bash": {
+      "str_min": 6,
+      "str_max": 12,
+      "sound": "crash!",
+      "sound_fail": "whack!",
+      "items": [
+        { "item": "stick", "count": [ 1, 2 ] },
+        { "item": "splinter", "count": [ 1, 4 ] },
+        { "item": "plastic_chunk", "count": [ 4, 8 ] }
+      ]
+    },
+    "deconstruct": {
+      "items": [ { "item": "pointy_stick", "count": 4 }, { "item": "string_6", "count": 4 }, { "item": "tarp", "count": 1 } ]
+    },
+    "flags": [ "TRANSPARENT", "FLAMMABLE", "THIN_OBSTACLE", "MOUNTABLE", "EASY_DECONSTRUCT", "FLAT", "BLOCK_WIND" ]
+  },
+  {
+    "id": "f_tarptent_leather",
+    "type": "furniture",
+    "name": "leather tarp lean-to",
+    "description": "A makeshift shelter made from a lather tarp and stakes driven into the ground.",
+    "symbol": ";",
+    "looks_like": "f_skin_door",
+    "color": [ "brown" ],
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "bash": {
+      "str_min": 6,
+      "str_max": 12,
+      "sound": "crash!",
+      "sound_fail": "whack!",
+      "items": [
+        { "item": "stick", "count": [ 1, 2 ] },
+        { "item": "splinter", "count": [ 1, 4 ] },
+        { "item": "leather", "count": [ 4, 8 ] }
+      ]
+    },
+    "deconstruct": {
+      "items": [ { "item": "pointy_stick", "count": 4 }, { "item": "cordage_6", "count": 6 }, { "item": "leather_tarp", "count": 1 } ]
+    },
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "THIN_OBSTACLE", "MOUNTABLE", "EASY_DECONSTRUCT", "FLAT", "BLOCK_WIND" ]
+  }
+]

@@ -1,0 +1,393 @@
+[
+  {
+    "type": "item_group",
+    "id": "mags_milspec",
+    "//": "Current military specification magazines.",
+    "items": [
+      [ "rm4502", 2 ],
+      [ "rm4504", 2 ],
+      { "item": "huge_atomic_battery_cell", "prob": 2, "charges": [ 0, 100000 ] },
+      [ "20x66_20_mag", 10 ],
+      [ "20x66_40_mag", 5 ],
+      [ "5x50_50_mag", 5 ],
+      [ "5x50_100_mag", 5 ],
+      [ "8x40_10_mag", 5 ],
+      [ "8x40_25_mag", 5 ],
+      [ "8x40_50_mag", 10 ],
+      [ "8x40_100_mag", 10 ],
+      [ "8x40_250_mag", 5 ],
+      [ "8x40_500_mag", 5 ],
+      [ "hk_g80mag", 40 ],
+      [ "m107a1mag", 50 ],
+      [ "drum_mag50", 5 ],
+      [ "tac50mag", 20 ],
+      [ "m2010mag", 10 ],
+      [ "scarhmag", 50 ],
+      [ "scarhbigmag", 20 ],
+      [ "stanag5", 2 ],
+      [ "stanag10", 5 ],
+      [ "stanag20", 10 ],
+      [ "stanag30", 20 ],
+      [ "stanag40", 2 ],
+      [ "stanag50", 2 ],
+      [ "stanag60", 3 ],
+      [ "stanag100", 2 ],
+      [ "hk417mag_20rd", 30 ],
+      [ "hk417mag_10rd", 20 ],
+      [ "p320mag_17rd_9x19mm", 60 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_military",
+    "//": "_DEPRECATED_ Older military magazines still in service.",
+    "items": [ [ "m1911mag", 5 ], [ "m9mag", 15 ], [ "stanag30", 20 ], [ "stanag50", 5 ], [ "usp9mag", 15 ], [ "usp45mag", 5 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_surplus",
+    "//": "Obsolete military magazines no longer in common use.  Matches mags used in guns_surplus.",
+    "items": [
+      { "group": "display_hi_power_9mm_mag", "prob": 10 },
+      { "group": "display_m9_mag", "prob": 15 },
+      { "group": "display_m1911_mag", "prob": 20 },
+      { "group": "display_tommygun_mag", "prob": 20 },
+      [ "stenmag", 10 ],
+      { "group": "display_fn_fal_mag", "prob": 5 },
+      { "group": "display_hk_g3_mag", "prob": 5 },
+      { "group": "display_m14_mag", "prob": 15 },
+      [ "ar10mag_20rd", 10 ],
+      { "group": "display_ak47_mag", "prob": 10 },
+      [ "762x39_clip", 5 ],
+      [ "SVDmag", 5 ],
+      [ "762R_clip", 20 ],
+      [ "garandclip", 20 ],
+      [ "3006_clip", 5 ],
+      { "group": "display_m1918_mag", "prob": 15 },
+      { "item": "ammolink3006", "count": [ 100, 200 ], "prob": 10 },
+      { "item": "ammolink308", "count": [ 100, 200 ], "prob": 10 },
+      { "item": "ammolink50", "count": [ 100, 200 ], "prob": 5 },
+      [ "pressurized_tank", 5 ],
+      [ "m74_clip", 5 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_cop",
+    "//": "Standard issue police magazines.",
+    "items": [
+      [ "glockmag", 40 ],
+      [ "glock40mag", 30 ],
+      [ "m9mag", 5 ],
+      [ "mp5mag", 10 ],
+      [ "sig40mag", 20 ],
+      [ "stanag30", 5 ],
+      [ "ppq9mag_10rd", 1 ],
+      [ "ppq9mag_15rd", 1 ],
+      [ "ppq9mag_17rd", 1 ],
+      [ "ppq40mag_10rd", 1 ],
+      [ "ppq40mag_12rd", 1 ],
+      [ "ppq40mag_14rd", 1 ],
+      [ "ppq45mag", 1 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_swat",
+    "//": "Magazines issued to paramilitary forces in addition to standard police issue.",
+    "items": [
+      { "group": "mags_cop", "prob": 50 },
+      [ "glockbigmag", 10 ],
+      [ "glock40bigmag", 10 ],
+      [ "m9bigmag", 10 ],
+      [ "mp5bigmag", 20 ],
+      [ "stanag30", 20 ],
+      [ "ump45mag", 15 ],
+      [ "ump40mag", 15 ],
+      [ "ump9mag", 15 ],
+      [ "usp45mag", 10 ],
+      [ "usp9mag", 10 ],
+      [ "as50mag", 2 ],
+      [ "hk417mag_20rd", 20 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_pistol_common",
+    "//": "Factory specification pistol magazines commonly owned by citizens.",
+    "items": [
+      [ "38_speedloader", 15 ],
+      [ "38_speedloader5", 10 ],
+      [ "38_speedloader6", 25 ],
+      [ "40_speedloader6", 10 ],
+      [ "22_speedloader8", 25 ],
+      [ "44_speedloader6", 40 ],
+      [ "90two40mag", 10 ],
+      [ "bhp9mag_13rd", 10 ],
+      [ "bhp40mag", 10 ],
+      [ "ccpmag", 15 ],
+      [ "cz75mag_12rd", 10 ],
+      [ "deaglemag", 10 ],
+      [ "fn1910mag", 5 ],
+      [ "glock_21mag", 15 ],
+      [ "glock17_17", 55 ],
+      [ "glock20mag", 20 ],
+      [ "glock40mag", 40 ],
+      [ "glockmag", 40 ],
+      [ "hptc9", 15 ],
+      [ "hptcf380", 10 ],
+      [ "hptjcp", 10 ],
+      [ "hptjhp", 10 ],
+      [ "j22mag", 10 ],
+      [ "kp32mag", 10 ],
+      [ "kp3atmag", 15 ],
+      [ "kpf9mag", 15 ],
+      [ "m1911mag", 30 ],
+      [ "m9mag", 25 ],
+      [ "mosquitomag", 15 ],
+      [ "p226mag_12rd_357sig", 35 ],
+      [ "p320mag_13rd_357sig", 40 ],
+      [ "p38mag", 10 ],
+      [ "ppkmag", 15 ],
+      [ "ppq40mag_10rd", 10 ],
+      [ "ppq45mag", 10 ],
+      [ "ppq9mag_10rd", 10 ],
+      [ "px4_40mag", 5 ],
+      [ "px4mag", 5 ],
+      [ "rugerlcpmag", 35 ],
+      [ "sw22mag", 15 ],
+      [ "taurus_spectrum_mag", 10 ],
+      [ "usp9mag", 20 ],
+      [ "usp45mag", 15 ],
+      [ "wp22mag", 15 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_pistol_makeshift",
+    "//": "Makeshift or otherwise poor quality pistol magazines.",
+    "items": [  ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_pistol_rare",
+    "//": "Aftermarket or otherwise uncommon pistol magazines excluding milspec.",
+    "items": [
+      [ "bhp9mag_15rd", 10 ],
+      [ "cz75mag_20rd", 7 ],
+      [ "cz75mag_26rd", 3 ],
+      [ "glock_21mag26", 10 ],
+      [ "glock_drum_100rd", 5 ],
+      [ "glock_drum_50rd", 10 ],
+      [ "glock17_22", 20 ],
+      [ "glock20bigmag", 15 ],
+      [ "glock20drum50rd", 5 ],
+      [ "glock21drum40rd", 5 ],
+      [ "glock40bigmag", 30 ],
+      [ "glock40drum50rd", 10 ],
+      [ "glockbigmag", 60 ],
+      [ "m1911bigmag", 30 ],
+      [ "m9bigmag", 25 ],
+      [ "p320mag_17rd_9x19mm", 10 ],
+      [ "ppq40mag_12rd", 5 ],
+      [ "ppq40mag_14rd", 5 ],
+      [ "ppq9mag_15rd", 5 ],
+      [ "ppq9mag_17rd", 5 ],
+      [ "sig40mag", 5 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_smg_common",
+    "//": "Factory specification SMG magazines commonly owned by citizens.",
+    "items": [
+      [ "a180mag", 20 ],
+      [ "kriss_mag", 40 ],
+      [ "kriss_vector_9mm_mag", 40 ],
+      [ "mac10mag", 40 ],
+      [ "mac11mag", 20 ],
+      [ "mp5mag", 90 ],
+      [ "stenmag", 100 ],
+      [ "tdi_mag", 40 ],
+      [ "tec9mag", 20 ],
+      [ "thompson_mag", 70 ],
+      [ "uzimag", 100 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_smg_makeshift",
+    "//": "Makeshift or otherwise poor quality SMG magazines.",
+    "items": [ [ "survivor9mm_mag", 50 ], [ "smg_40_mag", 15 ], [ "smg_45_mag", 20 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_smg_rare",
+    "//": "Aftermarket or otherwise uncommon SMG magazines excluding milspec.",
+    "items": [ [ "calicomag", 30 ], [ "mp5bigmag", 100 ], [ "thompson_bigmag", 100 ], [ "thompson_drum", 200 ], [ "ump45mag", 30 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_rifle_common",
+    "//": "Factory specification rifle magazines commonly owned by citizens.",
+    "items": [
+      [ "3006_clip", 5 ],
+      [ "762R_clip", 40 ],
+      [ "762x39_clip", 30 ],
+      [ "akmag10", 3 ],
+      [ "akmag20", 2 ],
+      [ "akmag30", 10 ],
+      [ "ar10mag_20rd", 20 ],
+      [ "blrmag", 25 ],
+      [ "garandclip", 45 ],
+      [ "hipoint_3895mag", 30 ],
+      [ "m14mag", 30 ],
+      [ "m14smallmag", 10 ],
+      [ "marlin_tubeloader", 70 ],
+      [ "ruger1022mag", 70 ],
+      [ "ruger5", 10 ],
+      [ "ruger10", 10 ],
+      [ "ruger20", 40 ],
+      [ "stanag5", 10 ],
+      [ "stanag10", 10 ],
+      [ "stanag20", 10 ],
+      [ "stanag30", 35 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_rifle_makeshift",
+    "//": "Makeshift or otherwise poor quality rifle magazines.",
+    "items": [ [ "survivor223mag", 50 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_rifle_rare",
+    "//": "Aftermarket or otherwise uncommon rifle magazines excluding milspec.",
+    "items": [
+      [ "akmag40", 10 ],
+      [ "akdrum75", 5 ],
+      [ "ruger30", 30 ],
+      [ "ruger90", 15 ],
+      [ "ruger100", 15 ],
+      [ "ruger1022bigmag", 70 ],
+      [ "stanag40", 20 ],
+      [ "stanag60drum", 15 ],
+      [ "stanag90", 15 ],
+      [ "stanag100drum", 10 ],
+      [ "stanag150", 5 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_shotgun_common",
+    "//": "Factory specification shotgun magazines commonly owned by citizens.",
+    "items": [ [ "shot_speedloader6", 15 ], [ "shot_speedloader8", 15 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_shotgun_makeshift",
+    "//": "Makeshift or otherwise poor quality shotgun magazines.",
+    "items": [ [ "shotbelt_20", 1 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_shotgun_rare",
+    "//": "Aftermarket or otherwise uncommon shotgun magazines excluding milspec.",
+    "items": [  ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_other_common",
+    "//": "Factory specification magazines commonly owned by citizens that have no better category.",
+    "items": [  ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_other_makeshift",
+    "//": "Makeshift or otherwise poor quality magazines that have no better category.",
+    "items": [ [ "pressurized_tank_chem", 5 ], [ "aux_pressurized_tank", 10 ], [ "nailmag", 20 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_other_rare",
+    "//": "Aftermarket or otherwise uncommon magazines excluding milspec that have no better category.",
+    "items": [ [ "8x40_25_mag", 10 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_common",
+    "//": "Common magazines for guns typically owned by citizens.",
+    "items": [
+      { "group": "mags_pistol_common", "prob": 30 },
+      { "group": "mags_rifle_common", "prob": 20 },
+      { "group": "mags_smg_common", "prob": 10 },
+      { "group": "mags_shotgun_common", "prob": 5 },
+      { "group": "mags_other_common", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_makeshift",
+    "//": "Makeshift or otherwise poor quality magazines.",
+    "items": [
+      { "group": "mags_pistol_makeshift", "prob": 30 },
+      { "group": "mags_rifle_makeshift", "prob": 20 },
+      { "group": "mags_smg_makeshift", "prob": 10 },
+      { "group": "mags_shotgun_makeshift", "prob": 5 },
+      { "group": "mags_other_makeshift", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_rare",
+    "//": "Aftermarket or otherwise uncommon magazines.",
+    "items": [
+      { "group": "mags_pistol_rare", "prob": 30 },
+      { "group": "mags_rifle_rare", "prob": 20 },
+      { "group": "mags_smg_rare", "prob": 10 },
+      { "group": "mags_shotgun_rare", "prob": 5 },
+      { "group": "mags_other_rare", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_obscure",
+    "//": "Magazines for imported firearms.",
+    "items": [
+      [ "augmag_100rd", 2 ],
+      [ "augmag_10rd", 5 ],
+      [ "augmag_30rd", 30 ],
+      [ "augmag_42rd", 5 ],
+      [ "falbigmag", 5 ],
+      [ "falmag", 25 ],
+      [ "g36mag_100rd", 5 ],
+      [ "g36mag_30rd", 35 ],
+      [ "g3bigmag", 5 ],
+      [ "g3mag", 35 ],
+      [ "m1918mag", 20 ],
+      [ "m1918bigmag", 10 ],
+      [ "saiga10mag", 15 ],
+      [ "saiga30mag", 5 ],
+      [ "saiga410mag_10rd", 30 ],
+      [ "saiga410mag_30rd", 10 ],
+      [ "sigp230mag", 10 ],
+      [ "skorpion61mag", 20 ],
+      [ "USAS10mag", 15 ],
+      [ "USAS20mag", 5 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mags_crime",
+    "//": "Magazines for guns typically used by criminals.",
+    "items": [
+      { "group": "mags_common", "prob": 10 },
+      { "group": "mags_makeshift", "prob": 5 },
+      { "group": "mags_rare", "prob": 20 },
+      { "group": "mags_obscure", "prob": 20 },
+      { "group": "mags_smg_common", "prob": 10 },
+      { "group": "mags_smg_rare", "prob": 5 }
+    ]
+  }
+]

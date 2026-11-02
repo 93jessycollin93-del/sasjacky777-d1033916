@@ -1,0 +1,19 @@
+(
+    object_type: "tile",
+    id: "plowed-field-01",
+    
+    image: (
+        path: "plowed-field-01.png",
+        copyright: "T.Okubo",
+        w: 48,
+        h: 48,
+        grid_nx: 3,
+        grid_ny: 2,
+        n_pattern: 5,
+    ),
+    
+    tile: (
+        kind: Ground,
+        fertility: 100,
+    ),
+)

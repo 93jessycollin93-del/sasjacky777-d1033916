@@ -1,0 +1,260 @@
+[
+  {
+    "type": "item_group",
+    "id": "fuel_jp8",
+    "items": [
+      { "item": "jp8", "prob": 60, "charges": [ 100, 8000 ], "container-item": "jerrycan" },
+      { "item": "jp8", "prob": 20, "charges": [ 100, 20000 ], "container-item": "jerrycan_big" }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "fuel_diesel",
+    "items": [
+      { "item": "diesel", "prob": 60, "charges": [ 100, 8000 ], "container-item": "jerrycan" },
+      { "item": "diesel", "prob": 20, "charges": [ 100, 20000 ], "container-item": "jerrycan_big" }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "fuel_gasoline",
+    "items": [
+      { "item": "gasoline", "prob": 60, "charges": [ 100, 8000 ], "container-item": "jerrycan" },
+      { "item": "gasoline", "prob": 20, "charges": [ 100, 20000 ], "container-item": "jerrycan_big" }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "spare_tire_kit",
+    "subtype": "collection",
+    "entries": [
+      { "distribution": [ { "item": "wheel", "prob": 65 }, { "item": "deflated_wheel", "prob": 35 } ], "prob": 55 },
+      { "item": "jack", "prob": 55 },
+      { "item": "lug_wrench", "prob": 55 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "spare_tire_kit_wide_wheel",
+    "subtype": "collection",
+    "entries": [
+      { "distribution": [ { "item": "wheel_wide", "prob": 65 }, { "item": "deflated_wheel_wide", "prob": 35 } ], "prob": 55 },
+      { "item": "jack", "prob": 55 },
+      { "item": "lug_wrench", "prob": 55 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "spare_tire_kit_small_jack",
+    "subtype": "collection",
+    "entries": [
+      { "distribution": [ { "item": "wheel", "prob": 65 }, { "item": "deflated_wheel", "prob": 35 } ], "prob": 55 },
+      { "item": "jack_small", "prob": 88 },
+      { "item": "lug_wrench", "prob": 92 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "spare_tire_kit_tools_only",
+    "subtype": "collection",
+    "entries": [ { "item": "jack", "prob": 55 }, { "item": "lug_wrench", "prob": 55 } ]
+  },
+  {
+    "id": "tools_car_kit",
+    "type": "item_group",
+    "subtype": "collection",
+    "container-item": "toolbox_empty",
+    "on_overflow": "discard",
+    "items": [
+      {
+        "distribution": [ { "item": "screwdriver_set" }, { "item": "socket_screwdriver_set" }, { "item": "screwdriver", "count": [ 0, 3 ] } ],
+        "prob": 30
+      },
+      {
+        "collection": [
+          { "distribution": [ { "item": "pliers_locking" }, { "item": "big_pliers" }, { "item": "pliers" } ], "prob": 30 },
+          {
+            "distribution": [ { "item": "wrench" }, { "item": "wrench_small", "count": [ 1, 2 ] }, { "item": "socket_wrench_set" } ],
+            "prob": 30
+          }
+        ],
+        "prob": 40
+      },
+      { "group": "duct_tape_roll_part", "prob": 35 },
+      { "group": "duct_tape_roll_part", "prob": 35 },
+      { "group": "superglue", "prob": 20 },
+      { "item": "bandages_makeshift", "prob": 2, "custom-flags": [ "FILTHY" ] },
+      { "item": "tshirt", "prob": 4, "damage": [ -1, 5 ], "custom-flags": [ "FILTHY" ] },
+      { "item": "bandages_makeshift", "prob": 2 },
+      { "item": "cotton_patch", "prob": 8 },
+      { "item": "rubber_spray_can", "prob": 2, "charges": [ 0, 10 ] },
+      { "item": "tshirt", "prob": 4, "damage": [ -1, 5 ] },
+      {
+        "distribution": [ { "item": "pockknife", "damage": [ -1, 1 ] }, { "item": "boxcutter", "damage": [ -1, 1 ] } ],
+        "prob": 20
+      },
+      { "item": "glowstick", "count": [ 0, 2 ], "charges": 1400, "prob": 10 },
+      {
+        "distribution": [ { "item": "flashlight", "charges": [ 0, 100 ] }, { "item": "heavy_flashlight", "charges": [ 0, 100 ] } ],
+        "prob": 10
+      },
+      { "item": "multitool", "prob": 2 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "car_kit",
+    "subtype": "collection",
+    "items": [
+      { "group": "tools_car_kit", "prob": 20 },
+      { "distribution": [ { "item": "jerrycan" }, { "item": "jerrycan_big" } ], "prob": 8 },
+      {
+        "distribution": [ { "item": "sm_extinguisher", "charges": 10 }, { "item": "extinguisher", "charges": 100 } ],
+        "prob": 20
+      },
+      {
+        "distribution": [ { "group": "used_1st_aid", "prob": 70 }, { "group": "full_1st_aid", "prob": 30 } ],
+        "prob": 12
+      },
+      {
+        "distribution": [ { "group": "used_survival_kit", "prob": 70 }, { "group": "full_survival_kit", "prob": 30 } ],
+        "prob": 5
+      },
+      [ "plastic_sheet", 12 ],
+      [ "hd_tow_cable", 5 ],
+      [ "hose", 10 ],
+      [ "blanket", 2 ],
+      [ "towel", 3 ],
+      [ "funnel", 10 ],
+      [ "jumper_cable", 30 ],
+      [ "hand_pump", 15 ],
+      [ "folding_solar_panel_v2", 1 ],
+      { "group": "bugout_bag", "prob": 1 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "car_misc",
+    "subtype": "collection",
+    "items": [
+      {
+        "collection": [
+          {
+            "distribution": [
+              { "item": "matches", "charges": [ 1, 20 ] },
+              { "item": "ref_matches", "charges": [ 0, 32 ] },
+              { "item": "lighter", "charges": [ 0, 100 ] },
+              { "item": "small_lighter", "charges": [ 0, 50 ] },
+              { "item": "ref_lighter", "charges": [ 0, 50 ] }
+            ]
+          },
+          { "group": "tobacco_products" }
+        ],
+        "prob": 20
+      },
+      { "item": "glowstick", "prob": 10, "charges": 1400 },
+      { "item": "flashlight", "prob": 10, "charges": [ 0, 300 ] },
+      { "distribution": [ { "item": "umbrella" }, { "item": "teleumbrella" } ], "prob": 30 },
+      { "distribution": [ { "item": "roadmap" }, { "item": "trailmap" }, { "item": "touristmap" } ], "prob": 5 },
+      {
+        "distribution": [ { "item": "gasdiscount_silver" }, { "item": "gasdiscount_gold" }, { "item": "gasdiscount_platinum" } ],
+        "prob": 5
+      },
+      { "group": "snacks_fancy", "count": [ 1, 2 ], "prob": 10 },
+      { "group": "wallets", "prob": 10 },
+      [ "sunglasses", 10 ],
+      [ "knife_swissarmy", 10 ],
+      [ "eclipse_glasses", 1 ],
+      [ "folding_solar_panel_v2", 2 ],
+      [ "thermos", 20 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "gas_charging_rack",
+    "items": [
+      { "item": "storage_battery", "prob": 15, "charges": 40000 },
+      { "item": "storage_battery", "prob": 40, "charges": [ 4000, 10000 ] },
+      { "item": "storage_battery", "prob": 60, "charges": [ 0, 2000 ] },
+      { "item": "small_storage_battery", "prob": 15, "charges": 500 },
+      { "item": "small_storage_battery", "prob": 40, "charges": [ 0, 200 ] },
+      { "item": "medium_storage_battery", "prob": 15, "charges": 7000 },
+      { "item": "medium_storage_battery", "prob": 40, "charges": [ 0, 2000 ] },
+      [ "it_battery_mount", 90 ],
+      [ "it_battery_mount", 50 ],
+      [ "it_battery_mount", 40 ],
+      [ "it_battery_mount", 10 ]
+    ]
+  },
+  {
+    "id": "wheels",
+    "type": "item_group",
+    "items": [
+      [ "wheel_wood", 5 ],
+      [ "wheel_metal", 25 ],
+      [ "wheel_small", 35 ],
+      [ "wheel_motorbike", 25 ],
+      [ "wheel_bicycle", 40 ],
+      [ "wheel_wide_or", 20 ],
+      [ "wheel_bicycle_or", 20 ],
+      [ "wheel_motorbike_or", 20 ],
+      [ "wheel_slick", 10 ],
+      [ "wheel", 50 ]
+    ]
+  },
+  {
+    "id": "wheels_damaged",
+    "type": "item_group",
+    "items": [
+      { "item": "wheel_wood", "prob": 5, "damage": [ -1, 5 ] },
+      { "item": "wheel_metal", "prob": 25, "damage": [ -1, 5 ] },
+      { "item": "wheel_small", "prob": 35, "damage": [ -1, 5 ] },
+      { "item": "wheel_motorbike", "prob": 25, "damage": [ -1, 5 ] },
+      { "item": "wheel_bicycle", "prob": 40, "damage": [ -1, 5 ] },
+      { "item": "wheel_wide_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "wheel_wide", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "wheel_bicycle_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "wheel_motorbike_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "wheel_slick", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "wheel", "prob": 50, "damage": [ -1, 5 ] }
+    ]
+  },
+  {
+    "id": "tires",
+    "type": "item_group",
+    "items": [
+      [ "tire_wide_or", 20 ],
+      [ "tire_bicycle", 40 ],
+      [ "tire_wide", 10 ],
+      [ "tire_motorbike_or", 20 ],
+      [ "tire_motorbike", 25 ],
+      [ "tire_medium_slick", 10 ],
+      [ "tire_medium", 50 ],
+      [ "tire_bicycle_or", 20 ]
+    ]
+  },
+  {
+    "id": "tires_damaged",
+    "type": "item_group",
+    "items": [
+      { "item": "tire_wide_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "tire_bicycle", "prob": 40, "damage": [ -1, 5 ] },
+      { "item": "tire_wide", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "tire_motorbike_or", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "tire_motorbike", "prob": 25, "damage": [ -1, 5 ] },
+      { "item": "tire_medium_slick", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "tire_medium", "prob": 50, "damage": [ -1, 5 ] },
+      { "item": "tire_bicycle_or", "prob": 20, "damage": [ -1, 5 ] }
+    ]
+  },
+  {
+    "id": "rims",
+    "type": "item_group",
+    "items": [
+      { "item": "wheel_rim_medium", "prob": 2 },
+      { "item": "wheel_rim_wide", "prob": 2 },
+      { "item": "wheel_rim_motorbike", "prob": 2 },
+      { "item": "wheel_rim_bicycle", "prob": 2 }
+    ]
+  }
+]

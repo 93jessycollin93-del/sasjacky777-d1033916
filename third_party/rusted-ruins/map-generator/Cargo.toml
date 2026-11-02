@@ -1,0 +1,20 @@
+[package]
+name = "rusted-ruins-map-generator"
+version = "0.1.0"
+edition = "2021"
+authors = ["T. Okubo <t.okubo.rx78+devel@gmail.com>"]
+
+[lib]
+name = "rusted_ruins_map_generator"
+crate-type = ["rlib"]
+
+[dependencies]
+serde = "1"
+serde_derive = "1"
+arrayvec = "0.7"
+rand = "0.8"
+
+tile-geom = { git = "https://github.com/garkimasera/tile-geom.git" }
+
+[dependencies.rusted-ruins-rng]
+path = "../rng"

@@ -1,0 +1,215 @@
+[
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ [ "garage_gas_1", "garage_gas_2", "garage_gas_3" ] ],
+    "weight": 250,
+    "object": {
+      "fill_ter": "t_thconc_floor",
+      "rows": [
+        "ss____________________`_____________________`____________s.............'",
+        "ss_______________________________________________________s..............",
+        "ss_______________________________________________________s..............",
+        "ss_______________________________________________________s..............",
+        "ss______________________________________________________ss..............",
+        "ss__________________ssssssssssssss__________s__________sss..............",
+        "ss________I________ssssssssssssllse________sss________esssss............",
+        "ss________&________sss|-www-www-|--========---========---|sssss.........",
+        "ss________I________ssswrrrr,rrrr| eMMGMMGMM   MMGMMGMMe  Assssss........",
+        "ss________s________sssw,,,,,,,,,[  MMGMMGMM I MMGMMGMM  U|---|ss........",
+        "ss________s________ssD|r,cc,,,,,[  MMGMMGMM   MMGMMGMM  U|t S|ss........",
+        "ss________s________sss[,,,,,,cc,|  MMGMMGMM a MMGMMGMM  U|R  +ss........",
+        "ss________I________sss[,,,,,,6,,|L MMGMMGMM   MMGMMGMM  C|---|ss........",
+        "ss________&________ssD|r,,,,,c,,|W MMGMMGMM I MMGMMGMM  C|t  +ss........",
+        "_s________I________sssw,,,,,,c,r|W MMGMMGMM   MMGMMGMM  U|S R|s.........",
+        "___________________sssw,rrr,,c,r|L MMMMMMMM p MMMMMMMM  U|---|s.........",
+        "___________________sss|,rrr,,|+-|                        +sssss.........",
+        "___________________sssw,,,,,,|,,+           I            |ds............",
+        "___________________sssw,,,,,,|,z|-www-+-|                |ds............",
+        "___________________sss|[[[[[[|,z| kkk  P|BBCCCBBBBCCCBBBB|ds............",
+        "___________________sss|rrrrrr|,z|  h    |--www----www----|ss............",
+        "____________________ssA,,,,,,+,,|    off|4..............................",
+        "___________________...|---------|-------|...............................",
+        "_ss....................................................................."
+      ],
+      "set": [
+        { "point": "terrain", "id": "t_shrub", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 2 ] },
+        { "point": "furniture", "id": "f_dandelion", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 1 ] },
+        { "point": "furniture", "id": "f_bluebell", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 1 ] },
+        { "point": "furniture", "id": "f_mutpoppy", "x": [ 64, 71 ], "y": [ 0, 23 ], "repeat": [ 0, 1 ] }
+      ],
+      "terrain": {
+        "+": "t_door_c",
+        "-": "t_wall_w",
+        "|": "t_wall_w",
+        ".": [ [ "t_grass", 3 ], [ "t_dirt", 3 ], "t_grass_long" ],
+        "'": "t_dirt",
+        " ": "t_thconc_floor",
+        "6": "t_console_broken",
+        "=": "t_door_metal_locked",
+        "I": "t_column",
+        "[": "t_door_glass_c",
+        "_": "t_pavement",
+        "`": "t_pavement",
+        "e": "t_gates_mech_control",
+        "l": "t_sidewalk",
+        "s": "t_sidewalk",
+        "&": "t_sidewalk",
+        "D": "t_sidewalk",
+        "4": "t_gutter_downspout",
+        "w": "t_window",
+        "c": "t_linoleum_white",
+        "r": "t_linoleum_white",
+        ",": "t_linoleum_white",
+        "A": "t_m_frame",
+        "M": "t_metal_floor",
+        "G": "t_grate_indoor",
+        "d": "t_sidewalk"
+      },
+      "furniture": {
+        "'": "f_street_light",
+        "`": "f_street_light",
+        "P": "f_indoor_plant",
+        "D": "f_trashcan",
+        "R": "f_trashcan",
+        "c": "f_counter",
+        "C": "f_counter",
+        "h": "f_chair",
+        "k": "f_desk",
+        "l": "f_vending_c",
+        "o": "f_bookcase",
+        "r": "f_rack",
+        "z": "f_crate_c",
+        "S": "f_sink",
+        "L": "f_locker",
+        "f": "f_filing_cabinet",
+        "U": "f_utility_shelf",
+        "W": "f_utility_shelf",
+        "B": "f_rack",
+        "p": "f_hydraulic_press",
+        "a": "f_heavy_lathe",
+        "A": "f_air_conditioner",
+        "d": "f_dumpster"
+      },
+      "gaspumps": { "&": {  } },
+      "toilets": { "t": {  } },
+      "place_vendingmachines": [ { "item_group": "vending_food", "x": 31, "y": 6 }, { "item_group": "vending_drink", "x": 32, "y": 6 } ],
+      "place_loot": [
+        { "group": "magazines", "x": [ 23, 23 ], "y": [ 10, 10 ], "chance": 80, "repeat": [ 4, 12 ] },
+        { "group": "magazines", "x": [ 23, 23 ], "y": [ 13, 13 ], "chance": 80, "repeat": [ 4, 12 ] },
+        { "group": "alcohol", "x": [ 23, 23 ], "y": [ 20, 20 ], "chance": 60, "repeat": [ 1, 3 ] },
+        { "group": "snacks", "x": [ 23, 23 ], "y": [ 8, 8 ], "chance": 80, "repeat": [ 2, 8 ] },
+        { "group": "alcohol", "x": [ 24, 28 ], "y": 20, "chance": 75, "repeat": [ 1, 2 ] },
+        { "group": "snacks", "x": [ 24, 26 ], "y": 8, "chance": 80, "repeat": [ 2, 8 ] },
+        { "group": "tools_drawer", "x": [ 28, 31 ], "y": 8, "chance": 85, "repeat": [ 2, 3 ] },
+        { "group": "snacks", "x": [ 24, 26 ], "y": [ 15, 16 ], "chance": 80, "repeat": [ 2, 8 ] },
+        { "group": "snacks", "x": 31, "y": [ 18, 20 ], "chance": 80, "repeat": [ 2, 8 ] },
+        { "group": "smoke_shop", "x": 31, "y": [ 14, 15 ], "chance": 70, "repeat": [ 1, 2 ] },
+        { "group": "field", "x": [ 63, 70 ], "y": [ 2, 23 ], "chance": 90, "repeat": [ 0, 2 ] }
+      ],
+      "items": {
+        "L": { "item": "clothing_work_set", "chance": 55 },
+        "f": { "item": "SUS_office_filing_cabinet", "chance": 100 },
+        "C": { "item": "mechanics", "chance": 60 },
+        "U": { "item": "mechanics", "chance": 80, "repeat": [ 1, 6 ] },
+        "B": { "item": "spray_can", "chance": 60, "repeat": [ 1, 3 ] },
+        "W": { "item": "SUS_welding_gear", "chance": 80, "repeat": [ 1, 2 ] },
+        "o": { "item": "manuals", "chance": 100, "repeat": [ 1, 2 ] },
+        "D": { "item": "floor_trash", "chance": 90, "repeat": [ 1, 4 ] },
+        "R": { "item": "floor_trash", "chance": 90, "repeat": [ 1, 4 ] },
+        "k": { "item": "SUS_office_desk", "chance": 75 },
+        "d": { "item": "trash_dumpster", "chance": 80 }
+      },
+      "place_monsters": [
+        { "monster": "GROUP_ZOMBIE", "x": [ 0, 23 ], "y": [ 0, 21 ], "chance": 5 },
+        { "monster": "GROUP_ZOMBIE", "x": [ 24, 47 ], "y": [ 0, 21 ], "chance": 5 },
+        { "monster": "GROUP_ZOMBIE", "x": [ 48, 71 ], "y": [ 0, 19 ], "chance": 5 }
+      ],
+      "place_nested": [
+        {
+          "chunks": [ [ "null", 65 ], [ "garage_gas_2_vehicle", 25 ], [ "garage_gas_2_military_restoration", 10 ] ],
+          "x": 35,
+          "y": 6
+        }
+      ],
+      "place_vehicles": [ { "vehicle": "garage", "x": [ 49, 50 ], "y": [ 12, 13 ], "chance": 20, "rotation": 270 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "garage_gas_2_vehicle",
+    "object": {
+      "mapgensize": [ 10, 10 ],
+      "place_vehicles": [ { "vehicle": "garage", "x": [ 3, 4 ], "y": [ 6, 7 ], "chance": 100, "rotation": 270 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "garage_gas_2_military_restoration",
+    "object": {
+      "mapgensize": [ 10, 10 ],
+      "set": [ { "line": "terrain", "id": "t_door_metal_locked_o", "x": 0, "x2": 7, "y": 1, "y2": 1 } ],
+      "place_furniture": [ { "furn": "f_crate_c", "x": 9, "y": 6 } ],
+      "place_loot": [
+        { "group": "fuel_barrel_diesel_only", "x": 9, "y": 4, "chance": 50 },
+        { "group": "m60_patton_ammo_rack", "x": 9, "y": 6, "chance": 100 }
+      ],
+      "place_monster": [
+        { "group": "GROUP_MIL_WEAK", "x": [ 7, 9 ], "y": [ 2, 9 ], "chance": 50 },
+        { "group": "GROUP_MIL_WEAK", "x": [ 7, 9 ], "y": [ 2, 9 ], "chance": 50 },
+        { "group": "GROUP_MIL_WEAK", "x": [ 7, 9 ], "y": [ 2, 9 ], "chance": 50 }
+      ],
+      "place_vehicles": [ { "vehicle": "tankmod_garage_restoration", "x": 3, "y": 5, "chance": 100, "rotation": 270 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ [ "garage_gas_roof_1", "garage_gas_roof_2", "garage_gas_roof_3" ] ],
+    "object": {
+      "fill_ter": "t_flat_roof",
+      "rows": [
+        "                                                                        ",
+        "                                                                        ",
+        "                                                                        ",
+        "                                                                        ",
+        "                                                                        ",
+        "                                                                        ",
+        "         ...                                                            ",
+        "         ...          ------------------------------------              ",
+        "         ...          -..................................-              ",
+        "         ...          -...:..............................-----          ",
+        "         ...          -......................................-          ",
+        "         ...          -....................................=.-          ",
+        "         ...          -......................................-          ",
+        "         ...          -....................................=.-          ",
+        "         ...          -......................................-          ",
+        "         ...          -..................................-----          ",
+        "                      -..................................-              ",
+        "                      -..................................-              ",
+        "                      -...........................&......-              ",
+        "                      -..................................-              ",
+        "                      -.................------------------              ",
+        "                      -.................5                               ",
+        "                      -------------------                               ",
+        "                                                                        "
+      ],
+      "palettes": [ "roof_palette" ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "null", 20 ],
+            [ "roof_2x2_utilities_b", 15 ],
+            [ "roof_2x2_utilities_c", 5 ],
+            [ "roof_2x2_utilities_d", 10 ],
+            [ "roof_2x2_utilities", 10 ]
+          ],
+          "x": [ 24, 46 ],
+          "y": [ 10, 15 ]
+        }
+      ]
+    }
+  }
+]

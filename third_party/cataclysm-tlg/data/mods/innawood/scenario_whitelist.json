@@ -1,0 +1,22 @@
+[
+  {
+    "type": "SCENARIO_BLACKLIST",
+    "subtype": "whitelist",
+    "scenarios": [
+      "evacuee",
+      "cave_lonesome",
+      "migo_prisoner",
+      "mutant",
+      "wilderness",
+      "heli_crash",
+      "infected",
+      "hunted_start",
+      "fungal_start",
+      "bad_day",
+      "bordered",
+      "ambushed",
+      "summer_advanced_start",
+      "car_crash"
+    ]
+  }
+]

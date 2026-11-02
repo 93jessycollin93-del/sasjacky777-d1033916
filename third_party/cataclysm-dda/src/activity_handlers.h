@@ -1,0 +1,214 @@
+#pragma once
+#ifndef CATA_SRC_ACTIVITY_HANDLERS_H
+#define CATA_SRC_ACTIVITY_HANDLERS_H
+
+#include <algorithm>
+#include <functional>
+#include <list>
+#include <map>
+#include <optional>
+#include <string>
+#include <vector>
+
+#include "coordinates.h"
+#include "point.h"
+#include "requirements.h"
+#include "type_id.h"
+#include "units_fwd.h"
+
+class Character;
+class item;
+class item_location;
+class map;
+class player_activity;
+
+template<typename Point, typename Container>
+std::vector<Point> get_sorted_tiles_by_distance( const Point &center, const Container &tiles )
+{
+    const auto cmp = [center]( const Point & a, const Point & b ) {
+        const int da = rl_dist( center, a );
+        const int db = rl_dist( center, b );
+
+        return da < db;
+    };
+
+    std::vector<Point> sorted( tiles.begin(), tiles.end() );
+    std::sort( sorted.begin(), sorted.end(), cmp );
+
+    return sorted;
+}
+
+std::vector<tripoint_bub_ms> route_adjacent( const Character &you, const tripoint_bub_ms &dest );
+
+enum class requirement_check_result : int {
+    SKIP_LOCATION = 0,
+    SKIP_LOCATION_NO_ZONE,  // Zone activity but no zone found
+    SKIP_LOCATION_NO_SKILL, // Insufficient npc skill for task.
+    SKIP_LOCATION_BLOCKING, // Something is blocking the target location for companion.
+    SKIP_LOCATION_UNKNOWN_ACTIVITY, // This is probably an error: failed to find matching activity.
+    SKIP_LOCATION_NO_LOCATION, // No candidate locations found
+    SKIP_LOCATION_NO_MATCH, // No matches found
+    CAN_DO_LOCATION,
+    RETURN_EARLY       //another activity like a fetch activity has been started.
+};
+
+// asterick indicates the reason is tied to a valid activity
+enum class do_activity_reason : int {
+    CAN_DO_CONSTRUCTION,    //* Can do construction.
+    CAN_DO_FETCH,           //* Can do fetch - this is usually the default result for fetch task
+    NO_COMPONENTS,          // can't do the activity there due to lack of components /tools
+    DONT_HAVE_SKILL,        // don't have the required skill
+    NO_ZONE,                // There is no required zone anymore
+    NO_VEHICLE,             // There is no vehicle or no accessible vehicle at this location
+    ALREADY_DONE,           // the activity is done already ( maybe by someone else )
+    UNKNOWN_ACTIVITY,       // This is probably an error - got to the end of function with no previous reason
+    NEEDS_CLEARING,         //* For farming - tile was neglected and became overgrown, can be cleared.
+    NEEDS_HARVESTING,       //* For farming - tile is harvestable now.
+    NEEDS_PLANTING,         //* For farming - tile can be planted
+    NEEDS_TILLING,          //* For farming - tile can be tilled
+    NEEDS_FERTILIZING,          //* For farming - tile can be fertilized
+    BLOCKING_TILE,          // Something has made it's way onto the tile, so the activity cannot proceed
+    NEEDS_BOOK_TO_LEARN,    //* There is book to learn
+    NEEDS_CHOPPING,         //* There is wood there to be chopped
+    NEEDS_TREE_CHOPPING,    //* There is a tree there that needs to be chopped
+    NEEDS_BIG_BUTCHERING,   //* There is at least one corpse there to butcher, and it's a big one
+    NEEDS_BUTCHERING,       //* There is at least one corpse there to butcher, and there's no need for additional tools
+    NEEDS_CUT_HARVESTING,   //* There is a plant there which needs a grass-cutting tool to harvest
+    ALREADY_WORKING,        // somebody is already working there
+    NEEDS_VEH_DECONST,      //* There is a vehicle part there that we can deconstruct, given the right tools.
+    NEEDS_VEH_REPAIR,       //* There is a vehicle part there that can be repaired, given the right tools.
+    WOULD_PREVENT_VEH_FLYING, // Attempting to perform this activity on a vehicle would prevent it from flying
+    NEEDS_MINING,           //* This spot can be mined, if the right tool is present.
+    NEEDS_MOP,              //* This spot can be mopped, if a mop is present.
+    NEEDS_FISHING,          //* This spot can be fished, if the right tool is present.
+    NEEDS_CRAFT,            //* There is at least one item to craft.
+    NEEDS_DISASSEMBLE,      //* There is at least one item to disassemble.
+    REFUSES_THIS_WORK       // Character refuses to do this for some reason, maybe against their beliefs or needs danger prompt.
+
+};
+
+// Vector because of style demands => no built in consistency check when number of enum elements change.
+const std::vector<std::string> do_activity_reason_string = {
+    "CAN_DO_CONSTRUCTION",
+    "CAN_DO_FETCH",
+    "NO_COMPONENTS",
+    "DONT_HAVE_SKILL",
+    "NO_ZONE",
+    "NO_VEHICLE",
+    "ALREADY_DONE",
+    "UNKNOWN_ACTIVITY",
+    "NEEDS_CLEARING",
+    "NEEDS_HARVESTING",
+    "NEEDS_PLANTING",
+    "NEEDS_TILLING",
+    "BLOCKING_TILE",
+    "NEEDS_BOOK_TO_LEARN",
+    "NEEDS_CHOPPING",
+    "NEEDS_TREE_CHOPPING",
+    "NEEDS_BIG_BUTCHERING",
+    "NEEDS_BUTCHERING",
+    "NEEDS_CUT_HARVESTING",
+    "ALREADY_WORKING",
+    "NEEDS_VEH_DECONST",
+    "NEEDS_VEH_REPAIR",
+    "WOULD_PREVENT_VEH_FLYING",
+    "NEEDS_MINING",
+    "NEEDS_MOP",
+    "NEEDS_FISHING",
+    "NEEDS_CRAFT",
+    "NEEDS_DISASSEMBLE",
+    "REFUSES_THIS_WORK"
+};
+
+struct activity_reason_info {
+    //reason for success or fail
+    do_activity_reason reason;
+    //is it possible to do this
+    bool can_do;
+    //construction index
+    std::optional<construction_id> con_idx;
+
+    activity_reason_info( do_activity_reason reason_, bool can_do_,
+                          const std::optional<construction_id> &con_idx_ = std::nullopt ) :
+        reason( reason_ ),
+        can_do( can_do_ ),
+        con_idx( con_idx_ )
+    { }
+    activity_reason_info( do_activity_reason reason_, bool can_do_, const requirement_data &req ):
+        reason( reason_ ),
+        can_do( can_do_ ),
+        req( req )
+    { }
+
+    const requirement_data req;
+
+    static activity_reason_info ok( const do_activity_reason &reason_ ) {
+        return activity_reason_info( reason_, true );
+    }
+
+    static activity_reason_info build( const do_activity_reason &reason_, bool can_do_,
+                                       const construction_id &con_idx_ ) {
+        return activity_reason_info( reason_, can_do_, con_idx_ );
+    }
+
+    static activity_reason_info fail( const do_activity_reason &reason_ ) {
+        return activity_reason_info( reason_, false );
+    }
+};
+
+int get_auto_consume_moves( Character &you, bool food );
+bool try_fuel_fire( Character &you,
+                    std::optional<tripoint_bub_ms> fire_target = std::nullopt );
+
+enum class item_drop_reason : int {
+    deliberate,
+    too_large,
+    too_heavy,
+    tumbling
+};
+
+void put_into_vehicle_or_drop( Character &you, item_drop_reason, const std::list<item> &items );
+void put_into_vehicle_or_drop( Character &you, item_drop_reason, const std::list<item> &items,
+                               map *here, const tripoint_bub_ms &where, bool force_ground = false );
+std::vector<item_location> put_into_vehicle_or_drop_ret_locs( Character &you, item_drop_reason,
+        const std::list<item> &items, tripoint_bub_ms dest = tripoint_bub_ms::invalid );
+std::vector<item_location> put_into_vehicle_or_drop_ret_locs( Character &you, item_drop_reason,
+        const std::list<item> &items, map *here, const tripoint_bub_ms &where,
+        bool force_ground = false );
+std::vector<item_location> drop_on_map( Character &you, item_drop_reason reason,
+                                        const std::list<item> &items,
+                                        map *here, const tripoint_bub_ms &where );
+// used in unit tests to avoid triggering user input
+void repair_item_finish( player_activity *act, Character *you, bool no_menu );
+
+namespace activity_handlers
+{
+
+bool resume_for_multi_activities( Character &you );
+
+/** activity_do_turn functions: */
+void fill_liquid_do_turn( player_activity *act, Character *you );
+void repair_item_do_turn( player_activity *act, Character *you );
+void travel_do_turn( player_activity *act, Character *you );
+
+// defined in activity_handlers.cpp
+extern const std::map< activity_id, std::function<void( player_activity *, Character * )> >
+do_turn_functions;
+
+/** activity_finish functions: */
+void repair_item_finish( player_activity *act, Character *you );
+
+int move_cost( const item &it, const tripoint_bub_ms &src, const tripoint_bub_ms &dest );
+int move_cost_cart( const item &it, const tripoint_bub_ms &src, const tripoint_bub_ms &dest,
+                    const units::volume &capacity );
+int move_cost_inv( const item &it, const tripoint_bub_ms &src, const tripoint_bub_ms &dest );
+
+void clean_may_activity_occupancy_items_var( Character &you );
+void clean_may_activity_occupancy_items_var_if_is_avatar_and_no_activity_now( Character &you );
+// defined in activity_handlers.cpp
+extern const std::map< activity_id, std::function<void( player_activity *, Character * )> >
+finish_functions;
+
+} // namespace activity_handlers
+
+#endif // CATA_SRC_ACTIVITY_HANDLERS_H

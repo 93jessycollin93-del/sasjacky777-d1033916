@@ -1,0 +1,7 @@
+[
+  {
+    "type": "region_overlay",
+    "regions": [ "default" ],
+    "base_weather": "jp_weather_variants_default"
+  }
+]

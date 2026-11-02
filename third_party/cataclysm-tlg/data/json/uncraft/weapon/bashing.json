@@ -1,0 +1,25 @@
+[
+  {
+    "result": "knuckle_steel",
+    "type": "uncraft",
+    "activity_level": "MODERATE_EXERCISE",
+    "time": "2 m",
+    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "scrap", 4 ] ], [ [ "cotton_patch", 4 ] ] ]
+  },
+  {
+    "result": "cudgel_spiked",
+    "type": "uncraft",
+    "activity_level": "MODERATE_EXERCISE",
+    "time": "2 m",
+    "qualities": [ { "id": "PRYING_NAIL", "level": 1 } ],
+    "components": [ [ [ "splinter", 4 ] ], [ [ "nail", 8 ] ] ]
+  },
+  {
+    "result": "nunchaku",
+    "type": "uncraft",
+    "activity_level": "MODERATE_EXERCISE",
+    "time": "5 m",
+    "components": [ [ [ "splinter", 6 ] ] ]
+  }
+]

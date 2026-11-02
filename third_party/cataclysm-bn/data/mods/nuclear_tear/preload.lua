@@ -1,0 +1,1 @@
+-- Obsolete compatibility stub. This mod intentionally registers no hooks.

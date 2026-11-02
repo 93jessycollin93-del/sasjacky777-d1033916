@@ -1,0 +1,11 @@
+[
+  {
+    "type": "MOD_INFO",
+    "id": "tlg",
+    "name": "The Last Generation",
+    "description": "Core content for Cataclysm-TLG.  The game will probably not function without this enabled.",
+    "category": "content",
+    "core": true,
+    "path": "../../json"
+  }
+]

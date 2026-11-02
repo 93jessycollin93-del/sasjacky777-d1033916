@@ -1,0 +1,58 @@
+[
+  {
+    "type": "proficiency",
+    "id": "prof_field_medic",
+    "category": "prof_firstaid",
+    "name": { "str": "Field Medic" },
+    "description": "You're accustomed to dressing wounds under pressure, and can apply bandages or disinfectant much more quickly.",
+    "can_learn": true,
+    "default_time_multiplier": 2,
+    "default_skill_penalty": 0.25,
+    "time_to_learn": "9 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_burn_care",
+    "category": "prof_firstaid",
+    "name": { "str": "Burn Care" },
+    "description": "You have some basic understanding of how burns work and (potentially) how they could be treated.",
+    "can_learn": true,
+    "default_time_multiplier": 2,
+    "default_skill_penalty": 0.25,
+    "time_to_learn": "9 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_dissect_humans",
+    "category": "prof_firstaid",
+    "name": { "str": "Human Autopsies" },
+    "description": "You have been trained such that you are desensitized to the sight of a human's innards, and can dissect human corpses without penalty.",
+    "can_learn": false,
+    "default_time_multiplier": 2,
+    "default_skill_penalty": 0.25,
+    "time_to_learn": "1000 h",
+    "required_proficiencies": [ "prof_physiology" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_surgery",
+    "category": "prof_firstaid",
+    "name": { "str": "Surgery" },
+    "description": "Beneath the skin, the body is merely an enormously complex machine.  A trained eye can guide a steady blade through the inner workings of that machine with minimal harm to the patient.",
+    "can_learn": true,
+    "default_time_multiplier": 2,
+    "default_skill_penalty": 0.25,
+    "time_to_learn": "20 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_intro_biology",
+    "category": "prof_firstaid",
+    "name": { "str": "Principles of Biology" },
+    "description": "You are beginning to gain a general idea of how various living beings function.",
+    "can_learn": true,
+    "default_time_multiplier": 1.5,
+    "default_skill_penalty": 0.4,
+    "time_to_learn": "12 h"
+  }
+]

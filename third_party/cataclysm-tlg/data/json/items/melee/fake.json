@@ -1,0 +1,20 @@
+[
+  {
+    "type": "ITEM",
+    "id": "bio_blade_weapon",
+    "name": { "str": "monomolecular blade" },
+    "description": "A foot-long blade made from high-tech alloy and edged with bonded nanocrystals.",
+    "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "neutral" },
+    "weight": "100 g",
+    "color": "dark_gray",
+    "symbol": "{",
+    "material": [ "superalloy" ],
+    "techniques": [ "WBLOCK_2" ],
+    "volume": "750 ml",
+    "longest_side": "30 cm",
+    "flags": [ "BIONIC_WEAPON", "UNBREAKABLE_MELEE", "BIONIC_WEAPON_MELEE", "TRADER_AVOID", "CONDUCTIVE" ],
+    "weapon_category": [ "BIONIC_WEAPONRY", "BIONIC_SWORDS" ],
+    "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 22 ] ],
+    "melee_damage": { "cut": 28 }
+  }
+]

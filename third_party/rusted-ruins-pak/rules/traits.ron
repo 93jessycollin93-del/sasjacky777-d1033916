@@ -1,0 +1,46 @@
+{
+    // Positive traits
+    "beautiful": (
+        cost: 1,
+        conflicts: ["ugly"],
+        modifiers: [
+            Cha(5),
+        ],
+    ),
+    "intelligent": (
+        cost: 1,
+        modifiers: [
+            Int(5),
+        ],
+    ),
+    "monk": (
+        cost: 1,
+        modifiers: [
+            Wil(5),
+        ],
+    ),
+    "strong": (
+        cost: 1,
+        conflicts: ["weak"],
+        modifiers: [
+            Str(2),
+            Vit(3),
+        ],
+    ),
+    // Negative traits
+    "ugly": (
+        cost: -1,
+        conflicts: ["beautiful"],
+        modifiers: [
+            Cha(-5),
+        ],
+    ),
+    "weak": (
+        cost: -1,
+        conflicts: ["strong"],
+        modifiers: [
+            Str(-3),
+            Vit(-3),
+        ],
+    ),
+}

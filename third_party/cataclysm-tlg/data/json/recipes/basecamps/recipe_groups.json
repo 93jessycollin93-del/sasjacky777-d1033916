@@ -1,0 +1,14 @@
+[
+  {
+    "type": "recipe_group",
+    "id": "all_faction_base_types",
+    "building_type": "NONE",
+    "recipes": [
+      {
+        "id": "faction_base_bare_bones_basecamp_0",
+        "description": "A basic settlement to support those remaining features which have not yet been moved to another system.",
+        "om_terrains": [ "ANY" ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+{
+    "default": (
+        move_kind: NoMove,
+        pathfinding_step: 0,
+    ),
+    "melee": (
+        move_kind: Wander,
+        pathfinding_step: 20,
+        walk_prob: 0.3,
+        combat_prob: {
+            ApproachEnemy: 0.8,
+            Ability: 0.3,
+        }
+    ),
+    "fixed": (
+        move_kind: NoMove,
+        pathfinding_step: 0,
+        walk_prob: 0,
+        combat_prob: {
+            ApproachEnemy: 0,
+            RangedWeapon: 1.0,
+            Ability: 0.3,
+        }
+    ),
+    "wander": (
+        move_kind: Wander,
+        pathfinding_step: 20,
+        walk_prob: 0.4,
+        combat_prob: {
+            ApproachEnemy: 0.5,
+            Ability: 0.3,
+        }
+    ),
+    "shopkeeper": (
+        move_kind: Return,
+        pathfinding_step: 20,
+        walk_prob: 0.1,
+        combat_prob: {
+            ApproachEnemy: 0.2,
+            Ability: 0.3,
+        }
+    ),
+}

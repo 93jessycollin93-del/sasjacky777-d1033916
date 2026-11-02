@@ -1,0 +1,244 @@
+[
+  {
+    "id": "hood_survivor",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "survivor hood" },
+    "description": "A custom waterproof hood lined with kevlar and leather padding, it offers a comfortable layer of protection for the head.",
+    "weight": "820 g",
+    "volume": "2 L",
+    "price": "580 USD",
+    "price_postapoc": "40 USD",
+    "to_hit": -1,
+    "material": [ "vinyl", "nylon", "kevlar" ],
+    "symbol": "[",
+    "looks_like": "hood_rain",
+    "color": "brown",
+    "warmth": 15,
+    "environmental_protection": 6,
+    "techniques": [ "WBLOCK_1" ],
+    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
+        ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
+        "coverage": 100,
+        "encumbrance": [ 18, 18 ]
+      },
+      {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
+        ],
+        "coverage": 50,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hood_fsurvivor",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "survivor firehood" },
+    "description": "A custom padded hood with Nomex facing to resist fire and chemical attacks.",
+    "weight": "820 g",
+    "volume": "2 L",
+    "price": "580 USD",
+    "price_postapoc": "40 USD",
+    "to_hit": -1,
+    "material": [ "nomex", "cotton", "kevlar" ],
+    "symbol": "[",
+    "looks_like": "hood_rain",
+    "color": "light_gray",
+    "warmth": 20,
+    "environmental_protection": 6,
+    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
+        ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
+        "coverage": 100,
+        "encumbrance": [ 20, 20 ]
+      },
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
+        ],
+        "coverage": 50,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hood_wsurvivor",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "winter survivor hood" },
+    "description": "A custom waterproof hood lined with kevlar and leather padding, it offers a comfortable layer of protection for the head.  It's very warm thanks to its fur lining",
+    "weight": "870 g",
+    "volume": "1500 ml",
+    "price": "580 USD",
+    "price_postapoc": "35 USD",
+    "to_hit": -1,
+    "material": [ "vinyl", "nylon", "kevlar", "fur" ],
+    "symbol": "[",
+    "looks_like": "hood_survivor",
+    "color": "light_gray",
+    "warmth": 75,
+    "environmental_protection": 6,
+    "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
+          { "type": "fur", "covered_by_mat": 95, "thickness": 2.5 }
+        ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
+        "coverage": 100,
+        "encumbrance": [ 22, 22 ]
+      },
+      {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
+          { "type": "fur", "covered_by_mat": 95, "thickness": 2.5 }
+        ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ],
+        "coverage": 50
+      }
+    ]
+  },
+  {
+    "id": "hood_wsurvivor_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_wsurvivor",
+    "name": { "str": "winter survivor hood" },
+    "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "hood_wsurvivor_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_wsurvivor",
+    "name": { "str": "winter survivor hood" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "hood_survivor_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_survivor",
+    "name": { "str": "survivor hood" },
+    "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "hood_survivor_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_survivor",
+    "name": { "str": "survivor hood" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "hood_fsurvivor_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_survivor",
+    "name": { "str": "survivor firehood" },
+    "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "hood_fsurvivor_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_survivor",
+    "name": { "str": "survivor firehood" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "hood_wsurvivor_nofur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "faux fur winter survivor hood" },
+    "description": "A customized armored hood, chemical-resistant and padded with Kevlar.  It's also warm thanks to the faux fur lining.",
+    "copy-from": "hood_wsurvivor",
+    "material": [ "vinyl", "nylon", "kevlar", "faux_fur" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
+          { "type": "faux_fur", "covered_by_mat": 95, "thickness": 2.5 }
+        ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
+        "coverage": 100,
+        "encumbrance": [ 22, 22 ]
+      },
+      {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
+          { "type": "fur", "covered_by_mat": 95, "thickness": 2.5 }
+        ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ],
+        "coverage": 50
+      }
+    ],
+    "symbol": "[",
+    "warmth": 65,
+    "looks_like": "hood_survivor",
+    "color": "pink"
+  },
+  {
+    "id": "hood_wsurvivor_nofur_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_wsurvivor_nofur",
+    "name": { "str": "faux fur winter survivor hood" },
+    "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "hood_wsurvivor_nofur_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_wsurvivor_nofur",
+    "name": { "str": "faux fur winter survivor hood" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  }
+]

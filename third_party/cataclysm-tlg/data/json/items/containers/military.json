@@ -1,0 +1,324 @@
+[
+  {
+    "id": "ammunition_can_30",
+    "type": "ITEM",
+    "category": "container",
+    "name": "small ammo can",
+    "looks_like": "box_small_metal",
+    "description": "A solid metal ammo box with a small handle on top and shabby yellow text printed on the side.",
+    "weight": "1680 g",
+    "volume": "5058 ml",
+    "longest_side": "299 mm",
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "price": "19 USD 30 cent",
+    "price_postapoc": "10 cent",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "max_contains_volume": "3730 ml",
+        "max_contains_weight": "50 kg",
+        "max_item_length": "254 mm"
+      }
+    ],
+    "material": [ { "type": "steel" } ],
+    "symbol": "#",
+    "color": "light_gray"
+  },
+  {
+    "id": "ammunition_can_50",
+    "type": "ITEM",
+    "name": "ammo can",
+    "copy-from": "ammunition_can_30",
+    "weight": "2360 g",
+    "volume": "8666 ml",
+    "longest_side": "299 mm",
+    "price": "19 USD 99 cent",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "max_contains_volume": "6940 ml",
+        "max_contains_weight": "80 kg",
+        "max_item_length": "279 mm"
+      }
+    ]
+  },
+  {
+    "id": "ammunition_can_fat_50",
+    "type": "ITEM",
+    "name": "big ammo can",
+    "copy-from": "ammunition_can_30",
+    "weight": "2990 g",
+    "volume": "12627 ml",
+    "longest_side": "318 mm",
+    "price": "19 USD 99 cent",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "max_contains_volume": "10730 ml",
+        "max_contains_weight": "120 kg",
+        "max_item_length": "298 mm"
+      }
+    ]
+  },
+  {
+    "id": "ammunition_can_pa120",
+    "type": "ITEM",
+    "name": "heavy-duty ammo can",
+    "//0": "PA-120",
+    "copy-from": "ammunition_can_30",
+    "description": "A huge metal box with handles on each end.  It is almost inconveniently big, but can hold a lot of heavy items inside.",
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "weight": "6350 g",
+    "volume": "18572 ml",
+    "longest_side": "470 mm",
+    "price": "25 USD",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "max_contains_volume": "14772 ml",
+        "max_contains_weight": "160 kg",
+        "max_item_length": "438 mm"
+      }
+    ]
+  },
+  {
+    "id": "ammunition_can_pa124",
+    "type": "ITEM",
+    "name": "heavy-duty ammo can",
+    "//0": "PA-124",
+    "copy-from": "ammunition_can_30",
+    "description": "A huge metal box with handles on each end.  It is almost inconveniently big, but can hold a lot of heavy items inside.",
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "weight": "4082 g",
+    "volume": "23670 ml",
+    "longest_side": "470 mm",
+    "price": "25 USD",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "max_contains_volume": "14772 ml",
+        "max_contains_weight": "160 kg",
+        "max_item_length": "438 mm"
+      }
+    ]
+  },
+  {
+    "id": "ammunition_tube_mortar",
+    "type": "ITEM",
+    "category": "container",
+    "name": "mortar container",
+    "description": "A large cylindrical container.  Printed across the cardboard surface are the words: \nCOMP B\nB643\nCARTRIDGE 60MM HE\nFOR M224 MORTAR",
+    "weight": "272 g",
+    "volume": "1795 ml",
+    "material": [ { "type": "cardboard" } ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "1500 ml",
+        "max_contains_weight": "3000 g",
+        "max_item_length": "390 mm"
+      }
+    ],
+    "symbol": "0",
+    "color": "black"
+  },
+  {
+    "id": "ammunition_box_grenade",
+    "type": "ITEM",
+    "category": "container",
+    "name": "grenade container",
+    "description": "A small cylindrical container designed to safely store a single hand grenade.",
+    "weight": "411 g",
+    "volume": "590 ml",
+    "material": [ { "type": "cardboard" } ],
+    "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "550 ml", "max_contains_weight": "5000 g" } ],
+    "symbol": "0",
+    "color": "black"
+  },
+  {
+    "id": "ammunition_can_carlgustav",
+    "type": "ITEM",
+    "category": "container",
+    "name": "double 84mm HEDP container",
+    "description": "Huge metal container, in a shape of two massive rockets.",
+    "//": "84mm heat 551 container, 265x700x124mm",
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "weight": "1400 g",
+    "volume": "23000 ml",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "max_contains_volume": "2422 ml",
+        "max_contains_weight": "5000 g",
+        "max_item_length": "437mm"
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "max_contains_volume": "2422 ml",
+        "max_contains_weight": "5000 g",
+        "max_item_length": "437mm"
+      }
+    ],
+    "material": [ "steel" ],
+    "symbol": "8",
+    "color": "black"
+  },
+  {
+    "id": "ammunition_box_carlgustav",
+    "type": "ITEM",
+    "category": "container",
+    "name": "84mm HE crate",
+    "description": "Relatively small metal box.  On one side it has label \"EXPLOSIVE\"",
+    "//": "84mm heat551 transport box, 610x400x290mm",
+    "looks_like": "box_oversize_metal",
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "weight": "1400 g",
+    "volume": "70760 ml",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "max_contains_volume": "69 L",
+        "max_contains_weight": "200 kg"
+      }
+    ],
+    "material": [ "steel" ],
+    "symbol": "#",
+    "color": "black"
+  },
+  {
+    "id": "ammunition_crate_40x46_72",
+    "type": "ITEM",
+    "copy-from": "box_medium_wood",
+    "looks_like": "box_medium_wood",
+    "name": { "str": "wooden crate" },
+    "description": "Huge wooden crate, closed with metal wire.",
+    "pocket_data": [ { "pocket_type": "CONTAINER", "rigid": true, "max_contains_volume": "10 L", "max_contains_weight": "40 kg" } ],
+    "color": "light_gray",
+    "symbol": "#"
+  },
+  {
+    "id": "ammo_box_small",
+    "type": "ITEM",
+    "name": { "str": "small ammo box", "str_pl": "small ammo boxes" },
+    "description": "A small cardboard box for storing ammunition.",
+    "category": "container",
+    "symbol": "#",
+    "color": "brown",
+    "material": [ "cardboard" ],
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "weight": "14 g",
+    "volume": "115 ml",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "110 ml",
+        "max_contains_weight": "1600 g",
+        "max_item_length": "90 mm"
+      }
+    ]
+  },
+  {
+    "id": "ammo_box",
+    "type": "ITEM",
+    "name": { "str": "ammo box", "str_pl": "ammo boxes" },
+    "description": "A cardboard box for storing ammunition.",
+    "category": "container",
+    "symbol": "#",
+    "color": "brown",
+    "material": [ "cardboard" ],
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "weight": "34 g",
+    "volume": "250 ml",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "240 ml",
+        "max_contains_weight": "2000 g",
+        "max_item_length": "100 mm"
+      }
+    ]
+  },
+  {
+    "id": "ammo_box_big",
+    "type": "ITEM",
+    "name": { "str": "big ammo box", "str_pl": "big ammo boxes" },
+    "description": "A cardboard box suitable for storing larger cartridges, or maybe a lot of smaller ones.",
+    "category": "container",
+    "symbol": "#",
+    "color": "brown",
+    "material": [ "cardboard" ],
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "weight": "44 g",
+    "volume": "480 ml",
+    "longest_side": "14 cm",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "470 ml",
+        "max_contains_weight": "4000 g",
+        "max_item_length": "14 cm"
+      }
+    ]
+  },
+  {
+    "id": "55gal_drum_rubber",
+    "type": "ITEM",
+    "category": "container",
+    "name": { "str": "collapsible drum" },
+    "description": "A beige collapsible drum with a water valve and D-Rings.  Text on its top clearly says \"POTABLE WATER ONLY\".",
+    "weight": "16 kg",
+    "volume": "23 L",
+    "price": "395 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "//": "todo: replace with some better rubber material",
+    "material": [ { "type": "rubber", "portion": 9 }, { "type": "steel", "portion": 1 } ],
+    "symbol": "0",
+    "color": "yellow",
+    "qualities": [ [ "CONTAIN", 1 ] ],
+    "flags": [ "COLLAPSE_CONTENTS" ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "watertight": true,
+        "rigid": false,
+        "max_contains_volume": "200 L",
+        "max_contains_weight": "500 kg"
+      }
+    ]
+  },
+  {
+    "id": "432gal_drum_rubber",
+    "type": "ITEM",
+    "category": "container",
+    "name": { "str": "big collapsible drum" },
+    "description": "A black collapsible drum with a valve and D-Rings.  Yellow text on its top clearly says \"FLAMMABLE\".  Empty and collapsed, it could be moved elsewhere.",
+    "weight": "125 kg",
+    "volume": "180 L",
+    "price": "395 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "//": "todo: replace with some better rubber material",
+    "use_action": { "type": "deploy_furn", "furn_type": "f_432gal_drum_rubber" },
+    "material": [ { "type": "rubber", "portion": 9 }, { "type": "steel", "portion": 1 } ],
+    "symbol": "0"
+  }
+]

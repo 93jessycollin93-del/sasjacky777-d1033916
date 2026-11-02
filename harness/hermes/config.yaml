@@ -1,0 +1,50 @@
+# Hermes Agent → SAS-JACKY
+#
+# Copy into ~/.hermes/config.yaml (or merge the two blocks into yours), then:
+#   hermes            # interactive
+#   hermes -z "What's on my task board? Add 'ship v2' as high priority."
+#
+# The first time Hermes connects it opens a browser to sign in to SAS-JACKY
+# (OAuth 2.1 with PKCE, against the app's own Supabase login) and keeps the
+# token in ~/.hermes/mcp-tokens/sas-jacky.json, refreshing it on its own.
+# Everything the agent does, it does as you: same data, same rules, and the
+# owner-only engines only if your account holds the owner role.
+#
+# harness/e2e/run.sh tests this exact file against a local copy of the app,
+# swapping only the URL and the sign-in for a token (see docs/HARNESSES.md).
+
+model:
+  # DeepSeek's API. Put DEEPSEEK_API_KEY=… in ~/.hermes/.env.
+  provider: "deepseek"
+  default: "deepseek-v4-flash"
+
+  # ── Or one of these instead (keep exactly one provider/default pair) ──
+  # Hermes 4 through OpenRouter (OPENROUTER_API_KEY in ~/.hermes/.env):
+  #   provider: "openrouter"
+  #   default: "nousresearch/hermes-4-70b"
+  # LM Studio on this computer (load a Hermes or DeepSeek model first):
+  #   provider: "lmstudio"
+  #   default: "hermes-3-llama-3.1-8b"
+  # Ollama on this computer (`ollama pull hermes3:8b` or `deepseek-r1:14b`):
+  #   provider: "custom"
+  #   base_url: "http://localhost:11434/v1"
+  #   default: "hermes3:8b"
+
+mcp_servers:
+  sas-jacky:
+    url: "https://iezgzdhhmwmbqshnxrie.supabase.co/functions/v1/mcp"
+    auth: oauth
+    # ask_jackie waits for Jackie's whole answer; give it room.
+    timeout: 180
+    # Hermes asks before every write-capable tool on an untrusted server.
+    # Uncomment to approve each change to your tasks and memory by hand:
+    # trust: untrusted
+
+# Keep the app's tools directly in front of the model. Hermes otherwise hides
+# MCP tools behind a tool_search bridge; that pays off for servers with
+# hundreds of tools, but these are twenty-one small ones, and Hermes's own docs
+# note models sometimes skip the search and assume a tool is missing. If you
+# attach many other MCP servers, delete this block to get the bridge back.
+tools:
+  tool_search:
+    enabled: off

@@ -1,0 +1,154 @@
+[
+  {
+    "type": "martial_art",
+    "id": "style_biojutsu",
+    "name": { "str": "Bionic Combatives" },
+    "description": "A modern combat style for the post-modern human.  Nicknamed \"Biojutsu\", Bionic Combatives combines integrated weaponry, armor, and augments into a consolidated fighting discipline.",
+    "initiate": [
+      "BEGINNING BIONIC COMBATIVES PROGRAM.  INITIATING COMBAT PROTOCOLS.",
+      "%s starts moving with swift robotic precision."
+    ],
+    "arm_block": 2,
+    "leg_block": 3,
+    "static_buffs": [
+      {
+        "id": "buff_biojutsu_static",
+        "name": "CQC Program Alpha",
+        "description": "Attack and defend with methodical precision.\n\n+1 block attempts, +1 accuracy.",
+        "unarmed_allowed": true,
+        "melee_allowed": true,
+        "bonus_blocks": 1,
+        "flat_bonuses": [ { "stat": "hit", "scale": 1.0 } ]
+      }
+    ],
+    "onblock_buffs": [
+      {
+        "id": "buff_biojutsu_onblock",
+        "name": "Reactive Defense",
+        "description": "Adjust stance to optimally deflect incoming attacks.\n\n+1 bash, cut, and stab armor.\nLasts 4 turns.  Stacks 3 times.",
+        "unarmed_allowed": true,
+        "melee_allowed": true,
+        "skill_requirements": [ { "name": "melee", "level": 4 } ],
+        "buff_duration": 4,
+        "max_stacks": 3,
+        "flat_bonuses": [
+          { "stat": "armor", "type": "bash", "scale": 1.0 },
+          { "stat": "armor", "type": "cut", "scale": 1.0 },
+          { "stat": "armor", "type": "stab", "scale": 1.0 }
+        ]
+      }
+    ],
+    "onkill_buffs": [
+      {
+        "id": "buff_biojutsu_onkill",
+        "name": "Optimization",
+        "description": "Apply combat data from a defeated opponent.\n\n+1 accuracy, +15% damage.\nLasts 3 turns.  Stacks 3 times.",
+        "unarmed_allowed": true,
+        "melee_allowed": true,
+        "skill_requirements": [ { "name": "melee", "level": 4 } ],
+        "buff_duration": 3,
+        "max_stacks": 3,
+        "persists": true,
+        "flat_bonuses": [ { "stat": "hit", "scale": 1.0 } ],
+        "mult_bonuses": [
+          { "stat": "damage", "type": "bash", "scale": 1.15 },
+          { "stat": "damage", "type": "cut", "scale": 1.15 },
+          { "stat": "damage", "type": "stab", "scale": 1.15 }
+        ]
+      }
+    ],
+    "techniques": [
+      "tec_biojutsu_disarm",
+      "tec_biojutsu_strike_unarmed",
+      "tec_biojutsu_strike_melee",
+      "tec_biojutsu_impale",
+      "tec_biojutsu_takedown",
+      "tec_biojutsu_wide"
+    ],
+    "weapon_category": [ "BIONIC_WEAPONRY" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_biojutsu_disarm",
+    "name": "Disarm",
+    "messages": [ "You effortlessly disarm and stun %s!", "<npcname> effortlessly disarms and stuns %s!" ],
+    "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
+    "unarmed_allowed": true,
+    "weighting": 2,
+    "disarms": true,
+    "tech_effects": [
+      {
+        "id": "disarmed",
+        "chance": 100,
+        "duration": 400,
+        "on_damage": true,
+        "message": "The weapon of %s has been forced out ot their hands!"
+      }
+    ],
+    "stun_dur": 1,
+    "attack_vectors": [ "vector_grasp" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_biojutsu_strike_melee",
+    "name": "Measured Strike (melee)",
+    "messages": [ "You make an efficient strike against %s!", "<npcname> makes an efficient strike against %s!" ],
+    "melee_allowed": true,
+    "mult_bonuses": [ { "stat": "movecost", "scale": 0.8 } ],
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_biojutsu_strike_unarmed",
+    "name": "Measured Strike (unarmed)",
+    "messages": [ "You make an efficient strike against %s!", "<npcname> makes an efficient strike against %s!" ],
+    "unarmed_allowed": true,
+    "crit_ok": true,
+    "mult_bonuses": [ { "stat": "movecost", "scale": 0.8 } ],
+    "attack_vectors": [ "vector_punch" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_biojutsu_impale",
+    "name": "Biojutsu Impale",
+    "messages": [ "You brutally impale %s with your weapon!", "<npcname> brutally impales %s with their weapon!" ],
+    "skill_requirements": [ { "name": "melee", "level": 3 } ],
+    "melee_allowed": true,
+    "crit_tec": true,
+    "mult_bonuses": [
+      { "stat": "damage", "type": "bash", "scale": 1.5 },
+      { "stat": "damage", "type": "cut", "scale": 1.5 },
+      { "stat": "damage", "type": "stab", "scale": 1.5 }
+    ],
+    "stun_dur": 1,
+    "attack_vectors": [ "vector_null" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_biojutsu_takedown",
+    "name": "Biojutsu Takedown",
+    "messages": [ "You kick and slam %s to the ground!", "<npcname> kicks and slams %s to the ground!" ],
+    "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
+    "unarmed_allowed": true,
+    "weighting": 2,
+    "crit_ok": true,
+    "condition": { "not": { "npc_has_effect": "downed" } },
+    "condition_desc": "* Only works on a <info>non-downed</info> target",
+    "down_dur": 2,
+    "attack_vectors": [ "vector_foot_toes" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_biojutsu_wide",
+    "name": "Biojutsu Cleave",
+    "messages": [ "You quickly cleave through %s and those nearby!", "<npcname> quickly cleaves through %s and those nearby!" ],
+    "skill_requirements": [ { "name": "melee", "level": 5 } ],
+    "weapon_categories_allowed": "BIONIC_WEAPONRY",
+    "melee_allowed": true,
+    "unarmed_allowed": true,
+    "weighting": 2,
+    "crit_tec": true,
+    "aoe": "wide",
+    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right" ]
+  }
+]

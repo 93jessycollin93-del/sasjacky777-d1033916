@@ -42,7 +42,10 @@ export function byteOffsets(s: string): Uint32Array {
   return table;
 }
 
-const BOUNDARY = /(?<=[.!?])[\s ]+|\n{2,}/g;
+// The NBSP is spelled as an escape, not typed literally: \s already matches
+// U+00A0, but a raw one here is invisible in review and trips
+// no-irregular-whitespace.
+const BOUNDARY = /(?<=[.!?])[\s\u00a0]+|\n{2,}/g;
 
 /**
  * Split into sentences. Deliberately conservative: it keeps anything that

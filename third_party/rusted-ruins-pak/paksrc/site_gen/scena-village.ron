@@ -1,0 +1,34 @@
+(
+    object_type: "site_gen",
+    id: "scena-village",
+    
+    site_gen: (
+        kind: Town,
+        site_symbol: "rm-town",
+        map_template_id: [
+            "scena-village-1",
+        ],
+        default_faction_id: "free_frontier",
+        npcs: [
+            (
+                id: Site(0),
+                pos: (13, 15),
+                floor: 0,
+                chara_template_id: "u-lucetta",
+                talk_script: "shop",
+            ),
+            (
+                id: Site(1),
+                pos: (10, 10),
+                floor: 0,
+                chara_template_id: "peasant-m-01",
+                talk_script: "!random-talk(text_id='scena-civilian-random', range='1..2')",
+            ),
+        ],
+        shops: {
+            Site(0): (
+                item_selector: "group/seed,fertilizer",
+            ),
+        },
+    ),
+)

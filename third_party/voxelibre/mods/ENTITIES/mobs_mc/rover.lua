@@ -1,0 +1,787 @@
+--MCmobs v0.4
+--maikerumine
+
+-- Rootyjr
+-----------------------------
+-- implemented ability to detect when seen / break eye contact and aggressive response
+-- implemented teleport to avoid arrows.
+-- implemented teleport to avoid rain.
+-- implemented teleport to chase.
+-- added particles.
+-- drew mcl_portal_particle1.png
+-- drew mcl_portal_particle2.png
+-- drew mcl_portal_particle3.png
+-- drew mcl_portal_particle4.png
+-- drew mcl_portal_particle5.png
+-- added rain damage.
+-- fixed the grass_with_dirt issue.
+
+-- How freqeuntly to take and place blocks, in seconds
+local take_frequency_min = 235
+local take_frequency_max = 245
+local place_frequency_min = 235
+local place_frequency_max = 245
+
+
+minetest.register_entity("mobs_mc:ender_eyes", {
+	on_step = function(self)
+		self.object:remove()
+	end,
+})
+
+local S = minetest.get_translator("mobs_mc")
+local enable_damage = minetest.settings:get_bool("enable_damage")
+
+local telesound = function(pos, is_source)
+	local snd
+	if is_source then
+		snd = "mobs_mc_enderman_teleport_src"
+	else
+		snd = "mobs_mc_enderman_teleport_dst"
+	end
+	minetest.sound_play(snd, {pos=pos, max_hear_distance=16}, true)
+end
+
+--###################
+--################### ENDERMAN
+--###################
+
+local pr = PseudoRandom(os.time()*(-334))
+
+-- Select a new animation definition.
+local select_rover_animation = function(animation_type)
+	-- Enderman holds a block
+	if animation_type == "block" then
+		return {
+			walk_speed = 25,
+			run_speed = 50,
+			stand_speed = 25,
+			stand_start = 200,
+			stand_end = 200,
+			walk_start = 161,
+			walk_end = 200,
+			run_start = 161,
+			run_end = 200,
+			punch_start = 121,
+			punch_end = 160,
+		}
+	-- Enderman doesn't hold a block
+	elseif animation_type == "normal" or animation_type == nil then
+		return {
+			walk_speed = 25,
+			run_speed = 50,
+			stand_speed = 25,
+			stand_start = 40,
+			stand_end = 80,
+			walk_start = 0,
+			walk_end = 40,
+			run_start = 0,
+			run_end = 40,
+			punch_start = 81,
+			punch_end = 120,
+		}
+	end
+end
+
+-- Check if the rover is in eye contact with the player
+local function is_eye_contact(rover, player, tolerance)
+	local player_pos = player:get_pos()
+	local look_dir_not_normalized = player:get_look_dir()
+	local player_eye_height = player:get_properties().eye_height
+
+	if not player_eye_height then
+		core.log("warning", "[mobs_mc:rover] Player "..player:get_player_name().." has no eye height property; defaulting to 1.5")
+		player_eye_height = 1.5
+	end
+
+	local look_dir = vector.normalize(look_dir_not_normalized)
+	local look_pos = vector.new(player_pos.x, player_pos.y + player_eye_height, player_pos.z)
+	local rover_eye_pos = vector.offset(rover.object:get_pos(), 0, rover.head_eye_height, 0)
+	local eye_distance_from_player = vector.distance(rover_eye_pos, look_pos)
+	look_pos = vector.add(look_pos, vector.multiply(look_dir, eye_distance_from_player))
+
+	return mcl_mobs.target_visible(rover.object, player)
+			and vector.distance(look_pos, rover_eye_pos) <= tolerance
+end
+
+-- Calculate teleport probability per second based on light level
+local function get_light_teleport_probability(light_level, dtime)
+	-- Uses exponential distribution: P(teleport in dt) = dt / expected_time
+	-- Light level 15: expected 0.1s, 14: 2s, 13: 4s, ..., 0: 30s
+	local expected_time = (core.LIGHT_MAX - light_level) * 2 + 0.1
+
+	return 1 - math.exp(-dtime / expected_time)
+end
+
+-- Decide how rover reacts to being interrupted when provoked
+local function react_to_threat(rover)
+	if rover.state == "staring" or rover.state == "attack" then
+		local provoker = core.get_player_by_name(rover._provoking_player)
+		if provoker then
+			rover.attack = provoker
+			rover.state = "attack"
+			rover:teleport(provoker)
+		end
+		return
+	end
+
+	rover:teleport(nil)
+end
+
+local mobs_griefing = minetest.settings:get_bool("mobs_griefing") ~= false
+local psdefs = {{
+	amount = 5,
+	minpos = vector.new(-0.6,0,-0.6),
+	maxpos = vector.new(0.6,3,0.6),
+	minvel = vector.new(-0.25,-0.25,-0.25),
+	maxvel = vector.new(0.25,0.25,0.25),
+	minacc = vector.new(-0.5,-0.5,-0.5),
+	maxacc = vector.new(0.5,0.5,0.5),
+	minexptime = 0.2,
+	maxexptime = 3,
+	minsize = 0.2,
+	maxsize = 1.2,
+	collisiondetection = true,
+	vertical = false,
+	time = 0,
+	texture = "mcl_portals_particle"..math.random(1, 5)..".png",
+}}
+
+mcl_mobs.register_mob("mobs_mc:rover", {
+	description = S("Rover"),
+	type = "monster",
+	spawn_class = "passive",
+	can_despawn = true,
+	passive = true,
+	pathfinding = 1,
+	initial_properties = {
+		hp_min = 40,
+		hp_max = 40,
+		collisionbox = {-0.3, -0.01, -0.3, 0.3, 2.89, 0.3},
+	},
+	xp_min = 5,
+	xp_max = 5,
+	head_eye_height = 2.55,
+	visual = "mesh",
+	mesh = "vl_rover.b3d",
+	textures = { "vl_mobs_rover.png^vl_mobs_rover_face.png" },
+	glow = 100,
+	visual_size = {x=10, y=10},
+	makes_footstep_sound = true,
+	sounds = {
+		-- TODO: Custom war cry sound
+		war_cry = "mobs_sandmonster",
+		death = {name="mobs_mc_enderman_death", gain=0.7},
+		damage = {name="mobs_mc_enderman_hurt", gain=0.5},
+		random = {name="mobs_mc_enderman_random", gain=0.5},
+		distance = 16,
+	},
+	walk_velocity = 2,
+	run_velocity = 4,
+	damage = 7,
+	reach = 2,
+	particlespawners = psdefs,
+	drops = {
+		{name = "mcl_throwing:ender_pearl",
+		chance = 1,
+		min = 0,
+		max = 1,
+		looting = "common"},
+	},
+	_vl_projectile = {
+		can_punch = function() return false end
+	},
+	animation = select_rover_animation("normal"),
+	_taken_node = "",
+	can_spawn = function(pos)
+		return #minetest.find_nodes_in_area(vector.offset(pos,0,1,0),vector.offset(pos,0,3,0),{"air"}) > 2
+	end,
+	do_custom = function(self, dtime)
+		-- Handle damage and teleportation when standing in rain
+		local rover_pos = self.object:get_pos()
+		local dim = mcl_worlds.pos_to_dimension(rover_pos)
+		if dim == "overworld" and mcl_burning.is_affected_by_rain(self.object) then
+			self.state = "stand"
+			self.object:punch(self.object, 1.0, {
+				full_punch_interval=1.0,
+				damage_groups={fleshy=self.rain_damage},
+			}, nil)
+			-- Try to teleport to safety
+			self:teleport(nil)
+		end
+
+		-- If burning and not in attack state, try to teleport to safety
+		if mcl_burning.is_burning(self.object) and self.state ~= "attack" then
+			react_to_threat(self)
+		end
+
+		-- If standing in liquid, teleport to safety
+		local standing_nodef = core.registered_nodes[self.standing_in]
+		if standing_nodef.groups.liquid then
+			react_to_threat(self)
+		end
+
+		-- If standing in any lingering cloud, teleport to safety
+		if mcl_potions and mcl_potions.get_lingering_clouds_at then
+			local clouds = mcl_potions.get_lingering_clouds_at(rover_pos)
+			if #clouds > 0 then
+				self.state = "stand"
+				self:teleport(nil)
+			end
+		end
+
+		-- Check for arrows and people nearby and teleport away if found.
+		rover_pos = self.object:get_pos()
+		rover_pos.y = rover_pos.y + 1.5
+		local objs = core.get_objects_inside_radius(rover_pos, 2)
+		for n = 1, #objs do
+			local obj = objs[n]
+			if obj then
+				if core.is_player(obj) then
+					if self.state == "staring" or self.state == "attack" then
+						self:teleport(obj)
+					else
+						self:teleport(nil)
+					end
+				else
+					local lua = obj:get_luaentity()
+					if lua and lua.name then
+						if lua.name == "mcl_bows:arrow_entity"
+								or lua.name == "mcl_throwing:snowball_entity"
+								or lua.name:find("^mcl_potions:.*_splash_flying$")
+								or lua.name:find("^mcl_potions:.*_lingering_flying$") then
+							react_to_threat(self)
+						end
+					end
+				end
+			end
+		end
+
+		-- State management
+		if self.state == "staring" then
+			local provoker = core.get_player_by_name(self._provoking_player)
+
+			-- Check if the provoking player disconnected or has gotten too far away
+			if not provoker or vector.distance(rover_pos, provoker:get_pos()) > self.view_range then
+				self._provoking_player = nil
+				self.state = "stand"
+				self:teleport(nil)
+			elseif is_eye_contact(self, provoker, 0.8) then
+				local player_pos = provoker:get_pos()
+				self:turn_in_direction(player_pos.x - rover_pos.x, player_pos.z - rover_pos.z, 1)
+			else
+				-- Player looked away, attack
+				self.attack = provoker
+				self.state = "attack"
+				self:teleport(provoker)
+			end
+
+			-- Do nothing else while being provoked
+			return
+
+		elseif self.state == "attack" then
+			self.object:set_properties({textures={"vl_mobs_rover.png^vl_mobs_rover_face_angry.png"}})
+
+			-- Warp aggresively towards target if too far away
+			if self.attack then
+				local target = self.attack
+				local pos = target:get_pos()
+				if pos then
+					local distance = vector.distance(rover_pos, pos)
+					if self.view_range >= distance and distance > 10 then
+						self:teleport(target)
+					end
+				end
+			end
+
+			-- Already attacking, do nothing else
+			return
+
+		else
+			self.object:set_properties({textures={"vl_mobs_rover.png^vl_mobs_rover_face.png"}})
+
+			-- Spontaneous teleport based on light level in overworld
+			if dim == 'overworld' then
+				local light = core.get_node_light(rover_pos)
+				if light then
+					local prob = get_light_teleport_probability(light, dtime)
+					if math.random() < prob then
+						self:teleport(nil)
+					end
+				end
+			end
+		end
+
+		-- Check to see if people are near by enough to look at us.
+		for _,obj in pairs(minetest.get_connected_players()) do
+
+			--check if they are within radius
+			local player_pos = obj:get_pos()
+			if player_pos then -- prevent crashing in 1 in a million scenario
+				-- Rovers become motionless on eye contact
+				if is_eye_contact(self, obj, 0.4) then
+					self._provoking_player = obj:get_player_name()
+					self:set_velocity(0)
+					self:set_animation("stand", true)
+					self.state = "staring"
+					self:turn_in_direction(player_pos.x - rover_pos.x, player_pos.z - rover_pos.z, 1)
+					break
+				end
+			end
+		end
+
+		-- ATTACK ENDERMITE
+		local enderpos = self.object:get_pos()
+		if math.random(1,140) == 1 then
+			local mobsnear = minetest.get_objects_inside_radius(enderpos, 64)
+			for n=1, #mobsnear do
+				local mob = mobsnear[n]
+				if mob then
+					local entity = mob:get_luaentity()
+					if entity and entity.name == "mobs_mc:endermite" then
+						self.attack = mob
+						self.state = 'attack'
+					end
+				end
+			end
+		end
+
+		-- TAKE AND PLACE STUFF BEHAVIOUR BELOW.
+		if not mobs_griefing then
+			return
+		end
+		-- Take and put nodes
+		if not self._take_place_timer or not self._next_take_place_time then
+			self._take_place_timer = 0
+			self._next_take_place_time = math.random(take_frequency_min, take_frequency_max)
+			return
+		end
+		self._take_place_timer = self._take_place_timer + dtime
+		if (self._taken_node == nil or self._taken_node == "") and self._take_place_timer >= self._next_take_place_time then
+			-- Take random node
+			self._take_place_timer = 0
+			self._next_take_place_time = math.random(place_frequency_min, place_frequency_max)
+			local pos = self.object:get_pos()
+			local takable_nodes = minetest.find_nodes_in_area_under_air({x=pos.x-2, y=pos.y-1, z=pos.z-2}, {x=pos.x+2, y=pos.y+1, z=pos.z+2}, "group:enderman_takable")
+			if #takable_nodes >= 1 then
+				local r = pr:next(1, #takable_nodes)
+				local take_pos = takable_nodes[r]
+				local node = minetest.get_node(take_pos)
+				-- Don't destroy protected stuff.
+				if not minetest.is_protected(take_pos, "") then
+					minetest.remove_node(take_pos)
+					local dug = minetest.get_node_or_nil(take_pos)
+					if dug and dug.name == "air" then
+						local node_obj = vl_held_item.create_item_entity(take_pos, node.name)
+						if node_obj then
+							node_obj:set_attach(self.object, "held_node")
+							self._node_obj = node_obj
+							self._taken_node = node.name
+							local prop = node_obj:get_properties()
+							table.update(prop, { static_save = false, visual_size={x=0.02, y=0.02} })
+							node_obj:set_properties(prop)
+						end
+						local def = minetest.registered_nodes[self._taken_node]
+						self.animation = select_rover_animation("block")
+						self:set_animation(self.animation.current)
+						if def and def.sounds and def.sounds.dug then
+							minetest.sound_play(def.sounds.dug, {pos = take_pos, max_hear_distance = 16}, true)
+						end
+					end
+				end
+			end
+		elseif self._taken_node ~= nil and self._taken_node ~= "" and self._take_place_timer >= self._next_take_place_time then
+			-- Place taken node
+			self._take_place_timer = 0
+			self._next_take_place_time = math.random(take_frequency_min, take_frequency_max)
+			local pos = self.object:get_pos()
+			local yaw = self.object:get_yaw()
+			-- Place node at looking direction
+			local place_pos = vector.subtract(pos, minetest.facedir_to_dir(minetest.dir_to_facedir(minetest.yaw_to_dir(yaw))))
+			-- Also check to see if protected.
+			if minetest.get_node(place_pos).name == "air" and not minetest.is_protected(place_pos, "") then
+				-- ... but only if there's a free space
+				local success = minetest.place_node(place_pos, {name = self._taken_node})
+				if success then
+					local def = minetest.registered_nodes[self._taken_node]
+					-- Update animation accordingly (removes visible block)
+					self.persistent = false
+					self.animation = select_rover_animation("normal")
+					self:set_animation(self.animation.current)
+					if def and def.sounds and def.sounds.place then
+						minetest.sound_play(def.sounds.place, {pos = place_pos, max_hear_distance = 16}, true)
+					end
+					self._node_obj:remove()
+					self._node_obj = nil
+					self._taken_node = nil
+				end
+			end
+		end
+	end,
+	do_teleport = function(self, target)
+		if target ~= nil then
+			local target_pos = target:get_pos()
+			-- Find all solid nodes below air in a 10×10×10 cuboid centered on the target
+			local nodes = minetest.find_nodes_in_area_under_air(vector.subtract(target_pos, 5), vector.add(target_pos, 5), {"group:solid", "group:cracky", "group:crumbly"})
+			local telepos
+			if nodes ~= nil then
+				if #nodes > 0 then
+					-- Up to 64 attempts to teleport
+					for n=1, math.min(64, #nodes) do
+						local r = pr:next(1, #nodes)
+						local nodepos = nodes[r]
+						local node_ok = true
+						-- Selected node needs to have 3 nodes of free space above
+						for u=1, 3 do
+							local node = minetest.get_node({x=nodepos.x, y=nodepos.y+u, z=nodepos.z})
+							local ndef = minetest.registered_nodes[node.name]
+							if ndef and ndef.walkable then
+								node_ok = false
+								break
+							end
+						end
+						if node_ok then
+							telepos = {x=nodepos.x, y=nodepos.y+1, z=nodepos.z}
+						end
+					end
+					if telepos then
+						telesound(self.object:get_pos(), false)
+						self.object:set_pos(telepos)
+						telesound(telepos, true)
+					end
+				end
+			end
+		else
+			-- Attempt to randomly teleport enderman
+			local pos = self.object:get_pos()
+			-- Up to 8 top-level attempts to teleport
+			for n=1, 8 do
+				local node_ok = false
+				-- We need to add (or subtract) different random numbers to each vector component, so it couldn't be done with a nice single vector.add() or .subtract():
+				local randomCube = vector.new( pos.x + 8*(pr:next(0,16)-8), pos.y + 8*(pr:next(0,16)-8), pos.z + 8*(pr:next(0,16)-8) )
+				local nodes = minetest.find_nodes_in_area_under_air(vector.subtract(randomCube, 4), vector.add(randomCube, 4), {"group:solid", "group:cracky", "group:crumbly"})
+				if nodes ~= nil then
+					if #nodes > 0 then
+						-- Up to 8 low-level (in total up to 8*8 = 64) attempts to teleport
+						for n=1, math.min(8, #nodes) do
+							local r = pr:next(1, #nodes)
+							local nodepos = nodes[r]
+							node_ok = true
+							for u=1, 3 do
+								local node = minetest.get_node({x=nodepos.x, y=nodepos.y+u, z=nodepos.z})
+								local ndef = minetest.registered_nodes[node.name]
+								if ndef and ndef.walkable then
+									node_ok = false
+									break
+								end
+							end
+							if node_ok then
+								telesound(self.object:get_pos(), false)
+								local telepos = {x=nodepos.x, y=nodepos.y+1, z=nodepos.z}
+								self.object:set_pos(telepos)
+								telesound(telepos, true)
+								break
+							end
+						end
+					end
+				end
+				if node_ok then
+					break
+				end
+			end
+		end
+	end,
+	on_die = function(self, pos)
+		-- Drop carried node on death
+		if self._taken_node ~= nil and self._taken_node ~= "" then
+			minetest.add_item(pos, self._taken_node)
+		end
+		if self._node_obj then
+			self._node_obj:remove()
+			self._node_obj = nil
+		end
+	end,
+	_on_remove = function(self)
+		if self._node_obj then
+			self._node_obj:remove()
+			self._node_obj = nil
+		end
+	end,
+	do_punch = function(self, hitter, tflp, tool_caps, dir)
+		-- damage from rain caused by itself so we don't want it to attack itself.
+        if hitter ~= self.object and hitter ~= nil then
+            if self.state ~= "attack" then
+                self.state = "attack"
+                self.attack = hitter
+                self:teleport(hitter)
+            elseif pr:next(1, 5) == 1 then
+                -- Teleport with 20% chance
+                self:teleport(hitter)
+            end
+        end
+	end,
+	after_activate = function(self, staticdata, def, dtime)
+		self.object:set_bone_override("held_node", {rotation={vec=vector.new(-math.pi/2, 0, 0)}})
+		if not self._taken_node or self._taken_node == "" then
+			self.animation = select_rover_animation("normal")
+			self:set_animation(self.animation.current)
+			return
+		end
+		self.animation = select_rover_animation("block")
+		self:set_animation(self.animation.current)
+		local node_obj = vl_held_item.create_item_entity(self.object:get_pos(), self._taken_node)
+		if node_obj then
+			node_obj:set_attach(self.object, "held_node")
+			self._node_obj = node_obj
+			local prop = node_obj:get_properties()
+			table.update(prop, { static_save = false, visual_size={x=0.02, y=0.02} })
+			node_obj:set_properties(prop)
+		end
+	end,
+	armor = { fleshy = 100, water_vulnerable = 100 },
+	water_damage = 8,
+	rain_damage = 2,
+	view_range = 64,
+	fear_height = 4,
+	attack_type = "dogfight",
+	_on_after_convert = function(obj)
+		obj:set_properties({
+			mesh = "vl_rover.b3d",
+			textures = { "vl_mobs_rover.png^vl_mobs_rover_face.png" },
+			visual_size = {x=10, y=10},
+		})
+	end
+}) -- END mcl_mobs.register_mob("mobs_mc:rover", {
+
+-- compat
+mcl_mobs.register_conversion("mobs_mc:enderman", "mobs_mc:rover")
+
+-- End spawn
+mcl_mobs:spawn_setup({
+	name = "mobs_mc:rover",
+	dimension = "end",
+	type_of_spawning = "ground",
+	biomes = {
+		"End",
+		"EndIsland",
+		"EndMidlands",
+		"EndBarrens",
+		"EndBorder",
+		"EndSmallIslands"
+	},
+	min_light = 0,
+	max_light = minetest.LIGHT_MAX+1,
+	chance = 100,
+	interval = 30,
+	aoc = 12,
+	min_height = mcl_vars.mg_end_min,
+	max_height = mcl_vars.mg_end_max
+})
+-- Overworld spawn
+mcl_mobs:spawn_setup({
+	name = "mobs_mc:rover",
+	dimension = "overworld",
+	type_of_spawning = "ground",
+	biomes = {
+		"Mesa",
+		"FlowerForest",
+		"Swampland",
+		"Taiga",
+		"ExtremeHills",
+		"Jungle",
+		"Savanna",
+		"BirchForest",
+		"MegaSpruceTaiga",
+		"MegaTaiga",
+		"ExtremeHills+",
+		"Forest",
+		"Plains",
+		"Desert",
+		"ColdTaiga",
+		"IcePlainsSpikes",
+		"SunflowerPlains",
+		"IcePlains",
+		"RoofedForest",
+		"ExtremeHills+_snowtop",
+		"MesaPlateauFM_grasstop",
+		"JungleEdgeM",
+		"ExtremeHillsM",
+		"JungleM",
+		"BirchForestM",
+		"MesaPlateauF",
+		"MesaPlateauFM",
+		"MesaPlateauF_grasstop",
+		"MesaBryce",
+		"JungleEdge",
+		"SavannaM",
+		"FlowerForest_beach",
+		"Forest_beach",
+		"StoneBeach",
+		"ColdTaiga_beach_water",
+		"Taiga_beach",
+		"Savanna_beach",
+		"Plains_beach",
+		"ExtremeHills_beach",
+		"ColdTaiga_beach",
+		"Swampland_shore",
+		"JungleM_shore",
+		"Jungle_shore",
+		"MesaPlateauFM_sandlevel",
+		"MesaPlateauF_sandlevel",
+		"MesaBryce_sandlevel",
+		"Mesa_sandlevel",
+		"RoofedForest_ocean",
+		"JungleEdgeM_ocean",
+		"BirchForestM_ocean",
+		"BirchForest_ocean",
+		"IcePlains_deep_ocean",
+		"Jungle_deep_ocean",
+		"Savanna_ocean",
+		"MesaPlateauF_ocean",
+		"ExtremeHillsM_deep_ocean",
+		"Savanna_deep_ocean",
+		"SunflowerPlains_ocean",
+		"Swampland_deep_ocean",
+		"Swampland_ocean",
+		"MegaSpruceTaiga_deep_ocean",
+		"ExtremeHillsM_ocean",
+		"JungleEdgeM_deep_ocean",
+		"SunflowerPlains_deep_ocean",
+		"BirchForest_deep_ocean",
+		"IcePlainsSpikes_ocean",
+		"Mesa_ocean",
+		"StoneBeach_ocean",
+		"Plains_deep_ocean",
+		"JungleEdge_deep_ocean",
+		"SavannaM_deep_ocean",
+		"Desert_deep_ocean",
+		"Mesa_deep_ocean",
+		"ColdTaiga_deep_ocean",
+		"Plains_ocean",
+		"MesaPlateauFM_ocean",
+		"Forest_deep_ocean",
+		"JungleM_deep_ocean",
+		"FlowerForest_deep_ocean",
+		"MegaTaiga_ocean",
+		"StoneBeach_deep_ocean",
+		"IcePlainsSpikes_deep_ocean",
+		"ColdTaiga_ocean",
+		"SavannaM_ocean",
+		"MesaPlateauF_deep_ocean",
+		"MesaBryce_deep_ocean",
+		"ExtremeHills+_deep_ocean",
+		"ExtremeHills_ocean",
+		"Forest_ocean",
+		"MegaTaiga_deep_ocean",
+		"JungleEdge_ocean",
+		"MesaBryce_ocean",
+		"MegaSpruceTaiga_ocean",
+		"ExtremeHills+_ocean",
+		"Jungle_ocean",
+		"RoofedForest_deep_ocean",
+		"IcePlains_ocean",
+		"FlowerForest_ocean",
+		"ExtremeHills_deep_ocean",
+		"MesaPlateauFM_deep_ocean",
+		"Desert_ocean",
+		"Taiga_ocean",
+		"BirchForestM_deep_ocean",
+		"Taiga_deep_ocean",
+		"JungleM_ocean",
+		"FlowerForest_underground",
+		"JungleEdge_underground",
+		"StoneBeach_underground",
+		"MesaBryce_underground",
+		"Mesa_underground",
+		"RoofedForest_underground",
+		"Jungle_underground",
+		"Swampland_underground",
+		"BirchForest_underground",
+		"Plains_underground",
+		"MesaPlateauF_underground",
+		"ExtremeHills_underground",
+		"MegaSpruceTaiga_underground",
+		"BirchForestM_underground",
+		"SavannaM_underground",
+		"MesaPlateauFM_underground",
+		"Desert_underground",
+		"Savanna_underground",
+		"Forest_underground",
+		"SunflowerPlains_underground",
+		"ColdTaiga_underground",
+		"IcePlains_underground",
+		"IcePlainsSpikes_underground",
+		"MegaTaiga_underground",
+		"Taiga_underground",
+		"ExtremeHills+_underground",
+		"JungleM_underground",
+		"ExtremeHillsM_underground",
+		"JungleEdgeM_underground",
+		"BambooJungle",
+		"BambooJungleM",
+		"BambooJungleEdge",
+		"BambooJungleEdgeM",
+		"BambooJungle_underground",
+		"BambooJungleM_underground",
+		"BambooJungleEdge_underground",
+		"BambooJungleEdgeM_underground",
+		"BambooJungle_ocean",
+		"BambooJungleM_ocean",
+		"BambooJungleEdge_ocean",
+		"BambooJungleEdgeM_ocean",
+		"BambooJungle_deep_ocean",
+		"BambooJungleM_deep_ocean",
+		"BambooJungleEdge_deep_ocean",
+		"BambooJungleEdgeM_deep_ocean",
+		"BambooJungle_shore",
+		"BambooJungleM_shore",
+		"BambooJungleEdge_shore",
+		"BambooJungleEdgeM_shore",
+	},
+	min_light = 0,
+	max_light = 7,
+	chance = 100,
+	interval = 30,
+	aoc = 2,
+	min_height = mcl_vars.mg_overworld_min,
+	max_height = mcl_vars.mg_overworld_max
+})
+
+-- Nether spawn (rare)
+mcl_mobs:spawn_setup({
+	name = "mobs_mc:rover",
+	dimension = "nether",
+	type_of_spawning = "ground",
+	biomes = {
+		"Nether",
+		"SoulsandValley",
+	},
+	min_light = 0,
+	max_light = 11,
+	chance = 100,
+	interval = 30,
+	aoc = 4,
+	min_height = mcl_vars.mg_nether_min,
+	max_height = mcl_vars.mg_nether_max
+})
+
+-- Warped Forest spawn (common)
+mcl_mobs:spawn_setup({
+	name = "mobs_mc:rover",
+	dimension = "nether",
+	type_of_spawning = "ground",
+	biomes = {
+		"WarpedForest"
+	},
+	min_light = 0,
+	max_light = 11,
+	chance = 100,
+	interval = 30,
+	aoc = 4,
+	min_height = mcl_vars.mg_nether_min,
+	max_height = mcl_vars.mg_nether_max
+})
+
+-- spawn eggs
+mcl_mobs.register_egg("mobs_mc:rover", S("Rover"), "#252525", "#151515", 0)
+minetest.register_alias("mobs_mc:enderman", "mobs_mc:rover")

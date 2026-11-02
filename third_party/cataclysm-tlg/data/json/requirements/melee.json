@@ -1,0 +1,465 @@
+[
+  {
+    "id": "basic_shivs",
+    "type": "requirement",
+    "//": "Any basic shivs not explicity designed for combat, or low-quality things.",
+    "tools": [
+      [
+        [ "glass_shiv", -1 ],
+        [ "sharp_toothbrush", -1 ],
+        [ "bone_knife", -1 ],
+        [ "knuckle_katar", -1 ],
+        [ "sharp_toothbrush", -1 ],
+        [ "knife_steak", -1 ],
+        [ "knife_paring", -1 ],
+        [ "knife_carving", -1 ],
+        [ "knife_bread", -1 ],
+        [ "screwdriver", -1 ],
+        [ "scissors_child", -1 ],
+        [ "scissors_medical", -1 ],
+        [ "scissors", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_shivs",
+    "type": "requirement",
+    "//": "Any real, small weapons that can be concealed and stab someone at close range, like pocket knives.",
+    "tools": [
+      [
+        [ "switchblade", -1 ],
+        [ "knife_swissarmy", -1 ],
+        [ "punch_dagger", -1 ],
+        [ "knuckle_katar", -1 ],
+        [ "balisong", -1 ],
+        [ "sai", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_claws",
+    "type": "requirement",
+    "//": "Any claw-like weapons that are real and good quality.  Excludes makeshift stuff.",
+    "tools": [ [ [ "bagh_nakha", -1 ], [ "integrated_fingertip_razors", -1 ] ] ]
+  },
+  {
+    "id": "basic_hooks",
+    "type": "requirement",
+    "//": "Any basic thing that you can use to hook stuff in a fight.",
+    "tools": [
+      [
+        [ "makeshift_scythe_war", -1 ],
+        [ "makeshift_glaive", -1 ],
+        [ "makeshift_scythe_war", -1 ],
+        [ "street_sign", -1 ],
+        [ "ax_sheets_bolted", -1 ],
+        [ "hockey_stick", -1 ],
+        [ "crowbar", -1 ],
+        [ "claw_bar", -1 ],
+        [ "fire_ax", -1 ],
+        [ "pike_pole", -1 ],
+        [ "EOD_hotstick", -1 ],
+        [ "ny_hook", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_hooks",
+    "type": "requirement",
+    "//": "Any quality weapon designed to hook your oppenents and their gear in a fight.  Reserved for the good stuff.",
+    "tools": [
+      [
+        [ "scythe_war", -1 ],
+        [ "poleaxe", -1 ],
+        [ "ji", -1 ],
+        [ "halberd", -1 ],
+        [ "glaive", -1 ],
+        [ "battleaxe", -1 ],
+        [ "lucerne_hammer", -1 ],
+        [ "warhammer", -1 ],
+        [ "jitte", -1 ],
+        [ "sai", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "basic_knives",
+    "type": "requirement",
+    "//": "Any small close-range stabbing weapons.  Not explicity designed for combat.",
+    "tools": [
+      [
+        [ "knife_hunting", -1 ],
+        [ "makeshift_knife", -1 ],
+        [ "bone_knife", -1 ],
+        [ "primitive_knife", -1 ],
+        [ "enfield_bayonet", -1 ],
+        [ "knife_butcher", -1 ],
+        [ "knife_chef", -1 ],
+        [ "knife_vegetable_cleaver", -1 ],
+        [ "knife_meat_cleaver", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_knives",
+    "type": "requirement",
+    "//": "Any real, small weapons meant to stab someone at close range; larger shivs basically.",
+    "tools": [
+      [
+        [ "knife_combat_marine", -1 ],
+        [ "knife_combat_army", -1 ],
+        [ "knife_combat", -1 ],
+        [ "knife_KABAR", -1 ],
+        [ "knife_rambo", -1 ],
+        [ "knife_rm42", -1 ],
+        [ "knife_folding", -1 ],
+        [ "knife_trench", -1 ],
+        [ "knife_baselard", -1 ],
+        [ "kris", -1 ],
+        [ "kukri", -1 ],
+        [ "tanto", -1 ],
+        [ "karambit", -1 ],
+        [ "kirpan", -1 ],
+        [ "butterfly_swords", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "basic_thrusting_swords",
+    "type": "requirement",
+    "//": "Any weapon that you could thrust with and stab someone.",
+    "tools": [
+      [
+        [ "fencing_foil", -1 ],
+        [ "fencing_foil_sharpened", -1 ],
+        [ "shock_foil", -1 ],
+        [ "fencing_epee", -1 ],
+        [ "fencing_epee_sharpened", -1 ],
+        [ "shock_epee", -1 ],
+        [ "fencing_sabre", -1 ],
+        [ "fencing_sabre_sharpened", -1 ],
+        [ "shock_sabre", -1 ],
+        [ "sharpened_pipe", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_thrusting_swords",
+    "type": "requirement",
+    "//": "Any real, quality weapon designed to be used in a thrusting fashion.  Needs to be a sword, not a spear.  This includes but is not limited to fencing weaponry.",
+    "tools": [ [ [ "estoc", -1 ], [ "sword_cane", -1 ], [ "rapier", -1 ], [ "jian", -1 ], [ "broadsword", -1 ] ] ]
+  },
+  {
+    "id": "basic_short_swords",
+    "type": "requirement",
+    "//": "Any basic thing you could use as a short sword, exlcudes high-quality things.",
+    "tools": [ [ [ "makeshift_machete", -1 ], [ "machete_gimmick", -1 ] ] ]
+  },
+  {
+    "id": "real_short_swords",
+    "type": "requirement",
+    "//": "Any real, edged short swords you could practice with, like broadswords.  I reckon that anything with a straight, sharp point to it that primarily swings side-to-side can qualify.",
+    "tools": [
+      [
+        [ "khopesh", -1 ],
+        [ "sword_xiphos", -1 ],
+        [ "sword_bronze", -1 ],
+        [ "sword_bayonet", -1 ],
+        [ "butterfly_swords", -1 ],
+        [ "arisaka_bayonet", -1 ],
+        [ "machete", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "basic_medium_swords",
+    "type": "requirement",
+    "//": "Any basic thing that can be used like a medium sword.",
+    "tools": [
+      [
+        [ "cavalry_sabre", -1 ],
+        [ "jian", -1 ],
+        [ "talwar", -1 ],
+        [ "arming_sword", -1 ],
+        [ "wakizashi", -1 ],
+        [ "broadsword", -1 ],
+        [ "cutlass", -1 ],
+        [ "sword_wood", -1 ],
+        [ "sword_sheets_welded", -1 ],
+        [ "sword_metal", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_medium_swords",
+    "type": "requirement",
+    "//": "Any real, edged medium swords you could practice with, like cavalry sabres.  This is any sword that is bigger than a short sword, but shorter than a long sword.",
+    "tools": [
+      [
+        [ "broadsword", -1 ],
+        [ "cavalry_sabre", -1 ],
+        [ "jian", -1 ],
+        [ "arming_sword", -1 ],
+        [ "dao", -1 ],
+        [ "wakizashi", -1 ],
+        [ "sword_cane", -1 ],
+        [ "cutlass", -1 ],
+        [ "falx", -1 ],
+        [ "talwar", -1 ],
+        [ "kilij", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "basic_long_swords",
+    "type": "requirement",
+    "//": "Basic things you could use as a long sword.  Excludes real stuff, this is makeshift and low-grade bits.",
+    "tools": [
+      [
+        [ "sword_wood", -1 ],
+        [ "bokken", -1 ],
+        [ "sword_sheets_welded", -1 ],
+        [ "sword_metal", -1 ],
+        [ "longsword", -1 ],
+        [ "katana", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_long_swords",
+    "type": "requirement",
+    "//": "Any real, edged long swords you could practice with, like katanas, longswords, etc.  I reckon that anything with a straight, sharp point to it that primarily swings side-to-side can qualify.",
+    "tools": [ [ [ "katana", -1 ], [ "longsword", -1 ] ] ]
+  },
+  {
+    "id": "basic_great_swords",
+    "type": "requirement",
+    "//": "Basic or makeshift weapons that can be used like a greatsword.  Exlcudes real or good things.",
+    "tools": [
+      [
+        [ "sword_wood_large", -1 ],
+        [ "sword_sheets_welded_large", -1 ],
+        [ "sword_metal_large", -1 ],
+        [ "zweihander", -1 ],
+        [ "nodachi", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_great_swords",
+    "type": "requirement",
+    "//": "Any real, edged, big swords you could practice with, like zweihanders, greatswords, or the Dragonslayer, etc.  I reckon that anything with a straight, sharp point to it that primarily swings side-to-side, and is large enough to require a normal human to use two hands can qualify.",
+    "tools": [ [ [ "zweihander", -1 ], [ "nodachi", -1 ], [ "kriegsmesser", -1 ] ] ]
+  },
+  {
+    "id": "basic_axes",
+    "type": "requirement",
+    "//": "Any given thing you can use like an axe, basic stuff.",
+    "tools": [ [ [ "ax_sheets_welded", -1 ], [ "primitive_axe", -1 ] ] ]
+  },
+  {
+    "id": "real_axes",
+    "type": "requirement",
+    "//": "Any real, cutting weapons that can be used like an axe; large, heavy head with two sharp sides on a pole.",
+    "tools": [
+      [
+        [ "ax", -1 ],
+        [ "hatchet", -1 ],
+        [ "copper_ax", -1 ],
+        [ "iceaxe", -1 ],
+        [ "crash_axe", -1 ],
+        [ "brush_axe", -1 ],
+        [ "bronze_brush_axe", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_great_axes",
+    "type": "requirement",
+    "//": "Any real, cutting weapons that can be used like an axe; large, heavy head with two sharp sides on a pole.",
+    "tools": [ [ [ "fire_ax", -1 ], [ "battleaxe", -1 ], [ "street_sign", -1 ] ] ]
+  },
+  {
+    "id": "basic_batons",
+    "type": "requirement",
+    "//": "Small or especially light or technical blunt weapons which rely on speed and skill rather than power.",
+    "tools": [ [ [ "cane", -1 ], [ "hollow_cane", -1 ], [ "candlestick", -1 ], [ "rolling_pin", -1 ] ] ]
+  },
+  {
+    "id": "real_batons",
+    "type": "requirement",
+    "//": "Any one-handed weapon designed primarily to bash or smash things.  Reserved for quality items.",
+    "tools": [
+      [
+        [ "blackjack", -1 ],
+        [ "shocktonfa_off", -1 ],
+        [ "baton-extended", -1 ],
+        [ "tonfa", -1 ],
+        [ "tonfa_wood", -1 ],
+        [ "jitte", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "basic_flails",
+    "type": "requirement",
+    "//": "Any basic thing that can be used as a flail.",
+    "tools": [ [ [ "2h_flail_wood", -1 ], [ "rock_sock", -1 ] ] ]
+  },
+  {
+    "id": "real_flails",
+    "type": "requirement",
+    "//": "Any real heavy-ended bashing weapons that feature a long pole with an independently-swinging baton.",
+    "tools": [ [ [ "2h_flail_steel", -1 ], [ "2h_flail_wood", -1 ], [ "1h_flail_steel", -1 ], [ "nunchaku", -1 ] ] ]
+  },
+  {
+    "id": "basic_great_hammers",
+    "type": "requirement",
+    "//": "Any basic thing that works like a great hammer; unga bunga.",
+    "tools": [ [ [ "hammer_sledge", -1 ] ] ]
+  },
+  {
+    "id": "real_great_hammers",
+    "type": "requirement",
+    "//": "Any real great hammers.  It's got to have a big blunt end on a haft, directly attached to it.",
+    "tools": [ [ [ "club_war", -1 ], [ "club_war_stone", -1 ] ] ]
+  },
+  {
+    "id": "basic_hammers",
+    "type": "requirement",
+    "//": "Any basic thing you can use as a mace.",
+    "tools": [
+      [
+        [ "mace", -1 ],
+        [ "morningstar", -1 ],
+        [ "hammer", -1 ],
+        [ "hammer_sledge_engineer", -1 ],
+        [ "warhammer", -1 ],
+        [ "nailboard", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_maces",
+    "type": "requirement",
+    "//": "Any real, top-heavy bashing weapons that don't independantly swing (those are flails).",
+    "tools": [ [ [ "mace", -1 ], [ "mace_bronze", -1 ], [ "morningstar", -1 ], [ "warhammer", -1 ] ] ]
+  },
+  {
+    "id": "real_bludgeons",
+    "type": "requirement",
+    "//": "Any basic thing you can use as a bludgeon.",
+    "tools": [
+      [
+        [ "pipe", -1 ],
+        [ "stick", -1 ],
+        [ "cudgel", -1 ],
+        [ "cudgel_spiked", -1 ],
+        [ "bat", -1 ],
+        [ "bat_metal", -1 ],
+        [ "bwirebat", -1 ],
+        [ "nailbat", -1 ],
+        [ "nailboard", -1 ],
+        [ "kanabo_wood", -1 ],
+        [ "shillelagh", -1 ],
+        [ "shillelagh_weighted", -1 ],
+        [ "bokken", -1 ],
+        [ "halligan", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "basic_staffs",
+    "type": "requirement",
+    "//": "Any basic thing you can use like a quarterstaff.",
+    "tools": [
+      [
+        [ "staff_pipe", -1 ],
+        [ "pool_cue", -1 ],
+        [ "mop", -1 ],
+        [ "walking_stick", -1 ],
+        [ "crutch", -1 ],
+        [ "crutch_wooden", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_staffs",
+    "type": "requirement",
+    "//": "Any real, pole-like weapons designed for bashing and smashing.  Reserved for quality items.",
+    "tools": [ [ [ "i_staff", -1 ], [ "q_staff", -1 ], [ "bo", -1 ], [ "shock_staff", -1 ] ] ]
+  },
+  {
+    "id": "basic_polearms",
+    "type": "requirement",
+    "//": "Any basic weapon you can use as a cutting polearm.",
+    "tools": [
+      [
+        [ "halberd", -1 ],
+        [ "makeshift_glaive", -1 ],
+        [ "ji", -1 ],
+        [ "naginata", -1 ],
+        [ "scythe_war", -1 ],
+        [ "brush_axe", -1 ],
+        [ "bronze_brush_axe", -1 ],
+        [ "hockey_stick", -1 ],
+        [ "pike_pole", -1 ],
+        [ "EOD_hotstick", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_polearms",
+    "type": "requirement",
+    "//": "Any real, top-heavy cutting weapons with a long pole and a blade on the end, designed to swing side-to-side.  Think like a sword with a really long handle.",
+    "tools": [
+      [
+        [ "glaive", -1 ],
+        [ "halberd", -1 ],
+        [ "naginata", -1 ],
+        [ "scythe_war", -1 ],
+        [ "brush_axe", -1 ],
+        [ "bronze_brush_axe", -1 ],
+        [ "poleaxe", -1 ],
+        [ "lucerne_hammer", -1 ],
+        [ "ji", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "basic_spears",
+    "type": "requirement",
+    "//": "Any given item that can be used as a spear.  Reserved for crappier things.",
+    "tools": [
+      [
+        [ "pitchfork", -1 ],
+        [ "pointy_stick_long", -1 ],
+        [ "spear_wood", -1 ],
+        [ "spear_shaft_sharpened", -1 ],
+        [ "spear_knife", -1 ],
+        [ "pike_wood", -1 ],
+        [ "pike", -1 ],
+        [ "spear_stone", -1 ],
+        [ "spear_stone_simple", -1 ]
+      ]
+    ]
+  },
+  {
+    "id": "real_spears",
+    "type": "requirement",
+    "//": "Any weapon that features a long pole with a pointed tip at the end.  Reserved for quality weapons.",
+    "tools": [
+      [
+        [ "spear_steel", -1 ],
+        [ "spear_copper", -1 ],
+        [ "qiang", -1 ],
+        [ "javelin", -1 ],
+        [ "javelin_iron", -1 ],
+        [ "pike_copper", -1 ],
+        [ "pike", -1 ],
+        [ "spear_bronze", -1 ],
+        [ "ji", -1 ]
+      ]
+    ]
+  }
+]

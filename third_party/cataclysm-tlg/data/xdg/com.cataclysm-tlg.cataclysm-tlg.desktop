@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Cataclysm: The Last Generation
+GenericName=Post-apocalyptic survival game
+Comment=A turn-based survival game set in a post-apocalyptic world.
+Icon=com.cataclysm-tlg.cataclysm-tlg
+Type=Application
+Exec=cataclysm-tlg-tiles
+Categories=Game;RolePlaying;
+Keywords=zombie;survival;game;tiles;tlg;ctlg;
+Terminal=false

@@ -1,0 +1,1649 @@
+[
+  {
+    "id": "2byshin_guard",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "2-by-shin guards", "str_pl": "pairs of 2-by-shin guards" },
+    "description": "A pair of improvised shin guards made from broken pieces of a plank that are tied to your shins with rags and string.",
+    "weight": "300 g",
+    "volume": "1500 ml",
+    "price": "5 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -1,
+    "material": [ "wood" ],
+    "symbol": "[",
+    "looks_like": "leg_splint",
+    "color": "brown",
+    "warmth": 5,
+    "material_thickness": 3,
+    "flags": [ "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 8,
+        "coverage": 60,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "carpet_legguards",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "carpet leg guards", "str_pl": "pairs of carpet leg guards" },
+    "description": "Small squares of carpet rolled around your shins and thighs.  Perfect for wading through the local furniture store.",
+    "weight": "2040 g",
+    "//": "The weight assumes four squares of carpet of about 25cm x 30cm.",
+    "volume": "3 L",
+    "price": "20 cent",
+    "price_postapoc": "10 cent",
+    "to_hit": 1,
+    "material": [ "carpet_pile", "plastic" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "red",
+    "warmth": 35,
+    "material_thickness": 4,
+    "environmental_protection": 1,
+    "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 14,
+        "coverage": 90,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_upper_r", "leg_upper_l" ]
+      }
+    ]
+  },
+  {
+    "id": "carpet_greaves",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "carpet greaves", "str_pl": "pairs of carpet greaves" },
+    "description": "Small squares of carpet rolled around your shins.  These might protect you from the corner of a table.",
+    "weight": "1020 g",
+    "//": "The weight assumes two squares of carpet of about 25cm x 30cm.",
+    "volume": "2 L",
+    "price": "20 cent",
+    "price_postapoc": "10 cent",
+    "to_hit": 1,
+    "material": [ "carpet_pile", "plastic" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "red",
+    "warmth": 35,
+    "material_thickness": 4,
+    "environmental_protection": 1,
+    "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 7,
+        "coverage": 90,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
+      }
+    ]
+  },
+  {
+    "id": "legguard_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
+    "description": "A pair of guards for the lower legs and knees made from the exoskeletons of insects.",
+    "weight": "790 g",
+    "volume": "5000 ml",
+    "price": "250 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "chitin" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "green",
+    "warmth": 10,
+    "material_thickness": 3,
+    "environmental_protection": 2,
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 4,
+        "coverage": 85,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "xl_legguard_chitin",
+    "copy-from": "legguard_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
+    "material": [ "chitin" ],
+    "proportional": { "weight": 1.5, "volume": 1.5 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_legguard_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "legguard_chitin",
+    "name": { "str": "chitin greaves", "str_pl": "pairs of chitin greaves" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "legguard_acidchitin",
+    "copy-from": "legguard_chitin",
+    "looks_like": "legguard_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "price_postapoc": "12 USD 50 cent",
+    "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified greaves" },
+    "description": "A pair of leg guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
+    "material": [ "acidchitin" ],
+    "melee_damage": { "bash": 4 },
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 6,
+        "coverage": 85,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
+      }
+    ]
+  },
+  {
+    "id": "xl_legguard_acidchitin",
+    "copy-from": "legguard_acidchitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified chitin greaves" },
+    "material": [ "acidchitin" ],
+    "proportional": { "weight": 1.5, "volume": 1.5 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_legguard_acidchitin",
+    "copy-from": "legguard_acidchitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified chitin greaves" },
+    "material": [ "acidchitin" ],
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "bunker_pants",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "turnout trousers" },
+    "//": "Fire-resistant outerwear ain't cheap.",
+    "description": "A heavy pair of protective overalls worn by firefighters as protection against heat.",
+    "weight": "2290 g",
+    "volume": "5 L",
+    "price": "815 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": -1,
+    "material": [ "nomex", "kevlar", "spandex" ],
+    "symbol": "[",
+    "looks_like": "pants_cargo",
+    "color": "dark_gray",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "warmth": 30,
+    "material_thickness": 2,
+    "valid_mods": [ "steel_padded" ],
+    "environmental_protection": 6,
+    "flags": [ "VARSIZE", "POCKETS", "STURDY", "WATERPROOF", "OUTER" ],
+    "armor": [ { "encumbrance": [ 24, 30 ], "coverage": 98, "covers": [ "leg_l", "leg_r" ] } ]
+  },
+  {
+    "id": "chainmail_chausses",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
+    "description": "Protective leggings made of interlocking links of steel wire, covering from the thighs to the tops of the feet.",
+    "weight": "3515 g",
+    "volume": "847 ml",
+    "longest_side": "9 cm",
+    "price": "100 USD",
+    "price_postapoc": "20 USD",
+    "to_hit": -1,
+    "material": [ "steel_chain" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "light_red",
+    "warmth": 0,
+    "flags": [ "STURDY", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
+        "coverage": 40
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
+        "coverage": 90,
+        "encumbrance": 4
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_lower_l", "leg_lower_r" ],
+        "coverage": 100,
+        "encumbrance": 2
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "chainmail_chausses_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_chausses",
+    "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "chainmail_chausses_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_chausses",
+    "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "chainmail_skirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chainmail skirt" },
+    "description": "A knee-length skirt made of interlocking steel rings.  It can be adjusted to be worn as outerwear.",
+    "weight": "1382 g",
+    "volume": "1016 ml",
+    "longest_side": "12 cm",
+    "price": "40 USD",
+    "price_postapoc": "8 USD",
+    "to_hit": -1,
+    "material": [ "steel_chain" ],
+    "symbol": "[",
+    "looks_like": "skirt_leather",
+    "color": "light_red",
+    "warmth": 0,
+    "flags": [ "STURDY", "ALLOWS_TAIL", "NORMAL" ],
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_skirt_loose",
+      "menu_text": "Loosen"
+    },
+    "armor": [
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
+        "coverage": 98,
+        "encumbrance": 5
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
+        "coverage": 95,
+        "encumbrance": 0
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
+        "coverage": 40,
+        "encumbrance": 0
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 98,
+        "encumbrance": 4
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 98,
+        "encumbrance": 4
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 95,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ]
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_lower" ],
+        "coverage": 10,
+        "encumbrance": 0
+      }
+    ]
+  },
+  {
+    "id": "chainmail_skirt_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_skirt",
+    "name": { "str": "chainmail skirt" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_skirt_loose_xs",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "chainmail_skirt_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_skirt",
+    "name": { "str": "chainmail skirt" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_skirt_loose_xl",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "chainmail_skirt_loose",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_skirt",
+    "name": { "str": "chainmail skirt (loose)" },
+    "description": "A knee-length skirt made of interlocking steel rings.  It can be adjusted to be worn closer to the body.",
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_skirt",
+      "menu_text": "Tighten"
+    },
+    "delete": { "flags": [ "NORMAL" ] },
+    "extend": { "flags": [ "OUTER" ] }
+  },
+  {
+    "id": "chainmail_skirt_loose_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_skirt_xs",
+    "name": { "str": "chainmail skirt (loose)" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_skirt_xs",
+      "menu_text": "Tighten"
+    },
+    "delete": { "flags": [ "NORMAL" ] },
+    "extend": { "flags": [ "OUTER" ] }
+  },
+  {
+    "id": "chainmail_skirt_loose_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_skirt_xl",
+    "name": { "str": "chainmail skirt (loose)" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_skirt_xl",
+      "menu_text": "Tighten"
+    },
+    "delete": { "flags": [ "NORMAL" ] },
+    "extend": { "flags": [ "OUTER" ] }
+  },
+  {
+    "id": "chaps_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str_sp": "leather chaps" },
+    "description": "A pair of tough leather chaps, meant to tie on over pants for extra protection.",
+    "weight": "1414 g",
+    "volume": "1250 ml",
+    "price": "210 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "pants_leather",
+    "color": "dark_gray",
+    "warmth": 10,
+    "material_thickness": 2,
+    "flags": [ "OUTER", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "encumbrance": 7,
+        "coverage": 70,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_lower_l", "leg_lower_r", "leg_knee_r", "leg_knee_l" ]
+      },
+      { "coverage": 20, "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_hip_r", "leg_hip_l" ] },
+      { "coverage": 70, "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_upper_r", "leg_upper_l" ] }
+    ]
+  },
+  {
+    "id": "chaps_cut_resistant",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "chainsaw chaps" },
+    "description": "A pair of tough chaps made of Kevlar.  Chainsaw kickbacks are potentially fatal; personal protective equipment like these chaps help protect your femoral arteries.  The layered Kevlar is designed to fray on contact with the chain and bind up the tool.",
+    "weight": "1014 g",
+    "volume": "1150 ml",
+    "price": "210 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "nylon", "kevlar" ],
+    "symbol": "[",
+    "looks_like": "pants_leather",
+    "color": "dark_gray",
+    "warmth": 10,
+    "flags": [ "OUTER", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "encumbrance": 7,
+        "coverage": 70,
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "material_thickness": 1,
+        "specifically_covers": [ "leg_lower_l", "leg_lower_r", "leg_knee_r", "leg_knee_l" ]
+      },
+      {
+        "coverage": 20,
+        "covers": [ "leg_l", "leg_r" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2 }
+        ],
+        "material_thickness": 1,
+        "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      },
+      {
+        "coverage": 70,
+        "covers": [ "leg_l", "leg_r" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.5 }
+        ],
+        "material_thickness": 1,
+        "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
+      }
+    ]
+  },
+  {
+    "id": "fencing_pants",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str_sp": "fencing pants" },
+    "description": "A pair of reinforced pants used by fencers to prevent injuries.  They don't cover the lower leg.",
+    "weight": "450 g",
+    "volume": "2 L",
+    "price": "25 USD",
+    "price_postapoc": "5 USD",
+    "material": [ "cotton", "nylon" ],
+    "symbol": "[",
+    "looks_like": "pants",
+    "color": "white",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "1200 g",
+        "max_item_length": "13 cm",
+        "moves": 100
+      }
+    ],
+    "warmth": 25,
+    "material_thickness": 2.5,
+    "flags": [ "VARSIZE", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "encumbrance": [ 7, 9 ],
+        "coverage": 100,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r", "leg_knee_l", "leg_knee_r", "leg_upper_r", "leg_upper_l" ]
+      }
+    ]
+  },
+  {
+    "id": "knee_pads",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "knee pads", "str_pl": "pairs of knee pads" },
+    "description": "A pair of knee pads made of stout plastic and spandex.",
+    "weight": "210 g",
+    "volume": "1500 ml",
+    "price": "25 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": 1,
+    "material": [ "plastic", "spandex" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "dark_gray",
+    "material_thickness": 5,
+    "flags": [ "WATER_FRIENDLY", "OUTER", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 4 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
+        "coverage": 100,
+        "encumbrance": 3
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "bronze_greaves",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
+    "description": "A pair of bronze shin and knee guards with a simple leather lining.",
+    "weight": "2520 g",
+    "volume": "5500 ml",
+    "price": "400 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "bronze", "leather" ],
+    "symbol": "[",
+    "looks_like": "platemail_leg_guards",
+    "color": "yellow",
+    "warmth": 15,
+    "material_thickness": 3,
+    "flags": [ "OUTER", "STURDY", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 5,
+        "coverage": 90,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 5 }
+  },
+  {
+    "id": "bronze_greaves_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "bronze_greaves",
+    "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "bronze_greaves_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "bronze_greaves",
+    "name": { "str": "bronze greaves", "str_pl": "pairs of bronze greaves" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "legguard_hard",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "plastic shin guards", "str_pl": "pairs of plastic shin guards" },
+    "description": "A pair of polyurethane leg guards with neoprene backing.  These were used in sport, policing, and even on some job sites.",
+    "weight": "625 g",
+    "volume": "3 L",
+    "price": "34 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": 1,
+    "material": [ "plastic", "neoprene" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "dark_gray",
+    "warmth": 20,
+    "material_thickness": 4,
+    "environmental_protection": 1,
+    "flags": [ "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 8,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
+        "material": [
+          { "type": "plastic", "covered_by_mat": 70, "thickness": 1.5 },
+          { "type": "neoprene", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "coverage": 80
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "tire_tasset",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "tire tasset" },
+    "description": "A skirt made of salvaged chunks of rubber strung together and tied around the waist.  It can be adjusted to fit over bulky armor.",
+    "weight": "1382 g",
+    "volume": "1016 ml",
+    "longest_side": "12 cm",
+    "price": "40 USD",
+    "price_postapoc": "8 USD",
+    "to_hit": -1,
+    "material": [ "rubber" ],
+    "symbol": "[",
+    "looks_like": "skirt_leather",
+    "color": "light_red",
+    "warmth": 5,
+    "flags": [ "STURDY", "OUTER" ],
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your tire skirt for a looser fit.",
+      "target": "tire_tasset_loose",
+      "menu_text": "Loosen"
+    },
+    "armor": [
+      {
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
+        "coverage": 80,
+        "encumbrance": 4
+      },
+      {
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
+        "coverage": 60,
+        "encumbrance": 5
+      },
+      {
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 75,
+        "encumbrance": 3
+      },
+      {
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 60,
+        "encumbrance": 5
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 60,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tire_tasset_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_tasset",
+    "name": { "str": "tire tasset" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your tire skirt for a looser fit.",
+      "target": "tire_tasset_loose_xs",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "tire_tasset_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_tasset",
+    "name": { "str": "tire tasset" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your tire skirt for a looser fit.",
+      "target": "tire_tasset_loose_xl",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "tire_tasset_loose",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_tasset",
+    "name": { "str": "tire tasset (loose)" },
+    "description": "A skirt made of salvaged chunks of rubber strung together and tied around the waist.  It can be adjusted to fit closer to the body.",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your tire skirt for a closer fit.",
+      "target": "tire_tasset",
+      "menu_text": "Tighten"
+    },
+    "delete": { "flags": [ "OUTER" ] },
+    "extend": { "flags": [ "BELTED", "ALLOWS_TAIL" ] }
+  },
+  {
+    "id": "tire_tasset_loose_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_tasset_loose",
+    "name": { "str": "tire tasset (loose)" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your tire skirt for a closer fit.",
+      "target": "tire_tasset_xs",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "tire_tasset_loose_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_tasset_loose",
+    "name": { "str": "tire tasset (loose)" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your tire skirt for a closer fit.",
+      "target": "tire_tasset_xl",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "platemail_tasset",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "plate tasset" },
+    "description": "A skirt of steel faulds that hangs over the hips.  It can be adjusted to fit over bulky armor.",
+    "weight": "1382 g",
+    "volume": "1016 ml",
+    "longest_side": "12 cm",
+    "price": "40 USD",
+    "price_postapoc": "8 USD",
+    "to_hit": -1,
+    "material": [ "steel" ],
+    "symbol": "[",
+    "looks_like": "skirt_leather",
+    "color": "light_red",
+    "warmth": 0,
+    "flags": [ "STURDY", "OUTER" ],
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your faulds for a looser fit.",
+      "target": "platemail_tasset_loose",
+      "menu_text": "Loosen"
+    },
+    "armor": [
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
+        "coverage": 90,
+        "encumbrance": 5
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
+        "coverage": 70,
+        "encumbrance": 0
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "coverage": 75,
+        "encumbrance": 4
+      },
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "long_tail" ],
+        "specifically_covers": [ "long_tail_base" ],
+        "coverage": 70,
+        "encumbrance": 0
+      },
+      {
+        "encumbrance": 5,
+        "coverage": 80,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "platemail_tasset_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_tasset",
+    "name": { "str": "plate tasset" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your faulds for a looser fit.",
+      "target": "platemail_tasset_loose_xs",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "platemail_tasset_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_tasset",
+    "name": { "str": "plate tasset" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your faulds for a looser fit.",
+      "target": "platemail_tasset_loose_xl",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "platemail_tasset_loose",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_tasset",
+    "name": { "str": "plate tasset (loose)" },
+    "description": "A skirt of steel faulds that hangs over the hips.  It can be adjusted to fit closer to the body.",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your faulds for a closer fit.",
+      "target": "platemail_tasset",
+      "menu_text": "Tighten"
+    },
+    "delete": { "flags": [ "OUTER" ] },
+    "extend": { "flags": [ "BELTED", "ALLOWS_TAIL" ] }
+  },
+  {
+    "id": "platemail_tasset_loose_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_tasset_loose",
+    "name": { "str": "plate tasset (loose)" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your faulds for a closer fit.",
+      "target": "platemail_tasset_xs",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "platemail_tasset_loose_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_tasset_loose",
+    "name": { "str": "plate tasset (loose)" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your faulds for a closer fit.",
+      "target": "platemail_tasset_xl",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "platemail_leg_guards",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
+    "description": "A full assembly of platemail for the legs.  Steel cuisses, poleyns, and greaves, with leather straps to secure each piece and connect it as part of a set.",
+    "weight": "4080 g",
+    "volume": "6 L",
+    "price": "200 USD",
+    "price_postapoc": "40 USD",
+    "to_hit": -1,
+    "material": [ "steel" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "light_gray",
+    "warmth": 20,
+    "flags": [ "OUTER", "STURDY", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "leather", "covered_by_mat": 2, "thickness": 1.0 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 8,
+        "coverage": 30,
+        "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
+      },
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "leather", "covered_by_mat": 2, "thickness": 1.0 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 8,
+        "coverage": 85,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 6 }
+  },
+  {
+    "id": "platemail_leg_guards_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_leg_guards",
+    "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "platemail_leg_guards_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_leg_guards",
+    "name": { "str": "plate leg guards", "str_pl": "pairs of plate leg guards" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "paper_greaves",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "paper greaves", "str_pl": "pairs of paper greaves" },
+    "description": "Shin guards made of stacked paper sheets held together with duct tape.",
+    "weight": "370 g",
+    "volume": "500 ml",
+    "price": "2 USD 30 cent",
+    "price_postapoc": "50 cent",
+    "to_hit": 1,
+    "material": [ "paper" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "blue",
+    "warmth": 5,
+    "material_thickness": 3,
+    "flags": [ "OUTER", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 5,
+        "coverage": 80,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 1 }
+  },
+  {
+    "id": "tire_greaves",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "tire greaves", "str_pl": "pairs of tire greaves" },
+    "description": "A pair of improvised shin guards made from thick chunks of rubber strung together and tied over the legs.",
+    "weight": "4800 g",
+    "volume": "5 L",
+    "price": "200 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -1,
+    "material": [ "rubber" ],
+    "symbol": "[",
+    "looks_like": "platemail_leg_guards",
+    "color": "light_gray",
+    "warmth": 10,
+    "material_thickness": 4,
+    "flags": [ "OUTER", "NONCONDUCTIVE", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 6,
+        "coverage": 80,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "tire_greaves_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_greaves",
+    "name": { "str": "tire leg guards", "str_pl": "pairs of tire leg guards" },
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "tire_greaves_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_greaves",
+    "name": { "str": "tire leg guards", "str_pl": "pairs of tire leg guards" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "motorbike_pants",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "motorcycle jeans", "str_pl": "pairs of motorcycle jeans" },
+    "description": "A pair of thick jeans interwoven with Kevlar for added durability and sporting integrated kneepads and flank protection, typically worn by motorcyclists to protect from road rash.",
+    "weight": "1340 g",
+    "volume": "2500 ml",
+    "price": "100 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "material": [ "kevlar", "denim", "plastic_pad" ],
+    "symbol": "[",
+    "category": "armor",
+    "looks_like": "jeans",
+    "color": "dark_gray",
+    "warmth": 15,
+    "material_thickness": 2,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "WATERPROOF", "POCKETS", "NORMAL", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "denim", "covered_by_mat": 100, "thickness": 0.6 }
+        ],
+        "encumbrance": [ 16, 20 ],
+        "coverage": 100,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_upper_l", "leg_lower_l", "leg_hip_r", "leg_upper_r", "leg_lower_r" ]
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 5 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "denim", "covered_by_mat": 100, "thickness": 0.6 }
+        ],
+        "encumbrance": [ 0, 0 ],
+        "coverage": 100,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ],
+    "//": "Mid-heavyweight 14 oz denim jeans.",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "jeans_mod",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "armored jeans", "str_pl": "pairs of armored jeans" },
+    "description": "A pair of jeans reinforced with extra fabric and metal sheets.  It's not the most durable armor, but it offers decent protection.",
+    "weight": "3810 g",
+    "volume": "3500 ml",
+    "price": "100 USD",
+    "price_postapoc": "10 USD",
+    "material": [ "steel", "denim" ],
+    "symbol": "[",
+    "looks_like": "motorbike_pants",
+    "category": "armor",
+    "color": "light_blue",
+    "warmth": 20,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "POCKETS", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "encumbrance": [ 26, 28 ],
+        "coverage": 100,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_upper_l", "leg_lower_l", "leg_hip_r", "leg_upper_r", "leg_lower_r" ],
+        "material": [
+          { "type": "steel", "covered_by_mat": 70, "thickness": 1.5 },
+          { "type": "denim", "covered_by_mat": 100, "thickness": 0.65 }
+        ],
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "coverage": 100,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "denim", "covered_by_mat": 100, "thickness": 0.65 }
+        ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "trousers_eod",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "EOD trousers" },
+    "description": "This is a heavy pair of trousers armored in Kevlar, Nomex, and foam padding, for use by explosive ordnance disposal technicians.  While it offers near complete coverage in fragmentation resistant materials, it still offers insufficient protection from ballistic threats.",
+    "weight": "6400 g",
+    "volume": "7 L",
+    "price": "10060 USD",
+    "price_postapoc": "120 USD",
+    "warmth": 65,
+    "material": [ "kevlar", "nomex" ],
+    "symbol": "[",
+    "color": "light_green",
+    "environmental_protection": 2,
+    "material_thickness": 15,
+    "flags": [ "STURDY", "OUTER", "RAINPROOF", "ONLY_ONE", "NORMAL" ],
+    "use_action": [ { "type": "attach_molle", "size": 4 }, { "type": "detach_molle" } ],
+    "armor": [
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 7.4 },
+          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 2.0 }
+        ],
+        "coverage": 98,
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 40
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "trousers_eod_light",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "tactical EOD trousers" },
+    "description": "This is a heavy pair of trousers armored in Kevlar, Nomex, and foam padding, for use by explosive ordnance disposal technicians in 'non-permissive environments'.  While it offers near complete coverage in fragmentation resistant materials, it still offers insufficient protection from ballistic threats.  These trousers are lighter than normal EOD armor to provide more maneuverability.",
+    "weight": "3000 g",
+    "volume": "7 L",
+    "price": "2734 USD 40 cent",
+    "price_postapoc": "33 USD",
+    "warmth": 40,
+    "material": [ "kevlar", "nomex" ],
+    "symbol": "[",
+    "color": "light_gray",
+    "environmental_protection": 2,
+    "material_thickness": 7,
+    "flags": [ "STURDY", "OUTER", "RAINPROOF", "ONLY_ONE", "NORMAL" ],
+    "use_action": [ { "type": "attach_molle", "size": 6 }, { "type": "detach_molle" } ],
+    "armor": [
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 4.4 },
+          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 2 }
+        ],
+        "encumbrance": 20,
+        "coverage": 98,
+        "covers": [ "leg_l", "leg_r" ]
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "armor_riot_leg",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "riot shin guards", "str_pl": "pairs of riot shin guards" },
+    "description": "Hard armor for the feet and lower legs used by riot police.",
+    "weight": "500 g",
+    "volume": "2500 ml",
+    "price": "100 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": -3,
+    "material": [ "thermo_resin", "plastic_pad" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "dark_gray",
+    "warmth": 20,
+    "longest_side": "40 cm",
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 3,
+        "coverage": 90,
+        "material": [
+          { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.75 },
+          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 5 }
+        ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "leg_lower_l", "leg_lower_r" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "encumbrance": 2,
+        "coverage": 75,
+        "material": [ { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "specifically_covers": [ "foot_arch_l", "foot_arch_r", "foot_ankle_r", "foot_ankle_l" ],
+        "layers": [ "BELTED" ]
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "leather_leg_guards",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
+    "description": "A set of soft leather cuisses, poleyns, and greaves that strap on over the legs, providing excellent protection from cutting and stabbing attacks.",
+    "weight": "2040 g",
+    "volume": "2 L",
+    "price": "40 USD",
+    "price_postapoc": "10 USD",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "legguard_bronze",
+    "color": "brown",
+    "warmth": 25,
+    "material_thickness": 4,
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
+    "armor": [ { "covers": [ "leg_l", "leg_r" ], "encumbrance": 7, "coverage": 90 } ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "leather_leg_guards_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
+    "copy-from": "leather_leg_guards",
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "leather_leg_guards_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "leather_leg_guards",
+    "name": { "str": "leather leg guards", "str_pl": "pairs of leather leg guards" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "leggings_kevlar",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "description": "A pair of Kevlar leggings designed to protect the legs from abrasion when riding a motorcycle.",
+    "weight": "310 g",
+    "volume": "500 ml",
+    "price": "12 USD",
+    "price_postapoc": "2 USD",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "looks_like": "leggings",
+    "color": "yellow",
+    "warmth": 14,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 6,
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "leggings_kevlar_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "copy-from": "leggings_kevlar",
+    "weight": "620 g",
+    "volume": "800 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "leggings_kevlar_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Kevlar leggings", "str_pl": "pairs of Kevlar leggings" },
+    "copy-from": "leggings_kevlar",
+    "weight": "155 g",
+    "volume": "250 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  },
+  {
+    "id": "cephalopod_sleeves_cut_resistant",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "cut-resistant cephalopod sleeves", "str_pl": "sets of cut-resistant cephalopod sleeves" },
+    "description": "A set of tubes of loosely woven Kevlar which should fit over a cephalopod's many arms.",
+    "weight": "440 g",
+    "volume": "820 ml",
+    "price": "0 USD",
+    "price_postapoc": "1 USD",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "yellow",
+    "warmth": 10,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "encumbrance": 4,
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_1_tip",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_2_tip",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_3_tip",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_4_tip",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_5_tip",
+          "cephalopod_arm_6_base",
+          "cephalopod_arm_6_tip"
+        ],
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "cephalopod_sleeves_cut_resistant_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant cephalopod sleeves", "str_pl": "sets of cut-resistant cephalopod sleeves" },
+    "copy-from": "cephalopod_sleeves_cut_resistant",
+    "weight": "880 g",
+    "volume": "820 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "cephalopod_sleeves_cut_resistant_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant cephalopod sleeves", "str_pl": "sets of cut-resistant cephalopod sleeves" },
+    "copy-from": "cephalopod_sleeves_cut_resistant",
+    "weight": "220 g",
+    "volume": "410 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_cut_resistant",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "cut-resistant tail sleeve", "str_pl": "cut-resistant tail sleeves" },
+    "description": "A slender tube of loosely woven Kevlar which should help protect the wearer's tail from cuts and scrapes.",
+    "weight": "110 g",
+    "volume": "205 ml",
+    "price": "0 USD",
+    "price_postapoc": "25 cent",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "color": "yellow",
+    "warmth": 10,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [ "long_tail" ],
+        "encumbrance": 4,
+        "specifically_covers": [ "long_tail_base", "long_tail_tip" ],
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "tail_sleeve_cut_resistant_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant tail sleeve", "str_pl": "cut-resistant tail sleeves" },
+    "copy-from": "tail_sleeve_cut_resistant",
+    "weight": "220 g",
+    "volume": "410 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_cut_resistant_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant tail sleeve", "str_pl": "cut-resistant tail sleeves" },
+    "copy-from": "tail_sleeve_cut_resistant",
+    "weight": "55 g",
+    "volume": "102 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "description": "A tube of leather which should help protect the wearer's tail from cuts and scrapes.",
+    "weight": "210 g",
+    "volume": "255 ml",
+    "price": "0 USD",
+    "price_postapoc": "25 cent",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "color": "brown",
+    "warmth": 12,
+    "flags": [ "NORMAL" ],
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "long_tail" ],
+        "encumbrance": 8,
+        "specifically_covers": [ "long_tail_base", "long_tail_tip" ],
+        "coverage": 85
+      }
+    ]
+  },
+  {
+    "id": "tail_sleeve_leather_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "copy-from": "tail_sleeve_leather",
+    "weight": "420 g",
+    "volume": "510 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "tail_sleeve_leather_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather tail sleeve", "str_pl": "leather tail sleeves" },
+    "copy-from": "tail_sleeve_leather",
+    "weight": "105 g",
+    "volume": "152 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  }
+]

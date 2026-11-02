@@ -1,0 +1,24 @@
+(
+    object_type: "item",
+    id: "platearmor",
+    
+    image: (
+        path: "platearmor.png",
+        copyright: "T.Okubo",
+    ),
+    
+    item: (
+        item_kind: "armor",
+        group: "platearmor",
+        basic_price: 5000,
+        w: 20000,
+        quality_kind: Mutable,
+        gen_weight: 2,
+        gen_level: 15,
+        armor_kind: Body,
+        material_group: "metal",
+        attrs: [
+            Defence((15, 7, 7, 4, 5, 0)),
+        ]
+    ),
+)

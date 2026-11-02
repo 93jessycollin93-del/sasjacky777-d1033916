@@ -1,0 +1,224 @@
+[
+  {
+    "type": "SPECIES",
+    "id": "MAMMAL",
+    "description": "a mammal",
+    "fear_triggers": [ "HURT", "FIRE", "FRIEND_DIED" ],
+    "flight_sound": "flapping.",
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "AMPHIBIAN",
+    "description": "an amphibian",
+    "fear_triggers": [ "HURT", "FIRE" ],
+    "flight_sound": "flapping.",
+    "flags": [ "BELLYUP" ],
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "BIRD",
+    "description": "a bird",
+    "fear_triggers": [ "HURT", "SOUND", "FRIEND_ATTACKED" ],
+    "flight_sound": "fluttering.",
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "CYBORG",
+    "description": "a cyborg",
+    "flags": [ "DRACULIN_IMMUNE" ],
+    "flight_sound": "WHIRR!",
+    "footsteps": "heavy thuds."
+  },
+  {
+    "type": "SPECIES",
+    "id": "REPTILE",
+    "description": "a reptile",
+    "fear_triggers": [ "HURT", "FIRE" ],
+    "flight_sound": "flapping.",
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "FISH",
+    "description": "a fish",
+    "fear_triggers": [ "HURT", "FRIEND_ATTACKED" ],
+    "flight_sound": "flapping.",
+    "flags": [ "BELLYUP" ],
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "KRAKEN",
+    "description": "a cephalopod",
+    "footsteps": "slithering.",
+    "fear_triggers": [ "HURT", "FRIEND_ATTACKED" ],
+    "flags": [ "BELLYUP" ],
+    "//": "Cephalopods use hemoglobin or a close analogue, so no draculin immunity.",
+    "bleeds": "fd_blood_invertebrate"
+  },
+  {
+    "type": "SPECIES",
+    "id": "MUTANT",
+    "description": "a mutant",
+    "flight_sound": "flapping."
+  },
+  {
+    "type": "SPECIES",
+    "id": "NETHER",
+    "flight_sound": "flapping.",
+    "flags": [ "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "NETHER_BURROWING",
+    "footsteps": "rustling",
+    "flags": [ "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "NETHER_EMANATION",
+    "fear_triggers": [ "HURT" ],
+    "flight_sound": "whooshing.",
+    "flags": [ "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "MIGO",
+    "fear_triggers": [ "HURT" ],
+    "flight_sound": "flapping.",
+    "flags": [ "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "SLIME",
+    "footsteps": "plop.",
+    "bleeds": "fd_slime",
+    "flags": [ "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "FUNGUS",
+    "fear_triggers": [ "HURT", "FIRE" ],
+    "flight_sound": "flapping.",
+    "flags": [ "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "INSECT",
+    "description": "an insect",
+    "anger_triggers": [ "FRIEND_DIED" ],
+    "fear_triggers": [ "HURT", "FIRE" ],
+    "bleeds": "fd_blood_insect",
+    "flight_sound": "flapping.",
+    "flags": [ "DRACULIN_IMMUNE", "BELLYUP" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "CENTIPEDE",
+    "description": "a centipede",
+    "footsteps": "skittering.",
+    "fear_triggers": [ "FIRE" ],
+    "bleeds": "fd_blood_insect",
+    "flags": [ "DRACULIN_IMMUNE", "BELLYUP" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "INSECT_FLYING",
+    "description": "a flying insect",
+    "footsteps": "BZZZZZZZZZZZZZZZZZ",
+    "anger_triggers": [ "FRIEND_DIED" ],
+    "flight_sound": "flapping.",
+    "flags": [ "LOUDMOVES", "DRACULIN_IMMUNE", "BELLYUP" ],
+    "bleeds": "fd_blood_insect"
+  },
+  {
+    "type": "SPECIES",
+    "id": "SPIDER",
+    "description": "a spider",
+    "anger_triggers": [ "FRIEND_DIED" ],
+    "fear_triggers": [ "HURT", "FIRE" ],
+    "bleeds": "fd_blood_insect",
+    "flags": [ "DRACULIN_IMMUNE", "BELLYUP" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "PLANT",
+    "description": "a plant",
+    "fear_triggers": [ "HURT", "FIRE" ],
+    "bleeds": "fd_blood_vegetable",
+    "flags": [ "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "MOLLUSK",
+    "description": "a mollusk",
+    "fear_triggers": [ "HURT", "FIRE" ],
+    "//": "Despite having nonstandard blood, mollusks have circulatory systems similar to fish and reptiles, so no DRACULIN_IMMUNE",
+    "bleeds": "fd_blood_invertebrate"
+  },
+  {
+    "type": "SPECIES",
+    "id": "WORM",
+    "description": "a worm",
+    "footsteps": "rustle.",
+    "fear_triggers": [ "HURT" ],
+    "//": "Today I learned that earthworms use hemoglobin and their blood clots similarly to a human's.",
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "ZOMBIE",
+    "description": "a zombie",
+    "footsteps": "shuffling.",
+    "flight_sound": "flapping.",
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "FERAL",
+    "footsteps": "shuffling.",
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "ROBOT",
+    "description": "a robot",
+    "footsteps": "mechanical whirring.",
+    "bleeds": "fd_mechanical_fluid",
+    "flight_sound": "WHIRR!",
+    "flags": [ "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "ROBOT_FLYING",
+    "description": "a flying robot",
+    "footsteps": "mechanical whirring.",
+    "flight_sound": "WHIRR!",
+    "flags": [ "LOUDMOVES", "DRACULIN_IMMUNE" ]
+  },
+  {
+    "type": "SPECIES",
+    "id": "HORROR"
+  },
+  {
+    "type": "SPECIES",
+    "id": "ABERRATION"
+  },
+  {
+    "type": "SPECIES",
+    "id": "HALLUCINATION"
+  },
+  {
+    "type": "SPECIES",
+    "id": "HUMAN",
+    "description": "a human",
+    "bleeds": "fd_blood"
+  },
+  {
+    "type": "SPECIES",
+    "id": "UNKNOWN"
+  }
+]

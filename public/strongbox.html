@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Strongbox">
+<meta name="color-scheme" content="dark">
+<!-- An inline icon, so the browser never asks the server for /favicon.ico: the
+     Checks tab counts every request this page makes, and that was the only one. -->
+<link rel="icon" href="data:,">
+<title>Strongbox</title>
+<style>
+:root{
+  --ink:#0B1016; --panel:#121A24; --panel2:#0E151D; --line:#1F2B38;
+  --text:#D8E2EC; --muted:#7C8FA3; --dim:#4E6070;
+  --true:#E8A33D;     /* verified / armed */
+  --false:#E0687A;    /* failed */
+  --info:#6C8FB5;     /* degraded / neutral */
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --pad: 16px;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--ink);color:var(--text);font-family:var(--sans);
+  font-size:16px;line-height:1.45;overscroll-behavior:none}
+body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none}
+a{color:var(--true)}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);display:block;margin-bottom:8px}
+
+/* ---- header ---- */
+header{position:sticky;top:0;z-index:40;background:rgba(11,16,22,.92);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 10px) var(--pad) 10px;
+  display:flex;align-items:center;gap:10px}
+.brand{font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+.brand b{color:var(--true);font-weight:600}
+.hstat{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--muted);text-align:right;line-height:1.3}
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);border-radius:2px}
+.pill.armed{color:var(--true);border-color:#4a3a1c;background:#1a1508}
+.pill.open{color:var(--info);border-color:#25384a;background:#0d1620}
+
+main{padding:var(--pad);max-width:640px;margin:0 auto}
+section[hidden]{display:none}
+
+/* ---- generic ---- */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;margin-bottom:12px}
+h2{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin:22px 0 10px;font-weight:600}
+h2:first-child{margin-top:0}
+p{margin:0 0 10px}
+.small{font-size:13px;color:var(--muted)}
+.tiny{font-size:11.5px;color:var(--dim);font-family:var(--mono);line-height:1.5}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-height:46px;padding:0 16px;border:1px solid var(--line);border-radius:5px;
+  background:var(--panel2);font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text);transition:border-color .15s,background .15s}
+.btn:active{background:#182430}
+.btn:focus-visible{outline:2px solid var(--true);outline-offset:2px}
+.btn.primary{border-color:#5a4520;background:#1d1608;color:var(--true)}
+.btn.danger{border-color:#4a2028;color:var(--false)}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.btn.wide{width:100%}
+.btn[hidden]{display:none}  /* .btn sets display, which outranks the hidden attribute */
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row>.btn{flex:1 1 auto}
+input[type=text],input[type=password],textarea{width:100%;background:var(--panel2);
+  border:1px solid var(--line);border-radius:5px;padding:12px;min-height:46px;
+  font-family:var(--mono);font-size:15px}
+input:focus,textarea:focus{outline:none;border-color:var(--info)}
+textarea{min-height:190px;resize:vertical;line-height:1.55}
+label{display:block;margin-bottom:6px}
+
+/* ---- audit readout: the signature element ---- */
+.audit{font-family:var(--mono);font-size:12px;background:var(--panel2);
+  border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.audit .hd{padding:9px 12px;border-bottom:1px solid var(--line);color:var(--dim);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;display:flex}
+.audit .hd span:last-child{margin-left:auto}
+.arow{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding:8px 12px;border-bottom:1px solid #16202b}
+.arow:last-child{border-bottom:none}
+.arow .k{color:var(--muted);flex:1;min-width:0}
+.arow .v{font-weight:600;letter-spacing:.08em;font-size:11px;white-space:nowrap}
+.arow .n{color:var(--dim);font-size:10.5px;flex-basis:100%;padding-left:0;margin-top:-2px}
+.v.t{color:var(--true)} .v.f{color:var(--false)} .v.d{color:var(--info)} .v.p{color:var(--dim)}
+.bar{height:3px;background:#16202b;border-radius:2px;overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:var(--true);width:0;transition:width .4s}
+
+/* ---- items ---- */
+.item{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);
+  border-radius:5px;background:var(--panel);margin-bottom:8px;width:100%;text-align:left}
+.item:active{background:#182430}
+.ico{width:34px;height:34px;flex:none;border:1px solid var(--line);border-radius:4px;
+  display:grid;place-items:center;font-family:var(--mono);font-size:9px;letter-spacing:.06em;
+  color:var(--info);background:var(--panel2)}
+.item .nm{flex:1;min-width:0}
+.item .nm b{display:block;font-weight:500;font-size:15px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.item .nm span{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.empty{border:1px dashed var(--line);border-radius:6px;padding:28px 18px;text-align:center;color:var(--muted)}
+
+/* ---- terminal ---- */
+#termOut{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--panel2);
+  border:1px solid var(--line);border-radius:6px;padding:12px;height:52vh;min-height:280px;
+  overflow-y:auto;white-space:pre-wrap;word-break:break-word;-webkit-overflow-scrolling:touch}
+#termOut .u{color:var(--true)} #termOut .e{color:var(--false)} #termOut .m{color:var(--dim)}
+.termbar{display:flex;gap:8px;margin-top:8px;align-items:stretch}
+.termbar input{flex:1}
+.hint{display:flex;gap:6px;overflow-x:auto;margin-top:8px;padding-bottom:2px;scrollbar-width:none}
+.hint::-webkit-scrollbar{display:none}
+.hint button{flex:none;font-family:var(--mono);font-size:11px;padding:7px 11px;
+  border:1px solid var(--line);border-radius:4px;color:var(--muted);background:var(--panel2)}
+
+/* ---- lock screen ---- */
+#lock{position:fixed;inset:0;z-index:60;background:var(--ink);display:flex;flex-direction:column;
+  justify-content:center;padding:28px 22px calc(28px + env(safe-area-inset-bottom));overflow-y:auto}
+#lock .wrap{max-width:420px;margin:0 auto;width:100%}
+.mark{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--true);margin-bottom:26px}
+#lock h1{font-size:26px;font-weight:600;letter-spacing:-.02em;margin:0 0 8px}
+#lock .sub{color:var(--muted);font-size:14px;margin-bottom:24px}
+.msg{font-family:var(--mono);font-size:12px;padding:10px 12px;border-radius:5px;margin-top:12px;display:none}
+.msg.show{display:block}
+.msg.err{color:var(--false);border:1px solid #3d1d24;background:#180d10}
+.msg.ok{color:var(--true);border:1px solid #443318;background:#171208}
+
+/* ---- tabs ---- */
+nav{position:fixed;bottom:0;left:0;right:0;z-index:50;display:flex;
+  background:rgba(11,16,22,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;padding:11px 4px 13px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+  border-top:2px solid transparent;margin-top:-1px}
+nav button[aria-selected=true]{color:var(--true);border-top-color:var(--true)}
+
+/* ---- sheet ---- */
+#sheet{position:fixed;inset:0;z-index:70;background:rgba(5,8,11,.72);display:none;
+  align-items:flex-end;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#sheet.show{display:flex}
+#sheet .inner{background:var(--panel);border-top:1px solid var(--line);border-radius:12px 12px 0 0;
+  width:100%;max-height:92vh;overflow-y:auto;padding:18px var(--pad) calc(22px + env(safe-area-inset-bottom));
+  max-width:640px;margin:0 auto;-webkit-overflow-scrolling:touch}
+#sheet h3{margin:0 0 4px;font-size:18px;font-weight:600;word-break:break-word}
+audio,img.prev{width:100%;margin:12px 0;border-radius:5px;display:block}
+img.prev{border:1px solid var(--line)}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(78px + env(safe-area-inset-bottom));
+  z-index:90;background:#1d1608;border:1px solid #5a4520;color:var(--true);font-family:var(--mono);
+  font-size:12px;padding:10px 15px;border-radius:5px;opacity:0;transition:opacity .2s;pointer-events:none;
+  max-width:88vw;text-align:center}
+#toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">STRONG<b>BOX</b></div>
+  <div class="hstat">
+    <span id="lockPill" class="pill armed">Locked</span><br>
+    <span id="hStorage">—</span>
+  </div>
+</header>
+
+<main>
+  <!-- ============ VAULT ============ -->
+  <section id="tab-vault">
+    <div class="row" style="margin-bottom:14px">
+      <button class="btn primary" id="bNote">+ Note</button>
+      <button class="btn" id="bFile">+ File</button>
+    </div>
+    <input type="file" id="filePick" hidden multiple>
+    <h2>Contents · <span id="cnt">0</span></h2>
+    <div id="list"></div>
+    <h2>Vault</h2>
+    <div class="card">
+      <div class="tiny" id="vaultFacts">—</div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="bExport">Export</button>
+        <button class="btn" id="bImport">Restore</button>
+        <button class="btn" id="bLock">Lock</button>
+      </div>
+      <!-- No accept filter. On iOS the list becomes a set of file types, and .sbx
+           is not a type iOS knows. Rather than risk a backup that cannot be
+           picked, every file is offered, and checked properly once read. -->
+      <input type="file" id="importPick" hidden>
+    </div>
+  </section>
+
+  <!-- ============ TERMINAL ============ -->
+  <section id="tab-term" hidden>
+    <div id="termOut"></div>
+    <div class="termbar">
+      <input type="text" id="termIn" placeholder="help" autocapitalize="off"
+             autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="send">
+      <button class="btn" id="termGo" style="min-width:60px">Run</button>
+    </div>
+    <div class="hint">
+      <button data-c="help">help</button><button data-c="ls">ls</button>
+      <button data-c="stat">stat</button><button data-c="storage">storage</button>
+      <button data-c="&gt; 2+2">&gt; 2+2</button><button data-c="clear">clear</button>
+    </div>
+  </section>
+
+  <!-- ============ CHECKS ============ -->
+  <section id="tab-checks" hidden>
+    <span class="eyebrow">Boot audit · this device, right now</span>
+    <div class="audit" id="audit"><div class="hd"><span>Capability</span><span>Result</span></div></div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn" id="bRecheck">Re-run</button>
+      <button class="btn primary" id="bPersist">Keep storage</button>
+    </div>
+    <h2>Storage</h2>
+    <div class="card">
+      <div class="tiny" id="quota">—</div>
+      <div class="bar"><i id="quotaBar"></i></div>
+    </div>
+    <h2>Self-test</h2>
+    <div class="card">
+      <p class="small">Writes a 4&nbsp;MB file, encrypts it, reads it back and compares every
+        byte, then searches what was stored for a marker it wrote into the file. Then deletes
+        it. Nothing is faked — watch the timings move.</p>
+      <button class="btn wide" id="bSelfTest">Run self-test</button>
+      <div class="tiny" id="stOut" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="tab-about" hidden>
+    <span class="eyebrow">What this is</span>
+    <p>One page. Everything you save is encrypted on this device with a key derived
+      from your password. There is no account and no upload: the page sends nothing
+      anywhere, and the only thing it ever downloads is a fresh copy of itself, kept so
+      it opens with no signal. The Checks tab counts the page's own requests to prove it.</p>
+
+    <h2>How it protects things</h2>
+    <div class="card tiny" style="line-height:1.7">
+      PBKDF2-HMAC-SHA256, 600,000 iterations<br>
+      16-byte random salt, unique per vault<br>
+      AES-GCM 256, fresh 12-byte IV per write<br>
+      Key held in memory only, dropped on lock<br>
+      Payloads in IndexedDB, encrypted before write<br>
+      Names and types encrypted too — sizes and the item count are not: the length of
+      what is stored gives them away
+    </div>
+    <p class="small" style="margin-top:10px">Lose the password and the data is gone. That's
+      the point of it, and there is no recovery path.</p>
+
+    <h2>What it deliberately doesn't do</h2>
+    <div class="card">
+      <p class="small">Each of these was cut because it cannot work in a web page on an
+        iPhone, and shipping a button that pretends otherwise is worse than shipping nothing.</p>
+      <div class="tiny" style="line-height:1.8">
+        <b style="color:var(--false)">No local model calls.</b> An https page cannot reach
+        http://localhost:11434. Browsers hard-block mixed content, and "localhost" on your
+        phone means your phone, not your PC.<br><br>
+        <b style="color:var(--false)">No model downloads.</b> A progress bar that isn't moving
+        real bytes is an animation.<br><br>
+        <b style="color:var(--false)">No bridge to another chat.</b> A sandboxed page cannot
+        message the assistant that generated it. No such channel exists.<br><br>
+        <b style="color:var(--false)">No API keys in the file.</b> Anything you paste into a
+        page is readable by that page.
+      </div>
+    </div>
+
+    <h2>Worth knowing</h2>
+    <div class="card tiny" style="line-height:1.7">
+      <b style="color:var(--true)">Add to Home Screen.</b> Safari can evict data from sites you
+      haven't opened in 7 days. Installed to the Home Screen, it's treated as an app and kept.
+      Share → Add to Home Screen. Then tap <b>Keep storage</b> on the Checks tab. Once it has
+      been opened with signal, it opens without.<br><br>
+      <b style="color:var(--true)">Safari and the Home Screen are separate.</b> On iPhone a
+      Home Screen app keeps its own storage, apart from Safari's. Make your vault from the icon
+      you'll actually use — or move it: Export in one, Restore in the other.<br><br>
+      <b style="color:var(--true)">Export is your backup.</b> The export file is encrypted with
+      the same password and restores anywhere. Base64 makes it about a third larger than the
+      contents. Keep one somewhere you trust. Restoring asks for the backup's password first,
+      and changes nothing until it checks out.<br><br>
+      <b style="color:var(--true)">It shares its site's storage.</b> Anything else served from
+      the same site can reach what this page stores. Without your password that is noise — but
+      code you don't trust on the same site could also swap this page for one that isn't. On a
+      domain of its own, it answers to nothing else.
+    </div>
+    <p class="tiny" style="margin-top:14px">Strongbox · offline · no telemetry · no dependencies</p>
+  </section>
+</main>
+
+<nav>
+  <button data-tab="vault"  aria-selected="true">Vault</button>
+  <button data-tab="term"   aria-selected="false">Terminal</button>
+  <button data-tab="checks" aria-selected="false">Checks</button>
+  <button data-tab="about"  aria-selected="false">About</button>
+</nav>
+
+<!-- ============ LOCK ============ -->
+<div id="lock">
+  <div class="wrap">
+    <div class="mark">◈ STRONGBOX</div>
+    <h1 id="lockTitle">Unlock</h1>
+    <div class="sub" id="lockSub">Enter your password.</div>
+    <label class="tiny" for="pw">Password</label>
+    <input type="password" id="pw" autocomplete="current-password" enterkeyhint="go">
+    <div id="pw2wrap" hidden style="margin-top:12px">
+      <label class="tiny" for="pw2">Confirm password</label>
+      <input type="password" id="pw2" autocomplete="new-password" enterkeyhint="go">
+    </div>
+    <button class="btn primary wide" id="bGo" style="margin-top:14px">Unlock</button>
+    <button class="btn wide" id="bRestore" hidden style="margin-top:10px">Restore from a backup</button>
+    <div class="msg" id="lockMsg"></div>
+    <div class="tiny" id="lockFoot" style="margin-top:22px"></div>
+  </div>
+</div>
+
+<div id="sheet"><div class="inner" id="sheetBody"></div></div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   Strongbox — single-file encrypted vault.
+   e2e/strongbox.spec.ts drives this page in a real browser on every push:
+   wrong-password and tamper rejection, nothing readable at rest, backups that
+   restore elsewhere and never damage the vault they land in, and each of the
+   failure paths below saying what failed instead of carrying on.
+   ============================================================ */
+
+const $ = s => document.querySelector(s);
+const enc = new TextEncoder(), dec = new TextDecoder();
+const ITER = 600000, DB = 'strongbox', VER = 1, IDLE_MS = 5 * 60 * 1000;
+const VERIFY = 'STRONGBOX-VERIFY';
+
+let KEY = null;            // CryptoKey — memory only
+let META = null;           // {salt, iter, verify}
+let ITEMS = [];            // decrypted metadata only; payloads stay encrypted at rest
+let URLS = [];             // object URLs to revoke on lock
+let idleTimer = null, lastActive = Date.now();
+let MEM = null;            // in-memory fallback when IndexedDB is unavailable
+let storageBroken = false; // storage could not be read, so nothing may be created over it
+let swErr = null;
+
+/* ---------- storage layer (IndexedDB, with honest fallback) ---------- */
+let db = null, dbErr = null, memOnly = false;
+function openDB(){
+  return new Promise(res => {
+    let settled = false;
+    const done = (v, e) => { if (settled) return; settled = true; if (e) dbErr = e; res(v); };
+    let r;
+    try { r = indexedDB.open(DB, VER); }
+    catch (e) { return done(null, e.message); }
+    r.onupgradeneeded = () => {
+      const d = r.result;
+      if (!d.objectStoreNames.contains('meta'))  d.createObjectStore('meta',  {keyPath:'k'});
+      if (!d.objectStoreNames.contains('items')) d.createObjectStore('items', {keyPath:'id'});
+    };
+    r.onsuccess = () => done(r.result);
+    r.onerror   = () => done(null, (r.error && r.error.message) || 'blocked');
+    r.onblocked = () => done(null, 'another tab holds the database');
+    setTimeout(() => done(null, 'timed out'), 4000);
+  });
+}
+
+// Safari closes the IndexedDB connection of a page it has put in the background
+// ("Connection to Indexed Database server lost"), and the next transaction throws
+// InvalidStateError. Every save after that used to fail without a word; now the
+// connection is opened again, once, and a second failure is reported.
+function watch(d){ if (d) d.onclose = () => { if (db === d) db = null; }; return d; }
+async function connection(){
+  if (!db) {
+    db = watch(await openDB());
+    if (!db) throw new Error('lost the connection to storage (' + (dbErr || 'unknown') + '), reload the page');
+  }
+  return db;
+}
+async function run(stores, mode, work){
+  for (let attempt = 0; ; attempt++) {
+    const d = await connection();
+    let t;
+    try { t = d.transaction(stores, mode); }
+    catch (e) {
+      if (e && e.name === 'InvalidStateError' && attempt === 0) { if (db === d) db = null; continue; }
+      throw e;
+    }
+    return work(t);
+  }
+}
+// Settles when the transaction does, not when its request does: a write can be
+// accepted and still fail to commit, and "Saved" has to mean it is on disk.
+const one = (store, mode, call) => run(store, mode, t => new Promise((res, rej) => {
+  const r = call(t.objectStore(store));
+  let result;
+  r.onsuccess = () => { result = r.result; };
+  t.oncomplete = () => res(result);
+  t.onabort = () => rej(t.error || r.error || new Error('the write was abandoned'));
+}));
+
+async function sPut(store, val){
+  if (memOnly) { MEM[store].set(val.k || val.id, val); return; }
+  return one(store, 'readwrite', s => s.put(val));
+}
+async function sGet(store, key){
+  if (memOnly) return MEM[store].get(key) || undefined;
+  return one(store, 'readonly', s => s.get(key));
+}
+async function sAll(store){
+  if (memOnly) return [...MEM[store].values()];
+  return one(store, 'readonly', s => s.getAll());
+}
+async function sDel(store, key){
+  if (memOnly) { MEM[store].delete(key); return; }
+  return one(store, 'readwrite', s => s.delete(key));
+}
+// A restore is one transaction: either all of the backup is in, or the vault that
+// was here still is. It used to clear both stores first and write after, one put at
+// a time — so a backup that failed halfway through destroyed the vault it replaced.
+async function replaceVault(meta, items){
+  if (memOnly) { MEM.meta = new Map([['vault', meta]]); MEM.items = new Map(items.map(i => [i.id, i])); return; }
+  return run(['meta','items'], 'readwrite', t => new Promise((res, rej) => {
+    t.oncomplete = () => res();
+    t.onabort = () => rej(t.error || new Error('the write was abandoned'));
+    const m = t.objectStore('meta'), s = t.objectStore('items');
+    m.clear(); s.clear(); m.put(meta);
+    for (const it of items) s.put(it);
+  }));
+}
+
+/* ---------- crypto ---------- */
+const rnd = n => crypto.getRandomValues(new Uint8Array(n));
+async function derive(pw, salt, iter){
+  const base = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:iter, hash:'SHA-256'},
+    base, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']);
+}
+async function encBytes(bytes, key = KEY){
+  const iv = rnd(12);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, bytes));
+  return {iv, ct};
+}
+async function decBytes(iv, ct, key = KEY){
+  return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, ct));
+}
+const encJSON = o => encBytes(enc.encode(JSON.stringify(o)));
+const decJSON = async (iv, ct) => JSON.parse(dec.decode(await decBytes(iv, ct)));
+/** Throws unless `key` is the one this vault (or backup) was made with. */
+async function proveKey(key, verify){
+  if (dec.decode(await decBytes(verify.iv, verify.ct, key)) !== VERIFY) throw new Error('verify mismatch');
+}
+
+function b64(u8){ let s=''; const c=0x8000; for(let i=0;i<u8.length;i+=c) s+=String.fromCharCode.apply(null,u8.subarray(i,i+c)); return btoa(s); }
+function unb64(s){ const bin=atob(s), u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return u; }
+
+/* ---------- helpers ---------- */
+const fmt = b => b<1024 ? b+' B' : b<1048576 ? (b/1024).toFixed(1)+' KB'
+  : b<1073741824 ? (b/1048576).toFixed(1)+' MB' : (b/1073741824).toFixed(2)+' GB';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const why = e => (e && e.message) || String(e);
+const uid = () => Date.now().toString(36) + '-' + b64(rnd(6)).replace(/[^a-z0-9]/gi,'').slice(0,6);
+let toastT;
+function toast(m, long){ const t=$('#toast'); t.textContent=m; t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'), long ? 7000 : 2400); }
+// The last line of defence: an async handler that throws must not fail in silence.
+addEventListener('unhandledrejection', e => toast('Something failed: ' + why(e.reason), true));
+
+/* ---------- lock / unlock ---------- */
+function resetIdle(){
+  lastActive = Date.now();
+  clearTimeout(idleTimer);
+  if (KEY) idleTimer = setTimeout(idleLock, IDLE_MS);
+}
+function idleLock(){ if (!KEY) return; lock(); toast('Locked after 5 minutes idle'); }
+// setTimeout counts the time the page spent running. A phone that sleeps stops that
+// count, so the lock above could come due hours late, with the key in memory the
+// whole time. The wall clock does not stop: check it whenever the page is back.
+function checkIdle(){
+  if (!KEY) return;
+  const left = IDLE_MS - (Date.now() - lastActive);
+  if (left <= 0) return idleLock();
+  clearTimeout(idleTimer); idleTimer = setTimeout(idleLock, left);
+}
+['pointerdown','keydown'].forEach(e => addEventListener(e, resetIdle, {passive:true}));
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') checkIdle(); });
+addEventListener('pageshow', checkIdle);
+
+function lock(){
+  KEY = null; ITEMS = [];
+  URLS.forEach(u => URL.revokeObjectURL(u)); URLS = [];
+  clearTimeout(idleTimer);
+  $('#list').innerHTML=''; $('#cnt').textContent='0';
+  closeSheet();
+  // `cat` prints decrypted text into the terminal, and `new` takes a note's text on
+  // the command line. Both used to stay on the page after the key was gone.
+  $('#termOut').innerHTML=''; HIST.length = 0; hi = -1; $('#termIn').value='';
+  termLine('locked', 'm');
+  $('#lockPill').textContent='Locked'; $('#lockPill').className='pill armed';
+  $('#pw').value=''; $('#pw2').value='';
+  $('#lock').style.display='flex';
+  showLockState();
+}
+
+async function showLockState(){
+  try { META = (await sGet('meta','vault')) || null; }
+  catch (e) {
+    // Offering "Create your vault" here would put a new salt over an existing vault
+    // the moment someone typed a password, and every item in it would be unreadable.
+    storageBroken = true;
+    $('#lockTitle').textContent = 'Storage error';
+    $('#lockSub').textContent = 'Could not read this vault (' + why(e) + '). Nothing was changed. Reload to try again.';
+    $('#pw2wrap').hidden = true; $('#bRestore').hidden = true; $('#bGo').disabled = true;
+    $('#lockFoot').textContent = 'Nothing was written.';
+    return;
+  }
+  storageBroken = false; $('#bGo').disabled = false;
+  const isNew = !META;
+  $('#lockTitle').textContent = isNew ? 'Create your vault' : 'Unlock';
+  $('#lockSub').textContent = isNew
+    ? 'Pick a password. It is the only key — nothing can recover the contents without it.'
+    : 'Enter your password.';
+  $('#pw2wrap').hidden = !isNew;
+  $('#bRestore').hidden = !isNew;
+  $('#bGo').textContent = isNew ? 'Create vault' : 'Unlock';
+  $('#pw').setAttribute('autocomplete', isNew ? 'new-password' : 'current-password');
+  $('#lockFoot').innerHTML = memOnly
+    ? '<span style="color:var(--false)">Storage unavailable' +
+      (dbErr ? ' (' + esc(dbErr) + ')' : '') +
+      '. The vault works but forgets everything on reload — a private window does this.</span>'
+    : 'Encrypted locally · nothing leaves this device';
+}
+
+function lockMsg(text, kind){
+  const m = $('#lockMsg'); m.textContent = text;
+  m.className = 'msg show ' + (kind || 'err');
+}
+
+function showOpen(){
+  $('#pw').value=''; $('#pw2').value=''; $('#lockMsg').className='msg';
+  $('#lock').style.display='none';
+  $('#lockPill').textContent='Open'; $('#lockPill').className='pill open';
+  resetIdle();
+}
+
+async function submitLock(){
+  if (storageBroken) return;
+  const pw = $('#pw').value;
+  if (pw.length < 8) return lockMsg('Password needs at least 8 characters.');
+  const creating = !META;
+  if (creating && pw !== $('#pw2').value) return lockMsg('The two passwords do not match.');
+
+  $('#bGo').disabled = true;
+  lockMsg('Deriving key — 600,000 rounds, deliberately slow…', 'ok');
+  await new Promise(r => setTimeout(r, 30));
+  const t0 = performance.now();
+
+  let key;
+  try {
+    if (creating) {
+      const salt = rnd(16);
+      key = await derive(pw, salt, ITER);
+      const v = await encBytes(enc.encode(VERIFY), key);
+      const meta = {k:'vault', salt, iter:ITER, verify:{iv:v.iv, ct:v.ct}, created:Date.now()};
+      await sPut('meta', meta);
+      // Set only once it is stored. Set before, a failed write left the page believing
+      // in a vault that was never saved, and items encrypted under its key were lost
+      // on the next reload.
+      META = meta;
+    } else {
+      key = await derive(pw, META.salt, META.iter || ITER);
+      await proveKey(key, META.verify);
+    }
+  } catch (e) {
+    $('#bGo').disabled = false;
+    if (creating) return lockMsg('Could not create the vault: ' + why(e));
+    return lockMsg(e.name === 'OperationError' || e.message === 'verify mismatch'
+      ? 'Wrong password.' : 'Could not unlock: ' + why(e));
+  }
+
+  KEY = key;
+  const ms = Math.round(performance.now() - t0);
+  $('#bGo').disabled = false;
+  showOpen();
+  await loadItems();
+  updateQuota();
+  termLine('unlocked · key derived in ' + ms + 'ms', 'm');
+  toast(creating ? 'Vault created' : 'Unlocked in ' + ms + 'ms');
+}
+$('#bGo').onclick = submitLock;
+$('#pw').onkeydown = e => { if (e.key === 'Enter') { if ($('#pw2wrap').hidden) submitLock(); else $('#pw2').focus(); } };
+$('#pw2').onkeydown = e => { if (e.key === 'Enter') submitLock(); };
+$('#bLock').onclick = () => { lock(); toast('Locked'); };
+
+/* ---------- items ---------- */
+async function loadItems(){
+  let raw;
+  try { raw = await sAll('items'); }
+  catch (e) {
+    ITEMS = []; render();
+    $('#list').innerHTML = '<div class="empty" style="color:var(--false)">Could not read the vault: ' + esc(why(e)) + '</div>';
+    return;
+  }
+  ITEMS = [];
+  for (const r of raw) {
+    try { ITEMS.push(Object.assign({id:r.id, bytes:r.bCt.length}, await decJSON(r.mIv, r.mCt))); }
+    catch { ITEMS.push({id:r.id, name:'(unreadable — different password?)', mime:'', size:0, kind:'bad', created:0, bytes:r.bCt.length}); }
+  }
+  ITEMS.sort((a,b) => b.created - a.created);
+  render();
+}
+
+function kindOf(mime, name){
+  if (/^audio\//.test(mime)) return 'audio';
+  if (/^image\//.test(mime)) return 'image';
+  if (/^video\//.test(mime)) return 'video';
+  if (/^text\/|json|javascript|xml|csv/.test(mime) || /\.(txt|md|json|js|css|html|csv|log)$/i.test(name||'')) return 'text';
+  return 'file';
+}
+const tag = k => ({note:'TXT', text:'TXT', audio:'AUD', image:'IMG', video:'VID', file:'BIN', bad:'ERR'}[k] || 'BIN');
+
+function render(){
+  $('#cnt').textContent = ITEMS.length;
+  const l = $('#list');
+  if (!ITEMS.length) {
+    l.innerHTML = '<div class="empty">Nothing saved yet.<br><span class="small">Add a note, or pick a file from your phone.</span></div>';
+  } else {
+    // Escaped like everything else written into the page: ids arrive in backups too,
+    // and a backup is a file anyone can hand you.
+    l.innerHTML = ITEMS.map(i =>
+      '<button class="item" data-id="' + esc(i.id) + '">' +
+        '<span class="ico">' + tag(i.kind) + '</span>' +
+        '<span class="nm"><b>' + esc(i.name) + '</b><span>' + fmt(i.size) +
+        ' · ' + (i.created ? new Date(i.created).toLocaleDateString() : '—') + '</span></span>' +
+      '</button>').join('');
+    l.querySelectorAll('.item').forEach(b => b.onclick = () => openItem(b.dataset.id));
+  }
+  const total = ITEMS.reduce((s,i) => s + i.size, 0);
+  $('#vaultFacts').innerHTML =
+    ITEMS.length + ' item' + (ITEMS.length===1?'':'s') + ' · ' + fmt(total) + ' of contents<br>' +
+    'AES-GCM 256 · PBKDF2 ' + ((META && META.iter) || ITER).toLocaleString() + ' rounds<br>' +
+    (memOnly ? '<span style="color:var(--false)">memory only — will not survive reload</span>' : 'IndexedDB');
+}
+
+async function saveItem(name, mime, bytes, kind){
+  const meta = {name, mime, size:bytes.length, kind:kind || kindOf(mime, name), created:Date.now()};
+  const m = await encJSON(meta), b = await encBytes(bytes);
+  const id = uid();
+  await sPut('items', {id, mIv:m.iv, mCt:m.ct, bIv:b.iv, bCt:b.ct});
+  ITEMS.unshift(Object.assign({id, bytes:b.ct.length}, meta));
+  render(); updateQuota();
+  return id;
+}
+async function readItem(id){
+  const r = await sGet('items', id);
+  if (!r) throw new Error('no such item');
+  return decBytes(r.bIv, r.bCt);
+}
+async function delItem(id){
+  await sDel('items', id);
+  ITEMS = ITEMS.filter(i => i.id !== id);
+  render(); updateQuota();
+}
+
+/* ---------- sheet ---------- */
+function openSheet(html){ $('#sheetBody').innerHTML = html; $('#sheet').classList.add('show'); }
+function closeSheet(){ $('#sheet').classList.remove('show'); $('#sheetBody').innerHTML=''; }
+$('#sheet').onclick = e => { if (e.target.id === 'sheet') closeSheet(); };
+
+$('#bNote').onclick = () => {
+  openSheet(
+    '<h3>New note</h3><p class="tiny">Encrypted the moment you save it.</p>' +
+    '<input type="text" id="nName" placeholder="Title" style="margin:10px 0">' +
+    '<textarea id="nBody" placeholder="Write here…"></textarea>' +
+    '<div class="row" style="margin-top:12px"><button class="btn" id="nCancel">Cancel</button>' +
+    '<button class="btn primary" id="nSave">Save</button></div>');
+  $('#nCancel').onclick = closeSheet;
+  $('#nSave').onclick = async () => {
+    const name = ($('#nName').value || 'Untitled note').trim();
+    const body = $('#nBody').value;
+    if (!body) return toast('Nothing to save');
+    $('#nSave').disabled = true;
+    try { await saveItem(name, 'text/plain', enc.encode(body), 'note'); }
+    catch (e) { $('#nSave').disabled = false; return toast('Not saved (' + why(e) + '). Your text is still here.', true); }
+    closeSheet(); toast('Saved');
+  };
+  $('#nName').focus();
+};
+
+$('#bFile').onclick = () => $('#filePick').click();
+$('#filePick').onchange = async e => {
+  const files = [...e.target.files]; e.target.value = '';
+  if (!files.length) return;
+  const failed = [];
+  for (const f of files) {
+    try {
+      toast('Encrypting ' + f.name + '…');
+      await saveItem(f.name, f.type || 'application/octet-stream', new Uint8Array(await f.arrayBuffer()));
+    } catch (err) { failed.push(f.name + ' (' + why(err) + ')'); }
+  }
+  // Each failure used to get a toast of its own, which the next line overwrote with
+  // "N files saved" — counting the files that failed as saved.
+  const n = files.length, s = n === 1 ? '' : 's';
+  toast(failed.length
+    ? (n - failed.length) + ' of ' + n + ' file' + s + ' saved · not saved: ' + failed.join(', ')
+    : n + ' file' + s + ' saved', failed.length > 0);
+};
+
+async function openItem(id){
+  const it = ITEMS.find(i => i.id === id); if (!it) return;
+  openSheet('<h3>' + esc(it.name) + '</h3><p class="tiny">Decrypting…</p>');
+  let bytes;
+  try { bytes = await readItem(id); }
+  catch (e) {
+    openSheet('<h3>' + esc(it.name) + '</h3><p class="tiny" style="color:var(--false)">Could not decrypt: ' +
+      esc(why(e)) + '</p><button class="btn wide" id="vClose">Close</button>');
+    $('#vClose').onclick = closeSheet;
+    return;
+  }
+
+  const head = '<h3>' + esc(it.name) + '</h3><p class="tiny">' + fmt(it.size) + ' · ' +
+    esc(it.mime || 'binary') + ' · ' + (it.created ? new Date(it.created).toLocaleString() : '—') + '</p>';
+  let body = '';
+
+  if (it.kind === 'note' || it.kind === 'text') {
+    body = '<textarea id="vBody">' + esc(dec.decode(bytes)) + '</textarea>' +
+           '<button class="btn primary wide" id="vSave" style="margin-top:10px">Save changes</button>';
+  } else if (it.kind === 'audio' || it.kind === 'video' || it.kind === 'image') {
+    const url = URL.createObjectURL(new Blob([bytes], {type: it.mime})); URLS.push(url);
+    body = it.kind === 'image'
+      ? '<img class="prev" src="' + url + '" alt="' + esc(it.name) + '">'
+      : '<' + it.kind + ' src="' + url + '" controls playsinline style="width:100%;margin:12px 0"></' + it.kind + '>';
+  } else {
+    body = '<p class="small" style="margin-top:12px">Binary file. Export it to open in another app.</p>';
+  }
+
+  openSheet(head + body +
+    '<div class="row" style="margin-top:14px">' +
+    '<button class="btn" id="vClose">Close</button>' +
+    '<button class="btn" id="vDown">Export</button>' +
+    '<button class="btn danger" id="vDel">Delete</button></div>');
+
+  $('#vClose').onclick = closeSheet;
+  $('#vDown').onclick = () => { download(new Blob([bytes], {type: it.mime || 'application/octet-stream'}), it.name); };
+  $('#vDel').onclick = async () => {
+    if (!$('#vDel').dataset.armed) { $('#vDel').dataset.armed = '1'; $('#vDel').textContent = 'Tap again to delete'; return; }
+    try { await delItem(id); }
+    catch (e) { return toast('Not deleted (' + why(e) + ')', true); }
+    closeSheet(); toast('Deleted');
+  };
+  const s = $('#vSave');
+  if (s) s.onclick = async () => {
+    const txt = $('#vBody').value;
+    s.disabled = true;
+    try {
+      const m = await encJSON({name:it.name, mime:it.mime, size:enc.encode(txt).length, kind:it.kind, created:it.created});
+      const b = await encBytes(enc.encode(txt));
+      await sPut('items', {id, mIv:m.iv, mCt:m.ct, bIv:b.iv, bCt:b.ct});
+    } catch (e) { s.disabled = false; return toast('Not saved (' + why(e) + '). Your edit is still here.', true); }
+    await loadItems(); closeSheet(); toast('Saved');
+  };
+}
+
+function download(blob, name){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+
+/* ---------- export ---------- */
+$('#bExport').onclick = async () => {
+  try {
+    const raw = await sAll('items');
+    const bytes = raw.reduce((s,r) => s + r.bCt.length, 0);
+    if (bytes > 60 * 1048576 && !confirm('About ' + fmt(bytes * 1.34) + ' after encoding. Continue?')) return;
+    toast('Packing…');
+    const out = {
+      format:'strongbox-vault', v:1,
+      kdf:{name:'PBKDF2', hash:'SHA-256', iterations:META.iter || ITER, salt:b64(META.salt)},
+      verify:{iv:b64(META.verify.iv), ct:b64(META.verify.ct)},
+      items: raw.map(r => ({id:r.id, mIv:b64(r.mIv), mCt:b64(r.mCt), bIv:b64(r.bIv), bCt:b64(r.bCt)}))
+    };
+    const name = 'strongbox-' + new Date().toISOString().slice(0,10) + '.sbx';
+    download(new Blob([JSON.stringify(out)], {type:'application/json'}), name);
+    toast('Exported ' + raw.length + ' item' + (raw.length===1?'':'s'));
+  } catch (e) { toast('Export failed (' + why(e) + ')', true); }
+};
+
+/* ---------- restore ---------- */
+// A backup is a file, and by the time it comes back it can be anything: damaged, from
+// another vault, or written by someone else. So all of it is checked, and its password
+// proven, before the vault on this device is touched. The version this replaced wiped
+// the vault first and read the file after — a damaged file, or one whose password you
+// did not have, destroyed the vault it was meant to restore.
+function readBackup(j){
+  const fail = reason => { throw new Error(reason); };
+  if (!j || typeof j !== 'object' || j.format !== 'strongbox-vault') fail('that file is not a Strongbox backup');
+  if (j.v !== 1) fail('it was made by a different version of Strongbox');
+  const k = j.kdf;
+  if (!k || k.name !== 'PBKDF2' || k.hash !== 'SHA-256') fail('its key settings are missing or unknown');
+  if (!Number.isInteger(k.iterations) || k.iterations < 100000 || k.iterations > 10000000) fail('its key settings are out of range');
+  const bytes = (s, what, exact) => {
+    let u;
+    try { u = unb64(String(s)); } catch { fail(what + ' is damaged'); }
+    if (exact ? u.length !== exact : u.length < 16) fail(what + ' is damaged');
+    return u;
+  };
+  const v = j.verify || {};
+  const meta = {k:'vault', salt:bytes(k.salt, 'its salt', 16), iter:k.iterations,
+    verify:{iv:bytes(v.iv, 'its password check', 12), ct:bytes(v.ct, 'its password check')}, created:Date.now()};
+  if (!Array.isArray(j.items)) fail('it has no list of items');
+  const seen = new Set();
+  const items = j.items.map((it, n) => {
+    const which = 'item ' + (n + 1);
+    // Ids are written into the page. One carrying markup ran as code the moment the
+    // list rendered, so only the shape Strongbox itself makes is accepted.
+    if (!it || typeof it.id !== 'string' || !/^[A-Za-z0-9_-]{1,64}$/.test(it.id) || seen.has(it.id)) {
+      fail(which + ' has an id Strongbox did not make');
+    }
+    seen.add(it.id);
+    return {id:it.id, mIv:bytes(it.mIv, which, 12), mCt:bytes(it.mCt, which), bIv:bytes(it.bIv, which, 12), bCt:bytes(it.bCt, which)};
+  });
+  return {meta, items};
+}
+
+function askRestorePassword(backup, fileName){
+  const replacing = !!META, n = backup.items.length;
+  openSheet(
+    '<h3>Restore ' + esc(fileName) + '</h3>' +
+    '<p class="tiny">' + n + ' item' + (n===1?'':'s') + '. Enter the password this backup was made with.' +
+    (replacing ? ' It replaces everything in this vault, and from then on the backup\'s password opens it.' : '') +
+    ' Nothing changes until the password checks out.</p>' +
+    '<input type="password" id="rPw" autocomplete="current-password" style="margin:10px 0">' +
+    '<div class="msg" id="rMsg"></div>' +
+    '<div class="row" style="margin-top:12px"><button class="btn" id="rCancel">Cancel</button>' +
+    '<button class="btn primary" id="rGo">' + (replacing ? 'Replace vault' : 'Restore') + '</button></div>');
+  const msg = (text, kind) => { const m = $('#rMsg'); m.textContent = text; m.className = 'msg show ' + (kind || 'err'); };
+  const go = async () => {
+    $('#rGo').disabled = true;
+    msg('Checking the password — 600,000 rounds…', 'ok');
+    let key;
+    try {
+      key = await derive($('#rPw').value, backup.meta.salt, backup.meta.iter);
+      await proveKey(key, backup.meta.verify);
+    } catch { $('#rGo').disabled = false; return msg('Wrong password for this backup. Nothing was changed.'); }
+    try { await replaceVault(backup.meta, backup.items); }
+    catch (e) { $('#rGo').disabled = false; return msg('Could not write the backup (' + why(e) + '). Nothing was changed.'); }
+    KEY = key; META = backup.meta;
+    closeSheet(); showOpen();
+    await loadItems(); updateQuota();
+    toast('Restored ' + n + ' item' + (n===1?'':'s'));
+  };
+  $('#rCancel').onclick = closeSheet;
+  $('#rGo').onclick = go;
+  $('#rPw').onkeydown = e => { if (e.key === 'Enter') go(); };
+  $('#rPw').focus();
+}
+
+$('#bImport').onclick = () => $('#importPick').click();
+$('#bRestore').onclick = () => $('#importPick').click();
+$('#importPick').onchange = async e => {
+  const f = e.target.files[0]; e.target.value=''; if (!f) return;
+  if (META && !KEY) return toast('Unlock first to replace this vault.', true);
+  let backup;
+  try {
+    let j;
+    try { j = JSON.parse(await f.text()); } catch { throw new Error('that file is not a Strongbox backup'); }
+    backup = readBackup(j);
+  } catch (err) { return toast('Not restored: ' + why(err) + '. Nothing was changed.', true); }
+  askRestorePassword(backup, f.name);
+};
+
+/* ---------- storage ---------- */
+async function updateQuota(){
+  let usage = 0, quota = 0, has = false;
+  try { if (navigator.storage && navigator.storage.estimate) {
+    const e = await navigator.storage.estimate(); usage = e.usage||0; quota = e.quota||0; has = true;
+  } } catch {}
+  let persisted = null;
+  try { if (navigator.storage && navigator.storage.persisted) persisted = await navigator.storage.persisted(); } catch {}
+  $('#hStorage').textContent = has ? fmt(usage) + ' used' : 'storage n/a';
+  $('#quota').innerHTML = has
+    ? fmt(usage) + ' used of ' + fmt(quota) + ' available<br>' +
+      (persisted === true ? '<span style="color:var(--true)">Kept — Safari will not evict this</span>'
+       : persisted === false ? '<span style="color:var(--info)">Not kept — tap "Keep storage"; works best once added to your Home Screen</span>'
+       : 'Persistence state unknown on this browser')
+    : 'This browser does not report storage figures.';
+  $('#quotaBar').style.width = (has && quota) ? Math.min(100, usage/quota*100) + '%' : '0%';
+}
+$('#bPersist').onclick = async () => {
+  if (!navigator.storage || !navigator.storage.persist) return toast('Not supported here');
+  const ok = await navigator.storage.persist();
+  toast(ok ? 'Storage kept' : 'Declined — add to Home Screen, then try again');
+  updateQuota(); runAudit();
+};
+
+/* ---------- boot audit ---------- */
+const CHECKS = [
+  {k:'Web Crypto (subtle)', note:'AES-GCM + PBKDF2 come from here',
+   run:()=> (crypto && crypto.subtle) ? ['true','available'] : ['false','missing — the vault cannot work']},
+  {k:'Secure context', note:'required for crypto.subtle',
+   run:()=> isSecureContext ? ['true','yes'] : ['false','no — serve over https or file://']},
+  {k:'IndexedDB', note:'where encrypted payloads live',
+   run:()=> memOnly ? ['false', dbErr || 'unavailable'] : ['true','open']},
+  {k:'Persistent storage', note:'survives Safari 7-day eviction',
+   run: async ()=>{ try{ if(!navigator.storage||!navigator.storage.persisted) return ['pending','not supported'];
+     return (await navigator.storage.persisted()) ? ['true','granted'] : ['degraded','not granted yet']; }catch{ return ['pending','unknown']; } }},
+  {k:'Storage estimate', note:'real quota figures',
+   run: async ()=>{ try{ const e = await navigator.storage.estimate(); return ['true', fmt(e.quota||0) + ' quota']; }catch{ return ['degraded','not reported']; } }},
+  {k:'Offline copy', note:'lets the page open with no signal',
+   run:()=>{
+     if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return ['pending','not available here'];
+     if (navigator.serviceWorker.controller) return ['true','ready'];
+     return swErr ? ['degraded','not set up: ' + swErr] : ['degraded','saving — ready from the next open'];
+   }},
+  {k:'Blob download', note:'export needs it',
+   run:()=> (typeof Blob !== 'undefined' && URL.createObjectURL) ? ['true','available'] : ['false','missing']},
+  {k:'CompressionStream', note:'gzip in the terminal',
+   run:()=> (typeof CompressionStream !== 'undefined') ? ['true','gzip ready'] : ['degraded','absent — compress disabled']},
+  {k:'Dynamic eval', note:'terminal > expressions',
+   run:()=>{ try{ new Function('return 1')(); return ['true','allowed']; }
+             catch(e){ return ['degraded','blocked by CSP — "> expr" will not run']; } }},
+  // This row used to be the string "zero" with a PASS beside it, whatever happened.
+  // It is a count now, of everything the browser recorded this page requesting.
+  {k:'Requests from this page', note:'counted since it loaded, not assumed',
+   run:()=>{
+     if (!performance.getEntriesByType) return ['pending','this browser does not report them'];
+     const sent = performance.getEntriesByType('resource').filter(e => !/^(blob|data):/.test(e.name));
+     return sent.length
+       ? ['false', sent.length + ' — ' + sent.slice(0, 3).map(e => e.name).join(', ')]
+       : ['true','0 — no fetch, no CDN, no fonts'];
+   }}
+];
+
+async function runAudit(){
+  const el = $('#audit');
+  el.innerHTML = '<div class="hd"><span>Capability</span><span>Result</span></div>';
+  for (const c of CHECKS) {
+    let s, d;
+    try { [s, d] = await c.run(); } catch (e) { s = 'false'; d = e.message; }
+    const cls = {true:'t', false:'f', degraded:'d', pending:'p'}[s];
+    const word = {true:'PASS', false:'FAIL', degraded:'PARTIAL', pending:'—'}[s];
+    el.insertAdjacentHTML('beforeend',
+      '<div class="arow"><span class="k">' + c.k + '</span><span class="v ' + cls + '">' + word +
+      '</span><span class="n">' + esc(d) + ' · ' + c.note + '</span></div>');
+  }
+}
+$('#bRecheck').onclick = () => { runAudit(); updateQuota(); toast('Re-checked'); };
+
+/* ---------- self test ---------- */
+function contains(hay, needle){
+  outer: for (let i = 0; i + needle.length <= hay.length; i++) {
+    for (let j = 0; j < needle.length; j++) if (hay[i + j] !== needle[j]) continue outer;
+    return true;
+  }
+  return false;
+}
+$('#bSelfTest').onclick = async () => {
+  if (!KEY) return toast('Unlock first');
+  const o = $('#stOut'); const log = s => o.insertAdjacentHTML('beforeend', s + '<br>');
+  o.innerHTML = ''; $('#bSelfTest').disabled = true;
+  const N = 4 * 1048576;
+  const name = 'selftest-' + Date.now() + '.bin';
+  const mark = enc.encode('STRONGBOX-SELFTEST-' + b64(rnd(9)));
+  let id = null, passed = false;
+  try {
+    const data = new Uint8Array(N);
+    for (let i = 0; i < N; i += 65536) crypto.getRandomValues(data.subarray(i, Math.min(i+65536, N)));
+    data.set(mark, 0);   // something known, to look for on disk afterwards
+    log('generated 4.00 MB of random data');
+
+    let t = performance.now();
+    id = await saveItem(name, 'application/octet-stream', data);
+    log('encrypted + written in ' + Math.round(performance.now()-t) + 'ms');
+
+    t = performance.now();
+    const back = await readItem(id);
+    log('read + decrypted in ' + Math.round(performance.now()-t) + 'ms');
+
+    // Every byte. This compared one byte in 997 while saying "every byte", and a
+    // single corrupted byte between two samples passed.
+    let bad = back.length === N ? -1 : Math.min(back.length, N);
+    if (bad === -1) for (let i = 0; i < N; i++) if (back[i] !== data[i]) { bad = i; break; }
+    log(bad === -1 ? '<span style="color:var(--true)">all ' + N.toLocaleString() + ' bytes match</span>'
+                   : '<span style="color:var(--false)">byte ' + bad.toLocaleString() + ' differs</span>');
+
+    const rec = await sGet('items', id);
+    log('at rest: ' + fmt(rec.bCt.length) + ' ciphertext (+16-byte auth tag)');
+    log('first bytes on disk: <span style="color:var(--info)">' + esc(b64(rec.bCt.slice(0, 24))) + '</span>');
+    const leaked = contains(rec.bCt, mark) || contains(rec.mCt, enc.encode(name));
+    log('plaintext found on disk: ' + (leaked ? '<span style="color:var(--false)">yes</span>'
+      : '<span style="color:var(--true)">no</span>') + ' (searched for the marker and the name)');
+    passed = bad === -1 && !leaked;
+  } catch (e) {
+    log('<span style="color:var(--false)">error: ' + esc(why(e)) + '</span>');
+  } finally {
+    if (id) {
+      try { await delItem(id); log('test item deleted'); }
+      catch (e) { log('<span style="color:var(--false)">could not delete the test item: ' + esc(why(e)) + '</span>'); }
+    }
+  }
+  log(passed ? '<b style="color:var(--true)">SELF-TEST PASSED</b>' : '<b style="color:var(--false)">SELF-TEST FAILED</b>');
+  if (memOnly) log('<span style="color:var(--false)">note: memory-only mode — this proves the crypto, not persistence</span>');
+  $('#bSelfTest').disabled = false;
+  updateQuota();
+};
+
+/* ---------- terminal ---------- */
+const HIST = []; let hi = -1;
+function termLine(s, cls){
+  const o = $('#termOut');
+  o.insertAdjacentHTML('beforeend', '<div' + (cls ? ' class="' + cls + '"' : '') + '>' + s + '</div>');
+  o.scrollTop = o.scrollHeight;
+}
+const CMDS = {
+  help(){ return [
+    'ls                 list items',
+    'cat &lt;n|name&gt;       print a text item',
+    'new &lt;name&gt;         create a note from the rest of the line',
+    'rm &lt;n|name&gt;        delete an item',
+    'stat               vault summary',
+    'storage            quota and persistence',
+    'persist            ask the browser to keep this data',
+    'gzip &lt;n&gt;           compress a text item, report the ratio',
+    'lock               lock, drop the key, clear this screen',
+    'clear              clear this screen',
+    '&gt; expression       evaluate JavaScript (e.g. > 2+2)'
+  ].join('\n'); },
+  ls(){
+    if (!ITEMS.length) return '(empty)';
+    return ITEMS.map((i,n) => String(n+1).padStart(3) + '  ' + tag(i.kind) + '  ' +
+      fmt(i.size).padStart(9) + '  ' + esc(i.name)).join('\n');
+  },
+  async cat(a){
+    const it = pick(a); if (!it) return err('no such item');
+    if (it.kind !== 'note' && it.kind !== 'text') return err('not text — open it on the Vault tab');
+    return esc(dec.decode(await readItem(it.id)));
+  },
+  async new(a){
+    if (!a) return err('usage: new &lt;name&gt; [text]');
+    const sp = a.indexOf(' ');
+    const name = sp === -1 ? a : a.slice(0, sp);
+    const body = sp === -1 ? '' : a.slice(sp+1);
+    await saveItem(name, 'text/plain', enc.encode(body), 'note');
+    return 'created ' + esc(name);
+  },
+  async rm(a){
+    const it = pick(a); if (!it) return err('no such item');
+    await delItem(it.id); return 'deleted ' + esc(it.name);
+  },
+  stat(){
+    const total = ITEMS.reduce((s,i) => s+i.size, 0);
+    return [
+      'items       ' + ITEMS.length,
+      'contents    ' + fmt(total),
+      'cipher      AES-GCM 256',
+      'kdf         PBKDF2-SHA256 ' + ((META&&META.iter)||ITER).toLocaleString(),
+      'backend     ' + (memOnly ? 'memory (volatile)' : 'IndexedDB'),
+      'key         in memory, dropped on lock',
+      'auto-lock   5 min idle, by the wall clock'
+    ].join('\n');
+  },
+  async storage(){
+    try {
+      const e = await navigator.storage.estimate();
+      let p = 'unknown';
+      try { p = (await navigator.storage.persisted()) ? 'granted' : 'not granted'; } catch {}
+      return 'used        ' + fmt(e.usage||0) + '\nquota       ' + fmt(e.quota||0) + '\npersisted   ' + p;
+    } catch { return err('not reported by this browser'); }
+  },
+  async persist(){
+    if (!navigator.storage || !navigator.storage.persist) return err('not supported');
+    const ok = await navigator.storage.persist(); updateQuota(); runAudit();
+    return ok ? 'granted' : 'declined — add to Home Screen, then run persist again';
+  },
+  async gzip(a){
+    if (typeof CompressionStream === 'undefined') return err('CompressionStream missing on this browser');
+    const it = pick(a); if (!it) return err('no such item');
+    const bytes = await readItem(it.id);
+    const cs = new CompressionStream('gzip');
+    const w = cs.writable.getWriter(); w.write(bytes); w.close();
+    const packed = new Uint8Array(await new Response(cs.readable).arrayBuffer());
+    return 'original    ' + fmt(bytes.length) + '\ngzipped     ' + fmt(packed.length) +
+      '\nratio       ' + (packed.length/bytes.length*100).toFixed(1) + '%';
+  },
+  lock(){ setTimeout(lock, 50); return 'locking…'; },
+  clear(){ $('#termOut').innerHTML=''; return ''; }
+};
+const err = m => '<span class="e">' + m + '</span>';
+function pick(a){
+  if (!a) return null;
+  const n = parseInt(a, 10);
+  if (!isNaN(n) && String(n) === a.trim()) return ITEMS[n-1] || null;
+  return ITEMS.find(i => i.name.toLowerCase() === a.trim().toLowerCase()) ||
+         ITEMS.find(i => i.name.toLowerCase().includes(a.trim().toLowerCase())) || null;
+}
+
+async function runCmd(line){
+  line = line.trim(); if (!line) return;
+  HIST.push(line); hi = HIST.length;
+  termLine('<span class="u">$ ' + esc(line) + '</span>');
+  if (!KEY) return termLine(err('locked — unlock to use the vault'));
+
+  if (line.startsWith('>')) {
+    const expr = line.slice(1).trim();
+    try {
+      const v = new Function('vault', 'items', 'return (' + expr + ')')(
+        {count:ITEMS.length, names:ITEMS.map(i=>i.name), bytes:ITEMS.reduce((s,i)=>s+i.size,0)}, ITEMS);
+      return termLine(esc(typeof v === 'object' ? JSON.stringify(v, null, 2) : String(v)));
+    } catch (e) {
+      return termLine(err(/unsafe-eval|Content Security/i.test(e.message)
+        ? 'blocked by Content Security Policy — expressions are disabled here'
+        : e.name + ': ' + e.message));
+    }
+  }
+  const sp = line.indexOf(' ');
+  const cmd = (sp === -1 ? line : line.slice(0, sp)).toLowerCase();
+  const arg = sp === -1 ? '' : line.slice(sp+1);
+  if (!Object.prototype.hasOwnProperty.call(CMDS, cmd))
+    return termLine(err('unknown command: ' + esc(cmd) + ' — try help'));
+  try { const out = await CMDS[cmd](arg); if (out) termLine(out); }
+  catch (e) { termLine(err(esc(why(e)))); }
+}
+$('#termGo').onclick = () => { runCmd($('#termIn').value); $('#termIn').value=''; };
+$('#termIn').onkeydown = e => {
+  if (e.key === 'Enter') { runCmd($('#termIn').value); $('#termIn').value=''; }
+  else if (e.key === 'ArrowUp')   { if (hi > 0) $('#termIn').value = HIST[--hi]; e.preventDefault(); }
+  else if (e.key === 'ArrowDown') { hi = Math.min(hi+1, HIST.length); $('#termIn').value = HIST[hi] || ''; }
+};
+document.querySelectorAll('.hint button').forEach(b =>
+  b.onclick = () => { $('#termIn').value = b.dataset.c.replace('&gt;','>'); $('#termIn').focus(); });
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', x === b));
+  ['vault','term','checks','about'].forEach(t => $('#tab-' + t).hidden = (t !== b.dataset.tab));
+  if (b.dataset.tab === 'checks') { runAudit(); updateQuota(); }
+  scrollTo(0,0);
+});
+
+/* ---------- boot ---------- */
+(async function boot(){
+  MEM = {meta:new Map(), items:new Map()};
+  db = watch(await openDB());
+  memOnly = !db;
+  // Served from a site, the page needs a copy of itself to open with no signal — and
+  // a Home Screen app on iPhone never loads the rest of the site, so never gets the
+  // site's own worker. strongbox-sw.js keeps that one copy and does nothing else.
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    navigator.serviceWorker.register('strongbox-sw.js', {scope:'./strongbox'}).catch(e => { swErr = why(e); });
+  }
+  await showLockState();
+  await runAudit();
+  await updateQuota();
+  termLine('strongbox · offline · type help', 'm');
+  if (memOnly) termLine(err('storage unavailable — running in memory'));
+})();
+</script>
+</body>
+</html>

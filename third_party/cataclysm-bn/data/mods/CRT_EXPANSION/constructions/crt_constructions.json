@@ -1,0 +1,19 @@
+[
+  {
+    "type": "construction",
+    "id": "constr_crt_wall_stick",
+    "group": "makeshift_wall",
+    "category": "OTHER",
+    "required_skills": [ [ "survival", 2 ] ],
+    "time": "45 m",
+    "qualities": [ [ { "id": "DIG", "level": 1 } ], [ { "id": "SAW_W", "level": 1 } ] ],
+    "components": [
+      [ [ "wood_structural_small", 2, "LIST" ] ],
+      [ [ "rock", 2 ], [ "pebble", 15 ] ],
+      [ [ "material_soil", 40 ] ],
+      [ [ "withered", 6 ], [ "withered_bundle", 2 ] ]
+    ],
+    "pre_terrain": "t_pit_shallow",
+    "post_terrain": "t_wall_stick"
+  }
+]

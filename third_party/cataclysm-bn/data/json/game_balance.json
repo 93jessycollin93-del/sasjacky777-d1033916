@@ -1,0 +1,275 @@
+[
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "DISPERSION_PER_GUN_DAMAGE",
+    "info": "Value that adds to weapon dispersion per weapon damage value.",
+    "stype": "int",
+    "value": 30
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "GUN_DISPERSION_DIVIDER",
+    "info": "Value that divides total weapon dispersion. 15 means that weapons became 15 times more accurate than default.",
+    "stype": "float",
+    "value": 18
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "PLAYER_MAX_STAMINA",
+    "info": "Sets max stamina value of the player.",
+    "stype": "int",
+    "value": 10000
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "PLAYER_BASE_STAMINA_REGEN_RATE",
+    "info": "Sets base stamina regeneration per turn of the player. May be used as an offset in stamina draining effects.",
+    "stype": "float",
+    "value": 20
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "PLAYER_BASE_STAMINA_BURN_RATE",
+    "info": "Sets base stamina burn per 100 moves of the walking player.",
+    "stype": "int",
+    "value": 15
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "PLAYER_HUNGER_RATE",
+    "info": "Set base hunger rate per 5 minutes. Default: 1.0",
+    "stype": "float",
+    "value": 1
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "PLAYER_THIRST_RATE",
+    "info": "Set base thirst rate per 5 minutes. Default: 1.0",
+    "stype": "float",
+    "value": 1
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "PLAYER_FATIGUE_RATE",
+    "info": "Set base fatigue rate per 5 minutes. Default: 1.0",
+    "stype": "float",
+    "value": 1
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "PLAYER_HEALING_RATE",
+    "info": "Set base player healing rate per turn. Default: 0.0002",
+    "stype": "float",
+    "value": 0.0002
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "NPC_HEALING_RATE",
+    "info": "Set base NPC healing rate per turn. Default: 0.0002",
+    "stype": "float",
+    "value": 0.0002
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "NO_FAULTS",
+    "info": "Disables vehicle part faults.  If true, disables vehicle part faults, vehicle parts will be totally reliable unless destroyed, and can only be repaired via replacement.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MANUAL_BIONIC_INSTALLATION",
+    "info": "Permits manual self-installation of bionics.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "NO_NPC_FOOD",
+    "info": "Disables tracking food, thirst and ( partially ) fatigue for NPCs. If true, NPCs won't need to eat or drink and will only get tired enough to sleep, not to get penalties.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "NO_VITAMINS",
+    "info": "Disables tracking vitamins in food items.  If true, disables vitamin tracking and vitamin disorders.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "CBM_SLOTS_ENABLED",
+    "info": "Enables CBM slots mechanics. If true CBM slots are enabled.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "DISABLE_ANIMAL_CLASH",
+    "info": "Disable additional spawn of large groups of monsters fighting each other on swamps.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MAX_HARVEST_COUNT",
+    "info": "The maximum amount of produce that can be harvested from a plant.",
+    "stype": "int",
+    "value": 12
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "DISABLE_ROBOT_RESPONSE",
+    "info": "Disables robot spawning from alerts and from being wanted.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "CRAZY",
+    "info": "A boolean specifically for Crazy Cataclysm.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "STATS_THROUGH_KILLS",
+    "info": "Stats through Kills.  A mod that allows your stats to increase by killing zombies.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MON_FUNGALOID_YOUNG_ALLOWED",
+    "info": "Enables fungal stalk to be spawned on infested terrain from 'PLANT' attack function.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "FUNGUS_SPREAD_ON_FLAT_TILES_ALLOWED",
+    "info": "Enables fungal infestation on FLAT tiles (indoors houses/asphalt/etc..).",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MON_FUNGALOID_YOUNG_SPAWN_BASE_RATE",
+    "info": "Base rate to spawn fungal stalk from 'PLANT' attack function. Chance to spawn: 1 / (MON_FUNGALOID_YOUNG_SPAWN_BASE_RATE + num_creatures_in_bubble / MON_FUNGALOID_YOUNG_SPAWN_BUBBLE_CREATURES_DIVIDER)",
+    "stype": "int",
+    "value": 10
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MON_FUNGALOID_YOUNG_SPAWN_BUBBLE_CREATURES_DIVIDER",
+    "info": "Number of creatures in bubble will be divided on that number to calculate chance to spawn fungal stalk from 'PLANT' attack function. Chance to spawn: 1 / (MON_FUNGALOID_YOUNG_SPAWN_BASE_RATE + num_creatures_in_bubble / MON_FUNGALOID_YOUNG_SPAWN_BUBBLE_CREATURES_DIVIDER)",
+    "stype": "int",
+    "value": 5
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "FUNGUS_SPORE_CHANCE",
+    "info": "Chance (0 to 1) to trigger spore creation on fungal_effects::fungalize method (for character; infested furniture/terrain bash; FUNGUS death function, FUNGUS_ADVANCED attack function) (note: change for FUNGUS_ADVANCED attack function will be affected by random radius change (1~2) and will proportionally decrease as FUNGUS_ADVANCED_CREATURES_THRESHOLD is passed)",
+    "stype": "float",
+    "value": 0.25
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "FUNGUS_ADVANCED_CREATURES_THRESHOLD",
+    "info": "If number of creatures nearby will pass this threshold - chance to spawn spore by FUNGUS_ADVANCED attack will be proportionally decreased",
+    "stype": "int",
+    "value": 25
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "FUNGUS_SPORE_CREATURES_THRESHOLD",
+    "info": "Global value that affects ability of fungal_effects::fungalize to spawn spores. If there is more creature nearby than specified value - spore will not spawn",
+    "stype": "int",
+    "value": 250
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "INT_BASED_LEARNING_BASE_VALUE",
+    "info": "The amount of INT which is used as base point for focus adjustments",
+    "stype": "int",
+    "value": 8
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "INT_BASED_LEARNING_FOCUS_ADJUSTMENT",
+    "info": "The amount of focus gained per each INT point above INT_BASED_LEARNING_BASE_VALUE",
+    "stype": "int",
+    "value": 5
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "ALLOW_LEARNING_BOOK_RECIPES",
+    "info": "Allows learning recipes by reading books.",
+    "stype": "bool",
+    "value": true
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "BALANCED_MUTATIONS",
+    "info": "Makes mutation more balanced and interesting.",
+    "stype": "bool",
+    "value": true
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MANA_REGEN_IS_FLAT",
+    "info": "A boolean for whether mana regen is a flat rate or based on regenerating all your mana in a given number of hours",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MANA_REGEN_HOURS_RATE",
+    "info": "The integer number of hours that it should take for the player's mana to fully regenerate by default.",
+    "stype": "int",
+    "value": 8
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MANA_REGEN_FLAT",
+    "info": "The integer flat rate for mana regen (per hour) that should be used as a baseline if enabled.",
+    "stype": "int",
+    "value": 100
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "MAGIC_STAT_SCALING_PERCENT",
+    "info": "The percentage bonus (or malus) that each point away from the base 8 should get you (i.e. 10 is 10%).",
+    "stype": "int",
+    "value": 10
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "UNDERGROUND_TEMPERATURE_INFLUENCED_BY_SURFACE",
+    "info": "If true, underground temperatures are influenced by surface weather conditions. At z=-1 (50% influence), z=-2 (25%), z<=-3 (0%, annual average only).",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "AVATAR_LEVEL_XP_COEFF",
+    "info": "An integer coefficient for determining the XP thresholds for leveling up in STK and similar",
+    "stype": "int",
+    "value": 400
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "ALWAYS_SHOW_MANA",
+    "info": "If true, always display the mana in the sidebar. Primarily useful for magic-related mods.",
+    "stype": "bool",
+    "value": false
+  },
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "SKILL_TRAINING_SPEED",
+    "info": "A multiplier on the amount of XP you gain from skills. 0 completely disables it (a la skills through kills)",
+    "stype": "float",
+    "value": 1.0
+  }
+]

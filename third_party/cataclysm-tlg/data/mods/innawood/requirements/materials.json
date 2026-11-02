@@ -1,0 +1,90 @@
+[
+  {
+    "id": "fabric_standard",
+    "type": "requirement",
+    "//": "Materials used for crafting or repairing clothing or sheeting, etc.",
+    "components": [
+      [
+        [ "cotton_patch", 8 ],
+        [ "fibercloth_patch", 8 ],
+        [ "cotton_sheet", 1 ],
+        [ "fibercloth_sheet", 1 ],
+        [ "spandex_sheet", 1 ],
+        [ "spandex_patch", 8 ],
+        [ "nylon_patch", 1 ],
+        [ "nylon_sheet", 1 ],
+        [ "leather_patch", 8 ],
+        [ "nomex_patch", 8 ],
+        [ "nomex_sheet", 1 ],
+        [ "neoprene_patch", 8 ],
+        [ "neoprene_sheet", 1 ]
+      ]
+    ]
+  },
+  {
+    "id": "fabric_standard_permeable",
+    "type": "requirement",
+    "//": "Materials used for crafting or repairing woven fabrics",
+    "components": [
+      [
+        [ "cotton_patch", 8 ],
+        [ "fibercloth_patch", 8 ],
+        [ "cotton_sheet", 1 ],
+        [ "fibercloth_sheet", 1 ],
+        [ "spandex_patch", 8 ],
+        [ "spandex_sheet", 1 ],
+        [ "nylon_patch", 8 ],
+        [ "nylon_sheet", 1 ],
+        [ "nomex_patch", 8 ],
+        [ "nomex_sheet", 1 ]
+      ]
+    ]
+  },
+  {
+    "id": "fabric_standard_nostretch",
+    "type": "requirement",
+    "//": "Materials used for crafting or repairing non-form fitting clothing",
+    "components": [
+      [
+        [ "cotton_patch", 8 ],
+        [ "fibercloth_patch", 8 ],
+        [ "cotton_sheet", 1 ],
+        [ "fibercloth_sheet", 1 ],
+        [ "nylon_patch", 8 ],
+        [ "nylon_sheet", 1 ],
+        [ "nomex_patch", 8 ],
+        [ "nomex_sheet", 1 ]
+      ]
+    ]
+  },
+  {
+    "id": "fabric_standard_small",
+    "type": "requirement",
+    "//": "Materials used for crafting or repairing clothing or sheeting, etc.",
+    "components": [
+      [
+        [ "cotton_patch", 1 ],
+        [ "fibercloth_patch", 1 ],
+        [ "spandex_patch", 1 ],
+        [ "nylon_patch", 1 ],
+        [ "leather_patch", 1 ],
+        [ "nomex_patch", 1 ],
+        [ "neoprene_patch", 1 ]
+      ]
+    ]
+  },
+  {
+    "id": "fabric_standard_permeable_small",
+    "type": "requirement",
+    "//": "Materials used for crafting or repairing woven fabrics",
+    "components": [
+      [ [ "cotton_patch", 1 ], [ "fibercloth_patch", 1 ], [ "spandex_patch", 1 ], [ "nylon_patch", 1 ], [ "nomex_patch", 1 ] ]
+    ]
+  },
+  {
+    "id": "fabric_standard_nostretch_small",
+    "type": "requirement",
+    "//": "Materials used for crafting or repairing non-form fitting clothing",
+    "components": [ [ [ "cotton_patch", 1 ], [ "fibercloth_patch", 1 ], [ "nylon_patch", 1 ], [ "nomex_patch", 1 ] ] ]
+  }
+]

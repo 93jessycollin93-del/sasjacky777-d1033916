@@ -1,0 +1,85 @@
+[
+  {
+    "method": "json",
+    "om_terrain": "house_32",
+    "//": "used by lab basements, no dedicated stairs added.",
+    "type": "mapgen",
+    "weight": 100,
+    "object": {
+      "fill_ter": "t_floor",
+      "rows": [
+        ".................``.....",
+        "##======#######..``.....",
+        "#&~~~~~~U#yiiyo..``.....",
+        "#~~~~~~~~+    *````.....",
+        "#~~~~~~~~#    o.......^.",
+        "#~~~~~~~U#L   ###::::###",
+        "#~~~~~~~U#       HHHH T#",
+        "#~~~~~~~q#R       ll  x#",
+        "#~~NN~~qq#R            o",
+        "##########c      HHHH  #",
+        "#Dbd   +               #",
+        "o     T| hhhh      AAAA#",
+        "#     E| ffff     JJJJJ#",
+        "o @@  y| hhhh         1#",
+        "#I@@I R|              5o",
+        "#|||||||              2#",
+        "# TII  +  |||+||Y  7O43#",
+        "#   h  ||||E  R|||+||||#",
+        "o @   R|R      R|t¨¨¨¨B#",
+        "#s@y ER|R yHHHTy|QQ8S8B#",
+        "###o#o#####:::##########",
+        "....................[.^.",
+        "......[.......[.........",
+        "........................"
+      ],
+      "palettes": [ "standard_domestic_palette", "parameterized_linoleum_color_bathroom", "standard_domestic_landscaping_palette" ],
+      "terrain": {
+        "$": "t_privacy_fence",
+        ";": "t_privacy_fencegate_c",
+        "&": "t_gates_mech_control",
+        "=": "t_door_metal_locked",
+        "U": "t_thconc_floor",
+        "q": "t_thconc_floor",
+        "N": "t_thconc_floor",
+        "~": "t_thconc_floor"
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": "house_32_roof",
+    "object": {
+      "fill_ter": "t_shingle_flat_roof",
+      "rows": [
+        "                        ",
+        "---------------         ",
+        "-.............-         ",
+        "-.............-         ",
+        "-.............-         ",
+        "-.............--------5-",
+        "-......................-",
+        "-......................-",
+        "-......................-",
+        "-......................-",
+        "-......................-",
+        "-........N......&......-",
+        "-......................-",
+        "-...............=......-",
+        "-......................-",
+        "-......................-",
+        "-............X.........-",
+        "-......................-",
+        "-......................-",
+        "-......................-",
+        "----------------------5-",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "palettes": [ "roof_palette" ],
+      "terrain": { ".": "t_shingle_flat_roof" }
+    }
+  }
+]

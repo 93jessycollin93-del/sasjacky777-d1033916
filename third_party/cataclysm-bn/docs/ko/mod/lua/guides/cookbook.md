@@ -1,0 +1,747 @@
+# Lua 스크립팅 요리책
+
+Lua API에 익숙해지고 사용 방법을 배우는 데 도움이 되는 코드 조각들입니다.
+이 예제들을 테스트하려면 `` ` `` (백틱) 키를 눌러 게임 내 Lua 콘솔에 코드를 붙여넣으세요.
+
+## 아이템
+
+### 인벤토리에서 장착 및 착용한 모든 아이템 목록 가져오기
+
+```lua
+local you = gapi.get_avatar()
+local items = you:all_items(false)
+
+for _, item in pairs(items) do
+  local status = ""
+  if you:is_wielding(item) then
+    status = "들고 있음: "
+  elseif you:is_wearing(item) then
+    status = "착용 중: "
+  end
+  print(status .. item:tname(1, false, 0))
+end
+```
+
+<details>
+<summary>예제 출력</summary>
+
+```
+들고 있음: 스마트폰
+착용 중: 브래지어
+착용 중: 팬티
+착용 중: 양말
+착용 중: 청바지
+착용 중: 긴팔 셔츠
+착용 중: 운동화
+착용 중: 메신저백
+착용 중: 손목시계
+포켓칼
+성냥갑
+깨끗한 물 (플라스틱 병)
+깨끗한 물
+```
+
+</details>
+
+## 몬스터
+
+### 플레이어 근처에 개 소환하기
+
+```lua
+local avatar = gapi.get_avatar()
+local coords = avatar:get_pos_ms()
+local dog_mtype = MtypeId.new("mon_dog_bcollie")
+local doggy = gapi.place_monster_around(dog_mtype, coords, 5)
+if doggy == nil then
+    gdebug.log_info("개를 스폰할 수 없습니다 :(")
+else
+    gdebug.log_info(string.format("개를 %s 위치에 스폰했습니다", doggy:get_pos_ms()))
+end
+```
+
+## 전투
+
+### 전투 기술 사용 시 세부 정보 출력하기
+
+먼저 함수를 정의합니다.
+
+```lua
+on_creature_performed_technique = function(params)
+  local char = params.char
+  local technique = params.technique
+  local target = params.target
+  local damage_instance = params.damage_instance
+  local move_cost = params.move_cost
+  gdebug.log_info(
+          string.format(
+                  "%s가(이) %s을(를) %s에게 사용했습니다 (DI: %s , MC: %s)",
+                  char:get_name(),
+                  technique.name,
+                  target:get_name(),
+                  damage_instance:total_damage(),
+                  move_cost
+          )
+  )
+end
+```
+
+그런 다음 훅을 함수에 한 번만 연결합니다.
+
+```lua
+game.add_hook("on_creature_performed_technique", function(...) return on_creature_performed_technique(...) end)
+```
+
+<details>
+<summary>예제 출력</summary>
+
+```
+Ramiro Waters가(이) zombie에게 Power Hit을(를) 사용했습니다 (DI: 27.96 , MC: 58)
+```
+
+</details>
+
+## 아이템 내구도
+
+### 아이템 손상도 확인 및 수정하기
+
+```lua
+local you = gapi.get_avatar()
+local wielding = you:all_items(false)[1]
+print(wielding:get_damage())
+print(wielding:get_damage_level(4))
+wielding:mod_damage(2000)
+print(wielding:get_damage_level(4))
+```
+
+## 몬스터
+
+### 몬스터 인벤토리에 아이템 추가하기
+
+```lua
+local target_monster = -- [[ 당신의 몬스터 참조 ]]
+local scraps = gapi.create_item(ItypeId.new("scrap"), 3)
+target_monster:as_monster():add_item(scraps)
+```
+
+### 몬스터 상호작용을 무작위로 막기
+
+Lua 콘솔에 아래 코드를 붙여 넣으면 몬스터 상호작용이 50% 확률로
+실패하게 할 수 있습니다:
+
+```lua
+game.add_hook("on_try_monster_interaction", function(params)
+    local monster = params.monster
+
+    gapi.add_msg(string.format("당신은 %s에게 말을 걸어보려 합니다", monster:get_name()))
+    if math.random(2) == 1 then
+        gapi.add_msg(MsgType.warning, string.format("당신은 %s(와)과 상호작용하기엔 너무 수줍습니다!", monster:get_name()))
+        return false
+    end
+end)
+```
+
+`false` 를 반환하면 기본 펫, 메카, 우호적 몬스터 상호작용이 막히고,
+`true` 를 반환하면 그대로 진행됩니다.
+
+## NPC
+
+### NPC 생성 및 삭제
+
+```lua
+local player = gapi.get_avatar()
+local map = gapi.get_map()
+local player_pos = player:get_pos_ms()
+local place_point = player_pos:xy() + Point.new(0, 2)
+local new_npc = map:place_npc(place_point, "thug")
+
+-- 나중에 NPC를 조용히 삭제할 수 있습니다
+new_npc:erase()
+```
+
+### NPC 조종 전환에 반응하기
+
+플레이어가 동료 NPC 조종으로 전환한 뒤 모드 상태를 갱신해야 할 때
+`on_control_npc` 훅을 사용합니다. 이 훅은 전환 후 실행되므로 현재 조종
+중인 캐릭터는 `gapi.get_avatar()`로 읽습니다.
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_control_npc", function(...) return mod.on_control_npc(...) end)
+
+mod.on_control_npc = function(params)
+    local controlled = gapi.get_avatar()
+
+    gapi.add_msg(MsgType.good, string.format("이제 %s을(를) 조종합니다.", controlled:get_name()))
+end
+```
+
+## 차원
+
+### 현재 차원 확인하기
+
+```lua
+local map = gapi.get_map()
+
+print("game dimension:", gapi.get_current_dimension_id())
+print("map dimension:", map:get_bound_dimension())
+print("is far-away point out of bounds:", map:is_out_of_bounds(coords.tripoint_bub_ms(500, 500, 0)))
+```
+
+### 포켓 디멘션에 들어가고 다시 들어가기
+
+새 포켓 디멘션을 만들 때는 `world_type` 과 두 경계를 모두 넘겨야 합니다.
+선택 사항인 `overmap_terrain` 은 `bounds_min_omt` 기준 z/y/x 테이블입니다.
+그 디멘션이 현재 세션에 로드된 상태라면 `dimension_id` 와 `target_omt` 만으로
+다시 들어갈 수 있습니다.
+
+```lua
+home_dimension = "sky_island_home"
+overworld_pos = gapi.get_avatar():abs_pos()
+home_omt = overworld_pos:to_omt()
+local home_bounds_radius = coords.tripoint_rel_omt(2, 2, 0)
+
+local entered = gapi.place_player_dimension_at({
+  dimension_id = home_dimension,
+  target_omt = home_omt,
+  world_type = "pocket_dimension",
+  bounds_min_omt = home_omt - home_bounds_radius,
+  bounds_max_omt = home_omt + home_bounds_radius,
+  boundary_terrain = "t_pd_border",
+  boundary_overmap_terrain = "pd_border",
+  overmap_terrain = {
+    {
+      { "forest", "field", "forest" },
+      { "field", "field", "field" },
+      { "forest", "field", "forest" },
+    },
+  },
+})
+
+if entered then
+  gapi.add_msg("Pocket home loaded.")
+end
+```
+
+### 오버월드로 돌아가기
+
+들어가기 전에 저장한 `overworld_pos` 를 사용하면 정확한 칸으로 돌아갑니다.
+
+```lua
+gapi.place_player_dimension_at({
+  dimension_id = "",
+  target_ms = overworld_pos,
+})
+```
+
+돌아온 뒤에는 로드된 포켓 디멘션의 ID와 목적지만 지정해서 다시 들어갑니다.
+
+```lua
+local reentered = gapi.place_player_dimension_at({
+  dimension_id = home_dimension,
+  target_omt = home_omt,
+})
+```
+
+### 원정 디멘션 초기화 또는 삭제하기
+
+통합 대상인
+[CBN-Sky-Island 원정 흐름](https://github.com/graysonchao/CBN-Sky-Island/blob/main/teleport.lua)은
+[이슈 #9589](https://github.com/cataclysmbn/Cataclysm-BN/issues/9589)를 해결하려면
+원정 지형을 새로 생성해야 합니다. 원정에 기본 디멘션이 아닌 ID를 지정하고,
+오버월드로 돌아와 모드 상태를 갱신한 다음 생성 데이터를 초기화합니다.
+
+```lua
+local expedition_dimension = "sky_island_expedition"
+local storage = game.mod_storage[game.current_mod]
+local returned = gapi.place_player_dimension_at({
+  dimension_id = "",
+  target_ms = overworld_pos,
+})
+
+if returned then
+  storage.is_away_from_home = false
+  gapi.reset_dimension(expedition_dimension)
+end
+```
+
+기본 오버월드는 제거할 수 없으므로 두 정리 함수 모두 `""`를 거부합니다.
+`reset_dimension`은 재진입에 필요한 디멘션 메타데이터를 유지하지만,
+`delete_dimension`을 사용하면 다음 진입 시 생성 옵션을 모두 다시 넘겨야 합니다.
+정리하기 전에 전체 저장을 수행하므로, 영구 Lua 상태를 먼저 갱신해야 합니다.
+
+## 날씨 훅
+
+### 날씨 변화에 반응하기
+
+먼저 preload.lua에서 훅을 설정합니다:
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_weather_changed", function(...) mod.weather_changed_alert(...) end)
+game.add_hook("on_weather_updated", function(...) mod.weather_report(...) end)
+```
+
+그 다음 main.lua에서 핸들러를 정의합니다:
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+
+-- 날씨가 변할 때 호출됨 (예: 맑음 -> 비)
+mod.weather_changed_alert = function(params)
+    local msg = string.format(
+        "날씨가 %s에서 %s로 변경되었습니다!",
+        params.old_weather_id,
+        params.weather_id
+    )
+    gdebug.log_info(msg)
+end
+
+-- 5분마다 현재 날씨 데이터와 함께 호출됨
+mod.weather_report = function(params)
+    local msg = string.format(
+        "현재 날씨: %s, 온도: %.1f°C, 바람: %d, 습도: %d%%",
+        params.weather_id,
+        params.temperature,
+        params.windspeed,
+        params.humidity
+    )
+    gdebug.log_info(msg)
+end
+```
+
+## 원거리 전투
+
+### 발사된 총과 던져진 아이템에 반응하기
+
+먼저 preload.lua에서 훅을 설정합니다:
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_shoot", function(...) return mod.on_shoot_fun(...) end)
+game.add_hook("on_throw", function(...) return mod.on_throw_fun(...) end)
+```
+
+그 다음 main.lua에서 핸들러를 정의합니다:
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+
+mod.on_shoot_fun = function(params)
+    ---@type Item
+    local gun = params.gun
+    ---@type Item
+    local ammo_item = params.ammo
+    local ammo = ItypeId.NULL_ID()
+    if not ammo_item then
+        ammo = gun:ammo_current()
+    else
+        ammo = ammo_item:get_type()
+    end
+    local shoot_noise = ammo:obj():slot_ammo().loudness
+    gdebug.log_info(string.format("총소리: %d.", shoot_noise))
+end
+
+mod.on_throw_fun = function(params)
+    ---@type Character
+    local thrower = params.thrower
+    ---@type Item
+    local thrown = params.thrown
+    if thrown:is_gun() then
+        gdebug.log_info("어라! 총은 던지는 것이 아닙니다!")
+    end
+end
+```
+
+## 오버맵 쿼리
+
+### 오버맵에서 아이템 찾기 및 조작하기
+
+```lua
+-- 특정 위치의 오버맵에서 모든 아이템 찾기
+local om_pos = OmPos.new(0, 0, 0)
+local items = gapi.overmap_find_items_around(om_pos, 0)
+
+-- 맵에서 아이템을 가져와서 맵이 언로드되어도 Lua에서 유지하기
+local map_pos = MapPos.new(100, 100, 0)
+local item = gapi.get_map():find_item_at(map_pos)
+if item then
+    local detached = gapi.create_detached_item(item)
+    -- 나중에 다시 위치에 부착할 수 있습니다
+    local reattached = gapi.reattach_item(detached, map_pos)
+end
+
+-- 같은 맵 내에서 아이템 이동하기
+local source_pos = MapPos.new(100, 100, 0)
+local dest_pos = MapPos.new(110, 110, 0)
+gapi.get_map():move_item_at(source_pos, dest_pos)
+```
+
+## 사망 훅
+
+### 몬스터 사망 추적하기
+
+```lua
+-- preload.lua에서
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_mon_death", function(...) return mod.on_mon_death(...) end)
+```
+
+```lua
+-- main.lua에서
+local mod = game.mod_runtime[game.current_mod]
+
+mod.on_mon_death = function(params)
+    ---@type Creature
+    local monster = params.creature
+    ---@type Character|nil
+    local killer = params.killer
+
+    local killer_name = killer and killer:get_name() or "알 수 없음"
+    gdebug.log_info(string.format("%s가(이) %s에게 죽었습니다", monster:get_name(), killer_name))
+end
+```
+
+### 캐릭터 사망 추적하기
+
+```lua
+-- preload.lua에서
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_char_death", function(...) return mod.on_char_death(...) end)
+```
+
+```lua
+-- main.lua에서
+local mod = game.mod_runtime[game.current_mod]
+
+mod.on_char_death = function(params)
+    ---@type Character
+    local char = params.char
+    ---@type Character|nil
+    local killer = params.killer
+
+    if char == gapi.get_avatar() then
+        gdebug.log_info("당신이 죽었습니다!")
+    end
+end
+```
+
+## 캐릭터 전투 스탯
+
+### 공격 및 스태미나 비용 확인하기
+
+```lua
+local you = gapi.get_avatar()
+local items = you:all_items(false)
+
+for _, item in pairs(items) do
+    print(
+        item:tname(1, false, 0)
+        .. " { 공격 비용: " .. item:attack_cost()
+        .. ", 스태미나 비용: " .. item:stamina_cost()
+        .. ", 근접 스태미나 비용: " .. you:get_melee_stamina_cost(item)
+        .. " }"
+    )
+end
+
+-- 특수 능력 확인
+print("Uncanny dodge: " .. (you:uncanny_dodge() and "네" or "아니오"))
+```
+
+## 캐릭터 마법
+
+### 새 주문을 배우고 잊기
+
+주문 배우기:
+
+```lua
+local u = gapi.get_avatar()
+local km = u:get_magic()
+local ex_sp = SpellTypeId.new("example_template")
+km:learn_spell(ex_sp, u, true) -- learn forced
+print( km:knows_spell(ex_sp) ) -- check
+```
+
+주문 잊기:
+
+```lua
+local u = gapi.get_avatar()
+local km = u:get_magic()
+local ex_sp = SpellTypeId.new("example_template")
+km:forget_spell(ex_sp)         -- forget
+print( km:knows_spell(ex_sp) ) -- check again
+```
+
+## 동적 아이템 액션
+
+모든 아이템, 바이오닉, 돌연변이 콜백 테이블은 문자열 ID를 키로 사용하며 선택적 콜백 함수 테이블을 받습니다. 모든 콜백은 이름 있는 필드를 가진 단일 `params` 테이블을 받습니다.
+
+### game.iuse_functions
+
+| 콜백      | params 필드           |
+| --------- | --------------------- |
+| `use`     | `user`, `item`, `pos` |
+| `can_use` | `user`, `item`, `pos` |
+
+`use`는 `int`(이동 단위 시간 비용)를 반환합니다. `can_use`는 `bool`을 반환합니다.
+
+```lua
+game.iuse_functions["my_custom_item"] = {
+    use = function(params)
+        local user = params.user
+        local item = params.item
+        gdebug.log_info("사용 중: " .. item:tname(1))
+        return 0  -- 이동 단위로 시간 비용 반환
+    end,
+
+    can_use = function(params)
+        -- 사용을 허용하려면 true, 방지하려면 false 반환
+        return true
+    end
+}
+```
+
+### 아이템 수명 주기 콜백
+
+몇 가지 추가 콜백 테이블을 사용하면 아이템 이벤트에 반응할 수 있습니다.
+
+### game.iwieldable_functions
+
+| 콜백                                     | params 필드                 |
+| ---------------------------------------- | --------------------------- |
+| `on_wield`                               | `user`, `item`, `move_cost` |
+| `on_unwield`, `can_wield`, `can_unwield` | `user`, `item`              |
+
+---
+### game.iwearable_functions
+| 콜백 | params 필드 |
+|-----------|---------------|
+| `on_wear`, `on_takeoff`, `can_wear`, `can_takeoff` | `user`, `item` |
+---
+
+### game.iequippable_functions
+
+| 콜백                    | params 필드                                |
+| ----------------------- | ------------------------------------------ |
+| `on_durability_change`  | `user`, `item`, `old_damage`, `new_damage` |
+| `on_repair`, `on_break` | `user`, `item`                             |
+
+---
+### game.istate_functions
+| 콜백            | params 필드         |
+|--------------------- | --------------------- |
+| `on_tick`, `on_drop` | `user`, `item`, `pos` |
+| `on_pickup`          | `user`, `item`        |
+---
+
+### game.imelee_functions
+
+| 콜백              | params 필드                                 |
+| ----------------- | ------------------------------------------- |
+| `on_melee_attack` | `user`, `target`, `item`                    |
+| `on_hit`          | `user`, `target`, `item`, `damage_instance` |
+| `on_block`        | `user`, `source`, `item`, `damage_blocked`  |
+| `on_miss`         | `user`, `item`                              |
+
+---
+### game.iranged_functions
+| 콜백                             | params 필드                         |
+| ------------------------------------- | ------------------------------------- |
+| `on_fire`                             | `user`, `item`, `target_pos`, `shots` |
+| `on_reload`, `can_fire`, `can_reload` | `user`, `item`                        |
+---
+
+`can_*` 콜백은 `bool`을 반환합니다 — 동작을 막으려면 `false`를 반환하세요.
+
+```lua
+game.iwieldable_functions["cursed_sword"] = {
+    on_wield = function(params)
+        gdebug.log_info(params.user:get_name() .. " draws " .. params.item:tname(1))
+    end,
+    can_unwield = function(params)
+        -- Cursed sword can't be put down
+        return false
+    end
+}
+```
+
+### 바이오닉 콜백
+
+`game.bionic_functions`는 바이오닉 문자열 ID를 키로 사용합니다. 각 콜백은 단일 `params` 테이블을 받습니다.
+
+| 콜백            | params 필드         | 발생 시점            |
+| --------------- | ------------------- | -------------------- |
+| `on_activate`   | `user`, `bionic`    | 바이오닉 활성화 후   |
+| `on_deactivate` | `user`, `bionic`    | 바이오닉 비활성화 후 |
+| `on_installed`  | `user`, `bionic_id` | 바이오닉 설치 후     |
+| `on_removed`    | `user`, `bionic_id` | 바이오닉 제거 후     |
+
+```lua
+game.bionic_functions["bio_laser"] = {
+    on_activate = function(params)
+        gdebug.log_info(params.user:get_name() .. " activated bio_laser")
+    end,
+    on_installed = function(params)
+        gdebug.log_info("Installed: " .. tostring(params.bionic_id))
+    end
+}
+```
+
+### 돌연변이 콜백
+
+`game.mutation_functions`는 특성 문자열 ID를 키로 사용합니다.
+
+| 콜백            | params 필드        | 발생 시점            |
+| --------------- | ------------------ | -------------------- |
+| `on_activate`   | `user`, `trait_id` | 돌연변이 활성화 후   |
+| `on_deactivate` | `user`, `trait_id` | 돌연변이 비활성화 후 |
+| `on_gain`       | `user`, `trait_id` | 돌연변이 획득 후     |
+| `on_loss`       | `user`, `trait_id` | 돌연변이 상실 후     |
+
+```lua
+game.mutation_functions["TRAIT_QUICK"] = {
+    on_gain = function(params)
+        gdebug.log_info(params.user:get_name() .. " gained " .. tostring(params.trait_id))
+    end,
+    on_loss = function(params)
+        gdebug.log_info(params.user:get_name() .. " lost " .. tostring(params.trait_id))
+    end
+}
+```
+
+## 더 많은 전투 훅
+
+### 회피, 방어 및 기술 이벤트에 반응하기
+
+```lua
+-- preload.lua에서
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_creature_dodged", function(...) return mod.on_creature_dodged(...) end)
+game.add_hook("on_creature_blocked", function(...) return mod.on_creature_blocked(...) end)
+game.add_hook("on_creature_performed_technique", function(...) return mod.on_creature_performed_technique(...) end)
+game.add_hook("on_creature_melee_attacked", function(...) return mod.on_creature_melee_attacked(...) end)
+```
+
+```lua
+-- main.lua에서
+local mod = game.mod_runtime[game.current_mod]
+
+mod.on_creature_dodged = function(params)
+    ---@type Character
+    local char = params.char
+    ---@type Creature
+    local source = params.source
+    local difficulty = params.difficulty
+    gdebug.log_info(string.format("%s가(이) %s를(을) 회피했습니다 (DC: %d)", char:get_name(), source:get_name(), difficulty))
+end
+
+mod.on_creature_blocked = function(params)
+    ---@type Character
+    local char = params.char
+    ---@type Creature
+    local source = params.source
+    local bodypart_id = params.bodypart_id
+    local damage_blocked = params.damage_blocked
+    gdebug.log_info(string.format(
+        "%s가(이) %s를(을) %s에서 방어했습니다 (방어함: %.1f 데미지)",
+        char:get_name(),
+        source:get_name(),
+        bodypart_id,
+        damage_blocked
+    ))
+end
+
+mod.on_creature_melee_attacked = function(params)
+    ---@type Character
+    local char = params.char
+    ---@type Creature
+    local target = params.target
+    if params.success then
+        gdebug.log_info(string.format("%s가(이) %s를(을) 맞췄습니다", char:get_name(), target:get_name()))
+    else
+        gdebug.log_info(string.format("%s가(이) %s를(을) 빗맞혔습니다", char:get_name(), target:get_name()))
+    end
+end
+```
+
+## 캐릭터 함정 인식
+
+### 함정 확인 및 기억하기
+
+먼저 함정을 설치합니다:
+
+```lua
+local u = gapi.get_avatar()
+local m = gapi.get_map()
+local pos = u:get_pos_ms()
+local pos4x = pos + Tripoint.new(4, 0, 0)
+-- tr_landmine_buried는 가시성이 20입니다. 찾기 매우 어렵습니다.
+local mine = TrapId.new("tr_landmine_buried"):int_id()
+m:set_trap_at(pos4x, mine)
+print(tostring(u:knows_trap(pos4x)))
+```
+
+그 다음 캐릭터가 함정을 인식하도록 합니다:
+
+```lua
+local u = gapi.get_avatar()
+local m = gapi.get_map()
+local pos = u:get_pos_ms()
+local pos4x = pos + Tripoint.new(4, 0, 0)
+u:add_known_trap(pos4x, m:get_trap_at(pos4x))
+print(tostring(u:knows_trap(pos4x)))
+```
+
+두 번째 스크립트를 실행한 후에는 함정을 밟지 않고도 함정이 설치된 위치를 볼 수 있습니다.
+
+## 시간과 공간
+
+### 태양과 달, 실내와 실외
+
+```lua
+local u_pos = gapi.get_avatar():get_pos_ms()
+local map = gapi.get_map()
+local now = gapi.current_turn()
+
+-- Found the key name from MoonPhase entries
+local moon = ""
+for name, num in pairs(MoonPhase) do
+   if num == now:moon_phase() then
+      moon = name
+   end
+end
+
+print( "Are you outside?: " .. tostring(map:is_outside(u_pos)) )
+print( "Are you sheltered?: " .. tostring(map:is_sheltered(u_pos)) )
+print( "Today moon phase is: " .. moon )
+print( "Sunset time is: " .. now:sunset():to_string_time_of_day() )
+```
+
+## 아이템 타입 정보
+
+### ItypeId를 통한 아이템 타입 속성 쿼리
+
+```lua
+local item_type = ItypeId.new("9mm")
+
+-- 아이템 타입 객체(ItypeRaw) 가져오기
+local itype_raw = item_type:obj()
+
+-- 아이템 타입별 데이터 접근 (예: 탄약)
+if itype_raw:slot_ammo() then
+    local ammo_data = itype_raw:slot_ammo()
+    print("탄약 데미지: " .. ammo_data.damage)
+    print("탄약 범위: " .. ammo_data.range)
+end
+
+-- 컨테이너의 경우
+if itype_raw:slot_container() then
+    local container_data = itype_raw:slot_container()
+    print("수용량: " .. container_data.capacity)
+end
+
+-- 도구의 경우
+if itype_raw:slot_tool() then
+    local tool_data = itype_raw:slot_tool()
+    print("도구 품질: " .. tool_data.quality)
+end
+```

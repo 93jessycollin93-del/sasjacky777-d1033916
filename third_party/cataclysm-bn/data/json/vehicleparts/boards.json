@@ -1,0 +1,560 @@
+[
+  {
+    "abstract": "board",
+    "type": "vehicle_part",
+    "name": { "str": "board" },
+    "item": "sheet_metal",
+    "location": "center",
+    "durability": 120,
+    "description": "A metal wall.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
+    "breaks_into": "ig_vp_sheet_metal",
+    "flags": [ "OPAQUE", "OBSTACLE", "FULL_BOARD", "NO_ROOF_NEEDED" ],
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 1 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "30 m", "qualities": [ { "id": "SAW_M", "level": 1 } ] },
+      "repair": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 5 ], [ "vehicle_repair_small_metal", 3 ] ]
+      }
+    },
+    "damage_reduction": { "all": 28 },
+    "default_color": "#622625",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_rear", "symbol": "B" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "clothboard",
+    "type": "vehicle_part",
+    "name": { "str": "cloth board" },
+    "item": "sheet",
+    "location": "center",
+    "broken_color": "dark_gray",
+    "durability": 15,
+    "description": "A cloth wall.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
+    "folded_volume": "3750 ml",
+    "breaks_into": "ig_vp_cloth",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 0 ] ], "time": "30 m", "using": [ [ "vehicle_nail_install", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_nail_removal", 1 ] ] },
+      "repair": {
+        "skills": [ [ "mechanics", 2 ], [ "tailor", 2 ] ],
+        "time": "30 m",
+        "using": [ [ "sewing_standard", 10 ], [ "fabric_standard", 1 ] ]
+      }
+    },
+    "flags": [ "OPAQUE", "OBSTACLE", "FOLDABLE", "FULL_BOARD", "NO_ROOF_NEEDED", "SHOCK_IMMUNE" ],
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "cloth_halfboard",
+    "copy-from": "clothboard",
+    "type": "vehicle_part",
+    "name": { "str": "cloth quarterpanel" },
+    "description": "A half-height cloth wall.  Keeps zombies outside the vehicle but allows people to see over it.",
+    "proportional": { "durability": 0.8 },
+    "extend": { "flags": [ "HALF_BOARD" ] },
+    "delete": { "flags": [ "OPAQUE", "FULL_BOARD" ] },
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_2", "symbol": "=" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "t" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_2", "symbol": "H" }
+    ]
+  },
+  {
+    "abstract": "halfboard",
+    "copy-from": "board",
+    "type": "vehicle_part",
+    "name": { "str": "quarterpanel" },
+    "description": "A half-height metal wall.  Keeps zombies outside the vehicle but allows people to see over it.",
+    "proportional": { "durability": 0.8 },
+    "extend": { "flags": [ "HALF_BOARD" ] },
+    "delete": { "flags": [ "OPAQUE", "FULL_BOARD" ] },
+    "damage_reduction": { "all": 28 },
+    "shapes": [
+      { "direction": "cover", "symbol": "^" },
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_rear", "symbol": "B" },
+      { "direction": "horizontal_2", "symbol": "=" },
+      { "direction": "horizontal_2_front", "symbol": "=" },
+      { "direction": "horizontal_2_rear", "symbol": "=" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "j" },
+      { "direction": "vertical_2", "symbol": "H" },
+      { "direction": "vertical_2_left", "symbol": "H" },
+      { "direction": "vertical_2_right", "symbol": "H" },
+      { "direction": "vertical_T_right", "symbol": "[" },
+      { "direction": "vertical_T_left", "symbol": "]" }
+    ]
+  },
+  {
+    "abstract": "aluminum_board",
+    "copy-from": "board",
+    "type": "vehicle_part",
+    "name": { "str": "aluminum board" },
+    "item": "aluminium_sheet",
+    "proportional": { "durability": 0.75 },
+    "breaks_into": [ { "item": "material_aluminium_ingot", "count": [ 2, 4 ] } ],
+    "damage_reduction": { "all": 20 },
+    "default_color": "#622625",
+    "looks_like": "board",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_rear", "symbol": "B" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "aluminum_halfboard",
+    "copy-from": "halfboard",
+    "type": "vehicle_part",
+    "name": { "str": "aluminum quarterpanel" },
+    "item": "aluminium_sheet",
+    "proportional": { "durability": 0.75 },
+    "breaks_into": [ { "item": "material_aluminium_ingot", "count": [ 2, 4 ] } ],
+    "damage_reduction": { "all": 20 },
+    "default_color": "#622625",
+    "looks_like": "halfboard",
+    "shapes": [
+      { "direction": "cover", "symbol": "^" },
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_rear", "symbol": "B" },
+      { "direction": "horizontal_2", "symbol": "=" },
+      { "direction": "horizontal_2_front", "symbol": "=" },
+      { "direction": "horizontal_2_rear", "symbol": "=" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "t" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "j" },
+      { "direction": "vertical_2", "symbol": "H" },
+      { "direction": "vertical_2_left", "symbol": "H" },
+      { "direction": "vertical_2_right", "symbol": "H" },
+      { "direction": "vertical_T_right", "symbol": "[" },
+      { "direction": "vertical_T_left", "symbol": "]" }
+    ]
+  },
+  {
+    "abstract": "aluminum_stowboard",
+    "copy-from": "stowboard",
+    "type": "vehicle_part",
+    "name": { "str": "aluminum stow board" },
+    "item": "aluminium_sheet",
+    "proportional": { "durability": 0.75 },
+    "breaks_into": [ { "item": "material_aluminium_ingot", "count": [ 2, 4 ] } ],
+    "damage_reduction": { "all": 20 },
+    "default_color": "#622625",
+    "looks_like": "stowboard",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "carbon_board",
+    "type": "vehicle_part",
+    "name": { "str": "carbon board" },
+    "item": "sheet_carbon",
+    "location": "center",
+    "durability": 160,
+    "description": "A carbon fiber wall.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
+    "breaks_into": "ig_vp_carbon",
+    "flags": [ "OPAQUE", "OBSTACLE", "FULL_BOARD", "NO_ROOF_NEEDED", "SHOCK_RESISTANT" ],
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 1 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "30 m", "qualities": [ { "id": "SAW_M", "level": 1 } ] },
+      "repair": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 5 ], [ "vehicle_repair_carbon", 3 ] ]
+      }
+    },
+    "damage_reduction": { "all": 28 },
+    "default_color": "#622625",
+    "looks_like": "board",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_rear", "symbol": "B" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "carbon_halfboard",
+    "copy-from": "carbon_board",
+    "type": "vehicle_part",
+    "name": { "str": "carbon quarterpanel" },
+    "description": "A half-height carbon fiber wall.  Keeps zombies outside the vehicle but allows people to see over it.",
+    "proportional": { "durability": 0.8 },
+    "extend": { "flags": [ "HALF_BOARD" ] },
+    "delete": { "flags": [ "OPAQUE", "FULL_BOARD" ] },
+    "damage_reduction": { "all": 28 },
+    "default_color": "#622625",
+    "looks_like": "halfboard",
+    "shapes": [
+      { "direction": "cover", "symbol": "^" },
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_rear", "symbol": "B" },
+      { "direction": "horizontal_2", "symbol": "=" },
+      { "direction": "horizontal_2_front", "symbol": "=" },
+      { "direction": "horizontal_2_rear", "symbol": "=" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "t" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "j" },
+      { "direction": "vertical_2", "symbol": "H" },
+      { "direction": "vertical_2_left", "symbol": "H" },
+      { "direction": "vertical_2_right", "symbol": "H" },
+      { "direction": "vertical_T_right", "symbol": "[" },
+      { "direction": "vertical_T_left", "symbol": "]" }
+    ]
+  },
+  {
+    "abstract": "carbon_stowboard",
+    "type": "vehicle_part",
+    "name": { "str": "carbon fiber stow board" },
+    "item": "sheet_carbon",
+    "location": "center",
+    "color": "white",
+    "broken_symbol": "#",
+    "broken_color": "light_gray",
+    "durability": 120,
+    "description": "A carbon fiber wall with a storage locker.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
+    "size": "75000 ml",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "qualities": [ { "id": "SAW_M", "level": 1 } ] },
+      "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "60 m", "using": [ [ "vehicle_repair_carbon", 3 ] ] }
+    },
+    "flags": [ "OBSTACLE", "OPAQUE", "CARGO", "COVERED", "FULL_BOARD", "NO_ROOF_NEEDED", "LOCKABLE_CARGO", "SHOCK_RESISTANT" ],
+    "damage_reduction": { "all": 28 },
+    "default_color": "#622625",
+    "looks_like": "stowboard",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "stowboard",
+    "type": "vehicle_part",
+    "name": { "str": "stow board" },
+    "item": "sheet_metal",
+    "location": "center",
+    "color": "white",
+    "broken_symbol": "#",
+    "broken_color": "light_gray",
+    "durability": 80,
+    "description": "A metal wall with a storage locker.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
+    "size": "62500 ml",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "qualities": [ { "id": "SAW_M", "level": 1 } ] },
+      "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ], [ "steel_tiny", 1 ] ] }
+    },
+    "flags": [ "OBSTACLE", "OPAQUE", "CARGO", "COVERED", "FULL_BOARD", "NO_ROOF_NEEDED", "LOCKABLE_CARGO" ],
+    "damage_reduction": { "all": 28 },
+    "default_color": "#622625",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "hdstowboard",
+    "copy-from": "stowboard",
+    "type": "vehicle_part",
+    "name": { "str": "heavy duty stow board" },
+    "item": "steel_plate",
+    "color": "brown",
+    "broken_color": "dark_gray",
+    "proportional": { "durability": 4.15, "size": 0.76 },
+    "flags": [ "OBSTACLE", "OPAQUE", "CARGO", "COVERED", "FULL_BOARD", "NO_ROOF_NEEDED", "LOCKABLE_CARGO" ],
+    "damage_reduction": { "all": 72, "cut": 80, "stab": 80 },
+    "default_color": "#3f4535",
+    "looks_like": "stowboard",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "hdboard",
+    "type": "vehicle_part",
+    "name": { "str": "heavy duty board" },
+    "item": "steel_plate",
+    "location": "center",
+    "color": "dark_gray",
+    "durability": 450,
+    "description": "A strong metal wall.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
+    "breaks_into": "ig_vp_steel_plate",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
+      "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ], [ "steel_tiny", 1 ] ] }
+    },
+    "flags": [ "OPAQUE", "OBSTACLE", "FULL_BOARD", "NO_ROOF_NEEDED" ],
+    "damage_reduction": { "all": 75, "cut": 80, "stab": 80 },
+    "default_color": "#3f4535",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "hdhalfboard",
+    "copy-from": "hdboard",
+    "type": "vehicle_part",
+    "name": { "str": "heavy duty quarterpanel" },
+    "description": "A half-height strong metal wall.  Keeps zombies outside the vehicle but allows people to see over it.",
+    "proportional": { "durability": 0.8 },
+    "extend": { "flags": [ "HALF_BOARD" ] },
+    "delete": { "flags": [ "OPAQUE", "FULL_BOARD" ] },
+    "damage_reduction": { "all": 75, "cut": 80, "stab": 80 },
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_2", "symbol": "=" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "t" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_2", "symbol": "H" }
+    ]
+  },
+  {
+    "copy-from": "hdstowboard",
+    "abstract": "hdstowboard_superalloy",
+    "type": "vehicle_part",
+    "name": { "str": "superalloy stow board" },
+    "item": "alloy_plate",
+    "breaks_into": "ig_vp_alloy",
+    "requirements": {
+      "repair": {
+        "skills": [ [ "mechanics", 3 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 5 ], [ "vehicle_repair_superalloy", 1 ] ]
+      }
+    },
+    "extend": { "flags": [ "SHOCK_IMMUNE" ] },
+    "looks_like": "hdstowboard",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "copy-from": "hdboard",
+    "abstract": "hdboard_superalloy",
+    "type": "vehicle_part",
+    "name": { "str": "superalloy board" },
+    "item": "alloy_plate",
+    "breaks_into": "ig_vp_alloy",
+    "requirements": {
+      "repair": {
+        "skills": [ [ "mechanics", 3 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 5 ], [ "vehicle_repair_superalloy", 1 ] ]
+      }
+    },
+    "extend": { "flags": [ "SHOCK_IMMUNE" ] },
+    "looks_like": "hdboard",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "copy-from": "hdhalfboard",
+    "abstract": "hdhalfboard_superalloy",
+    "type": "vehicle_part",
+    "name": { "str": "superalloy quarterpanel" },
+    "item": "alloy_plate",
+    "breaks_into": "ig_vp_alloy",
+    "requirements": {
+      "repair": {
+        "skills": [ [ "mechanics", 3 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 5 ], [ "vehicle_repair_superalloy", 1 ] ]
+      }
+    },
+    "extend": { "flags": [ "SHOCK_IMMUNE" ] },
+    "looks_like": "hdhalfboard",
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_2", "symbol": "=" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "t" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_2", "symbol": "H" }
+    ]
+  },
+  {
+    "abstract": "woodboard",
+    "type": "vehicle_part",
+    "name": { "str": "wooden board" },
+    "item": "wood_plate",
+    "location": "center",
+    "color": "brown",
+    "broken_color": "brown",
+    "durability": 100,
+    "description": "A wooden wall.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
+    "breaks_into": "ig_vp_wood_plate",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 1 ] ], "time": "30 m", "using": [ [ "vehicle_nail_install", 10 ] ] },
+      "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "15 m", "using": [ [ "vehicle_nail_removal", 1 ] ] },
+      "repair": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "30 m",
+        "using": [ [ "nail_any_adhesive", 2 ], [ "wood_structural_small", 1 ] ]
+      }
+    },
+    "flags": [ "OPAQUE", "OBSTACLE", "FULL_BOARD", "NO_ROOF_NEEDED" ],
+    "damage_reduction": { "all": 16, "cut": 8, "stab": 8 },
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" }
+    ]
+  },
+  {
+    "abstract": "woodhalfboard",
+    "copy-from": "woodboard",
+    "type": "vehicle_part",
+    "name": { "str": "wooden quarterpanel" },
+    "description": "A half-height wooden wall.  Keeps zombies outside the vehicle but allows people to see over it.",
+    "proportional": { "durability": 0.8 },
+    "extend": { "flags": [ "HALF_BOARD" ] },
+    "delete": { "flags": [ "OPAQUE", "FULL_BOARD" ] },
+    "damage_reduction": { "all": 16, "cut": 8, "stab": 8 },
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_2", "symbol": "=" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "t" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_2", "symbol": "H" }
+    ]
+  },
+  {
+    "abstract": "xlhalfboard",
+    "type": "vehicle_part",
+    "name": { "str": "extra light quarterpanel" },
+    "item": "pipe",
+    "location": "center",
+    "looks_like": "halfboard",
+    "durability": 96,
+    "description": "A half-height thin metal wall.  Keeps zombies outside the vehicle but allows people to see over it.",
+    "breaks_into": [ { "item": "pipe", "prob": 50 } ],
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "qualities": [ { "id": "SAW_M", "level": 1 } ] },
+      "repair": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 5 ], [ "vehicle_repair_small_metal", 4 ] ]
+      }
+    },
+    "flags": [ "OBSTACLE", "HALF_BOARD", "NO_ROOF_NEEDED" ],
+    "damage_reduction": { "all": 8 },
+    "shapes": [
+      { "direction": "horizontal", "symbol": "h" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_rear", "symbol": "B" },
+      { "direction": "horizontal_2", "symbol": "=" },
+      { "direction": "horizontal_2_front", "symbol": "=" },
+      { "direction": "horizontal_2_rear", "symbol": "=" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "vertical", "symbol": "j" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "j" },
+      { "direction": "vertical_2", "symbol": "H" }
+    ]
+  }
+]

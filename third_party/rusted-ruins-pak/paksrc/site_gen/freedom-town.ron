@@ -1,0 +1,108 @@
+(
+    object_type: "site_gen",
+    id: "freedom-town",
+    
+    site_gen: (
+        kind: Town,
+        site_symbol: "rm-town",
+        map_template_id: [
+            "freedom-town-1",
+        ],
+        default_faction_id: "free_frontier",
+        npcs: [
+            (
+                id: Site(0),
+                pos: (22, 10),
+                floor: 0,
+                chara_template_id: "guild-informant",
+                talk_script: "guild-informant",
+            ),
+            (
+                id: Site(1),
+                pos: (17, 3),
+                floor: 0,
+                chara_template_id: "town-girl-01",
+                talk_script: "hello",
+            ),
+            (
+                id: Site(2),
+                pos: (7, 23),
+                floor: 0,
+                chara_template_id: "u-captain",
+                talk_script: "u-captain",
+            ),
+            (
+                id: Site(3),
+                pos: (12, 11),
+                floor: 0,
+                chara_template_id: "shopkeeper-m-01",
+                talk_script: "shop",
+            ),
+            (
+                id: Site(4),
+                pos: (30, 18),
+                floor: 0,
+                chara_template_id: "smith-m-01",
+                talk_script: "smith",
+            ),
+            (
+                id: Unique("prof-mayer"),
+                pos: (36, 3),
+                floor: 0,
+                chara_template_id: "u-prof-mayer",
+                talk_script: "prof-mayer",
+            ),
+            (
+                id: Site(6),
+                pos: (25, 12),
+                floor: 0,
+                chara_template_id: "shopkeeper-m-01",
+                talk_script: "shop",
+            ),
+            (
+                id: Site(7),
+                pos: (3, 3),
+                floor: 0,
+                chara_template_id: "shopkeeper-m-01",
+                talk_script: "freedom-town-caravan",
+            ),
+            (
+                id: Site(100),
+                pos: (38, 11),
+                floor: 0,
+                chara_template_id: "drunkard-01",
+                talk_script: "freedom-town-drunkard",
+            ),
+        ],
+        shops: {
+            Site(3): (
+                item_selector: "kind/food"
+            ),
+            Site(4): (
+                shop_kind: "equipment",
+            ),
+            Site(6): (
+                item_selector: "skill-cartridge",
+            ),
+        },
+        quests: [
+            ItemDelivering(
+                text_id: "construction-material-procurement",
+                deadline: 5,
+                reward: (
+                    money: 800,
+                ),
+                items: [("wood", 5)],
+            ),
+            ItemDelivering(
+                text_id: "weapon-material-procurement",
+                deadline: 5,
+                reward: (
+                    money: 1000,
+                ),
+                items: [("iron-plate", 5)],
+            ),
+        ],
+        delivery_chest: (0, (19, 12), "delivery-chest")
+    ),
+)

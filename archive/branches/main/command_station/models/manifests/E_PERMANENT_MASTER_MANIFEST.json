@@ -1,0 +1,1 @@
+{"manifest_version":"2.0.0","workstation_config":{"storage_drives":{"lm_studio_models":"C:\\Users\\Eru\\AI_ Workspace\\models\\LM_Studio\\Models"}},"model_families":[{"model_family":"QWYTHOS-9B","formats":["F16","Q4_K_M"]}],"hybrid_routing_config":{"cpu_threads":32}}

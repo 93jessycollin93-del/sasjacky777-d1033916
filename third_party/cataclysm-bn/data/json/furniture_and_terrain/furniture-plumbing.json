@@ -1,0 +1,463 @@
+[
+  {
+    "type": "furniture",
+    "id": "f_bathtub",
+    "name": "bathtub",
+    "symbol": "~",
+    "description": "You could lay in and take a soothing bath, if there were running water.  The plug is intact, so you could use it to store liquids.",
+    "color": "white",
+    "move_cost_mod": 2,
+    "coverage": 30,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "MOUNTABLE", "LIQUIDCONT" ],
+    "max_volume": "200 L",
+    "examine_action": "lua:PLUMBING_BATHTUB_EXAMINE",
+    "keg_capacity": 800,
+    "fluid_grid": { "role": "fixture", "allow_input": false, "allow_output": true, "allowed_liquids": [ "water", "water_clean" ] },
+    "bash": {
+      "str_min": 12,
+      "str_max": 50,
+      "sound": "porcelain breaking!",
+      "sound_fail": "whunk!",
+      "items": [
+        { "item": "cu_pipe", "prob": 50 },
+        { "item": "water_faucet", "prob": 50 },
+        { "item": "ceramic_shard", "count": [ 6, 18 ] }
+      ],
+      "//": "ceramic obstacles have destroy_threshold equal to str_min since more fragile",
+      "ranged": { "reduction": [ 12, 12 ], "destroy_threshold": 12, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_shower",
+    "name": "shower",
+    "symbol": "~",
+    "description": "You would be able to clean yourself if water was running.  Soap, detergent, or bleach could help with a thorough wash.",
+    "color": "white",
+    "move_cost_mod": 0,
+    "coverage": 35,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR" ],
+    "examine_action": "lua:PLUMBING_SHOWER_EXAMINE",
+    "fluid_grid": { "role": "fixture", "allow_input": false, "allow_output": true, "allowed_liquids": [ "water", "water_clean" ] },
+    "bash": {
+      "str_min": 6,
+      "str_max": 30,
+      "sound": "porcelain breaking!",
+      "sound_fail": "whunk!",
+      "sound_vol": "100 dB",
+      "sound_fail_vol": "80 dB",
+      "items": [
+        { "item": "cu_pipe", "count": [ 0, 2 ] },
+        { "item": "scrap_copper", "count": [ 0, 2 ] },
+        { "item": "ceramic_shard", "count": [ 2, 6 ] },
+        { "item": "glass_shard", "count": [ 1, 2 ] }
+      ],
+      "//": "ceramic obstacles have destroy_threshold equal to str_min since more fragile",
+      "ranged": { "reduction": [ 6, 6 ], "destroy_threshold": 6, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_sink",
+    "name": "sink",
+    "symbol": "&",
+    "description": "A basin with a faucet, set in a countertop. If you can get the plumbing working, it might work as a water source.",
+    "color": "white",
+    "move_cost_mod": 2,
+    "coverage": 45,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "CONTAINER", "PLACE_ITEM", "MOUNTABLE" ],
+    "examine_action": "fluid_grid_fixture",
+    "fluid_grid": { "role": "fixture", "allow_input": false, "allow_output": true, "allowed_liquids": [ "water", "water_clean" ] },
+    "connects_to": "COUNTER",
+    "bash": {
+      "str_min": 8,
+      "str_max": 30,
+      "sound": "porcelain breaking!",
+      "sound_fail": "whunk!",
+      "items": [
+        { "item": "cu_pipe", "prob": 50 },
+        { "item": "water_faucet", "prob": 50 },
+        { "item": "ceramic_shard", "count": [ 2, 8 ] }
+      ],
+      "//": "ceramic obstacles have destroy_threshold equal to str_min since more fragile",
+      "ranged": { "reduction": [ 8, 8 ], "destroy_threshold": 8, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_toilet",
+    "name": "toilet",
+    "symbol": "&",
+    "color": "white",
+    "description": "A porcelain throne.  Emergency water source, from the tank, and provider of relief.",
+    "move_cost_mod": 2,
+    "coverage": 30,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "MOUNTABLE", "LIQUIDCONT" ],
+    "examine_action": "toilet",
+    "bash": {
+      "str_min": 8,
+      "str_max": 30,
+      "sound": "porcelain breaking!",
+      "sound_fail": "whunk!",
+      "items": [ { "item": "cu_pipe", "prob": 50 }, { "item": "ceramic_shard", "count": [ 2, 8 ] }, { "item": "wax", "count": 1 } ],
+      "//": "ceramic obstacles have destroy_threshold equal to str_min since more fragile",
+      "ranged": { "reduction": [ 8, 8 ], "destroy_threshold": 8, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_debug_pump",
+    "name": "debug beer pump",
+    "symbol": "&",
+    "color": "white",
+    "looks_like": "f_still",
+    "description": "Time to get infinitely drunk",
+    "move_cost_mod": 2,
+    "coverage": 30,
+    "required_str": -1,
+    "provides_liquids": "beer",
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD" ],
+    "examine_action": "liquid_source",
+    "bash": {
+      "str_min": 8,
+      "str_max": 30,
+      "sound": "reality shattering!",
+      "sound_fail": "whunk!",
+      "items": [ { "item": "cu_pipe", "prob": 50 }, { "item": "sheet_metal", "count": [ 2, 8 ] }, { "item": "pipe", "count": 1 } ],
+      "ranged": { "reduction": [ 8, 8 ], "destroy_threshold": 30, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_water_heater",
+    "name": "water heater",
+    "looks_like": "f_standing_tank",
+    "description": "An insulated metal tank that holds water, kept to a temperature by a small gas flame.",
+    "symbol": "0",
+    "bgcolor": "white",
+    "move_cost_mod": -1,
+    "coverage": 55,
+    "required_str": -1,
+    "flags": [ "CONTAINER", "PLACE_ITEM", "LIQUIDCONT", "NOITEM", "SEALED", "ADV_DECONSTRUCT" ],
+    "examine_action": "keg",
+    "keg_capacity": 240,
+    "deconstruct": {
+      "items": [
+        { "item": "pipe", "count": 1 },
+        { "item": "scrap", "count": [ 2, 6 ] },
+        { "item": "steel_chunk", "count": [ 1, 3 ] },
+        { "item": "sheet_metal", "count": [ 2, 6 ] },
+        { "item": "cable", "charges": [ 1, 15 ] },
+        { "item": "cu_pipe", "count": [ 2, 5 ] },
+        { "item": "hose", "count": [ 0, 2 ] },
+        { "item": "pilot_light", "count": 1 },
+        { "item": "thermostat", "count": 1 },
+        { "item": "water_faucet", "count": 1 },
+        { "item": "metal_tank", "count": 1 }
+      ]
+    },
+    "bash": {
+      "str_min": 18,
+      "str_max": 50,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "items": [
+        { "item": "scrap", "count": [ 2, 7 ] },
+        { "item": "steel_chunk", "count": [ 0, 3 ] },
+        { "item": "sheet_metal", "count": [ 2, 6 ] },
+        { "item": "cable", "charges": [ 1, 15 ] },
+        { "item": "hose", "count": [ 0, 2 ] },
+        { "item": "cu_pipe", "count": [ 1, 4 ] },
+        { "item": "scrap_copper", "count": [ 0, 2 ] },
+        { "item": "water_faucet", "count": [ 0, 1 ] }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 9, 18 ], "destroy_threshold": 50, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_water_dispenser",
+    "copy-from": "f_water_heater",
+    "name": "water dispenser",
+    "looks_like": "t_water_dispenser",
+    "description": "A machine with several taps that dispenses clean water.  Also known as a water cooler, it's still useful so long as the tank is full.",
+    "symbol": "W",
+    "color": "light_blue",
+    "keg_capacity": 75,
+    "bash": {
+      "str_min": 15,
+      "str_max": 80,
+      "sound": "whack!",
+      "sound_fail": "thunk.",
+      "items": [
+        { "item": "sheet_metal", "count": 1 },
+        { "item": "sheet_metal_small", "count": [ 0, 10 ] },
+        { "item": "steel_chunk", "count": [ 0, 2 ] },
+        { "item": "scrap", "count": [ 3, 6 ] },
+        { "item": "pipe", "count": [ 0, 2 ] },
+        { "item": "hose", "count": 1 },
+        { "item": "water_faucet", "count": 1 }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 8, 15 ], "destroy_threshold": 80, "block_unaimed_chance": "50%" }
+    },
+    "deconstruct": {
+      "items": [
+        { "item": "sheet_metal", "count": 2 },
+        { "item": "steel_chunk", "count": 2 },
+        { "item": "scrap", "count": 6 },
+        { "item": "pipe", "count": 2 },
+        { "item": "cable", "charges": 10 },
+        { "item": "hose", "count": 1 },
+        { "item": "water_faucet", "count": 1 }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "abstract": "f_water_purifier_base",
+    "looks_like": "f_water_heater",
+    "name": "abstract water purifier",
+    "description": "Abstract furniture.  If you see this, something went wrong.",
+    "symbol": "W",
+    "bgcolor": "blue",
+    "move_cost_mod": -1,
+    "coverage": 50,
+    "required_str": -1,
+    "deconstruct": {
+      "items": [
+        { "item": "scrap", "count": [ 2, 6 ] },
+        { "item": "steel_chunk", "count": [ 1, 3 ] },
+        { "item": "sheet_metal_small", "count": [ 0, 4 ] },
+        { "item": "sheet_metal", "count": [ 2, 4 ] },
+        { "item": "cable", "charges": [ 1, 15 ] },
+        { "item": "hose", "count": [ 3, 6 ] },
+        { "item": "motor_small", "count": 1 },
+        { "item": "solder_wire", "charges": [ 1, 15 ] },
+        { "item": "cu_pipe", "count": [ 2, 5 ] }
+      ]
+    },
+    "bash": {
+      "str_min": 15,
+      "str_max": 50,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "items": [
+        { "item": "scrap", "count": [ 2, 7 ] },
+        { "item": "steel_chunk", "count": [ 0, 3 ] },
+        { "item": "sheet_metal_small", "count": [ 8, 12 ] },
+        { "item": "sheet_metal", "count": [ 1, 2 ] },
+        { "item": "cable", "charges": [ 1, 15 ] },
+        { "item": "hose", "count": [ 0, 1 ] },
+        { "item": "e_scrap", "count": [ 5, 10 ] },
+        { "item": "plastic_chunk", "count": [ 0, 2 ] },
+        { "item": "cu_pipe", "count": [ 1, 3 ] }
+      ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 8, 15 ], "destroy_threshold": 50, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_water_purifier_off",
+    "copy-from": "f_water_purifier_base",
+    "looks_like": "f_water_purifier",
+    "name": "water purifier (off)",
+    "description": "This removes ions dissolved in the water, making it pretty clean, if you care about that kind of thing.  It is hooked into a fluid grid and switched off.",
+    "symbol": "W",
+    "bgcolor": "blue",
+    "examine_action": "transform",
+    "transforms_into": "f_water_purifier",
+    "prompt": "Switch on the water purifier.",
+    "message": "You switch on the water purifier."
+  },
+  {
+    "type": "furniture",
+    "id": "f_water_purifier",
+    "copy-from": "f_water_purifier_base",
+    "looks_like": "f_water_purifier",
+    "name": "water purifier",
+    "description": "This removes ions dissolved in the water, making it pretty clean, if you care about that kind of thing.  It is hooked into a fluid grid.",
+    "symbol": "W",
+    "bgcolor": "blue",
+    "examine_action": "transform",
+    "transforms_into": "f_water_purifier_off",
+    "prompt": "Switch off the water purifier.",
+    "message": "You switch off the water purifier.",
+    "active": [
+      "charge_watcher",
+      { "min_power": 30, "transform": { "id": "f_water_purifier_on", "msg": "The water purifier starts up." } }
+    ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_water_purifier_on",
+    "copy-from": "f_water_purifier_base",
+    "looks_like": "f_water_purifier",
+    "name": "water purifier (on)",
+    "description": "This removes ions dissolved in the water, making it pretty clean, if you care about that kind of thing.  It is hooked into a fluid grid and switched on.",
+    "symbol": "W",
+    "bgcolor": "blue",
+    "examine_action": "transform",
+    "transforms_into": "f_water_purifier_off",
+    "prompt": "Switch off the water purifier.",
+    "message": "You switch off the water purifier.",
+    "fluid_grid": {
+      "role": "transformer",
+      "allow_input": false,
+      "allow_output": false,
+      "allowed_liquids": [ "water", "water_clean" ],
+      "transformer": {
+        "tick_interval": "10 m",
+        "transforms": [
+          { "inputs": [ { "liquid": "water", "amount": "1 L" } ], "outputs": [ { "liquid": "water_clean", "amount": "1 L" } ] }
+        ]
+      }
+    },
+    "active": [
+      "steady_consumer",
+      {
+        "power": 40,
+        "consume_every": "600 s",
+        "transform": { "id": "f_water_purifier", "msg": "The water purifier shuts down." }
+      }
+    ]
+  },
+  {
+    "type": "furniture",
+    "abstract": "f_electric_well_pump_base",
+    "looks_like": "f_debug_pump",
+    "name": "abstract electric well pump",
+    "description": "Abstract furniture.  If you see this, something went wrong.",
+    "symbol": "&",
+    "color": "light_gray",
+    "move_cost_mod": 6,
+    "coverage": 40,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "THIN_OBSTACLE" ],
+    "deconstruct": {
+      "items": [
+        { "item": "well_pump", "count": 1 },
+        { "item": "pipe", "count": 6 },
+        { "item": "motor_small", "count": 1 },
+        { "item": "power_supply", "count": 1 },
+        { "item": "cable", "charges": [ 5, 10 ] }
+      ]
+    },
+    "bash": {
+      "str_min": 15,
+      "str_max": 80,
+      "sound": "whack!",
+      "sound_fail": "thunk.",
+      "items": [
+        { "item": "steel_chunk", "count": [ 0, 2 ] },
+        { "item": "scrap", "count": [ 3, 6 ] },
+        { "item": "pipe", "count": [ 0, 2 ] }
+      ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_electric_well_pump_off",
+    "copy-from": "f_electric_well_pump_base",
+    "looks_like": "f_debug_pump",
+    "name": "electric well pump (off)",
+    "description": "An electric well pump connected to a fluid grid.  It is switched off.",
+    "symbol": "&",
+    "color": "light_gray",
+    "examine_action": "transform",
+    "transforms_into": "f_electric_well_pump",
+    "prompt": "Switch on the electric well pump.",
+    "message": "You switch on the electric well pump."
+  },
+  {
+    "type": "furniture",
+    "id": "f_electric_well_pump",
+    "copy-from": "f_electric_well_pump_base",
+    "looks_like": "f_debug_pump",
+    "name": "electric well pump",
+    "description": "An electric well pump connected to a fluid grid.  It has no power.",
+    "symbol": "&",
+    "color": "light_gray",
+    "examine_action": "transform",
+    "transforms_into": "f_electric_well_pump_off",
+    "prompt": "Switch off the electric well pump.",
+    "message": "You switch off the electric well pump.",
+    "active": [
+      "charge_watcher",
+      {
+        "min_power": 30,
+        "transform": { "id": "f_electric_well_pump_on", "msg": "The electric well pump starts up." }
+      }
+    ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_electric_well_pump_on",
+    "copy-from": "f_electric_well_pump_base",
+    "looks_like": "f_debug_pump",
+    "name": "electric well pump (on)",
+    "description": "An electric well pump connected to a fluid grid.  It is switched on.",
+    "symbol": "&",
+    "color": "light_gray",
+    "examine_action": "transform",
+    "transforms_into": "f_electric_well_pump_off",
+    "prompt": "Switch off the electric well pump.",
+    "message": "You switch off the electric well pump.",
+    "fluid_grid": {
+      "role": "transformer",
+      "allow_input": false,
+      "allow_output": false,
+      "allowed_liquids": [ "water" ],
+      "transformer": { "tick_interval": "10 m", "transforms": [ { "outputs": [ { "liquid": "water", "amount": "5 L" } ] } ] }
+    },
+    "active": [
+      "steady_consumer",
+      {
+        "power": 30,
+        "consume_every": "600 s",
+        "transform": { "id": "f_electric_well_pump", "msg": "The electric well pump shuts down." }
+      }
+    ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_rain_collector_plumbed",
+    "name": "rain collector (plumbed)",
+    "description": "A plumbed rain collector that feeds a fluid grid when it is raining.",
+    "symbol": "U",
+    "color": "light_blue",
+    "looks_like": "tr_metal_funnel",
+    "move_cost_mod": -1,
+    "coverage": 30,
+    "required_str": 6,
+    "flags": [ "TRANSPARENT", "PLACE_ITEM", "BLOCKSDOOR" ],
+    "fluid_grid": {
+      "role": "rain_collector",
+      "allow_input": false,
+      "allow_output": false,
+      "allowed_liquids": [ "water" ],
+      "transformer": { "tick_interval": "10 m", "collector_area_m2": 1.0 }
+    },
+    "deconstruct": {
+      "items": [
+        { "item": "pipe", "count": 4 },
+        { "item": "sheet_metal", "count": 2 },
+        { "item": "scrap", "count": 8 },
+        { "item": "water_faucet", "count": 1 }
+      ]
+    },
+    "bash": {
+      "str_min": 15,
+      "str_max": 80,
+      "sound": "whack!",
+      "sound_fail": "thunk.",
+      "items": [ { "item": "scrap", "count": [ 8, 12 ] }, { "item": "pipe", "count": [ 0, 2 ] } ]
+    }
+  }
+]

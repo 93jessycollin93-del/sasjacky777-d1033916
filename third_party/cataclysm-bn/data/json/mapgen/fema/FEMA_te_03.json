@@ -1,0 +1,52 @@
+[
+  {
+    "type": "mapgen",
+    "om_terrain": "FEMA_te",
+    "//": "top edge",
+    "weight": 200,
+    "method": "json",
+    "object": {
+      "fill_ter": "t_floor",
+      "rows": [
+        "........................",
+        "ffffffffffffffffffffffff",
+        "........................",
+        "...NNNNNNNNNNNNNNNNNNNN.",
+        "..--------------------N.",
+        ".N|~xxx~f~lllllllllll|N.",
+        ".N|~xxx~f~~~~~~~~~~~~|N.",
+        "..|~xxx~f~XX~~XX~~XX~|N.",
+        "..|~z~~~f~~~~~~~~~~~~|N.",
+        ".N|~~~~~ffffffffFFfff|N.",
+        ".N|~~~~~~~~~~~~~~~~~~|N.",
+        ".N|TTc~~~z~~~~~~~~D~~|..",
+        ".N|TT~~z~~~~~~~~z~Dc~|..",
+        "..|6~~~~~~~~~~~~~~D~~|..",
+        "..--------9[]---------..",
+        "........Z.....Z.........",
+        "........................",
+        "..====.====..=*==.====..",
+        "..=,,=.=,,*..=,,=.=,,*..",
+        "..=,,=.=,,=..=,,=.=,,=..",
+        "..==*=.====..====.====..",
+        "........................",
+        "........................",
+        "........................"
+      ],
+      "rotation": 0,
+      "palettes": [ "FEMA_camp" ],
+      "terrain": {
+        "9": "t_card_military",
+        "Z": "t_dirt",
+        "[": "t_door_metal_locked",
+        "]": "t_door_metal_locked",
+        "=": "t_dirt",
+        ",": "t_dirt",
+        "*": "t_dirt",
+        "N": "t_region_soil"
+      },
+      "items": { "x": [ { "item": "mil_food_nodrugs", "chance": 75 }, { "item": "mil_accessories", "chance": 50 } ] },
+      "monster": { "Z": { "monster": "mon_zombie_soldier" }, "z": { "monster": "mon_zombie_soldier" } }
+    }
+  }
+]

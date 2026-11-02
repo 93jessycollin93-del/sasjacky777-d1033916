@@ -1,10 +1,15 @@
 """The gateway's request/response logic, tested without FastAPI installed."""
 
+import re
+from pathlib import Path
+
 import pytest
 
 from jackierouter import EchoAdapter, NoProviderAvailable, Provider, Router
 from jackierouter.gateway import (
+    auto_complete_payload,
     build_request,
+    chat_completion_payload,
     capability_for,
     create_app,
     extract_messages,
@@ -89,4 +94,39 @@ def test_create_app_explains_itself_when_fastapi_is_missing():
             create_app()
     else:  # pragma: no cover - only when the gateway extra is installed
         app = create_app(Router([Provider(name="e", model="m", adapter=EchoAdapter())]))
-        assert {route.path for route in app.routes} >= {"/api/generate", "/ready", "/health", "/status"}
+        assert {route.path for route in app.routes} >= {
+            "/api/generate", "/chat/completions", "/complete/auto", "/ready", "/health", "/status",
+        }
+
+
+def test_chat_completions_answers_in_the_shape_the_agent_runtime_reads():
+    router = Router([Provider(name="e", model="echo-1", adapter=EchoAdapter(reply="hi"))])
+    body = chat_completion_payload(router.dispatch(RouteRequest(messages=[{"role": "user", "content": "x"}])))
+    # quickstart.py reads exactly this path; anything else prints an empty answer.
+    assert body["choices"][0]["message"] == {"role": "assistant", "content": "hi"}
+    assert body["model"] == body["model_used"] == "echo-1"
+    assert body["result"] == "hi"
+    assert set(body["usage"]) >= {"prompt_tokens", "completion_tokens"}
+
+
+def test_auto_complete_answers_under_response():
+    router = Router([Provider(name="e", model="echo-1", adapter=EchoAdapter(reply="hi"))])
+    body = auto_complete_payload(router.dispatch(RouteRequest(messages=[{"role": "user", "content": "x"}])))
+    assert body["response"] == "hi"
+    assert body["model_used"] == "echo-1"
+
+
+def test_the_gateway_serves_every_endpoint_the_agent_runtime_calls():
+    """
+    Read from the source rather than a running app, so it holds in CI, which
+    does not install FastAPI. The runtime posted to /chat/completions for weeks
+    while the router it ships with served only /api/generate: every agent call
+    was a 404, and each half passed its own tests.
+    """
+    root = Path(__file__).resolve().parents[1]
+    client = (root / "Jackie/core/engine/fs/jackie_router_client.py").read_text(encoding="utf-8")
+    gateway = (root / "jackierouter/gateway.py").read_text(encoding="utf-8")
+    called = set(re.findall(r'self\.router_url}(/[\w/]+)', client))
+    served = set(re.findall(r'@app\.(?:get|post)\("([^"]+)"\)', gateway))
+    assert called, "found no router calls in the client; the pattern above needs updating"
+    assert called <= served, f"called but not served: {sorted(called - served)}"

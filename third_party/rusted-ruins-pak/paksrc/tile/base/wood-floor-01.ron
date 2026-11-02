@@ -1,0 +1,19 @@
+(
+    object_type: "tile",
+    id: "wood-floor-01",
+    
+    image: (
+        path: "wood-floor-01.png",
+        copyright: "T.Okubo",
+        w: 48,
+        h: 48,
+    ),
+    
+    tile: (
+        kind: Ground,
+        build_skill: 0,
+        materials: [
+            ("wood", 2),
+        ],
+    ),
+)

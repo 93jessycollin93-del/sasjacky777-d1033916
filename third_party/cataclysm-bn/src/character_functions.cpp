@@ -1,0 +1,1078 @@
+#include "character_functions.h"
+
+#include "ammo.h"
+#include "bionics.h"
+#include "bodypart.h"
+#include "calendar.h"
+#include "character.h"
+#include "character_martial_arts.h"
+#include "creature.h"
+#include "flag.h"
+#include "flag_trait.h"
+#include "game.h"
+#include "handle_liquid.h"
+#include "itype.h"
+#include "iuse_actor.h"
+#include "make_static.h"
+#include "map/map_selector.h"
+#include "map/submap.h"
+#include "map_iterator.h"
+#include "messages.h"
+#include "monster.h"
+#include "npc.h"
+#include "output.h"
+#include "player.h"
+#include "rng.h"
+#include "skill.h"
+#include "trap.h"
+#include "type_id.h"
+#include "vehicle/veh_type.h"
+#include "vehicle/vehicle.h"
+#include "vehicle/vehicle_part.h"
+#include "vehicle/vehicle_selector.h"
+#include "vehicle/vpart_position.h"
+#include "weather/weather.h"
+#include "weather/weather_gen.h"
+
+#include <algorithm>
+#include <string>
+#include <utility>
+
+static const trait_id trait_CHLOROMORPH( "CHLOROMORPH" );
+static const trait_id trait_DEBUG_NODMG( "DEBUG_NODMG" );
+static const trait_id trait_EASYSLEEPER( "EASYSLEEPER" );
+static const trait_id trait_EASYSLEEPER2( "EASYSLEEPER2" );
+static const trait_id trait_INSOMNIA( "INSOMNIA" );
+static const trait_id trait_LOVES_BOOKS( "LOVES_BOOKS" );
+static const trait_id trait_M_SKIN3( "M_SKIN3" );
+static const trait_id trait_NOPAIN( "NOPAIN" );
+static const trait_id trait_PER_SLIME_OK( "PER_SLIME_OK" );
+static const trait_id trait_SHELL2( "SHELL2" );
+static const trait_id trait_STRONGBACK( "STRONGBACK" );
+static const trait_id trait_BADBACK( "BADBACK" );
+static const trait_id trait_THRESH_SPIDER( "THRESH_SPIDER" );
+static const trait_id trait_WATERSLEEP( "WATERSLEEP" );
+static const trait_id trait_WEB_SPINNER( "WEB_SPINNER" );
+static const trait_id trait_WEB_WALKER( "WEB_WALKER" );
+static const trait_id trait_WEB_WEAVER( "WEB_WEAVER" );
+
+static const trait_flag_str_id trait_flag_CANNIBAL( "CANNIBAL" );
+static const trait_flag_str_id trait_flag_PSYCHOPATH( "PSYCHOPATH" );
+static const trait_flag_str_id trait_flag_SAPIOVORE( "SAPIOVORE" );
+static const trait_flag_str_id trait_flag_SPIRITUAL( "SPIRITUAL" );
+
+static const trait_flag_str_id trait_flag_MUTATION_FLIGHT( "MUTATION_FLIGHT" );
+static const trait_flag_str_id trait_flag_FLIGHT_ALWAYS_ACTIVE( "FLIGHT_ALWAYS_ACTIVE" );
+
+const flag_id flag_ALLOWS_FLIGHT( "ALLOWS_FLIGHT" );
+const flag_id flag_ALWAYS_ALLOWS_FLIGHT( "ALWAYS_ALLOWS_FLIGHT" );
+
+static const efftype_id effect_boomered( "boomered" );
+static const efftype_id effect_darkness( "darkness" );
+static const efftype_id effect_meth( "meth" );
+
+static const bionic_id bio_soporific( "bio_soporific" );
+static const bionic_id bio_uncanny_dodge( "bio_uncanny_dodge" );
+
+static const itype_id itype_UPS( "UPS" );
+
+
+static const quality_id qual_SLEEP_AID( "SLEEP_AID" );
+
+static const enchantment_value_id ench_val_UNCANNY_DODGE( "UNCANNY_DODGE" );
+
+namespace character_funcs
+{
+
+time_duration estimate_effect_dur( int skill_lvl, const efftype_id &target_effect,
+                                   const time_duration &error_magnitude, int threshold, const Creature &target )
+{
+    const time_duration zero_duration = 0_turns;
+
+    time_duration estimate = std::max( zero_duration, target.get_effect_dur( target_effect ) +
+                                       rng( -1, 1 ) * error_magnitude *
+                                       rng( 0, std::max( 0, threshold - skill_lvl ) ) );
+    return estimate;
+}
+
+void siphon( Character &ch, vehicle &veh, const itype_id &desired_liquid )
+{
+    if( !ch.is_avatar() ) {
+        // TODO: implement for NPCs
+        debugmsg( "Siphoning not implemented for NPCs." );
+        return;
+    }
+    auto qty = veh.fuel_left( desired_liquid );
+    if( qty <= 0 ) {
+        ch.add_msg_if_player( m_bad, _( "There is not enough %s left to siphon it." ),
+                              item::nname( desired_liquid ) );
+        return;
+    }
+
+    detached_ptr<item> liquid = item::spawn( desired_liquid, calendar::turn, qty );
+    liquid_handler::handle_liquid( std::move( liquid ) );
+    // NOLINTNEXTLINE(bugprone-use-after-move)
+    if( liquid ) {
+        veh.drain( desired_liquid, qty - liquid->charges );
+    } else {
+        veh.drain( desired_liquid, qty );
+    }
+}
+
+bool can_noclip( const Character &ch )
+{
+    return ch.has_trait( trait_id( "DEBUG_NOCLIP" ) );
+}
+
+bool can_fly( Character &ch )
+{
+
+    // if the player can noclip, flying is technically a part of that
+    if( can_noclip( ch ) ) {
+        return true;
+    }
+
+    for( const auto &w : ch.worn ) {
+        if( ( w->is_active() && w->has_flag( flag_ALLOWS_FLIGHT ) ) ||
+            w->has_flag( flag_ALWAYS_ALLOWS_FLIGHT ) ) {
+            return true;
+        }
+    }
+
+    Creature *mc = ch.mounted_creature.get();
+    if( mc && mc->has_flag( MF_FLIES ) ) {
+        return true;
+    }
+
+    for( const trait_id &mid : ch.get_mutations() ) {
+        auto it = ch.my_mutations.find( mid->id );
+        if( it != ch.my_mutations.end() ) {
+            if( ( mid->flags.contains( trait_flag_MUTATION_FLIGHT ) && ( can_use_mutation( mid, ch ) &&
+                    it->second.powered ) ) ||  mid->flags.contains( trait_flag_FLIGHT_ALWAYS_ACTIVE ) ) {
+                return true;
+            } else if( ( mid->flags.contains( trait_flag_MUTATION_FLIGHT ) && !can_use_mutation( mid, ch ) &&
+                         it->second.powered ) ) {
+                ch.deactivate_mutation( mid );
+                return false;
+            }
+        }
+    }
+    for( const bionic &bio : *ch.my_bionics ) {
+        if( bio.info().has_flag( flag_id( "BIONIC_FLIGHT" ) ) &&
+            ch.get_power_level() > units::from_kilojoule( 0 ) && bio.powered ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+auto is_driving( const Character &p ) -> bool
+{
+    const optional_vpart_position vp = get_map().veh_at( p.bub_pos() );
+    return vp && vp->vehicle().is_moving() && vp->vehicle().player_in_control( p );
+}
+
+bool is_book_morale_boosted( const Character &ch, const item &book )
+{
+    // If you don't have a problem with eating humans, To Serve Man becomes rewarding
+    if( ( ch.has_trait_flag( trait_flag_CANNIBAL ) || ch.has_trait_flag( trait_flag_PSYCHOPATH ) ||
+          ch.has_trait_flag( trait_flag_SAPIOVORE ) ) &&
+        book.has_flag( flag_BOOK_CANNIBAL ) ) {
+        return true;
+    } else if( ch.has_trait_flag( trait_flag_SPIRITUAL ) && book.has_flag( flag_INSPIRATIONAL ) ) {
+        return true;
+    } else if( ch.has_trait_flag( trait_flag_PSYCHOPATH ) && book.has_flag( flag_MORBID ) ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool is_fun_to_read( const Character &ch, const item &book )
+{
+    if( is_book_morale_boosted( ch, book ) ) {
+        return true;
+    } else {
+        return get_book_fun_for( ch, book ) > 0;
+    }
+}
+
+int get_book_fun_for( const Character &ch, const item &book )
+{
+    int fun_bonus = book.type->book->fun;
+    if( !book.is_book() ) {
+        debugmsg( "called avatar::book_fun_for with non-book" );
+        return 0;
+    }
+
+    if( is_book_morale_boosted( ch, book ) ) {
+        fun_bonus = std::abs( fun_bonus );
+    }
+
+    // Separate bonus for spiritual characters.
+    if( ch.has_trait_flag( trait_flag_SPIRITUAL ) && book.has_flag( flag_INSPIRATIONAL ) ) {
+        fun_bonus += 2;
+    }
+
+    if( ch.has_trait( trait_LOVES_BOOKS ) ) {
+        fun_bonus++;
+    }
+
+    if( fun_bonus > 1 && book.get_chapters() > 0 && book.get_remaining_chapters( ch ) == 0 ) {
+        fun_bonus /= 2;
+    }
+
+    return fun_bonus;
+}
+
+float fine_detail_vision_mod( const Character &who )
+{
+    return fine_detail_vision_mod( who, who.bub_pos() );
+}
+
+float fine_detail_vision_mod( const Character &who, const tripoint_bub_ms &p )
+{
+    if( who.has_effect_with_flag( flag_EFFECT_SUPER_CLAIRVOYANCE )
+        || who.has_effect_with_flag( flag_EFFECT_CLAIRVOYANCE )
+        || who.has_effect_with_flag( flag_EFFECT_CLAIRVOYANCE_PLUS ) ) {
+        return 1.0f;
+    }
+
+    // PER_SLIME_OK implies you can get enough eyes around the bile
+    // that you can generally see.  There still will be the haze, but
+    // it's annoying rather than limiting.
+    if( who.is_blind() ||
+        ( ( who.has_effect( effect_boomered ) || who.has_effect( effect_darkness ) ) &&
+          !who.has_trait( trait_PER_SLIME_OK ) ) ) {
+        return 11.0;
+    }
+    // Previously above 8 added 4 to help night vision reading on mutations
+    // Thusly nearsight help to night vision ratio is 2
+    float nvbonus = who.night_vision_sight_range() / 2;
+
+    // Scale linearly as light level approaches LIGHT_AMBIENT_LIT.
+    // If we're actually a source of light, assume we can direct it where we need it.
+    // Therefore give a hefty bonus relative to ambient light.
+    float own_light = std::max( 1.0f, LIGHT_AMBIENT_LIT - who.active_light() - 2.0f );
+
+    // Same calculation as above, but with a result 3 lower, and night vision is allowed to affect it.
+    float ambient_light = std::max( 1.0f,
+                                    LIGHT_AMBIENT_LIT - get_map().ambient_light_at( p ) - nvbonus + 1.0f );
+
+    return std::min( own_light, ambient_light );
+}
+
+bool can_see_fine_details( const Character &who )
+{
+    return can_see_fine_details( who, who.bub_pos() );
+}
+
+bool can_see_fine_details( const Character &who, const tripoint_bub_ms &p )
+{
+    return fine_detail_vision_mod( who, p ) <= FINE_VISION_THRESHOLD;
+}
+
+comfort_response_t base_comfort_value( const Character &who, const tripoint_bub_ms &p )
+{
+    // Comfort of sleeping spots is "objective", while sleep_spot( p ) is "subjective"
+    // As in the latter also checks for fatigue and other variables while this function
+    // only looks at the base comfyness of something. It's still subjective, in a sense,
+    // as arachnids who sleep in webs will find most places comfortable for instance.
+    float comfort = 0.0;
+
+    comfort_response_t comfort_response;
+
+    bool plantsleep = who.has_trait( trait_CHLOROMORPH );
+    bool fungaloid_cosplay = who.has_trait( trait_M_SKIN3 );
+    bool websleep = who.has_trait( trait_WEB_WALKER );
+    bool webforce = who.has_trait( trait_THRESH_SPIDER ) && ( who.has_trait( trait_WEB_SPINNER ) ||
+                    ( who.has_trait( trait_WEB_WEAVER ) ) );
+    bool in_shell = who.has_active_mutation( trait_SHELL2 );
+    bool watersleep = who.has_trait( trait_WATERSLEEP );
+    bool music = who.has_active_item_with_action( "MP3_ON" );
+
+    map &here = get_map();
+    const optional_vpart_position vp = here.veh_at( p );
+    const maptile tile = here.maptile_at( tripoint_bub_ms( p ) );
+    const trap &trap_at_pos = tile.get_trap_t();
+    const ter_id ter_at_pos = tile.get_ter();
+    const furn_id furn_at_pos = tile.get_furn();
+
+    int web = here.get_field_intensity( p, fd_web );
+
+    // Some mutants have different comfort needs
+    if( !plantsleep && !webforce ) {
+        if( in_shell ) {
+            comfort += 1 + static_cast<int>( comfort_level::slightly_comfortable );
+            // Note: shelled individuals can still use sleeping aids!
+        } else if( vp ) {
+            const std::optional<vpart_reference> carg = vp.part_with_feature( "CARGO", false );
+            const std::optional<vpart_reference> board = vp.part_with_feature( "BOARDABLE", true );
+            if( carg ) {
+                const vehicle_stack items = vp->vehicle().get_items( carg->part_index() );
+                for( item *items_it : items ) {
+                    int sleep_quality = items_it->get_quality( qual_SLEEP_AID );
+                    if( sleep_quality >= 0 ) {
+                        // uncomfortable = -7, neutral = 0, comfortable = 5+, very comfortable = 10
+                        // Note: BED + LEVEL 2 SLEEP_AID = 7 pts, or 3 pt below very_comfortable
+                        comfort += sleep_quality;
+                        comfort_response.aid.push_back( items_it );
+                    }
+                }
+            }
+            if( board ) {
+                comfort += board->info().comfort;
+            } else {
+                comfort -= here.move_cost( p );
+            }
+        }
+        // Not in a vehicle, start checking furniture/terrain/traps at this point in decreasing order
+        else if( furn_at_pos != f_null ) {
+            comfort += 0 + furn_at_pos.obj().comfort;
+        }
+        // Web sleepers can use their webs if better furniture isn't available
+        else if( websleep && web >= 3 ) {
+            comfort += 1 + static_cast<int>( comfort_level::slightly_comfortable );
+        } else if( ter_at_pos == t_improvised_shelter ) {
+            comfort += 0 + static_cast<int>( comfort_level::slightly_comfortable );
+        } else if( ter_at_pos == t_floor || ter_at_pos == t_floor_waxed ||
+                   ter_at_pos == t_carpet_red || ter_at_pos == t_carpet_yellow ||
+                   ter_at_pos == t_carpet_green || ter_at_pos == t_carpet_purple ) {
+            comfort += 1 + static_cast<int>( comfort_level::neutral );
+        } else if( !trap_at_pos.is_null() ) {
+            comfort += 0 + trap_at_pos.comfort;
+        } else {
+            // Not a comfortable sleeping spot
+            comfort -= here.move_cost( p );
+        }
+
+        if( comfort_response.aid.empty() ) {
+            const map_stack items = here.i_at( p );
+            for( item *items_it : items ) {
+                int sleep_quality = items_it->get_quality( qual_SLEEP_AID );
+                if( sleep_quality >= 0 ) {
+                    // Note: BED + LEVEL 2 SLEEP_AID = 7 pts, or 3 pt below very_comfortable
+                    comfort += sleep_quality;
+                    comfort_response.aid.push_back( items_it );
+                }
+            }
+        }
+        bool skintight_or_naked = true;
+        for( item *it : who.worn ) {
+            if( !it->has_flag( flag_SKINTIGHT ) && !it->has_flag( flag_OVERSIZE ) ) {
+                skintight_or_naked = false;
+            }
+
+            // check wearing bonus (sleep aid clothing is worth double when worn, similar to snuggling)
+            int sleep_quality = it->get_quality( qual_SLEEP_AID );
+            if( sleep_quality >= 0 ) {
+                comfort += sleep_quality;
+                comfort_response.aid.push_back( it );
+            }
+        }
+
+        // bonus if player is wearing only skintight clothing (pajamas/boxers), oversized clothing (big hoodies, blankets, etc) or naked
+        if( skintight_or_naked ) {
+            comfort += 1;
+        }
+
+        // bonus if player is snuggling with a specific item
+        for( item *it : who.wielded_items() ) {
+            if( it->has_quality( qual_SLEEP_AID ) ) {
+                // don't add to the aid array, because we print special mesage here
+                comfort += it->get_quality( qual_SLEEP_AID ) * 2;
+                comfort_response.aid.push_back( it );
+            }
+        }
+
+        if( fungaloid_cosplay && here.has_flag_ter_or_furn( "FUNGUS", p ) ) {
+            comfort += static_cast<int>( comfort_level::very_comfortable );
+        } else if( watersleep && here.has_flag_ter( "SWIMMABLE", p ) ) {
+            comfort += static_cast<int>( comfort_level::very_comfortable );
+        }
+    } else if( plantsleep ) {
+        if( vp || furn_at_pos != f_null ) {
+            // Sleep ain't happening in a vehicle or on furniture
+            comfort = static_cast<int>( comfort_level::impossible );
+        } else {
+            // It's very easy for Chloromorphs to get to sleep on soil!
+            if( ter_at_pos == t_dirt || ter_at_pos == t_pit || ter_at_pos == t_dirtmound ||
+                ter_at_pos == t_pit_shallow ) {
+                comfort += static_cast<int>( comfort_level::very_comfortable );
+            }
+            // Not as much if you have to dig through stuff first
+            else if( ter_at_pos == t_grass ) {
+                comfort += static_cast<int>( comfort_level::comfortable );
+            }
+            // Sleep ain't happening
+            else {
+                comfort = static_cast<int>( comfort_level::impossible );
+            }
+        }
+        // Has webforce
+    } else {
+        if( web >= 3 ) {
+            // Thick Web and you're good to go
+            comfort += static_cast<int>( comfort_level::very_comfortable );
+        } else {
+            comfort = static_cast<int>( comfort_level::impossible );
+        }
+    }
+    // If you are listening to music, give a small buff to comfort
+    if( music ) {
+        comfort += 2;
+    }
+    if( comfort >= static_cast<int>( comfort_level::very_comfortable ) ) {
+        comfort_response.level = comfort_level::very_comfortable;
+    } else if( comfort >= static_cast<int>( comfort_level::comfortable ) ) {
+        comfort_response.level = comfort_level::comfortable;
+    } else if( comfort >= static_cast<int>( comfort_level::slightly_comfortable ) ) {
+        comfort_response.level = comfort_level::slightly_comfortable;
+    } else if( comfort >= static_cast<int>( comfort_level::neutral ) ) {
+        comfort_response.level = comfort_level::neutral;
+    } else {
+        comfort_response.level = comfort_level::uncomfortable;
+    }
+    return comfort_response;
+}
+
+int rate_sleep_spot( const Character &who, const tripoint_bub_ms &p )
+{
+    const int current_stim = who.get_stim();
+    const comfort_response_t comfort_info = base_comfort_value( who, p );
+    for( item *comfort_item : comfort_info.aid ) {
+        who.add_msg_if_player( m_info, _( "You use your %s for comfort." ), comfort_item->tname() );
+    }
+
+    int sleepy = static_cast<int>( comfort_info.level );
+    bool watersleep = who.has_trait( trait_WATERSLEEP );
+
+    if( who.has_addiction( add_type::SLEEP ) ) {
+        sleepy -= 4;
+    }
+    if( who.has_trait( trait_INSOMNIA ) ) {
+        // 12.5 points is the difference between "tired" and "dead tired"
+        sleepy -= 12;
+    }
+    if( who.has_trait( trait_EASYSLEEPER ) ) {
+        // Low fatigue (being rested) has a much stronger effect than high fatigue
+        // so it's OK for the value to be that much higher
+        sleepy += 40;
+    }
+    if( who.has_active_bionic( bio_soporific ) ) {
+        sleepy += 30;
+    }
+    if( who.has_trait( trait_EASYSLEEPER2 ) ) {
+        // At this point, the only limit to sleep is tiredness
+        sleepy += 100;
+    }
+    if( watersleep && get_map().has_flag_ter( "SWIMMABLE", p ) ) {
+        sleepy += 10; //comfy water!
+    }
+
+    if( who.get_fatigue() < fatigue_levels::tired + 1 ) {
+        sleepy -= ( ( fatigue_levels::tired + 1 - who.get_fatigue() ) / 4 );
+    } else {
+        sleepy += ( ( who.get_fatigue() - fatigue_levels::tired + 1 ) / 16 );
+    }
+
+    if( current_stim > 0 || !who.has_trait( trait_INSOMNIA ) ) {
+        sleepy -= 2 * current_stim;
+    } else {
+        // Make it harder for insomniac to get around the trait
+        sleepy -= current_stim;
+    }
+
+    return sleepy;
+}
+
+bool roll_can_sleep( Character &who )
+{
+    if( who.has_effect( effect_meth ) ) {
+        // Sleep ain't happening until that meth wears off completely.
+        return false;
+    }
+
+    // Since there's a bit of randomness to falling asleep, we want to
+    // prevent exploiting this if can_sleep() gets called over and over.
+    // Only actually check if we can fall asleep no more frequently than
+    // every 30 minutes.  We're assuming that if we return true, we'll
+    // immediately be falling asleep after that.
+    //
+    // Also if player debug menu'd time backwards this breaks, just do the
+    // check anyway, this will reset the timer if 'dur' is negative.
+    const time_point now = calendar::turn;
+    const time_duration dur = now - who.last_sleep_check;
+    if( dur >= 0_turns && dur < 30_minutes ) {
+        return false;
+    }
+    who.last_sleep_check = now;
+
+    int sleepy = character_funcs::rate_sleep_spot( who, who.bub_pos() );
+    sleepy += rng( -8, 8 );
+    bool result = sleepy > 0;
+
+    if( who.has_active_bionic( bio_soporific ) ) {
+        if( who.bio_soporific_powered_at_last_sleep_check && !who.has_power() ) {
+            who.add_msg_if_player( m_bad, _( "Your soporific inducer runs out of power!" ) );
+        } else if( !who.bio_soporific_powered_at_last_sleep_check && who.has_power() ) {
+            who.add_msg_if_player( m_good, _( "Your soporific inducer starts back up." ) );
+        }
+        who.bio_soporific_powered_at_last_sleep_check = who.has_power();
+    }
+
+    return result;
+}
+
+bool can_interface_armor( const Character &who )
+{
+    bool okay = std::any_of( who.my_bionics->begin(), who.my_bionics->end(),
+    []( const bionic & b ) {
+        return b.powered && b.info().has_flag( STATIC( flag_id( "BIONIC_ARMOR_INTERFACE" ) ) );
+    } );
+    return okay;
+}
+
+std::string fmt_wielded_weapon( const Character &who )
+{
+    if( !who.is_armed() ) {
+        return _( "fists" );
+    }
+    const item &weapon = who.primary_weapon();
+    if( weapon.is_gun() ) {
+        std::string str = weapon.is_gunmod()
+                          ? string_format( "(%d) %s",
+                                           weapon.ammo_remaining(), weapon.type_name() )
+                          : string_format( "(%d) [%s] %s",
+                                           weapon.gun_current_mode()->ammo_remaining(),
+                                           weapon.gun_current_mode().tname(), weapon.type_name() );
+        // Is either the base item or at least one auxiliary gunmod loaded (includes empty magazines)
+        bool base = weapon.ammo_capacity() > 0 && !weapon.has_flag( flag_RELOAD_AND_SHOOT );
+
+        const auto mods = weapon.gunmods();
+        bool aux = std::ranges::any_of( mods, [&]( const item * e ) {
+            return e->is_gun() && e->ammo_capacity() > 0 && !e->has_flag( flag_RELOAD_AND_SHOOT );
+        } );
+
+        if( base || aux ) {
+            for( auto e : mods ) {
+                if( e->is_gun() && e->ammo_capacity() > 0 && !e->has_flag( flag_RELOAD_AND_SHOOT ) ) {
+                    str += " (" + std::to_string( e->ammo_remaining() );
+                    if( e->magazine_integral() ) {
+                        str += "/" + std::to_string( e->ammo_capacity() );
+                    }
+                    str += ")";
+                }
+            }
+        }
+        return str;
+
+    } else if( ( weapon.is_container() && weapon.contents.num_item_stacks() == 1 ) ||
+               weapon.ammo_capacity() > 0 ) {
+        return string_format( "(%d) %s",
+                              weapon.is_container() ? weapon.contents.front().charges : weapon.ammo_remaining(), weapon.tname() );
+    } else {
+        return weapon.tname();
+    }
+}
+
+void add_pain_msg( const Character &who, int val, const bodypart_str_id &bp )
+{
+    if( who.has_trait( trait_NOPAIN ) ) {
+        return;
+    }
+    if( !bp ) {
+        if( val > 20 ) {
+            who.add_msg_if_player( _( "Your body is wracked with excruciating pain!" ) );
+        } else if( val > 10 ) {
+            who.add_msg_if_player( _( "Your body is wracked with terrible pain!" ) );
+        } else if( val > 5 ) {
+            who.add_msg_if_player( _( "Your body is wracked with pain!" ) );
+        } else if( val > 1 ) {
+            who.add_msg_if_player( _( "Your body pains you!" ) );
+        } else {
+            who.add_msg_if_player( _( "Your body aches." ) );
+        }
+    } else {
+        if( val > 20 ) {
+            who.add_msg_if_player( _( "Your %s is wracked with excruciating pain!" ),
+                                   body_part_name_accusative( bp.id() ) );
+        } else if( val > 10 ) {
+            who.add_msg_if_player( _( "Your %s is wracked with terrible pain!" ),
+                                   body_part_name_accusative( bp.id() ) );
+        } else if( val > 5 ) {
+            who.add_msg_if_player( _( "Your %s is wracked with pain!" ),
+                                   body_part_name_accusative( bp.id() ) );
+        } else if( val > 1 ) {
+            who.add_msg_if_player( _( "Your %s pains you!" ),
+                                   body_part_name_accusative( bp.id() ) );
+        } else {
+            who.add_msg_if_player( _( "Your %s aches." ),
+                                   body_part_name_accusative( bp.id() ) );
+        }
+    }
+}
+
+void normalize( Character &who )
+{
+    who.martial_arts_data->reset_style();
+    who.remove_primary_weapon();
+
+    who.set_body();
+    who.recalc_hp();
+
+    for( auto &pr : who.get_body() ) {
+        pr.second.set_temp_cur( BODYTEMP_NORM );
+        pr.second.set_temp_conv( BODYTEMP_NORM );
+    }
+
+    who.set_stamina( who.get_stamina_max() );
+}
+
+void store_in_container( Character &who, item &container, detached_ptr<item> &&put, bool penalties,
+                         int base_cost )
+{
+    who.moves -= who.item_store_cost( *put, container, penalties, base_cost );
+    container.put_in( std::move( put ) );
+    who.reset_encumbrance();
+}
+
+bool try_wield_contents( Character &who, item &container, item *internal_item, bool penalties,
+                         int base_cost )
+{
+    // if index not specified and container has multiple items then ask the player to choose one
+    if( internal_item == nullptr ) {
+        std::vector<std::string> opts;
+        std::vector<item *> container_contents = container.contents.all_items_top();
+        std::ranges::transform( container_contents,
+        std::back_inserter( opts ), []( const item * elem ) {
+            return elem->display_name();
+        } );
+        if( opts.size() > 1 ) {
+            int pos = uilist( _( "Wield what?" ), opts );
+            if( pos < 0 ) {
+                return false;
+            }
+            internal_item = *std::next( container_contents.begin(), pos );
+        } else {
+            internal_item = &container.contents.front();
+        }
+    }
+
+    if( !container.has_item( *internal_item ) ) {
+        debugmsg( "Tried to wield non-existent item from container (player::wield_contents)" );
+        return false;
+    }
+
+    const ret_val<bool> ret = who.can_wield( *internal_item );
+    if( !ret.success() ) {
+        who.add_msg_if_player( m_info, "%s", ret.c_str() );
+        return false;
+    }
+
+    int mv = 0;
+
+    if( who.is_armed() ) {
+        if( !who.as_player()->unwield() ) {
+            return false;
+        }
+        who.inv_unsort();
+    }
+
+    who.set_primary_weapon( internal_item->detach() );
+    who.inv_update_invlet( *internal_item );
+    who.inv_update_invlet_cache_with_item( *internal_item );
+    who.last_item = internal_item->typeId();
+
+    /**
+     * @EFFECT_PISTOL decreases time taken to draw pistols from holsters
+     * @EFFECT_SMG decreases time taken to draw smgs from holsters
+     * @EFFECT_RIFLE decreases time taken to draw rifles from holsters
+     * @EFFECT_SHOTGUN decreases time taken to draw shotguns from holsters
+     * @EFFECT_LAUNCHER decreases time taken to draw launchers from holsters
+     * @EFFECT_STABBING decreases time taken to draw stabbing weapons from sheathes
+     * @EFFECT_CUTTING decreases time taken to draw cutting weapons from scabbards
+     * @EFFECT_BASHING decreases time taken to draw bashing weapons from holsters
+     */
+    int lvl = who.get_skill_level( internal_item->is_gun() ? internal_item->gun_skill() :
+                                   internal_item->melee_skill() );
+    mv += who.item_handling_cost( *internal_item, penalties, base_cost ) / ( ( lvl + 10.0f ) / 10.0f );
+
+    who.moves -= mv;
+
+    internal_item->on_wield( *who.as_player(), mv );
+
+    return true;
+}
+
+bool try_uncanny_dodge( Character &who )
+{
+    if( who.has_active_bionic( bio_uncanny_dodge ) ) {
+        const units::energy trigger_cost = bio_uncanny_dodge->power_trigger;
+        if( who.get_power_level() < trigger_cost ) {
+            return false;
+        }
+        who.mod_power_level( -trigger_cost );
+    } else if( who.get_stamina() > 100 ) {
+        float ench_chance = who.bonus_from_enchantments( 0.0, ench_val_UNCANNY_DODGE );
+        if( ench_chance < rng_float( 0.0, 1.0 ) ) {
+            return false;
+        }
+        // NOTE: Potential improvement, allow lua hook to burn resources
+        who.mod_stamina( -100 );
+    } else {
+        return false;
+    }
+
+    bool is_u = who.is_avatar();
+    bool seen = is_u || get_player_character().sees( who );
+    // If successful, dodge for free. If we already burned bonus dodges this turn then get_dodge fails and we're overwhelmed.
+    if( x_in_y( who.get_dodge(), 10 ) ) {
+        if( is_u ) {
+            add_msg( m_good, _( "Time seems to slow down and you effortlessly dodge!" ) );
+        } else if( seen ) {
+            add_msg( m_good, _( "%s effortlessly dodges… so fast!" ), who.disp_name() );
+        }
+        return true;
+        // Didn't get a free dodge, burn dodges_left instead. If this zeros them out and there's still more attacks coming this turn the next shot will hit.
+    } else if( who.dodges_left > 0 ) {
+        if( is_u ) {
+            add_msg( m_mixed, _( "Time seems to slow down and you instinctively dodge!" ) );
+        } else if( seen ) {
+            add_msg( m_mixed, _( "%s dodges… so fast!" ), who.disp_name() );
+        }
+        who.dodges_left--;
+        return true;
+        // No dodges left, catch those hands.
+    } else {
+        if( is_u ) {
+            add_msg( m_bad, _( "You try to dodge but fail!" ) );
+        } else if( seen ) {
+            add_msg( m_bad, _( "%s tries to dodge but fails!" ), who.disp_name() );
+        }
+        return false;
+    }
+}
+
+std::optional<tripoint_bub_ms> pick_safe_adjacent_tile( const Character &who )
+{
+    std::vector<tripoint_bub_ms> ret;
+    int dangerous_fields = 0;
+    map &here = get_map();
+    for( const tripoint_bub_ms &p : here.points_in_radius( who.bub_pos(), 1 ) ) {
+        if( p == who.bub_pos() ) {
+            // Don't consider player position
+            continue;
+        }
+        const trap &curtrap = here.tr_at( p );
+        if( g->critter_at( p ) == nullptr && here.passable( p ) &&
+            ( curtrap.is_null() || curtrap.is_benign() ) ) {
+            // Only consider tile if unoccupied, passable and has no traps
+            dangerous_fields = 0;
+            auto &tmpfld = here.field_at( p );
+            for( auto &fld : tmpfld ) {
+                const field_entry &cur = fld.second;
+                if( cur.is_dangerous() ) {
+                    dangerous_fields++;
+                }
+            }
+
+            if( dangerous_fields == 0 && ! get_map().obstructed_by_vehicle_rotation( who.bub_pos(), p ) ) {
+                ret.push_back( p );
+            }
+        }
+    }
+
+    return random_entry_opt( ret );
+}
+
+bool is_bp_immune_to( const Character &who, body_part bp, damage_unit dam )
+{
+    if( who.has_trait( trait_DEBUG_NODMG ) || who.is_immune_damage( dam.type ) ) {
+        return true;
+    }
+
+    who.passive_absorb_hit( convert_bp( bp ).id(), dam );
+
+    for( const item *cloth : who.worn ) {
+        if( cloth->get_coverage( convert_bp( bp ).id() ) == 100 && cloth->covers( convert_bp( bp ) ) ) {
+            cloth->mitigate_damage( dam );
+        }
+    }
+
+    return dam.amount <= 0;
+}
+
+std::vector<npc *> get_crafting_helpers( const Character &who, int max )
+{
+    if( max == 0 || !who.is_avatar() ) {
+        // TODO: NPCs assisting other NPCs
+        return {};
+    }
+    int n = 0;
+    return g->get_npcs_if( [&]( const npc & guy ) {
+        // NPCs can help craft if awake, taking orders, within pickup range and have clear path
+        if( max > 0 && n >= max ) {
+            return false;
+        }
+        bool ok = !guy.in_sleep_state() && guy.is_obeying( who ) &&
+                  rl_dist( guy.bub_pos(), who.bub_pos() ) < PICKUP_RANGE &&
+                  get_map().clear_path( who.bub_pos(), guy.bub_pos(), PICKUP_RANGE, 1, 100 );
+        if( ok ) {
+            n += 1;
+        }
+        return ok;
+    } );
+}
+
+int get_lift_strength( const Character &who )
+{
+    int str = who.get_str();
+    if( who.mounted_creature ) {
+        auto mons = who.mounted_creature.get();
+        str = mons->mech_str_addition() == 0 ? str : mons->mech_str_addition();
+    }
+    if( who.has_trait( trait_STRONGBACK ) ) {
+        str *= 1.35;
+    } else if( who.has_trait( trait_BADBACK ) ) {
+        str /= 1.35;
+    }
+    return str;
+}
+
+int get_lift_strength_with_helpers( const Character &who )
+{
+    int result = get_lift_strength( who );
+    const std::vector<npc *> helpers = get_crafting_helpers( who );
+    for( const npc *np : helpers ) {
+        result += get_lift_strength( *np );
+    }
+    return result;
+}
+
+bool can_lift_with_helpers( const Character &who, int lift_required )
+{
+    return get_lift_strength_with_helpers( who ) >= lift_required;
+}
+
+
+
+
+std::vector<item *> get_ammo_items( const Character &who, const ammotype &at )
+{
+    return who.items_with( [at]( const item & it ) {
+        return it.ammo_type() == at;
+    } );
+}
+
+template <typename T, typename Output>
+void find_ammo_helper( T &src, const item &obj, bool empty, Output out, bool nested )
+{
+    if( obj.is_container() ) {
+        if( !obj.is_container_empty() ) {
+            auto contents_id = obj.contents.front().typeId();
+
+            // Look for containers with the same type of liquid as that already in our container
+            src.visit_items( [&nested, &out, &contents_id, &obj]( item * node ) {
+                if( node == &obj ) {
+                    // This stops containers and magazines counting *themselves* as ammo sources.
+                    return VisitResponse::SKIP;
+                }
+
+                if( node->is_container() && !node->is_container_empty() &&
+                    node->contents.front().typeId() == contents_id ) {
+                    out = node;
+                } else if( !node->is_container() && !node->is_in_container() && node->made_of( SOLID ) &&
+                           node->typeId() == contents_id ) {
+                    out = node;
+                }
+                return nested ? VisitResponse::NEXT : VisitResponse::SKIP;
+            } );
+        } else {
+            // Look for any contents we can hold, exclude stackable generics
+            src.visit_items( [&nested, &out]( item * node ) {
+                if( ( node->is_watertight_container() && node->contents_made_of( LIQUID ) ) ||
+                    ( !node->is_in_container() && ( node->is_ammo() || node->is_comestible() ) &&
+                      node->made_of( SOLID ) ) ||
+                    ( node->is_container() && node->contents_made_of( SOLID ) ) ) {
+                    out = node;
+                }
+                return nested ? VisitResponse::NEXT : VisitResponse::SKIP;
+            } );
+        }
+    }
+    if( obj.magazine_integral() ) {
+        // find suitable ammo excluding that already loaded in magazines
+        const std::set<ammotype> &ammo = obj.ammo_types();
+        const auto mags = obj.magazine_compatible();
+
+        src.visit_items( [&nested, &out, &mags, ammo]( item * node ) {
+            if( node->is_gun() || node->is_tool() ) {
+                // guns/tools never contain usable ammo so most efficient to skip them now
+                return VisitResponse::SKIP;
+            }
+            if( !node->made_of( SOLID ) ) {
+                // some liquids are ammo but we can't reload with them unless within a container or frozen
+                return VisitResponse::SKIP;
+            }
+            if( node->is_ammo_container() && !node->contents.empty() &&
+                !node->contents_made_of( SOLID ) ) {
+                for( const ammotype &at : ammo ) {
+                    if( node->contents.front().ammo_type() == at ) {
+                        out = node;
+                    }
+                }
+                return VisitResponse::SKIP;
+            }
+
+            for( const ammotype &at : ammo ) {
+                if( node->ammo_type() == at ) {
+                    out = node;
+                }
+            }
+            if( node->is_magazine() && node->has_flag( flag_SPEEDLOADER ) ) {
+                if( mags.contains( node->typeId() ) && node->ammo_remaining() ) {
+                    out = node;
+                }
+            }
+            return nested ? VisitResponse::NEXT : VisitResponse::SKIP;
+        } );
+    } else {
+        // find compatible magazines excluding those already loaded in tools/guns
+        const auto mags = obj.magazine_compatible();
+        const std::set<ammotype> &ammo = obj.ammo_types();
+
+        src.visit_items( [&nested, &out, mags, empty, &ammo]( item * node ) {
+            if( node->is_gun() || node->is_tool() ) {
+                return VisitResponse::SKIP;
+            }
+            if( node->is_magazine() ) {
+
+                if( !node->contents.empty() ) {
+                    const bool match = std::ranges::any_of( ammo, [&]( const ammotype & at ) {
+                        return node->contents.front().ammo_type() == at;
+                    } );
+                    if( !match ) {
+                        return VisitResponse::SKIP;
+                    }
+                }
+
+                if( mags.contains( node->typeId() ) && ( node->ammo_remaining() || empty ) ) {
+                    out = node;
+                }
+                return VisitResponse::SKIP;
+            }
+            return nested ? VisitResponse::NEXT : VisitResponse::SKIP;
+        } );
+    }
+}
+
+std::vector<item *> find_ammo_items_or_mags( const Character &who, const item &obj,
+        bool empty, int radius )
+{
+    std::vector<item *> res;
+
+    find_ammo_helper( const_cast<Character &>( who ), obj, empty, std::back_inserter( res ), true );
+
+    if( radius >= 0 ) {
+        for( auto &cursor : map_selector( who.bub_pos(), radius ) ) {
+            find_ammo_helper( cursor, obj, empty, std::back_inserter( res ), false );
+        }
+        for( auto &cursor : vehicle_selector( who.bub_pos(), radius ) ) {
+            find_ammo_helper( cursor, obj, empty, std::back_inserter( res ), false );
+        }
+    }
+
+    return res;
+}
+
+std::vector<item *> find_reloadables( Character &who )
+{
+    std::vector<item *> reloadables;
+
+    who.visit_items( [&]( item * node ) {
+        bool reloadable = false;
+        if( node->is_gun() && !node->magazine_compatible().empty() ) {
+            reloadable = node->magazine_current() == nullptr ||
+                         node->ammo_remaining() < node->ammo_capacity();
+        } else {
+            reloadable = ( node->is_magazine() || node->is_bandolier() ||
+                           ( node->is_gun() && node->magazine_integral() ) ) &&
+                         node->ammo_remaining() < node->ammo_capacity();
+        }
+        if( node->is_holster() ) {
+            const holster_actor *ptr = dynamic_cast<const holster_actor *>
+                                       ( node->get_use( "holster" )->get_actor_ptr() );
+            if( static_cast<int>( node->contents.num_item_stacks() ) < ptr->multi ) {
+                reloadable = true;
+            }
+        }
+        if( reloadable ) {
+            reloadables.push_back( node );
+        }
+        return VisitResponse::SKIP;
+    } );
+    return reloadables;
+}
+
+int ammo_count_for( const Character &who, const item &gun )
+{
+    if( !gun.is_gun() ) {
+        return item::INFINITE_CHARGES;
+    }
+    int ammo_drain = gun.ammo_required();
+    int energy_drain = gun.get_gun_ups_drain();
+
+    units::energy power = units::from_kilojoule( who.charges_of( itype_UPS ) );
+    int total_ammo = gun.ammo_remaining();
+    const std::vector<item *> inv_ammo = find_ammo_items_or_mags( who, gun, true, -1 );
+
+    bool has_mag = gun.magazine_integral();
+
+    for( const item * const &it : inv_ammo ) {
+        if( it->is_magazine() ) {
+            total_ammo += it->ammo_remaining();
+        } else if( has_mag && it->is_ammo() ) {
+            // In combat, NPCs will only consider ammo "available" if it's in an applicable magazine
+            // or if the gun has an integral magazine (whereupon the "mags" are usually speedloaders)
+            total_ammo += it->count();
+        }
+    }
+
+    if( ammo_drain > 0 && energy_drain > 0 ) {
+        // Both UPS and ammo, lower is limiting.
+        return std::min( total_ammo / ammo_drain, power / units::from_kilojoule( energy_drain ) );
+    } else if( energy_drain > 0 ) {
+        //Only one of the two, it is limiting.
+        return power / units::from_kilojoule( energy_drain );
+    } else if( ammo_drain > 0 ) {
+        return total_ammo / ammo_drain;
+    } else {
+        // Effectively infinite ammo.
+        return item::INFINITE_CHARGES;
+    }
+}
+
+void show_skill_capped_notice( const Character &who, const skill_id &id )
+{
+    if( !who.is_avatar() ) {
+        return;
+    }
+    const SkillLevel &level = who.get_skill_level_object( id );
+
+    const Skill &skill = id.obj();
+    std::string skill_name = skill.name();
+    int curLevel = level.level();
+
+    add_msg( m_info, _( "This task is too simple to train your %s beyond %d." ),
+             skill_name, curLevel );
+}
+
+/// Returns true if the character has a bionic listed in the entered bionic id's available_upgrades field
+auto has_upgraded_bionic( const Character &c, const bionic_id &b ) -> bool
+{
+    return std::ranges::any_of( b->available_upgrades, [&]( const auto & bio ) { return c.has_bionic( bio ); } );
+}
+
+} // namespace character_funcs

@@ -1,0 +1,177 @@
+[
+  {
+    "id": "calcium",
+    "type": "vitamin",
+    "vit_type": "vitamin",
+    "name": { "str": "Calcium" },
+    "deficiency": "hypocalcemia",
+    "min": -12000,
+    "rate": "15 m",
+    "disease": [ [ -4800, -5600 ], [ -5601, -6400 ], [ -6401, -12000 ] ]
+  },
+  {
+    "id": "iron",
+    "type": "vitamin",
+    "vit_type": "vitamin",
+    "name": { "ctxt": "nutrient", "str": "Iron" },
+    "excess": "hypervitaminosis",
+    "deficiency": "anemia",
+    "min": -12000,
+    "max": 3600,
+    "rate": "15 m",
+    "disease": [ [ -4800, -5600 ], [ -5601, -6400 ], [ -6401, -12000 ] ]
+  },
+  {
+    "id": "vitA",
+    "type": "vitamin",
+    "vit_type": "vitamin",
+    "name": { "str": "Vitamin A" },
+    "excess": "hypervitaminosis",
+    "deficiency": "hypovitA",
+    "min": -8400,
+    "max": 3600,
+    "rate": "15 m",
+    "disease": [ [ -2000, -4800 ], [ -4801, -5600 ], [ -5601, -8400 ] ]
+  },
+  {
+    "id": "vitB",
+    "type": "vitamin",
+    "vit_type": "vitamin",
+    "name": { "str": "Vitamin B12" },
+    "deficiency": "hypovitB",
+    "min": -5600,
+    "rate": "15 m",
+    "disease": [ [ -2800, -3600, 1 ], [ -3601, -4400, 2 ], [ -4401, -5600, 3 ] ]
+  },
+  {
+    "id": "vitC",
+    "type": "vitamin",
+    "vit_type": "vitamin",
+    "name": { "str": "Vitamin C" },
+    "deficiency": "scurvy",
+    "min": -5600,
+    "rate": "15 m",
+    "disease": [ [ -2800, -3600, 1 ], [ -3601, -4400, 2 ], [ -4401, -5600, 3 ] ]
+  },
+  {
+    "id": "mutant_toxin",
+    "type": "vitamin",
+    "vit_type": "toxin",
+    "name": { "str": "Mutagenic toxins" },
+    "excess": "toxin_buildup",
+    "min": 0,
+    "max": 1100,
+    "rate": "12 m",
+    "disease_excess": [ [ 251, 500 ], [ 501, 750 ], [ 751, 1000 ], [ 1001, 1100 ] ]
+  },
+  {
+    "id": "bad_food",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Disgusting Diet" },
+    "min": 0,
+    "max": 40,
+    "rate": "4 h",
+    "flags": [ "NO_DISPLAY" ],
+    "disease_excess": [ [ 10, 19 ], [ 20, 29 ], [ 30, 40 ] ]
+  },
+  {
+    "id": "human_flesh_vitamin",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Consumed human flesh" },
+    "min": 0,
+    "max": 10000,
+    "rate": "1 h"
+  },
+  {
+    "id": "meat_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Meat" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  },
+  {
+    "id": "veggy_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Veggy" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  },
+  {
+    "id": "wheat_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Wheat" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  },
+  {
+    "id": "egg_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Egg" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  },
+  {
+    "id": "fruit_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Fruit" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  },
+  {
+    "id": "junk_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Junk" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  },
+  {
+    "id": "nut_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Nut" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  },
+  {
+    "id": "bread_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Bread" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  },
+  {
+    "id": "milk_allergen",
+    "//": "used so allergies and restrictions could be inherited in cooking process",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Milk" },
+    "min": 0,
+    "max": 1,
+    "rate": "1 h"
+  }
+]

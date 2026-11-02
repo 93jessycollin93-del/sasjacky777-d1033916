@@ -8,10 +8,19 @@
  *  - A fresh random 16-byte salt per pod, stored in the header.
  *  - The GCM tag is kept with the frame, so tampering fails the open rather
  *    than returning wrong plaintext.
+ *  - The iteration count is read back out of the pod header, which means it
+ *    arrives from whoever wrote the pod rather than from this module. It is
+ *    bounded on the way in: too low and the KDF it names is not work-hardening
+ *    anything, too high and opening a pod is a way to hang the process holding
+ *    it.
  */
 const IV_BYTES = 12;
 const SALT_BYTES = 16;
 const KDF_ITERATIONS = 600_000;
+/** Floor: OWASP's PBKDF2-HMAC-SHA256 guidance, an order of magnitude down. */
+const MIN_KDF_ITERATIONS = 100_000;
+/** Ceiling: still seconds, not minutes, on hardware nobody would call fast. */
+const MAX_KDF_ITERATIONS = 10_000_000;
 
 export interface KdfParams { salt: string; iterations: number; }
 
@@ -23,6 +32,13 @@ export function newKdfParams(): KdfParams {
 
 export async function deriveKey(passphrase: string, params: KdfParams): Promise<CryptoKey> {
   if (!passphrase) throw new Error('passphrase required for an encrypted pod');
+  const iterations = params?.iterations;
+  if (!Number.isInteger(iterations) || iterations < MIN_KDF_ITERATIONS || iterations > MAX_KDF_ITERATIONS) {
+    throw new Error(
+      `pod declares an unusable KDF iteration count (${String(iterations)}); ` +
+      `expected an integer between ${MIN_KDF_ITERATIONS} and ${MAX_KDF_ITERATIONS}`,
+    );
+  }
   const material = await crypto.subtle.importKey(
     'raw', new TextEncoder().encode(passphrase), 'PBKDF2', false, ['deriveKey'],
   );
@@ -30,7 +46,7 @@ export async function deriveKey(passphrase: string, params: KdfParams): Promise<
     {
       name: 'PBKDF2',
       salt: Buffer.from(params.salt, 'base64'),
-      iterations: params.iterations,
+      iterations,
       hash: 'SHA-256',
     },
     material,

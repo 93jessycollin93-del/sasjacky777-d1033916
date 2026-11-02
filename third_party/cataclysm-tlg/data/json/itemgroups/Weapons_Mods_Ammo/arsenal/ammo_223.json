@@ -1,0 +1,110 @@
+[
+  {
+    "id": "ammo_can_223_any",
+    "type": "item_group",
+    "items": [ { "group": "ammo_can_clips_223", "prob": 100 }, { "group": "ammo_can_box_223_20tracer", "prob": 4 } ]
+  },
+  {
+    "id": "ammo_can_223_mg_any",
+    "type": "item_group",
+    "items": [
+      { "group": "ammo_can_belt223", "prob": 100 },
+      { "group": "ammo_can_belt223_ball", "prob": 100 },
+      { "group": "ammo_can_belt223_4ap_tracer_1", "prob": 100 },
+      { "group": "ammo_can_belt223_5ap", "prob": 100 }
+    ]
+  },
+  {
+    "id": "ammo_can_clips_223",
+    "type": "item_group",
+    "subtype": "collection",
+    "container-item": "ammunition_can_50",
+    "items": [ { "group": "box_223_clips", "count": [ 0, 8 ] } ]
+  },
+  {
+    "id": "box_223_clips",
+    "type": "item_group",
+    "container-item": "ammo_box",
+    "on_overflow": "discard",
+    "items": [ { "group": "clip223_10rd_556", "count": 2 } ]
+  },
+  {
+    "id": "clip223_10rd_556",
+    "type": "item_group",
+    "container-item": "clip223_10rd",
+    "items": [ { "item": "556_m855a1", "count": 1, "charges": 10 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_can_belt223",
+    "container-item": "ammunition_can_fat_50",
+    "items": [ { "group": "ammo_can_belt223", "count": [ 0, 3 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_can_belt223",
+    "container-item": "cheap_ammo_pouch_belt223",
+    "on_overflow": "discard",
+    "items": [ { "group": "belt223_4ball_1tracer" } ]
+  },
+  {
+    "type": "item_group",
+    "id": "belt223_4ball_1tracer",
+    "container-item": "belt223",
+    "subtype": "collection",
+    "items": [ { "item": "556_incendiary", "count": 1, "charges": 40 }, { "item": "556", "count": 1, "charges": 160 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_can_belt223_ball",
+    "container-item": "ammunition_can_fat_50",
+    "items": [ { "group": "belt223_ball", "count": [ 0, 3 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "belt223_ball",
+    "container-item": "belt223",
+    "subtype": "collection",
+    "items": [ { "item": "556", "count": 1, "charges": 200 } ]
+  },
+  {
+    "id": "ammo_can_box_223_20tracer",
+    "type": "item_group",
+    "subtype": "collection",
+    "container-item": "ammunition_can_50",
+    "items": [ { "group": "box_223_20_tracer", "count": [ 0, 10 ] } ]
+  },
+  {
+    "id": "box_223_20_tracer",
+    "type": "item_group",
+    "container-item": "ammo_box_small",
+    "on_overflow": "discard",
+    "items": [ { "item": "556_incendiary", "count": 1, "charges": 20 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_can_belt223_4ap_tracer_1",
+    "container-item": "ammunition_can_fat_50",
+    "items": [ { "group": "belt223_4ap_1tracer", "count": [ 0, 3 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "belt223_4ap_1tracer",
+    "container-item": "belt223",
+    "subtype": "collection",
+    "items": [ { "item": "556_incendiary", "count": 1, "charges": 40 }, { "item": "556_m995", "count": 1, "charges": 160 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_can_belt223_5ap",
+    "container-item": "ammunition_can_fat_50",
+    "items": [ { "group": "belt223_5ap", "count": [ 0, 3 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "belt223_5ap",
+    "container-item": "belt223",
+    "subtype": "collection",
+    "items": [ { "item": "556_m995", "count": 1, "charges": 200 } ]
+  }
+]

@@ -1,0 +1,416 @@
+[
+  {
+    "id": "armor_acidchitin",
+    "type": "requirement",
+    "//": "Shaping and attaching a biosillicified chitin plate to something, per 112 g of biosillicified chitin.  Time needed is 10 minutes per unit.  In the future when we have some bases, we should also add the requirement for a weak base to neutralize the chitin before crafting with it.",
+    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "components": [ [ [ "acidchitin_piece", 1 ] ], [ [ "filament", 1, "LIST" ] ] ]
+  },
+  {
+    "id": "armor_chainmail_assembling",
+    "type": "requirement",
+    "//": "Assembling chainmail rings into finished products, and riveting rings closed, per 1025 g of steel.  It is assumed that each ring used comes with a prepared rivet.  Time needed is 1 hour per unit (most of the time goes into making rings and then chainmail sheets first)",
+    "qualities": [ { "id": "WRENCH", "level": 1 } ],
+    "tools": [ [ [ "boltcutters", -1 ], [ "toolset", -1 ] ] ],
+    "components": [ [ [ "link_sheet", 1 ] ], [ [ "chain_link", 25 ] ] ]
+  },
+  {
+    "id": "armor_chitin",
+    "type": "requirement",
+    "//": "Shaping and attaching a chitin plate to something, per 90 g of chitin.  Time needed is 10 minutes per unit.",
+    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "components": [ [ [ "chitin_piece", 1 ] ], [ [ "filament", 1, "LIST" ] ] ]
+  },
+  {
+    "id": "armor_kevlar_rigid",
+    "type": "requirement",
+    "//": "Shaping and attaching a rigid Kevlar plate to something, per 430 g of rigid Kevlar.  Time needed is 45 minutes per unit.",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_plate", 1 ] ], [ [ "super_glue", 1 ] ] ]
+  },
+  {
+    "id": "armor_kevlar_layered",
+    "type": "requirement",
+    "//": "Joining Kevlar panels together into something like a Kevlar vest or other armor per 428 g of Kevlar.  Time needed is 45 minutes per unit.",
+    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet_layered", 1 ] ], [ [ "filament_durable", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "armor_steel_plate",
+    "type": "requirement",
+    "//": "Attaching a steel plate to some flexible material like cloth or leather, as well as working it into shape needed, per 251 g of steel.  Time needed is 20 minutes per unit.",
+    "qualities": [ { "id": "SAW_M", "level": 1 }, { "id": "HAMMER", "level": 1 }, { "id": "DRILL", "level": 1 } ],
+    "components": [ [ [ "sheet_metal_small", 1 ] ], [ [ "filament", 1, "LIST" ] ] ]
+  },
+  {
+    "id": "armor_paper",
+    "type": "requirement",
+    "//": "Joining multiple sheets of paper together using duct tape, per 19 g of paper.  Time needed is 2 minutes per unit.",
+    "components": [ [ [ "paper", 5 ] ], [ [ "duct_tape", 1 ] ] ]
+  },
+  {
+    "id": "armor_wood",
+    "type": "requirement",
+    "//": "Shaping and tying together multiple wood pieces of same size with lots of cordage, per 1463 g of wood.  Time needed is 30 minutes per unit.  Works for lamellar wooden armor as well as for planks tied to limbs.",
+    "qualities": [ { "id": "SAW_W", "level": 2 }, { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "2x4", 1 ] ], [ [ "cordage", 2, "LIST" ] ] ]
+  },
+  {
+    "id": "button",
+    "type": "requirement",
+    "//": "All kinds of clothing buttons.",
+    "components": [
+      [ [ "button_plastic", 1 ], [ "button_wood", 1 ], [ "button_bone", 1 ], [ "button_steel", 1 ], [ "button_bronze", 1 ] ]
+    ]
+  },
+  {
+    "id": "strap_small",
+    "type": "requirement",
+    "//": "A small piece of fabric or leather to strap something firmly to the body.  Stronger than a bit of string.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "cotton_patch", 3 ], [ "leather_patch", 3 ], [ "fur_patch", 3 ], [ "strap_cotton", 1 ] ] ]
+  },
+  {
+    "id": "strap_large",
+    "type": "requirement",
+    "//": "A long piece of fabric or leather to strap something firmly to the body.  Stronger than a bit of string.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "cordage_short", 1, "LIST" ], [ "leather_patch", 4 ], [ "fur_patch", 4 ], [ "strap_cotton", 1 ] ] ]
+  },
+  {
+    "id": "dye_cloth",
+    "type": "requirement",
+    "//": "Dyeing cloth items, per 500 ml of dyed cloth.  Use only for fancy clothing, otherwise it's unnecessary.  Takes 720 minutes, this doesn't depend on amount.",
+    "qualities": [ { "id": "COOK", "level": 3 } ],
+    "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
+    "components": [
+      [
+        [ "dye_powder", 5 ],
+        [ "tanbark", 1 ],
+        [ "coffee_raw", 1 ],
+        [ "coffee_raw_kentucky", 1 ],
+        [ "tea_raw", 1 ],
+        [ "mustard", 48 ],
+        [ "acorns", 1 ],
+        [ "wild_herbs", 100 ],
+        [ "raw_dandelion", 4 ],
+        [ "sugar_beet", 1 ],
+        [ "carrot", 12 ],
+        [ "carrot_wild", 6 ],
+        [ "onion", 1 ],
+        [ "blueberries", 1 ],
+        [ "strawberries", 1 ],
+        [ "cranberries", 3 ],
+        [ "raspberries", 1 ],
+        [ "huckleberries", 1 ],
+        [ "mulberries", 1 ],
+        [ "elderberries", 1 ],
+        [ "chokeberries", 1 ],
+        [ "blackberries", 1 ],
+        [ "cherries", 1 ],
+        [ "grapes", 1 ],
+        [ "pomegranate", 1 ],
+        [ "rose_hips", 1 ],
+        [ "cabbage", 1 ],
+        [ "celery", 1 ],
+        [ "mushroom", 1 ]
+      ],
+      [
+        [ "ammonia_liquid", 2 ],
+        [ "vinegar", 16 ],
+        [ "ash", 100 ],
+        [ "tanbark", 1 ],
+        [ "salt", 100 ],
+        [ "chem_potassium_alum", 100 ]
+      ],
+      [ [ "water", 3 ], [ "water_clean", 3 ] ]
+    ]
+  },
+  {
+    "id": "fastener_large",
+    "type": "requirement",
+    "//": "All kinds of fasteners for jacket-sized soft objects.",
+    "components": [ [ [ "zipper_long_plastic", 1 ], [ "button", 9, "LIST" ], [ "touch_fastener", 6 ], [ "snapfastener_steel", 9 ] ] ]
+  },
+  {
+    "id": "fastener_small",
+    "type": "requirement",
+    "//": "All kinds of fasteners for footwear-sized soft objects, including pockets.",
+    "components": [ [ [ "button", 3, "LIST" ], [ "zipper_short_plastic", 1 ], [ "snapfastener_steel", 3 ], [ "touch_fastener", 2 ] ] ]
+  },
+  {
+    "id": "fastener_shoes",
+    "type": "requirement",
+    "//": "Identical in every way to fastener_small but given string_6 first so that world objects spawn with shoelaces as those are much more common than button or zipper shoes.",
+    "components": [
+      [
+        [ "string_6", 2 ],
+        [ "cordage_6_leather", 2 ],
+        [ "zipper_short_plastic", 1 ],
+        [ "snapfastener_steel", 3 ],
+        [ "touch_fastener", 2 ],
+        [ "button", 3, "LIST" ]
+      ]
+    ]
+  },
+  {
+    "id": "clasps",
+    "type": "requirement",
+    "//": "All kinds of fasteners for strapped-on objects like belts, per single strap.",
+    "components": [ [ [ "button", 1, "LIST" ], [ "snapfastener_steel", 2 ], [ "buckle_steel", 1 ], [ "touch_fastener", 2 ] ] ]
+  },
+  {
+    "id": "plastic_molding",
+    "type": "requirement",
+    "//": "Melting and reshaping plastic items through the use of vacuum forming molds, per 70 g of plastic. Usually takes 30 minutes per unit.",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "tools": [ [ [ "makeshift_vacuum_mold", 4 ], [ "vac_mold", 2 ] ], [ [ "surface_heat", 5, "LIST" ] ] ],
+    "components": [ [ [ "polycarbonate_sheet", 1 ] ] ]
+  },
+  {
+    "id": "tailoring_cotton_sheet",
+    "type": "requirement",
+    "//": "35g per unit. Crafting possibly-patchwork cotton items, adjusted for tailoring rework. Time needed is usually 30 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet)",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "cotton_sheet", 1 ] ], [ [ "filament", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_cotton_sheet_simple",
+    "type": "requirement",
+    "//": "35g per unit. Crafting possibly-patchwork cotton items, adjusted for tailoring rework. Time needed is usually 30 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet).  Used for simpler items where precision cutting is less important.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "cotton_sheet", 1 ] ], [ [ "filament", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_cotton_patch",
+    "type": "requirement",
+    "//": "5g per unit. Crafting possibly-patchwork cotton items, adjusted for tailoring rework. Time needed is usually 15 minutes per unit if hand-stitching.  excessive weight of material is wasted, possibly producing cotton scraps.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "cotton_patch", 1 ] ], [ [ "filament", 3, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_cotton_patch_simple",
+    "type": "requirement",
+    "//": "5g per unit. Crafting possibly-patchwork cotton items, adjusted for tailoring rework. Time needed is usually 15 minutes per unit if hand-stitching.  excessive weight of material is wasted, possibly producing cotton scraps.  Used for simpler items where precision cutting is less important.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "cotton_patch", 1 ] ], [ [ "filament", 3, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_denim_sheet",
+    "type": "requirement",
+    "//": "85g per unit. Crafting possibly-patchwork denim items, adjusted for tailoring rework. Time needed is usually 40 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet)",
+    "qualities": [ { "id": "SEW", "level": 2 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "denim_sheet", 1 ] ], [ [ "filament", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_denim_patch",
+    "type": "requirement",
+    "//": "14g per unit. Crafting possibly-patchwork denim items, adjusted for tailoring rework. Time needed is usually 20 minutes per unit if hand-stitching.  excessive weight of material is wasted, possibly producing denim scraps.",
+    "qualities": [ { "id": "SEW", "level": 2 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "denim_patch", 1 ] ], [ [ "filament", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_canvas_sheet",
+    "type": "requirement",
+    "//": "85g per unit. Crafting possibly-patchwork cotton items, adjusted for tailoring rework. Time needed is usually 40 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet)",
+    "qualities": [ { "id": "SEW", "level": 2 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "canvas_sheet", 1 ] ], [ [ "filament_canvas", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_canvas_patch",
+    "type": "requirement",
+    "//": "14g per unit. Crafting possibly-patchwork cotton items, adjusted for tailoring rework. Time needed is usually 20 minutes per unit if hand-stitching.  excessive weight of material is wasted, possibly producing canvas scraps.",
+    "qualities": [ { "id": "SEW", "level": 2 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "canvas_patch", 1 ] ], [ [ "filament_canvas", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_faux_fur_sheet",
+    "type": "requirement",
+    "//": "350g per unit. Crafting possibly-patchwork faux fur items, per 371 g of faux fur; 21 g + excessive weight of material is wasted, producing faux fur patches and scraps.  Time needed is usually 40 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet).",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT_FINE", "level": 1 } ],
+    "components": [ [ [ "faux_fur_sheet", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_faux_fur_patch",
+    "type": "requirement",
+    "//": "40g per unit. Crafting possibly-patchwork faux fur items, per 46 g of faux fur; 6 g + excessive weight of material is wasted, producing faux fur scraps.  Time needed is usually 25 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet).",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT_FINE", "level": 1 } ],
+    "components": [ [ [ "faux_fur_patch", 1 ] ], [ [ "filament", 4, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_felt_sheet",
+    "type": "requirement",
+    "//": "25g per unit. Crafting possibly-patchwork felt items (not via knitting), per 28 g of felt; 3 g + excessive weight of material is wasted, producing felt patches as byproducts.  Time needed is usually 35 minutes per unit if hand-stitching. (most of the time actually needed goes into making a patchwork sheet)",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "felt_sheet", 1 ] ], [ [ "filament", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_felt_patch",
+    "type": "requirement",
+    "//": "3g per unit. Crafting possibly-patchwork felt items (not via knitting), per 3.4 g of felt; .4 g + excessive weight of material is wasted.  Time needed is usually 15 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "felt_patch", 1 ] ], [ [ "filament", 3, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_fur_sheet",
+    "type": "requirement",
+    "//": "250g per unit. Crafting fur items, per 372 g of fur; 122 g + excessive weight of material is wasted, producing fur patches as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching for extra material processing time.",
+    "qualities": [
+      { "id": "SEW", "level": 1 },
+      { "id": "FABRIC_CUT", "level": 1 },
+      { "id": "LEATHER_AWL", "level": 1 },
+      { "id": "CUT_FINE", "level": 1 }
+    ],
+    "components": [ [ [ "fur_sheet", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_fur_sheet_simple",
+    "type": "requirement",
+    "//": "250g per unit. Crafting fur items, per 372 g of fur; 122 g + excessive weight of material is wasted, producing fur patches as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching for extra material processing time.  Used for simpler items where precision cutting is less important.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "fur_sheet", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_fur_patch",
+    "type": "requirement",
+    "//": "35g per unit. Crafting either small or patchwork fur items, per 46 g of fur; 11 g + excessive weight of material is wasted, producing fur patches as byproducts.  Time needed is usually 15 minutes per unit if hand-stitching.",
+    "qualities": [
+      { "id": "SEW", "level": 1 },
+      { "id": "FABRIC_CUT", "level": 1 },
+      { "id": "LEATHER_AWL", "level": 1 },
+      { "id": "CUT_FINE", "level": 1 }
+    ],
+    "components": [ [ [ "fur_patch", 1 ] ], [ [ "filament", 3, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_kevlar_sheet",
+    "type": "requirement",
+    "//": "Crafting Kevlar items, per 26 g of Kevlar; 6 g + excessive weight of material is wasted, producing Kevlar scraps as byproducts.  Time needed is usually 40 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 2 }, { "id": "FABRIC_CUT", "level": 2 } ],
+    "components": [ [ [ "kevlar_sheet", 1 ] ], [ [ "filament_durable", 6, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_leather",
+    "type": "requirement",
+    "//": "275g per unit. Crafting leather items, per 296 g of leather; 21 g + excessive weight of material is wasted, producing leather patches as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "components": [ [ [ "leather_sheet", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_leather_sheet",
+    "type": "requirement",
+    "//": "275g per unit. Crafting leather items, per 296 g of leather; 21 g + excessive weight of material is wasted, producing leather patches as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "components": [ [ [ "leather_sheet", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_leather_sheet_simple",
+    "type": "requirement",
+    "//": "275g per unit. Crafting leather items, per 296 g of leather; 21 g + excessive weight of material is wasted, producing leather patches as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching.  Used for simpler items where precision cutting is less important.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "components": [ [ [ "leather_sheet", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_leather_small",
+    "type": "requirement",
+    "//": "35g per unit. Crafting either small or patchwork leather items, per 37 g of leather; 2 g + excessive weight of material is wasted, producing leather patches as byproducts.  Time needed is usually 15 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "filament", 3, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_spandex",
+    "type": "requirement",
+    "//": "30g per unit. Crafting spandex items, per 33 g of spandex; 3 g + excessive weight of material is wasted, producing spandex scraps as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "spandex_sheet", 1 ] ], [ [ "thread_nomex", 5 ] ] ]
+  },
+  {
+    "id": "tailoring_spandex_sheet",
+    "type": "requirement",
+    "//": "30g per unit. Crafting possibly-patchwork spandex items, per 33 g of spandex; 3 g + excessive weight of material is wasted, producing spandex scraps as byproducts.  Time needed is usually 90 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet).",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "spandex_sheet", 1 ] ], [ [ "thread_nomex", 5 ] ] ]
+  },
+  {
+    "id": "tailoring_spandex_patch",
+    "type": "requirement",
+    "//": "4g per unit. Crafting possibly-patchwork spandex items, per 4.18 g of spandex; .18 g + excessive weight of material is wasted, producing spandex scraps as byproducts.  Time needed is usually 30 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "spandex_patch", 1 ] ], [ [ "thread_nomex", 3 ] ] ]
+  },
+  {
+    "id": "tailoring_neoprene_sheet",
+    "type": "requirement",
+    "//": "25g per unit. Crafting possibly-patchwork neoprene items, per 26 g of neoprene; 1 g + excessive weight of material is wasted, producing neoprene scraps as byproducts.  Superglue and duct tape will usually be needed for extra waterproofing.  Time needed is usually 60 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet).",
+    "qualities": [ { "id": "SEW_CURVED", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_sheet", 1 ], [ "neoprene_sheet", 1 ] ], [ [ "filament", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_neoprene_patch",
+    "type": "requirement",
+    "//": "3g per unit. Crafting possibly-patchwork neoprene items, per 3 g of neoprene; .5 g + excessive weight of material is wasted, producing neoprene scraps as byproducts.  Superglue and duct tape will usually be needed for extra waterproofing.  Time needed is usually 30 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW_CURVED", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "neoprene_patch", 1 ] ], [ [ "filament", 3, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_nomex_sheet",
+    "type": "requirement",
+    "//": "30g per unit. Crafting possibly-patchwork Nomex items, per 32 g of Nomex; 2 g + excessive weight of material is wasted, producing Nomex scraps as byproducts.  Time needed is usually 45 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
+    "components": [ [ [ "nomex_sheet", 1 ] ], [ [ "thread_nomex", 5 ], [ "thread_kevlar", 5 ] ] ]
+  },
+  {
+    "id": "tailoring_nomex_patch",
+    "type": "requirement",
+    "//": "3g per unit. Crafting small Nomex items, per 32 g of Nomex; 1 g + excessive weight of material is wasted, producing Nomex scraps as byproducts.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
+    "components": [ [ [ "nomex_patch", 1 ] ], [ [ "thread_nomex", 3 ], [ "thread_kevlar", 3 ] ] ]
+  },
+  {
+    "id": "tailoring_nylon_sheet",
+    "type": "requirement",
+    "//": "40g per unit. Crafting possibly-patchwork synthetic fabric items, per 46 g of nylon; 6 g + excessive weight of material is wasted, producing synthetic fabric scraps as byproducts.  Time needed is usually 30 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet).",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "nylon_sheet", 1 ] ], [ [ "filament", 5, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_nylon_patch",
+    "type": "requirement",
+    "//": "5g per unit. Crafting possibly-patchwork synthetic fabric items, per 6 g of nylon; 1 g + excessive weight of material is wasted, producing synthetic fabric scraps as byproducts.  Time needed is usually 25 minutes per unit if hand-stitching.",
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
+    "components": [ [ [ "nylon_patch", 1 ] ], [ [ "filament", 3, "LIST" ] ] ]
+  },
+  {
+    "id": "tailoring_wool_knitting",
+    "type": "requirement",
+    "//": "Crafting wool items via knitting, per 1 g of wool; no material wasted.  Time needed is usually 2 minutes per unit if doing it by hand.",
+    "qualities": [ { "id": "KNIT", "level": 1 } ],
+    "components": [ [ [ "yarn", 1 ] ] ]
+  },
+  {
+    "id": "waterproofing_cloth",
+    "type": "requirement",
+    "//": "Waterproofing cloth items, per 500 ml of waterproofed cloth.  Takes 360 minutes, doesn't depend on amount.  Duct tape is needed to waterproof seams.",
+    "qualities": [ { "id": "COOK", "level": 3 }, { "id": "CUT", "level": 2 } ],
+    "tools": [ [ [ "water_boiling_heat", 2, "LIST" ] ] ],
+    "components": [
+      [ [ "chem_potassium_alum", 50 ] ],
+      [ [ "detergent", 10 ] ],
+      [ [ "water", 3 ], [ "water_clean", 3 ] ],
+      [ [ "duct_tape", 5 ] ]
+    ]
+  },
+  {
+    "id": "waterproofing_plastic_sheets",
+    "type": "requirement",
+    "//": "Making a waterproof layer from plastic sheets duct taped together, per 0.2 m2.",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "plastic_sheet_small", 1 ] ], [ [ "duct_tape", 5 ] ] ]
+  },
+  {
+    "id": "tanning_agent",
+    "type": "requirement",
+    "//": "Enough to make one tanned hide/pelt",
+    "components": [ [ [ "tanbark", 1 ], [ "acorns", 2 ], [ "hops", 2 ], [ "pine_bough", 6 ], [ "meat_brain", 3, "LIST" ] ] ]
+  }
+]

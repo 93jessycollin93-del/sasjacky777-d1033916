@@ -1,0 +1,51 @@
+[
+  {
+    "result": "leathersandals",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_FEET",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "1 h",
+    "autolearn": true,
+    "proficiencies": [
+      { "proficiency": "prof_cobbling" },
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" }
+    ],
+    "using": [ [ "tailoring_leather_sheet", 3 ] ]
+  },
+  {
+    "result": "mocassins",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_FEET",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "90 m",
+    "autolearn": true,
+    "proficiencies": [ { "proficiency": "prof_cobbling" }, { "proficiency": "prof_leatherworking_basic" } ],
+    "book_learn": [ [ "textbook_survival", 0 ], [ "pocket_survival", 0 ] ],
+    "using": [ [ "tailoring_leather_sheet", 2 ] ]
+  },
+  {
+    "result": "mocassins_fur",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_FEET",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "90 m",
+    "autolearn": true,
+    "proficiencies": [
+      { "proficiency": "prof_cobbling" },
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_furriery" }
+    ],
+    "book_learn": [ [ "textbook_survival", 0 ], [ "pocket_survival", 0 ] ],
+    "using": [ [ "tailoring_fur_sheet", 2 ] ]
+  }
+]

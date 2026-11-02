@@ -1,0 +1,130 @@
+[
+  {
+    "type": "addiction_type",
+    "id": "caffeine",
+    "name": "Craving Caffeine",
+    "type_name": "caffeine",
+    "description": "Life without caffeine is rough, but there are worse things to be hooked on.",
+    "sated": "6 hours",
+    "craving_morale": "morale_craving_caffeine",
+    "satisfying_effects": [ "caffeine_eff" ],
+    "effect_on_condition": "EOC_CAFFEINE_ADDICTION"
+  },
+  {
+    "type": "addiction_type",
+    "id": "nicotine",
+    "name": "Craving Nicotine",
+    "type_name": "nicotine",
+    "description": "A cigarette, a vape, even the gum would be better than going without.",
+    "sated": "4 hours",
+    "craving_morale": "morale_craving_nicotine",
+    "satisfying_effects": [ "cig" ],
+    "builtin": "nicotine_effect"
+  },
+  {
+    "type": "addiction_type",
+    "id": "alcohol",
+    "name": "Craving Alcohol",
+    "type_name": "alcohol",
+    "description": "A drink would make everything better.",
+    "sated": "6 hours",
+    "craving_morale": "morale_craving_alcohol",
+    "satisfying_effects": [ "drunk" ],
+    "builtin": "alcohol_effect"
+  },
+  {
+    "type": "addiction_type",
+    "id": "sleeping pill",
+    "name": "Sleeping Pill Insomnia",
+    "type_name": "sleeping pills",
+    "description": "You will have a hard time sleeping without help.",
+    "sated": "6 hours",
+    "satisfying_effects": [ "zolpidem", "took_antihistamine", "opioid_eff", "took_xanax", "valium" ],
+    "effect_on_condition": "EOC_SLEEP_ADDICTION"
+  },
+  {
+    "type": "addiction_type",
+    "id": "opioid",
+    "name": "Craving Opioids",
+    "type_name": "opioids",
+    "description": "You really need some painkillers.",
+    "sated": "6 hours",
+    "craving_morale": "morale_craving_opioid",
+    "satisfying_effects": [ "opioid_eff" ],
+    "builtin": "opioid_effect"
+  },
+  {
+    "type": "addiction_type",
+    "id": "amphetamine",
+    "name": "Craving Amphetamines",
+    "type_name": "amphetamine",
+    "description": "Everything is too much and too loud, and you can't keep up.",
+    "sated": "6 hours",
+    "craving_morale": "morale_craving_speed",
+    "satisfying_effects": [ "amphetamine_eff" ],
+    "builtin": "amphetamine_effect"
+  },
+  {
+    "type": "addiction_type",
+    "id": "cocaine",
+    "name": "Craving Cocaine",
+    "type_name": "cocaine",
+    "description": "Just a bump would fix you.",
+    "sated": "4 hours",
+    "craving_morale": "morale_craving_cocaine",
+    "satisfying_effects": [ "cocaine" ],
+    "builtin": "cocaine_effect"
+  },
+  {
+    "type": "addiction_type",
+    "id": "cannabis",
+    "name": "Craving Cannabis",
+    "type_name": "cannabis",
+    "description": "You could use some herb right now.",
+    "sated": "8 hours",
+    "craving_morale": "morale_craving_cannabis",
+    "satisfying_effects": [ "high" ],
+    "builtin": "cannabis_effect"
+  },
+  {
+    "type": "addiction_type",
+    "id": "diazepam",
+    "name": "Craving Benzodiazepines",
+    "type_name": "diazepam",
+    "description": "The world is way too much, you're freaking out.  You just need a chill pill, that's all.",
+    "sated": "6 hours",
+    "craving_morale": "morale_craving_diazepam",
+    "satisfying_effects": [ "valium", "took_xanax" ],
+    "builtin": "diazepam_effect"
+  },
+  {
+    "type": "addiction_type",
+    "id": "marloss_r",
+    "name": "Marloss Longing",
+    "type_name": "Marloss berries",
+    "description": "You should try some of those pink berries.",
+    "sated": "8 hours",
+    "craving_morale": "morale_craving_marloss",
+    "effect_on_condition": "EOC_MARLOSS_R_ADDICTION"
+  },
+  {
+    "type": "addiction_type",
+    "id": "marloss_b",
+    "name": "Marloss Desire",
+    "type_name": "Marloss seeds",
+    "description": "You should try some of those cyan seeds.",
+    "sated": "8 hours",
+    "craving_morale": "morale_craving_marloss",
+    "effect_on_condition": "EOC_MARLOSS_B_ADDICTION"
+  },
+  {
+    "type": "addiction_type",
+    "id": "marloss_y",
+    "name": "Marloss Cravings",
+    "type_name": "Marloss gel",
+    "description": "You should try some of that golden gel.",
+    "sated": "8 hours",
+    "craving_morale": "morale_craving_marloss",
+    "effect_on_condition": "EOC_MARLOSS_Y_ADDICTION"
+  }
+]

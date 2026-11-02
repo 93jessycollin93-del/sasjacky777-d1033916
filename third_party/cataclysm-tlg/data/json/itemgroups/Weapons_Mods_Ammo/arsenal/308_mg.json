@@ -1,0 +1,24 @@
+[
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_308_mg_gun&mags&cans",
+    "subtype": "collection",
+    "items": [ { "group": "milspec_arsenal_308_mg_gun&ammo" } ]
+  },
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_308_mg_gun&ammo",
+    "subtype": "collection",
+    "items": [ { "group": "milspec_arsenal_308_mg_gun&mags" }, { "group": "ammo_can_308_mg_any", "prob": 75, "count": [ 1, 2 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_308_mg_gun&mags",
+    "subtype": "collection",
+    "items": [
+      { "item": "m240", "count": 1 },
+      { "item": "m240", "count": 1, "prob": 40 },
+      { "item": "m240", "count": 1, "prob": 10 }
+    ]
+  }
+]

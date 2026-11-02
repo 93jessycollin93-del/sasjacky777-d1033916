@@ -1,0 +1,46 @@
+[
+  {
+    "id": "jet_thruster",
+    "type": "GENERIC",
+    "category": "veh_parts",
+    "name": { "str": "jet thruster" },
+    "description": "This is a jet propulsion module used in military fighter jets.  It provides extremely high thrust.",
+    "price": "20000000 USD",
+    "price_postapoc": "70 USD",
+    "weight": "300 kg",
+    "volume": "100 L",
+    "material": "steel",
+    "symbol": "^",
+    "color": "light_gray"
+  },
+  {
+    "id": "vtol_thruster",
+    "type": "GENERIC",
+    "category": "veh_parts",
+    "name": { "str": "VTOL thruster" },
+    "description": "This is a vertical takeoff and landing (VTOL) propulsion system used in military VTOL aircraft.  It provides both lift for taking off and thrust when in the air.",
+    "price": "5000000 USD",
+    "price_postapoc": "75 USD",
+    "weight": "200 kg",
+    "volume": "150 L",
+    "looks_like": "xl_wind_turbine",
+    "material": "steel",
+    "symbol": "O",
+    "color": "light_gray"
+  },
+  {
+    "id": "hover_repulsor",
+    "type": "WHEEL",
+    "category": "veh_parts",
+    "name": { "str": "hover repulsor" },
+    "description": "This is an experimental hover repulsor module mounted on the underside of a vehicle.  It allows the vehicle to glide and fly over rough terrain and obstacles.  Though originally thought to be frictionless, unknown antigrav phenomena nonetheless causes vehicles to experience a force similar to friction when near the ground.",
+    "price": "50000000 USD",
+    "price_postapoc": "1000 USD",
+    "weight": "60 kg",
+    "volume": "55 L",
+    "looks_like": "xl_wind_turbine",
+    "material": "superalloy",
+    "symbol": "O",
+    "color": "cyan"
+  }
+]

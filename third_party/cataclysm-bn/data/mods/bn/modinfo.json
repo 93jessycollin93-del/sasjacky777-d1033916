@@ -1,0 +1,14 @@
+[
+  {
+    "type": "MOD_INFO",
+    "id": "bn",
+    "name": "Bright Nights",
+    "description": "Core content for Cataclysm-BN",
+    "category": "core",
+    "core": true,
+    "lua_api_version": 2,
+    "loading_images": [ "loading/" ],
+    "path": "../../json",
+    "conflicts": [ "Tankmod_Revived", "Heavy miners", "Mining_Mod" ]
+  }
+]

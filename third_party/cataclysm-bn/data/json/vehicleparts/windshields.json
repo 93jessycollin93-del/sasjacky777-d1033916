@@ -1,0 +1,137 @@
+[
+  {
+    "abstract": "windshield_abstract",
+    "breaks_into": [ { "count": [ 2, 5 ], "item": "glass_shard" } ],
+    "broken_color": "light_gray",
+    "broken_symbol": "0",
+    "color": "light_cyan",
+    "damage_modifier": 70,
+    "description": "A sheet of glass that lets you see outside the vehicle.",
+    "durability": 50,
+    "flags": [ "OVER", "WINDSHIELD", "OBSTACLE", "WINDOW" ],
+    "item": "glass_sheet",
+    "location": "center",
+    "looks_like": "t_wall_glass",
+    "name": { "str": "windshield" },
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 1 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
+      "repair": {
+        "skills": [ [ "mechanics", 2 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 5 ], [ "vehicle_repair_glass", 2 ] ]
+      }
+    },
+    "symbol": "\"",
+    "type": "vehicle_part",
+    "default_color": "#622625"
+  },
+  {
+    "abstract": "reinforced_windshield_abstract",
+    "breaks_into": [ { "count": [ 2, 5 ], "item": "glass_shard" }, { "count": [ 4, 8 ], "item": "wire" } ],
+    "broken_color": "light_gray",
+    "broken_symbol": "0",
+    "color": "light_blue",
+    "damage_modifier": 80,
+    "damage_reduction": { "all": 16 },
+    "description": "A sheet of glass that lets you see outside the vehicle.  Reinforced with wire to make it harder to break than normal glass.",
+    "durability": 250,
+    "flags": [ "WINDSHIELD", "OBSTACLE", "WINDOW" ],
+    "item": "reinforced_glass_sheet",
+    "location": "center",
+    "looks_like": "windshield",
+    "name": { "str": "reinforced windshield" },
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 4 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
+      "repair": {
+        "skills": [ [ "mechanics", 5 ] ],
+        "time": "60 m",
+        "using": [ [ "welding_standard", 5 ], [ "vehicle_repair_glass", 2 ], [ "vehicle_repair_small_metal", 1 ] ]
+      }
+    },
+    "symbol": "\"",
+    "type": "vehicle_part",
+    "default_color": "#3f4535"
+  },
+  {
+    "abstract": "plastic_windshield_abstract",
+    "breaks_into": [ { "count": [ 10, 20 ], "item": "plastic_chunk" } ],
+    "broken_color": "light_gray",
+    "broken_symbol": "0",
+    "color": "light_cyan",
+    "damage_modifier": 75,
+    "description": "A translucent sheet of rigid that lets you see outside the vehicle.  Bit more durable than glass.",
+    "durability": 100,
+    "flags": [ "OVER", "WINDSHIELD", "OBSTACLE", "WINDOW" ],
+    "item": "rigid_plastic_sheet",
+    "location": "center",
+    "name": { "str": "plastic windshield" },
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 1 ] ], "time": "20 m", "using": [ [ "soldering_standard", 10 ] ] },
+      "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "10 m", "using": "vehicle_weld_removal" },
+      "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "using": [ [ "soldering_standard", 5 ], [ "plastics", 1 ] ] }
+    },
+    "symbol": "\"",
+    "type": "vehicle_part"
+  },
+  {
+    "copy-from": "windshield_abstract",
+    "id": "windshield",
+    "symbol": "\"",
+    "type": "vehicle_part",
+    "shapes": [
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "nw_edge", "symbol": "y" },
+      { "direction": "ne_edge", "symbol": "u" },
+      { "direction": "sw_edge", "symbol": "b" },
+      { "direction": "se_edge", "symbol": "n" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "H" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_front_edge", "symbol": "^" },
+      { "direction": "horizontal_rear", "symbol": "B" }
+    ]
+  },
+  {
+    "copy-from": "plastic_windshield_abstract",
+    "id": "plastic_windshield",
+    "looks_like": "windshield",
+    "symbol": "\"",
+    "type": "vehicle_part",
+    "shapes": [
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "sw", "symbol": "b" },
+      { "direction": "se", "symbol": "n" },
+      { "direction": "nw_edge", "symbol": "y" },
+      { "direction": "ne_edge", "symbol": "u" },
+      { "direction": "sw_edge", "symbol": "b" },
+      { "direction": "se_edge", "symbol": "n" },
+      { "direction": "vertical_left", "symbol": "j" },
+      { "direction": "vertical_right", "symbol": "H" },
+      { "direction": "horizontal_front", "symbol": "T" },
+      { "direction": "horizontal_front_edge", "symbol": "^" },
+      { "direction": "horizontal_rear", "symbol": "B" }
+    ]
+  },
+  {
+    "copy-from": "reinforced_windshield_abstract",
+    "id": "reinforced_windshield",
+    "symbol": "T",
+    "type": "vehicle_part",
+    "shapes": [
+      { "direction": "nw", "symbol": "y" },
+      { "direction": "ne", "symbol": "u" },
+      { "direction": "sw_edge", "symbol": "b" },
+      { "direction": "se_edge", "symbol": "n" },
+      { "direction": "vertical_left", "symbol": "[" },
+      { "direction": "vertical_right", "symbol": "]" },
+      { "direction": "horizontal_front", "symbol": "h" },
+      { "direction": "horizontal_rear_edge", "symbol": "B" }
+    ]
+  }
+]

@@ -1,0 +1,864 @@
+[
+  {
+    "type": "faction",
+    "id": "your_followers",
+    "name": "Your Followers",
+    "likes_u": 60,
+    "respects_u": 60,
+    "known_by_u": true,
+    "size": 1,
+    "power": 100,
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
+    "consumes_food": true,
+    "wealth": 0,
+    "relations": {
+      "your_followers": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      }
+    },
+    "mon_faction": "player",
+    "epilogues": [ { "power_min": 0, "power_max": 149, "id": "epilogue_faction_your_followers_0" } ],
+    "description": "The survivors who have entrusted you with their well-being.  If morale drops, poor performance and mutiny may become issues."
+  },
+  {
+    "type": "faction",
+    "id": "amf",
+    "name": "AMF",
+    "likes_u": -60,
+    "respects_u": -60,
+    "known_by_u": false,
+    "size": 1,
+    "power": 100,
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
+    "wealth": 0,
+    "relations": {
+      "your_followers": { "kill on sight": true, "knows your voice": true },
+      "amf": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      }
+    },
+    "description": "The survivors who formerly entrusted you with their well-being, but have now mutinied because of your abuse and incompetence.  They will kill you if they can."
+  },
+  {
+    "type": "faction",
+    "id": "robofac",
+    "name": "Hub 01",
+    "mon_faction": "robofac",
+    "likes_u": 15,
+    "respects_u": 15,
+    "known_by_u": false,
+    "size": 100,
+    "power": 100,
+    "//": "90 days worth of food for 10 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
+    "//2": "Expect to see these values a lot.",
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
+    "wealth": 100000000,
+    "currency": "RobofacCoin",
+    "price_rules": [
+      { "group": "NC_ROBOFAC_gear", "markup": 2 },
+      { "item": "money_strap_FMCNote", "purchase_rate": 0 },
+      { "item": "money_bundle_FMCNote", "purchase_rate": 0 },
+      { "item": "FMCNote", "purchase_rate": 0 },
+      { "category": "clothing", "purchase_rate": 0 },
+      { "category": "container", "purchase_rate": 0 },
+      { "category": "spare_parts", "purchase_rate": 0 },
+      { "category": "chems", "purchase_rate": 0 },
+      { "category": "food", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.05 },
+      { "category": "tools", "purchase_rate": 0 },
+      { "category": "armor", "purchase_rate": 0 },
+      { "category": "books", "purchase_rate": 0 },
+      { "category": "mods", "purchase_rate": 0 },
+      { "category": "seeds", "purchase_rate": 0 },
+      { "category": "ma_manuals", "purchase_rate": 0 },
+      { "category": "manuals", "purchase_rate": 0 },
+      { "category": "mutagen", "purchase_rate": 0.5 },
+      { "category": "drugs", "purchase_rate": 0 },
+      { "category": "ammo", "purchase_rate": 0 },
+      { "category": "weapons", "purchase_rate": 0 },
+      { "category": "guns", "purchase_rate": 0 },
+      { "category": "magazines", "purchase_rate": 0 },
+      { "category": "veh_parts", "purchase_rate": 0 },
+      { "category": "tool_magazine", "purchase_rate": 0 },
+      { "category": "other", "purchase_rate": 0 },
+      { "category": "maps", "purchase_rate": 0 },
+      { "item": "napalm", "purchase_rate": 0 },
+      { "item": "gelled_gasoline", "purchase_rate": 0 },
+      { "item": "flamethrower_fuel", "purchase_rate": 0 },
+      { "category": "bionics", "purchase_rate": 0.25 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "ultratech_all", "purchase_rate": 0.5 }
+    ],
+    "relations": {
+      "robofac": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "robofac_auxiliaries": { "share my stuff": true },
+      "marloss": { "kill on sight": true }
+    },
+    "epilogues": [
+      { "power_min": 0, "power_max": 149, "id": "epilogue_faction_robofac_0" },
+      { "power_min": 150, "power_max": 299, "id": "epilogue_faction_robofac_150" }
+    ],
+    "description": "A mysterious voice on the other end of an intercom."
+  },
+  {
+    "type": "faction",
+    "id": "robofac_auxiliaries",
+    "name": "Hub 01 Ancilla",
+    "likes_u": 15,
+    "respects_u": 15,
+    "known_by_u": false,
+    "size": 70,
+    "power": 100,
+    "//": "No food supply, they eat off of robofac's",
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
+    "wealth": 75000,
+    "currency": "RobofacCoin",
+    "relations": {
+      "robofac": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "marloss": { "kill on sight": true }
+    },
+    "description": "A loose association of skilled wastelanders, traders, mercenaries and scouts.  All working on behalf of Hub 01, for their own reasons."
+  },
+  {
+    "type": "faction",
+    "id": "old_guard",
+    "name": "The Old Guard",
+    "likes_u": 15,
+    "respects_u": 15,
+    "known_by_u": false,
+    "size": 100,
+    "power": 100,
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
+    "wealth": 100000000,
+    "relations": {
+      "old_guard": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "free_merchants": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": false,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "hells_raiders": { "kill on sight": true }
+    },
+    "epilogues": [
+      { "power_min": 0, "id": "epilogue_faction_old_guard_0" },
+      { "power_min": 150, "id": "epilogue_faction_old_guard_150" }
+    ],
+    "description": "The remains of the federal government.  The extent of their strength is unknown but squads of patrolling soldiers have been seen under their banner."
+  },
+  {
+    "type": "faction",
+    "id": "free_merchants",
+    "name": "The Free Merchants",
+    "likes_u": 30,
+    "respects_u": 30,
+    "known_by_u": false,
+    "size": 100,
+    "power": 100,
+    "//": "(only) 30 days worth of food for 100 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
+    "//2": "Their canonical starvation is not yet implemented.",
+    "fac_food_supply": [ [ 0, { "calories": 9000000000, "vitamins": { "iron": 288000, "calcium": 288000, "vitC": 288000 } } ] ],
+    "wealth": 75000000,
+    "currency": "FMCNote",
+    "price_rules": [
+      { "item": "money_strap_FMCNote", "fixed_adj": 0 },
+      { "item": "money_bundle_FMCNote", "fixed_adj": 0 },
+      { "item": "RobofacCoin", "purchase_rate": 0 },
+      { "item": "icon", "purchase_rate": 0 },
+      { "category": "clothing", "purchase_rate": 0 },
+      { "category": "container", "purchase_rate": 0 },
+      { "category": "spare_parts", "purchase_rate": 0 },
+      { "category": "chems", "purchase_rate": 0 },
+      { "category": "bionics", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.05 },
+      { "category": "tools", "purchase_rate": 0 },
+      { "category": "armor", "purchase_rate": 0 },
+      { "category": "books", "purchase_rate": 0 },
+      { "category": "mods", "purchase_rate": 0 },
+      { "category": "seeds", "purchase_rate": 0 },
+      { "category": "ma_manuals", "purchase_rate": 0 },
+      { "category": "manuals", "purchase_rate": 0 },
+      { "category": "mutagen", "purchase_rate": 0 },
+      { "category": "drugs", "purchase_rate": 0 },
+      { "category": "ammo", "purchase_rate": 0 },
+      { "category": "weapons", "purchase_rate": 0 },
+      { "category": "guns", "purchase_rate": 0 },
+      { "category": "magazines", "purchase_rate": 0 },
+      { "category": "veh_parts", "purchase_rate": 0 },
+      { "category": "tool_magazine", "purchase_rate": 0 },
+      { "category": "other", "purchase_rate": 0 },
+      { "category": "maps", "purchase_rate": 0 },
+      { "group": "toiletries", "purchase_rate": 0.5 },
+      { "group": "firstaid", "purchase_rate": 0.3 },
+      { "group": "drugs_medical_common", "purchase_rate": 0.3 },
+      { "group": "drugs_soft", "purchase_rate": 0.5 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "games_board_all", "purchase_rate": 0.5 },
+      { "item": "napalm", "purchase_rate": 0 },
+      { "item": "gelled_gasoline", "purchase_rate": 0 },
+      { "item": "flamethrower_fuel", "purchase_rate": 0 }
+    ],
+    "relations": {
+      "free_merchants": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "old_guard": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "tacoma_commune": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "lobby_beggars": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "share public goods": true,
+        "guard your stuff": true,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "wasteland_scavengers": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "no_faction": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "hells_raiders": { "kill on sight": true }
+    },
+    "epilogues": [
+      { "power_min": 0, "power_max": 149, "id": "epilogue_faction_free_merchants_0" },
+      { "power_min": 150, "id": "epilogue_faction_free_merchants_150" }
+    ],
+    "description": "A conglomeration of entrepreneurs and businessmen that stand together to hammer-out an existence through trade and industry."
+  },
+  {
+    "type": "faction",
+    "id": "lobby_beggars",
+    "name": "The Beggars in the Lobby",
+    "likes_u": 0,
+    "respects_u": 0,
+    "known_by_u": false,
+    "size": 5,
+    "power": 0,
+    "//": "No camp, on purpose! These guys will literally starve.",
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
+    "wealth": 100,
+    "relations": {
+      "lobby_beggars": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "free_merchants": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "old_guard": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "no_faction": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "wasteland_scavengers": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      }
+    },
+    "description": "A collection of mentally and physically disadvantaged survivors who beg for food in the Evac Center lobby."
+  },
+  {
+    "type": "faction",
+    "id": "tacoma_commune",
+    "name": "The Tacoma Commune",
+    "likes_u": 30,
+    "respects_u": 30,
+    "known_by_u": false,
+    "size": 100,
+    "power": 100,
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
+    "wealth": 10000000,
+    "currency": "FMCNote",
+    "price_rules": [
+      { "item": "money_strap_FMCNote", "fixed_adj": 0 },
+      { "item": "money_bundle_FMCNote", "fixed_adj": 0 },
+      { "item": "RobofacCoin", "purchase_rate": 0 },
+      { "item": "icon", "purchase_rate": 0 },
+      { "category": "clothing", "purchase_rate": 0 },
+      { "category": "container", "purchase_rate": 0 },
+      { "category": "spare_parts", "purchase_rate": 0 },
+      { "category": "chems", "purchase_rate": 0 },
+      { "category": "bionics", "purchase_rate": 0 },
+      { "category": "tools", "purchase_rate": 0 },
+      { "category": "armor", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.05 },
+      { "category": "books", "purchase_rate": 0 },
+      { "category": "mods", "purchase_rate": 0 },
+      { "category": "seeds", "purchase_rate": 0 },
+      { "category": "ma_manuals", "purchase_rate": 0 },
+      { "category": "manuals", "purchase_rate": 0 },
+      { "category": "mutagen", "purchase_rate": 0 },
+      { "category": "drugs", "purchase_rate": 0 },
+      { "category": "ammo", "purchase_rate": 0 },
+      { "category": "weapons", "purchase_rate": 0 },
+      { "category": "guns", "purchase_rate": 0 },
+      { "category": "magazines", "purchase_rate": 0 },
+      { "category": "veh_parts", "purchase_rate": 0 },
+      { "category": "tool_magazine", "purchase_rate": 0 },
+      { "category": "other", "purchase_rate": 0 },
+      { "category": "maps", "purchase_rate": 0 },
+      { "group": "toiletries", "purchase_rate": 0.4 },
+      { "group": "firstaid", "purchase_rate": 0.4 },
+      { "group": "drugs_medical_common", "purchase_rate": 0.3 },
+      { "group": "drugs_soft", "purchase_rate": 0.5 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "games_board_all", "purchase_rate": 0.3 },
+      { "item": "napalm", "purchase_rate": 0 },
+      { "item": "gelled_gasoline", "purchase_rate": 0 },
+      { "item": "flamethrower_fuel", "purchase_rate": 0 }
+    ],
+    "relations": {
+      "free_merchants": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      }
+    },
+    "epilogues": [
+      { "power_min": 0, "power_max": 149, "id": "epilogue_faction_tacoma_commune_0" },
+      { "power_min": 150, "id": "epilogue_faction_tacoma_commune_150" }
+    ],
+    "description": "An outpost started by the Free Merchants to provide a source of food and raw materials."
+  },
+  {
+    "type": "faction",
+    "id": "marloss",
+    "name": "Marloss Evangelists",
+    "likes_u": 15,
+    "respects_u": 0,
+    "known_by_u": false,
+    "size": 100,
+    "power": 100,
+    "//": "No camp, on purpose! The pilgrim group should probably be full marloss, and not need to eat?",
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
+    "wealth": 25000,
+    "relations": {
+      "marloss": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      }
+    },
+    "description": "Diverse bands, congregations and organizations with the common goal of preaching human survival through symbiosis with fungaloids."
+  },
+  {
+    "type": "faction",
+    "id": "no_faction",
+    "name": "No Faction",
+    "likes_u": 0,
+    "respects_u": 0,
+    "known_by_u": false,
+    "size": 1,
+    "power": 1,
+    "fac_food_supply": [ [ 0, { "calories": 1, "vitamins": {  } } ] ],
+    "lone_wolf_faction": true,
+    "wealth": 1,
+    "relations": {
+      "lobby_beggars": { "knows your voice": true },
+      "free_merchants": { "knows your voice": true },
+      "old_guard": { "knows your voice": true },
+      "wasteland_scavengers": { "knows your voice": true },
+      "no_faction": { "knows your voice": true }
+    },
+    "description": "A lone wolf, not aligned with any faction."
+  },
+  {
+    "type": "faction",
+    "id": "wasteland_scavengers",
+    "name": "The Wasteland Scavengers",
+    "likes_u": 0,
+    "respects_u": 0,
+    "known_by_u": false,
+    "size": 100,
+    "power": 100,
+    "//": "90 days worth of food for 10 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
+    "wealth": 2500000,
+    "relations": {
+      "lobby_beggars": { "knows your voice": true },
+      "free_merchants": { "knows your voice": true },
+      "old_guard": { "knows your voice": true },
+      "wasteland_scavengers": { "share my stuff": true, "guard your stuff": true, "knows your voice": true },
+      "no_faction": { "knows your voice": true }
+    },
+    "epilogues": [
+      { "power_min": 0, "power_max": 149, "id": "epilogue_faction_wasteland_scavengers_0" },
+      { "power_min": 150, "id": "epilogue_faction_wasteland_scavengers_150" }
+    ],
+    "description": "Autonomous bands or individuals who make their living raiding the ruins of the old-world for gear and provisions."
+  },
+  {
+    "type": "faction",
+    "id": "hells_raiders",
+    "name": "Bandits",
+    "likes_u": -25,
+    "respects_u": -25,
+    "known_by_u": false,
+    "size": 100,
+    "power": 100,
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
+    "wealth": 45000000,
+    "relations": {
+      "hells_raiders": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "slaves": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": false
+      },
+      "free_merchants": { "kill on sight": true },
+      "old_guard": { "kill on sight": true },
+      "your_followers": { "kill on sight": true }
+    },
+    "epilogues": [
+      { "power_min": 0, "power_max": 149, "id": "epilogue_faction_hells_raiders_0" },
+      { "power_min": 150, "id": "epilogue_faction_hells_raiders_150" }
+    ],
+    "description": "The largest gang of hooligans and bandits that preys upon other survivors.  Even if you have no gear, there is always a need for slaves and fresh meat."
+  },
+  {
+    "type": "faction",
+    "id": "slaves",
+    "name": "Enslaved individuals",
+    "likes_u": 0,
+    "respects_u": 0,
+    "known_by_u": false,
+    "size": 1,
+    "power": 1,
+    "fac_food_supply": [ [ 0, { "calories": 1, "vitamins": {  } } ] ],
+    "wealth": 1,
+    "relations": {
+      "slaves": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "hells_raiders": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "share public goods": true,
+        "guard your stuff": false,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": false
+      },
+      "free_merchants": { "kill on sight": false },
+      "old_guard": { "kill on sight": false },
+      "your_followers": { "kill on sight": false }
+    },
+    "description": "Individuals who have been enslaved or held prisoner for a long period of time, for various reasons."
+  },
+  {
+    "type": "faction",
+    "id": "gods_community",
+    "name": "New England Church Community",
+    "likes_u": 30,
+    "respects_u": 20,
+    "known_by_u": false,
+    "size": 25,
+    "power": 20,
+    "currency": "icon",
+    "price_rules": [
+      { "item": "money_strap_FMCNote", "purchase_rate": 0 },
+      { "item": "money_bundle_FMCNote", "purchase_rate": 0 },
+      { "item": "RobofacCoin", "purchase_rate": 0 },
+      { "item": "FMCNote", "purchase_rate": 0 },
+      { "category": "clothing", "purchase_rate": 0 },
+      { "category": "container", "purchase_rate": 0 },
+      { "category": "spare_parts", "purchase_rate": 0 },
+      { "category": "chems", "purchase_rate": 0 },
+      { "category": "bionics", "purchase_rate": 0 },
+      { "category": "tools", "purchase_rate": 0 },
+      { "category": "armor", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.08 },
+      { "category": "books", "purchase_rate": 0 },
+      { "category": "mods", "purchase_rate": 0 },
+      { "category": "seeds", "purchase_rate": 0 },
+      { "category": "ma_manuals", "purchase_rate": 0 },
+      { "category": "manuals", "purchase_rate": 0 },
+      { "category": "mutagen", "purchase_rate": 0 },
+      { "category": "drugs", "purchase_rate": 0 },
+      { "category": "ammo", "purchase_rate": 0.5 },
+      { "category": "weapons", "purchase_rate": 0 },
+      { "category": "guns", "purchase_rate": 0.5 },
+      { "category": "magazines", "purchase_rate": 0.5 },
+      { "category": "veh_parts", "purchase_rate": 0 },
+      { "category": "tool_magazine", "purchase_rate": 0 },
+      { "category": "other", "purchase_rate": 0 },
+      { "category": "maps", "purchase_rate": 0 },
+      { "group": "toiletries", "purchase_rate": 0.3 },
+      { "group": "firstaid", "purchase_rate": 0.5 },
+      { "group": "drugs_medical_common", "purchase_rate": 0.25 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "games_board_all", "purchase_rate": 0.5 },
+      { "item": "napalm", "purchase_rate": 0.5 },
+      { "item": "gelled_gasoline", "purchase_rate": 0.5 },
+      { "item": "flamethrower_fuel", "purchase_rate": 0.5 }
+    ],
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
+    "wealth": 82500,
+    "relations": {
+      "gods_community": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "free_merchants": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "old_guard": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": false
+      },
+      "tacoma_commune": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true
+      },
+      "lobby_beggars": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": false
+      },
+      "no_faction": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": true,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "wasteland_scavengers": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "hells_raiders": { "kill on sight": true },
+      "marloss": { "kill on sight": true }
+    },
+    "epilogues": [
+      { "power_min": 0, "power_max": 149, "id": "epilogue_faction_gods_community_0" },
+      { "power_min": 150, "id": "epilogue_faction_gods_community_150" }
+    ],
+    "description": "A small group of churchgoers that formed a community in the woods.  They welcome anyone in their faction, but hate the unnatural."
+  },
+  {
+    "type": "faction",
+    "id": "fisherman_family",
+    "name": "Fisherman Family",
+    "likes_u": 0,
+    "respects_u": 0,
+    "known_by_u": false,
+    "size": 3,
+    "power": 3,
+    "//": "FIXME: Currently no camps! Spawns via % chance in a bit of nested mapgen, then moves to an existing lighthouse (with no way to know which lighthouse during mapgen!). Will probably need some dynamic camp placement to support.",
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
+    "wealth": 20000,
+    "relations": {
+      "free_merchants": { "knows your voice": true },
+      "old_guard": { "knows your voice": true },
+      "your_followers": { "knows your voice": true },
+      "no_faction": { "knows your voice": true }
+    },
+    "description": "A small family trying to survive in this new world."
+  },
+  {
+    "type": "faction",
+    "id": "prisoners",
+    "name": "Prisoners",
+    "likes_u": 0,
+    "respects_u": 0,
+    "known_by_u": true,
+    "limited_area_claim": true,
+    "size": 100,
+    "power": 100,
+    "//": "7 days worth of food for 10 people, at 3000kcal/day and *half* RDA of iron/calcium/vitC",
+    "fac_food_supply": [ [ 0, { "calories": 210000000, "vitamins": { "iron": 3360, "calcium": 3360, "vitC": 3360 } } ] ],
+    "wealth": 45000000,
+    "relations": {
+      "hells_raiders": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": true,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": true,
+        "knows your voice": true
+      },
+      "free_merchants": { "kill on sight": true },
+      "old_guard": { "kill on sight": true },
+      "your_followers": { "kill on sight": false }
+    },
+    "epilogues": [
+      { "power_min": 0, "power_max": 149, "id": "epilogue_faction_prisoners_0" },
+      { "power_min": 150, "id": "epilogue_faction_prisoners_150" }
+    ],
+    "description": "Former prisoners who got their freedom during the apocalypse."
+  },
+  {
+    "type": "faction",
+    "id": "the_great_library",
+    "name": "The Great Library",
+    "likes_u": 30,
+    "respects_u": 30,
+    "known_by_u": false,
+    "size": 100,
+    "power": 100,
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
+    "wealth": 25000000,
+    "currency": "FlatCoin",
+    "price_rules": [
+      { "item": "money_strap_FMCNote", "purchase_rate": 0 },
+      { "item": "money_bundle_FMCNote", "purchase_rate": 0 },
+      { "item": "RobofacCoin", "purchase_rate": 0 },
+      { "item": "FMCNote", "purchase_rate": 0 },
+      { "category": "clothing", "purchase_rate": 0 },
+      { "category": "container", "purchase_rate": 0 },
+      { "category": "spare_parts", "purchase_rate": 0 },
+      { "category": "chems", "purchase_rate": 0 },
+      { "category": "food", "purchase_rate": 0 },
+      { "category": "fuel", "purchase_rate": 0.05 },
+      { "category": "tools", "purchase_rate": 0 },
+      { "category": "armor", "purchase_rate": 0 },
+      { "category": "mutagen", "purchase_rate": 0 },
+      { "category": "drugs", "purchase_rate": 0 },
+      { "category": "ammo", "purchase_rate": 0 },
+      { "category": "weapons", "purchase_rate": 0 },
+      { "category": "guns", "purchase_rate": 0 },
+      { "category": "magazines", "purchase_rate": 0 },
+      { "category": "veh_parts", "purchase_rate": 0 },
+      { "category": "tool_magazine", "purchase_rate": 0 },
+      { "category": "other", "purchase_rate": 0 },
+      { "category": "manuals", "premium": 1 },
+      { "category": "ma_manuals", "premium": 1 },
+      { "group": "literature", "premium": 1 },
+      { "group": "exotic_books", "premium": 2 },
+      { "group": "toiletries", "purchase_rate": 0.3 },
+      { "group": "firstaid", "purchase_rate": 0.5 },
+      { "group": "drugs_medical_common", "purchase_rate": 0.25 },
+      { "group": "drugs_soft", "purchase_rate": 0.25 },
+      { "group": "drugs_medical_important", "purchase_rate": 0.5 },
+      { "group": "games_board_all", "purchase_rate": 0.5 },
+      { "item": "napalm", "purchase_rate": 0 },
+      { "item": "gelled_gasoline", "purchase_rate": 0 },
+      { "item": "flamethrower_fuel", "purchase_rate": 0 }
+    ],
+    "relations": {
+      "free_merchants": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": true,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "old_guard": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "tacoma_commune": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "lobby_beggars": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "wasteland_scavengers": {
+        "kill on sight": false,
+        "watch your back": true,
+        "share my stuff": false,
+        "guard your stuff": true,
+        "lets you in": true,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "no_faction": {
+        "kill on sight": false,
+        "watch your back": false,
+        "share my stuff": false,
+        "guard your stuff": false,
+        "lets you in": false,
+        "defends your space": false,
+        "knows your voice": true
+      },
+      "hells_raiders": { "kill on sight": true }
+    },
+    "epilogues": [
+      { "power_min": 0, "power_max": 149, "id": "epilogue_faction_the_great_library_0" },
+      { "power_min": 150, "id": "epilogue_faction_the_great_library_150" }
+    ],
+    "description": "A group of academics and other survivors that stand together to preserve and spread knowledge of the world."
+  }
+]

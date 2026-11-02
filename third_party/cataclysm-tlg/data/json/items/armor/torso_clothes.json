@@ -1,0 +1,1588 @@
+[
+  {
+    "id": "waist_apron_long",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "long waist apron" },
+    "description": "A long cloth apron that haings from the waist.",
+    "copy-from": "apron_cotton",
+    "volume": "1750 ml",
+    "weight": "226 g",
+    "price": "10 USD",
+    "material": [ "cotton" ],
+    "material_thickness": 0.3,
+    "color": "white",
+    "delete": { "flags": [ "OUTER" ] },
+    "extend": { "flags": [ "BELTED" ] },
+    "armor": [
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ], "coverage": 100, "encumbrance": [ 1, 1 ] },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
+        "coverage": 70,
+        "encumbrance": 2,
+        "volume_encumber_modifier": 0.3
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 55,
+        "encumbrance": 1,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 70,
+        "encumbrance": 2,
+        "volume_encumber_modifier": 0.3,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 70,
+        "encumbrance": 2,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped",
+          "crab_leg_1_draped",
+          "crab_leg_2_draped",
+          "crab_leg_3_draped",
+          "crab_leg_4_draped"
+        ],
+        "layers": [ "BELTED" ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "750 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "30 cm",
+        "moves": 70
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "750 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "30 cm",
+        "moves": 70
+      }
+    ]
+  },
+  {
+    "id": "waist_apron_short",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "short waist apron" },
+    "description": "A short cloth apron that hangs from the waist.",
+    "copy-from": "apron_cotton",
+    "volume": "350 ml",
+    "weight": "136 g",
+    "price": "25 USD",
+    "material": [ "cotton" ],
+    "material_thickness": 0.3,
+    "color": "white",
+    "delete": { "flags": [ "OUTER" ] },
+    "extend": { "flags": [ "BELTED" ] },
+    "armor": [
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ], "coverage": 80, "encumbrance": [ 0, 0 ] },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 22,
+        "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
+        "volume_encumber_modifier": 0.3
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 0,
+        "volume_encumber_modifier": 0.3,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "long_tail" ],
+        "coverage": 22,
+        "volume_encumber_modifier": 0.3,
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 22,
+        "volume_encumber_modifier": 0.3,
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped",
+          "crab_leg_1_draped",
+          "crab_leg_2_draped",
+          "crab_leg_3_draped",
+          "crab_leg_4_draped"
+        ],
+        "layers": [ "BELTED" ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "750 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "27 cm",
+        "moves": 70
+      }
+    ]
+  },
+  {
+    "id": "apron_cotton",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cotton apron" },
+    "description": "An cloth apron that covers the front of the body.",
+    "copy-from": "apron_leather",
+    "volume": "1750 ml",
+    "weight": "357 g",
+    "price": "10 USD",
+    "material": [ "cotton" ],
+    "color": "white",
+    "material_thickness": 0.3,
+    "delete": { "flags": [ "RAINPROOF" ] }
+  },
+  {
+    "id": "apron_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather apron" },
+    "description": "A leather apron that covers the front of the body.",
+    "weight": "1925 g",
+    "volume": "2250 ml",
+    "price": "15 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "vest_leather",
+    "color": "brown",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 70, "encumbrance": 4, "volume_encumber_modifier": 0.3 },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 42,
+        "encumbrance": [ 5, 5 ],
+        "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 36,
+        "encumbrance": 3,
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "coverage": 42,
+        "encumbrance": 3,
+        "covers": [ "cephalopod_arm_1", "cephalopod_arm_4" ],
+        "specifically_covers": [ "cephalopod_arm_1_draped", "cephalopod_arm_4_draped" ],
+        "layers": [ "BELTED" ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "750 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "28 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "750 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "28 cm",
+        "moves": 80
+      }
+    ],
+    "warmth": 2,
+    "material_thickness": 1.5,
+    "environmental_protection": 1,
+    "flags": [ "POCKETS", "OUTER", "RAINPROOF" ]
+  },
+  {
+    "id": "apron_plastic",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "plastic apron" },
+    "description": "An apron made of plastic that covers the front of the body, provides some protection against accidental chemical splashes.",
+    "copy-from": "apron_leather",
+    "weight": "391 g",
+    "material": [ "vinyl" ],
+    "material_thickness": 1.2,
+    "color": "light_cyan",
+    "extend": { "flags": [ "TRANSPARENT", "RAINPROOF" ] }
+  },
+  {
+    "id": "apron_cut_resistant",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "cut-resistant apron" },
+    "description": "A Kevlar apron that covers the front of the body.",
+    "copy-from": "apron_leather",
+    "weight": "576 g",
+    "price": "38 USD",
+    "material": [ "kevlar" ],
+    "color": "dark_gray",
+    "material_thickness": 2.5
+  },
+  {
+    "id": "blazer",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "blazer" },
+    "description": "A professional-looking wool blazer.",
+    "weight": "680 g",
+    "volume": "3500 ml",
+    "price": "120 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "jacket_light",
+    "color": "dark_gray",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 85, "encumbrance": [ 16, 20 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 85, "encumbrance": [ 16, 16 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 85, "encumbrance": [ 16, 16 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "11 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "11 cm",
+        "moves": 80
+      }
+    ],
+    "warmth": 25,
+    "material_thickness": 1.2,
+    "flags": [ "VARSIZE", "FANCY", "OUTER" ]
+  },
+  {
+    "id": "cheerleader_dress",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cheerleader dress", "str_pl": "cheerleader dresses" },
+    "description": "A light and breezy cheerleader dress.  It's blue and white with the word \"Cheers\" printed at the top.",
+    "weight": "200 g",
+    "volume": "500 ml",
+    "price": "12 USD 50 cent",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "sundress",
+    "color": "blue",
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "coverage": 85, "covers": [ "torso" ] },
+      { "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_hip_l", "leg_hip_r" ], "coverage": 100 },
+      { "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_upper_l", "leg_upper_r" ], "coverage": 25 }
+    ]
+  },
+  {
+    "id": "combat_shirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "combat shirt" },
+    "description": "An oddly balanced long-sleeved shirt with a thin, breathable torso and thicker arms more appropriate for a jacket.  The arms are covered in a camouflage pattern and have two shoulder pockets.  It has a pocket for your pen!",
+    "weight": "450 g",
+    "volume": "3 L",
+    "price": "64 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "material": [ "nylon" ],
+    "symbol": "[",
+    "looks_like": "jacket_army",
+    "color": "green",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": 3 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 7, 9 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 95, "encumbrance": [ 7, 9 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "13 cm",
+        "moves": 120
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "13 cm",
+        "moves": 120
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "10 ml",
+        "max_contains_weight": "50 g",
+        "max_item_length": "13 cm",
+        "moves": 120
+      }
+    ],
+    "warmth": 5,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE", "POCKETS" ]
+  },
+  {
+    "id": "dress",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "dress", "str_pl": "dresses" },
+    "description": "A long cotton dress.",
+    "weight": "680 g",
+    "volume": "3500 ml",
+    "price": "180 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -5,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "robe",
+    "color": "pink",
+    "warmth": 10,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "FANCY" ],
+    "armor": [ { "encumbrance": 7, "coverage": 85, "covers": [ "torso", "leg_l", "leg_r" ] } ]
+  },
+  {
+    "id": "denim_shirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "denim shirt" },
+    "description": "A long sleeved button-down shirt made from denim.",
+    "//": "This is for 12 oz denim shirt, which I found to be average",
+    "weight": "680 g",
+    "volume": "1 L",
+    "price": "50 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "denim" ],
+    "looks_like": "dress_shirt",
+    "symbol": "[",
+    "color": "light_blue",
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 16, 17 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 16, 16 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 85, "encumbrance": [ 16, 16 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "10 cm",
+        "moves": 75
+      }
+    ],
+    "warmth": 20,
+    "material_thickness": 0.8
+  },
+  {
+    "id": "dress_shirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "dress shirt" },
+    "description": "A white button-down shirt with long sleeves.  Looks professional!",
+    "weight": "250 g",
+    "volume": "750 ml",
+    "price": "15 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "longshirt",
+    "color": "white",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 98, "encumbrance": [ 4, 5 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 4, 4 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 85, "encumbrance": [ 4, 4 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "250 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": false,
+        "max_contains_weight": "12 g",
+        "max_contains_volume": "3 ml",
+        "max_item_length": "85 mm",
+        "moves": 100,
+        "description": "Eyelets for a collar pin",
+        "flag_restriction": [ "SHIRT_COLLAR_ACCESSORY" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": false,
+        "max_contains_weight": "22 g",
+        "max_contains_volume": "3 ml",
+        "max_item_length": "85 mm",
+        "moves": 100,
+        "description": "Buttonholes for cufflinks",
+        "flag_restriction": [ "SHIRT_CUFF_ACCESSORY" ]
+      }
+    ],
+    "warmth": 10,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "FANCY" ]
+  },
+  {
+    "id": "dress_wedding",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "wedding dress", "str_pl": "wedding dresses" },
+    "description": "A beautiful white wedding dress.  What good will it be now?",
+    "weight": "9333 g",
+    "volume": "18 L",
+    "price": "590 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -5,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "dress",
+    "color": "white",
+    "warmth": 16,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "SUPER_FANCY" ],
+    "armor": [
+      { "coverage": 90, "covers": [ "torso" ], "encumbrance": 12 },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 100, "encumbrance": 20 }
+    ]
+  },
+  {
+    "id": "flag_shirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "flag t-shirt" },
+    "description": "A t-shirt embroidered with an American flag pattern.",
+    "weight": "158 g",
+    "volume": "500 ml",
+    "price": "60 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "tshirt",
+    "color": "light_red",
+    "warmth": 10,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      { "coverage": 90, "covers": [ "torso" ], "encumbrance": 4 },
+      {
+        "coverage": 100,
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
+      },
+      { "coverage": 40, "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ] },
+      {
+        "coverage": 30,
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]
+      }
+    ]
+  },
+  {
+    "id": "flotation_vest",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "flotation vest" },
+    "description": "A brightly-colored vest designed to keep you upright and floating in water.",
+    "weight": "451 g",
+    "volume": "9 L",
+    "price": "110 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": -3,
+    "material": [ "plastic", "canvas" ],
+    "symbol": "[",
+    "looks_like": "vest_leather",
+    "color": "yellow",
+    "warmth": 3,
+    "material_thickness": 4,
+    "flags": [ "FLOTATION", "WATER_FRIENDLY", "BELTED" ],
+    "armor": [ { "encumbrance": 40, "coverage": 40, "covers": [ "torso" ] } ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "flotation_vest_ms",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "makeshift flotation vest" },
+    "description": "A flotation vest made of inflated animal skins.",
+    "weight": "451 g",
+    "volume": "9 L",
+    "price": "110 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": -3,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "vest_leather",
+    "color": "brown",
+    "warmth": 5,
+    "material_thickness": 2,
+    "flags": [ "FLOTATION", "WATER_FRIENDLY", "BELTED" ],
+    "armor": [ { "encumbrance": 50, "coverage": 40, "covers": [ "torso" ] } ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "gown",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "evening gown" },
+    "description": "A luxurious evening gown.  It accentuates your curves, or lack thereof.",
+    "weight": "1800 g",
+    "volume": "5 L",
+    "price": "210 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "dress",
+    "color": "dark_gray",
+    "warmth": 10,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE", "SUPER_FANCY" ],
+    "armor": [ { "encumbrance": 14, "coverage": 75, "covers": [ "torso", "leg_l", "leg_r" ] } ]
+  },
+  {
+    "id": "halter_top",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "halter top" },
+    "description": "A short top made from cotton.",
+    "weight": "100 g",
+    "volume": "500 ml",
+    "price": "20 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -5,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "tank_top",
+    "color": "pink",
+    "warmth": 2,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [ { "coverage": 25, "covers": [ "torso" ] } ]
+  },
+  {
+    "id": "hoodie",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "hoodie" },
+    "description": "A sweatshirt with a hood and a \"kangaroo pocket\" in the front for storage.",
+    "weight": "420 g",
+    "volume": "3 L",
+    "price": "38 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "sweater",
+    "color": "dark_gray",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 6, 12 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 6, 6 ] },
+      { "coverage": 95, "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "encumbrance": [ 6, 6 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "3 L",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "36 cm",
+        "moves": 80
+      }
+    ],
+    "warmth": 20,
+    "material_thickness": 1,
+    "flags": [ "VARSIZE", "POCKETS", "HOOD" ]
+  },
+  {
+    "id": "jersey",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "sports jersey" },
+    "//": "Genuine team merch, and priced like it!",
+    "description": "A shirt made of cotton, printed with the name and logo of a sports team.",
+    "weight": "480 g",
+    "volume": "2250 ml",
+    "price": "89 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "tshirt",
+    "color": "yellow",
+    "warmth": 12,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance": 7,
+        "coverage": 90,
+        "covers": [ "torso", "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ]
+      }
+    ]
+  },
+  {
+    "id": "leotard",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leotard" },
+    "description": "A skin-tight spandex garment, covering the body from the groin to the shoulders.  With its deep scoop-cut back and high waist cuts, this garment is perfect for showcasing your physique on the stage.",
+    "weight": "150 g",
+    "volume": "500 ml",
+    "price": "10 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "spandex" ],
+    "symbol": "[",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.08,
+    "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
+    "armor": [ { "coverage": 80, "covers": [ "torso" ] } ]
+  },
+  {
+    "id": "longshirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "long-sleeved t-shirt" },
+    "description": "A soft cotton shirt with long sleeves.",
+    "weight": "146 g",
+    "volume": "750 ml",
+    "price": "20 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "dress_shirt",
+    "color": "blue",
+    "warmth": 5,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 98, "encumbrance": 4 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 4 },
+      { "coverage": 95, "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "encumbrance": 4 }
+    ]
+  },
+  {
+    "id": "longshirt_costume",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str_sp": "long-sleeved shirt" },
+    "description": "A long-sleeved cotton shirt.",
+    "copy-from": "longshirt",
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "shirt_striped",
+        "name": { "str": "striped shirt" },
+        "description": "A long-sleeved shirt with horizontal black and white stripes.",
+        "color": "light_gray"
+      }
+    ]
+  },
+  {
+    "id": "turtleneck",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "turtleneck" },
+    "description": "A tasteful wool turtleneck, modeled after cashmere.  Unencumbering and warm, but lacking storage.",
+    "category": "clothing",
+    "weight": "478 g",
+    "volume": "2500 ml",
+    "price": "50 USD",
+    "price_postapoc": "60 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "sweater",
+    "color": "white",
+    "warmth": 30,
+    "material_thickness": 0.3,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS", "COLLAR" ],
+    "armor": [
+      { "encumbrance": 3, "coverage": 98, "covers": [ "arm_l", "arm_r" ] },
+      { "coverage": 95, "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "encumbrance": 3 },
+      { "encumbrance": 3, "coverage": 98, "covers": [ "torso" ] },
+      { "encumbrance": 1, "coverage": 98, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
+    ]
+  },
+  {
+    "id": "turtleneck_shirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "turtleneck shirt" },
+    "description": "A tasteful shirt with a high rolled collar.  It's too thin to be called a sweater.",
+    "category": "clothing",
+    "weight": "300 g",
+    "volume": "2000 ml",
+    "price": "20 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "sweater",
+    "color": "white",
+    "warmth": 20,
+    "material_thickness": 0.5,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS", "COLLAR" ],
+    "armor": [
+      { "encumbrance": 2, "coverage": 98, "covers": [ "arm_l", "arm_r" ] },
+      { "coverage": 95, "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "encumbrance": 2 },
+      { "encumbrance": 2, "coverage": 98, "covers": [ "torso" ] },
+      { "encumbrance": 0, "coverage": 98, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
+    ]
+  },
+  {
+    "id": "shirt_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "buckskin shirt" },
+    "description": "An overshirt made of thin, lightweight leather.",
+    "weight": "500 g",
+    "volume": "1250 ml",
+    "price": "42 USD",
+    "price_postapoc": "1 USD",
+    "to_hit": -5,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "shirt_western",
+    "color": "brown",
+    "warmth": 15,
+    "material_thickness": 1.0,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 14 },
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 14 },
+      { "coverage": 95, "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "encumbrance": 14 }
+    ]
+  },
+  {
+    "id": "shirt_leather_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "buckskin shirt" },
+    "copy-from": "shirt_leather",
+    "looks_like": "shirt_leather",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "shirt_leather_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "shirt_leather",
+    "looks_like": "shirt_leather",
+    "name": { "str": "buckskin shirt" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "vest_leather_light",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "buckskin vest" },
+    "description": "A vest made of thin, lightweight leather.",
+    "weight": "500 g",
+    "volume": "1250 ml",
+    "price": "42 USD",
+    "price_postapoc": "1 USD",
+    "to_hit": -5,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "tacvest",
+    "color": "brown",
+    "warmth": 15,
+    "material_thickness": 1.0,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 14 },
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 }
+    ]
+  },
+  {
+    "id": "vest_leather_light_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "buckskin vest" },
+    "copy-from": "vest_leather_light",
+    "looks_like": "vest_leather_light",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "vest_leather_light_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "vest_leather_light",
+    "looks_like": "vest_leather_light",
+    "name": { "str": "buckskin vest" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "polo_shirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "polo shirt" },
+    "description": "A short-sleeved cotton shirt, slightly thicker than a t-shirt.",
+    "weight": "136 g",
+    "volume": "750 ml",
+    "price": "15 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "tshirt",
+    "color": "light_red",
+    "warmth": 10,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "encumbrance": 6, "coverage": 90, "covers": [ "torso" ] },
+      {
+        "coverage": 100,
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
+      },
+      { "coverage": 40, "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ] },
+      {
+        "coverage": 30,
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 80
+      }
+    ]
+  },
+  {
+    "id": "postman_shirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "mail carrier shirt" },
+    "description": "A light blue button down shirt with a couple of pockets in front and the US postal service logo embroidered on it.",
+    "weight": "110 g",
+    "volume": "500 ml",
+    "price": "15 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "polo_shirt",
+    "color": "light_blue",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 80
+      }
+    ],
+    "warmth": 5,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "coverage": 90, "covers": [ "torso" ], "encumbrance": [ 6, 8 ] },
+      {
+        "encumbrance": [ 2, 2 ],
+        "coverage": 100,
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
+      },
+      {
+        "encumbrance": [ 0, 0 ],
+        "coverage": 40,
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_upper_l", "arm_upper_r" ]
+      },
+      {
+        "coverage": 30,
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": [ 2, 2 ]
+      }
+    ]
+  },
+  {
+    "id": "santa_dress",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Santa dress", "str_pl": "Santa dresses" },
+    "description": {
+      "//NOLINT(cata-text-style)": "The dot after Mrs is not a period",
+      "str": "A sleeved red dress with white faux fur trim.  For when you want to be Mrs. Claus on Christmas, or perhaps Santa going clubbing."
+    },
+    "weight": "800 g",
+    "volume": "3500 ml",
+    "price": "180 USD",
+    "price_postapoc": "60 cent",
+    "to_hit": -5,
+    "material": [ "cotton", "faux_fur" ],
+    "symbol": "[",
+    "looks_like": "dress",
+    "color": "red",
+    "warmth": 20,
+    "material_thickness": 0.4,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": 10 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": 8 },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 95, "encumbrance": 8 },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
+        "coverage": 100,
+        "encumbrance": 5
+      },
+      { "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_upper_l", "leg_upper_r" ], "coverage": 50 }
+    ]
+  },
+  {
+    "id": "santa_dress_long",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "luxury Santa dress", "str_pl": "luxury Santa dresses" },
+    "description": "A long red dress with full sleeves and white faux fur trim.  A dress for a queen of the north pole.",
+    "weight": "1200 g",
+    "volume": "3850 ml",
+    "price": "250 USD",
+    "price_postapoc": "90 cent",
+    "to_hit": -5,
+    "material": [ "cotton", "faux_fur" ],
+    "symbol": "[",
+    "looks_like": "santa_dress",
+    "color": "red",
+    "warmth": 25,
+    "material_thickness": 0.8,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 85, "encumbrance": 8 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 85, "encumbrance": 6 },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 80, "encumbrance": 6 },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 100, "encumbrance": 8 }
+    ]
+  },
+  {
+    "id": "santa_dress_short",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "short Santa dress", "str_pl": "short Santa dresses" },
+    "description": {
+      "//NOLINT(cata-text-style)": "The dot after Mrs is not a period",
+      "str": "A short red dress with white faux fur trim.  Looks like something Mrs. Claus might wear on Christmas night."
+    },
+    "weight": "600 g",
+    "volume": "2000 ml",
+    "price": "160 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -5,
+    "material": [ "cotton", "faux_fur" ],
+    "symbol": "[",
+    "looks_like": "sundress",
+    "color": "red",
+    "warmth": 15,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 75, "encumbrance": 4 },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
+        "coverage": 100,
+        "encumbrance": 4
+      },
+      { "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_upper_l", "leg_upper_r" ], "coverage": 40 }
+    ]
+  },
+  {
+    "id": "shirt_western",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "western shirt" },
+    "description": "A long-sleeved shirt with snap buttons down the front, a style traditionally associated with the Old West.",
+    "weight": "250 g",
+    "volume": "750 ml",
+    "price": "11 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "dress_shirt",
+    "color": "brown",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 98, "encumbrance": [ 6, 8 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 6, 6 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 95, "encumbrance": [ 6, 6 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": false,
+        "max_contains_weight": "12 g",
+        "max_contains_volume": "3 ml",
+        "max_item_length": "85 mm",
+        "moves": 100,
+        "description": "Eyelets for a collar pin",
+        "flag_restriction": [ "SHIRT_COLLAR_ACCESSORY" ]
+      }
+    ],
+    "warmth": 10,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE" ]
+  },
+  {
+    "id": "shirt_straw",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "grass shirt" },
+    "description": "A crude and bulky short-sleeved shirt woven from grass.  Definitely not the most comfortable thing to wear.",
+    "weight": "500 g",
+    "volume": "2500 ml",
+    "price": "1 USD",
+    "price_postapoc": "5 cent",
+    "material": [ "dry_plant" ],
+    "symbol": "[",
+    "looks_like": "camisole",
+    "color": "yellow",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 90, "encumbrance": 8 },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r" ],
+        "coverage": 40,
+        "encumbrance": 1
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "coverage": 40,
+        "encumbrance": 1
+      }
+    ],
+    "warmth": 5,
+    "material_thickness": 0.5,
+    "flags": [ "VARSIZE" ]
+  },
+  {
+    "id": "dress_costume",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "costume dress", "str_pl": "costume dresses" },
+    "description": { "str": "A long-sleeved gown made of cheap costumey material." },
+    "weight": "800 g",
+    "volume": "3500 ml",
+    "price": "180 USD",
+    "price_postapoc": "60 cent",
+    "material": [ "spandex" ],
+    "symbol": "[",
+    "looks_like": "dress",
+    "color": "dark_gray",
+    "warmth": 10,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 80, "encumbrance": 6 },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 8 }
+    ],
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "sinister_dress",
+        "name": { "str": "sinister gown" },
+        "description": "A sleeveless gown in a dramatic gothic style - part of a halloween costume, or maybe a piece of clubwear.",
+        "color": "dark_gray"
+      },
+      {
+        "id": "princess_dress",
+        "name": { "str": "princess dress" },
+        "description": "A pink and white dress made of gauzy tulle, a perfect costume for a princess.",
+        "color": "light_red"
+      },
+      {
+        "id": "elven_dress",
+        "name": { "str": "elven gown" },
+        "description": "This sleeveless gown is made of a plush green material, a costume imitation of velvet.",
+        "color": "green"
+      }
+    ]
+  },
+  {
+    "id": "dress_costume_skimpy",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "skimpy costume dress", "str_pl": "skimpy costume dresses" },
+    "description": { "str": "A scandalously short dress, the sort of thing young women wear for halloween." },
+    "weight": "600 g",
+    "volume": "2000 ml",
+    "price": "160 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "spandex" ],
+    "symbol": "[",
+    "looks_like": "sundress",
+    "color": "red",
+    "warmth": 4,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 75, "encumbrance": 6 },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ],
+        "coverage": 80,
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
+        "coverage": 100,
+        "encumbrance": 4
+      },
+      { "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_upper_l", "leg_upper_r" ], "coverage": 40 }
+    ],
+    "variants": [
+      {
+        "id": "pirate_dress",
+        "name": { "str": "skimpy pirate dress" },
+        "description": "A teeny tiny little dress festooned with lace and frills.  It sort of looks like stereotypical pirate's garb.",
+        "color": "red"
+      },
+      {
+        "id": "police_dress",
+        "name": { "str": "sexy cop costume" },
+        "description": "This dangerously short dress is made to resemble a police uniform, though the badge is merely embroidered on.",
+        "color": "light_blue"
+      },
+      {
+        "id": "maid_dress",
+        "name": { "str": "French maid outfit" },
+        "description": "A kinky little number consisting of a black bodice and miniskirt fluffed up with white lace and tulle.  It's a lot sexier than what an actual housekeeper would wear.",
+        "color": "dark_gray"
+      },
+      {
+        "id": "nurse_dress",
+        "name": { "str": "nurse costume" },
+        "description": "This skimpy white dress looks like the sort of thing only a particularly naughty nurse might wear.  Normally nurses just wear scrubs.",
+        "color": "light_gray"
+      },
+      {
+        "id": "gothic_dress",
+        "name": { "str": "gothic dress" },
+        "description": "A lacy red and black mini dress in a cutesy gothic style.",
+        "color": "dark_gray"
+      },
+      {
+        "id": "bee_dress",
+        "name": { "str": "sexy bee dress" },
+        "description": "A skimpy dress striped in yellow and black to invoke the image of a honey bee.",
+        "color": "yellow"
+      }
+    ]
+  },
+  {
+    "id": "sundress",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "sundress", "str_pl": "sundresses" },
+    "description": "A light and breezy cotton dress.",
+    "weight": "300 g",
+    "volume": "1 L",
+    "price": "40 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -5,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "dress",
+    "color": "yellow",
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "FANCY" ],
+    "armor": [
+      { "coverage": 65, "covers": [ "torso" ] },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "leg_upper_l", "leg_upper_r", "leg_hip_l", "leg_hip_r" ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "sweater",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "sweater" },
+    "description": "A warm wool sweater.",
+    "weight": "550 g",
+    "volume": "2 L",
+    "price": "45 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "longshirt",
+    "color": "blue",
+    "warmth": 35,
+    "material_thickness": 0.6,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance": 6,
+        "coverage": 95,
+        "covers": [ "torso", "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ]
+      }
+    ]
+  },
+  {
+    "id": "sweatshirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "sweatshirt" },
+    "description": "A thick cotton shirt.",
+    "weight": "244 g",
+    "volume": "3500 ml",
+    "price": "18 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "longshirt",
+    "color": "light_red",
+    "warmth": 30,
+    "material_thickness": 1,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance": 6,
+        "coverage": 95,
+        "covers": [ "torso", "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ]
+      }
+    ]
+  },
+  {
+    "id": "technician_shirt_gray",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "work t-shirt" },
+    "description": "A t-shirt with a small front pocket.",
+    "weight": "200 g",
+    "volume": "250 ml",
+    "price": "10 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "canvas" ],
+    "symbol": "[",
+    "looks_like": "polo_shirt",
+    "color": "light_gray",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "650 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "15 cm",
+        "moves": 80
+      }
+    ],
+    "warmth": 8,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "encumbrance": [ 4, 5 ], "coverage": 90, "covers": [ "torso" ] },
+      {
+        "encumbrance": [ 0, 0 ],
+        "coverage": 100,
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
+      },
+      {
+        "encumbrance": [ 0, 0 ],
+        "coverage": 40,
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_upper_l", "arm_upper_r" ]
+      },
+      {
+        "encumbrance": [ 0, 0 ],
+        "coverage": 30,
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]
+      }
+    ]
+  },
+  {
+    "id": "tshirt",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "t-shirt" },
+    "description": "A short-sleeved cotton shirt.",
+    "weight": "110 g",
+    "volume": "500 ml",
+    "price": "8 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "camisole",
+    "color": "white",
+    "warmth": 5,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      { "coverage": 90, "covers": [ "torso" ], "encumbrance": 4 },
+      {
+        "coverage": 100,
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
+      },
+      { "coverage": 40, "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ] },
+      {
+        "encumbrance": [ 0, 0 ],
+        "coverage": 30,
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]
+      }
+    ]
+  },
+  {
+    "id": "tallit_katan",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str_sp": "tallit katan" },
+    "description": "A shirt with four tassels worn by observant Jews in deference to Deuteronomy 22:12, which commands the wearing of fringes on the corner of one's garments.",
+    "weight": "158 g",
+    "volume": "500 ml",
+    "price": "60 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "tshirt",
+    "color": "white",
+    "warmth": 10,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      { "coverage": 90, "covers": [ "torso" ] },
+      {
+        "coverage": 100,
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
+      },
+      { "coverage": 40, "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ] },
+      {
+        "encumbrance": [ 0, 0 ],
+        "coverage": 30,
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]
+      }
+    ]
+  },
+  {
+    "id": "uttarasanga",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "uttarasanga" },
+    "description": "A traditional Buddhist shirt, covering most of the upper body, but not the arms.",
+    "weight": "250 g",
+    "volume": "750 ml",
+    "price": "65 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "longshirt",
+    "color": "brown",
+    "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 400 } ],
+    "warmth": 5,
+    "material_thickness": 0.4,
+    "flags": [ "VARSIZE" ],
+    "armor": [ { "encumbrance": [ 4, 5 ], "coverage": 50, "covers": [ "torso" ] } ]
+  },
+  {
+    "id": "vest_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather vest" },
+    "description": "A vest made from thick leather.",
+    "weight": "997 g",
+    "volume": "2500 ml",
+    "price": "55 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "vest",
+    "color": "brown",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "650 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "15 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "800 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "15 cm",
+        "moves": 120
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "800 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "15 cm",
+        "moves": 120
+      }
+    ],
+    "warmth": 15,
+    "material_thickness": 1.5,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "POCKETS", "OUTER", "RAINPROOF" ],
+    "armor": [ { "encumbrance": [ 20, 22 ], "coverage": 95, "covers": [ "torso" ] } ]
+  },
+  {
+    "id": "wool_hoodie",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "wool hoodie" },
+    "description": "A hooded wool shirt with a kangaroo pocket in the front.",
+    "weight": "580 g",
+    "volume": "3250 ml",
+    "price": "35 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "hoodie",
+    "color": "dark_gray",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 6, 12 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 6, 6 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 95, "encumbrance": [ 6, 6 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "3 L",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "36 cm",
+        "moves": 80
+      }
+    ],
+    "warmth": 35,
+    "material_thickness": 0.6,
+    "flags": [ "VARSIZE", "POCKETS", "HOOD" ]
+  },
+  {
+    "id": "suit_bostonchan",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Boston-Chan suit" },
+    "description": "A professional-looking bright blue wool suit for the Boston-Chan costume.",
+    "weight": "680 g",
+    "volume": "3500 ml",
+    "price": "120 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "jacket_light",
+    "color": "blue",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 85, "encumbrance": [ 5, 10 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 85, "encumbrance": [ 5, 5 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 85, "encumbrance": [ 5, 5 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "750 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "11 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "750 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "11 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "9 cm",
+        "moves": 100
+      }
+    ],
+    "warmth": 25,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE", "OUTER" ]
+  }
+]

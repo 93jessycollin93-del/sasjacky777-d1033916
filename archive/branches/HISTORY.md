@@ -1,0 +1,233 @@
+# Commit history of the archived branches
+
+These branches share no history with SAS-JACKY, so deleting them on GitHub
+deletes their commits too. Their messages are kept here; their files are in the
+folders beside this one.
+
+## `main` — tip `afe1658`, 48 commits
+
+- `afe1658` 2026-09-14 Add context-condenser: anchored dehydration and real rehydration
+- `f195794` 2026-09-13 Make the router hardware-aware and close the outstanding issues
+- `33a2d00` 2026-09-13 Add jackierouter: predictive, cost-tiered AI routing library
+- `df2e517` 2026-08-28 Update install_jackierouter.bat with full content
+- `7e4a42a` 2026-08-28 Add install_jackierouter.bat for NSSM service setup
+- `8de5d32` 2026-08-28 Merge pull request #7 from yyb84ycgt6-oss/bionic/router-stack-v1
+- `e6f4036` 2026-08-28 Add router_entry.py entrypoint
+- `08ad6b3` 2026-08-28 Add cleaned router_final.py to repo
+- `6933e24` 2026-08-28 Update maintenance_orchestrator.bat to read all tools first, then generate scheduler
+- `e25fa58` 2026-08-28 Add scheduler_generator.py to command_station/tools
+- `919b1d9` 2026-08-28 Push hybrid_router.py to command_station/tools
+- `1c63f2e` 2026-08-28 Push MANIFEST_README.md to command_station/tools
+- `03b0c61` 2026-08-28 Update Robocopy_LMStudio_to_E.bat with full content
+- `9cc7e1c` 2026-08-28 Push Robocopy_E_to_LMStudio.bat to command_station/tools
+- `ad07151` 2026-08-28 Push nightly_maintenance.bat to command_station/tools
+- `17271fd` 2026-08-28 Push maintenance_orchestrator.bat to command_station/tools
+- `ba7b924` 2026-08-28 Push vault_diff_tool.py to command_station/tools
+- `ac9fb69` 2026-08-28 Push test_router_suite.py to command_station/tools
+- `a9df678` 2026-08-28 Update integrity_dashboard.py with full content
+- `e4f8d25` 2026-08-28 Push freeFileSync_batch.ffs to command_station/tools
+- `a227cd2` 2026-08-28 Push duplicate_cleaner_profile.xml to command_station/tools
+- `3b2e219` 2026-08-28 Push backup_retention_policy.sh to command_station/tools
+- `fe7f947` 2026-08-28 Push TOOLS_SUMMARY.md to command_station/docs
+- `6bf388a` 2026-08-28 Push MEMORY_VAULT_IMPLEMENTATION_SUMMARY.md to command_station/docs
+- `4a8dbc8` 2026-08-28 Update QWYTHOS_9B_1M_HANDOFF_PLAN.md with full content
+- `5d36df3` 2026-08-28 Merge pull request #6 from yyb84ycgt6-oss/bionic/command-station-integration-v2
+- `11061e7` 2026-08-28 Create README.md with Command Station section
+- `bef16b8` 2026-08-28 Push integrity_dashboard.py to command_station/tools
+- `9f185f2` 2026-08-28 Push memory_vault_README.md to command_station/docs
+- `eeae026` 2026-08-28 Push GGUF_SHA256_Checksums.csv to command_station/docs
+- `85e4ec4` 2026-08-28 Push E_PERMANENT_MASTER_MANIFEST.json to command_station/docs
+- `bace6fb` 2026-08-28 Add AI_WORKSPACE_ROOT and PERMANENT_STORAGE to .env.example
+- `7f3eec7` 2026-08-28 Add QWYTHOS handoff plan
+- `1d5fada` 2026-08-28 Add GGUF checksums
+- `02143d5` 2026-08-28 Merge pull request #5 from yyb84ycgt6-oss/bionic/command-station-integration-v2
+- `2da47a6` 2026-08-28 Add integration plan doc
+- `25876b5` 2026-08-28 Add Robocopy script
+- `49dd52a` 2026-08-28 Add master manifest stub
+- `05841f7` 2026-08-28 Add models manifests README
+- `3f4bbe8` 2026-08-28 Add command station README
+- `f336a47` 2026-08-28 Add FS bootstrap
+- `854ae94` 2026-08-28 Add manifest locator
+- `d3ec114` 2026-08-28 Add tool runner
+- `91a5703` 2026-08-28 Add vault router
+- `d8998c0` 2026-08-28 Add command station engine fs layer and scaffolding
+- `493a737` 2026-08-28 Add .env.example with workspace and storage vars
+- `6c71488` 2026-08-22 Add jackie_inspector report\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+- `e081d1e` 2026-08-21 Add tools/jackie_inspector.py
+
+## `bionic/router-stack-v1` — tip `e6f4036`, 42 commits
+
+- `e6f4036` 2026-08-28 Add router_entry.py entrypoint
+- `08ad6b3` 2026-08-28 Add cleaned router_final.py to repo
+- `6933e24` 2026-08-28 Update maintenance_orchestrator.bat to read all tools first, then generate scheduler
+- `e25fa58` 2026-08-28 Add scheduler_generator.py to command_station/tools
+- `919b1d9` 2026-08-28 Push hybrid_router.py to command_station/tools
+- `1c63f2e` 2026-08-28 Push MANIFEST_README.md to command_station/tools
+- `03b0c61` 2026-08-28 Update Robocopy_LMStudio_to_E.bat with full content
+- `9cc7e1c` 2026-08-28 Push Robocopy_E_to_LMStudio.bat to command_station/tools
+- `ad07151` 2026-08-28 Push nightly_maintenance.bat to command_station/tools
+- `17271fd` 2026-08-28 Push maintenance_orchestrator.bat to command_station/tools
+- `ba7b924` 2026-08-28 Push vault_diff_tool.py to command_station/tools
+- `ac9fb69` 2026-08-28 Push test_router_suite.py to command_station/tools
+- `a9df678` 2026-08-28 Update integrity_dashboard.py with full content
+- `e4f8d25` 2026-08-28 Push freeFileSync_batch.ffs to command_station/tools
+- `a227cd2` 2026-08-28 Push duplicate_cleaner_profile.xml to command_station/tools
+- `3b2e219` 2026-08-28 Push backup_retention_policy.sh to command_station/tools
+- `fe7f947` 2026-08-28 Push TOOLS_SUMMARY.md to command_station/docs
+- `6bf388a` 2026-08-28 Push MEMORY_VAULT_IMPLEMENTATION_SUMMARY.md to command_station/docs
+- `4a8dbc8` 2026-08-28 Update QWYTHOS_9B_1M_HANDOFF_PLAN.md with full content
+- `5d36df3` 2026-08-28 Merge pull request #6 from yyb84ycgt6-oss/bionic/command-station-integration-v2
+- `11061e7` 2026-08-28 Create README.md with Command Station section
+- `bef16b8` 2026-08-28 Push integrity_dashboard.py to command_station/tools
+- `9f185f2` 2026-08-28 Push memory_vault_README.md to command_station/docs
+- `eeae026` 2026-08-28 Push GGUF_SHA256_Checksums.csv to command_station/docs
+- `85e4ec4` 2026-08-28 Push E_PERMANENT_MASTER_MANIFEST.json to command_station/docs
+- `bace6fb` 2026-08-28 Add AI_WORKSPACE_ROOT and PERMANENT_STORAGE to .env.example
+- `7f3eec7` 2026-08-28 Add QWYTHOS handoff plan
+- `1d5fada` 2026-08-28 Add GGUF checksums
+- `02143d5` 2026-08-28 Merge pull request #5 from yyb84ycgt6-oss/bionic/command-station-integration-v2
+- `2da47a6` 2026-08-28 Add integration plan doc
+- `25876b5` 2026-08-28 Add Robocopy script
+- `49dd52a` 2026-08-28 Add master manifest stub
+- `05841f7` 2026-08-28 Add models manifests README
+- `3f4bbe8` 2026-08-28 Add command station README
+- `f336a47` 2026-08-28 Add FS bootstrap
+- `854ae94` 2026-08-28 Add manifest locator
+- `d3ec114` 2026-08-28 Add tool runner
+- `91a5703` 2026-08-28 Add vault router
+- `d8998c0` 2026-08-28 Add command station engine fs layer and scaffolding
+- `493a737` 2026-08-28 Add .env.example with workspace and storage vars
+- `6c71488` 2026-08-22 Add jackie_inspector report\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+- `e081d1e` 2026-08-21 Add tools/jackie_inspector.py
+
+## `bionic/command-station-integration-v2` — tip `d4e087b`, 37 commits
+
+- `d4e087b` 2026-08-28 Add Sidebar.jsx — UI hub sidebar component (placeholder)
+- `0f1645a` 2026-08-28 Add App.jsx — UI hub main component (placeholder)
+- `eb3f4f8` 2026-08-28 Add ui-hub index.html — Cursor-inspired web IDE entry point
+- `2f77901` 2026-08-28 Add ui-hub README.md — Cursor-inspired web IDE
+- `c6ddcd7` 2026-08-28 Create jackie_service_entry.py — Jackie OS Service Entrypoint
+- `fc10d4d` 2026-08-28 Add jackie-os quickstart.py demo script
+- `715b541` 2026-08-28 Add jackie-os requirements.txt
+- `b4b85c8` 2026-08-28 Create Jackie/core/engine/__init__.py (empty)
+- `52f21a2` 2026-08-28 Add jackie_os.py — Jackie OS Unified Runtime Bootstrap
+- `a9bd709` 2026-08-28 Add state_viewer.py — Jackie OS HTTP State Viewer API
+- `c68d53d` 2026-08-28 Add tracing.py — Jackie OS Logging & Tracing Layer
+- `efd93c7` 2026-08-28 Add execution_graph.py — Jackie OS Multi-Agent Execution Graph
+- `e3bd1fb` 2026-08-28 Add jackie_orchestrator.py — Jackie OS Orchestrator Layer
+- `7207fd7` 2026-08-28 Add pod_backpack_manager.py — Jackie OS Pod / Backpack Manager
+- `0625001` 2026-08-28 Add agent_registry.py — Jackie OS Agent Registry
+- `e1b7c21` 2026-08-28 Add jackie_router_client.py — Jackie OS Router Client
+- `afbc81a` 2026-08-28 Add router_entry.py — Jackie OS Router Entrypoint
+- `5e6d8bf` 2026-08-28 Add router_final.py — Jackie OS Router Gateway
+- `11061e7` 2026-08-28 Create README.md with Command Station section
+- `bef16b8` 2026-08-28 Push integrity_dashboard.py to command_station/tools
+- `9f185f2` 2026-08-28 Push memory_vault_README.md to command_station/docs
+- `eeae026` 2026-08-28 Push GGUF_SHA256_Checksums.csv to command_station/docs
+- `85e4ec4` 2026-08-28 Push E_PERMANENT_MASTER_MANIFEST.json to command_station/docs
+- `bace6fb` 2026-08-28 Add AI_WORKSPACE_ROOT and PERMANENT_STORAGE to .env.example
+- `2da47a6` 2026-08-28 Add integration plan doc
+- `25876b5` 2026-08-28 Add Robocopy script
+- `49dd52a` 2026-08-28 Add master manifest stub
+- `05841f7` 2026-08-28 Add models manifests README
+- `3f4bbe8` 2026-08-28 Add command station README
+- `f336a47` 2026-08-28 Add FS bootstrap
+- `854ae94` 2026-08-28 Add manifest locator
+- `d3ec114` 2026-08-28 Add tool runner
+- `91a5703` 2026-08-28 Add vault router
+- `d8998c0` 2026-08-28 Add command station engine fs layer and scaffolding
+- `493a737` 2026-08-28 Add .env.example with workspace and storage vars
+- `6c71488` 2026-08-22 Add jackie_inspector report\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+- `e081d1e` 2026-08-21 Add tools/jackie_inspector.py
+
+## `bionic/command-station-integration-v3` — tip `6933e24`, 40 commits
+
+- `6933e24` 2026-08-28 Update maintenance_orchestrator.bat to read all tools first, then generate scheduler
+- `e25fa58` 2026-08-28 Add scheduler_generator.py to command_station/tools
+- `919b1d9` 2026-08-28 Push hybrid_router.py to command_station/tools
+- `1c63f2e` 2026-08-28 Push MANIFEST_README.md to command_station/tools
+- `03b0c61` 2026-08-28 Update Robocopy_LMStudio_to_E.bat with full content
+- `9cc7e1c` 2026-08-28 Push Robocopy_E_to_LMStudio.bat to command_station/tools
+- `ad07151` 2026-08-28 Push nightly_maintenance.bat to command_station/tools
+- `17271fd` 2026-08-28 Push maintenance_orchestrator.bat to command_station/tools
+- `ba7b924` 2026-08-28 Push vault_diff_tool.py to command_station/tools
+- `ac9fb69` 2026-08-28 Push test_router_suite.py to command_station/tools
+- `a9df678` 2026-08-28 Update integrity_dashboard.py with full content
+- `e4f8d25` 2026-08-28 Push freeFileSync_batch.ffs to command_station/tools
+- `a227cd2` 2026-08-28 Push duplicate_cleaner_profile.xml to command_station/tools
+- `3b2e219` 2026-08-28 Push backup_retention_policy.sh to command_station/tools
+- `fe7f947` 2026-08-28 Push TOOLS_SUMMARY.md to command_station/docs
+- `6bf388a` 2026-08-28 Push MEMORY_VAULT_IMPLEMENTATION_SUMMARY.md to command_station/docs
+- `4a8dbc8` 2026-08-28 Update QWYTHOS_9B_1M_HANDOFF_PLAN.md with full content
+- `5d36df3` 2026-08-28 Merge pull request #6 from yyb84ycgt6-oss/bionic/command-station-integration-v2
+- `11061e7` 2026-08-28 Create README.md with Command Station section
+- `bef16b8` 2026-08-28 Push integrity_dashboard.py to command_station/tools
+- `9f185f2` 2026-08-28 Push memory_vault_README.md to command_station/docs
+- `eeae026` 2026-08-28 Push GGUF_SHA256_Checksums.csv to command_station/docs
+- `85e4ec4` 2026-08-28 Push E_PERMANENT_MASTER_MANIFEST.json to command_station/docs
+- `bace6fb` 2026-08-28 Add AI_WORKSPACE_ROOT and PERMANENT_STORAGE to .env.example
+- `7f3eec7` 2026-08-28 Add QWYTHOS handoff plan
+- `1d5fada` 2026-08-28 Add GGUF checksums
+- `02143d5` 2026-08-28 Merge pull request #5 from yyb84ycgt6-oss/bionic/command-station-integration-v2
+- `2da47a6` 2026-08-28 Add integration plan doc
+- `25876b5` 2026-08-28 Add Robocopy script
+- `49dd52a` 2026-08-28 Add master manifest stub
+- `05841f7` 2026-08-28 Add models manifests README
+- `3f4bbe8` 2026-08-28 Add command station README
+- `f336a47` 2026-08-28 Add FS bootstrap
+- `854ae94` 2026-08-28 Add manifest locator
+- `d3ec114` 2026-08-28 Add tool runner
+- `91a5703` 2026-08-28 Add vault router
+- `d8998c0` 2026-08-28 Add command station engine fs layer and scaffolding
+- `493a737` 2026-08-28 Add .env.example with workspace and storage vars
+- `6c71488` 2026-08-22 Add jackie_inspector report\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+- `e081d1e` 2026-08-21 Add tools/jackie_inspector.py
+
+## `bionic/command-station-integration-v4` — tip `6933e24`, 40 commits
+
+- `6933e24` 2026-08-28 Update maintenance_orchestrator.bat to read all tools first, then generate scheduler
+- `e25fa58` 2026-08-28 Add scheduler_generator.py to command_station/tools
+- `919b1d9` 2026-08-28 Push hybrid_router.py to command_station/tools
+- `1c63f2e` 2026-08-28 Push MANIFEST_README.md to command_station/tools
+- `03b0c61` 2026-08-28 Update Robocopy_LMStudio_to_E.bat with full content
+- `9cc7e1c` 2026-08-28 Push Robocopy_E_to_LMStudio.bat to command_station/tools
+- `ad07151` 2026-08-28 Push nightly_maintenance.bat to command_station/tools
+- `17271fd` 2026-08-28 Push maintenance_orchestrator.bat to command_station/tools
+- `ba7b924` 2026-08-28 Push vault_diff_tool.py to command_station/tools
+- `ac9fb69` 2026-08-28 Push test_router_suite.py to command_station/tools
+- `a9df678` 2026-08-28 Update integrity_dashboard.py with full content
+- `e4f8d25` 2026-08-28 Push freeFileSync_batch.ffs to command_station/tools
+- `a227cd2` 2026-08-28 Push duplicate_cleaner_profile.xml to command_station/tools
+- `3b2e219` 2026-08-28 Push backup_retention_policy.sh to command_station/tools
+- `fe7f947` 2026-08-28 Push TOOLS_SUMMARY.md to command_station/docs
+- `6bf388a` 2026-08-28 Push MEMORY_VAULT_IMPLEMENTATION_SUMMARY.md to command_station/docs
+- `4a8dbc8` 2026-08-28 Update QWYTHOS_9B_1M_HANDOFF_PLAN.md with full content
+- `5d36df3` 2026-08-28 Merge pull request #6 from yyb84ycgt6-oss/bionic/command-station-integration-v2
+- `11061e7` 2026-08-28 Create README.md with Command Station section
+- `bef16b8` 2026-08-28 Push integrity_dashboard.py to command_station/tools
+- `9f185f2` 2026-08-28 Push memory_vault_README.md to command_station/docs
+- `eeae026` 2026-08-28 Push GGUF_SHA256_Checksums.csv to command_station/docs
+- `85e4ec4` 2026-08-28 Push E_PERMANENT_MASTER_MANIFEST.json to command_station/docs
+- `bace6fb` 2026-08-28 Add AI_WORKSPACE_ROOT and PERMANENT_STORAGE to .env.example
+- `7f3eec7` 2026-08-28 Add QWYTHOS handoff plan
+- `1d5fada` 2026-08-28 Add GGUF checksums
+- `02143d5` 2026-08-28 Merge pull request #5 from yyb84ycgt6-oss/bionic/command-station-integration-v2
+- `2da47a6` 2026-08-28 Add integration plan doc
+- `25876b5` 2026-08-28 Add Robocopy script
+- `49dd52a` 2026-08-28 Add master manifest stub
+- `05841f7` 2026-08-28 Add models manifests README
+- `3f4bbe8` 2026-08-28 Add command station README
+- `f336a47` 2026-08-28 Add FS bootstrap
+- `854ae94` 2026-08-28 Add manifest locator
+- `d3ec114` 2026-08-28 Add tool runner
+- `91a5703` 2026-08-28 Add vault router
+- `d8998c0` 2026-08-28 Add command station engine fs layer and scaffolding
+- `493a737` 2026-08-28 Add .env.example with workspace and storage vars
+- `6c71488` 2026-08-22 Add jackie_inspector report\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+- `e081d1e` 2026-08-21 Add tools/jackie_inspector.py
+
+## `master` — tip `c84ac56`, 3 commits
+
+- `c84ac56` 2026-08-25 feat: jackie app — UI, terminals, background transitions, Wayland integration, shell
+- `0321b42` 2026-08-25 feat: jackie core — router, orchestrator, memory, personality, terminal
+- `0ff61f8` 2026-08-25 feat: sovereign vault foundation — API key vault, encryption, rotation, scopes, lock-in

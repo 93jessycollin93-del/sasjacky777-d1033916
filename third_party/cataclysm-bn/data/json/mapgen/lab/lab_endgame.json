@@ -1,0 +1,44 @@
+[
+  {
+    "//": "turrets finale",
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ "central_lab_endgame" ],
+    "weight": 100,
+    "object": {
+      "rows": [
+        "GG         GG         GG",
+        "GG         GG         GG",
+        "           GG           ",
+        "           GG           ",
+        "           GG           ",
+        "           GG           ",
+        "           GG           ",
+        "       GGGGGGGGGG       ",
+        "       GGGGGGGGGG       ",
+        "       GG______GG       ",
+        "       GG______GG       ",
+        "GGGGGGGGG__**__GGGGGGGGG",
+        "GGGGGGGGG__**__GGGGGGGGG",
+        "       GG______GG       ",
+        "       GG______GG       ",
+        "       GGGGGGGGGG       ",
+        "       GGGGGGGGGG       ",
+        "           GG           ",
+        "           GG           ",
+        "           GG           ",
+        "           GG           ",
+        "           GG           ",
+        "GG         GG         GG",
+        "GG         GG         GG"
+      ],
+      "terrain": {
+        "_": "t_metal_floor_no_roof",
+        "*": "t_dimensional_portal",
+        "G": "t_grate",
+        " ": [ [ "t_strconc_floor_no_roof", 7 ], [ "t_platform_resin", 2 ], "t_lava" ]
+      },
+      "place_monster": [ { "group": "GROUP_ENDGAME_FINALE", "x": [ 1, 22 ], "y": [ 1, 22 ], "repeat": [ 3, 6 ] } ]
+    }
+  }
+]

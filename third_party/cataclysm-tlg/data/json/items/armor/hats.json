@@ -1,0 +1,1128 @@
+[
+  {
+    "id": "10gal_hat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "ten-gallon hat" },
+    "description": "These may not be the Great Plains, but you can still be the Boss with this high-crowned, wide-brimmed hat.",
+    "weight": "410 g",
+    "volume": "2500 ml",
+    "price": "179 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "cowboy_hat",
+    "color": "brown",
+    "warmth": 8,
+    "material_thickness": 0.3,
+    "environmental_protection": 4,
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "bandana_head",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
+    "category": "clothing",
+    "name": { "str": "kerchief" },
+    "description": "A cotton bandana worn over the head.  It can be adjusted to cover the mouth and nose instead.",
+    "weight": "42 g",
+    "volume": "250 ml",
+    "price": "6 USD",
+    "price_postapoc": "10 cent",
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust the %s to cover your mouth.",
+      "target": "bandana",
+      "menu_text": "Cover mouth"
+    },
+    "material": [ "cotton" ],
+    "flags": [ "SKINTIGHT" ],
+    "symbol": "[",
+    "looks_like": "scarf",
+    "color": "blue",
+    "warmth": 5,
+    "material_thickness": 0.1,
+    "environmental_protection": 3,
+    "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 70, "covers": [ "head" ] } ]
+  },
+  {
+    "id": "beret",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "beret" },
+    "description": "A soft cap that fits snugly about the head with a bit of slack on top.",
+    "weight": "120 g",
+    "volume": "250 ml",
+    "price": "12 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "dark_gray",
+    "warmth": 3,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "beret_wool",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "wool beret" },
+    "description": "A soft felt cap that fits snugly about the head with a bit of slack on top.",
+    "weight": "160 g",
+    "volume": "250 ml",
+    "price": "15 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "beret",
+    "color": "dark_gray",
+    "warmth": 10,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "bowhat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "bowler hat" },
+    "description": "An old-fashioned gentleman's cap with a domed crown and a short, rounded brim.",
+    "weight": "213 g",
+    "volume": "1250 ml",
+    "price": "45 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.3,
+    "environmental_protection": 3,
+    "flags": [ "FANCY", "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "chaplet",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "chaplet" },
+    "description": "A wreath headdress made from plant material woven into a ring.",
+    "weight": "46 g",
+    "volume": "150 ml",
+    "price": "1 USD",
+    "price_postapoc": "10 cent",
+    "material": [ "dry_plant" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "dark_gray",
+    "material_thickness": 0.1,
+    "environmental_protection": 2,
+    "flags": [ "OVERSIZE", "WATER_FRIENDLY", "ALLOWS_NATURAL_ATTACKS", "SOFT" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 60,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead", "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "cowboy_hat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cowboy hat" },
+    "description": "Whether yer hunting varmints, fixing up the ranch, or heading into the sunset, this is the hat for the job.",
+    "weight": "390 g",
+    "volume": "2 L",
+    "price": "95 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "bowhat",
+    "color": "brown",
+    "warmth": 7,
+    "material_thickness": 0.3,
+    "environmental_protection": 4,
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "drinking_hat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "clothing",
+    "symbol": "[",
+    "color": "blue",
+    "name": { "str": "drinking hat" },
+    "description": "An improvised harness that can be worn over other headgear or by itself, made from two small liquid containers, a rubber hose, a bundle of steel wire, and some cordage.  A convenient and simple device for hands-free drinking, though it's not watertight and would spill if you put it into your backpack.",
+    "price": "10 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton", "plastic" ],
+    "weight": "733 g",
+    "volume": "1500 ml",
+    "material_thickness": 0.2,
+    "environmental_protection": 4,
+    "pocket_data": [
+      {
+        "max_contains_volume": "500 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "1 mm",
+        "watertight": true,
+        "rigid": true
+      }
+    ],
+    "flags": [ "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "WATER_FRIENDLY" ],
+    "armor": [
+      { "encumbrance_modifiers": [ "NONE" ], "coverage": 60, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] }
+    ]
+  },
+  {
+    "id": "eboshi",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str_sp": "eboshi" },
+    "description": "A high, black cap with a very narrow top.  Traditionally worn by Shinto priests.",
+    "weight": "120 g",
+    "volume": "500 ml",
+    "price": "70 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "bowhat",
+    "color": "dark_gray",
+    "warmth": 4,
+    "material_thickness": 0.2,
+    "environmental_protection": 2,
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_navy",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "eight point cap" },
+    "description": "Also known as a utility cover or utility cap, this is an eight pointed hat with a baseball-style visor at the front.  Commonly worn by Marines and sailors, this hat is the standard headwear of both the United States Marine Corps and Navy.",
+    "weight": "92 g",
+    "volume": "500 ml",
+    "price": "16 USD 99 cent",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "cowboy_hat",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.3,
+    "environmental_protection": 4,
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_field",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "patrol cap" },
+    "description": "A simple round cap in a camouflage pattern.  Often used by the military when helmets aren't needed.  Its brim helps keep the sun out of your eyes.",
+    "weight": "92 g",
+    "volume": "500 ml",
+    "price": "15 USD",
+    "price_postapoc": "80 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "cowboy_hat",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.3,
+    "environmental_protection": 4,
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_boonie",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "boonie hat" },
+    "description": "Also called a \"bucket hat.\" Often used in the military.  Its wide brim helps keep the sun out of your eyes.",
+    "weight": "92 g",
+    "volume": "500 ml",
+    "price": "12 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "cowboy_hat",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.3,
+    "environmental_protection": 4,
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_ball",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "baseball cap" },
+    "//": "Head encumbrance stops you from wearing additional headgear.  No helmet over a ballcap, sorry.  But brimmed gear gets the anti-glare flag!",
+    "description": "A cotton cap with a rounded crown, an adjustable strap, and a long visor.  It shields your eyes from the sun and provides a little bit of warmth.  Traditionally worn by baseball players.",
+    "weight": "88 g",
+    "volume": "500 ml",
+    "price": "25 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.1,
+    "environmental_protection": 4,
+    "flags": [ "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 90,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_chef",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "toque" },
+    "description": "A traditional chef's hat, standing tall and proud against the vulgarities of the world.",
+    "weight": "140 g",
+    "volume": "500 ml",
+    "price": "5 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "white",
+    "warmth": 5,
+    "material_thickness": 0.1,
+    "environmental_protection": 2,
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_cotton",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "beanie" },
+    "description": "A warm knit hat.",
+    "weight": "78 g",
+    "volume": "250 ml",
+    "price": "20 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_ball",
+    "color": "dark_gray",
+    "warmth": 15,
+    "material_thickness": 0.1,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "fur hat" },
+    "description": "A hat made from the pelts of animals.  Extremely warm.",
+    "weight": "246 g",
+    "volume": "750 ml",
+    "price": "50 USD",
+    "price_postapoc": "5 USD",
+    "material": [ "fur" ],
+    "symbol": "[",
+    "looks_like": "hat_knit",
+    "color": "brown",
+    "warmth": 60,
+    "material_thickness": 0.3,
+    "environmental_protection": 4,
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_faux_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hat_fur",
+    "looks_like": "hat_fur",
+    "name": { "str": "faux fur hat" },
+    "description": "A stylish hat made of faux fur.  Like real fur, but without the suffering, if the tag is to be believed.  Very warm.",
+    "material": [ "faux_fur", "cotton" ],
+    "warmth": 50
+  },
+  {
+    "id": "hat_hard",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "hard hat" },
+    "description": "A hard plastic hat worn at construction and industrial sites.  Provides excellent protection from cuts and percussion.",
+    "weight": "430 g",
+    "volume": "2500 ml",
+    "longest_side": "28 cm",
+    "price": "12 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "plastic" ],
+    "symbol": "[",
+    "looks_like": "hat_ball",
+    "color": "yellow",
+    "warmth": 5,
+    "material_thickness": 4,
+    "environmental_protection": 4,
+    "techniques": [ "WBLOCK_1" ],
+    "flags": [ "RAINPROOF", "PADDED", "OUTER", "NORMAL" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "500 ml",
+        "max_contains_weight": "500 g",
+        "moves": 250,
+        "description": "Pocket for a face shield or a shield visor.",
+        "flag_restriction": [ "HELMET_FACE_SHIELD" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "500 ml",
+        "max_contains_weight": "400 g",
+        "moves": 250,
+        "description": "Pocket for an ear attachment.",
+        "flag_restriction": [ "HELMET_EAR_ATTACHMENT" ],
+        "inherits_flags": true
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "500 ml",
+        "max_contains_weight": "250 g",
+        "moves": 250,
+        "description": "Pocket for a nape protector.",
+        "flag_restriction": [ "HELMET_NAPE_PROTECTOR" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "500 ml",
+        "max_contains_weight": "400 g",
+        "moves": 250,
+        "description": "Pocket for a strapped mandible guard.",
+        "flag_restriction": [ "HELMET_MANDIBLE_GUARD_STRAPPED" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "400 g",
+        "moves": 250,
+        "description": "Pocket for a counterweight pouch.",
+        "flag_restriction": [ "HELMET_BACK_POUCH" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "500 g",
+        "max_item_length": "14 cm",
+        "moves": 100,
+        "description": "Pocket for a flashlight attachment.",
+        "flag_restriction": [ "HELMET_HEAD_ATTACHMENT" ],
+        "transparent": true
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "hat_hard_hooded",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "summer hard hat" },
+    "description": "A hard plastic hat worn at construction and industrial sites, with a sun shield tucked on top to keep the glare out of your eyes.  Protects your eyes from the harsh sun, although it makes ear muffs unattachable to the hard hat itself.",
+    "weight": "470 g",
+    "volume": "2750 ml",
+    "longest_side": "28 cm",
+    "price": "12 USD",
+    "price_postapoc": "3 USD",
+    "material": [ "plastic" ],
+    "symbol": "[",
+    "looks_like": "hat_hard",
+    "color": "yellow",
+    "warmth": 4,
+    "material_thickness": 4,
+    "techniques": [ "WBLOCK_1" ],
+    "environmental_protection": 5,
+    "flags": [ "RAINPROOF", "PADDED", "SUN_SHADE", "OUTER", "NORMAL" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "500 ml",
+        "max_contains_weight": "250 g",
+        "moves": 250,
+        "description": "Pocket for a nape protector.",
+        "flag_restriction": [ "HELMET_NAPE_PROTECTOR" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "500 ml",
+        "max_contains_weight": "400 g",
+        "moves": 250,
+        "description": "Pocket for a strapped mandible guard.",
+        "flag_restriction": [ "HELMET_MANDIBLE_GUARD_STRAPPED" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "400 g",
+        "moves": 250,
+        "description": "Pocket for a counterweight pouch.",
+        "flag_restriction": [ "HELMET_BACK_POUCH" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "500 g",
+        "max_item_length": "14 cm",
+        "moves": 100,
+        "description": "Pocket for a flashlight attachment.",
+        "flag_restriction": [ "HELMET_HEAD_ATTACHMENT" ],
+        "transparent": true
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "hat_hunting",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "hunting cap" },
+    "description": "A red plaid hunting cap with ear flaps.  Notably warm.",
+    "weight": "206 g",
+    "volume": "750 ml",
+    "price": "30 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "hat_ball",
+    "color": "light_red",
+    "warmth": 45,
+    "material_thickness": 0.3,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_knit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "knit hat" },
+    "description": "A snug-fitting wool hat.  Very warm.",
+    "weight": "120 g",
+    "volume": "250 ml",
+    "price": "30 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "dark_gray",
+    "warmth": 45,
+    "material_thickness": 0.5,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_newsboy",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "newsboy cap" },
+    "description": "A slouching wool cap with a short front brim, traditionally associated with newspaper delivery boys.  Quite warm.",
+    "weight": "100 g",
+    "volume": "250 ml",
+    "price": "30 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "hat_ball",
+    "color": "dark_gray",
+    "warmth": 30,
+    "material_thickness": 0.2,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 90,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_noise_cancelling",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "noise canceling headgear" },
+    "description": "Padding over your ears, kept in place by some string.  Blocks incoming sounds.",
+    "weight": "72 g",
+    "volume": "500 ml",
+    "price": "25 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.1,
+    "flags": [ "DEAF" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "IMBALANCED" ],
+        "coverage": 25,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_sombrero",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "sombrero" },
+    "//": "Not a real sombrero, but a felt imitation.",
+    "description": "An orange felt sombrero with traditional white and yellow hand stitching.  The wide brim keeps the sun out of your eyes, and a thin strap hooks around your chin.",
+    "weight": "140 g",
+    "volume": "3500 ml",
+    "price": "55 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "cowboy_hat",
+    "color": "light_red",
+    "warmth": 15,
+    "material_thickness": 0.2,
+    "environmental_protection": 4,
+    "flags": [ "OUTER", "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "IMBALANCED" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "kippah",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "kippah" },
+    "description": "A thin, rounded skullcap.  A traditional headdress in Judaism.",
+    "weight": "80 g",
+    "volume": "250 ml",
+    "price": "50 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "blue",
+    "warmth": 2,
+    "material_thickness": 0.1,
+    "armor": [
+      { "encumbrance_modifiers": [ "NONE" ], "coverage": 70, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] }
+    ]
+  },
+  {
+    "id": "zucchetto",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "zucchetto" },
+    "description": "A small, crimson skullcap.  Traditionally worn by Catholic priests.",
+    "weight": "100 g",
+    "volume": "300 ml",
+    "price": "100 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "red",
+    "warmth": 3,
+    "material_thickness": 0.2,
+    "armor": [
+      { "encumbrance_modifiers": [ "NONE" ], "coverage": 70, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] }
+    ]
+  },
+  {
+    "id": "kufi",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "kufi cap" },
+    "description": "A brimless, short and rounded cap.",
+    "weight": "88 g",
+    "volume": "500 ml",
+    "price": "30 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "white",
+    "warmth": 6,
+    "material_thickness": 0.1,
+    "environmental_protection": 1,
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 70,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "maid_hat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "French maid hat" },
+    "description": "A frilly white headpiece.",
+    "weight": "10 g",
+    "volume": "250 ml",
+    "price": "25 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "white",
+    "warmth": 2,
+    "material_thickness": 0.05,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 55,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "porkpie",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "porkpie hat" },
+    "description": "A flat-topped hat with circular indent and a narrow brim.  Most popular in the 40s and 50s, still common among those in the mod scene, hipsters, and people named Heisenberg.",
+    "weight": "213 g",
+    "volume": "1250 ml",
+    "price": "55 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "bowhat",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.2,
+    "environmental_protection": 1,
+    "flags": [ "FANCY", "VARSIZE", "SUN_SHADE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "postman_hat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "mail carrier hat" },
+    "description": "A traditional mail carrier's cap, with the US postal service logo embroidered on the front above the plastic brim.  A symbol of a bygone world.",
+    "weight": "90 g",
+    "volume": "750 ml",
+    "price": "10 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton", "plastic" ],
+    "symbol": "[",
+    "looks_like": "hat_ball",
+    "color": "blue",
+    "warmth": 6,
+    "material_thickness": 0.1,
+    "environmental_protection": 4,
+    "flags": [ "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 90,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "santa_hat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Santa hat" },
+    "description": "A red hat with white faux fur trim, commonly used by bearded men on Christmas.",
+    "weight": "200 g",
+    "volume": "500 ml",
+    "price": "50 USD",
+    "price_postapoc": "5 USD",
+    "material": [ "cotton", "faux_fur" ],
+    "symbol": "[",
+    "looks_like": "hat_knit",
+    "color": "red",
+    "warmth": 20,
+    "material_thickness": 0.3,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE", "ALLOWS_NATURAL_ATTACKS" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "straw_hat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "straw hat" },
+    "description": "A hat woven out of straw.  Its brim helps keep the sun out of your eyes.",
+    "weight": "50 g",
+    "volume": "750 ml",
+    "price": "3 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "paper" ],
+    "symbol": "[",
+    "looks_like": "cowboy_hat",
+    "color": "dark_gray",
+    "warmth": 2,
+    "material_thickness": 0.2,
+    "environmental_protection": 4,
+    "flags": [ "VARSIZE", "SUN_SHADE", "NORMAL", "OUTER", "BELTED" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "tinfoil_hat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "aluminum foil hat" },
+    "description": "A sheet of aluminum foil that has been molded into a form-fitting hat.  Perfect for protecting yourself from the government, Illuminati, aliens, and THEM.",
+    "weight": "16 g",
+    "volume": "250 ml",
+    "price": "16 cent",
+    "price_postapoc": "10 cent",
+    "material": [ "aluminum" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "warmth": 5,
+    "color": "white",
+    "environmental_protection": 3,
+    "flags": [ "PSYSHIELD_PARTIAL", "SKINTIGHT", "TRADER_AVOID", "NO_REPAIR", "SOFT" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "tophat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "top hat" },
+    "description": "The only hat for a gentleman.  Look exquisite while laughing in the face of danger!",
+    "weight": "233 g",
+    "volume": "2500 ml",
+    "price": "195 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "fur" ],
+    "symbol": "[",
+    "looks_like": "porkpie",
+    "color": "dark_gray",
+    "warmth": 8,
+    "material_thickness": 0.2,
+    "environmental_protection": 4,
+    "flags": [ "VARSIZE", "SUPER_FANCY", "SUN_SHADE", "NORMAL", "OUTER", "BELTED" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "tricorne",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "tricorne" },
+    "description": "A design that goes back to the founding of the thirteen colonies, this is a wide-brimmed oiled leather hat pinned up on three sides to make a distinctive three-pointed design.",
+    "weight": "490 g",
+    "volume": "2 L",
+    "price": "25 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "material": [ "leather_treated" ],
+    "symbol": "[",
+    "looks_like": "bowhat",
+    "color": "brown",
+    "warmth": 7,
+    "material_thickness": 0.6,
+    "environmental_protection": 5,
+    "flags": [ "VARSIZE", "RAINPROOF", "WATER_FRIENDLY", "SUN_SHADE", "NORMAL", "OUTER", "BELTED" ],
+    "armor": [
+      { "encumbrance_modifiers": [ "NONE" ], "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] },
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 80,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "turban",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "turban" },
+    "description": "Cloth wound around the head, worn by people of many cultures worldwide.",
+    "weight": "105 g",
+    "volume": "250 ml",
+    "price": "85 cent",
+    "price_postapoc": "10 cent",
+    "to_hit": -1,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "white",
+    "warmth": 8,
+    "material_thickness": 0.3,
+    "environmental_protection": 3,
+    "flags": [ "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_ear_r", "head_ear_l" ]
+      }
+    ]
+  },
+  {
+    "id": "hat_golf",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "golf cap" },
+    "description": "A flat, short-brimmed cap, commonly worn by golfers.",
+    "weight": "85 g",
+    "volume": "500 ml",
+    "price": "22 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "hat_ball",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.1,
+    "environmental_protection": 2,
+    "flags": [ "SUN_SHADE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 90,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ]
+      }
+    ]
+  },
+  {
+    "id": "wizard_hat_costume",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": "wizard hat",
+    "description": "A pointed blue hat with stars stitched into it.",
+    "weight": "300 g",
+    "volume": "2 L",
+    "price": "40 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "spandex" ],
+    "symbol": "^",
+    "color": "light_blue",
+    "warmth": 8,
+    "material_thickness": 0.2,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "encumbrance_modifiers": [ "NONE" ],
+        "coverage": 80,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_ear_r", "head_ear_l" ]
+      }
+    ],
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "wizard_hat",
+        "name": { "str": "wizard hat" },
+        "description": "A pointed blue hat with stars stitched into it.",
+        "weight": 12
+      },
+      {
+        "id": "witch_hat",
+        "name": { "str": "witch hat" },
+        "description": "A pointed black hat with a broad brim.",
+        "weight": 12
+      },
+      {
+        "id": "pilgrim_hat",
+        "name": { "str": "pilgrim hat" },
+        "description": "A broad-brimmed black hat with a buckled belt around the crown.  It's a cheap replica of the kind ahistorically associated with the pilgrims who settled at Plymouth Rock.",
+        "weight": 4
+      }
+    ]
+  }
+]

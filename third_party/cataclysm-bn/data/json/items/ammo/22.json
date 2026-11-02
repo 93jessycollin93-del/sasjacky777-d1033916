@@ -1,0 +1,84 @@
+[
+  {
+    "id": "22_cphp",
+    "copy-from": "22_lr",
+    "type": "AMMO",
+    "name": { "str": ".22 CPHP" },
+    "description": ".22 Long Rifle ammunition with 30gr copper-plated, hollow-point bullets.  Has a higher velocity and slightly more stopping power than lead round-nose ammunition, but armor will have a magnified effect on its already-low penetration.",
+    "//": "Hollowpoint damage increase of 25%",
+    "damage": { "damage_type": "bullet", "amount": 20, "armor_penetration": 0 },
+    "relative": { "range": 3 },
+    "loudness": 148,
+    "speed": 500,
+    "proportional": { "recoil": 1.2 }
+  },
+  {
+    "id": "22_lr",
+    "type": "AMMO",
+    "name": { "str": ".22 LR" },
+    "description": ".22 Long Rifle ammunition with 40gr unjacketed bullets.  The .22LR round is extremely weak with very low stopping power, short range, and negligible recoil.  It is most useful for rifle training, and hunting small animals.",
+    "weight": "3 g",
+    "volume": "250 ml",
+    "price": "150 cent",
+    "price_postapoc": "8 USD",
+    "material": [ "brass", "lead", "powder" ],
+    "symbol": "=",
+    "color": "yellow",
+    "count": 80,
+    "stack_size": 100,
+    "ammo_type": "22",
+    "casing": "22_casing",
+    "range": 13,
+    "damage": { "damage_type": "bullet", "amount": 16, "armor_penetration": 7 },
+    "dispersion": 60,
+    "recoil": 150,
+    "loudness": 142,
+    "speed": 370,
+    "effects": [ "COOKOFF" ]
+  },
+  {
+    "id": "22_ratshot",
+    "copy-from": "22_cphp",
+    "type": "AMMO",
+    "name": { "str": ".22 rat-shot" },
+    "description": "A .22 caliber cartridge loaded with very small pieces of shot contained within a fragmenting plastic capsule.  It has an extremely short range and penetration ability, but it can hit targets with greater ease.  Also, it is subsonic, and thus works well with suppressors.",
+    "count": 100,
+    "price_postapoc": "4 USD",
+    "dispersion": 0,
+    "range": 8,
+    "damage": { "damage_type": "bullet", "amount": 2, "armor_penetration": 1 },
+    "shot": { "count": 10, "half_angle": 15 },
+    "proportional": { "recoil": 0.334 },
+    "loudness": 140,
+    "speed": 300,
+    "extend": { "effects": [ "SHOT", "NOGIB" ] }
+  },
+  {
+    "id": "bp_22_cphp",
+    "copy-from": "22_cphp",
+    "type": "AMMO",
+    "name": { "str": ".22 LR CPHP, black powder" },
+    "proportional": {
+      "price": 0.5,
+      "price_postapoc": 0.5,
+      "damage": { "damage_type": "bullet", "amount": 0.8 },
+      "recoil": 0.57,
+      "dispersion": 1.2
+    },
+    "extend": { "effects": [ "RECYCLED", "BLACKPOWDER", "MUZZLE_SMOKE" ] }
+  },
+  {
+    "id": "bp_22_lr",
+    "copy-from": "22_lr",
+    "type": "AMMO",
+    "name": { "str": ".22 LR, black powder" },
+    "proportional": {
+      "price": 0.5,
+      "price_postapoc": 0.5,
+      "damage": { "damage_type": "bullet", "amount": 0.8, "armor_penetration": 0.5 },
+      "recoil": 0.57,
+      "dispersion": 1.2
+    },
+    "extend": { "effects": [ "RECYCLED", "BLACKPOWDER", "MUZZLE_SMOKE" ] }
+  }
+]

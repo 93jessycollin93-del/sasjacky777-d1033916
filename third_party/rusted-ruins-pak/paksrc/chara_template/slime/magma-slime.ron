@@ -1,0 +1,32 @@
+(
+    object_type: "chara_template",
+    id: "magma-slime",
+    
+    image: (
+        path: "magma-slime.png",
+        copyright: "T.Okubo",
+        w: 24,
+        h: 48,
+    ),
+    
+    chara_template: (
+        race: "slime",
+        class: "predator",
+        faction: "monster",
+        gen_weight: 100,
+        gen_level: 18,
+        default_ai_kind: "melee",
+        skill_bonus: {},
+        base_hp: 80,
+        base_mp: 10,
+        str: 18,
+        vit: 18,
+        dex: 12,
+        int: 8,
+        wil: 5,
+        cha: 10,
+        spd: 75,
+        carry: 2,
+        travel_speed: 1,
+    ),
+)

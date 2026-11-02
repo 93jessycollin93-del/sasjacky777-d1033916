@@ -1,0 +1,421 @@
+[
+  {
+    "id": "misc_smoking",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "Smokable item and something to light it with",
+    "entries": [
+      {
+        "distribution": [
+          { "item": "cig", "prob": 70, "charges": [ 1, 10 ] },
+          {
+            "collection": [
+              { "item": "tobacco", "charges-min": 1, "charges-max": 20 },
+              {
+                "distribution": [ { "item": "rolling_paper", "prob": 70, "charges-min": 1, "charges-max": 30 }, { "item": "pipe_tobacco", "prob": 30 } ]
+              }
+            ],
+            "prob": 20
+          },
+          { "item": "cigar", "prob": 5, "charges": [ 1, 1 ] },
+          { "item": "joint", "prob": 5 },
+          { "item": "blunt", "prob": 5 },
+          {
+            "collection": [
+              { "item": "weed", "charges-min": 1, "charges-max": 20 },
+              {
+                "distribution": [ { "item": "rolling_paper", "prob": 70, "charges-min": 1, "charges-max": 30 }, { "item": "pipe_glass", "prob": 30 } ]
+              }
+            ],
+            "prob": 20
+          }
+        ]
+      },
+      { "distribution": [ { "item": "lighter" }, { "item": "matches", "charges-min": 1, "charges-max": 20 } ] }
+    ]
+  },
+  {
+    "id": "stoner",
+    "type": "item_group",
+    "//": "Processed weed and weed accessories found on bodies",
+    "items": [
+      [ "joint_roach", 50 ],
+      [ "blunt_roach", 50 ],
+      { "item": "chem_butane", "prob": 50, "container-item": "bottle_plastic" },
+      { "group": "weed_accessories", "prob": 200 },
+      { "group": "dispensary", "prob": 200 }
+    ]
+  },
+  {
+    "id": "silverware",
+    "type": "item_group",
+    "//": "Forks, spoons, knives, ect.",
+    "items": [ [ "knife_steak", 10 ] ]
+  },
+  {
+    "id": "tinware",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [ [ "bowl_pewter", 100 ], [ "tin_plate", 100 ], [ "tin_cup", 100 ] ]
+  },
+  {
+    "id": "dinnerware",
+    "type": "item_group",
+    "//": "Plates, bowls, cups, etc.",
+    "items": [
+      [ "glass", 20 ],
+      [ "glass_bowl", 20 ],
+      [ "ceramic_plate", 10 ],
+      [ "wine_glass", 10 ],
+      [ "ceramic_bowl", 10 ],
+      [ "ceramic_cup", 10 ]
+    ]
+  },
+  {
+    "id": "digging_soil_loam_200L",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "~200L of loamy soil, sand, clay, and rocks from digging in generic dirt",
+    "items": [ { "item": "material_soil", "count": [ 36, 44 ] }, { "group": "digging_soil_extras", "count": 4 } ]
+  },
+  {
+    "id": "digging_clay_200L",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "~200L, 10% volume clay, for digging in clay terrain",
+    "items": [
+      { "item": "material_soil", "count": [ 32, 40 ] },
+      { "group": "digging_soil_extras", "count": 4 },
+      { "item": "clay_lump", "count": [ 72, 88 ] }
+    ]
+  },
+  {
+    "id": "digging_clay_mound_200L",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "~200L, 20% volume clay, for digging in clay mounds",
+    "items": [
+      { "item": "material_soil", "count": [ 28, 36 ] },
+      { "group": "digging_soil_extras", "count": 4 },
+      { "item": "clay_lump", "count": [ 144, 176 ] }
+    ]
+  },
+  {
+    "id": "digging_sand_200L",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "~200L, 10% volume sand, for digging in sand terrain",
+    "items": [
+      { "item": "material_soil", "count": [ 32, 40 ] },
+      { "group": "digging_soil_extras", "count": 4 },
+      { "item": "material_sand", "charges": [ 3600, 4400 ] }
+    ]
+  },
+  {
+    "id": "digging_sand_mound_200L",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "~200L, 20% volume sand, for digging in sand mounds",
+    "items": [
+      { "item": "material_soil", "count": [ 28, 36 ] },
+      { "group": "digging_soil_extras", "count": 4, "prob": 100 },
+      { "item": "material_sand", "charges": [ 7200, 8800 ] }
+    ]
+  },
+  {
+    "id": "digging_iron_200L",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "~200L, 10% volume iron ore, for digging in bog iron",
+    "items": [
+      { "item": "material_soil", "count": [ 32, 40 ] },
+      { "group": "digging_soil_extras", "count": 4 },
+      { "item": "iron_ore", "count": [ 14, 16 ] }
+    ]
+  },
+  {
+    "id": "digging_alluvial_200L",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "~200L of random soil clay and sand, variable amount of random metals, sometimes trash washed ashore.  For alluvial deposits.",
+    "items": [
+      { "distribution": [ { "group": "digging_clay_200L", "prob": 75 }, { "group": "digging_sand_200L", "prob": 25 } ] },
+      { "group": "trash_forest", "prob": 50, "count": [ 1, 4 ] },
+      { "group": "digging_alluvial_extras" }
+    ]
+  },
+  {
+    "id": "digging_soil_extras",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "Random extras per 50 liters of soil dug up.",
+    "items": [
+      { "item": "material_sand", "charges": [ 1, 10 ], "prob": 5 },
+      { "item": "clay_lump", "count": [ 1, 4 ], "prob": 5 },
+      { "item": "rock", "count": [ 1, 4 ], "prob": 15 },
+      { "item": "pebble", "count": [ 1, 4 ], "prob": 15 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "digging_alluvial_extras",
+    "//": "Randomly picks a metal, with varying yield: 1-4 liters for copper, 200-800 ml for lead/tin, 100-400 ml for silver/gold.",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "copper", "charges": [ 800, 3200 ], "prob": 70 },
+      { "item": "lead", "charges": [ 800, 3200 ], "prob": 10 },
+      { "item": "tin", "charges": [ 400, 1600 ], "prob": 10 },
+      { "item": "silver_small", "charges": [ 400, 1600 ], "prob": 5 },
+      { "item": "gold_small", "charges": [ 200, 800 ], "prob": 5 }
+    ]
+  },
+  {
+    "id": "digging_niter_bed",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "Results of standard digging, plus niter.",
+    "items": [ { "group": "digging_soil_loam_200L" }, { "item": "material_niter" } ]
+  },
+  {
+    "id": "office_paper",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "Random paper/data items. for filing cabinets or other office locations",
+    "items": [
+      { "group": "oa_discarded_news", "count": [ 2, 12 ], "prob": 20 },
+      { "group": "flask_liquor", "prob": 10 },
+      { "group": "elecsto_pcs", "count": [ 1, 2 ], "prob": 10 },
+      { "item": "file", "count": [ 1, 8 ], "prob": 50 },
+      { "group": "elecsto_stor", "count": [ 1, 2 ], "prob": 30 },
+      { "item": "money_bundle", "count": [ 1, 10 ], "prob": 20 },
+      { "item": "survnote", "prob": 10 },
+      { "item": "survivormap", "prob": 1 },
+      { "item": "flyer", "count": [ 1, 10 ], "prob": 30 },
+      { "item": "character_sheet", "count": [ 1, 2 ], "prob": 5 },
+      { "item": "phonebook", "prob": 10 },
+      { "item": "magic_8_ball", "prob": 5 },
+      { "item": "family_photo", "prob": 5 },
+      { "item": "coin_quarter", "prob": 5 },
+      { "item": "mobile_memory_card_used", "count": [ 1, 4 ], "prob": 15 },
+      { "item": "RPG_die", "prob": 5 },
+      { "item": "metal_RPG_die", "prob": 1 },
+      { "item": "mobile_memory_card_encrypted", "count": [ 1, 2 ], "prob": 15 }
+    ]
+  },
+  {
+    "id": "bus_common",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "group": "child_items", "prob": 15 },
+      { "group": "jackets", "prob": 15 },
+      { "group": "novels", "prob": 15 },
+      { "group": "bags_trip", "prob": 20 }
+    ]
+  },
+  {
+    "id": "gobag_contents",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "Items generated from a go bag",
+    "items": [
+      { "item": "duffelbag" },
+      { "item": "backpack" },
+      { "item": "helmet_army" },
+      { "item": "jacket_army" },
+      { "item": "pants_army" },
+      { "item": "tshirt", "count": 3 },
+      { "item": "under_armor" },
+      { "item": "tacvest" },
+      { "item": "coat_rain" },
+      { "item": "hood_rain" },
+      { "item": "long_underpants" },
+      { "item": "towel" },
+      { "item": "boots_combat" },
+      { "item": "socks", "count": 3 },
+      { "item": "gloves_tactical" },
+      { "item": "light_plus_battery_cell", "charges": 150 },
+      { "item": "light_plus_battery_cell", "charges": 150, "container-item": "flashlight" },
+      { "item": "light_plus_battery_cell", "charges": 150, "container-item": "radio" },
+      { "item": "lighter", "charges": 25 },
+      { "item": "pockknife" },
+      { "item": "multitool" },
+      { "item": "1st_aid_ifak" },
+      { "item": "rollmat" },
+      { "item": "sleeping_bag_roll" },
+      { "item": "ear_plugs" },
+      { "item": "mre_hashbrownbacon_box" },
+      { "item": "mre_macaronimarinara_box" },
+      { "item": "mre_meatball_box" },
+      { "item": "water_clean", "count": 2, "charges": 2, "container-item": "bottle_plastic" }
+    ]
+  },
+  {
+    "id": "individual_first_aid_kit",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "medical_tape", "charges": 20 },
+      { "item": "bfipowder", "charges": 4, "container-item": "bag_zipper_small" },
+      { "item": "quikclot", "charges": 3, "container-item": "bag_zipper_small" },
+      { "item": "bandages", "charges": 3 },
+      { "item": "medical_gauze", "charges": 3 }
+    ]
+  },
+  {
+    "id": "pocket_first_aid_kit",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "medical_tape", "charges": 20 },
+      { "item": "disinfectant", "charges": 10, "container-item": "bottle_plastic_small" },
+      { "item": "bandages", "charges": 6 },
+      { "item": "medical_gauze", "charges": 6 },
+      { "item": "booklet_firstaid" }
+    ]
+  },
+  {
+    "id": "deluxe_first_aid_kit",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "medical_tape", "charges": 20 },
+      { "item": "aspirin", "charges": 10 },
+      { "item": "disinfectant", "charges": 10, "container-item": "bottle_plastic_small" },
+      { "item": "saline", "charges": 5 },
+      { "item": "bandages", "charges": 6 },
+      { "item": "medical_gauze", "charges": 6 },
+      { "item": "gloves_medical" },
+      { "item": "mask_dust" },
+      { "item": "scissors" },
+      { "item": "booklet_firstaid" }
+    ]
+  },
+  {
+    "id": "premium_contents",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "Items generated from a premium survival kit",
+    "items": [
+      { "item": "knife_folding" },
+      { "item": "flint_steel" },
+      { "item": "whistle_multitool" },
+      { "item": "bottle_folding" },
+      { "item": "light_plus_battery_cell", "charges": 150, "container-item": "flashlight" },
+      { "item": "picklocks" },
+      { "item": "lifestraw" },
+      { "item": "pocket_survival" },
+      { "item": "solarpack" },
+      { "item": "wire_saw" },
+      { "item": "handflare", "count": 4 }
+    ]
+  },
+  {
+    "id": "horse_gear",
+    "type": "item_group",
+    "//": "Horse vehicle items",
+    "items": [ [ "horse_tack", 50 ], [ "yoke_harness", 50 ], [ "reins_tackle", 50 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "maps",
+    "items": [
+      { "item": "roadmap", "prob": 30 },
+      { "item": "touristmap", "prob": 30 },
+      { "item": "regionaltransportmap", "prob": 30 },
+      { "item": "survivormap", "prob": 10 },
+      { "item": "cavemap", "prob": 10 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "tobacco_products",
+    "items": [
+      [ "cig", 60 ],
+      [ "tobacco", 20 ],
+      [ "chaw", 20 ],
+      [ "cigar", 10 ],
+      [ "ecig", 10 ],
+      [ "advanced_ecig", 8 ],
+      [ "nicotine_liquid", 15 ],
+      [ "pipe_tobacco", 10 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "spiral",
+    "items": [ [ "spiral_stone", 20 ], [ "vortex_stone", 2 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "makeshift_memorial",
+    "subtype": "collection",
+    "entries": [
+      { "item": "candle", "prob": 100, "count": [ 1, 3 ], "charges-max": 50 },
+      { "item": "candle", "prob": 33, "count": [ 1, 2 ], "charges-min": 50 },
+      { "item": "family_photo", "prob": 20, "count": [ 1, 2 ] },
+      { "item": "teddy_bear", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "cathedral_archives",
+    "subtype": "collection",
+    "entries": [
+      { "item": "file", "prob": 50, "count": [ 1, 15 ] },
+      { "item": "paper", "prob": 60, "charges": [ 10, 125 ] },
+      { "item": "candle", "prob": 3, "charges": 100 },
+      { "item": "holybook_bible1", "prob": 3 },
+      { "item": "candlestick", "prob": 2 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "cabin_chemist_sell",
+    "items": [
+      { "group": "chem_lab", "prob": 100 },
+      { "group": "harddrugs", "prob": 70 },
+      { "group": "tools_medical", "prob": 80 },
+      { "group": "SUS_chemistry_bookcase", "prob": 10 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "still_alcohol",
+    "//": "Alcohol you'd find in at a still or moonshine camp",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "moonshine", "prob": 86 },
+      { "item": "beer", "prob": 80 },
+      { "item": "fruit_wine", "prob": 40 },
+      { "item": "brandy", "prob": 20 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "geode_contents",
+    "//": "Ah yes, geodes, natures gacha ball.",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "gold_ore", "prob": 10, "count": [ 1, 3 ] },
+      { "item": "silver_ore", "prob": 10, "count": [ 1, 3 ] },
+      { "item": "lead_ore", "prob": 15, "count": [ 3, 5 ] },
+      { "item": "tin_ore", "prob": 15, "count": [ 3, 6 ] },
+      { "item": "copper_ore", "prob": 15, "count": [ 3, 6 ] },
+      { "item": "iron_ore", "prob": 15, "count": [ 3, 6 ] },
+      { "item": "citrine", "prob": 1, "count": 1 },
+      { "item": "diamond", "prob": 1, "count": 1 },
+      { "item": "emerald", "prob": 1, "count": 1 },
+      { "item": "peridot", "prob": 1, "count": 1 },
+      { "item": "amethyst", "prob": 1, "count": 1 },
+      { "item": "sapphire", "prob": 1, "count": 1 },
+      { "item": "aquamarine", "prob": 1, "count": 1 },
+      { "item": "blue_topaz", "prob": 1, "count": 1 },
+      { "item": "tourmaline", "prob": 1, "count": 1 },
+      { "item": "alexandrite", "prob": 1, "count": 1 },
+      { "item": "opal", "prob": 1, "count": 1 },
+      { "item": "ruby", "prob": 1, "count": 1 },
+      { "item": "garnet", "prob": 1, "count": 1 }
+    ]
+  }
+]

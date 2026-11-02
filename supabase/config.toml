@@ -1,1 +1,13 @@
 project_id = "iezgzdhhmwmbqshnxrie"
+
+# A bot presents `sk_live_...`, which is not a Supabase JWT, so the platform
+# verifier would reject it before the function ran. Authentication happens
+# inside the function instead: the key is hashed and checked by a service-only
+# RPC that also consumes the rate-limit slot.
+[functions.api-key-auth]
+verify_jwt = false
+
+# On-device chat still needs the protected profile service. Register it with
+# the deployment configuration; its handler also enforces the owner's role.
+[functions.jackie-device]
+verify_jwt = true

@@ -1,0 +1,223 @@
+[
+  {
+    "id": "beekeeping_hood",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "beekeeping hood" },
+    "description": "A beekeeping hood.  Keeps the bees out, but lets fresh air in.",
+    "weight": "260 g",
+    "volume": "1500 ml",
+    "price": "45 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "cotton", "plastic" ],
+    "symbol": "[",
+    "looks_like": "cowboy_hat",
+    "color": "white",
+    "armor": [
+      { "covers": [ "head" ], "coverage": 100, "encumbrance_modifiers": [ "NONE" ] },
+      { "covers": [ "eyes", "mouth" ], "coverage": 100, "encumbrance": 5, "breathability": "GOOD" }
+    ],
+    "warmth": 10,
+    "material_thickness": 1,
+    "environmental_protection": 2,
+    "flags": [ "BELTED", "SUN_SHADE" ]
+  },
+  {
+    "id": "hood_rain",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "rain hood" },
+    "description": "A waterproof hood made to be worn in bad weather.",
+    "weight": "160 g",
+    "volume": "750 ml",
+    "price": "20 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "vinyl" ],
+    "symbol": "[",
+    "looks_like": "hat_cotton",
+    "color": "yellow",
+    "warmth": 8,
+    "material_thickness": 0.3,
+    "flags": [ "RAINPROOF", "BELTED", "SUN_SHADE" ],
+    "environmental_protection": 5,
+    "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 95, "covers": [ "head" ] } ]
+  },
+  {
+    "id": "hood_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "leather hood" },
+    "description": "A cowl made to fit over the head, leaving only the face exposed.  It is quite thick and may be of some use in combat.",
+    "weight": "658 g",
+    "volume": "1600 ml",
+    "price": "40 USD",
+    "price_postapoc": "5 USD",
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "hood_rain",
+    "color": "brown",
+    "warmth": 15,
+    "material_thickness": 2,
+    "flags": [ "WATER_FRIENDLY", "STURDY", "BELTED", "SUN_SHADE", "RAINPROOF" ],
+    "environmental_protection": 4,
+    "armor": [
+      {
+        "encumbrance": 12,
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ]
+      },
+      { "coverage": 50, "covers": [ "head" ], "specifically_covers": [ "head_forehead" ] }
+    ]
+  },
+  {
+    "id": "hood_leather_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_leather",
+    "name": { "str": "leather hood" },
+    "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "hood_leather_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "hood_leather",
+    "name": { "str": "leather hood" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "nomex_hood",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "flame-resistant cowl" },
+    "description": "A snug fitting garment that protects your head and neck, made from lightweight Nomex fire-resistant fabric.  Tough yet breathable, it is light and comfortable to wear under clothing.",
+    "weight": "210 g",
+    "volume": "500 ml",
+    "price": "50 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": -5,
+    "material": [ "nomex" ],
+    "symbol": "[",
+    "looks_like": "hood_rain",
+    "color": "light_gray",
+    "warmth": 5,
+    "material_thickness": 0.5,
+    "environmental_protection": 3,
+    "flags": [ "SKINTIGHT", "STURDY" ],
+    "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 98, "covers": [ "head" ] } ]
+  },
+  {
+    "id": "hood_gut",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "gutskin hood" },
+    "description": "A hood sewn from treated and split intestines, the perfect companion for a gutskin parka.",
+    "weight": "40 g",
+    "volume": "250 ml",
+    "price": "26 USD",
+    "price_postapoc": "1 USD 50 cent",
+    "material": [ "gutskin" ],
+    "symbol": "[",
+    "looks_like": "hood_rain",
+    "color": "light_gray",
+    "warmth": 10,
+    "material_thickness": 0.1,
+    "environmental_protection": 4,
+    "flags": [ "RAINPROOF", "BELTED", "SUN_SHADE" ],
+    "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 95, "covers": [ "head" ] } ]
+  },
+  {
+    "id": "hood_ninja",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "ninja cowl" },
+    "description": "A cloth hood that covers the mouth, leaving only the wearer's eyes exposed.",
+    "weight": "80 g",
+    "volume": "200 ml",
+    "price": "35 USD",
+    "price_postapoc": "20 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "balaclava",
+    "color": "dark_gray",
+    "armor": [
+      { "covers": [ "head" ], "coverage": 100, "encumbrance_modifiers": [ "NONE" ] },
+      { "covers": [ "mouth" ], "coverage": 100, "encumbrance": 5 }
+    ],
+    "warmth": 8,
+    "material_thickness": 0.2,
+    "environmental_protection": 3,
+    "flags": [ "SKINTIGHT" ]
+  },
+  {
+    "id": "chainmail_coif",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chainmail coif" },
+    "description": "A protective hood made of interlocking steel rings.",
+    "weight": "2200 g",
+    "volume": "2000 ml",
+    "longest_side": "5 cm",
+    "price": "50 USD 12 cent",
+    "price_postapoc": "13 USD",
+    "to_hit": -1,
+    "material": [ "steel_chain" ],
+    "symbol": "[",
+    "color": "light_red",
+    "warmth": 0,
+    "flags": [ "STURDY" ],
+    "armor": [
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_throat" ],
+        "coverage": 95,
+        "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_nape" ],
+        "coverage": 95,
+        "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_ear_r", "head_ear_l" ],
+        "coverage": 100,
+        "encumbrance": 3
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ],
+        "coverage": 95,
+        "encumbrance": 2
+      }
+    ]
+  },
+  {
+    "id": "chainmail_coif_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "XL chainmail coif" },
+    "copy-from": "chainmail_coif",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE" ] }
+  },
+  {
+    "id": "chainmail_coif_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_coif",
+    "name": { "str": "XS chainmail coif" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE" ] }
+  }
+]

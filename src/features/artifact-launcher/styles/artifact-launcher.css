@@ -1,0 +1,243 @@
+/* Artifact Launcher Styles */
+
+.artifact-launcher-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.artifact-launcher-modal {
+  background: #1e1e1e;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.artifact-launcher-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.artifact-launcher-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 24px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+.artifact-launcher-search {
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.artifact-launcher-search input {
+  width: 100%;
+  padding: 12px 16px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.artifact-launcher-search input:focus {
+  border-color: #007acc;
+}
+
+.cluster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.cluster-tile {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cluster-tile:hover {
+  background: #333;
+  border-color: #007acc;
+  transform: translateY(-2px);
+}
+
+.cluster-tile h3 {
+  margin: 0 0 8px 0;
+  color: #fff;
+  font-size: 16px;
+}
+
+.cluster-tile p {
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.cluster-thumbnail {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  margin-top: 12px;
+  object-fit: cover;
+}
+
+.artifact-list-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.artifact-list-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+  background: #2a2a2a;
+}
+
+.back-btn {
+  background: #333;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background: #444;
+}
+
+.artifact-count {
+  color: #999;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.artifact-list {
+  padding: 16px;
+}
+
+.artifact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.artifact-item:hover {
+  background: #333;
+  border-color: #555;
+}
+
+.artifact-thumbnail {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.artifact-info {
+  flex: 1;
+}
+
+.artifact-info h4 {
+  margin: 0 0 4px 0;
+  color: #fff;
+  font-size: 16px;
+}
+
+.artifact-meta {
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.artifact-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.favorite-btn, .open-btn {
+  background: #333;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.favorite-btn:hover, .open-btn:hover {
+  background: #444;
+}
+
+.favorite-btn.active {
+  color: #ffd700;
+  background: #3a3a1a;
+}
+
+.loading, .error {
+  padding: 40px;
+  text-align: center;
+  color: #999;
+}
+
+.error {
+  color: #ff6b6b;
+}

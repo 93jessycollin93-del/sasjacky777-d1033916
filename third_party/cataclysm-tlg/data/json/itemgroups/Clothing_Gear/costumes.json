@@ -1,0 +1,390 @@
+[
+  {
+    "type": "item_group",
+    "id": "costume_all",
+    "//": "mainly used for places of storage for costumes (like boxes in basements)",
+    "subtype": "distribution",
+    "entries": [ { "group": "costume_all_clothing", "prob": 95 }, { "group": "costume_misc_items", "prob": 5 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_misc_items",
+    "//": "These are not really clothing, but spawn with all of the clothing in certain locations",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "pom_poms", "prob": 10 },
+      { "item": "cane_toy", "variant": "cane_toy_wizard", "prob": 5 },
+      { "item": "cane_toy", "variant": "cane_toy_fairy", "prob": 5 },
+      { "item": "cane_toy", "variant": "cane_toy_sinister", "prob": 5 },
+      { "item": "scythe_toy", "prob": 5 },
+      { "group": "bokken_with_saya", "prob": 1 },
+      { "group": "samurai_sword_fake_with_scabbard", "prob": 1 },
+      { "group": "western_sword_fake_with_scabbard", "prob": 1 },
+      { "item": "clownshoes", "prob": 15 },
+      { "group": "costume_weapons", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_all_clothing",
+    "//": "mainly used for places for general clothing (like a dresser or a clothing store warehouse)",
+    "subtype": "distribution",
+    "entries": [
+      { "group": "costume_accessories", "prob": 20 },
+      { "group": "costume_cloaks", "prob": 10 },
+      { "group": "costume_coats", "prob": 10 },
+      { "group": "costume_dresses", "prob": 10 },
+      { "group": "costume_gloves", "prob": 5 },
+      { "group": "costume_hats_hoods", "prob": 20 },
+      { "group": "costume_jackets", "prob": 10 },
+      { "group": "costume_masks", "prob": 20 },
+      { "group": "costume_pants_skirts", "prob": 10 },
+      { "group": "costume_shirts", "prob": 10 },
+      { "group": "costume_suits", "prob": 10 },
+      { "group": "costume_undergarments_women", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_accessories",
+    "//": "miscellaneous accessories for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "vampire_fangs", "prob": 40 },
+      { "item": "santa_belt", "prob": 30 },
+      { "item": "apron_leather", "prob": 25 },
+      { "item": "apron_cotton", "prob": 5 },
+      { "item": "waist_apron_long", "prob": 10 },
+      { "item": "waist_apron_short", "prob": 15 },
+      { "item": "leg_bag", "prob": 10 },
+      { "item": "clown_nose", "prob": 20 },
+      { "item": "plastic_mandible_guard", "prob": 5 },
+      { "item": "leg_sheath6", "prob": 20 },
+      { "item": "throwing_knife", "count": [ 1, 6 ], "entry-wrapper": "leg_sheath6", "prob": 1 },
+      { "item": "punch_dagger", "container-item": "gartersheath", "prob": 1 },
+      { "item": "gartersheath", "prob": 25 },
+      { "item": "eyepatch_leather", "prob": 20 },
+      { "item": "hakama", "prob": 1 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_cloaks",
+    "//": "cloaks for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "cloak_costume", "prob": 25 },
+      { "item": "jedi_cloak", "prob": 30 },
+      { "item": "cloak", "prob": 15 },
+      { "item": "cloak_leather", "prob": 10 },
+      { "item": "cloak_wool", "prob": 10 },
+      { "item": "pride_flag", "prob": 2 },
+      { "item": "protest_flag", "prob": 1 },
+      { "item": "national_flag", "prob": 1 },
+      { "item": "state_flag", "prob": 1 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_coats",
+    "//": "coats and robes for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "robe_wizard", "prob": 30 },
+      { "item": "ghost_robe", "prob": 20 },
+      { "item": "ghost_robe_sheet", "prob": 10 },
+      { "item": "grim_reaper_robe", "prob": 25 },
+      { "item": "coat_lab", "prob": 8 },
+      { "item": "coat_straw", "prob": 5 },
+      { "item": "robe", "prob": 10 },
+      { "item": "samghati", "prob": 1 },
+      { "item": "haori", "prob": 1 },
+      { "item": "longcoat", "prob": 10 },
+      { "item": "longcoat_faux_fur", "prob": 15 },
+      { "item": "sleeveless_longcoat_faux_fur", "prob": 15 },
+      { "item": "cassock", "prob": 20 },
+      { "item": "nun_habit", "prob": 10 },
+      { "item": "house_coat", "prob": 5 },
+      { "item": "suit_bostonchan", "prob": 20 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_jackets",
+    "//": "jackets for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "santa_jacket", "prob": 50 },
+      { "item": "santa_jacket_short", "prob": 25 },
+      { "item": "jacket_chef", "prob": 25 },
+      { "item": "jacket_leather", "prob": 40 },
+      { "item": "coat_faux_fur", "prob": 30 },
+      { "item": "vest_faux_fur", "prob": 30 },
+      { "item": "jacket_army", "prob": 25 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_dresses",
+    "//": "dresses for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "santa_dress", "prob": 50 },
+      { "item": "santa_dress_short", "prob": 25 },
+      { "item": "santa_dress_long", "prob": 5 },
+      { "item": "cheerleader_dress", "prob": 30 },
+      { "item": "dress_costume", "variant": "sinister_dress", "prob": 30 },
+      { "item": "dress_costume", "variant": "elven_dress", "prob": 20 },
+      { "item": "dress_costume", "variant": "princess_dress", "prob": 30 },
+      { "item": "dress_costume_skimpy", "variant": "bee_dress", "prob": 30 },
+      { "item": "dress_costume_skimpy", "variant": "gothic_dress", "prob": 30 },
+      { "item": "dress_costume_skimpy", "variant": "pirate_dress", "prob": 30 },
+      { "item": "dress_costume_skimpy", "variant": "nurse_dress", "prob": 30 },
+      { "item": "dress_costume_skimpy", "variant": "police_dress", "prob": 30 },
+      { "item": "dress_costume_skimpy", "variant": "maid_dress", "prob": 30 },
+      { "item": "kimono", "prob": 5 },
+      { "item": "yukata", "prob": 5 },
+      { "item": "gown", "prob": 5 },
+      { "item": "dress_wedding", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_gloves",
+    "//": "gloves for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "gloves_white", "prob": 25 },
+      { "item": "santa_gloves", "prob": 15 },
+      { "item": "gloves_leather", "prob": 15 },
+      { "item": "gloves_black", "prob": 25 },
+      { "item": "gloves_skeleton", "prob": 15 },
+      { "item": "gloves_claws", "prob": 5 },
+      { "item": "long_glove_white", "prob": 15 },
+      { "item": "gloves_fingerless", "prob": 15 },
+      { "item": "beekeeping_gloves", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_hats_hoods",
+    "//": "hats and hoods for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "santa_hat", "prob": 25 },
+      { "item": "hat_sombrero", "prob": 20 },
+      { "item": "cowboy_hat", "prob": 20 },
+      { "item": "hat_hard", "prob": 10 },
+      { "item": "plastic_mandible_guard", "container-item": "hat_hard", "prob": 1 },
+      { "item": "hat_hard_hooded", "prob": 1 },
+      { "item": "clown_wig", "prob": 15 },
+      { "item": "bostonchan_wig", "prob": 20 },
+      { "item": "tricorne", "prob": 5 },
+      { "item": "wizard_hat_costume", "prob": 35 },
+      { "item": "maid_hat", "prob": 15 },
+      { "item": "hood_ninja", "prob": 15 },
+      { "item": "postman_hat", "prob": 10 },
+      { "item": "hat_chef", "prob": 5 },
+      { "item": "tophat", "prob": 5 },
+      { "item": "straw_hat", "prob": 5 },
+      { "item": "bandana_head", "prob": 5 },
+      { "item": "fedora", "prob": 10 },
+      { "item": "porkpie", "prob": 10 },
+      { "item": "nun_wimple", "prob": 12 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_masks",
+    "//": "masks for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "santa_beard", "prob": 20 },
+      { "item": "mask_guy_fawkes", "prob": 10 },
+      { "item": "mask_hockey", "prob": 20 },
+      { "item": "bondage_mask", "prob": 5 },
+      { "item": "blindfold", "prob": 5 },
+      { "item": "balaclava_skull", "prob": 25 },
+      { "item": "mask_skull", "prob": 25 },
+      { "item": "mask_hockey", "prob": 5 },
+      { "item": "scarf", "prob": 10 },
+      { "item": "face_veil", "prob": 10 },
+      { "item": "pumpkin_mask", "prob": 10 },
+      { "item": "zombie_mask", "prob": 10 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_pants_skirts",
+    "//": "pants and skirts for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [ { "group": "costume_pants", "prob": 70 }, { "group": "costume_skirts", "prob": 30 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_pants",
+    "//": "pants for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "santa_pants", "prob": 20 },
+      { "item": "santa_shorts", "prob": 10 },
+      { "item": "pants_army", "prob": 10 },
+      { "item": "pants_costume", "variant": "pants_striped", "prob": 10 },
+      { "item": "pants_faux_fur", "prob": 5 },
+      { "item": "pants_leather", "prob": 15 },
+      { "item": "hot_pants_leather", "prob": 15 },
+      { "item": "postman_shorts", "prob": 10 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_skirts",
+    "//": "skirts for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "nanoskirt", "prob": 10 },
+      { "item": "skirt_leather", "prob": 15 },
+      { "item": "skirt_bostonchan", "prob": 20 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_shirts",
+    "//": "shirts for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "tank_top", "prob": 10 },
+      { "item": "tshirt", "prob": 10 },
+      { "item": "rashguard", "prob": 10 },
+      { "item": "postman_shirt", "prob": 2 },
+      { "item": "dress_shirt", "prob": 10 },
+      { "item": "longshirt", "prob": 10 },
+      { "item": "shirt_western", "prob": 10 },
+      { "item": "longshirt_costume", "variant": "shirt_striped", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_suits",
+    "//": "body suits for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "jumpsuit_long", "prob": 30 },
+      { "item": "bodysuit_spandex", "prob": 30 },
+      { "item": "suit", "prob": 10 },
+      { "item": "tux", "prob": 10 },
+      { "item": "fursuit", "prob": 20 },
+      { "item": "mascot_suit", "prob": 20 },
+      { "item": "beekeeping_suit", "prob": 5 },
+      { "item": "zentai", "prob": 2 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "fursuits",
+    "//": "Fursuits. These could be for furries or paired with the mascot suits group for stadiums etc.",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "fursuit", "variant": "wolf_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "tiger_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "cat_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "lion_fursuit", "prob": 2 },
+      { "item": "fursuit", "variant": "bear_fursuit", "prob": 2 },
+      { "item": "fursuit", "variant": "fox_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "dog_fursuit", "prob": 3 },
+      { "item": "fursuit", "variant": "eagle_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "rabbit_fursuit", "prob": 2 },
+      { "item": "fursuit", "variant": "rat_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "fantasy_fursuit", "prob": 2 },
+      { "item": "fursuit", "variant": "horse_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "bull_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "chicken_fursuit", "prob": 1 },
+      { "item": "fursuit", "variant": "monster_fursuit", "prob": 2 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "mascot_suits",
+    "//": "Mascot suits. These are mostly stuff for sports teams or promotions.",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "mascot_suit", "variant": "shark_costume", "prob": 3 },
+      { "item": "mascot_suit", "variant": "dino_costume", "prob": 3 },
+      { "item": "mascot_suit", "variant": "dragon_costume", "prob": 3 },
+      { "item": "mascot_suit", "variant": "fish_costume", "prob": 2 },
+      { "item": "mascot_suit", "variant": "spartan_costume", "prob": 3 },
+      { "item": "mascot_suit", "variant": "pizza_costume", "prob": 2 },
+      { "item": "mascot_suit", "variant": "revolutionary_costume", "prob": 2 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_undergarments_women",
+    "//": "undergarments for costumes, cosplay and costume parties",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "bikini_top", "prob": 30 },
+      { "item": "bikini_bottom", "prob": 30 },
+      { "item": "wetsuit_spring", "prob": 5 },
+      { "item": "wetsuit_spring_sleeveless", "prob": 5 },
+      { "item": "corset", "prob": 20 },
+      { "item": "corset_waist", "prob": 20 },
+      { "item": "leotard", "prob": 10 },
+      { "item": "unitard", "prob": 5 },
+      { "item": "tights", "prob": 25 },
+      { "item": "stockings", "prob": 25 },
+      { "item": "garter_belt", "prob": 25 },
+      { "item": "bikini_top_fur", "prob": 1 },
+      { "item": "bikini_top_leather", "prob": 2 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_cheerleader_set_any",
+    "//": "clothing sets for any cheerleader costume/outfit",
+    "subtype": "distribution",
+    "entries": [
+      { "group": "costume_cheerleader_set", "prob": 50 },
+      { "item": "cheerleader_dress", "prob": 25 },
+      { "item": "jacket_varsity", "prob": 25 },
+      { "item": "jersey", "prob": 25 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_cheerleader_set",
+    "//": "clothing set for a normal cheerleader outfit",
+    "subtype": "collection",
+    "entries": [ { "item": "pom_poms", "prob": 60 }, { "item": "skirt", "prob": 100 }, { "item": "tank_top", "prob": 100 } ]
+  },
+  {
+    "id": "costume_weapons",
+    "type": "item_group",
+    "items": [
+      { "group": "western_medieval_weapon_fake", "prob": 20 },
+      { "item": "walking_stick", "prob": 5 },
+      { "item": "q_staff", "prob": 1 },
+      { "group": "samurai_weapon_fake", "prob": 15 },
+      { "item": "kris", "prob": 1 },
+      { "item": "kris", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "independence_all_clothing",
+    "//": "mainly used for places for general clothing (like a dresser or a clothing store warehouse)",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "jumpsuit_long", "variant": "flag_suit", "prob": 25 },
+      { "item": "american_flag", "prob": 25 },
+      { "group": "costume_independence_undergarments_women", "prob": 25 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "costume_independence_undergarments_women",
+    "//": "women undergarments for independence day",
+    "subtype": "distribution",
+    "entries": [ { "item": "bikini_top", "prob": 40 }, { "item": "bikini_bottom", "prob": 40 } ]
+  }
+]

@@ -1,0 +1,50 @@
+# Max length of a line is 78 characters; the following line is for reference
+# Longer lines will be automatically folded
+##############################################################################
+<color_white>Visit us:</color>
+
+<color_light_gray>* Homepage:</color>    <color_cyan>https://github.com/cataclysmbn/Cataclysm-BN/</color>
+<color_light_gray>* Wiki:</color>        <color_cyan>https://github.com/cataclysmbn/Cataclysm-BN/wiki</color>
+
+<color_white>Report bugs, suggestion and follow the development at:</color>
+
+<color_light_gray>* Github: </color><color_light_cyan>https://github.com/cataclysmbn/Cataclysm-BN/issues</color>
+<color_light_gray>* e-mail: </color><color_light_cyan>Coolthulhu@gmail.com</color>
+
+<color_white>Join the discussion on forums and chats:</color>
+
+<color_light_gray>* Reddit:                    </color><color_cyan>https://www.reddit.com/r/cataclysmbn/</color>
+<color_light_gray>* Discord:                   </color><color_cyan>https://discord.gg/XW7XhXuZ89</color>
+<color_light_gray>* Modding Discord:           </color><color_cyan>https://discord.gg/B5q4XCa</color>
+
+<color_light_gray>Other useful links are also available at our Homepage.</color>
+
+<color_light_gray>In game you can access the options via the main menu (<color_yellow>Esc</color>).</color>
+
+<color_light_red>******************************************************************************</color>
+<color_light_red>    Disclaimer for the nightly builds:</color>
+<color_light_red>******************************************************************************</color>
+
+<color_white>Q: </color><color_yellow>What is a nightly build?</color>
+
+<color_white>A: </color><color_light_gray>Nightly builds are released every day, and have the latest features.  Compared to the unchanging stone of stable builds, nightly builds can be said to be ever-changing.  As such, they're often preferred by most players.</color>
+
+<color_white>Q: </color><color_yellow>Why are nightly builds even a thing?</color>
+
+<color_white>A: </color><color_light_gray>Players want to play with the latest features, and if we had to wait for the infrequent stable builds before anyone could play with new content, we'd likely have a much smaller community.  Additionally, whenever a big change is made, bugs are not uncommon.  By having frequent releases, we are better able to fix up bugs that somehow slipped through our current testing process.</color>
+
+<color_white>Q: </color><color_yellow>Are nightly builds playable then?</color>
+
+<color_white>A: </color><color_light_gray>Yes!  In fact, the majority of players prefer Nightly builds to the stables thanks to all the fresh content.  Additionally, the testing that we do before PRs get merged means that you're very unlikely to encounter seriously game-breaking bugs, even in Nightly.</color>
+
+<color_white>Q: </color><color_yellow>Should I play nightly builds then, or stick to stable build?</color>
+
+<color_white>A: </color><color_light_gray>Your choice to play nightly builds as opposed to stables is entirely up to you, but we would note that a majority of "Stable Releases" are really moreso just bookmarks in our history.  In truth, many in the community would highly recommend playing on a recent Nightly build for the sake of experiencing the new content.</color>
+
+<color_white>Q: </color><color_yellow>Should I be aware of anything else?</color>
+
+<color_white>A: </color><color_light_gray>Many mods that are not in-repo, unless having created a release specifically labeled for a given stable, are based on the latest Nightly as opposed to latest Stable.  As such, if you wish to use certain mods, it may likely be in your best interest to be using the latest (or at least fairly recent) Nightly builds.</color>
+
+<color_white>Q: </color><color_yellow>What if I find the risk of playing nightly build unacceptable?</color>
+
+<color_white>A: </color><color_light_gray>While we would note that, unlike in DDA's Experimentals, the Nightly builds are generally still fairly well-balanced and tested, it is ultimately up to you if you feel that Nightly releases are too risky for you.  However, if you ever report a bug or request a feature, we kindly ask you to make sure it hasn't already been fixed or implemented in a Nightly build if you do choose to stick to Stable releases.</color>

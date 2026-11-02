@@ -1,0 +1,251 @@
+[
+  {
+    "id": "boots_survivor",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
+    "description": "A pair of custom-made boots constructed of thick Kevlar and a chemical resistant layer, featuring steel toes for extra protection.  Keeps your feet safe from the myriad dangers of the apocalypse.",
+    "weight": "1330 g",
+    "volume": "2500 ml",
+    "price": "240 USD",
+    "price_postapoc": "60 USD",
+    "to_hit": -1,
+    "material": [ "leather_treated", "kevlar", "steel" ],
+    "symbol": "[",
+    "looks_like": "boots_combat",
+    "color": "brown",
+    "warmth": 30,
+    "material_thickness": 3,
+    "environmental_protection": 12,
+    "flags": [ "VARSIZE", "WATERPROOF", "STURDY" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l", "foot_arch_r", "foot_arch_l", "foot_heel_r", "foot_heel_l" ],
+        "material": [
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.2 }
+        ],
+        "encumbrance": 20,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.2 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 },
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "boots_survivor_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots_survivor",
+    "proportional": { "weight": 1.4, "volume": 1.4 },
+    "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "boots_survivor_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots_survivor",
+    "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "boots_wsurvivor_nofur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
+    "description": "A pair of customized, Kevlar-armored chemical-resistant boots with steel toes.  Warm thanks to the faux-fur lining, and quite protective due to the thick materials, though perhaps a little hard to move in.",
+    "copy-from": "boots_wsurvivor",
+    "material": [ "leather_treated", "steel", "kevlar", "faux_fur" ],
+    "symbol": "[",
+    "warmth": 50,
+    "looks_like": "boots_fur",
+    "color": "pink",
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l", "foot_arch_r", "foot_arch_l", "foot_heel_r", "foot_heel_l" ],
+        "material": [
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "faux_fur", "covered_by_mat": 100, "thickness": 2.5 }
+        ],
+        "encumbrance": 35,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "faux_fur", "covered_by_mat": 100, "thickness": 2.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 },
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "coverage": 100
+      }
+    ],
+    "environmental_protection": 12,
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "boots_wsurvivor_nofur_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots_wsurvivor_nofur",
+    "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
+    "proportional": { "weight": 1.3, "volume": 1.3 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "boots_wsurvivor_nofur_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots_wsurvivor_nofur",
+    "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "boots_wsurvivor",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
+    "description": "A pair of customized, Kevlar-armored boots with a chemical-resistant layer and steel toes.  Warm thanks to the real fur lining, and quite protective due to the thick materials, though perhaps a little hard to move in.",
+    "weight": "1760 g",
+    "volume": "3500 ml",
+    "price": "240 USD",
+    "price_postapoc": "60 USD",
+    "to_hit": -1,
+    "material": [ "leather_treated", "steel", "kevlar", "fur" ],
+    "symbol": "[",
+    "looks_like": "boots_fur",
+    "color": "light_gray",
+    "warmth": 75,
+    "material_thickness": 5,
+    "environmental_protection": 12,
+    "flags": [ "VARSIZE", "WATERPROOF", "STURDY" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l", "foot_arch_r", "foot_arch_l", "foot_heel_r", "foot_heel_l" ],
+        "material": [
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "fur", "covered_by_mat": 100, "thickness": 2.5 }
+        ],
+        "encumbrance": 35,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "fur", "covered_by_mat": 100, "thickness": 2.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 },
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "fur", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "boots_wsurvivor_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
+    "copy-from": "boots_wsurvivor",
+    "proportional": { "weight": 1.3, "volume": 1.3 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "boots_wsurvivor_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots_wsurvivor",
+    "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "swim_fins_custom",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str_sp": "custom swim fin boot attachments" },
+    "description": "A pair of rubber flippers worn on the feet, which improve swimming speed while greatly impeding the wearer's ability to walk.  This pair was reduced in volume and weight and has to be attached to diving boots with necessary attachment points.",
+    "weight": "420 g",
+    "volume": "850 ml",
+    "price": "20 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "rubber" ],
+    "symbol": "[",
+    "looks_like": "swim_fins",
+    "color": "dark_gray",
+    "warmth": 5,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "FIN", "BOOT_FINS_CUSTOM", "CANT_WEAR", "OVERSIZE" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "encumbrance": 20,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "coverage": 30
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "coverage": 50
+      }
+    ]
+  }
+]

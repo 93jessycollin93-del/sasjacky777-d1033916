@@ -1,0 +1,17 @@
+[
+  {
+    "type": "item_group",
+    "id": "mut_lab",
+    "items": [ [ "iv_mutagen_vamp", 1 ], [ "iv_mutagen_wendigo", 1 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mutagens",
+    "items": [ [ "iv_mutagen_vamp", 1 ], [ "iv_mutagen_wendigo", 1 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "mut_iv",
+    "items": [ [ "iv_mutagen_vamp", 1 ], [ "iv_mutagen_wendigo", 1 ] ]
+  }
+]

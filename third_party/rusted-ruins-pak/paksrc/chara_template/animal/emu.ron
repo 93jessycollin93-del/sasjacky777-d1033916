@@ -1,0 +1,30 @@
+(
+    object_type: "chara_template",
+    id: "emu",
+    
+    image: (
+        path: "emu.png",
+        copyright: "T.Okubo",
+    ),
+    
+    chara_template: (
+        race: "animal",
+        class: "animal",
+        faction: "monster",
+        gen_weight: 100,
+        gen_level: 14,
+        default_ai_kind: "melee",
+        skill_bonus: {},
+        base_hp: 90,
+        base_mp: 50,
+        str: 20,
+        vit: 14,
+        dex: 13,
+        int: 16,
+        wil: 15,
+        cha: 18,
+        spd: 100,
+        carry: 2,
+        travel_speed: 6,
+    ),
+)

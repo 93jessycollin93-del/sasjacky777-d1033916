@@ -17,9 +17,16 @@ Central operational layer for AI Workstation organization, model vault managemen
 
 ## Quick Start
 ```bash
-cp .env.example .env
-# Edit .env with AI_WORKSPACE_ROOT and PERMANENT_STORAGE
+# Set workspace root
+export AI_WORKSPACE_ROOT="C:/Users/Eru/AI_ Workspace"
+export PERMANENT_STORAGE="E:/AI_Permanent"
+
+# Run maintenance
+tools/maintenance_orchestrator.bat
 ```
 
 ## Principles
-Non-destructive, reversible, predictable, context-aware, workstation-grade.
+- Non-destructive — never delete unless explicitly ordered
+- Reversible — every action logged
+- Predictable — deterministic sorting rules
+- Context-aware — respects Jackie_Rebuild, KEEP, MY HOME boundaries

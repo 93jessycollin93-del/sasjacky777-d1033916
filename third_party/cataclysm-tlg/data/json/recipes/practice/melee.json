@@ -1,0 +1,108 @@
+[
+  {
+    "id": "prac_cutting_dummy",
+    "type": "practice",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_PRACTICE",
+    "subcategory": "CSC_PRACTICE_MELEE",
+    "name": "cutting",
+    "description": "Practice your edged weapon skill by slashing a dummy made of rolls of wet paper on a stand.",
+    "skill_used": "cutting",
+    "skills_required": [ [ "melee", 1 ] ],
+    "time": "1 h",
+    "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
+    "autolearn": [ [ "cutting", 2 ] ],
+    "book_learn": [ [ "mag_cutting", 1 ], [ "manual_cutting", 1 ] ],
+    "//": "Only real and powerful cutting weapons.",
+    "tools": [
+      [
+        [ "real_shivs", 1, "LIST" ],
+        [ "real_claws", 1, "LIST" ],
+        [ "real_hooks", 1, "LIST" ],
+        [ "real_knives", 1, "LIST" ],
+        [ "real_short_swords", 1, "LIST" ],
+        [ "real_medium_swords", 1, "LIST" ],
+        [ "real_long_swords", 1, "LIST" ],
+        [ "real_great_swords", 1, "LIST" ],
+        [ "real_axes", 1, "LIST" ],
+        [ "real_great_axes", 1, "LIST" ],
+        [ "real_polearms", 1, "LIST" ]
+      ],
+      [ "water", "water_clean" ]
+    ],
+    "//1": "A bunch of duct tape and scrap to repair the dummy with each training session.",
+    "components": [ [ [ "duct_tape", 10 ] ], [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "paper", 10 ] ] ]
+  },
+  {
+    "id": "prac_stabbing_dummy",
+    "type": "practice",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_PRACTICE",
+    "subcategory": "CSC_PRACTICE_MELEE",
+    "name": "stabbing",
+    "description": "Practice your stabbing weapon skill by stabbing a dummy made of rolls of wet paper on a stand.",
+    "skill_used": "stabbing",
+    "skills_required": [ [ "melee", 1 ] ],
+    "time": "1 h",
+    "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
+    "autolearn": [ [ "stabbing", 2 ] ],
+    "book_learn": [ [ "mag_stabbing", 1 ], [ "manual_stabbing", 1 ] ],
+    "//": "Only real and powerful stabbing weapons.",
+    "tools": [
+      [
+        [ "real_shivs", 1, "LIST" ],
+        [ "real_knives", 1, "LIST" ],
+        [ "real_thrusting_swords", 1, "LIST" ],
+        [ "real_spears", 1, "LIST" ]
+      ],
+      [ "water", "water_clean" ]
+    ],
+    "//1": "A bunch of duct tape and scrap to repair the dummy with each training session.",
+    "components": [ [ [ "duct_tape", 10 ] ], [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "paper", 10 ] ] ]
+  },
+  {
+    "id": "prac_bashing_dummy",
+    "type": "practice",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_PRACTICE",
+    "subcategory": "CSC_PRACTICE_MELEE",
+    "name": "bashing",
+    "description": "Practice striking and with bludgeoning weapons using an especially durable training dummy.",
+    "skill_used": "bashing",
+    "skills_required": [ [ "melee", 1 ] ],
+    "time": "1 h",
+    "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
+    "autolearn": [ [ "bashing", 2 ] ],
+    "book_learn": [ [ "mag_bashing", 1 ], [ "manual_bashing", 1 ] ],
+    "//": "Only large, top-heavy bashing weapons or axes.",
+    "tools": [
+      [
+        [ "real_batons", 1, "LIST" ],
+        [ "real_bludgeons", 1, "LIST" ],
+        [ "real_flails", 1, "LIST" ],
+        [ "real_great_hammers", 1, "LIST" ],
+        [ "real_maces", 1, "LIST" ],
+        [ "real_staffs", 1, "LIST" ]
+      ],
+      [ "pseudo_training_dummy_heavy" ]
+    ],
+    "//1": "A bunch of duct tape and scrap to repair the dummy with each training session.",
+    "components": [ [ [ "duct_tape", 50 ] ], [ [ "scrap", 20 ] ] ]
+  },
+  {
+    "id": "prac_unarmed_dummy",
+    "type": "practice",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_PRACTICE",
+    "subcategory": "CSC_PRACTICE_MELEE",
+    "name": "unarmed",
+    "description": "Practice unarmed combat against a punching bag or a training dummy.",
+    "skill_used": "unarmed",
+    "time": "1 h",
+    "skills_required": [ [ "melee", 1 ] ],
+    "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
+    "autolearn": [ [ "unarmed", 2 ] ],
+    "book_learn": [ [ "mag_unarmed", 1 ], [ "manual_brawl", 1 ] ],
+    "tools": [ [ "pseudo_training_dummy_light", "pseudo_punching_bag" ] ]
+  }
+]

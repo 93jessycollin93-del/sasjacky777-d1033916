@@ -1,0 +1,247 @@
+[
+  {
+    "id": "fridges_and_freezers_tradeable",
+    "//": "for traders",
+    "type": "item_group",
+    "items": [
+      { "item": "apartment_fridge", "prob": 100 },
+      { "item": "minifridge", "prob": 50 },
+      { "item": "glass_fridge", "prob": 80 },
+      { "item": "glass_fridge_double", "prob": 70 },
+      { "item": "heavy_duty_fridge", "prob": 5 },
+      { "item": "display_fridge", "prob": 25 },
+      { "item": "apartment_freezer", "prob": 100 },
+      { "item": "minifreezer", "prob": 22 },
+      { "item": "chest_minifreezer", "prob": 16 },
+      { "item": "chest_freezer", "prob": 20 },
+      { "item": "heavy_duty_freezer", "prob": 6 },
+      { "item": "glass_freezer", "prob": 30 },
+      { "item": "display_freezer", "prob": 30 }
+    ]
+  },
+  {
+    "id": "apartment_fridge_destroyed",
+    "//": "allows both terrain/furniture and vehicle/appliances use the same drop list",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 4 ] },
+      { "item": "steel_fragment", "count": [ 0, 2 ] },
+      { "item": "pipe_fittings", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 4 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "minifridge_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 2 ] },
+      { "item": "steel_fragment", "count": [ 0, 1 ] },
+      { "item": "plastic_chunk", "count": [ 0, 2 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "glass_fridge_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 4 ] },
+      { "item": "steel_fragment", "count": [ 0, 2 ] },
+      { "item": "pipe_fittings", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 4 ] },
+      { "item": "glass_shard", "count": [ 0, 34 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "glass_fridge_double_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 2 ] },
+      { "item": "evaporator_coil", "count": [ 0, 2 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 8 ] },
+      { "item": "steel_fragment", "count": [ 0, 4 ] },
+      { "item": "pipe_fittings", "count": [ 0, 4 ] },
+      { "item": "plastic_chunk", "count": [ 0, 8 ] },
+      { "item": "glass_shard", "count": [ 0, 68 ] },
+      { "item": "cable", "charges": [ 0, 2 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "heavy_duty_fridge_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 7 ] },
+      { "item": "steel_fragment", "count": [ 0, 4 ] },
+      { "item": "pipe_fittings", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 6 ] },
+      { "item": "cable", "charges": [ 0, 2 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "display_fridge_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 6 ] },
+      { "item": "steel_fragment", "count": [ 0, 3 ] },
+      { "item": "pipe_fittings", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 9 ] },
+      { "item": "glass_shard", "count": [ 0, 52 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "apartment_freezer_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 3 ] },
+      { "item": "steel_fragment", "count": [ 0, 2 ] },
+      { "item": "pipe_fittings", "count": [ 0, 1 ] },
+      { "item": "plastic_chunk", "count": [ 0, 2 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "minifreezer_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 2 ] },
+      { "item": "steel_fragment", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 2 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "chest_minifreezer_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 3 ] },
+      { "item": "steel_fragment", "count": [ 0, 2 ] },
+      { "item": "pipe_fittings", "count": [ 0, 1 ] },
+      { "item": "plastic_chunk", "count": [ 0, 8 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "chest_freezer_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 4 ] },
+      { "item": "steel_fragment", "count": [ 0, 2 ] },
+      { "item": "pipe_fittings", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 4 ] },
+      { "item": "cable", "charges": [ 0, 2 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "heavy_duty_freezer_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 7 ] },
+      { "item": "steel_fragment", "count": [ 0, 4 ] },
+      { "item": "pipe_fittings", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 6 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "glass_freezer_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 5 ] },
+      { "item": "steel_fragment", "count": [ 0, 2 ] },
+      { "item": "pipe_fittings", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 8 ] },
+      { "item": "glass_shard", "count": [ 0, 34 ] },
+      { "item": "cable", "charges": [ 0, 1 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "id": "display_freezer_destroyed",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "item": "condensor_coil", "count": [ 0, 1 ] },
+      { "item": "evaporator_coil", "count": [ 0, 1 ] },
+      { "item": "compressor", "count": [ 0, 1 ] },
+      { "item": "sheet_metal", "count": [ 0, 6 ] },
+      { "item": "steel_fragment", "count": [ 0, 3 ] },
+      { "item": "pipe_fittings", "count": [ 0, 2 ] },
+      { "item": "plastic_chunk", "count": [ 0, 5 ] },
+      { "item": "glass_shard", "count": [ 0, 34 ] },
+      { "item": "cable", "charges": [ 0, 3 ] },
+      { "item": "hose", "count": [ 0, 1 ] },
+      { "item": "refrigerant_tank", "count": [ 0, 1 ] }
+    ]
+  }
+]

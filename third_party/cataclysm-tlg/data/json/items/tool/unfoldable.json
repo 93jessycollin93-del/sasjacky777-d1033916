@@ -1,0 +1,188 @@
+[
+  {
+    "id": "generic_folded_vehicle",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "name": { "str_sp": "seeing this is a bug" },
+    "description": "seeing this is a bug",
+    "volume": "0 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "symbol": "/",
+    "color": "light_gray",
+    "flags": [ "ZERO_WEIGHT" ],
+    "use_action": [ "UNFOLD_GENERIC" ]
+  },
+  {
+    "id": "folded_bicycle",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "copy-from": "generic_folded_vehicle",
+    "name": { "str": "folded Bicycle" },
+    "description": "A folded Bicycle.",
+    "weight": "20786 g",
+    "volume": "18500 ml",
+    "longest_side": "90 cm",
+    "symbol": "0",
+    "color": "light_gray",
+    "variables": {
+      "vehicle_name": "Bicycle",
+      "folded_parts": "[{\"id\":\"folding_frame\",\"base\":{\"typeid\":\"foldframe\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"saddle\",\"base\":{\"typeid\":\"saddle\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0,\"variant\":\"pedal\"},{\"id\":\"horn_bicycle\",\"base\":{\"typeid\":\"horn_bicycle\",\"item_vars\":{\"magazine_converted\":\"1\"},\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"foot_pedals\",\"base\":{\"typeid\":\"foot_crank\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"folding_frame\",\"base\":{\"typeid\":\"foldframe\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":1,\"mount_dy\":0},{\"id\":\"wheel_mount_light_steerable\",\"base\":{\"typeid\":\"wheel_mount_light\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":1,\"mount_dy\":0},{\"id\":\"wheel_bicycle\",\"base\":{\"typeid\":\"wheel_bicycle\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":1,\"mount_dy\":0},{\"id\":\"folding_frame\",\"base\":{\"typeid\":\"foldframe\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":-1,\"mount_dy\":0},{\"id\":\"wheel_mount_light\",\"base\":{\"typeid\":\"wheel_mount_light\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":-1,\"mount_dy\":0},{\"id\":\"wheel_bicycle\",\"variant\":\"rear\",\"base\":{\"typeid\":\"wheel_bicycle\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":-1,\"mount_dy\":0},{\"id\":\"basketsm\",\"variant\":\"bike_rear\",\"base\":{\"typeid\":\"bike_basket\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":-1,\"mount_dy\":0}]"
+    }
+  },
+  {
+    "id": "folded_wheelchair_generic",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "copy-from": "generic_folded_vehicle",
+    "name": { "str": "folded wheelchair" },
+    "description": "A folded Wheelchair.",
+    "weight": "10586 g",
+    "volume": "12000 ml",
+    "longest_side": "90 cm",
+    "symbol": "/",
+    "color": "light_gray",
+    "variables": {
+      "vehicle_name": "Wheelchair",
+      "folded_parts": "[{\"id\":\"folding_frame\",\"base\":{\"typeid\":\"foldframe\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"folding_seat\",\"base\":{\"typeid\":\"sheet\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"wheel_mount_light\",\"base\":{\"typeid\":\"wheel_mount_light\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"wheel_wheelchair\",\"base\":{\"typeid\":\"wheel_wheelchair\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"hand_rims\",\"base\":{\"typeid\":\"hand_rims\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"basketsm\",\"base\":{\"typeid\":\"bike_basket\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0,\"variant\":\"wheelchair\"}]"
+    }
+  },
+  {
+    "id": "folded_inflatable_boat",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "copy-from": "generic_folded_vehicle",
+    "name": { "str": "inflatable boat" },
+    "description": "This rubber rowboat (with oars included) is deflated for storage.  Activate it with an air pump in your inventory to inflate and launch it.",
+    "weight": "32420 g",
+    "volume": "7500 ml",
+    "symbol": "0",
+    "color": "light_gray",
+    "variables": {
+      "vehicle_name": "Inflatable boat",
+      "folded_parts": "[{\"id\":\"inflatable_section\",\"base\":{\"typeid\":\"inflatable_section\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"folding_seat\",\"base\":{\"typeid\":\"sheet\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"inflatable_airbag\",\"base\":{\"typeid\":\"inflatable_airbag\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"hand_paddles\",\"base\":{\"typeid\":\"hand_paddles\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"inflatable_section\",\"base\":{\"typeid\":\"inflatable_section\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":1,\"mount_dy\":0},{\"id\":\"inflatable_airbag\",\"base\":{\"typeid\":\"inflatable_airbag\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":1,\"mount_dy\":0},{\"id\":\"inflatable_section\",\"base\":{\"typeid\":\"inflatable_section\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":1,\"mount_dy\":1},{\"id\":\"inflatable_airbag\",\"base\":{\"typeid\":\"inflatable_airbag\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":1,\"mount_dy\":1},{\"id\":\"inflatable_section\",\"base\":{\"typeid\":\"inflatable_section\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":1},{\"id\":\"inflatable_airbag\",\"base\":{\"typeid\":\"inflatable_airbag\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":1}]"
+    }
+  },
+  {
+    "id": "folded_skateboard_generic",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "copy-from": "generic_folded_vehicle",
+    "name": { "str": "skateboard" },
+    "description": "A skateboard.",
+    "weight": "2898 g",
+    "volume": "3750 ml",
+    "longest_side": "80 cm",
+    "symbol": "/",
+    "color": "light_gray",
+    "variables": {
+      "vehicle_name": "Skateboard",
+      "folded_parts": "[{\"id\":\"frame_wood_deck\",\"base\":{\"typeid\":\"frame_wood_deck\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"wheel_mount_skateboard\",\"base\":{\"typeid\":\"wheel_mount_skateboard\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"wheel_skateboard\",\"base\":{\"typeid\":\"wheel_skateboard\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
+    }
+  },
+  {
+    "id": "roller_bin",
+    "type": "ITEM",
+    "subtypes": [ "WHEEL", "TOOL" ],
+    "category": "container",
+    "name": { "str": "outdoor trash bin" },
+    "looks_like": "f_recycle_bin",
+    "description": "A big plastic trash can with two wheels and a lid.  This one is tipped over, activate it to set it up for rolling.",
+    "weight": "15 kg",
+    "volume": "400 L",
+    "longest_side": "114 cm",
+    "price": "150 USD",
+    "price_postapoc": "75 USD",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "360 L",
+        "max_contains_weight": "149 kg",
+        "open_container": true,
+        "rigid": true,
+        "watertight": true
+      }
+    ],
+    "qualities": [ [ "CONTAIN", 2 ] ],
+    "material": [ "plastic" ],
+    "symbol": ")",
+    "color": "green",
+    "use_action": [ "UNFOLD_GENERIC" ],
+    "diameter": 4,
+    "width": 1,
+    "variables": {
+      "vehicle_name": "Rolling Trash Bin",
+      "folded_parts": "[{\"id\":\"roller_bin\",\"base\":{\"typeid\":\"roller_bin\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
+    }
+  },
+  {
+    "id": "suitcase_large",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "WHEEL" ],
+    "category": "container",
+    "name": { "str": "large suitcase" },
+    "looks_like": "briefcase",
+    "description": "A hefty piece of hardshell luggage with wheels and a handle.",
+    "weight": "15 kg",
+    "volume": "85 L",
+    "longest_side": "114 cm",
+    "price": "300 USD",
+    "price_postapoc": "10 USD",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "80 L",
+        "max_contains_weight": "60 kg",
+        "max_item_length": "75 cm",
+        "moves": 300
+      }
+    ],
+    "qualities": [ [ "CONTAIN", 2 ] ],
+    "material": [ "plastic" ],
+    "symbol": ")",
+    "color": "green",
+    "use_action": [ "UNFOLD_GENERIC" ],
+    "diameter": 4,
+    "width": 1,
+    "variables": {
+      "vehicle_name": "Large Suitcase",
+      "folded_parts": "[{\"id\":\"suitcase_large\",\"base\":{\"typeid\":\"suitcase_large\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
+    }
+  },
+  {
+    "id": "suitcase",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "WHEEL" ],
+    "category": "container",
+    "name": { "str": "suitcase" },
+    "looks_like": "briefcase",
+    "description": "A piece of hardshell luggage with wheels and a handle.  It is sized for overhead storage on a plane.",
+    "weight": "10 kg",
+    "volume": "45 L",
+    "longest_side": "55 cm",
+    "price": "250 USD",
+    "price_postapoc": "5 USD",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "42 L",
+        "max_contains_weight": "40 kg",
+        "max_item_length": "50 cm",
+        "moves": 300
+      }
+    ],
+    "qualities": [ [ "CONTAIN", 2 ] ],
+    "material": [ "plastic" ],
+    "symbol": ")",
+    "color": "green",
+    "use_action": [ "UNFOLD_GENERIC" ],
+    "diameter": 4,
+    "width": 1,
+    "variables": {
+      "vehicle_name": "Suitcase",
+      "folded_parts": "[{\"id\":\"suitcase\",\"base\":{\"typeid\":\"suitcase\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
+    }
+  }
+]

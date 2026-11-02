@@ -1,0 +1,40 @@
+# Automatically normalize line endings for all files
+# detected as text (Convert CRLF => LF).
+*         text=auto
+
+# Explicitly normalize files with these extensions in
+# case Git doesn't detect them as text for some reason.
+*.c       text
+*.cbp     text
+*.cpp     text
+*.h       text
+*.json    text
+*.md      text
+*.py      text
+*.rc      text
+# Workaround so Windows users can run the shell script in WSL without manual dos2unix shenanigans
+*.sh      text  eol=lf
+*.txt     text
+*.yml     text
+
+# Visual Studio project files, leave them alone.
+*.cmd     -text
+*.filters -text
+*.sln     -text
+*.user    -text
+*.vcxproj -text
+
+# Generated translation text, don't mess with them.
+*.mo      binary
+*.po      -text -diff
+*.pot     -text
+
+# Treat images, archives, and font files as binary.
+# (binary is a macro for -text -diff)
+*.db      binary
+*.fon     binary
+*.gz      binary
+*.ico     binary
+*.png     binary
+*.ttf     binary
+

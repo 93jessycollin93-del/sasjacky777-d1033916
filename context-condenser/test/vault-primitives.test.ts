@@ -20,6 +20,27 @@ test('gzip round-trips exactly and actually compresses', () => {
   assert.ok(gz.length < BYTES.length, 'gzip should shrink repetitive text');
 });
 
+test('refuses a pod whose header names a KDF cost that is not one', async () => {
+  // `iterations` is read back out of the pod header, so it comes from whoever
+  // wrote the pod. A count in the single digits names a KDF that hardens
+  // nothing, and one in the billions turns opening a pod into a way to hang
+  // the process holding it. Neither is a number this module ever writes.
+  const { salt } = newKdfParams();
+  for (const iterations of [1, 1000, 0, -1, 1e12, 1.5, NaN, undefined as unknown as number]) {
+    await assert.rejects(
+      () => deriveKey('correct horse battery staple', { salt, iterations }),
+      /KDF iteration count/,
+      `iterations=${String(iterations)} should be refused`,
+    );
+  }
+});
+
+test('accepts the cost it writes itself', async () => {
+  const params = newKdfParams();
+  assert.equal(params.iterations, 600_000);
+  assert.ok(await deriveKey('correct horse battery staple', params));
+});
+
 test('aes-gcm round-trips, rejects the wrong passphrase, never reuses an IV', async () => {
   const params = newKdfParams();
   const key = await deriveKey('correct horse battery staple', params);

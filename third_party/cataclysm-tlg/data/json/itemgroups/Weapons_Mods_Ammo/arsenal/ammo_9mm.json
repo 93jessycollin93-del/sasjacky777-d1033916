@@ -1,0 +1,57 @@
+[
+  {
+    "id": "ammo_can_9mm_any",
+    "type": "item_group",
+    "items": [
+      { "group": "ammo_can_9mmP", "prob": 100 },
+      { "group": "ammo_can_9mmfmj", "prob": 100 },
+      { "group": "ammo_can_9mm", "prob": 100 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_can_9mmfmj",
+    "container-item": "ammunition_can_30",
+    "items": [ { "group": "ammo_box_9mmfmj", "count": [ 0, 6 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_box_9mmfmj",
+    "container-item": "ammo_box",
+    "on_overflow": "discard",
+    "items": [ { "item": "9mmfmj", "count": 1, "charges": 30 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_can_9mmP",
+    "container-item": "ammunition_can_30",
+    "items": [ { "group": "ammo_box_9mmP", "count": [ 0, 6 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_box_9mmP",
+    "container-item": "ammo_box",
+    "on_overflow": "discard",
+    "items": [ { "item": "9mmP", "count": 1, "charges": 30 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_box_9mmP",
+    "container-item": "ammo_box",
+    "on_overflow": "discard",
+    "items": [ { "item": "9mmP", "count": 1, "charges": 30 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_can_9mm",
+    "container-item": "ammunition_can_30",
+    "items": [ { "group": "ammo_box_9mm", "count": [ 0, 6 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "ammo_box_9mm",
+    "container-item": "ammo_box",
+    "on_overflow": "discard",
+    "items": [ { "item": "9mm", "count": 1, "charges": 30 } ]
+  }
+]

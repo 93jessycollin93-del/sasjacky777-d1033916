@@ -1,0 +1,23 @@
+# DeepSeek Harness → SAS-JACKY, with an access token you already have.
+#
+# For scripted and unattended runs, where no browser is available: the
+# harness sends SAS_JACKY_TOKEN as a bearer token over Streamable HTTP. The
+# token must be an OAuth access token from the app's sign-in (it carries a
+# client_id; a plain browser session token is refused by design). The
+# browser-login alternative is sas-jacky.oauth.patch.yml.
+#
+#   SAS_JACKY_TOKEN=… dsh --profile headless --patch "$PWD/harness/deepseek-harness/sas-jacky.token.patch.yml" "…"
+#
+# SAS_JACKY_MCP_URL overrides the endpoint; harness/e2e/run.sh uses that to
+# test this exact file against a local copy of the app.
+- insert:
+    - id: sas-jacky-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: sasjacky
+        transport: streamable-http
+        url: !!js process.env.SAS_JACKY_MCP_URL || 'https://iezgzdhhmwmbqshnxrie.supabase.co/functions/v1/mcp'
+        headers:
+          Authorization: !!js '`Bearer ${process.env.SAS_JACKY_TOKEN}`'
+        toolCallTimeoutMs: 180000
+        failOnStartupError: true

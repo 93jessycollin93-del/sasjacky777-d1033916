@@ -1,0 +1,35 @@
+(
+    object_type: "item",
+    id: "aconitum",
+    
+    image: (
+        path: "aconitum.png",
+        copyright: "T.Okubo",
+    ),
+    
+    item: (
+        item_kind: "food",
+        group: "herb",
+        basic_price: 20,
+        w: 20,
+        quality_kind: Mutable,
+        gen_weight: 10,
+        gen_level: 0,
+        attrs: [
+            Medical(
+                effect: (
+                    kind: [Status(status:Poison)],
+                    target_mode: Enemy,
+                    base_power: (10, 1),
+                    hit: 80,
+                    range: 0,
+                    shape: OneTile,
+                    size: 0,
+                    anim_kind: Chara,
+                    anim_img: "",
+                    sound: "",
+                ),
+            )
+        ]
+    ),
+)

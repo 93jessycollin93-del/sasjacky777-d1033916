@@ -1,0 +1,233 @@
+[
+  {
+    "type": "item_group",
+    "id": "NC_ARSONIST_storage",
+    "subtype": "distribution",
+    "entries": [ { "item": "golf_bag", "prob": 100 } ]
+  },
+  {
+    "type": "npc",
+    "id": "arsonist",
+    "//": "Appears in the refugee center as a unique trader and potential mission provider.",
+    "name_unique": "Makayla Sanchez",
+    "name_suffix": "Arsonist",
+    "gender": "female",
+    "class": "NC_ARSONIST",
+    "attitude": 0,
+    "mission": 3,
+    "age": 24,
+    "height": 165,
+    "chat": "TALK_ARSONIST",
+    "faction": "no_faction",
+    "mission_offered": "MISSION_ARSONIST_1_AMMONIUM_NITRATE"
+  },
+  {
+    "type": "npc_class",
+    "id": "NC_ARSONIST",
+    "name": { "str": "Arsonist" },
+    "job_description": "I'm just watching the world burn.",
+    "common": false,
+    "traits": [
+      { "group": "BG_survival_story_CRIMINAL" },
+      { "trait": "hair_medium_fringe", "variant": "brown" },
+      { "trait": "natural_hair_color_brown" },
+      { "trait": "eye_color", "variant": "blue" },
+      { "trait": "SKIN_LIGHT" },
+      { "trait": "QUICK" },
+      { "trait": "FASTHEALER" },
+      { "trait": "OPTIMISTIC" },
+      { "trait": "FELINE_EARS" }
+    ],
+    "bonus_dex": { "rng": [ 2, 2 ] },
+    "bonus_int": { "rng": [ 1, 1 ] },
+    "bonus_per": { "rng": [ 2, 2 ] },
+    "bonus_aggression": { "rng": [ 0, 1 ] },
+    "bonus_collector": { "rng": [ 0, 2 ] },
+    "shopkeeper_item_group": [ { "group": "NC_ARSONIST_STOCK", "rigid": true } ],
+    "shopkeeper_price_rules": [
+      { "item": "FMCNote", "fixed_adj": 0 },
+      { "item": "money_strap_FMCNote", "fixed_adj": 0 },
+      { "item": "money_bundle_FMCNote", "fixed_adj": 0 }
+    ],
+    "carry_override": "NC_ARSONIST_STOCK",
+    "worn_override": "NC_ARSONIST_worn",
+    "skills": [
+      { "skill": "firstaid", "bonus": 3 },
+      { "skill": "cooking", "bonus": 5 },
+      { "skill": "fabrication", "bonus": 5 },
+      { "skill": "survival", "bonus": 2 },
+      { "skill": "melee", "bonus": 5 },
+      { "skill": "bashing", "bonus": 4 },
+      { "skill": "gun", "bonus": 4 },
+      { "skill": "pistol", "bonus": 4 },
+      { "skill": "throw", "bonus": 6 },
+      { "skill": "swimming", "bonus": 3 },
+      { "skill": "driving", "bonus": 3 },
+      { "skill": "speech", "bonus": 3 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_ARSONIST_worn",
+    "subtype": "collection",
+    "items": [
+      { "item": "backpack_leather" },
+      { "item": "legrig", "contents-group": "makayla_ammo" },
+      { "item": "bunker_pants" },
+      { "group": "clothing_watch" },
+      { "item": "bunker_coat" },
+      { "item": "socks" },
+      { "item": "boots_combat" },
+      { "item": "slingpack" },
+      { "item": "bra" },
+      { "item": "tank_top" },
+      { "item": "panties" },
+      { "item": "model_10_revolver", "ammo-item": "38_special", "charges": 6, "container-item": "holster" },
+      { "item": "webbing_belt", "contents-group": "makayla_belt" },
+      { "item": "gloves_fingerless_mod" }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "makayla_ammo",
+    "subtype": "collection",
+    "items": [
+      { "item": "38_speedloader6", "ammo-item": "38_special", "charges": 6 },
+      { "item": "38_speedloader6", "ammo-item": "38_special", "charges": 6 },
+      { "item": "38_speedloader6", "ammo-item": "38_special", "charges": 6 },
+      { "item": "38_special" }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "makayla_belt",
+    "subtype": "collection",
+    "items": [
+      { "item": "gadget_pouch" },
+      { "item": "bandages", "count": 5 },
+      { "item": "pockknife" },
+      { "item": "lighter", "charges": 100 },
+      { "item": "hatchet" }
+    ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST",
+    "dynamic_line": {
+      "u_is_wearing": "badge_marshal",
+      "yes": "That sure is a shiny badge you got there!",
+      "no": "Heh, you look important."
+    },
+    "responses": [
+      { "text": "I'm actually new.", "topic": "TALK_ARSONIST_NEW" },
+      { "text": "What are you doing here?", "topic": "TALK_ARSONIST_DOING" },
+      { "text": "Heard anything about the outside world?", "topic": "TALK_ARSONIST_WORLD" },
+      { "text": "Is there any way I can join your group?", "topic": "TALK_ARSONIST_JOIN" },
+      { "text": "Do you have any jobs for me?", "topic": "TALK_MISSION_LIST" },
+      {
+        "text": "What's with your ears?",
+        "condition": { "npc_has_visible_trait": "FELINE_EARS" },
+        "topic": "TALK_ARSONIST_MUTATION"
+      },
+      {
+        "text": "How are you doing these days?",
+        "condition": { "u_has_var": "talk_flag_TALK_ARSONIST_SUPPLIED", "value": "yes" },
+        "topic": "TALK_ARSONIST_TRADING"
+      },
+      { "text": "Well, bye.", "topic": "TALK_DONE" }
+    ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_NEW",
+    "dynamic_line": "You should talk to the trader guy at the entrance.  He's usually dressed like a firefighter, has a shop in one of the booths.",
+    "responses": [ { "text": "I see.", "topic": "TALK_ARSONIST" } ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_WORLD",
+    "dynamic_line": "Nothing good.  Had a pal on the road with a ham radio, but she's gone like everyone else.",
+    "responses": [
+      { "text": "…", "topic": "TALK_ARSONIST" },
+      { "text": "Nothing good?  So you have heard something", "topic": "TALK_ARSONIST_WORLD_SOMETHING" }
+    ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_WORLD_SOMETHING",
+    "dynamic_line": "I mean, there was a nuclear war and now the dead are walking, what do you want me to say?  The monsters are getting bigger and weirder, and there are fewer people every day.  Game over, man.",
+    "responses": [ { "text": "I feel bad for asking.", "topic": "TALK_ARSONIST" } ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_JOIN",
+    "dynamic_line": "Group?  You think they'd let someone like me live here?  Nah, I'm on my own and that's how I like it, I just come here to trade.",
+    "responses": [ { "text": "…", "topic": "TALK_ARSONIST" } ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_MUTATION",
+    "dynamic_line": {
+      "u_has_any_trait": [ "CANINE_EARS", "LUPINE_EARS", "FELINE_EARS", "URSINE_EARS", "ELFA_EARS" ],
+      "yes": "They just showed up one day, probably the same as yours.  Keep quiet about it, some people here don't like our kind.",
+      "no": "Ssh.  Some people in here hate mutants.  They just showed up one day, OK?"
+    },
+    "responses": [
+      { "text": "Sorry to ask.", "topic": "TALK_ARSONIST" },
+      { "text": "You're disgusting.", "topic": "TALK_ARSONIST_MUTATION_INSULT" }
+    ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_DOING",
+    "dynamic_line": "I burn down buildings and sell the materials.  Nails, rebar, wire, whatever metal I can pull out of the ashes.",
+    "responses": [ { "text": "I'll buy.", "effect": "start_trade", "topic": "TALK_ARSONIST" } ]
+  },
+  {
+    "id": "MISSION_ARSONIST_1_AMMONIUM_NITRATE",
+    "type": "mission_definition",
+    "name": { "str": "Supply the arsonist" },
+    "description": "Bring the arsonist 120 units of commercial fertilizer",
+    "difficulty": 1,
+    "value": 500,
+    "origins": [ "ORIGIN_SECONDARY" ],
+    "goal": "MGOAL_FIND_ITEM",
+    "item": "fertilizer_commercial",
+    "count": 120,
+    "dialogue": {
+      "describe": "I could use some help getting some materials.",
+      "offer": "I could use some help getting some materials.  Molotovs are nice for burning down buildings but aren't all that for keeping yourself safe.  If you could get me 120 units of commercial fertilizer I could make something a lot more potent.",
+      "accepted": "Oh man, thanks so much friend.  You won't regret it.",
+      "rejected": "Think it over.",
+      "advice": "Commercial fertilizer tends to be made from ammonium nitrate, which is also usable as an explosive.  Try looking for some around the abandoned farms.",
+      "inquire": "Did you find any fertilizer?  Are you sure this is the ammonium nitrate kind?",
+      "success": "This is great!  I'll get to work making something of this.  You can have some of my Molotovs, I won't need quite so many now.",
+      "success_lie": "I guess I could convince the shelter to sell me some.",
+      "failure": "Damn.  Perhaps I wasn't the only one who thought of this."
+    },
+    "end": {
+      "effect": [ { "u_spawn_item": "molotov", "count": 10 }, { "u_add_var": "talk_flag_TALK_ARSONIST_SUPPLIED", "value": "yes" } ]
+    }
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_TRADING",
+    "dynamic_line": "I made some nice things with that ammonium nitrate you got me.  Want to trade?",
+    "responses": [ { "text": "I'll buy.", "effect": "start_trade", "topic": "TALK_ARSONIST" } ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_MUTATION_INSULT",
+    "dynamic_line": {
+      "u_has_any_trait": [ "CANINE_EARS", "LUPINE_EARS", "FELINE_EARS", "URSINE_EARS", "ELFA_EARS" ],
+      "yes": { "gendered_line": "As if you're one to talk.  Screw You.", "relevant_genders": [ "u" ] },
+      "no": { "gendered_line": "Screw You!", "relevant_genders": [ "u" ] }
+    },
+    "responses": [
+      {
+        "text": "…",
+        "success": { "effect": "end_conversation", "opinion": { "trust": -1, "fear": -2, "value": -1, "anger": 1 }, "topic": "TALK_DONE" }
+      }
+    ]
+  }
+]

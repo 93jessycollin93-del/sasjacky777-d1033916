@@ -1,0 +1,28 @@
+# DeepSeek Harness → SAS-JACKY, signing in through the browser.
+#
+# DeepSeek Harness speaks MCP over stdio or over HTTP with fixed headers; it
+# does not run the OAuth sign-in the app's MCP server requires. mcp-remote does
+# (a small, widely used bridge): dsh starts it over stdio, it opens a browser
+# to sign in to SAS-JACKY once, caches the token under ~/.mcp-auth, and relays
+# every call to the app with it.
+#
+# Use for one run:
+#   dsh web --patch "$PWD/harness/deepseek-harness/sas-jacky.oauth.patch.yml"
+# Keep it: merge this file's `insert` entry into $DSH_HOME/cordis.patch.yml
+# (every profile) or $DSH_HOME/profiles/<name>/cordis.patch.yml (one profile).
+#
+# The model is DeepSeek's own (set DEEPSEEK_API_KEY); nothing else to set.
+# Tools appear to the model as mcp__sasjacky__<tool>.
+- insert:
+    - id: sas-jacky-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: sasjacky
+        transport: stdio
+        command: npx
+        args:
+          - '-y'
+          - 'mcp-remote@0.14.3'
+          - 'https://iezgzdhhmwmbqshnxrie.supabase.co/functions/v1/mcp'
+        # ask_jackie waits for Jackie's whole answer; give it room.
+        toolCallTimeoutMs: 180000

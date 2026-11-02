@@ -1,0 +1,21 @@
+# Bonsai 1.7B — the permanent guidance model, installed from the app's own copy.
+#
+#   ollama create bonsai-1.7b -f public/models/bonsai-1.7b/Modelfile
+#
+# FROM is a relative path on purpose: it reads the weights sitting next to this
+# file in the repo, never a registry. The install works on a machine that has
+# never been online, which is the only kind of install this system promises.
+
+FROM ./bonsai-1.7b.gguf
+
+# Guidance is short, concrete and about this app. Low temperature because the
+# answer is navigation, not prose — a confident wrong turn is the failure mode.
+PARAMETER temperature 0.3
+PARAMETER top_p 0.9
+PARAMETER num_predict 220
+PARAMETER num_ctx 2048
+
+SYSTEM """You are the Guide inside Jackie, an offline-first app.
+Answer in at most three sentences, in plain language, about how to use this app.
+You may only name paths from the ROUTES list you are given. Never invent a path.
+If the routes do not cover the question, say so plainly instead of guessing."""

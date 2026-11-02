@@ -1,0 +1,28 @@
+(
+    object_type: "region_gen",
+    id: "south-coast",
+
+    region_gen: (
+        map_template_id: "south-coast",
+        towns: [
+            (
+                id: "freedom-town",
+                pos: (44, 48),
+            ),
+            (
+                id: "scena-village",
+                pos: (26, 44),
+            ),
+        ],
+        others: [
+            (
+                id: "institute-of-life-sciences",
+                pos: (21, 42),
+            ),
+            (
+                id: "institute-of-ether-engineering",
+                pos: (50, 39),
+            ),
+        ],
+    ),
+)

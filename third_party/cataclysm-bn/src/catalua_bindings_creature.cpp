@@ -1,0 +1,1703 @@
+#include "activity_type.h"
+#include "avatar.h"
+#include "bionics.h"
+#include "bodypart.h"
+#include "calendar.h"
+#include "catalua.h"
+#include "catalua_bindings.h"
+#include "catalua_bindings_utils.h"
+#include "catalua_coord.h"
+#include "catalua_impl.h"
+#include "catalua_log.h"
+#include "catalua_luna.h"
+#include "catalua_luna_doc.h"
+#include "catalua_serde.h"
+#include "character.h"
+#include "character_martial_arts.h"
+#include "craft_command.h"
+#include "crafting.h"
+#include "creature.h"
+#include "damage.h"
+#include "disease.h"
+#include "enums.h"
+#include "flag.h"
+#include "flag_trait.h"
+#include "game.h"
+#include "inventory.h"
+#include "json.h"
+#include "magic/magic.h"
+#include "make_static.h"
+#include "map/field.h"
+#include "map/field_type.h"
+#include "map/map.h"
+#include "monfaction.h"
+#include "monster.h"
+#include "morale_types.h"
+#include "mtype.h"
+#include "mutation.h"
+#include "npc.h"
+#include "player.h"
+#include "player_activity.h"
+#include "pldata.h"
+#include "recipe.h"
+#include "requirements.h"
+#include "skill.h"
+#include "trap.h"
+#include "type_id.h"
+
+#include <climits>
+#include <iterator>
+#include <ranges>
+#include <sstream>
+#include <string_view>
+
+LUNA_VAL( player_activity, "PlayerActivity" )
+
+namespace
+{
+
+constexpr std::string_view lua_activity_data_prefix = "lua_activity_data:";
+constexpr std::string_view lua_activity_on_finish_prefix = "lua_activity_on_finish:";
+constexpr std::string_view lua_activity_on_turn_prefix = "lua_activity_on_turn:";
+
+auto serialize_lua_activity_data( const sol::optional<sol::table> &maybe_data ) -> std::string
+{
+    if( !maybe_data ) {
+        return {};
+    }
+
+    auto buffer = std::ostringstream{};
+    auto jsout = JsonOut( buffer );
+    cata::serialize_lua_table( *maybe_data, jsout );
+    return buffer.str();
+}
+
+struct lua_activity_options {
+    activity_id activity;
+    time_duration duration;
+    std::string on_finish;
+    std::string on_turn;
+    std::optional<tripoint_bub_ms> pos;
+    std::string name;
+    bool interruptable = true;
+    std::string data;
+};
+
+auto parse_lua_activity_options( const sol::table &opts ) -> lua_activity_options
+{
+    // Read the pos option through the direct coord conversion helper.
+    // Going through sol::optional<tripoint_bub_ms> relies on sol's ADL-based
+    // conversion dispatch, which silently drops the option on MSVC builds.
+    std::optional<tripoint_bub_ms> pos;
+    if( const sol::object raw_pos = opts["pos"]; raw_pos.get_type() == sol::type::userdata ) {
+        pos = cata::detail::lua_coords::as_cpp<tripoint_bub_ms>( raw_pos );
+        if( !pos ) {
+            debugmsg( "assign_lua_activity: pos option is not a TripointBubMs coordinate" );
+        }
+    }
+    const auto on_finish = opts.get<sol::optional<std::string>>( "on_finish" );
+    const auto on_turn = opts.get<sol::optional<std::string>>( "on_turn" );
+    const auto interruptable = opts.get<sol::optional<bool>>( "interruptable" );
+    auto result = lua_activity_options{
+        .activity = opts.get<activity_id>( "type" ),
+        .duration = opts.get<time_duration>( "duration" ),
+        .on_finish = on_finish.value_or( "" ),
+        .on_turn = on_turn.value_or( "" ),
+        .pos = pos,
+        .name = opts.get_or<std::string>( "name", "" ),
+        .interruptable = interruptable.value_or( true ),
+        .data = {},
+    };
+    const auto data = opts.get<sol::optional<sol::table>>( "data" );
+    result.data = serialize_lua_activity_data( data );
+    return result;
+}
+
+auto make_lua_activity( const lua_activity_options &opts ) -> std::unique_ptr<player_activity>
+{
+    auto act = std::make_unique<player_activity>( opts.activity, to_moves<int>( opts.duration ), -1,
+               INT_MIN, opts.name );
+    act->interruptable_with_kb = opts.interruptable;
+    if( !opts.on_finish.empty() ) {
+        act->str_values.push_back( std::string{ lua_activity_on_finish_prefix } + opts.on_finish );
+    }
+    if( !opts.on_turn.empty() ) {
+        act->str_values.push_back( std::string{ lua_activity_on_turn_prefix } + opts.on_turn );
+    }
+    if( !opts.data.empty() ) {
+        act->str_values.push_back( std::string{ lua_activity_data_prefix } + opts.data );
+    }
+    auto append_pos = [&act]( const tripoint_bub_ms & pos ) -> tripoint_abs_ms {
+        const auto abs_pos = bub_to_abs( pos );
+        act->coords.push_back( abs_pos );
+        return abs_pos;
+    };
+    if( opts.pos ) {
+        act->placement = append_pos( *opts.pos );
+    }
+    return act;
+}
+
+auto reg_player_activity( sol::state &lua ) -> void
+{
+    auto ut = luna::new_usertype<player_activity>( lua, luna::no_bases, luna::no_constructor );
+    luna::set( ut, "moves_total", &player_activity::moves_total );
+    luna::set( ut, "moves_left", &player_activity::moves_left );
+    luna::set( ut, "interruptable_with_kb", &player_activity::interruptable_with_kb );
+    luna::set( ut, "name", &player_activity::name );
+    luna::set_prop( ut, "coords", []( const player_activity & act ) -> std::vector<tripoint_abs_ms> {
+        return act.coords;
+    } );
+    luna::set_fx( ut, "id", []( const player_activity & act ) -> activity_id { return act.id(); } );
+    luna::set_fx( ut, "id_str", []( const player_activity & act ) -> std::string {
+        return act.id().str();
+    } );
+}
+
+} // namespace
+
+void cata::detail::reg_creature_family( sol::state &lua )
+{
+    reg_player_activity( lua );
+    reg_creature( lua );
+    reg_monster( lua );
+    reg_character( lua );
+    reg_player( lua );
+    reg_npc( lua );
+    reg_avatar( lua );
+}
+
+void cata::detail::reg_creature( sol::state &lua )
+{
+#define UT_CLASS Creature
+    {
+        sol::usertype<UT_CLASS> ut =
+        luna::new_usertype<UT_CLASS>(
+            lua,
+            luna::no_bases,
+            luna::no_constructor
+        );
+
+        // Methods
+        SET_FX_T( get_name, std::string() const );
+        DOC_PARAMS( "possessive", "capitalize_first" );
+        SET_FX_T( disp_name, std::string( bool, bool ) const );
+        SET_FX_T( skin_name, std::string() const );
+        SET_FX_T( get_grammatical_genders, std::vector<std::string>() const );
+
+        SET_FX_T( is_avatar, bool() const );
+        SET_FX_T( is_npc, bool() const );
+        SET_FX_T( is_monster, bool() const );
+        SET_FX_T( as_monster, monster * () );
+        SET_FX_T( as_npc, npc * () );
+        SET_FX_T( as_character, Character * () );
+        SET_FX_T( as_avatar, avatar * () );
+
+        SET_FX_T( dodge_roll, float() );
+        SET_FX_T( stability_roll, float() const );
+
+        SET_FX_T( attitude_to, Attitude( const Creature & ) const );
+
+        luna::set_fx( ut, "sees", []( const Creature & cr, const tripoint_bub_ms & t ) -> bool { return cr.sees( t ); } );
+
+        SET_FX_T( sight_range, int( int ) const );
+
+        SET_FX_T( power_rating, float() const );
+
+        SET_FX_T( speed_rating, float() const );
+
+        SET_FX_T( ranged_target_size, double() const );
+
+        SET_FX_T( knock_back_to, void( const tripoint_bub_ms & ) );
+
+        SET_FX_T( deal_damage, dealt_damage_instance( Creature * source, bodypart_id bp,
+                  const damage_instance & dam ) );
+
+        SET_FX_T( apply_damage, void( Creature * source, bodypart_id bp, int amount,
+                                      bool bypass_med ) );
+
+        SET_FX_T( size_melee_penalty, int() const );
+
+        SET_FX_T( digging, bool() const );
+        SET_FX_T( is_on_ground, bool() const );
+        SET_FX_T( is_underwater, bool() const );
+        SET_FX_T( set_underwater, void( bool x ) );
+        SET_FX_T( is_warm, bool() const );
+        SET_FX_T( in_species, bool( const species_id & ) const );
+
+        SET_FX_T( has_weapon, bool() const );
+        SET_FX_T( is_hallucination, bool() const );
+        SET_FX_N_T( is_dead_state, "is_dead", bool() const );
+
+        SET_FX_T( is_elec_immune, bool() const );
+        SET_FX_T( is_immune_effect, bool( const efftype_id & ) const );
+        SET_FX_T( is_immune_damage, bool( damage_type ) const );
+
+        SET_FX_N_T( bub_pos, "get_pos_ms", tripoint_bub_ms() const );
+
+        SET_FX_N_T( bub_pos, "bub_pos", tripoint_bub_ms() const );
+
+        SET_FX_N_T( abs_pos, "abs_pos", tripoint_abs_ms() const );
+
+        SET_FX_N_T( setpos, "set_pos_ms", void( const tripoint_bub_ms & ) );
+
+        luna::set_fx( ut, "set_pos",
+                      sol::overload(
+        []( Creature & cr, const tripoint_bub_ms & p ) -> void { cr.setpos( p ); },
+        []( Creature & cr, const tripoint_abs_ms & p ) -> void { cr.setpos( p ); }
+                      ) );
+
+        luna::set_fx( ut, "has_effect", []( const Creature & cr, const efftype_id & eff,
+        sol::optional<const bodypart_str_id &> bpid ) -> bool {
+            if( bpid.has_value() )
+            {
+                return cr.has_effect( eff, *bpid );
+            }
+            return cr.has_effect( eff );
+        } );
+
+        luna::set_fx( ut, "get_effect", []( Creature & cr, const efftype_id & eff,
+        sol::optional<const bodypart_str_id &> bpid ) -> effect & {
+            if( bpid.has_value() )
+            {
+                return cr.get_effect( eff, *bpid );
+            } else
+            {
+                return cr.get_effect( eff );
+            }
+        } );
+
+        luna::set_fx( ut, "has_effect_with_flag", []( const Creature & cr,
+        const flag_id & flag, sol::optional<const bodypart_str_id &> bpid ) -> bool {
+            const bodypart_str_id &bp = bpid ? *bpid : bodypart_str_id::NULL_ID();
+            return cr.has_effect_with_flag( flag, bp );
+        } );
+
+        luna::set_fx( ut, "get_effect_dur", []( const Creature & cr, const efftype_id & eff,
+        sol::optional<const bodypart_str_id &> bpid ) -> time_duration {
+            const bodypart_str_id &bp = bpid ? *bpid : bodypart_str_id::NULL_ID();
+            return cr.get_effect_dur( eff, bp );
+        } );
+
+        luna::set_fx( ut, "get_effect_int", []( const Creature & cr, const efftype_id & eff,
+        sol::optional<const bodypart_str_id &> bpid ) -> int {
+            const bodypart_str_id &bp = bpid ? *bpid : bodypart_str_id::NULL_ID();
+            return cr.get_effect_int( eff, bp );
+        } );
+
+        DOC( "Effect type, duration, bodypart and intensity" );
+        luna::set_fx( ut, "add_effect", []( Creature & cr, const efftype_id & eff,
+                                            const time_duration & dur,
+                                            sol::optional<const bodypart_str_id &> bpid,
+                                            sol::optional<int> intensity
+                                          )
+        {
+            int eint = intensity ? *intensity : 0;
+            const bodypart_str_id &bp = bpid ? *bpid : bodypart_str_id::NULL_ID();
+            cr.add_effect( eff, dur, bp, eint );
+        } );
+
+        luna::set_fx( ut, "remove_effect", []( Creature & cr, const efftype_id & eff,
+        sol::optional<const bodypart_str_id &> bpid ) -> bool {
+            const bodypart_str_id &bp = bpid ? *bpid : bodypart_str_id::NULL_ID();
+            return cr.remove_effect( eff, bp );
+        } );
+
+        SET_FX_T( clear_effects, void() );
+
+        DOC( "Sets an arbitrary key : value pair for the creature.NPC dialogue system uses this, with the format(\"npctalk_var\" + \"_\" + type_var + \"_\" + var_context + \"_\" + var_base_name) used for the key, skipping type or context if empty." );
+        SET_FX_T( set_value, void( const std::string &, const std::string & ) );
+        DOC( "Removes an arbitrary entry using the same key format as set_value." );
+        SET_FX_T( remove_value, void( const std::string & ) );
+        DOC( "Retrieves an arbitrary entry using the same key format as set_value." );
+        SET_FX_T( get_value, std::string( const std::string & ) const );
+        DOC( "Returns all stored creature vars as a Lua table" );
+        luna::set_fx( ut, "values_table", []( const Creature & cr, sol::this_state state )
+        {
+            sol::state_view lua( state );
+            sol::table vars = lua.create_table();
+            std::ranges::for_each( cr.get_values_map(), [&]( const auto & entry ) {
+                vars[entry.first] = entry.second;
+            } );
+            return vars;
+        } );
+
+        DOC( "Removes this creature from the game without death notifications or a corpse." );
+        SET_FX_T( erase, void() );
+
+        SET_FX_T( get_weight, units::mass() const );
+
+        SET_FX_T( has_trait, bool( const trait_id & ) const );
+
+        SET_FX_T( mod_pain, void( int ) );
+        SET_FX_T( mod_pain_noresist, void( int ) );
+        SET_FX_T( set_pain, void( int ) );
+        SET_FX_T( get_pain, int() const );
+        SET_FX_T( get_perceived_pain, int() const );
+
+        SET_FX_T( get_moves, int() const );
+        SET_FX_T( mod_moves, void( int ) );
+        SET_FX_T( set_moves, void( int ) );
+
+        SET_FX_T( get_num_blocks, int() const );
+        SET_FX_T( get_num_dodges, int() const );
+
+        SET_FX_T( get_env_resist, int( bodypart_id ) const );
+
+        SET_FX_T( get_armor_bash, int( bodypart_id ) const );
+        SET_FX_T( get_armor_cut, int( bodypart_id ) const );
+        SET_FX_T( get_armor_bullet, int( bodypart_id ) const );
+        SET_FX_T( get_armor_bash_base, int( bodypart_id ) const );
+        SET_FX_T( get_armor_cut_base, int( bodypart_id ) const );
+        SET_FX_T( get_armor_bullet_base, int( bodypart_id ) const );
+        SET_FX_T( get_armor_bash_bonus, int() const );
+        SET_FX_T( get_armor_cut_bonus, int() const );
+        SET_FX_T( get_armor_bullet_bonus, int() const );
+
+        SET_FX_T( get_armor_type, int( damage_type, bodypart_id ) const );
+
+        SET_FX_T( get_dodge, float() const );
+
+        SET_FX_T( get_melee, float() const );
+        SET_FX_T( get_hit, float() const );
+
+        SET_FX_T( get_speed, int() const );
+        SET_FX_T( get_size, creature_size() const );
+        luna::set_fx( ut, "get_hp", []( const Creature & cr,
+        sol::optional<const bodypart_id &> bpid ) -> int {
+            if( bpid.has_value() )
+            {
+                return cr.get_hp( *bpid );
+            } else
+            {
+                return cr.get_hp();
+            }
+        } );
+        luna::set_fx( ut, "get_hp_max", []( const Creature & cr,
+        sol::optional<const bodypart_id &> bpid ) -> int {
+            if( bpid.has_value() )
+            {
+                return cr.get_hp_max( *bpid );
+            } else
+            {
+                return cr.get_hp_max();
+            }
+        } );
+
+        SET_FX_T( hp_percentage, int() const );
+        SET_FX_T( has_flag, bool( const m_flag ) const );
+
+        SET_FX_T( get_part_hp_cur, int( const bodypart_id & ) const );
+        SET_FX_T( get_part_hp_max, int( const bodypart_id & ) const );
+
+        SET_FX_T( get_part_healed_total, int( const bodypart_id & ) const );
+
+        SET_FX_T( set_part_hp_cur, void( const bodypart_id &, int ) );
+        SET_FX_T( set_part_hp_max, void( const bodypart_id &, int ) );
+        SET_FX_T( mod_part_hp_cur, void( const bodypart_id &, int ) );
+        SET_FX_T( mod_part_hp_max, void( const bodypart_id &, int ) );
+
+        SET_FX_T( set_all_parts_hp_cur, void( int ) );
+        SET_FX_T( mod_all_parts_hp_cur, void( int ) );
+        SET_FX_T( set_all_parts_hp_to_max, void() );
+
+        SET_FX_T( get_random_body_part, bodypart_id( bool ) const );
+        SET_FX_T( get_all_body_parts, std::vector<bodypart_id>( bool ) const );
+
+        SET_FX_T( set_armor_bash_bonus, void( int ) );
+        SET_FX_T( set_armor_cut_bonus, void( int ) );
+        SET_FX_T( set_armor_bullet_bonus, void( int ) );
+
+        SET_FX_T( get_speed_base, int() const );
+        SET_FX_T( get_speed_bonus, int() const );
+        SET_FX_T( get_speed_mult, float() const );
+        SET_FX_T( get_block_bonus, int() const );
+
+        SET_FX_T( get_dodge_base, float() const );
+        SET_FX_T( get_hit_base, float() const );
+        SET_FX_T( get_dodge_bonus, float() const );
+        SET_FX_T( get_hit_bonus, float() const );
+
+        SET_FX_T( has_grab_break_tec, bool() const );
+
+        luna::set_fx( ut, "get_weight_capacity", []( UT_CLASS & cr ) -> std::int64_t { return cr.weight_capacity().value(); } );
+    }
+#undef UT_CLASS // #define UT_CLASS Creature
+}
+
+void cata::detail::reg_monster( sol::state &lua )
+{
+#define UT_CLASS monster
+    {
+        sol::usertype<UT_CLASS> ut =
+        luna::new_usertype<UT_CLASS>(
+            lua,
+            luna::bases<Creature>(),
+            luna::no_constructor
+        );
+
+        // Members
+        SET_MEMB( friendly );
+        SET_MEMB( anger );
+        SET_MEMB( morale );
+        SET_MEMB( faction );
+        SET_MEMB( death_drops );
+        SET_MEMB( unique_name );
+        DOC( "Pet training level gained through pet training." );
+        SET_MEMB_RO( training_level );
+        DOC( "Bond level with the character this pet is bonded to." );
+        SET_MEMB_RO( pet_bond_level );
+
+        // Methods
+        // I really don't want to break the uniformity, but...
+        luna::set_fx( ut, "get_type", []( const monster & m ) { return m.type -> id; } );
+        SET_FX_T( can_upgrade, bool() const );
+        SET_FX_T( hasten_upgrade, void() );
+        SET_FX_T( get_upgrade_time, int() const );
+        SET_FX_T( try_upgrade, void( bool ) );
+        SET_FX_T( try_reproduce, void() );
+        SET_FX_T( refill_udders, void() );
+        DOC( "Whether this monster's current type and runtime state contain the exact attack ID." );
+        SET_FX_T( has_special_attack, bool( const std::string & ) const );
+        DOC( "Checks only enabled state and zero cooldown; does not predict range, target, sight or ammo." );
+        SET_FX_T( special_attack_ready, bool( const std::string & ) const );
+        DOC( "Calls a ready special attack once. True means the actor handled use, not necessarily a hit or shot." );
+        DOC( "Resets cooldown only on true. Actor side effects are not rolled back on false." );
+        DOC( "Does not apply the scheduler's pacified/hallucination restrictions or plan a target." );
+        DOC( "On true the stock scheduler skips its own pick for the rest of this action." );
+        SET_FX_T( use_special_attack, bool( const std::string & ) );
+        DOC( "Whether this action's one special attack has already been spent." );
+        SET_FX_N_T( special_attack_budget_spent, "special_attack_budget_spent", bool() const );
+        DOC( "Frees the budget so a further use_special_attack can run in the same action." );
+        DOC( "Only for a deliberately multi-attack action; the budget is what stops Lua and" );
+        DOC( "the stock scheduler from stacking attacks onto one action." );
+        SET_FX_N_T( clear_special_attack_budget, "clear_special_attack_budget", void() );
+        DOC( "Sorted IDs of every special attack this monster's current type defines." );
+        SET_FX_N_T( special_attack_ids, "get_special_attack_ids",
+                    std::vector<std::string>() const );
+        DOC( "Whether the attack is enabled. False for attacks this monster does not have." );
+        SET_FX_N_T( special_attack_enabled, "special_attack_enabled",
+                    bool( const std::string & ) const );
+        DOC( "Enables or disables an attack without touching its cooldown." );
+        DOC( "The enabled flag is serialized, so it persists across save/load." );
+        DOC( "A disabled attack is skipped by the stock scheduler and by special_attack_ready." );
+        SET_FX_N_T( set_special_attack_enabled, "set_special_attack_enabled",
+                    void( const std::string &, bool ) );
+        DOC( "Remaining cooldown in turns, or nil for attacks this monster does not have." );
+        SET_FX_N_T( get_special_attack_cooldown, "get_special_attack_cooldown",
+                    std::optional<int>( const std::string & ) const );
+        DOC( "Sets the remaining cooldown in turns. Negative values are clamped to 0." );
+        DOC( "Does nothing for attacks this monster does not have." );
+        SET_FX_N_T( set_special_attack_cooldown, "set_special_attack_cooldown",
+                    void( const std::string &, int ) );
+        SET_FX_T( spawn, void( const tripoint_bub_ms & ) );
+
+        SET_FX_T( name, std::string( unsigned int ) const );
+        SET_FX_T( name_with_armor, std::string() const );
+
+        SET_FX_T( can_see, bool() const );
+        SET_FX_T( can_hear, bool() const );
+        SET_FX_T( can_submerge, bool() const );
+        SET_FX_T( can_drown, bool() const );
+        SET_FX_T( can_climb, bool() const );
+        SET_FX_T( can_dig, bool() const );
+        SET_FX_T( digs, bool() const );
+        SET_FX_T( flies, bool() const );
+        SET_FX_T( climbs, bool() const );
+        SET_FX_T( swims, bool() const );
+        SET_FX_T( made_of, bool( const material_id & ) const );
+
+        SET_FX_T( move_target, tripoint_bub_ms() );
+        SET_FX_N_T( is_wandering, "is_wandering", bool() const );
+        DOC( "Hostile creature this monster sees at its move target, or nil while wandering." );
+        SET_FX_T( attack_target, Creature * () );
+        DOC( "Whether this monster flees from the given character." );
+        SET_FX_T( is_fleeing, bool( Character & ) const );
+        DOC( "Whether this monster has moves left and is not stunned, downed or webbed." );
+        SET_FX_T( can_act, bool() const );
+        DOC( "Whether this monster has an effect that impairs movement." );
+        SET_FX_T( movement_impaired, bool() );
+        DOC( "Intensity of the grabbed effect this monster applies." );
+        SET_FX_T( get_grab_strength, int() const );
+        DOC( "Whether this monster is dead or at 0 HP. Unlike is_dead, which checks only HP," );
+        DOC( "this also includes monsters that already died with HP left, e.g. by self-destructing." );
+        SET_FX_N_T( is_dead, "is_dead_or_dying", bool() const );
+
+        SET_FX_T( wander_to, void( const tripoint_bub_ms & p, int f ) );
+        luna::set_fx( ut, "add_armor_item", []( monster & m, detached_ptr<item> &armor ) { return m.set_armor_item( std::move( armor ) ); } );
+        luna::set_fx( ut, "get_armor_item", []( monster & m ) { return m.get_armor_item(); } );
+        luna::set_fx( ut, "remove_armor_item", []( monster & m ) { return m.remove_armor_item(); } );
+
+        luna::set_fx( ut, "add_saddle_item", []( monster & m, detached_ptr<item> &saddle ) { return m.set_tack_item( std::move( saddle ) ); } );
+        luna::set_fx( ut, "get_saddle_item", []( monster & m ) { return m.get_tack_item() ; } );
+        luna::set_fx( ut, "remove_saddle_item", []( monster & m ) {return m.remove_tack_item();} );
+
+        luna::set_fx( ut, "add_storage_item", []( monster & m, detached_ptr<item> &storage ) { return m.set_storage_item( std::move( storage ) ) ;} );
+        luna::set_fx( ut, "get_storage_item", []( monster & m ) { return m.get_storage_item() ;} );
+        luna::set_fx( ut, "remove_storage_item", []( monster & m ) { return m.remove_storage_item() ;} );
+
+        luna::set_fx( ut, "add_battery_item", []( monster & m, detached_ptr<item> &storage ) { return m.set_battery_item( std::move( storage ) ) ;} );
+        luna::set_fx( ut, "get_battery_item", []( monster & m ) { return m.get_battery_item() ;} );
+        luna::set_fx( ut, "remove_battery_item", []( monster & m ) { return m.remove_battery_item() ;} );
+
+        luna::set_fx( ut, "set_move_target", sol::overload(
+        []( monster & mon, const tripoint_bub_ms & p ) -> void {
+            mon.set_dest( p );
+        },
+        []( monster & mon, const tripoint & p ) -> void {
+            mon.set_dest( tripoint_bub_ms( p ) );
+        } ) );
+        luna::set_fx( ut, "set_target", []( monster & mon, Creature * target ) -> void {
+            if( target == nullptr )
+            {
+                mon.unset_dest();
+                return;
+            }
+            mon.set_dest( target->bub_pos() );
+        } );
+        luna::set_fx( ut, "clear_move_target", []( monster & mon ) -> void {
+            mon.unset_dest();
+        } );
+        luna::set_fx( ut, "run_normal_ai_turn", []( monster & mon ) -> void {
+            mon.plan();
+            const auto action = mon.decide_action();
+            mon.execute_action( action );
+        } );
+        luna::set_fx( ut, "move_to", sol::overload(
+                          []( monster & mon, const tripoint_bub_ms & p, bool force, bool step_on_critter,
+        float stagger_adjustment ) -> bool {
+            return mon.move_to( p, force, step_on_critter, stagger_adjustment );
+        },
+        []( monster & mon, const tripoint & p, bool force, bool step_on_critter,
+            float stagger_adjustment ) -> bool {
+            return mon.move_to( tripoint_bub_ms( p ), force, step_on_critter, stagger_adjustment );
+        } ) );
+        luna::set_fx( ut, "bash_at", sol::overload(
+        []( monster & mon, const tripoint_bub_ms & p ) -> bool {
+            return mon.bash_at( p );
+        },
+        []( monster & mon, const tripoint & p ) -> bool {
+            return mon.bash_at( tripoint_bub_ms( p ) );
+        } ) );
+
+        SET_FX_T( attitude, monster_attitude( const Character * ) const );
+        luna::set_fx( ut, "set_attitude", []( monster & mon, monster_attitude att ) -> void {
+            static const auto effect_docile = efftype_id( "docile" );
+            static const auto effect_pacified = efftype_id( "pacified" );
+            switch( att )
+            {
+                case MATT_FLEE:
+                    mon.anger = 0;
+                    mon.morale = -100;
+                    break;
+                case MATT_ATTACK:
+                    mon.anger = 100;
+                    mon.morale = 100;
+                    mon.remove_effect( effect_docile );
+                    mon.remove_effect( effect_pacified );
+                    break;
+                case MATT_IGNORE:
+                    mon.anger = 0;
+                    mon.morale = 0;
+                    mon.remove_effect( effect_docile );
+                    mon.remove_effect( effect_pacified );
+                    break;
+                case MATT_FOLLOW:
+                    mon.anger = 5;
+                    mon.morale = -5;
+                    mon.remove_effect( effect_docile );
+                    mon.remove_effect( effect_pacified );
+                    break;
+                case MATT_FRIEND:
+                    mon.make_friendly();
+                    mon.remove_effect( effect_docile );
+                    mon.remove_effect( effect_pacified );
+                    break;
+                case MATT_FPASSIVE:
+                    mon.make_friendly();
+                    mon.add_effect( effect_docile, 1_turns );
+                    break;
+                case MATT_ZLAVE:
+                    mon.add_effect( effect_pacified, 1_turns );
+                    break;
+                default:
+                    break;
+            }
+        } );
+
+        SET_FX_T( heal, int( int, bool ) );
+
+        SET_FX_T( set_hp, void( int ) );
+
+        SET_FX_T( make_fungus, bool() );
+        SET_FX_T( make_friendly, void() );
+        SET_FX_T( make_pet, void() );
+
+        SET_FX_T( make_ally, void( const monster & ) );
+
+        SET_FX_T( get_items, const std::vector<item *> &() const );
+        luna::set_fx( ut, "add_item", []( monster & m, item * it )
+        {
+            if( it == nullptr ) { return; }
+            detached_ptr<item> ptr = item::spawn( *it );
+            m.add_item( std::move( ptr ) );
+        } );
+        luna::set_fx( ut, "add_detached_item", []( monster & m, detached_ptr<item> &it )
+        {
+            if( !it ) { return; }
+            m.add_item( std::move( it ) );
+        } );
+        SET_FX_T( remove_item, detached_ptr<item>( item * ) );
+        SET_FX_T( clear_items, std::vector<detached_ptr<item>>() );
+        SET_FX_T( drop_items, void( const tripoint_bub_ms & ) );
+        SET_FX_N_T( drop_items, "drop_items_here", void() );
+
+        luna::set_fx( ut, "add_faction_anger", []( monster & m, const std::string & faction_str, int amount )
+        {
+            m.add_faction_anger( mfaction_id( faction_str ), amount );
+        } );
+
+        luna::set_fx( ut, "get_faction_anger", []( const monster & m, const std::string & faction_str ) -> int {
+            return m.get_faction_anger( mfaction_id( faction_str ) );
+        } );
+    }
+#undef UT_CLASS // #define UT_CLASS monster
+}
+
+void cata::detail::reg_character( sol::state &lua )
+{
+#define UT_CLASS Character
+    {
+        sol::usertype<UT_CLASS> ut =
+        luna::new_usertype<UT_CLASS>(
+            lua,
+            luna::bases<Creature>(),
+            luna::no_constructor
+        );
+
+        // Members
+        SET_MEMB( name );
+        SET_MEMB( male );
+
+        SET_MEMB( focus_pool );
+        SET_MEMB( cash );
+        SET_MEMB( follower_ids );
+
+        SET_MEMB( mutation_category_level );
+
+        // Magic system
+        DOC( "Access the character's spellbook and mana pool." );
+        luna::set_fx( ut, "get_magic", []( UT_CLASS & c ) -> known_magic& {
+            return *c.magic;
+        } );
+
+        // Methods
+        SET_FX_T( getID, character_id() const );
+
+        SET_FX_T( setID, void( character_id, bool ) );
+
+        SET_FX_T( reset, void() );
+        SET_FX_T( reset_encumbrance, void() );
+
+        SET_FX_T( get_str, int() const );
+        SET_FX_T( get_dex, int() const );
+        SET_FX_T( get_per, int() const );
+        SET_FX_T( get_int, int() const );
+
+        SET_FX_T( get_str_base, int() const );
+        SET_FX_T( get_dex_base, int() const );
+        SET_FX_T( get_per_base, int() const );
+        SET_FX_T( get_int_base, int() const );
+
+        SET_FX_T( get_str_bonus, int() const );
+        SET_FX_T( get_dex_bonus, int() const );
+        SET_FX_T( get_per_bonus, int() const );
+        SET_FX_T( get_int_bonus, int() const );
+
+        SET_FX_T( set_str_bonus, void( int ) );
+        SET_FX_T( set_dex_bonus, void( int ) );
+        SET_FX_T( set_per_bonus, void( int ) );
+        SET_FX_T( set_int_bonus, void( int ) );
+        SET_FX_T( mod_str_bonus, void( int ) );
+        SET_FX_T( mod_dex_bonus, void( int ) );
+        SET_FX_T( mod_per_bonus, void( int ) );
+        SET_FX_T( mod_int_bonus, void( int ) );
+        SET_FX_T( mod_speed_bonus, void( int ) );
+        SET_FX_T( set_speed_bonus, void( int ) );
+
+        SET_FX_T( get_healthy, float() const );
+        SET_FX_T( get_healthy_mod, float() const );
+
+        SET_FX_T( mod_healthy, void( float ) );
+        SET_FX_T( mod_healthy_mod, void( float, float ) );
+
+        SET_FX_T( set_healthy, void( float ) );
+        SET_FX_T( set_healthy_mod, void( float ) );
+
+        SET_FX_T( get_stored_kcal, int() const );
+
+        SET_FX_T( max_stored_kcal, int() const );
+        SET_FX_T( get_kcal_percent, float() const );
+        SET_FX_T( get_thirst, int() const );
+        SET_FX_T( get_fatigue, int() const );
+        SET_FX_T( get_sleep_deprivation, int() const );
+
+        SET_FX_T( mod_stored_kcal, void( int ) );
+        SET_FX_T( mod_thirst, void( int ) );
+        SET_FX_T( mod_fatigue, void( int ) );
+        SET_FX_T( mod_sleep_deprivation, void( int ) );
+
+        SET_FX_T( set_stored_kcal, void( int ) );
+        SET_FX_T( set_thirst, void( int ) );
+        SET_FX_T( set_fatigue, void( int ) );
+        SET_FX_T( set_sleep_deprivation, void( int ) );
+
+        luna::set_fx( ut, "get_faction_id", []( const UT_CLASS & charac ) -> faction_id {
+            faction *fac = charac.get_faction();
+            return fac == nullptr ? faction_id::NULL_ID() : fac->id;
+        } );
+        luna::set_fx( ut, "set_faction_id", []( UT_CLASS & charac, faction_id id ) { charac.set_fac_id( id.str() ); } );
+
+        SET_FX_T( sight_impaired, bool() const );
+
+        SET_FX_T( has_alarm_clock, bool() const );
+
+        SET_FX_T( has_watch, bool() const );
+
+        DOC( "Gets the current temperature of a specific body part in Celsius." );
+        SET_FX_N_T( get_part_temp_cur, "get_part_temp_celsius", units::temperature( const bodypart_id & id ) const );
+        DOC( "Sets a specific body part to a temperature in Celsius." );
+        SET_FX_N_T( set_part_temp_cur, "set_part_temp_celsius", void( const bodypart_id & id, units::temperature temp ) );
+        DOC( "Gets all bodyparts and their associated temperatures in Celsius." );
+        luna::set_fx( ut, "get_temp_celsius", sol::resolve< std::map<bodypart_id, units::temperature>() >( &UT_CLASS::get_temp_cur ) );
+        DOC( "Sets ALL body parts on a creature to the given temperature in Celsius." );
+        SET_FX_N_T( set_temp_cur, "set_temp_celsius", void( units::temperature temp ) );
+
+        // These legacy functions are named with 'BTU' (body temperature units).
+        DOC( "Deprecated: use get_part_temp_celsius instead. Gets the current temperature of a specific body part in legacy Body Temperature Units." );
+        luna::set_fx( ut, "get_part_temp_btu", static_cast<int ( * )( const UT_CLASS &, const bodypart_id & )>(
+        []( const UT_CLASS & charac, const bodypart_id & id ) -> int {
+            return units::to_legacy_bodypart_temp( charac.get_part_temp_cur( id ) );
+        } ) );
+        DOC( "Deprecated: use set_part_temp_celsius instead. Sets a specific body part to a given legacy Body Temperature Units value." );
+        luna::set_fx( ut, "set_part_temp_btu", static_cast<void ( * )( UT_CLASS &, const bodypart_id &, int )>(
+        []( UT_CLASS & charac, const bodypart_id & id, int temp ) -> void {
+            charac.set_part_temp_cur( id, units::from_legacy_bodypart_temp( temp ) );
+        } ) );
+        DOC( "Deprecated: use get_temp_celsius instead. Gets all bodyparts and their associated temperatures in legacy Body Temperature Units." );
+        luna::set_fx( ut, "get_temp_btu", static_cast<std::map<bodypart_id, int>( * )( UT_CLASS & )>(
+        []( UT_CLASS & charac ) -> std::map<bodypart_id, int> {
+            auto legacy_temps = std::map<bodypart_id, int>{};
+            for( const auto &[bp, temp] : charac.get_temp_cur() )
+            {
+                legacy_temps.emplace( bp, units::to_legacy_bodypart_temp( temp ) );
+            }
+            return legacy_temps;
+        } ) );
+        DOC( "Deprecated: use set_temp_celsius instead. Sets ALL body parts on a creature to the given legacy Body Temperature Units value." );
+        luna::set_fx( ut, "set_temp_btu", static_cast<void ( * )( UT_CLASS &, int )>(
+        []( UT_CLASS & charac, int temp ) -> void {
+            charac.set_temp_cur( units::from_legacy_bodypart_temp( temp ) );
+        } ) );
+
+        SET_FX_T( blood_loss, int( const bodypart_id & bp ) const );
+
+        SET_FX_N_T( encumb, "get_part_encumbrance", int( const bodypart_str_id & bp ) const );
+
+        SET_FX_T( is_wearing_power_armor, bool( bool * ) const );
+
+        SET_FX_T( is_wearing_active_power_armor, bool() const );
+
+        SET_FX_T( is_wearing_active_optcloak, bool() const );
+
+        SET_FX_T( in_climate_control, bool() );
+
+        SET_FX_T( is_blind, bool() const );
+
+        SET_FX_T( is_invisible, bool() const );
+
+        SET_FX_T( get_movement_mode, character_movemode() const );
+
+        SET_FX_T( set_movement_mode, void( character_movemode ) );
+
+        SET_FX_T( expose_to_disease, void( diseasetype_id ) );
+
+        SET_FX_T( is_quiet, bool() const );
+
+        SET_FX_T( is_stealthy, bool() const );
+
+        SET_FX( uncanny_dodge );
+
+        SET_FX( get_melee_stamina_cost );
+
+        SET_FX_T( cough, void( bool harmful, int loudness ) );
+
+        SET_FX_T( bionic_armor_bonus, float( const bodypart_id &, damage_type ) const );
+
+        SET_FX_T( mabuff_armor_bonus, int( damage_type ) const );
+
+        SET_FX_T( has_base_trait, bool( const trait_id & b ) const );
+
+        SET_FX_T( has_trait_flag, bool( const trait_flag_str_id & b ) const );
+
+        SET_FX_T( has_trait_type, bool( const std::string & mut_type ) const );
+
+        SET_FX_T( has_opposite_trait, bool( const trait_id & flag ) const );
+
+        SET_FX_T( set_mutation, void( const trait_id & ) );
+        SET_FX_T( unset_mutation, void( const trait_id & ) );
+
+        SET_FX_T( activate_mutation, void( const trait_id & ) );
+        SET_FX_T( deactivate_mutation, void( const trait_id & ) );
+
+        SET_FX_T( can_mount, bool( const monster & critter ) const );
+        SET_FX_T( mount_creature, void( monster & z ) );
+        SET_FX_T( is_mounted, bool() const );
+        SET_FX_T( check_mount_will_move, bool( const tripoint_bub_ms & dest_loc ) );
+        SET_FX_T( check_mount_is_spooked, bool() );
+        SET_FX_T( dismount, void() );
+        SET_FX_T( forced_dismount, void() );
+
+        SET_FX_T( is_deaf, bool() const );
+
+        SET_FX_T( has_two_arms, bool() const );
+
+        SET_FX_T( get_working_arm_count, int() const );
+
+        SET_FX_T( get_working_leg_count, int() const );
+
+        SET_FX_T( is_limb_disabled, bool( const bodypart_id & ) const );
+
+        SET_FX_T( is_limb_broken, bool( const bodypart_id & ) const );
+
+        SET_FX_T( can_run, bool() );
+
+        SET_FX_T( hurtall, void( int dam, Creature * source, bool ) );
+
+        SET_FX_T( hitall, int( int dam, int vary, Creature * source ) );
+
+        SET_FX_T( heal, void( const bodypart_id &, int ) );
+
+        SET_FX_T( healall, void( int dam ) );
+
+        // Legacy Lua API aliases — scripts using these names still work.
+        luna::set_fx( ut, "global_square_location", []( const Character & c ) { return c.abs_pos(); } );
+        SET_FX_N_T( abs_sm_pos, "global_sm_location", tripoint_abs_sm() const );
+
+        SET_FX_T( has_mabuff, bool( const mabuff_id & ) const );
+
+        SET_FX_T( mabuff_tohit_bonus, float() const );
+
+        SET_FX_T( mabuff_dodge_bonus, float() const );
+
+        SET_FX_T( mabuff_block_bonus, int() const );
+
+        SET_FX_T( mabuff_speed_bonus, int() const );
+
+        SET_FX_T( mabuff_arpen_bonus, int( damage_type ) const );
+
+        SET_FX_T( mabuff_damage_mult, float( damage_type ) const );
+
+        SET_FX_T( mabuff_damage_bonus, int( damage_type ) const );
+
+        SET_FX_T( mabuff_attack_cost_penalty, int() const );
+
+        SET_FX_T( mabuff_attack_cost_mult, float() const );
+
+        SET_FX_T( mutation_effect, void( const trait_id & ) );
+
+        SET_FX_T( mutation_loss_effect, void( const trait_id & ) );
+
+        luna::set_fx( ut, "activate_mutation_id", []( UT_CLASS & utObj, trait_id & mut )
+        {
+            utObj.activate_mutation( mut );
+        } );
+
+        luna::set_fx( ut, "deactivate_mutation_id", []( UT_CLASS & utObj, trait_id & mut )
+        {
+            utObj.deactivate_mutation( mut );
+        } );
+
+        SET_FX_T( has_active_mutation, bool( const trait_id & ) const );
+
+        SET_FX_T( mutate, void() );
+
+        SET_FX_T( mutation_ok, bool( const trait_id &, bool, bool ) const );
+
+        luna::set_fx( ut, "mutate_category", sol::overload(
+                          sol::resolve<void( const mutation_category_id & )>( &UT_CLASS::mutate_category ),
+                          sol::resolve<void( const mutation_category_id &, bool )>( &UT_CLASS::mutate_category )
+                      ) );
+
+        luna::set_fx( ut, "mutate_towards", sol::overload(
+                          sol::resolve<bool( std::vector<trait_id>, int )>( &UT_CLASS::mutate_towards ),
+                          sol::resolve<bool( const trait_id & )>( &UT_CLASS::mutate_towards )
+                      ) );
+
+
+        SET_FX_T( remove_mutation, void( const trait_id &, bool ) );
+
+        SET_FX_T( has_child_flag, bool( const trait_id & flag ) const );
+
+        SET_FX_T( remove_child_flag, void( const trait_id & flag ) );
+
+        SET_FX_T( get_highest_category, mutation_category_id() const );
+
+        SET_FX_T( is_weak_to_water, bool() const );
+
+        SET_FX_T( mutation_armor, float( bodypart_id, damage_type ) const );
+
+        SET_FX_T( get_bionics, std::vector<bionic_id>() const );
+
+        luna::set_fx( ut, "get_bionic", []( UT_CLASS & utObj, const bionic_id & bid ) -> bionic {
+            return utObj.get_bionic_state( bid );
+        } );
+
+        SET_FX_T( has_bionic, bool( const bionic_id & b ) const );
+
+        luna::set_fx( ut, "activate_bionic", []( UT_CLASS & utObj, const bionic_id & bid, std::optional<bool> block_message ) -> bool {
+            if( utObj.has_bionic( bid ) )
+            {
+                bionic &bio = utObj.get_bionic_state( bid );
+                bio.powered = bio.info().has_flag( STATIC( flag_id( "BIONIC_TOGGLED" ) ) ) ||
+                bio.info().charge_time > 0;
+                if( bio.info().charge_time > 0 ) {
+                    bio.charge_timer = bio.info().charge_time;
+                }
+                if( !bio.id->enchantments.empty() ) {
+                    utObj.recalculate_enchantment_cache();
+                }
+                return utObj.activate_bionic( bio, block_message.value_or( true ) );
+            }
+            return false;
+        } );
+
+        luna::set_fx( ut, "deactivate_bionic", []( UT_CLASS & utObj, const bionic_id & bid, std::optional<bool> block_message ) -> bool {
+            if( utObj.has_bionic( bid ) )
+            {
+                bionic &bio = utObj.get_bionic_state( bid );
+                return utObj.deactivate_bionic( bio, block_message.value_or( true ) );
+            }
+            return false;
+        } );
+
+        SET_FX_T( has_active_bionic, bool( const bionic_id & b ) const );
+
+        SET_FX_T( has_any_bionic, bool() const );
+
+        SET_FX_T( has_bionics, bool() const );
+
+        SET_FX_T( clear_bionics, void() );
+        SET_FX_T( get_used_bionics_slots, int( const bodypart_id & ) const );
+        SET_FX_T( get_total_bionics_slots, int( const bodypart_id & ) const );
+        SET_FX_T( get_free_bionics_slots, int( const bodypart_id & ) const );
+
+        SET_FX_T( remove_bionic, void( const bionic_id & ) );
+
+        SET_FX_T( add_bionic, void( const bionic_id & ) );
+
+        // Power saving / auto-start controls (by bionic_id)
+        luna::set_fx( ut, "toggle_safe_fuel_mod", []( UT_CLASS & ch, const bionic_id & bid )
+        {
+            if( ch.has_bionic( bid ) ) {
+                ch.get_bionic_state( bid ).toggle_safe_fuel_mod();
+            }
+        } );
+        luna::set_fx( ut, "toggle_auto_start_mod", []( UT_CLASS & ch, const bionic_id & bid )
+        {
+            if( ch.has_bionic( bid ) ) {
+                ch.get_bionic_state( bid ).toggle_auto_start_mod();
+            }
+        } );
+        luna::set_fx( ut, "set_auto_start_thresh", []( UT_CLASS & ch, const bionic_id & bid, float val )
+        {
+            if( ch.has_bionic( bid ) ) {
+                ch.get_bionic_state( bid ).set_auto_start_thresh( val );
+            }
+        } );
+        luna::set_fx( ut, "get_auto_start_thresh", []( UT_CLASS & ch, const bionic_id & bid ) -> float {
+            if( ch.has_bionic( bid ) )
+            {
+                return ch.get_bionic_state( bid ).get_auto_start_thresh();
+            }
+            return -1.0f;
+        } );
+        luna::set_fx( ut, "is_auto_start_on", []( UT_CLASS & ch, const bionic_id & bid ) -> bool {
+            if( ch.has_bionic( bid ) )
+            {
+                return ch.get_bionic_state( bid ).is_auto_start_on();
+            }
+            return false;
+        } );
+        luna::set_fx( ut, "is_auto_start_keep_full", []( UT_CLASS & ch, const bionic_id & bid ) -> bool {
+            if( ch.has_bionic( bid ) )
+            {
+                return ch.get_bionic_state( bid ).is_auto_start_keep_full();
+            }
+            return false;
+        } );
+
+        SET_FX_T( get_power_level, units::energy() const );
+        SET_FX_T( get_max_power_level, units::energy() const );
+        SET_FX_T( mod_power_level, void( const units::energy & ) );
+        SET_FX_T( mod_max_power_level, void( const units::energy & ) );
+        SET_FX_T( set_power_level, void( const units::energy & ) );
+        SET_FX_T( set_max_power_level, void( const units::energy & ) );
+        SET_FX_T( is_max_power, bool() const );
+        SET_FX_T( has_power, bool() const );
+        SET_FX_T( has_max_power, bool() const );
+        SET_FX_T( enough_power_for, bool( const bionic_id & ) const );
+
+        SET_FX_T( is_worn, bool( const item & ) const );
+
+        SET_FX_T( weight_carried, units::mass() const );
+        SET_FX_T( volume_carried, units::volume() const );
+
+        SET_FX_T( volume_capacity, units::volume() const );
+
+        SET_FX_T( can_pick_volume, bool( units::volume ) const );
+        SET_FX_T( can_pick_weight, bool( units::mass, bool ) const );
+
+        SET_FX_T( is_armed, bool() const );
+
+        luna::set_fx( ut, "can_wield", []( const UT_CLASS & utObj, const item & i ) -> bool {
+            const auto result = utObj.can_wield( i );
+            return result.success() && result.value();
+        } );
+
+        SET_FX_T( wield, bool( item & target ) );
+
+        luna::set_fx( ut, "can_unwield", []( const UT_CLASS & utObj, const item & i ) -> bool {
+            const auto result = utObj.can_unwield( i );
+            return result.success() && result.value();
+        } );
+
+        SET_FX_T( unwield, bool() );
+
+        SET_FX_T( is_wielding, bool( const item & ) const );
+
+        SET_FX_T( is_wearing, bool( const item & ) const );
+
+        SET_FX_T( is_wearing_on_bp, bool( const itype_id &, const bodypart_id & ) const );
+
+        SET_FX_T( worn_with_flag, bool( const flag_id &, const bodypart_id & ) const );
+
+        SET_FX_T( worn_with_id, bool( const itype_id &, const bodypart_id & ) const );
+
+        SET_FX_T( item_worn_with_flag,
+                  const item * ( const flag_id &, const bodypart_id & ) const );
+
+        SET_FX_T( item_worn_with_id,
+                  const item * ( const itype_id &, const bodypart_id & ) const );
+
+        SET_FX_T( get_skill_level, int( const skill_id & ) const );
+
+        SET_FX_T( get_all_skills, const SkillLevelMap & () const );
+        SET_FX_T( get_skill_level_object, SkillLevel & ( const skill_id & ident ) );
+
+        SET_FX_T( set_skill_level, void( const skill_id &, int ) );
+        SET_FX_T( mod_skill_level, void( const skill_id &, int ) );
+
+        SET_FX_T( rust_rate, int() const );
+
+        SET_FX_T( practice, void( const skill_id &, int, int, bool ) );
+
+        SET_FX_T( read_speed, int( bool ) const );
+
+        SET_FX_T( get_time_died, time_point() const );
+
+        SET_FX_T( is_rad_immune, bool() const );
+
+        SET_FX_T( is_throw_immune, bool() const );
+
+        SET_FX_T( rest_quality, float() const );
+
+        SET_FX_T( healing_rate, float( float ) const );
+
+        SET_FX_T( healing_rate_medicine, float( float, const bodypart_id & ) const );
+
+        SET_FX_T( mutation_value, float( const std::string & ) const );
+
+        SET_FX_T( get_base_traits, std::vector<trait_id>() const );
+
+        SET_FX_T( get_mutations, std::vector<trait_id>( bool ) const );
+
+        SET_FX_T( clear_skills, void() );
+
+        SET_FX_T( clear_mutations, void() );
+
+        SET_FX_T( crossed_threshold, bool() const );
+
+        SET_FX_T( add_addiction, void( add_type, int ) );
+        SET_FX_T( rem_addiction, void( add_type ) );
+        SET_FX_T( has_addiction, bool( add_type ) const );
+        SET_FX_T( addiction_level, int( add_type ) const );
+
+        SET_FX_T( is_hauling, bool() const );
+
+        DOC( "Adds a detached item to the player inventory" );
+        luna::set_fx( ut, "add_item", []( UT_CLASS & c, detached_ptr<item> &i )
+        {
+            c.i_add( std::move( i ) );
+        } );
+
+        DOC( "Creates an item with the given id and adds it to the player inventory." );
+        DOC( "`count` sets the item's charges, not the number of items: exactly one item is created." );
+        DOC( "For stackable (count-by-charges) items such as ammo, `count` is the stack size. For non-stackable items, pass a negative value (e.g. -1), since a positive one is still applied as charges. Tools spawned with a negative value get their default charges." );
+        luna::set_fx( ut, "create_item", []( UT_CLASS & c, const itype_id & itype, int count )
+        {
+            return &c.add_item_with_id( itype, count );
+        } );
+
+        DOC( "DEPRECATED: use create_item instead" );
+        SET_FX_T( add_item_with_id, item & ( const itype_id & itype, int count ) );
+
+        DOC( "Checks for an item with the given id" );
+        SET_FX_T( has_item_with_id, bool( const itype_id & itype, bool need_charges ) const );
+
+        DOC( "Gets the first occurrence of an item with the given id" );
+        SET_FX_T( get_item_with_id, const item * ( const itype_id & itype, bool need_charges ) const );
+
+        DOC( "Checks for an item with the given flag" );
+        SET_FX_T( has_item_with_flag, bool( const flag_id & flag, bool need_charges ) const );
+
+        DOC( "Gets all items with the given flag" );
+        SET_FX_T( all_items_with_flag,
+                  std::vector<item *>( const flag_id & flag, bool need_charges ) const );
+
+        DOC( "Gets all items" );
+        SET_FX_T( all_items, std::vector<item *>( bool need_charges ) const );
+
+        DOC( "Filters items" );
+        luna::set_fx( ut, "items_with", &Character::items_with );
+
+        DOC( "DEPRECATED: use remove_item instead" );
+        luna::set_fx( ut, "inv_remove_item", &Character::inv_remove_item );
+
+        DOC( "Removes given `Item` from character's inventory. The `Item` must be in the inventory, neither wielded nor worn." );
+        luna::set_fx( ut, "remove_item", []( UT_CLASS & c, item & it ) -> detached_ptr<item> {
+            return c.inv_remove_item( &it );
+        } );
+
+        DOC( "Checks if a given `Item` can be taken off." );
+        luna::set_fx( ut, "can_takeoff", []( const UT_CLASS & c, const item & it )
+        {
+            const auto res = c.can_takeoff( it );
+            return res.success() && res.value();
+        } );
+
+        DOC( "Attempts to take off the worn `Item` from character." );
+        luna::set_fx( ut, "takeoff", []( UT_CLASS & c, item & it )
+        {
+            return c.takeoff( it, nullptr );
+        } );
+
+        DOC( "Attempts to remove the worn `Item` from character." );
+        luna::set_fx( ut, "remove_worn", []( UT_CLASS & c, item & it ) -> std::optional<detached_ptr<item>> {
+            std::vector<detached_ptr<item>> res{};
+            if( c.takeoff( it, &res ) )
+                return std::make_optional( std::move( res[0] ) );
+            return std::nullopt;
+        } );
+
+        luna::set_fx( ut, "get_dependant_worn_items", []( const UT_CLASS & c, const item & it )
+        {
+            auto lst = c.get_dependent_worn_items( it );
+            std::vector<item *> res = {};
+            std::ranges::copy( lst, std::back_inserter( res ) );
+            return res;
+        } );
+
+        // Could also use a std::variant<item*, detached_ptr<item>*> for a single method
+        DOC( "Attempts to wear an item not in the creature inventory. If boolean parameter is false, item is worn instantly" );
+        luna::set_fx( ut, "wear_detached", []( UT_CLASS & c, detached_ptr<item> &it, bool interactive )
+        {
+            return !!c.wear_item( std::move( it ), interactive, std::nullopt );
+        } );
+
+        DOC( "Attempts to wear an item in the creature inventory. If boolean parameter is false, item is worn instantly" );
+        luna::set_fx( ut, "wear", []( UT_CLASS & c, item & it, bool interactive )
+        {
+            return c.wear_possessed( it, interactive, std::nullopt );
+        } );
+
+        DOC( "Checks if creature can wear a given item. If boolean parameter is true, ignores already worn items" );
+        luna::set_fx( ut, "can_wear", []( const UT_CLASS & c, const item & it, bool ignore_worn )
+        {
+            auto res = c.can_wear( it, ignore_worn );
+            return res.success() && res.value();
+        } );
+
+        luna::set_fx( ut, "get_worn_items", []( const UT_CLASS & c )
+        {
+            std::vector<item *> res{};
+            std::ranges::copy( c.worn, std::back_inserter( res ) );
+            return res;
+        } );
+
+        SET_FX_T( assign_activity,
+                  void( const activity_id &, int, int, int, const std::string & ) );
+
+        DOC( "Assigns a Lua-backed activity with opts.type, opts.duration, optional opts.on_finish, optional opts.on_turn, optional opts.data, optional opts.pos, optional opts.name, and optional opts.interruptable." );
+        luna::set_fx( ut, "assign_lua_activity", []( UT_CLASS & c, const sol::table & opts ) -> void {
+            c.assign_activity( make_lua_activity( parse_lua_activity_options( opts ) ) );
+        } );
+
+        luna::set_fx( ut, "get_activity", []( UT_CLASS & c ) -> player_activity * {
+            return c.activity.get();
+        } );
+
+        SET_FX_T( has_activity, bool( const activity_id & type ) const );
+
+        SET_FX_T( cancel_activity, void() );
+
+        SET_FX_T( metabolic_rate, float() const );
+
+        SET_FX_T( base_age, int() const );
+        SET_FX_T( set_base_age, void( int ) );
+        SET_FX_T( mod_base_age, void( int ) );
+
+        SET_FX_T( age, int() const );
+
+        SET_FX_T( base_height, int() const );
+        SET_FX_T( set_base_height, void( int ) );
+        SET_FX_T( mod_base_height, void( int ) );
+
+        SET_FX_T( height, int() const );
+
+        SET_FX_T( bodyweight, units::mass() const );
+
+        SET_FX_T( bionics_weight, units::mass() const );
+
+        SET_FX_T( get_armor_acid, int( bodypart_id bp ) const );
+
+        SET_FX_T( get_stim, int() const );
+        SET_FX_T( set_stim, void( int ) );
+        SET_FX_T( mod_stim, void( int ) );
+
+        SET_FX_T( get_rad, int() const );
+        SET_FX_T( set_rad, void( int ) );
+        SET_FX_T( mod_rad, void( int ) );
+
+        SET_FX_T( get_stamina, int() const );
+        SET_FX_T( get_stamina_max, int() const );
+        SET_FX_T( set_stamina, void( int ) );
+        SET_FX_T( mod_stamina, void( int ) );
+
+        SET_FX_T( vitamin_get, int( const vitamin_id & ) const );
+        SET_FX_T( vitamin_set, bool( const vitamin_id &, int ) );
+        SET_FX_T( vitamin_mod, int( const vitamin_id &, int, bool ) );
+
+        SET_FX_T( sound_hallu, void() );
+
+        SET_FX_T( wake_up, void() );
+
+        SET_FX_T( get_shout_volume, int() const );
+
+        SET_FX_T( shout, void( std::string, bool ) );
+
+        SET_FX_T( vomit, void() );
+
+        SET_FX_T( restore_scent, void() );
+
+        SET_FX_T( mod_painkiller, void( int ) );
+
+        SET_FX_T( set_painkiller, void( int ) );
+
+        SET_FX_T( get_painkiller, int() const );
+
+        SET_FX_T( spores, void() );
+        SET_FX_T( blossoms, void() );
+
+        SET_FX_T( rooted, void() );
+
+        luna::set_fx( ut, "fall_asleep", sol::overload(
+                          sol::resolve<void()>( &UT_CLASS::fall_asleep ),
+                          sol::resolve<void( const time_duration &duration )>( &UT_CLASS::fall_asleep )
+                      ) );
+
+        SET_FX_T( get_hostile_creatures, std::vector<Creature *>( int ) const );
+
+        SET_FX_T( get_visible_creatures, std::vector<Creature *>( int ) const );
+
+        SET_FX_T( wearing_something_on, bool( const bodypart_id & ) const );
+
+        SET_FX_T( is_wearing_helmet, bool() const );
+
+        SET_FX_T( get_morale_level, int() const );
+        luna::set_fx( ut, "add_morale", []( UT_CLASS & c, const morale_type & type, int bonus,
+                                            int max_bonus, const time_duration & duration,
+                                            const time_duration & decay_start, bool capped,
+        sol::optional<const itype *> item_type ) -> void {
+            c.add_morale( type, bonus, max_bonus, duration, decay_start, capped, item_type.value_or( nullptr ) );
+        } );
+        SET_FX_T( has_morale, bool( const morale_type & ) const );
+        SET_FX_T( get_morale, int( const morale_type & ) const );
+        SET_FX_T( rem_morale, void( const morale_type & ) );
+        SET_FX_T( clear_morale, void() );
+        SET_FX_T( has_morale_to_read, bool() const );
+        SET_FX_T( has_morale_to_craft, bool() const );
+
+        luna::set_fx( ut, "knows_recipe", []( const UT_CLASS & utObj, const recipe_id & rec ) -> bool { return utObj.knows_recipe( &( rec.obj() ) ); } );
+        luna::set_fx( ut, "learn_recipe", []( UT_CLASS & utObj, const recipe_id & rec ) -> void { utObj.learn_recipe( &( rec.obj() ) ); } );
+
+        luna::set_fx( ut, "knows_martial_art", []( const UT_CLASS & utObj, const matype_id & ma_type_id ) -> bool { return utObj.martial_arts_data->has_martialart( ma_type_id ); } );
+        luna::set_fx( ut, "learn_martial_art", []( const UT_CLASS & utObj, const matype_id & ma_type_id ) -> void { utObj.martial_arts_data->add_martialart( ma_type_id ); } );
+
+        SET_FX_T( suffer, void() );
+
+        SET_FX_T( irradiate, bool( float rads, bool bypass ) );
+
+        DOC( "Whether the character knows about the trap at the given tripoint." );
+        SET_FX( knows_trap );
+
+        DOC( "Character learns that the given trap is on the given tripoint. If the trap is null, the character learns that there is no trap there." );
+        luna::set_fx( ut, "add_known_trap", []( UT_CLASS & c, const tripoint_bub_ms & p, const trap_id & tr )
+        {
+            c.add_known_trap( p, tr.obj() );
+        } );
+
+        SET_FX_T( can_hear, bool( const tripoint_bub_ms & source, int volume ) const );
+
+        SET_FX_T( hearing_ability, float() const );
+
+        SET_FX_T( get_lowest_hp, int() const );
+
+        // Respawn Stuff
+        SET_FX_T( drop_inv, void( const int count ) );
+
+        DOC( "Drops all items (inventory, worn, wielded) at the character's current position." );
+        luna::set_fx( ut, "drop_all_items", []( Character & ch ) -> void {
+            std::vector<detached_ptr<item>> tmp = ch.inv_dump_remove();
+            map &here = get_map();
+            for( auto &itm : tmp )
+            {
+                here.add_item_or_charges( ch.bub_pos(), std::move( itm ) );
+            }
+        } );
+
+        SET_FX( bodypart_exposure );
+
+        luna::set_fx( ut, "drench", []( UT_CLASS & c, const int saturation,
+                                        const std::vector<bodypart_id> &parts, const bool ignore_waterproof )
+        {
+            auto drenched_parts = body_part_set();
+            drenched_parts.fill( parts );
+            c.drench( saturation, drenched_parts, ignore_waterproof );
+        } );
+
+        luna::set_fx( ut, "use_charges", sol::overload(
+        []( UT_CLASS & c, const itype_id & what, int qty ) -> std::vector<detached_ptr<item>> {
+            return c.use_charges( what, qty );
+        },
+        []( UT_CLASS & c, const itype_id & what, int qty,
+        const sol::function & filter ) -> std::vector<detached_ptr<item>> {
+            return c.use_charges( what, qty, [&filter]( const item & it ) { return filter( it ); } );
+        } ) );
+        SET_FX( use_charges_if_avail );
+
+        DOC( "Returns the crafting inventory for this character (includes nearby items)" );
+        luna::set_fx( ut, "crafting_inventory", []( UT_CLASS & ch ) -> const inventory & {
+            return ch.crafting_inventory( tripoint_bub_ms::zero(), PICKUP_RANGE, true );
+        } );
+
+        DOC( "Invalidates the cached crafting inventory" );
+        SET_FX_T( invalidate_crafting_inventory, void() );
+
+        DOC( "Consumes a requirement's items from the inventory" );
+        luna::set_fx( ut, "consume_requirement", []( UT_CLASS & ch, const requirement_data & req, const sol::table & opts ) -> bool {
+            int range = opts.get_or( "range", PICKUP_RANGE );
+            int size = opts.get_or( "count", 1 );
+            inventory map_inv;
+            map_inv.form_from_map( ch.bub_pos(), range );
+            for( const auto &it : req.get_components() )
+            {
+                auto chosen = ch.select_item_component( it, size, map_inv, true );
+                if( chosen.use_from == usage_from::cancel ) {
+                    return false;
+                }
+                ch.consume_items( chosen, size );
+            }
+            return true;
+        } );
+
+        DOC( "Consumes items from inventory based on item component list" );
+        luna::set_fx( ut, "consume_items", []( UT_CLASS & ch, const std::vector<item_comp> &components ) -> void {
+            ch.consume_items( components );
+        } );
+
+        DOC( "Consumes tool charges from inventory based on tool component list" );
+        luna::set_fx( ut, "consume_tools", []( UT_CLASS & ch, const std::vector<tool_comp> &tools ) -> void {
+            ch.consume_tools( tools );
+        } );
+
+        DOC( "Gets the bonus from the enchantment value. Doesn't handle max logic itself." );
+        luna::set_fx( ut, "bonus_from_enchantments", []( UT_CLASS & ch, const double base, const enchantment_value_id & ench_val_id, sol::optional<bool> round ) -> double {
+            return ch.bonus_from_enchantments( base, ench_val_id, round.value_or( false ) );
+        } );
+        SET_FX( has_enchantment_flag );
+    }
+#undef UT_CLASS // #define UT_CLASS Character
+
+#define UT_CLASS character_id
+    {
+        sol::usertype<UT_CLASS> ut =
+        luna::new_usertype<UT_CLASS>(
+            lua,
+            luna::no_bases,
+            luna::constructors <
+            UT_CLASS(),
+            UT_CLASS( int )
+            > ()
+        );
+
+        SET_FX( is_valid );
+        SET_FX( get_value );
+    }
+#undef UT_CLASS // #define UT_CLASS character_id
+}
+
+void cata::detail::reg_player( sol::state &lua )
+{
+    {
+        // Note(AluminumAlman): skipping binding members and methods of this class because
+        // most of the methods and members are already binded through Character.
+        sol::usertype<player> ut =
+            luna::new_usertype<player>(
+                lua,
+                luna::bases<Character, Creature>(),
+                luna::no_constructor
+            );
+    }
+}
+
+void cata::detail::reg_npc( sol::state &lua )
+{
+#define UT_CLASS npc
+    {
+        sol::usertype<UT_CLASS> ut =
+        luna::new_usertype<UT_CLASS>(
+            lua,
+            luna::bases<player, Character, Creature>(),
+            luna::no_constructor
+        );
+
+        // Members
+        SET_MEMB( current_activity_id );
+        SET_MEMB( personality );
+        SET_MEMB( op_of_u );
+        SET_MEMB( patience );
+        SET_MEMB( marked_for_death );
+        SET_MEMB( hit_by_player );
+        SET_MEMB( needs );
+
+        // Methods
+        SET_FX_N_T( set_fac, "set_faction_id", void( const faction_id & id ) );
+
+        DOC( "True if this NPC is in a simulated (fully loaded, AI-eligible) submap." );
+        SET_FX_T( is_simulated, bool() const );
+
+        SET_FX_T( turned_hostile, bool() const );
+
+        SET_FX_T( hostile_anger_level, int() const );
+
+        SET_FX_T( make_angry, void() );
+
+        SET_FX_T( is_enemy, bool() const );
+
+        SET_FX_T( is_following, bool() const );
+
+        SET_FX_T( is_obeying, bool( const Character & p ) const );
+
+        SET_FX_T( is_friendly, bool( const Character & p ) const );
+
+        SET_FX_T( is_leader, bool() const );
+
+        SET_FX_T( is_walking_with, bool() const );
+
+        SET_FX_T( is_ally, bool( const Character & p ) const );
+
+        SET_FX_T( is_player_ally, bool() const );
+
+        SET_FX_T( is_stationary, bool( bool include_guards ) const );
+
+        SET_FX_T( is_guarding, bool() const );
+
+        SET_FX_T( is_patrolling, bool() const );
+
+        SET_FX_T( has_player_activity, bool() const );
+
+        DOC( "Returns true if the npc has the 'NPC_MISSION_TRAVELLING' mission." );
+
+        SET_FX_T( is_travelling, bool() const );
+
+        DOC( "Returns true if the npc is a player ally and their op_of_u.trust is >= 5." );
+
+        SET_FX_T( is_minion, bool() const );
+
+        DOC( "Returns true if the npc would be hostile to the player on sight regardless of their current attitude." );
+
+        SET_FX_T( guaranteed_hostile, bool() const );
+
+        DOC( "Causes the npc to leave your faction, incur various negative opinion maluses, and say explatives to the player." );
+
+        SET_FX_T( mutiny, void() );
+
+        DOC( "Returns the npc's faction id. If it's part of a monster faction, it returns the id of the monster faction." );
+
+        SET_FX_T( get_monster_faction, mfaction_id() const );
+
+        DOC( "Gets the npc's follow distance. This can only be a few values, and is determined by npc rules." );
+
+        SET_FX_T( follow_distance, int() const );
+
+        DOC( "Returns the npc's current target as a creature, if it has one." );
+
+        SET_FX_T( current_target, Creature * () );
+
+        DOC( "Returns the npc's current ally, if it has one." );
+
+        SET_FX_T( current_ally, Creature * () );
+
+        DOC( "Gets a value based on the npc's perspective of the area's danger." );
+
+        SET_FX_T( danger_assessment, float() );
+
+        DOC( "Gets the npc's blunt damage with their currently equipped weapon." );
+
+        SET_FX_T( smash_ability, int() const );
+
+        DOC( "Returns the first topic of the npc's chatbin." );
+
+        luna::set_fx( ut, "get_first_topic", []( UT_CLASS & npchar ) -> std::string { return npchar.chatbin.first_topic; } );
+
+        DOC( "Sets the first topic of the npc's chatbin. Note that some circumstances may cause this to not be the first topic used, such as player allies." );
+
+        luna::set_fx( ut, "set_first_topic", []( UT_CLASS & npchar, const std::string & str ) -> void { npchar.chatbin.first_topic = str; } );
+
+        DOC( "Triggers the npc menu to open." );
+        luna::set_fx( ut, "npc_menu", []( UT_CLASS & npchar, sol::optional<bool> force ) -> void { g->npc_menu( npchar, force.value_or( false ) ); } );
+
+        DOC( "Causes the npc to talk to you. Passing a topic will force that topic to be used in place of all others, including code enforced topics such as 'TALK_STOLE_ITEM'." );
+        luna::set_fx( ut, "talk_to_u", []( UT_CLASS & npchar, sol::optional<std::string> topic, sol::optional<bool> radio_contact ) -> void {
+            if( topic.has_value() && !topic.value().empty() ) {  npchar.chatbin.first_topic = topic.value(); }
+            npchar.talk_to_u( radio_contact.value_or( false ), topic.has_value() );
+        } );
+
+        DOC( "Has the npc say the given string in the sidebar." );
+
+        luna::set_fx( ut, "say", &UT_CLASS::say<> );
+
+        DOC( "Complain about an issue if enough time has passed. The first string is the issue identifier, with the second being the complaint text." );
+        DOC( "The optional bool allows you to force a complaint without concern for the input time." );
+
+        luna::set_fx( ut, "complain_about",
+        []( UT_CLASS & npchar, const std::string & issue, const time_duration & dur, const std::string & speech, sol::optional<bool> force ) -> bool {
+            return npchar.complain_about( issue, dur, speech, force.value_or( false ) );
+        } );
+
+        DOC( "Wrapper for complain_about that warns about a specific type of threat, with" );
+
+        DOC( "different warnings for hostile or friendly NPCs and hostile NPCs always complaining." );
+
+        SET_FX_T( warn_about,
+                  void( const std::string & type, const time_duration &, const std::string &,
+                        int, const tripoint_bub_ms & ) );
+
+        DOC( "Finds something to complain about and complains. Returns if complained." );
+
+        SET_FX_T( complain, bool() );
+
+        DOC( "Rates how dangerous a target is from 0 (harmless) to 1 (max danger)." );
+
+        SET_FX_T( evaluate_enemy, float( const Creature & ) const );
+
+        SET_FX_T( can_open_door, bool( const tripoint_bub_ms &, bool ) const );
+
+        SET_FX_T( can_move_to, bool( const tripoint_bub_ms &, bool ) const );
+
+        DOC( "Attempts to move the NPC to an adjacent map square." );
+        luna::set_fx( ut, "move_to", []( UT_CLASS & npchar, const tripoint_bub_ms & pos,
+        sol::optional<bool> no_bashing ) -> void {
+            npchar.move_to( pos, no_bashing.value_or( false ), nullptr );
+        } );
+        luna::set_fx( ut, "set_move_target", sol::overload(
+                          []( npc & npchar, const tripoint_bub_ms & p,
+        sol::optional<bool> no_bashing, sol::optional<bool> force ) -> bool {
+            return npchar.update_path( p, no_bashing.value_or( false ), force.value_or( true ) );
+        },
+        []( npc & npchar, const tripoint & p,
+            sol::optional<bool> no_bashing, sol::optional<bool> force ) -> bool {
+            return npchar.update_path( tripoint_bub_ms( p ), no_bashing.value_or( false ),
+                                       force.value_or( true ) );
+        } ) );
+
+        SET_FX_T( saw_player_recently, bool() const );
+
+        SET_FX_T( has_omt_destination, bool() const );
+
+        SET_FX_T( get_attitude, npc_attitude() const );
+
+        SET_FX_T( set_attitude, void( npc_attitude new_attitude ) );
+
+        SET_FX_T( has_activity, bool() const );
+    }
+#undef UT_CLASS // #define UT_CLASS npc
+
+#define UT_CLASS npc_personality
+    {
+        sol::usertype<UT_CLASS> ut =
+        luna::new_usertype<UT_CLASS>(
+            lua,
+            luna::no_bases,
+            luna::constructors <
+            UT_CLASS()
+            > ()
+        );
+        SET_MEMB( aggression );
+        SET_MEMB( bravery );
+        SET_MEMB( collector );
+        SET_MEMB( altruism );
+    }
+#undef UT_CLASS // #define UT_CLASS npc_personality
+
+#define UT_CLASS npc_opinion
+    {
+        sol::usertype<UT_CLASS> ut =
+        luna::new_usertype<UT_CLASS>(
+            lua,
+            luna::no_bases,
+            luna::constructors <
+            UT_CLASS(),
+            UT_CLASS( int, int, int, int, int )
+            > ()
+        );
+        SET_MEMB( trust );
+        SET_MEMB( fear );
+        SET_MEMB( value );
+        SET_MEMB( anger );
+        SET_MEMB( owed );
+    }
+#undef UT_CLASS // #define UT_CLASS npc_opinion
+}
+
+void cata::detail::reg_avatar( sol::state &lua )
+{
+#define UT_CLASS avatar
+    {
+        // Note(AluminumAlman): skipping binding members and methods of this class because
+        // most of the methods and members are already binded through Character.
+        sol::usertype<avatar> ut =
+        luna::new_usertype<avatar>(
+            lua,
+            luna::bases<player, Character, Creature>(),
+            luna::no_constructor
+        );
+
+        SET_FX_T( get_active_missions, std::vector<mission *>() const );
+        SET_FX_T( get_completed_missions, std::vector<mission *>() const );
+        SET_FX_T( get_failed_missions, std::vector<mission *>() const );
+
+    }
+#undef UT_CLASS // #define UT_CLASS npc_opinion
+}

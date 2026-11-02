@@ -1,0 +1,43 @@
+# textdomain: mcl_inventory
+##[ creative.lua ]##
+
+When enabled, ask for confirmation to clear the inventory when clicking the trash icon in creative mode.=
+
+Building Blocks=建築ブロック
+Decoration Blocks=装飾ブロック
+Redstone=レッドストーン
+Transportation=運送
+Miscellaneous=その他
+Search Items=アイテム検索
+Foodstuffs=食物
+Tools=道具
+Combat=戦闘
+Mobs=Mob
+Brewing=醸造
+Materials=素材
+Survival Inventory=サバイバル インベントリ
+Recipe book=レシピ本
+Help=ヘルプ
+Clear Inventory=
+Advancements=進捗
+Switch stack size=
+Select player skin=プレイヤースキン選択
+Settings=
+@1 / @2=
+Are you sure you want to remove all items from your inventory?=
+Do not ask again=
+Cancel=
+Remove All Items=
+You may change this back in the player settings.=
+##[ survival.lua ]##
+
+When enabled, shift-click moves items between hotbar and inventory rows instead of routing them into the crafting grid.=
+
+Crafting=クラフト
+Achievements=
+
+
+##### not used anymore #####
+
+Inventory=インベントリ
+@1/@2=@1/@2

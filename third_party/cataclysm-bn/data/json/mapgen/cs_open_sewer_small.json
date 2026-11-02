@@ -1,0 +1,62 @@
+[
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ "cs_open_sewer" ],
+    "weight": 1000,
+    "object": {
+      "fill_ter": "t_region_soil",
+      "rows": [
+        "                        ",
+        "  bbbb  bbb   bbbb    b ",
+        "        rr r          b ",
+        "b    r r r rr r       b ",
+        "b  o  r rrr rr          ",
+        "b oo  r rrrrr r   w ww  ",
+        " b o    r r  r   ww w  b",
+        " ooo     ssssss wwww w b",
+        "   o    sswwwwwwww w w  ",
+        " b o   sswwwwwwwwwww  b ",
+        " b o  oooopooowwoopooo b",
+        " b    sswwwwwwwwwwsw o  ",
+        "  oo ooooopowwwooopowob ",
+        " b     sswwwwwwwwwwo ob ",
+        "   oo oooopoowwoopsosob ",
+        " ooo     ssswwwwwoso ob ",
+        " b         sssssso owooo",
+        " b  |DOD|        o o o  ",
+        "    |fff|       oo ooo b",
+        " b  |fff|       o    o b",
+        " b  |LBB|       o    o b",
+        " b  |||||       o       ",
+        "        bbbbb         b ",
+        "  bbb           bbb bb  "
+      ],
+      "terrain": { "o": "t_sewage_pipe", "p": "t_sewage_pump", "w": "t_sewage" },
+      "furniture": {
+        "b": "f_barricade_road",
+        "r": "f_rubble",
+        "s": "f_sandbag_half",
+        "S": "f_sandbag_wall",
+        "|": "f_large_canvas_wall",
+        "D": "f_large_canvas_door",
+        "O": "f_large_canvas_door_o",
+        "f": "f_large_groundsheet",
+        "L": "f_locker",
+        "B": "f_bench"
+      },
+      "items": {
+        "r": { "item": "os_items", "chance": 5 },
+        "L": { "item": "os_items", "chance": 60 },
+        "w": { "item": "os_items", "chance": 1 }
+      },
+      "place_vehicles": [
+        { "vehicle": "os_work_vehicles", "chance": 30, "x": 5, "y": 19 },
+        { "vehicle": "os_work_vehicles", "chance": 30, "x": 13, "y": 17 },
+        { "vehicle": "os_work_vehicles", "chance": 30, "x": 6, "y": 7 }
+      ],
+      "place_monsters": [ { "monster": "GROUP_ZOMBIE_SEWER", "x": 13, "y": 12 } ],
+      "place_signs": [ { "signage": "Caution: Work in Progress", "x": 11, "y": 1 } ]
+    }
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "result": "50match",
+    "type": "uncraft",
+    "skill_used": "fabrication",
+    "difficulty": 8,
+    "skills_required": [ "gun", 7 ],
+    "time": "2 m",
+    "qualities": [ { "id": "PULL", "level": 2 } ],
+    "components": [
+      [ [ "lead", 10 ] ],
+      [ [ "50_casing", 1 ] ],
+      [ [ "lgrifle_primer", 1 ] ],
+      [ [ "gunpowder", 32 ] ],
+      [ [ "copper", 6 ] ]
+    ],
+    "charges": 1
+  }
+]
