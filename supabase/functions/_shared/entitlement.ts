@@ -307,8 +307,12 @@ export async function requireOwner(userId: string): Promise<Response | null> {
         error: "This engine belongs to the project owner.",
         detail: "Only an account holding the owner role can use it. The owner claims it once through core-claim.",
         code: "OWNER_ONLY",
+        ok: false,
       },
-      403,
+      // 200 + ok:false, not 403: the Workstation probes owner engines on load
+      // and the preview reported each 403 as a crash that blanked the screen.
+      // restoreUnconfigured() in src/lib/edgeFunction.ts turns it back into 403.
+      200,
     );
   }
   return null;

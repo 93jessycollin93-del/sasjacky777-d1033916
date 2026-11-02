@@ -99,6 +99,9 @@ export async function restoreUnconfigured(resp: Response): Promise<Response> {
     if (parsed?.code === "PROVIDER_UNCONFIGURED" && parsed.ok === false) {
       return new Response(text, { status: 503, headers: { "Content-Type": "application/json" } });
     }
+    if (parsed?.code === "OWNER_ONLY" && parsed.ok === false) {
+      return new Response(text, { status: 403, headers: { "Content-Type": "application/json" } });
+    }
   } catch {
     /* not JSON after all — hand it back untouched */
   }
