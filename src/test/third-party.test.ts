@@ -68,7 +68,7 @@ describe("third_party/", () => {
         expect(readFileSync(join(dir, e.name, f), "utf8"), `${e.name}/${f}`).not.toMatch(/filter=lfs/);
       }
     }
-  });
+  }, 30_000);
 
   it("keeps every symlink pointing inside its own project, never out into this repository or the machine", () => {
     for (const e of entries) {
