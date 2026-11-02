@@ -81,6 +81,7 @@ const PathRouter = lazy(() => import("./pages/PathRouter"));
 const Workstation = lazy(() => import("./pages/Workstation"));
 const Guide = lazy(() => import("./pages/Guide"));
 const JackieCore = lazy(() => import("./pages/JackieCore"));
+const AnswerLock = lazy(() => import("./pages/AnswerLock"));
 const JackieMorals = lazy(() => import("./pages/JackieMorals"));
 const JackieSkills = lazy(() => import("./pages/JackieSkills"));
 const GithubSync = lazy(() => import("./pages/GithubSync"));
@@ -387,6 +388,7 @@ const App = () => (
                   <Route path="/marvels" element={<ProtectedRoute><MarvelsRace /></ProtectedRoute>} />
                   <Route path="/craft" element={<ProtectedRoute><BlockCraft /></ProtectedRoute>} />
                   <Route path="/zomboid-realism" element={<ProtectedRoute><ZomboidRealism /></ProtectedRoute>} />
+                  <Route path="/lock" element={<ProtectedRoute><AnswerLock /></ProtectedRoute>} />
                   <Route path="/minecraft" element={<Navigate to="/craft" replace />} />
                   <Route path="/csc" element={<Navigate to="/craft" replace />} />
                   <Route path="/apex" element={<ProtectedRoute><ApexHub /></ProtectedRoute>} />
