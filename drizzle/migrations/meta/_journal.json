@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793614315622,
+      "tag": "0000_jackie_skills_tools_connections",
+      "breakpoints": true
+    }
+  ]
+}
