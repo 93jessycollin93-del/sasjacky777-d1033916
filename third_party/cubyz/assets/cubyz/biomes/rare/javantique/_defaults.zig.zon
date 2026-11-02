@@ -1,9 +1,0 @@
-.{
-	.music = "cubyz:sinanimea/sunrise",
-	.fogDensity = 20,
-	.skyColor = 0x0da3b5,
-	.fogColor = 0x0da3b5,
-	.minHeightLimit = 7,
-	.roughness = 0,
-	.smoothBeaches = true,
-}

@@ -1,9 +1,0 @@
-.{
-	.blueprints = .{
-		.{.id = "cubyz:tree/curl/base/0"},
-		.{.id = "cubyz:tree/curl/base/1"},
-	},
-	.children = .{
-		.white = "cubyz:tree/curl/curl",
-	},
-}

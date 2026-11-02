@@ -1,6 +1,0 @@
-{
-  "file_scan_exclusions": [
-    "android/app/src/main/assets/data/**",
-    "android/app/src/main/assets/gfx/**",
-  ],
-}

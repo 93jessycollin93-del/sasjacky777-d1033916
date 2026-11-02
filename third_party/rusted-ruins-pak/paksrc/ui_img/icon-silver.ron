@@ -1,9 +1,0 @@
-(
-    object_type: "ui_img",
-    id: "!icon-silver",
-    
-    image: (
-        path: "icon-silver.png",
-        copyright: "T.Okubo",
-    ),
-)

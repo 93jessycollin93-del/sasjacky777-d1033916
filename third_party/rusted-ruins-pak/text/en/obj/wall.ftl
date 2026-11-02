@@ -1,1 +1,0 @@
-wooden-wall = wooden wall

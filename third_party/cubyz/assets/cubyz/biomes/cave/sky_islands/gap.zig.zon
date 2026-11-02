@@ -1,4 +1,0 @@
-.{
-	.tags = .{.sky_island_fog_layer},
-	.chance = 10,
-}

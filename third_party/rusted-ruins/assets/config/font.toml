@@ -1,7 +1,0 @@
-
-mono_font = "NotoMono-Regular.ttf"
-
-[font_names]
-# en = "NotoSans-Medium.ttf"
-en = "NotoSansCJKjp-Medium.otf"
-ja = "NotoSansCJKjp-Medium.otf"

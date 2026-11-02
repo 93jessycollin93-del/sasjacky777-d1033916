@@ -1,2 +1,0 @@
-wood-floor = wood floor
-

@@ -1,8 +1,0 @@
-[
-  {
-    "id": "bionic_salvage_junk",
-    "type": "item_group",
-    "subtype": "distribution",
-    "entries": [ { "item": "afs_titanium_implant", "prob": 25 } ]
-  }
-]

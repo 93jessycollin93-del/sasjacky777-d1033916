@@ -1,8 +1,0 @@
-# Lines longer than 78 characters will be wrapped automatically
-# The following line is for reference
-##############################################################################
-<color_white>Visit us:</color>
-
-<color_white>Report bugs, suggestion and follow the development at:</color>
-
-<color_light_gray>* Github: </color><color_light_cyan>https://github.com/Cataclysm-TLG/Cataclysm-TLG</color>

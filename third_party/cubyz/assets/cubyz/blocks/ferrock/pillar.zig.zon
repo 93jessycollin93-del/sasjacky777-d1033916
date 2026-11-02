@@ -1,7 +1,0 @@
-.{
-	.rotation = "cubyz:direction",
-	.model = "cubyz:cube",
-	.texture = "cubyz:ferrock/pillar",
-	.texture_top = "cubyz:ferrock/pillar_top",
-	.texture_bottom = "cubyz:ferrock/pillar_top",
-}

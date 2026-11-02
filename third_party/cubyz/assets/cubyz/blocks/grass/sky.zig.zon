@@ -1,7 +1,0 @@
-.{
-	.drops = .{
-		.{.items = .{"cubyz:aerosoil"}},
-	},
-	.texture = "cubyz:grass/sky",
-	.texture_bottom = "cubyz:aerosoil",
-}

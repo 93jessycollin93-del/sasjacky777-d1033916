@@ -1,6 +1,0 @@
-.{
-	.blueprints = .{
-		.{.id = "cubyz:ruins/slate/circle/rock/0"},
-		.{.id = "cubyz:ruins/slate/circle/rock/1"},
-	},
-}

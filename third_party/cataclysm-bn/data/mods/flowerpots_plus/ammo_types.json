@@ -1,8 +1,0 @@
-[
-  {
-    "type": "ammunition_type",
-    "id": "plant_fertilizer",
-    "name": "fertilizer",
-    "default": "fertilizer_liquid"
-  }
-]

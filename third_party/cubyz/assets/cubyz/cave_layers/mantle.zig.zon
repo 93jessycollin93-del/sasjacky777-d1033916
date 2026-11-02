@@ -1,5 +1,0 @@
-.{
-	.tags = .{.mantle_layer},
-	.layerHeight = 5000,
-	.depthHint = -15000,
-}

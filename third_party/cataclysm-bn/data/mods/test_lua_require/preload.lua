@@ -1,2 +1,0 @@
--- Preload script for test_lua_require mod
--- Empty, just to show structure

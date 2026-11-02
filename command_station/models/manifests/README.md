@@ -14,6 +14,3 @@ Master catalog for all model families, hardware requirements, and operational gu
 - Llama3-8B
 - Mistral-7B
 - Phi-3-mini
-
-## Usage
-Manifests are consumed by hybrid_router.py and vault_diff_tool.py.

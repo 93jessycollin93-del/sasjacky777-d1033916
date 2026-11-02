@@ -1,8 +1,0 @@
-.{
-	.texture = "cubyz:fence/cirrus",
-	.texture_top = "cubyz:fence/top/cirrus",
-	.texture_bottom = "cubyz:fence/top/cirrus",
-	.item = .{
-		.texture = "fence/cirrus.png",
-	},
-}

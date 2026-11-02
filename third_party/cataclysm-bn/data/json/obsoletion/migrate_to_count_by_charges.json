@@ -1,6 +1,0 @@
-[
-  {
-    "type": "to_cbc_migration",
-    "list": [ "glass_shard", "FMCNote", "RobofacCoin", "FlatCoin", "signed_chit", "icon" ]
-  }
-]

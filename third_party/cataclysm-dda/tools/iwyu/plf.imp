@@ -1,4 +1,0 @@
-[
-    { symbol: ["plf::void_cast", "private", "<plf/list.h>", "public"] },
-    { symbol: ["plf::void_cast", "private", "<plf/colony.h>", "public"] },
-]

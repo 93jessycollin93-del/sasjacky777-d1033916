@@ -1,5 +1,0 @@
-.{
-	.tags = .{.cave_layer},
-	.layerHeight = 28100,
-	.depthHint = -20300,
-}

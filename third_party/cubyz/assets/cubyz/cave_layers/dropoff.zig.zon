@@ -1,5 +1,0 @@
-.{
-	.tags = .{.dropoff_layer},
-	.layerHeight = 250,
-	.depthHint = -48250,
-}

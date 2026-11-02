@@ -1,0 +1,4 @@
+[run]
+dev = "python3 preview/serve.py"
+build = "python3 preview/build.py"
+"build:dev" = "python3 preview/build.py"

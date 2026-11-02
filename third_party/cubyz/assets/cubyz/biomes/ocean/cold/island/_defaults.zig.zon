@@ -1,8 +1,0 @@
-.{
-	.chance = 0,
-	.climate = .{
-		.ocean,
-		.cold,
-	},
-	.music = "cubyz:totaldemented/tides",
-}

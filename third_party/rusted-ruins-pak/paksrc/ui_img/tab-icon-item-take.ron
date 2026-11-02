@@ -1,9 +1,0 @@
-(
-    object_type: "ui_img",
-    id: "!tab-icon-item-take",
-    
-    image: (
-        path: "tab-icon-item-take.png",
-        copyright: "T.Okubo",
-    ),
-)

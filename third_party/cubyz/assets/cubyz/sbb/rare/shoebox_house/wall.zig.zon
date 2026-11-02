@@ -1,6 +1,0 @@
-.{
-	.blueprints = .{
-		.{.id = "cubyz:rare/shoebox_house/wall/air"},
-		.{.id = "cubyz:rare/shoebox_house/wall/torch", .chance = 0.3},
-	},
-}

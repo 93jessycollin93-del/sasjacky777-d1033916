@@ -1,9 +1,0 @@
-(
-    object_type: "ui_img",
-    id: "!icon-defence-spirit",
-    
-    image: (
-        path: "icon-defence-spirit.png",
-        copyright: "T.Okubo",
-    ),
-)

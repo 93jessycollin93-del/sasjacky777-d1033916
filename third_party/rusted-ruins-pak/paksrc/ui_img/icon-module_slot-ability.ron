@@ -1,9 +1,0 @@
-(
-    object_type: "ui_img",
-    id: "!icon-module_slot-ability",
-    
-    image: (
-        path: "icon-module_slot-ability.png",
-        copyright: "T.Okubo",
-    ),
-)
