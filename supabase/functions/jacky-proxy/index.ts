@@ -98,7 +98,12 @@ serve(async (req) => {
   }
 
   const headers: Record<string, string> = { "Content-Type": "application/json" };
-  if (token) headers["Authorization"] = `Bearer ${token}`;
+  // Bearer alone was refused with 401 by the owner's server; many self-hosted
+  // APIs read X-API-Key instead. Both go only to the owner's own host.
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+    headers["X-API-Key"] = token;
+  }
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 30000);
