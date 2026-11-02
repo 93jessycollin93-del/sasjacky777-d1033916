@@ -148,7 +148,9 @@ serve(async (req) => {
       }
       if (p.action === "secrets") {
         const { data, error } = await admin.from("jackie_connection_secrets").select("connection_id,updated_at").eq("user_id", userId);
-        if (error) return json({ error: `Could not read which secrets are set: ${error.message}` }, 500);
+        // 200 + ok:false, not 500: the page lists secrets on load, and a 500
+        // there blanked the preview while the tables were still missing.
+        if (error) return json({ ok: false, secrets: [], error: `Could not read which secrets are set: ${error.message}`, code: "SECRETS_UNREADABLE" }, 200);
         return json({ secrets: data ?? [] });
       }
       const connectionId = typeof p.connection_id === "string" ? p.connection_id : "";
