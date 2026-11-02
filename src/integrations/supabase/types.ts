@@ -982,6 +982,63 @@ export type Database = {
         }
         Relationships: []
       }
+      jackie_lock_slots: {
+        Row: {
+          fingerprint: string
+          iterations: number
+          salt: string
+          slot: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          fingerprint: string
+          iterations: number
+          salt: string
+          slot: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          fingerprint?: string
+          iterations?: number
+          salt?: string
+          slot?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      jackie_lock_state: {
+        Row: {
+          failures: number
+          last_slot: number | null
+          locked_until: string | null
+          pending_slot: number | null
+          unlocked_until: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          failures?: number
+          last_slot?: number | null
+          locked_until?: string | null
+          pending_slot?: number | null
+          unlocked_until?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          failures?: number
+          last_slot?: number | null
+          locked_until?: string | null
+          pending_slot?: number | null
+          unlocked_until?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       jackie_memory: {
         Row: {
           category: string
