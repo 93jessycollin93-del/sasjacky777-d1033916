@@ -1,0 +1,84 @@
+[package]
+name = "rusted-ruins"
+version = "0.12.0"
+edition = "2021"
+authors = ["T. Okubo <t.okubo.rx78+devel@gmail.com>"]
+
+[features]
+default = []
+deb = []
+sdl2-static-link = ["sdl2/static-link", "sdl2/use-vcpkg"]
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+dirs = "4"
+env_logger = "0.10"
+fluent = "0.14"
+fnv = "1"
+once_cell = "1"
+log = "0.4"
+regex = "1"
+serde = "1"
+serde_derive = "1"
+extend = "1"
+rand = "0.8"
+ordered-float = { version = "3", features = ["rand", "serde"] }
+tar = "0.4"
+toml = "0.7"
+unic-langid = "0.9"
+walkdir = "2"
+num-rational = "0.4"
+
+tile-geom = { git = "https://github.com/garkimasera/tile-geom.git" }
+
+[dependencies.rusted-ruins-common]
+path = "../common"
+features = ["global_state_obj"]
+
+[dependencies.rusted-ruins-audio]
+path = "../audio"
+
+[dependencies.rusted-ruins-rng]
+path = "../rng"
+
+[dependencies.rusted-ruins-rules]
+path = "../rules"
+
+[dependencies.rusted-ruins-map-generator]
+path = "../map-generator"
+
+[dependencies.rusted-ruins-script]
+path = "../script"
+
+[dependencies.sdl2]
+version = "0.35"
+default-features = false
+features = ["ttf", "image", "mixer"]
+
+# [profile.release]
+# debug = true
+
+# for cargo-deb
+# build after "./build-pak.sh", and with command "cargo deb -p rusted-ruins -- --features deb"
+[package.metadata.deb]
+copyright = "2017, T. Okubo <t.okubo.rx78+devel@gmail.com>"
+license-file = ["../LICENSE", "0"]
+extended-description = """\
+Extensible open world rogue like game with pixel art."""
+depends = "libsdl2-2.0-0,libsdl2-image-2.0-0,libsdl2-mixer-2.0-0,libsdl2-ttf-2.0-0"
+section = "games"
+priority = "optional"
+assets = [
+    ["../target/release/rusted-ruins", "usr/games/", "755"],
+    ["../README.md", "usr/share/doc/rusted-ruins/README", "644"],
+    ["../assets/**/*", "usr/share/games/rusted-ruins/assets/", "644"],
+]
+
+[package.metadata.vcpkg]
+dependencies = ["sdl2", "sdl2-image[libjpeg-turbo,tiff,libwebp]", "sdl2-ttf", "sdl2-mixer[opusfile]"]
+git = "https://github.com/microsoft/vcpkg"
+rev = "9ff4659a075d5f4f30aaca9f7c4e7f059ecc1d6d"
+
+[package.metadata.vcpkg.target]
+x86_64-pc-windows-msvc = { triplet = "x64-windows-static-md" }

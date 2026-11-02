@@ -1,0 +1,1507 @@
+#include "npctalk.h" // IWYU pragma: associated
+
+#include <algorithm>
+#include <cstddef>
+#include <iosfwd>
+#include <list>
+#include <memory>
+#include <new>
+#include <optional>
+#include <set>
+#include <string>
+#include <vector>
+
+#include "activity_actor_definitions.h"
+#include <activity_handlers.h>
+#include "activity_type.h"
+#include "auto_pickup.h"
+#include "avatar.h"
+#include "basecamp.h"
+#include "bionics.h"
+#include "bodypart.h"
+#include "calendar.h"
+#include "cata_utility.h"
+#include "character.h"
+#include "character_id.h"
+#include "character_martial_arts.h"
+#include "coordinates.h"
+#include "creature.h"
+#include "debug.h"
+#include "dialogue_chatbin.h"
+#include "enums.h"
+#include "event.h"
+#include "event_bus.h"
+#include "faction.h"
+#include "flag.h"
+#include "game.h"
+#include "game_constants.h"
+#include "game_inventory.h"
+#include "item.h"
+#include "item_location.h"
+#include "iuse_actor.h"
+#include "line.h"
+#include "magic.h"
+#include "map.h"
+#include "memory_fast.h"
+#include "messages.h"
+#include "mission.h"
+#include "monster.h"
+#include "mutation.h"
+#include "npc.h"
+#include "npctrade.h"
+#include "output.h"
+#include "overmap.h"
+#include "overmap_ui.h"
+#include "overmapbuffer.h"
+#include "pimpl.h"
+#include "player_activity.h"
+#include "point.h"
+#include "rng.h"
+#include "text_snippets.h"
+#include "translations.h"
+#include "ui.h"
+#include "viewer.h"
+#include "vitamin.h"
+
+static const activity_id ACT_FIND_MOUNT( "ACT_FIND_MOUNT" );
+static const activity_id ACT_MOVE_LOOT( "ACT_MOVE_LOOT" );
+static const activity_id ACT_MULTIPLE_BUTCHER( "ACT_MULTIPLE_BUTCHER" );
+static const activity_id ACT_MULTIPLE_CHOP_PLANKS( "ACT_MULTIPLE_CHOP_PLANKS" );
+static const activity_id ACT_MULTIPLE_CHOP_TREES( "ACT_MULTIPLE_CHOP_TREES" );
+static const activity_id ACT_MULTIPLE_CONSTRUCTION( "ACT_MULTIPLE_CONSTRUCTION" );
+static const activity_id ACT_MULTIPLE_DIS( "ACT_MULTIPLE_DIS" );
+static const activity_id ACT_MULTIPLE_FARM( "ACT_MULTIPLE_FARM" );
+static const activity_id ACT_MULTIPLE_FISH( "ACT_MULTIPLE_FISH" );
+static const activity_id ACT_MULTIPLE_MINE( "ACT_MULTIPLE_MINE" );
+static const activity_id ACT_MULTIPLE_MOP( "ACT_MULTIPLE_MOP" );
+static const activity_id ACT_MULTIPLE_READ( "ACT_MULTIPLE_READ" );
+static const activity_id ACT_SOCIALIZE( "ACT_SOCIALIZE" );
+static const activity_id ACT_TRAIN( "ACT_TRAIN" );
+static const activity_id ACT_TRAIN_TEACHER( "ACT_TRAIN_TEACHER" );
+static const activity_id ACT_VEHICLE_DECONSTRUCTION( "ACT_VEHICLE_DECONSTRUCTION" );
+static const activity_id ACT_VEHICLE_REPAIR( "ACT_VEHICLE_REPAIR" );
+static const activity_id ACT_WAIT_NPC( "ACT_WAIT_NPC" );
+
+static const efftype_id effect_anemia( "anemia" );
+static const efftype_id effect_allow_sleep( "allow_sleep" );
+static const efftype_id effect_asked_for_item( "asked_for_item" );
+static const efftype_id effect_asked_personal_info( "asked_personal_info" );
+static const efftype_id effect_asked_to_follow( "asked_to_follow" );
+static const efftype_id effect_asked_to_lead( "asked_to_lead" );
+static const efftype_id effect_asked_to_train( "asked_to_train" );
+static const efftype_id effect_bandaged( "bandaged" );
+static const efftype_id effect_bite( "bite" );
+static const efftype_id effect_bleed( "bleed" );
+static const efftype_id effect_bloodworms( "bloodworms" );
+static const efftype_id effect_brainworms( "brainworms" );
+static const efftype_id effect_common_cold( "common_cold" );
+static const efftype_id effect_conjunctivitis_bacterial( "conjunctivitis_bacterial" );
+static const efftype_id effect_conjunctivitis_viral( "conjunctivitis_viral" );
+static const efftype_id effect_currently_busy( "currently_busy" );
+static const efftype_id effect_dermatik( "dermatik" );
+static const efftype_id effect_disinfected( "disinfected" );
+static const efftype_id effect_flu( "flu" );
+static const efftype_id effect_fungus( "fungus" );
+static const efftype_id effect_hypovolemia( "hypovolemia" );
+static const efftype_id effect_infected( "infected" );
+static const efftype_id effect_irradiated( "irradiated" );
+static const efftype_id effect_lying_down( "lying_down" );
+static const efftype_id effect_mending( "mending" );
+static const efftype_id effect_npc_suspend( "npc_suspend" );
+static const efftype_id effect_opioid_eff( "opioid_eff" );
+static const efftype_id effect_paincysts( "paincysts" );
+static const efftype_id effect_pet( "pet" );
+static const efftype_id effect_rat_bite_fever( "rat_bite_fever" );
+static const efftype_id effect_redcells_anemia( "redcells_anemia" );
+static const efftype_id effect_scurvy( "scurvy" );
+static const efftype_id effect_sleep( "sleep" );
+static const efftype_id effect_socialized_recently( "socialized_recently" );
+static const efftype_id effect_tapeworm( "tapeworm" );
+static const efftype_id effect_tetanus( "tetanus" );
+static const efftype_id effect_toxin_buildup( "toxin_buildup" );
+
+static const faction_id faction_no_faction( "no_faction" );
+static const faction_id faction_your_followers( "your_followers" );
+
+static const itype_id itype_arm_splint( "arm_splint" );
+static const itype_id itype_leg_splint( "leg_splint" );
+
+static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
+
+static const mission_type_id mission_MISSION_REACH_SAFETY( "MISSION_REACH_SAFETY" );
+
+static const morale_type morale_chat( "morale_chat" );
+static const morale_type morale_haircut( "morale_haircut" );
+static const morale_type morale_shave( "morale_shave" );
+
+static const mtype_id mon_chicken( "mon_chicken" );
+static const mtype_id mon_cow( "mon_cow" );
+static const mtype_id mon_horse( "mon_horse" );
+
+static const skill_id skill_firstaid( "firstaid" );
+
+static const trait_id trait_IRREPARABLE( "IRREPARABLE" );
+
+static const vitamin_id vitamin_blood( "blood" );
+static const vitamin_id vitamin_vit_mme( "vit_mme" );
+static const vitamin_id vitamin_vit_naloxone( "vit_naloxone" );
+
+static const zone_type_id zone_type_CAMP_FOOD( "CAMP_FOOD" );
+static const zone_type_id zone_type_CAMP_STORAGE( "CAMP_STORAGE" );
+
+struct itype;
+
+static void spawn_animal( npc &p, const mtype_id &mon );
+
+void talk_function::nothing( npc & )
+{
+}
+
+void talk_function::assign_mission( npc &p )
+{
+    mission *miss = p.chatbin.mission_selected;
+    if( miss == nullptr ) {
+        debugmsg( "assign_mission: mission_selected == nullptr" );
+        return;
+    } else if( miss->is_assigned() ) {
+        DebugLog( D_WARNING, D_MAIN ) << "assign_mission: mission_id: " << miss->mission_id().str() <<
+                                      " is already assigned!";
+        return;
+    }
+    miss->assign( get_avatar() );
+    p.chatbin.missions_assigned.push_back( miss );
+    const auto it = std::find( p.chatbin.missions.begin(), p.chatbin.missions.end(), miss );
+    p.chatbin.missions.erase( it );
+}
+
+void talk_function::mission_success( npc &p )
+{
+    mission *miss = p.chatbin.mission_selected;
+    if( miss == nullptr ) {
+        debugmsg( "mission_success: mission_selected == nullptr" );
+        return;
+    }
+
+    int miss_val = npc_trading::cash_to_favor( p, miss->get_value() );
+    npc_opinion op;
+    op.value = 1 + miss_val / 5;
+    op.anger = -1;
+    p.op_of_u += op;
+    faction *p_fac = p.get_faction();
+    if( p_fac != nullptr ) {
+        int fac_val = std::min( 1 + miss_val / 10, 10 );
+        p_fac->likes_u += fac_val;
+        p_fac->respects_u += fac_val;
+        p_fac->trusts_u += fac_val;
+        p_fac->power += fac_val;
+    }
+    miss->wrap_up();
+}
+
+void talk_function::mission_failure( npc &p )
+{
+    mission *miss = p.chatbin.mission_selected;
+    if( miss == nullptr ) {
+        debugmsg( "mission_failure: mission_selected == nullptr" );
+        return;
+    }
+    npc_opinion op;
+    op.trust = -1;
+    op.value = -1;
+    op.anger = 1;
+    p.op_of_u += op;
+    miss->fail();
+}
+
+void talk_function::clear_mission( npc &p )
+{
+    mission *miss = p.chatbin.mission_selected;
+    if( miss == nullptr ) {
+        debugmsg( "clear_mission: mission_selected == nullptr" );
+        return;
+    }
+    const auto it = std::find( p.chatbin.missions_assigned.begin(), p.chatbin.missions_assigned.end(),
+                               miss );
+    if( it == p.chatbin.missions_assigned.end() ) {
+        debugmsg( "clear_mission: mission_selected not in assigned" );
+        return;
+    }
+    p.chatbin.missions_assigned.erase( it );
+    if( p.chatbin.missions_assigned.empty() ) {
+        p.chatbin.mission_selected = nullptr;
+    } else {
+        p.chatbin.mission_selected = p.chatbin.missions_assigned.front();
+    }
+    if( miss->has_follow_up() ) {
+        p.add_new_mission( mission::reserve_new( miss->get_follow_up(), p.getID() ) );
+        if( !p.chatbin.mission_selected ) {
+            p.chatbin.mission_selected = p.chatbin.missions.front();
+        }
+    }
+}
+
+void talk_function::mission_reward( npc &p )
+{
+    const mission *miss = p.chatbin.mission_selected;
+    if( miss == nullptr ) {
+        debugmsg( "Called mission_reward with null mission" );
+        return;
+    }
+
+    int mission_value = miss->get_value();
+    p.op_of_u.owed += mission_value;
+    npc_trading::trade( p, 0, _( "Reward" ) );
+}
+
+void talk_function::buy_chicken( npc &p )
+{
+    spawn_animal( p, mon_chicken );
+}
+void talk_function::buy_horse( npc &p )
+{
+    spawn_animal( p, mon_horse );
+}
+
+void talk_function::buy_cow( npc &p )
+{
+    spawn_animal( p, mon_cow );
+}
+
+void spawn_animal( npc &p, const mtype_id &mon )
+{
+    if( monster *const mon_ptr = g->place_critter_around( mon, p.pos_bub(), 1 ) ) {
+        mon_ptr->friendly = -1;
+        mon_ptr->add_effect( effect_pet, 1_turns, true );
+    } else {
+        // TODO: handle this gracefully (return the money, proper in-character message from npc)
+        add_msg_debug( debugmode::DF_NPC, "No space to spawn purchased pet" );
+    }
+}
+
+void talk_function::start_trade( npc &p )
+{
+    npc_trading::trade( p, 0, _( "Trade" ) );
+}
+
+void talk_function::sort_loot( npc &p )
+{
+    p.assign_activity( ACT_MOVE_LOOT );
+}
+
+void talk_function::do_construction( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_CONSTRUCTION );
+}
+
+void talk_function::do_mining( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_MINE );
+}
+
+void talk_function::do_mopping( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_MOP );
+}
+
+void talk_function::do_read( npc &p )
+{
+    p.do_npc_read();
+}
+
+void talk_function::do_eread( npc &p )
+{
+    p.do_npc_read( true );
+}
+
+void talk_function::do_read_repeatedly( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_READ );
+}
+
+void talk_function::dismount( npc &p )
+{
+    p.npc_dismount();
+}
+
+void talk_function::find_mount( npc &p )
+{
+    // first find one nearby
+    for( monster &critter : g->all_monsters() ) {
+        if( p.can_mount( critter ) ) {
+            // keep the horse still for some time, so that NPC can catch up to it and mount it.
+            p.assign_activity( ACT_FIND_MOUNT );
+            p.chosen_mount = g->shared_from( critter );
+            // we found one, that's all we need.
+            return;
+        }
+    }
+    // if we got here and this was prompted by a renewal of the activity, and there are no valid monsters nearby, then cancel whole thing.
+    if( p.has_player_activity() ) {
+        p.revert_after_activity();
+    }
+}
+
+void talk_function::do_butcher( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_BUTCHER );
+}
+
+void talk_function::do_chop_plank( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_CHOP_PLANKS );
+}
+
+void talk_function::do_vehicle_deconstruct( npc &p )
+{
+    p.assign_activity( ACT_VEHICLE_DECONSTRUCTION );
+}
+
+void talk_function::do_vehicle_repair( npc &p )
+{
+    p.assign_activity( ACT_VEHICLE_REPAIR );
+}
+
+void talk_function::do_chop_trees( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_CHOP_TREES );
+}
+
+void talk_function::do_farming( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_FARM );
+}
+
+void talk_function::do_fishing( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_FISH );
+}
+
+void talk_function::revert_activity( npc &p )
+{
+    p.revert_after_activity();
+}
+
+void talk_function::do_craft( npc &p )
+{
+    p.do_npc_craft();
+}
+
+void talk_function::do_disassembly( npc &p )
+{
+    p.assign_activity( ACT_MULTIPLE_DIS );
+}
+
+void talk_function::goto_location( npc &p )
+{
+    int i = 0;
+    uilist selection_menu;
+    selection_menu.text = _( "Select a destination" );
+    std::vector<basecamp *> camps;
+    tripoint_abs_omt destination;
+    Character &player_character = get_player_character();
+    for( auto elem : player_character.camps ) {
+        if( elem == p.pos_abs_omt() ) {
+            continue;
+        }
+        if( overmap_buffer.seen( elem ) == om_vision_level::unseen ) {
+            continue;
+        }
+        std::optional<basecamp *> camp = overmap_buffer.find_camp( elem.xy() );
+        if( !camp ) {
+            continue;
+        }
+        basecamp *temp_camp = *camp;
+        camps.push_back( temp_camp );
+    }
+    for( const basecamp *iter : camps ) {
+        //~ %1$s: camp name, %2$s: coordinates of the camp
+        selection_menu.addentry( i++, true, MENU_AUTOASSIGN, pgettext( "camp", "%1$s at %2$s" ),
+                                 iter->camp_name(), iter->camp_omt_pos().to_string() );
+    }
+    selection_menu.addentry( i++, p.pos_abs_omt() != player_character.pos_abs_omt(),
+                             MENU_AUTOASSIGN, _( "My current location" ) );
+    selection_menu.addentry( i++, !player_character.omt_path.empty(), MENU_AUTOASSIGN,
+                             _( "My destination" ) );
+    selection_menu.addentry( i, true, MENU_AUTOASSIGN, _( "Cancel" ) );
+    selection_menu.selected = 0;
+    selection_menu.query();
+    int index = selection_menu.ret;
+    if( index < 0 || index >= i ) {
+        return;
+    }
+    if( index == static_cast<int>( camps.size() ) ) {
+        destination = player_character.pos_abs_omt();
+    } else if( index == static_cast<int>( camps.size() ) + 1 ) {
+        // This looks nuts, but omt_path is emplaced in reverse order. So the front of the vector is our destination
+        destination = player_character.omt_path.front();
+    } else {
+        const basecamp *selected_camp = camps[index];
+        destination = selected_camp->camp_omt_pos();
+    }
+    p.goal = destination;
+    p.omt_path = overmap_buffer.get_travel_path( p.pos_abs_omt(), p.goal,
+                 overmap_path_params::for_npc() );
+    if( destination == tripoint_abs_omt::zero || destination.is_invalid() ||
+        p.omt_path.empty() ) {
+        p.goal = npc::no_goal_point;
+        p.omt_path.clear();
+        add_msg( m_info, _( "That is not a valid destination for %s." ), p.disp_name() );
+        return;
+    }
+    g->follower_path_to_show = &p; // Necessary for overmap display in tiles version...
+    ui::omap::display_npc_path( p.pos_abs_omt(), p.omt_path );
+    g->follower_path_to_show = nullptr;
+    int tiles_to_travel = p.omt_path.size();
+    time_duration ETA = time_between_npc_OM_moves * tiles_to_travel;
+    ETA = ETA * rng_float( 0.8, 1.2 ); // Add +-20% variance in our estimate
+    if( !query_yn(
+            _( "Estimated time to arrival: %1$s  \nTiles to travel: %2$s  \nIs this path and destination acceptable?" ),
+            to_string_approx( ETA ), tiles_to_travel ) ) {
+        p.goal = npc::no_goal_point;
+        p.omt_path.clear();
+        return;
+    }
+    p.set_mission( NPC_MISSION_TRAVELLING );
+    p.chatbin.first_topic = p.chatbin.talk_friend_guard;
+    p.guard_pos = std::nullopt;
+    p.set_attitude( NPCATT_NULL );
+}
+
+void talk_function::assign_guard( npc &p )
+{
+    if( !p.is_player_ally() ) {
+        p.set_mission( NPC_MISSION_GUARD );
+        p.set_omt_destination();
+        return;
+    }
+
+    if( p.has_player_activity() ) {
+        p.revert_after_activity();
+    }
+    p.set_attitude( NPCATT_NULL );
+    p.set_mission( NPC_MISSION_GUARD_ALLY );
+    p.chatbin.first_topic = p.chatbin.talk_friend_guard;
+    p.set_omt_destination();
+}
+
+void talk_function::abandon_camp( npc &p )
+{
+    std::optional<basecamp *> bcp = overmap_buffer.find_camp( p.pos_abs_omt().xy() );
+    if( bcp ) {
+        basecamp *temp_camp = *bcp;
+        temp_camp->abandon_camp();
+    }
+}
+
+void talk_function::assign_camp( npc &p )
+{
+    std::optional<basecamp *> bcp = overmap_buffer.find_camp( p.pos_abs_omt().xy() );
+    if( bcp ) {
+        basecamp *temp_camp = *bcp;
+        p.set_attitude( NPCATT_NULL );
+        p.set_mission( NPC_MISSION_GUARD_ALLY );
+        temp_camp->add_assignee( p.getID() );
+        temp_camp->job_assignment_ui();
+        temp_camp->validate_assignees();
+        add_msg( _( "%1$s is assigned to %2$s" ), p.disp_name(), temp_camp->camp_name() );
+        if( p.has_player_activity() ) {
+            p.revert_after_activity();
+        }
+        p.chatbin.first_topic = p.chatbin.talk_friend_guard;
+        p.set_omt_destination();
+    }
+}
+
+void talk_function::stop_guard( npc &p )
+{
+    if( !p.is_player_ally() ) {
+        p.set_attitude( NPCATT_NULL );
+        p.set_mission( NPC_MISSION_NULL );
+        return;
+    }
+    p.set_attitude( NPCATT_FOLLOW );
+    add_msg( _( "%s begins to follow you." ), p.get_name() );
+    p.set_mission( NPC_MISSION_NULL );
+    if( p.has_companion_mission() ) {
+        p.reset_companion_mission();
+    }
+    p.chatbin.first_topic = p.chatbin.talk_friend;
+    p.goal = npc::no_goal_point;
+    p.guard_pos = std::nullopt;
+    if( p.assigned_camp ) {
+        if( std::optional<basecamp *> bcp = overmap_buffer.find_camp( ( *p.assigned_camp ).xy() ) ) {
+            ( *bcp )->remove_assignee( p.getID() );
+            ( *bcp )->validate_assignees();
+        }
+        p.assigned_camp = std::nullopt;
+    }
+}
+
+void talk_function::wake_up( npc &p )
+{
+    p.rules.clear_override( ally_rule::allow_sleep );
+    p.rules.enable_override( ally_rule::allow_sleep );
+    p.remove_effect( effect_allow_sleep );
+    p.remove_effect( effect_lying_down );
+    p.remove_effect( effect_npc_suspend );
+    p.remove_effect( effect_sleep );
+    // TODO: Get mad at player for waking us up unless we're in danger
+}
+
+void talk_function::reveal_stats( npc &p )
+{
+    p.disp_info( true );
+}
+
+void talk_function::end_conversation( npc &p )
+{
+    add_msg( _( "%s starts ignoring you." ), p.get_name() );
+    p.chatbin.first_topic = "TALK_DONE";
+}
+
+void talk_function::insult_combat( npc &p )
+{
+    add_msg( _( "You start a fight with %s!" ), p.get_name() );
+    p.chatbin.first_topic = "TALK_DONE";
+    p.set_attitude( NPCATT_KILL );
+}
+
+static void bionic_install_common( npc &p, Character &patron, Character &patient )
+{
+    item_location bionic = game_menus::inv::install_bionic( p, patron, patient, true );
+
+    if( !bionic ) {
+        return;
+    }
+
+    item *tmp = bionic.get_item();
+    tmp->set_var( VAR_TRADE_IGNORE, 1 );
+    const itype &it = *tmp->type;
+
+    signed int price = npc_trading::bionic_install_price( p, patient, bionic );
+    bool const ret = npc_trading::pay_npc( p, price );
+    tmp->erase_var( VAR_TRADE_IGNORE );
+    if( !ret ) {
+        return;
+    }
+
+    //Makes the doctor awesome at installing but not perfect
+    if( patient.can_install_bionics( it, p, false, 20 ) ) {
+        bionic.remove_item();
+        patient.install_bionics( it, p, false, 20 );
+    }
+}
+
+void talk_function::bionic_install( npc &p )
+{
+    Character &pc = get_player_character();
+    bionic_install_common( p, pc, pc );
+}
+
+void talk_function::bionic_install_allies( npc &p )
+{
+    npc *patient = pick_follower();
+    if( !patient ) {
+        return;
+    }
+    bionic_install_common( p, get_player_character(), *patient );
+}
+
+static void bionic_remove_common( npc &p, Character &patient )
+{
+    const bionic_collection all_bio = *patient.my_bionics;
+    if( all_bio.empty() ) {
+        popup( _( "%s doesn't have any bionics installed…" ), patient.get_name() );
+        return;
+    }
+
+    std::vector<itype_id> bionic_types;
+    std::vector<std::string> bionic_names;
+    std::vector<const bionic *> bionics;
+    for( const bionic &bio : all_bio ) {
+        const itype_id &bio_itype = bio.info().itype();
+        if( std::find( bionic_types.begin(), bionic_types.end(), bio_itype ) == bionic_types.end() ) {
+            bionic_types.push_back( bio_itype );
+            if( item::type_is_defined( bio_itype ) ) {
+                item tmp = item( bio_itype, calendar::turn_zero );
+                bionic_names.push_back( tmp.tname() + " - " + format_money( 5000 + ( tmp.price( true ) / 4 ) ) );
+            } else {
+                bionic_names.push_back( bio.id.str() + " - " + format_money( 5000 ) );
+            }
+            bionics.push_back( &bio );
+        }
+    }
+    // Choose bionic if applicable
+    int bionic_index = uilist( _( "Which bionic do you wish to uninstall?" ),
+                               bionic_names );
+    // Did we cancel?
+    if( bionic_index < 0 ) {
+        popup( _( "You decide to hold off…" ) );
+        return;
+    }
+
+    signed int price;
+    if( item::type_is_defined( bionic_types[bionic_index] ) ) {
+        price = 5000 + ( item( bionic_types[bionic_index], calendar::turn_zero ).price( true ) / 4 );
+    } else {
+        price = 5000;
+    }
+    if( !npc_trading::pay_npc( p, price ) ) {
+        return;
+    }
+
+    //Makes the doctor awesome at uninstalling but not perfect
+    if( patient.can_uninstall_bionic( *bionics[bionic_index], p, false, 20 ) ) {
+        patient.uninstall_bionic( *bionics[bionic_index], p, false, 20 );
+    }
+}
+
+void talk_function::bionic_remove( npc &p )
+{
+    bionic_remove_common( p, get_player_character() );
+}
+
+void talk_function::bionic_remove_allies( npc &p )
+{
+    npc *patient = pick_follower();
+    if( !patient ) {
+        return;
+    }
+    bionic_remove_common( p, *patient );
+}
+
+void talk_function::give_equipment( npc &p )
+{
+    give_equipment_allowance( p, 0 );
+}
+
+void talk_function::give_equipment_allowance( npc &p, int allowance )
+{
+    std::vector<item_pricing> giving = npc_trading::init_selling( p );
+    int chosen = -1;
+    while( chosen == -1 && !giving.empty() ) {
+        int index = rng( 0, giving.size() - 1 );
+        if( giving[index].price < p.op_of_u.owed + allowance ) {
+            chosen = index;
+        } else {
+            giving.erase( giving.begin() + index );
+        }
+    }
+    if( giving.empty() ) {
+        popup( _( "%s has nothing to give!" ), p.get_name() );
+        return;
+    }
+    if( chosen < 0 || static_cast<size_t>( chosen ) >= giving.size() ) {
+        debugmsg( "Chosen index is outside of available item range!" );
+        chosen = 0;
+    }
+    item it = *giving[chosen].loc.get_item();
+    giving[chosen].loc.remove_item();
+    popup( _( "%1$s gives you a %2$s" ), p.get_name(), it.tname() );
+    Character &player_character = get_player_character();
+    it.set_owner( player_character );
+    player_character.i_add( it );
+    allowance -= giving[chosen].price;
+    if( allowance < 0 ) {
+        p.op_of_u.owed += allowance;
+    }
+    p.add_effect( effect_asked_for_item, 3_hours );
+}
+
+/* This function assumes we're dealing with a public-facing professional (or someone who has
+*  reason to behave as such for the player character) who is in a well-stocked office. It might
+   someday be worth coming back and actually making sure the medic has all these supplies, but
+   generally they're only administering relatively cheap life-saving stuff. */
+void talk_function::give_aid( npc &p )
+{
+    Character &patient = get_player_character();
+    float medic_skill = p.get_skill_level( skill_firstaid );
+    if( patient.get_effect_int( effect_opioid_eff ) > 4 ) {
+        patient.vitamin_mod( vitamin_vit_mme, -1250 );
+        patient.vitamin_mod( vitamin_vit_naloxone, 400 );
+        patient.add_msg_player_or_npc( m_good,
+                                       _( "%s administers a dose of naloxone to treat your opioid overdose." ),
+                                       _( "%s administers a dose of naloxone to treat <npcname>'s opioid overdose." ),
+                                       p.get_name() );
+    }
+    if( patient.get_effect_int( effect_hypovolemia ) > 1 ) {
+        patient.vitamin_mod( vitamin_blood, 2500 );
+        patient.add_msg_player_or_npc( m_good,
+                                       _( "%s administers a saline infusion to treat your hypovolemic shock." ),
+                                       _( "%s administers a saline infusion to treat <npcname>'s hypovolemic shock." ),
+                                       p.get_name() );
+    }
+    patient.set_thirst( 0 );
+    for( const bodypart_id &bp :
+         patient.get_all_body_parts( get_body_part_flags::only_main ) ) {
+        if( bp->has_flag( json_flag_BIONIC_LIMB ) ) {
+            continue;
+        }
+        if( patient.has_effect( effect_bite, bp.id() ) ) {
+            patient.remove_effect( effect_bite, bp );
+        }
+        if( patient.has_effect( effect_bleed, bp.id() ) ) {
+            patient.remove_effect( effect_bleed, bp );
+        }
+        if( patient.get_part_hp_max( bp ) > patient.get_part_hp_cur( bp ) ) {
+            if( !patient.has_effect( effect_disinfected, bp.id() ) ) {
+                int disinfectant_power = 2;
+                float prof_bonus = medic_skill + std::clamp(
+                                       ( ( p.int_cur - 10.0f ) / 3.0f ), 0.0f, medic_skill / 2.66f );
+                float total_bonus = disinfectant_power +
+                                    ( 0.25f + disinfectant_power ) * prof_bonus;
+                total_bonus = p.enchantment_cache->modify_value(
+                                  enchant_vals::mod::DISINFECTANT_BONUS, total_bonus );
+                int disinfectant_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
+                patient.add_effect( effect_disinfected, 1_turns, bp );
+                effect &e = patient.get_effect( effect_disinfected, bp );
+                e.set_duration( e.get_int_dur_factor() * disinfectant_intensity );
+                patient.set_part_damage_disinfected(
+                    bp, patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
+                p.practice( skill_firstaid, 2 * disinfectant_intensity );
+            }
+            if( !patient.has_effect( effect_bandaged, bp.id() ) ) {
+                int bandages_power = 2;
+                float prof_bonus = medic_skill + std::clamp(
+                                       ( ( p.int_cur - 10.0f ) / 3.0f ), 0.0f, medic_skill / 2.66f );
+                float total_bonus = bandages_power +
+                                    ( 0.25f + bandages_power ) * prof_bonus;
+                total_bonus = p.enchantment_cache->modify_value(
+                                  enchant_vals::mod::BANDAGE_BONUS, total_bonus );
+                int bandage_intensity = std::max( 1, static_cast<int>( std::round( total_bonus ) ) );
+                patient.add_effect( effect_bandaged, 1_turns, bp );
+                effect &e = patient.get_effect( effect_bandaged, bp );
+                e.set_duration( e.get_int_dur_factor() * bandage_intensity );
+                patient.set_part_damage_bandaged(
+                    bp, patient.get_part_hp_max( bp ) - patient.get_part_hp_cur( bp ) );
+                p.practice( skill_firstaid, 2 * bandage_intensity );
+            }
+        }
+    }
+    bool found = false;
+    if( patient.has_effect( effect_tapeworm ) ) {
+        found |= x_in_y( medic_skill, 8.0 );
+    }
+    if( patient.has_effect( effect_bloodworms ) ) {
+        found |= x_in_y( medic_skill, 9.0 );
+    }
+    if( patient.has_effect( effect_brainworms ) ) {
+        found |= x_in_y( medic_skill, 10.0 );
+    }
+    if( patient.has_effect( effect_paincysts ) ) {
+        found |= x_in_y( medic_skill, 8.0 );
+    }
+    if( patient.has_effect( effect_dermatik ) ) {
+        found |= x_in_y( medic_skill, 6.0 );
+    }
+    if( found ) {
+        p.say( _( "You've got some kind of parasite.  It probably isn't immediately life-threatening, but taking antiparasitic medication should clear it up." ) );
+    }
+    if( x_in_y( medic_skill, 7.0 ) && patient.has_effect( effect_fungus ) ) {
+        p.say( _( "Looks like you have a pretty serious fungal infection.  Taking antifungal medication should clear it up, but I'd hurry if I were you." ) );
+    }
+    if( x_in_y( medic_skill, 8.0 ) && patient.has_effect( effect_irradiated ) ) {
+        p.say( _( "You have acute radiation syndrome.  Taking prussian blue every three hours should help treat it.  Most exposure comes from fine ash or dust in the environment, so in the future, try to mask up and wear clothing designed for environmental protection." ) );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_infected ) ) {
+        p.say( _( "You have a bacterial infection.  There's a chance a healthy person can fight this sort of thing off, but it can be lethal for just about anybody.  Find the strongest antibiotics you can and take one every twelve hours until it's cleared up." ) );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_flu ) ) {
+        p.say( _( "You probably feel pretty horrible, but it's just the flu.  It should resolve itself within two to twelve days from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any." ) );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && patient.has_effect( effect_common_cold ) ) {
+        p.say( _( "It seems you've caught a cold.  It should resolve itself within two days to three weeks from the time you first started noticing symptoms.  Until then, you can take cough syrup to suppress most symptoms, or opioids and antihistamines if you can't find any." ) );
+    }
+    if( x_in_y( medic_skill, 3.0 ) && ( patient.has_effect( effect_conjunctivitis_viral ) ||
+                                        patient.has_effect( effect_conjunctivitis_bacterial ) ) ) {
+        p.say( _( "You have a minor infenction of the conjunctiva - that is, pinkeye.  It should resolve itself within a couple of days.  If the itching is bothering you, try taking some antihistamines.  Cough syrup might also do the trick, but not the non-drowsy kind.  You could also try taking an antibiotic every twelve hours, but if the infection is viral, it won't have any effect." ) );
+    }
+    if( x_in_y( medic_skill, 5.0 ) && patient.has_effect( effect_rat_bite_fever ) ) {
+        p.say( _( "Those irritated scratches look like rat bite fever.  You could try taking some aspirin or ibuprofen to relieve the symptoms.  It's safe to wait it out and let your body fight it off, but you can also take one antibiotic every twelve hours to deal with it." ) );
+    }
+    if( x_in_y( medic_skill, 5.0 ) && patient.has_effect( effect_tetanus ) ) {
+        p.say( _( "Your muscle cramps are caused by tetanus.  A dose of antibiotics every twelve hours might get rid of it, otherwise you should look for benzodiazepines to relieve the symptoms." ) );
+    }
+    if( x_in_y( medic_skill, 6.0 ) && patient.get_effect_int( effect_toxin_buildup ) > 1 ) {
+        p.say( _( "Neuropathy, cramps, and tremors.  I'm not sure what exactly is the matter with you, but if I had to guess, you've been eating or drinking something toxic.  Stop doing that, and maybe your body will filter out the poison over time." ) );
+    }
+    if( patient.has_effect( effect_anemia ) || patient.has_effect( effect_redcells_anemia ) ) {
+        p.say( _( "You've got anemia.  It's often caused by bleeding, but sometimes a poor diet will do it, both are equally likely these days.  You need iron, either from leafy greens, multivitamins, or red meat, and you need rest so your body can rebuild itself." ) );
+    }
+    if( patient.has_effect( effect_scurvy ) ) {
+        p.say( _( "Scurvy.  That's a vitamin C deficiency.  You're going to want to look for fruit, greens, or organ meat, and it's got to be fresh, the preserved stuff usually won't do.  Vitamin supplements would also do the trick." ) );
+    }
+    time_duration since_start = calendar::turn - calendar::start_of_game;
+    int game_minutes = to_minutes<int>( since_start );
+    int time_slice_hourly = game_minutes / 60;
+    size_t hash_val_hourly = std::hash<int> {}( time_slice_hourly );
+    float normalized_hourly = ( hash_val_hourly % 1000 ) / 1000.0f;
+    float hourly_noise_factor = 0.85f + 0.3f * normalized_hourly;
+
+    const int cardio = static_cast<int>(
+                           std::round( p.get_cardiofit() * hourly_noise_factor )
+                       );
+
+    const int base = p.get_cardio_acc_base();
+
+    if( cardio < base * 0.9 ) {
+        p.say( _( "Your pulse is elevated and I'm not liking the look of your blood pressure.  You need more exercise." ) );
+    } else if( cardio < base * 1.1 ) {
+        p.say( _( "I'd say you could stand to get more exercise." ) );
+    } else if( cardio < base * 1.6 ) {
+        p.say( _( "Your vitals look good." ) );
+    } else if( cardio < base * 2.2 ) {
+        p.say( _( "It seems like you're in pretty good shape.  Your vitals look great, anyway." ) );
+    } else {
+        p.say( _( "You're in incredible shape!  What exactly have you been doing out there?" ) );
+    }
+
+    const float bmi = patient.get_bmi_fat();
+    if( bmi < character_weight_category::skinny ) {
+        p.say( _( "You probably don't need me to tell you this, but you're starving.  You're going to have a hard time staying healthy, let alone active, if your body doesn't have enough energy for its basic functions." ) );
+    } else if( bmi < character_weight_category::obese ) {
+        p.say( _( "Your weight looks OK." ) );
+    } else if( bmi < character_weight_category::morbidly_obese ) {
+        p.say( _( "You might benefit from losing some weight.  Things being how they are I'd say it's better to have too much than too little, but you're at the point where it's starting to put a strain on your body." ) );
+    } else {
+        p.say( _( "We really should think about getting you on a diet.  I know, I know, I don't like saying it, but now more than ever, your health matters." ) );
+    }
+    if( patient.has_trait( trait_IRREPARABLE ) ) {
+        p.say( _( "I don't think your condition's going to improve without some sort of miracle, so you need to stay out of trouble." ) );
+    } else if( patient.get_lifestyle() < -50 ) {
+        p.say( _( "One last thing: your immune system's probably shot.  That means you'll have a hard time fighting off infection and recovering from injury.  You need to avoid drugs and alcohol, mask up whenever possible, and don't eat anything weird.  Oh, and try to get some sleep.  You won't bounce back right away, but if you can stay active, stay clean, and try to maintain a healthy weight, you'll start feeling a lot better." ) );
+    } else if( patient.get_lifestyle() < -15 ) {
+        p.say( _( "That's everything.  You'd probably benefit from some lifestyle changes, though.  Little things, like exposure to toxins, junk food, smoke inhalation, even just dealing with a lot of negative emotions - all this stuff adds up, and it can really do a number on your health." ) );
+    } else if( patient.get_lifestyle() < 35 ) {
+        p.say( _( "It looks like apart from everything else, you've been maintaining good lifestyle habits.  Keep it up, it'll pay dividends the next time you're up against an injury or illness." ) );
+    } else if( patient.get_lifestyle() < 80 ) {
+        p.say( _( "Your health otherwise seems pretty good.  As long as you don't push it too far, you should be able to bounce back pretty well from most health problems." ) );
+    } else {
+        p.say( _( "All else aside, your outlook seems great.  Clean living really is its own reward." ) );
+    }
+    // Here's little bit of EXP for listening to the doc.
+    patient.practice( skill_firstaid, 6, 4 );
+    const int moves = to_moves<int>( 30_minutes );
+    patient.assign_activity( ACT_WAIT_NPC, moves );
+    patient.activity.str_values.push_back( p.get_name() );
+    p.add_effect( effect_currently_busy, 120_minutes );
+}
+
+static void generic_barber( const std::string &mut_type )
+{
+    uilist hair_menu;
+    std::string menu_text;
+    if( mut_type == "hair_style" ) {
+        menu_text = _( "Choose a new hairstyle" );
+    } else if( mut_type == "facial_hair" ) {
+        menu_text = _( "Choose a new facial hair style" );
+    }
+    hair_menu.text = menu_text;
+    int index = 0;
+    hair_menu.addentry( index, true, 'q', _( "Actually…  I've changed my mind." ) );
+    std::vector<trait_and_var> hair_muts = mutations_var_in_type( mut_type );
+    Character &player_character = get_player_character();
+    trait_and_var cur_hair;
+    for( const trait_and_var &elem : hair_muts ) {
+        if( player_character.has_trait_variant( elem ) ) {
+            cur_hair = elem;
+        }
+        index += 1;
+        hair_menu.addentry( index, true, MENU_AUTOASSIGN, elem.name() );
+    }
+    hair_menu.query();
+    int choice = hair_menu.ret;
+    if( choice != 0 ) {
+        if( player_character.has_trait( cur_hair.trait ) ) {
+            player_character.remove_mutation( cur_hair.trait, true );
+        }
+        const trait_and_var &chosen = hair_muts[choice - 1];
+        player_character.set_mutation( chosen.trait, chosen.trait->variant( chosen.variant ) );
+        add_msg( m_info, _( "You get a trendy new cut!" ) );
+    }
+}
+
+void talk_function::barber_beard( npc &/*p*/ )
+{
+    generic_barber( "facial_hair" );
+}
+
+void talk_function::barber_hair( npc &/*p*/ )
+{
+    generic_barber( "hair_style" );
+}
+
+void talk_function::buy_haircut( npc &p )
+{
+    Character &player_character = get_player_character();
+    player_character.add_morale( morale_haircut, 5, 5, 720_minutes, 3_minutes );
+    const int moves = to_moves<int>( 20_minutes );
+    player_character.assign_activity( ACT_WAIT_NPC, moves );
+    player_character.activity.str_values.push_back( p.get_name() );
+    add_msg( m_good, _( "%s gives you a decent haircut…" ), p.get_name() );
+}
+
+void talk_function::buy_shave( npc &p )
+{
+    Character &player_character = get_player_character();
+    player_character.add_morale( morale_shave, 10, 10, 360_minutes, 3_minutes );
+    const int moves = to_moves<int>( 5_minutes );
+    player_character.assign_activity( ACT_WAIT_NPC, moves );
+    player_character.activity.str_values.push_back( p.get_name() );
+    add_msg( m_good, _( "%s gives you a decent shave…" ), p.get_name() );
+}
+
+void talk_function::morale_chat_activity( npc &p )
+{
+    Character &player_character = get_player_character();
+    const int moves = to_moves<int>( 10_minutes );
+    player_character.assign_activity( ACT_SOCIALIZE, moves );
+    player_character.activity.str_values.push_back( p.get_name() );
+    if( one_in( 3 ) ) {
+        p.say( SNIPPET.random_from_category( "npc_socialize" ).value_or( translation() ).translated() );
+    }
+    add_msg( m_good, _( "That was a pleasant conversation with %s." ), p.disp_name() );
+    // 50% chance of increasing 1 npc opinion value each social chat after 6hr
+    if( !p.has_effect( effect_socialized_recently ) && p.opinion_values_raised <= 10 ) {
+        int value_change = 0;
+        switch( rng( 1, 3 ) ) {
+            case 1:
+                value_change = rng( 0, 1 );
+                p.op_of_u.trust += value_change;
+                break;
+            case 2:
+                value_change = rng( 0, 1 );
+                p.op_of_u.value += value_change;
+                break;
+            case 3:
+                if( p.op_of_u.anger > 0 ) {
+                    value_change = rng( -1, 0 );
+                    p.op_of_u.anger += value_change;
+                }
+                break;
+        }
+        // we need to check for any non-zero value, e.g. anger change might be negative
+        if( value_change != 0 ) {
+            p.opinion_values_raised++;
+        }
+        p.add_effect( effect_socialized_recently, 6_hours );
+    }
+    player_character.add_morale( morale_chat, rng( 3, 10 ), 10, 200_minutes, 5_minutes / 2 );
+}
+
+/*
+ * Function to make the npc drop non favorite, worn or wielded items at their current position.
+ */
+void talk_function::drop_items_in_place( npc &p )
+{
+    std::vector<drop_or_stash_item_info> to_drop;
+
+    // add all non favorite carried items to the drop off list
+    for( const item_location &npcs_item : p.all_items_loc() ) {
+        if( !npcs_item->is_favorite && npcs_item.where() == item_location::type::container &&
+            npcs_item.parent_item().where() == item_location::type::character ) {
+            to_drop.emplace_back( npcs_item, npcs_item->count() );
+        }
+    }
+    if( !to_drop.empty() ) {
+        // spawn a activity for the npc to drop the specified items
+        p.assign_activity( drop_activity_actor( to_drop, tripoint_rel_ms::zero, false ) );
+        p.say( "Understood." );
+    } else {
+        p.say( _( "I don't have anything to drop off." ) );
+    }
+}
+
+void talk_function::follow( npc &p )
+{
+    g->add_npc_follower( p.getID() );
+    p.set_attitude( NPCATT_FOLLOW );
+    p.set_fac( faction_your_followers );
+    get_player_character().cash += p.cash;
+    p.cash = 0;
+    if( !p.custom_profession.empty() ) {
+        p.custom_profession.clear();
+    }
+}
+
+void talk_function::follow_only( npc &p )
+{
+    p.set_attitude( NPCATT_FOLLOW );
+}
+
+void talk_function::deny_follow( npc &p )
+{
+    p.add_effect( effect_asked_to_follow, 6_hours );
+}
+
+void talk_function::deny_lead( npc &p )
+{
+    p.add_effect( effect_asked_to_lead, 6_hours );
+}
+
+void talk_function::deny_equipment( npc &p )
+{
+    p.add_effect( effect_asked_for_item, 1_hours );
+}
+
+void talk_function::deny_train( npc &p )
+{
+    p.add_effect( effect_asked_to_train, 6_hours );
+}
+
+void talk_function::deny_personal_info( npc &p )
+{
+    p.add_effect( effect_asked_personal_info, 3_hours );
+}
+
+void talk_function::hostile( npc &p )
+{
+    const map &here = get_map();
+
+    if( p.get_attitude() == NPCATT_KILL ) {
+        return;
+    }
+
+    if( p.sees( here, get_player_character() ) ) {
+        add_msg( _( "%s turns hostile!" ), p.get_name() );
+    }
+
+    get_event_bus().send<event_type::npc_becomes_hostile>( p.getID(), p.name );
+    p.set_attitude( NPCATT_KILL );
+}
+
+void talk_function::flee( npc &p )
+{
+    add_msg( _( "%s turns to flee!" ), p.get_name() );
+    p.set_attitude( NPCATT_FLEE );
+}
+
+void talk_function::leave( npc &p )
+{
+    add_msg( _( "%s leaves." ), p.get_name() );
+    g->remove_npc_follower( p.getID() );
+    std::string new_fac_id = "solo_";
+    new_fac_id += p.name;
+    new_fac_id += std::to_string( p.getID().get_value() );
+    p.job.clear_all_priorities();
+    // create a new "lone wolf" faction for this one NPC
+    faction *new_solo_fac = g->faction_manager_ptr->add_new_faction( p.name,
+                            faction_id( new_fac_id ), faction_no_faction );
+    p.set_fac( new_solo_fac ? new_solo_fac->id : faction_no_faction );
+    if( new_solo_fac ) {
+        new_solo_fac->known_by_u = true;
+    }
+    p.chatbin.first_topic = p.chatbin.talk_stranger_neutral;
+    p.set_attitude( NPCATT_NULL );
+    p.mission = NPC_MISSION_NULL;
+    p.long_term_goal_action();
+}
+
+void talk_function::stop_following( npc &p )
+{
+    // this is to tell non-allied NPCs to stop following.
+    // ( usually after a mission where they were temporarily tagging along )
+    // so don't tell already allied NPCs to stop following.
+    // they use the guard command for that.
+    if( p.is_player_ally() ) {
+        return;
+    }
+    add_msg( _( "%s stops following." ), p.get_name() );
+    p.set_attitude( NPCATT_NULL );
+}
+
+void talk_function::stranger_neutral( npc &p )
+{
+    add_msg( _( "%s feels less threatened by you." ), p.get_name() );
+    p.set_attitude( NPCATT_NULL );
+    p.chatbin.first_topic = p.chatbin.talk_stranger_neutral;
+}
+
+bool talk_function::drop_stolen_item( item &cur_item, npc &p )
+{
+    Character &player_character = get_player_character();
+    map &here = get_map();
+    bool dropped = false;
+    if( cur_item.is_old_owner( p ) ) {
+        item to_drop = player_character.i_rem( &cur_item );
+        to_drop.remove_old_owner();
+        to_drop.set_owner( p );
+        here.add_item_or_charges( player_character.pos_bub(), to_drop );
+        dropped = true;
+    } else if( cur_item.is_container() ) {
+        bool changed = false;
+        for( item *contained : cur_item.all_items_top() ) {
+            changed |= drop_stolen_item( *contained, p );
+        }
+        if( changed ) {
+            dropped = true;
+            cur_item.on_contents_changed();
+        }
+    }
+    return dropped;
+}
+
+void talk_function::drop_stolen_item( npc &p )
+{
+    bool dropped = false;
+    Character &player_character = get_player_character();
+    for( item *&elem : player_character.inv_dump() ) {
+        dropped |= drop_stolen_item( *elem, p );
+    }
+    if( dropped ) {
+        player_character.invalidate_weight_carried_cache();
+    } else {
+        debugmsg( "Failed to drop any stolen items." );
+    }
+    if( p.known_stolen_item ) {
+        p.known_stolen_item = nullptr;
+    }
+    if( player_character.is_hauling() ) {
+        player_character.stop_hauling();
+    }
+    p.set_attitude( NPCATT_NULL );
+}
+
+void talk_function::remove_stolen_status( npc &p )
+{
+    if( p.known_stolen_item ) {
+        p.known_stolen_item = nullptr;
+    }
+    p.set_attitude( NPCATT_NULL );
+}
+
+void talk_function::start_mugging( npc &p )
+{
+    p.set_attitude( NPCATT_MUG );
+    add_msg( _( "Pause to stay still.  Any movement may cause %s to attack." ), p.get_name() );
+}
+
+void talk_function::player_leaving( npc &p )
+{
+    p.set_attitude( NPCATT_WAIT_FOR_LEAVE );
+    p.patience = 15 - p.personality.aggression;
+}
+
+void talk_function::drop_weapon( npc &p )
+{
+    if( p.is_hallucination() ) {
+        return;
+    }
+    item weap = p.remove_weapon();
+    get_map().add_item_or_charges( p.pos_bub(), weap );
+}
+
+void talk_function::player_weapon_away( npc &/*p*/ )
+{
+    Character &player_character = get_player_character();
+
+    std::optional<bionic *> bionic_weapon = player_character.find_bionic_by_uid(
+            player_character.get_weapon_bionic_uid() );
+    if( bionic_weapon ) {
+        player_character.deactivate_bionic( **bionic_weapon );
+        return;
+    }
+
+    player_character.i_add( player_character.remove_weapon() );
+}
+
+void talk_function::player_weapon_drop( npc &/*p*/ )
+{
+    map &here = get_map();
+
+    Character &player_character = get_player_character();
+    item weap = player_character.remove_weapon();
+    drop_on_map( player_character, item_drop_reason::deliberate, {weap}, &here,
+                 player_character.pos_bub( here ) );
+}
+
+void talk_function::lead_to_safety( npc &p )
+{
+    mission *reach_safety_mission = mission::reserve_new( mission_MISSION_REACH_SAFETY,
+                                    character_id() );
+    reach_safety_mission->assign( get_avatar() );
+    p.goal = reach_safety_mission->get_target();
+    p.set_attitude( NPCATT_LEAD );
+}
+
+bool npc_trading::pay_npc( npc &np, int cost )
+{
+    if( np.op_of_u.owed >= cost ) {
+        np.op_of_u.owed -= cost;
+        return true;
+    }
+
+    return npc_trading::trade( np, cost, _( "Pay:" ) );
+}
+
+void talk_function::start_training_npc( npc &p )
+{
+    teach_domain d;
+    d.skill = p.chatbin.skill;
+    d.style = p.chatbin.style;
+    d.spell = p.chatbin.dialogue_spell;
+    d.prof = p.chatbin.proficiency;
+    std::vector<Character *> students;
+    students.push_back( &p );
+    start_training_gen( get_player_character(), students, d );
+}
+
+void talk_function::start_training( npc &p )
+{
+    teach_domain d;
+    d.skill = p.chatbin.skill;
+    d.style = p.chatbin.style;
+    d.spell = p.chatbin.dialogue_spell;
+    d.prof = p.chatbin.proficiency;
+    std::vector<Character *> students;
+    students.push_back( &get_player_character() );
+    start_training_gen( p, students, d );
+}
+
+void talk_function::start_training_seminar( npc &p )
+{
+    teach_domain d;
+    d.skill = p.chatbin.skill;
+    d.style = p.chatbin.style;
+    d.spell = p.chatbin.dialogue_spell;
+    d.prof = p.chatbin.proficiency;
+    std::vector<npc *> followers = g->get_npcs_if( [&p]( const npc & n ) {
+        return n.is_player_ally() && n.is_following() && n.can_hear( p.pos_bub(), p.get_shout_volume() );
+    } );
+    std::vector<Character *> students;
+    for( npc *n : followers ) {
+        if( n && p.getID() != n->getID() ) {
+            students.push_back( n );
+        }
+    }
+    students.push_back( &get_player_character() );
+
+    std::vector<Character *> picked;
+    std::function<bool( const Character * )> include_func = [&]( const Character * c ) {
+        if( d.skill != skill_id() ) {
+            return static_cast<int>( c->get_skill_level( d.skill ) ) < static_cast<int>( p.get_skill_level(
+                        d.skill ) );
+        } else if( d.style != matype_id() ) {
+            return !c->martial_arts_data->has_martialart( d.style );
+        } else if( d.prof != proficiency_id() ) {
+            return !c->has_proficiency( d.prof );
+        } else if( d.spell != spell_id() ) {
+            const bool knows = c->magic->knows_spell( d.spell );
+            return !knows || c->magic->get_spell( d.spell ).get_level() <
+                   p.magic->get_spell( d.spell ).get_level();
+        }
+        return false;
+    };
+    std::vector<int> selected = npcs_select_menu( students, _( "Who should participate?" ),
+    [&include_func]( const Character * ch ) {
+        return !include_func( ch );
+    } );
+
+    if( selected.empty() ) {
+        return;
+    }
+    picked.reserve( selected.size() );
+    for( int sel : selected ) {
+        picked.emplace_back( students[sel] );
+    }
+    start_training_gen( p, picked, d );
+}
+
+void talk_function::start_training_gen( Character &teacher, std::vector<Character *> &students,
+                                        teach_domain &d )
+{
+    int cost = 0;
+    time_duration time = 0_turns;
+    std::string name;
+    const skill_id &skill = d.skill;
+    const matype_id &style = d.style;
+    const spell_id &sp_id = d.spell;
+    const proficiency_id &proficiency = d.prof;
+    bool player_is_student = false;
+    int expert_multiplier = 1;
+    for( Character *student : students ) {
+        if( student->is_avatar() ) {
+            player_is_student = true;
+        }
+        int tmp_cost = 0;
+        time_duration tmp_time = 0_turns;
+        if( skill != skill_id() &&
+            student->get_skill_level( skill ) < teacher.get_skill_level( skill ) ) {
+            tmp_cost = calc_skill_training_cost_char( teacher, *student, skill );
+            tmp_time = calc_skill_training_time_char( teacher, *student, skill );
+            name = skill.str();
+        } else if( style != matype_id() &&
+                   !student->martial_arts_data->has_martialart( style ) ) {
+            tmp_cost = calc_ma_style_training_cost( teacher, *student, style );
+            tmp_time = calc_ma_style_training_time( teacher, *student, style );
+            name = style.str();
+        } else if( sp_id != spell_id() ) {
+            // already checked if can learn this spell in npctalk.cpp
+            tmp_cost = calc_spell_training_cost( teacher, *student, sp_id );
+            tmp_time = calc_spell_training_time( teacher, *student, sp_id );
+            name = sp_id.str();
+            const spell &temp_spell = teacher.magic->get_spell( sp_id );
+            const bool knows = student->magic->knows_spell( sp_id );
+            expert_multiplier = knows ? temp_spell.get_level() -
+                                student->magic->get_spell( sp_id ).get_level() : 1;
+        } else if( proficiency != proficiency_id() ) {
+            tmp_cost = calc_proficiency_training_cost( teacher, *student, proficiency );
+            tmp_time = calc_proficiency_training_time( teacher, *student, proficiency );
+            name = proficiency.str();
+        } else {
+            debugmsg( "start_training with no valid skill or style set" );
+            return;
+        }
+        // Use the slowest and most expensive common denominator.
+        cost = std::max( cost, tmp_cost );
+        time = std::max( time, tmp_time );
+    }
+    // 10% slower and more expensive for each extra student involved.
+    time *= 1.0 + 0.1 * ( students.size() - 1 );
+    std::string student_string = students.size() > 1 ? _( "students" ) : _( "student" );
+    if( cost > 0 && !teacher.is_avatar() ) {
+        if( !query_yn( _( "This lesson for %1s %2s will cost $%3.2f and take %4s.  Continue?" ),
+                       students.size(), student_string,
+                       static_cast<double>( cost ) / 100,
+                       to_string( time ) ) ) {
+            return;
+        }
+    } else {
+        if( !query_yn( _( "This lesson for %1s %2s will take %3s.  Continue?" ), students.size(),
+                       student_string, to_string( time ) ) ) {
+            return;
+        }
+    }
+    npc &p = static_cast<npc &>( teacher );
+    mission *miss = p.chatbin.mission_selected;
+    const character_id &pid = get_player_character().getID();
+    if( player_is_student && miss != nullptr &&
+        miss->get_assigned_player_id() == pid && miss->is_complete( pid ) ) {
+        clear_mission( p );
+    } else if( !npc_trading::pay_npc( p, cost ) ) {
+        return;
+    }
+    const int teacher_id = teacher.getID().get_value();
+    player_activity tact( ACT_TRAIN_TEACHER, to_moves<int>( time ), teacher_id, 0, name );
+    for( Character *student : students ) {
+        player_activity act( ACT_TRAIN, to_moves<int>( time ), teacher_id, 0, name );
+        act.values.push_back( expert_multiplier );
+        student->assign_activity( act );
+        tact.values.push_back( student->getID().get_value() );
+    }
+    teacher.assign_activity( tact );
+    teacher.add_effect( effect_asked_to_train, 6_hours );
+}
+
+npc *pick_follower()
+{
+    const map &here = get_map();
+
+    std::vector<npc *> followers;
+    std::vector<tripoint_bub_ms> locations;
+
+    for( npc &guy : g->all_npcs() ) {
+        if( guy.is_player_ally() && get_player_view().sees( here, guy ) ) {
+            followers.push_back( &guy );
+            locations.push_back( guy.pos_bub() );
+        }
+    }
+
+    pointmenu_cb callback( locations );
+
+    uilist menu;
+    menu.text = _( "Select a follower" );
+    menu.callback = &callback;
+    menu.w_y_setup = 2;
+
+    for( const npc *p : followers ) {
+        menu.addentry( -1, true, MENU_AUTOASSIGN, p->get_name() );
+    }
+
+    menu.query();
+    if( menu.ret < 0 || static_cast<size_t>( menu.ret ) >= followers.size() ) {
+        return nullptr;
+    }
+
+    return followers[ menu.ret ];
+}
+
+void talk_function::distribute_food_auto( npc &p )
+{
+    std::optional<basecamp *> bcp = overmap_buffer.find_camp( p.pos_abs_omt().xy() );
+    if( !bcp ) {
+        debugmsg( "distribute_food_auto called without a basecamp, aborting." );
+        return;
+    }
+    basecamp *npc_camp = *bcp;
+    if( !npc_camp->allowed_access_by( p ) ) {
+        debugmsg( "distribute_food_auto called on npc that isn't allowed to access local basecamp storage, aborting." );
+        return;
+    }
+
+    zone_manager &mgr = zone_manager::get_manager();
+    const tripoint_abs_ms &npc_abs_loc = p.pos_abs();
+    // 3x3 square with NPC in the center, includes NPC's tile and all adjacent ones, for overflow
+    const tripoint_abs_ms top_left = npc_abs_loc + point::north_west;
+    const tripoint_abs_ms bottom_right = npc_abs_loc + point::south_east;
+    std::string zone_name = "ERROR IF YOU SEE THIS (dummy zone talk_function::distribute_food_auto)";
+    const faction_id &fac_id = p.get_fac_id();
+    mgr.add( zone_name, zone_type_CAMP_FOOD, fac_id, false, true, top_left, bottom_right );
+    mgr.add( zone_name, zone_type_CAMP_STORAGE, fac_id, false, true, top_left,
+             bottom_right );
+    npc_camp->distribute_food( false );
+    // Now we clean up all camp zones, though there SHOULD only be the two we just made
+    auto lambda_remove_zones = [&mgr, &fac_id]( zone_type_id type_to_remove ) {
+        std::vector<zone_manager::ref_zone_data> p_zones = mgr.get_zones( fac_id );
+        for( zone_data &a_zone : p_zones ) {
+            if( a_zone.get_type() == type_to_remove ) {
+                mgr.remove( a_zone );
+            }
+        }
+    };
+    lambda_remove_zones( zone_type_CAMP_FOOD );
+    lambda_remove_zones( zone_type_CAMP_STORAGE );
+}
+
+void talk_function::copy_npc_rules( npc &p )
+{
+    const npc *other = pick_follower();
+    if( other != nullptr && other != &p ) {
+        p.rules = other->rules;
+    }
+}
+
+void talk_function::set_npc_pickup( npc &p )
+{
+    p.rules.pickup_whitelist->show( p.name );
+}
+
+void talk_function::npc_thankful( npc &p )
+{
+    if( p.get_attitude() == NPCATT_MUG || p.get_attitude() == NPCATT_WAIT_FOR_LEAVE ||
+        p.get_attitude() == NPCATT_FLEE || p.get_attitude() == NPCATT_KILL ||
+        p.get_attitude() == NPCATT_FLEE_TEMP ) {
+        p.set_attitude( NPCATT_NULL );
+    }
+    if( p.chatbin.first_topic != p.chatbin.talk_friend ) {
+        p.chatbin.first_topic = p.chatbin.talk_stranger_friendly;
+    }
+    int8_t &aggro = p.personality.aggression;
+    aggro = std::clamp<int8_t>( aggro - 1, NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
+
+}
+
+void talk_function::clear_overrides( npc &p )
+{
+    p.rules.clear_overrides();
+}
+
+void talk_function::pick_style( npc &p )
+{
+    p.martial_arts_data->pick_style( p );
+}
+
+void talk_function::switch_to( npc &p )
+{
+    get_avatar().control_npc( p, false );
+}

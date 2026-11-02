@@ -1,0 +1,66 @@
+[
+  {
+    "id": "TALK_CAMP_GENERAL",
+    "type": "talk_topic",
+    "dynamic_line": "What about settlements?",
+    "responses": [
+      {
+        "text": "I have some orders to give.",
+        "topic": "TALK_DONE",
+        "effect": "basecamp_mission",
+        "condition": { "npc_at_om_location": "FACTION_CAMP_ANY" }
+      },
+      { "text": "Tell me how settlements work.", "topic": "TALK_CAMP_TUTORIAL_GENERAL" },
+      {
+        "text": "I want you to start a settlement here.",
+        "topic": "TALK_HALLU_CAMP",
+        "condition": { "npc_has_trait": "HALLUCINATION" },
+        "switch": true
+      },
+      {
+        "text": "I want you to start a settlement here.",
+        "topic": "TALK_DONE",
+        "effect": "start_camp",
+        "condition": { "npc_at_om_location": "FACTION_CAMP_START" },
+        "switch": true,
+        "default": true
+      },
+      {
+        "text": "We need to abandon this camp.",
+        "condition": { "npc_at_om_location": "FACTION_CAMP_ANY" },
+        "topic": "TALK_ABANDON"
+      },
+      { "text": "Nothing.  Let's talk about something else.", "topic": "TALK_FRIEND" },
+      { "text": "Never mind, let's talk about other things you can do.", "topic": "TALK_ALLY_TUTORIAL" },
+      { "text": "Nothing.  Let's get back to work.", "topic": "TALK_DONE" }
+    ]
+  },
+  {
+    "id": "TALK_CAMP_TUTORIAL_GENERAL",
+    "type": "talk_topic",
+    "dynamic_line": "Most work is designated via zones or crafting orders, but you can designate a settlement and build a bulletin board or speak with me directly to handle a few types of offsite missions where I or another follower will head out to do some task without your supervision.",
+    "responses": [
+      { "text": "Tell me about missions.", "topic": "TALK_CAMP_TUTORIAL_MISSIONS" },
+      { "text": "Never mind, let's talk about other things you can do.", "topic": "TALK_ALLY_TUTORIAL" },
+      { "text": "Never mind, let's talk about something else.", "topic": "TALK_FRIEND" },
+      { "text": "Forget it.  Let's go.", "topic": "TALK_DONE" }
+    ]
+  },
+  {
+    "id": "TALK_CAMP_TUTORIAL_MISSIONS",
+    "type": "talk_topic",
+    "dynamic_line": "When you assign a companion to an offsite mission, they'll disappear while they go do whatever you want them to do.  When the duration of the mission has elapsed, you'll see a new mission on the bulletin board to have them return and complete the mission by upgrading your settlement, returning their hunting kills, dropping off whatever they were crafting, or whatever else the mission results are.\n  There are all kinds of faction camp missions: building up the camp, recruiting new allies, hunting and trapping game, scrounging for materials, that sort of thing.\n  Assign missions by interacting with the bulletin board or talking to me, in person or over a two-way radio.\n  There is one special mission called 'Emergency Recall'.  You can use this to retrieve any companion on a faction camp mission, but this cancels the mission and wastes any resources used on it.",
+    "responses": [
+      { "text": "Never mind, let's go back to talking about settlements.", "topic": "TALK_CAMP_GENERAL" },
+      { "text": "Never mind, let's talk about other things you can do.", "topic": "TALK_ALLY_TUTORIAL" },
+      { "text": "Never mind, let's talk about something else.", "topic": "TALK_FRIEND" },
+      { "text": "Forget it.  Let's go.", "topic": "TALK_DONE" }
+    ]
+  },
+  {
+    "id": "TALK_HALLU_CAMP",
+    "type": "talk_topic",
+    "dynamic_line": "<hallu_dont_camp>",
+    "responses": [ { "text": "Fair enough.", "topic": "TALK_NONE" } ]
+  }
+]

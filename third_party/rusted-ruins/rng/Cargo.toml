@@ -1,0 +1,13 @@
+[package]
+name = "rusted-ruins-rng"
+version = "0.1.0"
+edition = "2021"
+authors = ["T. Okubo <t.okubo.rx78+devel@gmail.com>"]
+
+[lib]
+name = "rusted_ruins_rng"
+crate-type = ["rlib"]
+
+[dependencies]
+rand = "0.8"
+rand_xorshift = "0.3"

@@ -1,0 +1,20 @@
+[package]
+name = "rusted-ruins-audio"
+version = "0.1.0"
+edition = "2021"
+authors = ["T. Okubo <t.okubo.rx78+devel@gmail.com>"]
+
+[lib]
+name = "rusted_ruins_audio"
+crate-type = ["rlib"]
+
+[dependencies]
+anyhow = "1"
+log = "0.4"
+flate2 = "1"
+tar = "0.4"
+
+[dependencies.sdl2]
+version = "0.35"
+default-features = false
+features = ["mixer"]

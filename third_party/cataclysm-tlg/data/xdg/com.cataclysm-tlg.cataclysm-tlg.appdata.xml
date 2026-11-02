@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.cataclysm-tlg.cataclysm-tlg</id>
+  <metadata_license>CC-BY-SA-3.0</metadata_license>
+  <project_license>CC-BY-SA-3.0</project_license>
+  <name>Cataclysm: The Last Generation</name>
+  <summary>
+    A turn-based survival game set in a post-apocalyptic world
+  </summary>
+  <description>
+    <p>
+      Struggle to survive in a harsh, persistent, procedurally
+      generated world. Scavenge the remnants of a dead civilization
+      for food, equipment, or, if you are lucky, a vehicle with a full
+      tank of gas to get you the hell out of Dodge. Fight to defeat or
+      escape from a wide variety of powerful monstrosities, from
+      zombies to giant insects to killer robots and things far
+      stranger and deadlier, and against the others like yourself,
+      that want what you have...
+    </p>
+    <p>
+      As your game begins, you awaken with hazy memories of violence
+      and terror from when the world suddenly unraveled around
+      you. Now you need to explore your surroundings, and secure food,
+      water and safety. After that, who knows? Long term survival will
+      mean tapping abilities you haven’t used before, learning to
+      survive in this new environment and developing new skills.
+    </p>
+  </description>
+  <categories>
+    <category>Game</category>
+    <category>RolePlaying</category>
+  </categories>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+    <content_attribute id="violence-desecration">intense</content_attribute>
+    <content_attribute id="violence-slavery">intense</content_attribute>
+    <content_attribute id="violence-worship">intense</content_attribute>
+    <content_attribute id="drugs-alcohol">moderate</content_attribute>
+    <content_attribute id="drugs-narcotics">moderate</content_attribute>
+    <content_attribute id="drugs-tobacco">moderate</content_attribute>
+    <content_attribute id="sex-nudity">mild</content_attribute>
+    <content_attribute id="sex-themes">moderate</content_attribute>
+    <content_attribute id="sex-homosexuality">intense</content_attribute>
+    <content_attribute id="sex-appearance">mild</content_attribute>
+    <content_attribute id="language-profanity">moderate</content_attribute>
+    <content_attribute id="language-humor">mild</content_attribute>
+    <content_attribute id="language-discrimination">mild</content_attribute>
+  </content_rating>
+  <url type="homepage">
+    https://github.com/Cataclysm-TLG/Cataclysm-TLG
+  </url>
+  <url type="bugtracker">
+    https://github.com/Cataclysm-TLG/Cataclysm-TLG/issues
+  </url>
+  <url type="vcs-browser">
+    https://github.com/Cataclysm-TLG/Cataclysm-TLG
+  </url>
+  <url type="contribute">
+    https://github.com/Cataclysm-TLG/Cataclysm-TLG
+  </url>
+  <launchable type="desktop-id">com.cataclysm-tlg.cataclysm-tlg.desktop</launchable>
+  <provides>
+    <binary>cataclysm-tiles</binary>
+  </provides>
+  <releases>
+    <release version="1.0" date="2025-2-26">
+      <description>
+        <p>
+          The game is currently in beta. Pardon our dust as we work to
+          clean up a host of bugs and implement the features that will
+          differentiate us from our originating project, Cataclysm:
+          Dark Days Ahead.
+        </p>
+        <p>
+          The Last Generation is forked from a March 2024 build of Cataclysm:
+          Dark Days Ahead, and has backported many of the changes that the
+          originating project has made since then. TLG would not be possible
+          without the past and present contributions of the hundreds of developers
+          and contributors at Dark Days Ahead.
+        </p>
+        <ul>
+          <li>Removed imgui for better performance and a cleaner, more classic appearance.</li>
+          <li>Added a grappling system that greatly expands what is possible in combat.</li>
+          <li>Rewrote lore to describe a Cataclysm spanning years, not weeks.</li>
+          <li>Removed portal storms and Exodii, restoring bionics to labs and hospitals.</li>
+          <li>Moved bionic professions to mainline, allowing players to start as cyborgs if desired.</li>
+          <li>Overhauled item spawns at game start, making basic resources like food much more scarce.</li>
+          <li>Adjusted plant/tree spawns according to real-world regional data.</li>
+          <li>Killed a great number of wild plants to reflect a more apocalyptic setting.</li>
+          <li>Farms generated at game start are poorly planted, afflicted by blight, and overrun by pests.</li>
+          <li>Decreased the incidence of subway labs, increased the incidence of older-style labs.</li>
+          <li>Reduced the number of monsters that spawn in subway labs.</li>
+          <li>Reduced the number of inconsequential monsters that spawn in many areas to improve performance.</li>
+          <li>Removed the ability of most creatures to become flesh cocoons on death, reducing amalgamation spam late-game.</li>
+          <li>Made shooting non-deterministic, fixing an age-old issue with monsters being unerringly accurate.</li>
+          <li>Overhauled acid and bile, which now behave as proper liquids and can interact with equipment.</li>
+          <li>Re-added survivor suits and made them specialized for dealing with the above.</li>
+          <li>Expanded weariness to more realistically model the effects of melee combat.</li>
+          <li>Refactored much of the armor in the game for better balance, readability, and verisimilitude.</li>
+          <li>Made unarmed combat far less destructive to the attacker's clothing.</li>
+          <li>Tileset vehicle support for more cohesive vehicle rendering.</li>
+          <li>Allowed Plant and Elf-A mutants to actually photosynthesize.</li>
+          <li>Added some sanity to grenade behavior, making them less like nuclear bombs.</li>
+          <li>Removed most item variants, simplifying loot and leaving more room for imagination.</li>
+          <li>Made trapdoor spiders actually detectable.</li>
+          <li>Implemented tempered glass for car windshields.</li>
+          <li>Removed the two-drug system, simplifying mutagens. Now you just take a single drug to mutate.</li>
+          <li>Made leap/pounce mutations actually functional.</li>
+          <li>Improved point buy and made it the default character creation system. Freeform is still available.</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>

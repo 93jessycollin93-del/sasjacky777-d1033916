@@ -1,0 +1,16 @@
+[
+  {
+    "type": "mutation_type",
+    "id": "Cybernetic"
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_Interface",
+    "name": { "str": "Standard Neurobionic Interface" },
+    "points": 0,
+    "description": "You have a matrix in your central nervous system with an external port that might allow you to interface with certain devices.",
+    "valid": false,
+    "purifiable": false,
+    "types": [ "Cybernetic" ]
+  }
+]

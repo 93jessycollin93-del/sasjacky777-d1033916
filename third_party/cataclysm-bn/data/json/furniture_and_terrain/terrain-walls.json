@@ -1,0 +1,2518 @@
+[
+  {
+    "type": "item_group",
+    "id": "wall_bash_results",
+    "subtype": "collection",
+    "entries": [
+      { "item": "rock", "count": [ 0, 2 ] },
+      { "item": "wood_panel", "count": [ 0, 1 ] },
+      { "item": "nail", "charges": [ 4, 16 ] },
+      { "item": "splinter", "count": [ 1, 5 ] },
+      { "item": "2x4", "count": [ 1, 2 ], "prob": 25 },
+      { "item": "pipe", "count": [ 0, 2 ], "prob": 10 },
+      { "item": "cu_pipe", "count": [ 0, 2 ], "prob": 10 },
+      { "item": "cable", "charges": [ 0, 200 ], "prob": 10 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "rock_mining_extra",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "material_rocksalt", "prob": 50 },
+      { "item": "coal_lump", "charges": [ 200, 400 ], "prob": 30 },
+      { "item": "material_zincite", "count": [ 1, 4 ], "prob": 10 },
+      { "item": "material_rhodonite", "prob": 10 }
+    ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall",
+    "alias": [ "t_wall_h", "t_wall_v" ],
+    "name": "plastered wooden wall",
+    "description": "The stereotypical wall with wooden support structure filled with insulation and drywalled.  Paint job is the all too common and neutral off-white or cream color, it could use more vibrant paint.  The underlying material is still somewhat flammable.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_paintable",
+    "looks_like": "t_wall",
+    "name": "dark plastered wooden wall",
+    "description": "The stereotypical wall with wooden support structure filled with insulation and drywalled.  Paint job is by default is the all too common and neutral off-white, but it is simple and easy to paint with spray cans.  The underlying material is still somewhat flammable.",
+    "symbol": "LINE_OXOX",
+    "color": "green",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [
+      "FLAMMABLE_HARD",
+      "NOITEM",
+      "SUPPORTS_ROOF",
+      "WALL",
+      "NO_SCENT",
+      "CHIP",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_half",
+    "name": "half-built wooden wall",
+    "description": "An incomplete wall of refined wood, dotted with carefully placed nails to provide proper support.  It requires some more two by fours and nails before it'd be considered a suitable wall.",
+    "symbol": "#",
+    "color": "light_red",
+    "move_cost": 4,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "NOITEM", "REDUCE_SCENT", "MOUNTABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 10,
+      "str_max": 70,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [
+        { "item": "2x4", "count": [ 0, 5 ] },
+        { "item": "wood_panel", "count": [ 0, 1 ] },
+        { "item": "nail", "charges": [ 0, 5 ] },
+        { "item": "splinter", "count": [ 5, 10 ] }
+      ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 12, 12 ], "destroy_threshold": 150, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_paintable_half",
+    "name": "half-built wooden wall",
+    "description": "An incomplete wall of refined wood, dotted with carefully placed nails to provide proper support.  It requires some more two by fours and nails before it'd be considered a suitable wall.",
+    "looks_like": "t_wall_half",
+    "symbol": "#",
+    "color": "light_red",
+    "move_cost": 4,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "NOITEM", "REDUCE_SCENT", "MOUNTABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 10,
+      "str_max": 70,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [
+        { "item": "2x4", "count": [ 0, 5 ] },
+        { "item": "wood_panel", "count": [ 0, 1 ] },
+        { "item": "nail", "charges": [ 0, 5 ] },
+        { "item": "splinter", "count": [ 5, 10 ] }
+      ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 12, 12 ], "destroy_threshold": 150, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_half_domestic",
+    "copy-from": "t_wall_half",
+    "name": "half-built domestic wall",
+    "description": "Wooden slats nailed across the bare skeleton of what will eventually be a modern interior wall.  The finishing touches would typically be drywall or plaster, or whatever one can improvise out of local materials.",
+    "symbol": "#",
+    "color": "light_red",
+    "move_cost": 0,
+    "coverage": 35,
+    "delete": { "flags": [ "MOUNTABLE" ] },
+    "bash": {
+      "str_min": 8,
+      "str_max": 50,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [
+        { "item": "2x4", "count": [ 0, 3 ] },
+        { "item": "nail", "charges": [ 0, 5 ] },
+        { "item": "splinter", "count": [ 3, 6 ] }
+      ],
+      "ranged": { "reduction": [ 8, 8 ], "destroy_threshold": 50, "block_unaimed_chance": "25%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_ponywall",
+    "alias": [ "t_ponywall_h", "t_ponywall_v" ],
+    "name": "pony wall",
+    "description": "A short divider wall with wooden support structure with drywall.  Paint job is the all too common and neutral off-white or cream color.  Appears as though the material is flammable.",
+    "symbol": "LINE_OXOX",
+    "looks_like": "f_counter",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 60,
+    "connects_to": "WALL",
+    "roof": "t_flat_roof",
+    "flags": [ "TRANSPARENT", "FLAMMABLE", "PLACE_ITEM", "AUTO_WALL_SYMBOL", "BASHABLE", "THIN_OBSTACLE", "MOUNTABLE", "SHORT" ],
+    "deconstruct": { "ter_set": "t_floor", "items": [ { "item": "2x4", "count": 10 }, { "item": "nail", "charges": 20 } ] },
+    "bash": {
+      "str_min": 15,
+      "str_max": 30,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "ranged": { "reduction": [ 15, 15 ], "destroy_threshold": 30, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_r",
+    "alias": [ "t_wall_h_r", "t_wall_v_r" ],
+    "name": "red wall",
+    "description": "Wall painted red.",
+    "symbol": "LINE_OXOX",
+    "color": "red",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [
+      "FLAMMABLE_HARD",
+      "NOITEM",
+      "SUPPORTS_ROOF",
+      "WALL",
+      "NO_SCENT",
+      "CHIP",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_w",
+    "alias": [ "t_wall_h_w", "t_wall_v_w" ],
+    "name": "white wall",
+    "description": "Wall painted white.",
+    "symbol": "LINE_OXOX",
+    "color": "white",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [
+      "FLAMMABLE_HARD",
+      "NOITEM",
+      "SUPPORTS_ROOF",
+      "WALL",
+      "NO_SCENT",
+      "CHIP",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_b",
+    "alias": [ "t_wall_h_b", "t_wall_v_b" ],
+    "name": "blue wall",
+    "description": "Wall painted blue.",
+    "symbol": "LINE_OXOX",
+    "color": "blue",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [
+      "FLAMMABLE_HARD",
+      "NOITEM",
+      "SUPPORTS_ROOF",
+      "WALL",
+      "NO_SCENT",
+      "CHIP",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_g",
+    "alias": [ "t_wall_h_g", "t_wall_v_g" ],
+    "name": "green wall",
+    "description": "Wall painted green.",
+    "symbol": "LINE_OXOX",
+    "color": "green",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [
+      "FLAMMABLE_HARD",
+      "NOITEM",
+      "SUPPORTS_ROOF",
+      "WALL",
+      "NO_SCENT",
+      "CHIP",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_y",
+    "alias": [ "t_wall_h_y", "t_wall_v_y" ],
+    "name": "yellow wall",
+    "description": "Wall painted yellow.",
+    "symbol": "LINE_OXOX",
+    "color": "yellow",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [
+      "FLAMMABLE_HARD",
+      "NOITEM",
+      "SUPPORTS_ROOF",
+      "WALL",
+      "NO_SCENT",
+      "CHIP",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_P",
+    "alias": [ "t_wall_h_P", "t_wall_v_P" ],
+    "name": "pink wall",
+    "description": "Wall painted pink.",
+    "symbol": "LINE_OXOX",
+    "color": "pink",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [
+      "FLAMMABLE_HARD",
+      "NOITEM",
+      "SUPPORTS_ROOF",
+      "WALL",
+      "NO_SCENT",
+      "CHIP",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_p",
+    "alias": [ "t_wall_h_p", "t_wall_v_p" ],
+    "name": "purple wall",
+    "description": "Wall painted purple.",
+    "symbol": "LINE_OXOX",
+    "color": "magenta",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [
+      "FLAMMABLE_HARD",
+      "NOITEM",
+      "SUPPORTS_ROOF",
+      "WALL",
+      "NO_SCENT",
+      "CHIP",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BLOCK_WIND"
+    ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the that of the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_brick_wall_halfway",
+    "name": "half-built brick wall",
+    "description": "Half of a brick wall, looks like it still requires some more resources and effort before being considered a real wall.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 5,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "bash": {
+      "str_min": 30,
+      "str_max": 100,
+      "sound": "crash!",
+      "sound_fail": "bash!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 5, 8 ] }, { "item": "brick", "count": [ 1, 3 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 120, 120 ], "destroy_threshold": 120, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_brick_wall",
+    "name": "brick wall",
+    "description": "A solid brick wall, sturdy enough to support a roof with enough walls and keep out any unwanted visitors.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 60,
+      "str_max": 160,
+      "sound": "crash!",
+      "sound_fail": "bash!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 8, 15 ] }, { "item": "brick", "count": [ 2, 6 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 120, 120 ], "destroy_threshold": 120 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_wall",
+    "name": "stone wall",
+    "description": "A sturdy stone wall.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND", "CLIMBABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 80,
+      "str_max": 300,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 8, 18 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 160, 160 ], "destroy_threshold": 160 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_wall_half",
+    "name": "half-built stone wall",
+    "description": "Half of a sturdy stone wall.  Some work still needs to be done before this stone wall is complete.",
+    "symbol": "#",
+    "color": "light_gray",
+    "move_cost": 4,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "NOITEM", "REDUCE_SCENT", "MOUNTABLE", "MINEABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 40,
+      "str_max": 200,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 3, 8 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 160, 160 ], "destroy_threshold": 80, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_smooth",
+    "name": "smoothed rock",
+    "description": "A block of stone that's been smoothed and shaped, commonly granite or marble for funerary chapels and mausoleums.",
+    "symbol": "LINE_OXOX",
+    "//": "use pillars, 't_column', as a compliment.",
+    "color": "white",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "CONNECT_TO_WALL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 120,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "items": [
+        { "item": "rock", "count": [ 25, 40 ] },
+        { "item": "sharp_rock", "count": [ 3, 7 ] },
+        { "item": "material_limestone", "charges": [ 400, 800 ], "prob": 40 },
+        { "item": "material_rocksalt", "prob": 10 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 240, 240 ], "destroy_threshold": 240 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_adobe_brick_wall_halfway",
+    "name": "half-built adobe wall",
+    "description": "Half of an adobe brick wall, looks like it still requires some more resources and effort before being considered a real wall.",
+    "symbol": "#",
+    "color": "brown",
+    "looks_like": "t_brick_wall_halfway",
+    "move_cost": 5,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "bash": {
+      "str_min": 20,
+      "str_max": 90,
+      "sound": "crash!",
+      "sound_fail": "bash!",
+      "ter_set": "t_null",
+      "items": [ { "item": "material_soil", "count": [ 4, 10 ] }, { "item": "adobe_brick", "count": [ 1, 3 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 90, 90 ], "destroy_threshold": 90, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_adobe_brick_wall",
+    "name": "adobe wall",
+    "description": "A solid adobe brick wall, sturdy enough to support a roof with enough walls and keep out any unwanted visitors.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "looks_like": "t_brick_wall",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 45,
+      "str_max": 120,
+      "sound": "crash!",
+      "sound_fail": "bash!",
+      "ter_set": "t_null",
+      "items": [ { "item": "material_soil", "count": [ 8, 20 ] }, { "item": "adobe_brick", "count": [ 2, 6 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 90, 90 ], "destroy_threshold": 90 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_concrete_wall",
+    "alias": [ "t_concrete_h", "t_concrete_v" ],
+    "name": "concrete wall",
+    "description": "An aesthetically pleasing design with simple lines, this type of concrete was used with a weaker chemical mixture in order to have faster setting times.  Not ideal for multi-story buildings, but still capable of supporting a roof.",
+    "symbol": "LINE_OXOX",
+    "color": "dark_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 70,
+      "str_max": 300,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_reb_cage",
+      "items": [ { "item": "rock", "count": [ 10, 22 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 140, 140 ], "destroy_threshold": 140 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_metal",
+    "alias": [ "t_wall_metal_h", "t_wall_metal_v" ],
+    "name": "metal wall",
+    "description": "An industrially fabricated thick sheet carefully positioned and joined seamlessly with perimeter sealant, this wall is capable of resisting extreme elements as well as hostile forces.  Blast load rated and extremely fire-retardant, breaching will require specialized tools or industrial vehicles.",
+    "symbol": "LINE_OXOX",
+    "color": "cyan",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "oxytorch": {
+      "result": "t_scrap_wall_halfway",
+      "duration": "15 seconds",
+      "byproducts": [ { "item": "steel_plate", "count": [ 2, 3 ] }, { "item": "steel_chunk", "count": [ 12, 20 ] } ]
+    },
+    "bash": {
+      "str_min": 200,
+      "str_max": 600,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_null",
+      "items": [
+        { "item": "steel_lump", "count": [ 1, 4 ] },
+        { "item": "steel_chunk", "count": [ 3, 12 ] },
+        { "item": "scrap", "count": [ 9, 36 ] }
+      ],
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 600 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_bulkhead",
+    "name": "bulkhead",
+    "description": "An industrially fabricated thick sheet carefully positioned, this wall is capable of resisting extreme elements as well as hostile forces.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "looks_like": "t_wall_metal",
+    "roof": "t_metal_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 200,
+      "str_max": 600,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_null",
+      "items": [
+        { "item": "steel_lump", "count": [ 1, 4 ] },
+        { "item": "steel_chunk", "count": [ 3, 12 ] },
+        { "item": "scrap", "count": [ 9, 36 ] }
+      ],
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 600 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_bulkhead_underwater",
+    "name": "underwater bulkhead",
+    "description": "An industrially fabricated thick sheet carefully positioned, this wall is capable of resisting extreme elements as well as hostile forces.  Seems to have sprung a leak, however.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "looks_like": "t_wall_metal",
+    "roof": "t_metal_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND", "WATER_CUBE" ],
+    "bash": {
+      "str_min": 200,
+      "str_max": 600,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_water_cube",
+      "items": [
+        { "item": "steel_lump", "count": [ 1, 4 ] },
+        { "item": "steel_chunk", "count": [ 3, 12 ] },
+        { "item": "scrap", "count": [ 9, 36 ] }
+      ],
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 600 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_sconc_wall",
+    "name": "simple concrete wall",
+    "description": "A durable and uniform concrete wall, quite drab without decoration.  More than capable of supporting a roof, as well as keeping out most anything, save for vehicles.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 90,
+      "str_max": 350,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_pit_shallow",
+      "items": [ { "item": "rock", "count": [ 10, 22 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 180, 180 ], "destroy_threshold": 180 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_sconc_wall_halfway",
+    "name": "half-built simple concrete wall",
+    "description": "A partially poured concrete wall that could probably keep anything behind it quite safe if it were finished.",
+    "symbol": "*",
+    "color": "light_gray",
+    "move_cost": 4,
+    "coverage": 60,
+    "flags": [ "NOITEM", "TRANSPARENT", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 40,
+      "str_max": 350,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_pit_shallow",
+      "items": [ { "item": "rock", "count": [ 5, 11 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 180, 180 ], "destroy_threshold": 180, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_strconc_wall",
+    "name": "reinforced concrete wall",
+    "description": "An extremely resilient wall, filled with concrete and rebar.  Best suited for supporting multi-level buildings, only serious explosives and high-speed impacts would be capable of damaging this wall.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 120,
+      "str_max": 460,
+      "sound": "scrrrash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_reb_cage",
+      "items": [ { "item": "rock", "count": [ 10, 22 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 240, 240 ], "destroy_threshold": 240 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_strconc_wall_halfway",
+    "name": "half-built reinforced concrete wall",
+    "description": "Poured concrete with methodically placed rebar sticking out, which isn't practical for supporting roofs or shelter.  It appears to need more resources before being considered complete.",
+    "symbol": "*",
+    "color": "light_gray",
+    "move_cost": 5,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 60,
+      "str_max": 460,
+      "sound": "scrrrash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_reb_cage",
+      "items": [ { "item": "rock", "count": [ 5, 11 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 240, 240 ], "destroy_threshold": 240, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_reb_cage",
+    "name": "rebar cage",
+    "description": "A structural support system made of rebar that appears to be the early stages of a reinforced concrete wall, just missing the poured concrete.",
+    "symbol": "#",
+    "color": "dark_gray",
+    "move_cost": 0,
+    "hacksaw": {
+      "result": "t_pit",
+      "duration": "10 minutes",
+      "message": "You finish cutting the metal.",
+      "byproducts": [ { "item": "spike", "count": 19 }, { "item": "scrap", "count": 8 } ]
+    },
+    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE", "THIN_OBSTACLE" ],
+    "connects_to": "WALL",
+    "oxytorch": {
+      "result": "t_pit",
+      "duration": "10 seconds",
+      "byproducts": [ { "item": "spike", "count": [ 1, 19 ] }, { "item": "scrap", "count": [ 1, 8 ] } ]
+    },
+    "bash": {
+      "str_min": 20,
+      "str_max": 100,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_pit",
+      "items": [ { "item": "scrap", "count": [ 4, 12 ] }, { "item": "rebar", "count": [ 0, 4 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_scrap_wall",
+    "name": "simple metal wall",
+    "description": "A relatively simple wall made of scraped together metal.  It's still capable of blocking intruders and supporting a roof with adjacent walls.",
+    "symbol": "LINE_OXOX",
+    "color": "dark_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 80,
+      "str_max": 200,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_pit_shallow",
+      "items": [ { "item": "steel_chunk", "count": [ 10, 22 ] } ],
+      "ranged": { "reduction": [ 80, 80 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_scrap_wall_halfway",
+    "name": "half-built simple metal wall",
+    "description": "A partially built makeshift wall of metal that could potentially support a roof if it were completed.",
+    "symbol": "#",
+    "color": "dark_gray",
+    "move_cost": 4,
+    "coverage": 60,
+    "flags": [ "NOITEM", "TRANSPARENT", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "bash": {
+      "str_min": 50,
+      "str_max": 130,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_pit_shallow",
+      "items": [ { "item": "steel_chunk", "count": [ 5, 11 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 80, 80 ], "destroy_threshold": 200, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_screened_porch_wall",
+    "name": "screen mesh wall",
+    "description": "A rather flimsy tall wall made of 2x4s and screen mesh, suitable for keeping the bugs out.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "looks_like": "t_chickenwire_fence",
+    "move_cost": 0,
+    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE", "AUTO_WALL_SYMBOL", "WALL" ],
+    "deconstruct": {
+      "ter_set": "t_floor",
+      "items": [ { "item": "screen_mesh", "count": 1 }, { "item": "nail", "charges": 10 }, { "item": "2x4", "charges": 4 } ]
+    },
+    "bash": {
+      "str_min": 5,
+      "str_max": 12,
+      "sound": "metal rattling!",
+      "sound_fail": "whack!",
+      "ter_set": "t_floor",
+      "items": [
+        { "item": "screen_mesh", "count": [ 0, 1 ] },
+        { "item": "nail", "charges": [ 5, 10 ] },
+        { "item": "2x4", "count": [ 1, 3 ] }
+      ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_wood",
+    "name": "wooden wall",
+    "description": "A finished wall of planks and support beams, capable of supporting an upper level or roof.  Still highly flammable.",
+    "symbol": "LINE_OXOX",
+    "color": "light_red",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 12,
+      "str_max": 150,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_wall_wood_chipped",
+      "items": [
+        { "item": "2x4", "count": [ 0, 3 ] },
+        { "item": "wood_panel", "count": [ 0, 2 ] },
+        { "item": "nail", "charges": [ 1, 5 ] },
+        { "item": "splinter", "count": [ 1, 4 ] }
+      ],
+      "ranged": { "reduction": [ 12, 12 ], "destroy_threshold": 150 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_wood_chipped",
+    "name": "chipped wood wall",
+    "description": "A wall of aligned two by fours that's starting to crack and break open.  Some cut wood and a number of nails could patch this up quick.",
+    "symbol": "LINE_OXOX",
+    "color": "light_red",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 8,
+      "str_max": 150,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_wall_wood_broken",
+      "items": [
+        { "item": "2x4", "count": [ 1, 4 ] },
+        { "item": "wood_panel", "count": [ 0, 2 ] },
+        { "item": "nail", "charges": [ 1, 3 ] },
+        { "item": "splinter", "count": [ 1, 4 ] }
+      ],
+      "ranged": { "reduction": [ 8, 8 ], "destroy_threshold": 150 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_wood_broken",
+    "name": "broken wood wall",
+    "description": "A number of planks are missing and the structure is beginning to sag and fall apart.  It's going to need quite a bit of work to repair this wall.",
+    "symbol": "&",
+    "color": "light_red",
+    "move_cost": 0,
+    "coverage": 35,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "NOITEM", "SUPPORTS_ROOF", "REDUCE_SCENT", "PERMEABLE", "CONNECT_TO_WALL" ],
+    "bash": {
+      "str_min": 4,
+      "str_max": 110,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [
+        { "item": "2x4", "count": [ 2, 5 ] },
+        { "item": "wood_panel", "count": [ 0, 2 ] },
+        { "item": "nail", "charges": [ 4, 10 ] },
+        { "item": "splinter", "count": [ 1, 5 ] }
+      ],
+      "ranged": { "reduction": [ 4, 4 ], "destroy_threshold": 110, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_wood_underwater",
+    "copy-from": "t_wall_wood",
+    "name": "underwater wooden wall",
+    "description": "A decaying old section of wooden wall, soaked through and leaking.  It will likely crumble to bits if damaged.",
+    "symbol": "LINE_OXOX",
+    "color": "light_red",
+    "roof": "t_floor_wood_underwater",
+    "extend": { "flags": [ "LIQUID", "SWIMMABLE", "WATER_CUBE", "DEEP_WATER", "GOES_UP" ] },
+    "delete": { "flags": [ "FLAMMABLE" ] },
+    "bash": {
+      "str_min": 12,
+      "str_max": 100,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_floor_wood_underwater",
+      "items": [
+        { "item": "2x4", "count": [ 0, 3 ] },
+        { "item": "wood_panel", "count": [ 0, 2 ] },
+        { "item": "nail", "charges": [ 1, 5 ] },
+        { "item": "splinter", "count": [ 1, 4 ] }
+      ],
+      "ranged": { "reduction": [ 12, 12 ], "destroy_threshold": 100 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_log_half",
+    "name": "half-built log wall",
+    "description": "A half-constructed wall of notched logs that interlock to provide stability.  Needs a few more logs to hold up a roof.  Looks flammable.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 4,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "NOITEM", "REDUCE_SCENT", "MOUNTABLE", "MINEABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 40,
+      "str_max": 120,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "splinter", "count": [ 10, 20 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 60, 60 ], "destroy_threshold": 180, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_log",
+    "name": "log wall",
+    "description": "A tall wall of timber suitable for housing and insulating from the weather.  Quite flammable.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 60,
+      "str_max": 180,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_wall_log_chipped",
+      "items": [ { "item": "splinter", "count": [ 5, 10 ] } ],
+      "ranged": { "reduction": [ 60, 60 ], "destroy_threshold": 180 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_log_chipped",
+    "name": "chipped log wall",
+    "description": "A moderately damaged wall, could probably be patched up with some planks and nails.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 40,
+      "str_max": 160,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_wall_log_broken",
+      "items": [ { "item": "splinter", "count": [ 5, 10 ] } ],
+      "ranged": { "reduction": [ 40, 40 ], "destroy_threshold": 160 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_log_broken",
+    "name": "broken log wall",
+    "description": "A destroyed wood wall, with only a supporting log left, ready to collapse.  Looks repairable if the damage was replaced and patched together with nails and planks.",
+    "symbol": "&",
+    "color": "brown",
+    "move_cost": 0,
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "NOITEM", "SUPPORTS_ROOF", "REDUCE_SCENT", "PERMEABLE", "CONNECT_TO_WALL" ],
+    "bash": {
+      "str_min": 8,
+      "str_max": 150,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "splinter", "count": [ 10, 20 ] } ],
+      "ranged": { "reduction": [ 8, 8 ], "destroy_threshold": 150, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_palisade",
+    "name": "palisade wall",
+    "description": "An age-old type of fortification consisting of hefty lumber staked into the ground and cabled together.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "REDUCE_SCENT", "CONNECT_TO_WALL", "WALL", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 35,
+      "str_max": 150,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "splinter", "count": [ 10, 30 ] } ],
+      "ranged": { "reduction": [ 35, 35 ], "destroy_threshold": 150 }
+    }
+  },
+  {
+    "id": "t_wall_wattle",
+    "type": "terrain",
+    "name": "wattle-and-daub wall",
+    "description": "A relatively primitive wall made by daubing together a lattice of wooden strips using some combination of wet soil, clay, sand, animal dung and straw.",
+    "symbol": "LINE_OXOX",
+    "color": "light_red",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_thatch_roof",
+    "bash": {
+      "str_min": 10,
+      "str_max": 140,
+      "ter_set": "t_wall_wattle_broken",
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "items": [ { "item": "2x4", "count": [ 0, 3 ] }, { "item": "splinter", "count": [ 0, 6 ] } ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 5, 10 ], "destroy_threshold": 140 }
+    },
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ]
+  },
+  {
+    "id": "t_wall_wattle_broken",
+    "type": "terrain",
+    "name": "broken wattle-and-daub wall",
+    "description": "This wattle-and-daub wall section has been destroyed, leaving mostly just frame, and is barely held together.",
+    "symbol": "&",
+    "color": "light_red",
+    "move_cost": 0,
+    "bash": {
+      "str_min": 4,
+      "str_max": 110,
+      "ter_set": "t_null",
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "items": [ { "item": "2x4", "count": [ 0, 3 ] }, { "item": "splinter", "count": [ 3, 6 ] } ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 2, 4 ], "destroy_threshold": 110, "block_unaimed_chance": "50%" }
+    },
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "NOITEM", "SUPPORTS_ROOF", "REDUCE_SCENT", "PERMEABLE", "CONNECT_TO_WALL" ]
+  },
+  {
+    "id": "t_wall_wattle_half",
+    "type": "terrain",
+    "name": "half-built wattle-and-daub wall",
+    "description": "This wattle-and-daub wall has some of the wooden strip lattice in place, and still requires the rest of the lattice and supporting wet compound to be filled in.",
+    "symbol": "#",
+    "color": "light_red",
+    "move_cost": 4,
+    "coverage": 60,
+    "bash": {
+      "str_min": 8,
+      "str_max": 75,
+      "ter_set": "t_null",
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "items": [ { "item": "2x4", "count": [ 1, 3 ] }, { "item": "splinter", "count": [ 6, 6 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 5, 10 ], "destroy_threshold": 140, "block_unaimed_chance": "50%" }
+    },
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "NOITEM", "REDUCE_SCENT", "MOUNTABLE" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_dirt",
+    "name": "smooth dirt wall",
+    "looks_like": "t_wall_rammed_earth",
+    "description": "A solid wall of compressed dirt, mixed with… something to keep it stable.  Its surface glistens slightly, and it smells like rotten milk.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 30,
+      "str_max": 200,
+      "sound": "heavy rumbling!",
+      "sound_fail": "thump",
+      "ter_set": "t_mud_underground",
+      "items": [ { "item": "material_soil", "count": [ 50, 100 ] } ],
+      "//": "reduction equal to str_max as with sandbags",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_junk_wall",
+    "name": "junk metal wall",
+    "looks_like": "t_scrap_wall",
+    "description": "A wall of rusty scrap metal bolted and wire-tied to a sturdy frame.  Very fashionable in post-apocalyptic shantytowns.  Can support a roof.",
+    "symbol": "LINE_OXOX",
+    "color": "dark_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "NOITEM", "WALL", "REDUCE_SCENT", "BLOCK_WIND", "SUPPORTS_ROOF", "AUTO_WALL_SYMBOL", "MINEABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 60,
+      "str_max": 200,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_null",
+      "items": [ { "item": "scrap", "count": [ 1, 40 ] }, { "item": "steel_chunk", "count": [ 1, 30 ] } ],
+      "ranged": { "reduction": [ 60, 60 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_rammed_earth",
+    "name": "rammed earth wall",
+    "description": "A solid wall of compressed dirt, sturdy enough to support a roof with enough walls and keep out some unwanted visitors.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 60,
+      "str_max": 200,
+      "sound": "heavy rumbling!",
+      "sound_fail": "thump",
+      "ter_set": "t_fence_post",
+      "items": [ { "item": "material_soil", "count": [ 50, 75 ] } ],
+      "//": "reduction equal to str_max as with sandbags",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_junk_palisade",
+    "name": "junk metal barrier",
+    "looks_like": "t_scrap_wall_halfway",
+    "description": "A short wall of rusty scrap metal bolted and wire-tied to a makeshift frame.  Very fashionable in post-apocalyptic shantytowns.  This one isn't quite strong enough to support a roof, but could be reinforced.",
+    "symbol": "LINE_OXOX",
+    "color": "dark_gray",
+    "move_cost": 0,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE", "AUTO_WALL_SYMBOL", "MINEABLE", "MOUNTABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 30,
+      "str_max": 200,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_null",
+      "items": [ { "item": "scrap", "count": [ 1, 40 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 60, 60 ], "destroy_threshold": 200, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_glass",
+    "alias": [ "t_wall_glass_h", "t_wall_glass_v" ],
+    "name": "glass wall",
+    "description": "A barrier made of glass, it's nothing complicated, and looks extremely fragile.  Some contain glass break sensors or window sensors that trigger if the glass is tampered.",
+    "symbol": "LINE_OXOX",
+    "color": "light_cyan",
+    "move_cost": 0,
+    "coverage": 90,
+    "roof": "t_flat_roof",
+    "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 4,
+      "str_max": 12,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": "100 dB",
+      "sound_fail_vol": "80 dB",
+      "ter_set": "t_floor",
+      "items": [ { "item": "glass_shard", "count": [ 3, 6 ] } ],
+      "//": "reduction and destroy_threshold are lower for plain glass",
+      "ranged": { "reduction": [ 1, 4 ], "reduction_laser": [ 0, 5 ], "destroy_threshold": 4 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wall_glass_alarm",
+    "alias": [ "t_wall_glass_h_alarm", "t_wall_glass_v_alarm" ],
+    "looks_like": "t_wall_glass",
+    "name": "glass wall",
+    "description": "A barrier made of glass, it's nothing complicated, and looks extremely fragile.  Some contain glass break sensors or window sensors that trigger if the glass is tampered.",
+    "symbol": "LINE_OXOX",
+    "color": "light_cyan",
+    "move_cost": 0,
+    "roof": "t_flat_roof",
+    "flags": [ "TRANSPARENT", "ALARMED", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 4,
+      "str_max": 12,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": "100 dB",
+      "sound_fail_vol": "80 dB",
+      "ter_set": "t_floor",
+      "items": [ { "item": "glass_shard", "count": [ 3, 6 ] } ],
+      "//": "reduction and destroy_threshold are lower for plain glass",
+      "ranged": { "reduction": [ 1, 4 ], "reduction_laser": [ 0, 5 ], "destroy_threshold": 4 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_laminated_glass",
+    "alias": [ "t_laminated_glass_h", "t_laminated_glass_v" ],
+    "name": "laminated glass",
+    "looks_like": "t_reinforced_glass",
+    "description": "Laminated glass is composed layers of glass and plastic held together by an interlayer.",
+    "symbol": "LINE_OXOX",
+    "color": "light_cyan",
+    "move_cost": 0,
+    "roof": "t_flat_roof",
+    "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 60,
+      "str_max": 200,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": "110 dB",
+      "sound_fail_vol": "90 dB",
+      "ter_set": "t_floor",
+      "items": [ { "item": "glass_shard", "count": [ 3, 6 ] } ],
+      "//": "reduction half str_min for ballistic-style glass, destroy_threshold equal to str_min for glass",
+      "ranged": { "reduction": [ 30, 30 ], "reduction_laser": [ 0, 5 ], "destroy_threshold": 60 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_ballistic_glass",
+    "alias": [ "t_ballistic_glass_h", "t_ballistic_glass_v" ],
+    "name": "ballistic glass",
+    "looks_like": "t_reinforced_glass",
+    "description": "Ballistic glass consists of layers of laminated glass.",
+    "symbol": "LINE_OXOX",
+    "color": "light_cyan",
+    "move_cost": 0,
+    "roof": "t_flat_roof",
+    "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": "110 dB",
+      "sound_fail_vol": "90 dB",
+      "ter_set": "t_floor",
+      "items": [ { "item": "glass_shard", "count": [ 3, 6 ] } ],
+      "//": "reduction half str_min for ballistic-style glass, destroy_threshold equal to str_min for glass",
+      "ranged": { "reduction": [ 50, 50 ], "reduction_laser": [ 0, 8 ], "destroy_threshold": 100 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_reinforced_glass",
+    "alias": [ "t_reinforced_glass_h", "t_reinforced_glass_v" ],
+    "name": "reinforced glass",
+    "description": "A thicker pane of glass with thin metal wires embedded throughout, strengthening the structural properties.  It's a lot stronger than drywall, but it's not made to support a roof and is weaker than concrete.",
+    "symbol": "LINE_OXOX",
+    "color": "light_cyan",
+    "move_cost": 0,
+    "roof": "t_flat_roof",
+    "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 80,
+      "str_max": 210,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": "110 dB",
+      "sound_fail_vol": "90 dB",
+      "ter_set": "t_floor",
+      "items": [ { "item": "glass_shard", "count": [ 3, 6 ] }, { "item": "wire", "prob": 20 } ],
+      "//": "reduction half str_min for ballistic-style glass, destroy_threshold equal to str_min for glass",
+      "ranged": { "reduction": [ 40, 40 ], "reduction_laser": [ 0, 8 ], "destroy_threshold": 80 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_reinforced_glass_shutter",
+    "name": "reinforced glass with closed shutters",
+    "description": "A secondary layer of protection over reinforced glass, these metal shutters are typically used to ward off criminals or protect against damage from extreme weather.  Looks like it can only be opened from the inside.  Even with the installed shutters, it isn't feasible in supporting a roof.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "move_cost": 0,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE", "MINEABLE", "BLOCK_WIND" ],
+    "open": "t_reinforced_glass_shutter_open",
+    "bash": {
+      "str_min": 80,
+      "str_max": 210,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": "110 dB",
+      "sound_fail_vol": "90 dB",
+      "ter_set": "t_floor",
+      "items": [ { "item": "glass_shard", "count": [ 3, 6 ] }, { "item": "wire", "prob": 20 }, { "item": "scrap", "count": [ 3, 5 ] } ],
+      "//": "reduction half str_min for ballistic-style glass, destroy_threshold equal to str_min for glass",
+      "ranged": { "reduction": [ 40, 40 ], "reduction_laser": [ 1, 10 ], "destroy_threshold": 80 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_reinforced_glass_shutter_open",
+    "name": "reinforced glass with open shutters",
+    "looks_like": "t_reinforced_glass",
+    "description": "Hanging metal shutters that haven't been deployed, exposing the reinforced glass.  It appears as though the metal shutters can only be activated from the inside.",
+    "symbol": "LINE_OXOX",
+    "color": "light_cyan",
+    "move_cost": 0,
+    "roof": "t_flat_roof",
+    "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE", "MINEABLE", "BLOCK_WIND" ],
+    "close": "t_reinforced_glass_shutter",
+    "bash": {
+      "str_min": 80,
+      "str_max": 210,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": "110 dB",
+      "sound_fail_vol": "90 dB",
+      "ter_set": "t_floor",
+      "items": [ { "item": "glass_shard", "count": [ 3, 6 ] }, { "item": "wire", "prob": 20 }, { "item": "scrap", "count": [ 3, 5 ] } ],
+      "//": "reduction half str_min for ballistic-style glass, destroy_threshold equal to str_min for glass",
+      "ranged": { "reduction": [ 40, 40 ], "reduction_laser": [ 0, 8 ], "destroy_threshold": 80 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_bars",
+    "name": "metal bars",
+    "description": "Thick, heavy bars from the floor to the ceiling, interlaced wall to wall.  Not made to support roofs, but great for blocking paths.",
+    "examine_action": "bars",
+    "symbol": "\"",
+    "color": "light_gray",
+    "move_cost": 0,
+    "roof": "t_flat_roof",
+    "hacksaw": {
+      "result": "t_floor",
+      "duration": "15 minutes",
+      "message": "You finish cutting the metal.",
+      "byproducts": [ { "item": "pipe", "count": 3 } ]
+    },
+    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE", "CONNECT_TO_WALL", "THIN_OBSTACLE" ],
+    "oxytorch": { "result": "t_floor", "duration": "10 seconds", "byproducts": [ { "item": "pipe", "count": [ 1, 2 ] } ] },
+    "bash": {
+      "str_min": 60,
+      "str_max": 250,
+      "sound": "metal screeching!",
+      "sound_fail": "clang!",
+      "ter_set": "t_floor",
+      "items": [
+        { "item": "steel_lump", "prob": 25 },
+        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "scrap", "count": [ 1, 5 ] }
+      ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_paper",
+    "name": "paper wall",
+    "description": "A huge wall of pulpy mass, covered in sticky wasp saliva.  You could smash it down effortlessly.",
+    "symbol": "#",
+    "color": "white",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "FLAMMABLE_ASH", "NOITEM", "WALL", "NO_SCENT" ],
+    "bash": {
+      "str_min": 1,
+      "str_max": 6,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "sound_fail_vol": "50 dB",
+      "ter_set": "t_floor_paper",
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_paper_brood",
+    "copy-from": "t_paper",
+    "symbol": "#",
+    "color": "white",
+    "flags": [ "FLAMMABLE_ASH", "NOITEM", "WALL", "NO_SCENT" ],
+    "bash": {
+      "str_min": 1,
+      "str_max": 6,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "60 dB",
+      "sound_fail_vol": "50 dB",
+      "ter_set": "t_floor_paper_noroof",
+      "//": "Go straight through without taking any damage.",
+      "ranged": { "block_unaimed_chance": "100%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_paper_hard",
+    "name": "layered paper wall",
+    "description": "A thick wall of layered tree pulp and wasp saliva, hardened to withstand the elements.  You could break through this, but it won't be easy.",
+    "symbol": "#",
+    "color": "dark_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "MINEABLE", "WALL", "NO_SCENT" ],
+    "bash": {
+      "str_min": 30,
+      "str_max": 150,
+      "sound": "rrrrip!",
+      "sound_fail": "slap!",
+      "sound_vol": "110 dB",
+      "sound_fail_vol": "80 dB",
+      "ter_set": "t_floor_paper_hard",
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 15, 30 ], "destroy_threshold": 150 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_root_wall",
+    "name": "root wall",
+    "description": "A dirt wall covered with roots.",
+    "symbol": "#",
+    "color": "brown",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_thatch_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT" ],
+    "bash": {
+      "str_min": 12,
+      "str_max": 150,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "splinter", "count": [ 2, 5 ] } ],
+      "//": "Variable reduction, maximum strength comparable to dirt walls",
+      "ranged": { "reduction": [ 100, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_wax",
+    "name": "wax wall",
+    "description": "A wall made entirely out of wax.",
+    "symbol": "#",
+    "color": "yellow",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_floor_wax",
+    "flags": [ "FLAMMABLE_ASH", "NOITEM", "SUPPORTS_ROOF", "PLACE_ITEM", "WALL", "NO_SCENT" ],
+    "bash": {
+      "str_min": 12,
+      "str_max": 150,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_floor_wax",
+      "items": [ { "item": "wax", "count": [ 3, 5 ] } ],
+      "//": "Variable reduction since might hit more or less material.",
+      "ranged": { "reduction": [ 6, 12 ], "destroy_threshold": 150 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock",
+    "name": "solid rock",
+    "description": "It's solid rock, could be full of all kinds of interesting things.  Best grab your pickaxe or equivalent digging implement, and strike the earth!",
+    "symbol": "#",
+    "color": "white",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "MINEABLE", "BLOCK_WIND", "CLIMBABLE" ],
+    "roof": "t_rock_floor_no_roof",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "group": "rock_mining_extra", "prob": 25 },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_red",
+    "name": "red stone",
+    "description": "A red stone.",
+    "symbol": "#",
+    "color": "red",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "MINEABLE" ],
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "items": [
+        { "item": "rock", "count": [ 35, 50 ] },
+        { "item": "sharp_rock", "count": [ 3, 7 ] },
+        { "item": "material_limestone", "charges": [ 400, 800 ], "prob": 40 },
+        { "item": "material_rocksalt", "prob": 10 },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_green",
+    "name": "green stone",
+    "description": "A green stone.",
+    "symbol": "#",
+    "color": "green",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "MINEABLE" ],
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "items": [
+        { "item": "rock", "count": [ 35, 50 ] },
+        { "item": "sharp_rock", "count": [ 3, 7 ] },
+        { "item": "material_limestone", "charges": [ 400, 800 ], "prob": 40 },
+        { "item": "material_rocksalt", "prob": 10 },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_blue",
+    "name": "blue stone",
+    "description": "A blue stone.",
+    "symbol": "#",
+    "color": "blue",
+    "move_cost": 0,
+    "coverage": 100,
+    "flags": [ "MINEABLE" ],
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "items": [
+        { "item": "rock", "count": [ 35, 50 ] },
+        { "item": "sharp_rock", "count": [ 3, 7 ] },
+        { "item": "material_limestone", "charges": [ 5, 15 ], "prob": 80 },
+        { "item": "material_rocksalt", "prob": 10 },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_iron",
+    "copy-from": "t_rock",
+    "name": "iron ore vein",
+    "description": "Solid rock, with an exposed seam of reddish-brown iron ore.",
+    "symbol": "#",
+    "color": "brown",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "iron_ore", "count": [ 20, 40 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_banded_iron",
+    "copy-from": "t_rock",
+    "name": "banded-iron ore vein",
+    "description": "Solid rock, with an exposed seam of brown-red banded-iron ore.",
+    "symbol": "#",
+    "color": "brown",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "iron_ore", "count": [ 18, 36 ] },
+        { "item": "gold_ore", "count": [ 2, 4 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_copper",
+    "copy-from": "t_rock",
+    "name": "copper ore vein",
+    "description": "Solid rock, with an exposed seam of green copper ore.",
+    "symbol": "#",
+    "color": "green",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "copper_ore", "count": [ 20, 40 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_tetrahedrite",
+    "copy-from": "t_rock",
+    "name": "tetrahedrite ore vein",
+    "description": "Solid rock, with an exposed seam of grey tetrahedrite ore.",
+    "symbol": "#",
+    "color": "light_gray",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "copper_ore", "count": [ 12, 24 ] },
+        { "item": "chunk_sulfur", "count": [ 4, 8 ] },
+        { "item": "iron_ore", "count": [ 4, 8 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_chalcopyrite",
+    "copy-from": "t_rock",
+    "name": "chalcopyrite ore vein",
+    "description": "Solid rock, with an exposed seam of light-green chalcopyrite ore.",
+    "symbol": "#",
+    "color": "light_green",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "copper_ore", "count": [ 5, 10 ] },
+        { "item": "chunk_sulfur", "count": [ 10, 20 ] },
+        { "item": "iron_ore", "count": [ 5, 10 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_lead",
+    "copy-from": "t_rock",
+    "name": "lead ore vein",
+    "description": "Solid rock, with an exposed dull gray and yellow seam of lead ore.",
+    "symbol": "#",
+    "color": "dark_gray",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "lead_ore", "count": [ 20, 40 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_galena",
+    "copy-from": "t_rock",
+    "name": "galena ore vein",
+    "description": "Solid rock, with an exposed dull gray seam of galena ore.",
+    "symbol": "#",
+    "color": "light_gray",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "lead_ore", "count": [ 10, 20 ] },
+        { "item": "silver_ore", "count": [ 10, 20 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_galenau",
+    "copy-from": "t_rock",
+    "name": "galenau ore vein",
+    "description": "Solid rock, with an exposed yellow-grey seam of galenau ore.",
+    "//": "This ore doesnt actually exist. The Calamity sure is wild huh?",
+    "symbol": "#",
+    "color": "light_gray",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "lead_ore", "count": [ 10, 20 ] },
+        { "item": "gold_ore", "count": [ 10, 20 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_tin",
+    "copy-from": "t_rock",
+    "name": "tin ore vein",
+    "description": "Solid rock, with dark gray hints of what you're fairly certain is an ore of tin.",
+    "symbol": "#",
+    "color": "dark_gray",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "tin_ore", "count": [ 20, 40 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_coppin",
+    "copy-from": "t_rock",
+    "name": "coppin ore vein",
+    "description": "Solid rock, with a seeming mixture of copper and tin ore.",
+    "//": "This ore, also, does not exist. Tin is a very boring metal apparently.",
+    "symbol": "#",
+    "color": "light_green",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "tin_ore", "count": [ 10, 20 ] },
+        { "item": "copper_ore", "count": [ 10, 20 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_bronzium",
+    "copy-from": "t_rock",
+    "name": "bronzium ore vein",
+    "description": "Solid rock, with a seeming mixture of copper and tin ore. Faintly resembles crude bronze.",
+    "//": "This ore, also, does not exist. No one likes tin apparently.",
+    "symbol": "#",
+    "color": "light_green",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "tin_ore", "count": [ 5, 10 ] },
+        { "item": "copper_ore", "count": [ 15, 30 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_silver",
+    "copy-from": "t_rock",
+    "name": "silver ore vein",
+    "description": "Solid rock, with an exposed gray gleam of silver ore.  There might be a few bits of native silver hidden within, but most of it will need to be processed.",
+    "symbol": "#",
+    "color": "light_gray",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "silver_ore", "count": [ 15, 30 ] },
+        { "item": "silver_small", "charges": [ 50, 100 ], "prob": 25 },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_gold",
+    "copy-from": "t_rock",
+    "name": "gold vein",
+    "description": "Hot damn, you've struck gold!  Gleaming through the rock in its native form, it's almost enough to make one forget how much less valuable it is after the end of the world.",
+    "symbol": "#",
+    "color": "yellow",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "gold_ore", "count": [ 15, 30 ] },
+        { "item": "gold_small", "charges": [ 50, 100 ], "prob": 25 },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_rock_ore_electrumite",
+    "copy-from": "t_rock",
+    "name": "electrumite ore vein",
+    "description": "Solid rock, with an exposed silvered yellow gleam of electrumite ore.",
+    "//": "Doesnt exist, but electrum does. Blame the calamity.",
+    "symbol": "#",
+    "color": "light_gray",
+    "looks_like": "t_fault",
+    "bash": {
+      "str_min": 100,
+      "str_max": 400,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_rock_floor",
+      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
+      "items": [
+        { "item": "rock", "count": [ 55, 75 ] },
+        { "item": "sharp_rock", "count": [ 5, 9 ] },
+        { "item": "material_limestone", "charges": [ 500, 1000 ], "prob": 40 },
+        { "item": "silver_ore", "count": [ 10, 20 ] },
+        { "item": "gold_ore", "count": [ 10, 20 ] },
+        { "item": "geode", "prob": 5 }
+      ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 200, 200 ], "destroy_threshold": 200 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_little_column",
+    "name": "little column",
+    "looks_like": "t_column",
+    "description": "A small support column.",
+    "symbol": "1",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 80,
+    "flags": [ "WALL", "PERMEABLE", "TRANSPARENT" ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 200,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 1, 3 ] }, { "item": "rebar", "count": [ 0, 2 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 80, 80 ], "destroy_threshold": 80, "block_unaimed_chance": "75%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_column_halfway",
+    "name": "half-built column",
+    "description": "An empty wooden frame in the shape of a column, built around a concrete and rebar foundation.  It isn't capable of supporting roofs or shelter, and appears to need more resources before being considered complete.",
+    "symbol": "*",
+    "color": "light_gray",
+    "move_cost": 5,
+    "coverage": 80,
+    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "PERMEABLE", "MINEABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 60,
+      "str_max": 460,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_reb_cage",
+      "items": [ { "item": "rock", "count": [ 5, 11 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 240, 240 ], "destroy_threshold": 240, "block_unaimed_chance": "75%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_column",
+    "name": "column",
+    "description": "A concrete column.",
+    "symbol": "1",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 80,
+    "flags": [ "WALL", "PERMEABLE", "MINEABLE" ],
+    "bash": {
+      "str_min": 120,
+      "str_max": 460,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_reb_cage",
+      "items": [ { "item": "rock", "count": [ 10, 22 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 240, 240 ], "destroy_threshold": 240 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_support_l",
+    "name": "large metal support",
+    "description": "A heavy-duty metal support beam.",
+    "symbol": "T",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 80,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "WALL", "REDUCE_SCENT", "SUPPORTS_ROOF", "MINEABLE" ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 200,
+      "sound": "metal screeching!",
+      "sound_fail": "whump!",
+      "ter_set": "t_concrete",
+      "items": [
+        { "item": "steel_lump", "count": [ 0, 2 ] },
+        { "item": "steel_chunk", "count": [ 2, 6 ] },
+        { "item": "scrap", "count": [ 5, 18 ] }
+      ],
+      "ranged": { "reduction": [ 40, 40 ], "destroy_threshold": 200 }
+    },
+    "deconstruct": {
+      "ter_set": "t_concrete",
+      "items": [
+        { "item": "frame", "count": [ 6, 8 ] },
+        { "item": "steel_lump", "count": [ 1, 2 ] },
+        { "item": "steel_chunk", "count": [ 1, 6 ] },
+        { "item": "scrap", "count": [ 4, 8 ] }
+      ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_support_s",
+    "name": "small metal support",
+    "description": "A metal support beam.",
+    "symbol": "l",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 55,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "WALL", "PERMEABLE", "SUPPORTS_ROOF", "MINEABLE" ],
+    "bash": {
+      "str_min": 20,
+      "str_max": 120,
+      "sound": "metal screeching!",
+      "sound_fail": "whump!",
+      "ter_set": "t_concrete",
+      "items": [
+        { "item": "steel_lump", "prob": 50 },
+        { "item": "steel_chunk", "count": [ 1, 3 ] },
+        { "item": "scrap", "count": [ 2, 9 ] }
+      ],
+      "ranged": { "reduction": [ 20, 20 ], "destroy_threshold": 200 }
+    },
+    "deconstruct": {
+      "ter_set": "t_concrete",
+      "items": [
+        { "item": "pipe", "count": [ 4, 6 ] },
+        { "item": "steel_lump", "count": [ 1, 2 ] },
+        { "item": "steel_chunk", "count": [ 1, 6 ] },
+        { "item": "scrap", "count": [ 2, 4 ] }
+      ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_drystone_wall",
+    "name": "field stone wall",
+    "description": "A sturdy dry stone wall.  Just rocks fitted together without mortar.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_flat_roof",
+    "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF", "CLIMBABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 50,
+      "str_max": 200,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 8, 18 ] }, { "item": "pebble", "count": [ 20, 38 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 100, 100 ], "destroy_threshold": 100 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_drystone_wall_half",
+    "name": "field stone half-wall",
+    "description": "A half height sturdy dry stone wall.  Just rocks fitted together without mortar.  Complete as is or with extensive work it could be doubled in height.",
+    "symbol": "#",
+    "color": "light_gray",
+    "move_cost": 4,
+    "coverage": 60,
+    "flags": [ "TRANSPARENT", "NOITEM", "REDUCE_SCENT", "MOUNTABLE", "MINEABLE" ],
+    "connects_to": "WALL",
+    "bash": {
+      "str_min": 30,
+      "str_max": 120,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 3, 8 ] }, { "item": "pebble", "count": [ 20, 38 ] } ],
+      "//": "reduction and destroy_threshold equal to completed version",
+      "ranged": { "reduction": [ 100, 100 ], "destroy_threshold": 100, "block_unaimed_chance": "50%" }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_pillar",
+    "name": "pillar",
+    "looks_like": "t_column",
+    "description": "A concrete column that helps keep the mine's ceiling and walls from collapsing.",
+    "symbol": "1",
+    "color": "light_gray",
+    "move_cost": 0,
+    "coverage": 80,
+    "flags": [ "WALL", "PERMEABLE", "MINEABLE" ],
+    "bash": {
+      "str_min": 120,
+      "str_max": 350,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_reb_cage",
+      "items": [ { "item": "rock", "count": [ 10, 22 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 240, 240 ], "destroy_threshold": 240 }
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_wood",
+    "copy-from": "t_wall_wood",
+    "name": "wooden fortification",
+    "description": "A wooden wall with a firing hole carved out of it, which you can fire through unimpeded if you're adjacent to it.  It doesn't take much out of incoming fire, but it's better than nothing.",
+    "symbol": "LINE_OXOX",
+    "color": "light_red",
+    "coverage": 80,
+    "bash": {
+      "str_min": 12,
+      "str_max": 150,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "//": "Skip straight to the version that already has holes in it",
+      "ter_set": "t_wall_wood_broken",
+      "items": [
+        { "item": "2x4", "count": [ 0, 3 ] },
+        { "item": "wood_panel", "count": [ 0, 2 ] },
+        { "item": "nail", "charges": [ 1, 5 ] },
+        { "item": "splinter", "count": [ 1, 4 ] }
+      ],
+      "ranged": { "reduction": [ 12, 12 ], "destroy_threshold": 150, "block_unaimed_chance": "75%" }
+    },
+    "extend": { "flags": [ "TRANSPARENT", "REDUCE_SCENT", "MOUNTABLE" ] },
+    "delete": { "flags": [ "NO_SCENT", "BLOCK_WIND" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_wood_underwater",
+    "copy-from": "t_fortification_wood",
+    "name": "underwater wooden fortification",
+    "description": "A waterlogged gunport from the age of sail.  If you have a speargun to fire through it with, it might still serve as light cover against any unexpected encounters with gun-toting sharks.",
+    "symbol": "LINE_OXOX",
+    "color": "light_red",
+    "looks_like": "t_fortification_wood",
+    "roof": "t_floor_wood_underwater",
+    "bash": {
+      "str_min": 12,
+      "str_max": 100,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "ter_set": "t_floor_wood_underwater",
+      "items": [
+        { "item": "2x4", "count": [ 0, 3 ] },
+        { "item": "wood_panel", "count": [ 0, 2 ] },
+        { "item": "nail", "charges": [ 1, 5 ] },
+        { "item": "splinter", "count": [ 1, 4 ] }
+      ],
+      "ranged": { "reduction": [ 12, 12 ], "destroy_threshold": 100, "block_unaimed_chance": "75%" }
+    },
+    "extend": { "flags": [ "LIQUID", "SWIMMABLE", "WATER_CUBE", "DEEP_WATER", "GOES_UP" ] },
+    "delete": { "flags": [ "FLAMMABLE" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_log",
+    "copy-from": "t_wall_log",
+    "name": "log fortification",
+    "description": "Stout timbers with a firing hole carved into it, letting you fire unimpeded if you're adjacent to it.  Provides pretty good cover, but might falter against higher-end firepower.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "coverage": 80,
+    "bash": {
+      "str_min": 60,
+      "str_max": 180,
+      "sound": "crunch!",
+      "sound_fail": "whump!",
+      "//": "Skip straight to the version that already has holes in it",
+      "ter_set": "t_wall_log_broken",
+      "items": [ { "item": "splinter", "count": [ 5, 10 ] } ],
+      "ranged": { "reduction": [ 60, 60 ], "destroy_threshold": 180, "block_unaimed_chance": "75%" }
+    },
+    "extend": { "flags": [ "TRANSPARENT", "REDUCE_SCENT", "MOUNTABLE" ] },
+    "delete": { "flags": [ "NO_SCENT", "BLOCK_WIND" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_drystone",
+    "copy-from": "t_drystone_wall",
+    "name": "field stone fortification",
+    "description": "A sturdy dry stone wall with a firing hole chiseled out, letting you fire unhindered when adjacent to it.  Basic as it may be, simple stones provide effective cover.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "coverage": 80,
+    "bash": {
+      "str_min": 50,
+      "str_max": 200,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 6, 14 ] }, { "item": "pebble", "count": [ 20, 38 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 100, 100 ], "destroy_threshold": 100, "block_unaimed_chance": "75%" }
+    },
+    "extend": { "flags": [ "TRANSPARENT", "REDUCE_SCENT", "MOUNTABLE" ] },
+    "delete": { "flags": [ "NO_SCENT", "BLOCK_WIND" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_stone",
+    "copy-from": "t_rock_wall",
+    "name": "stone fortification",
+    "description": "A sturdy stone wall with a firing hole chiseled out, letting you fire unhindered when adjacent to it.  An excellent source of cover against anything short of siege weapons.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "coverage": 80,
+    "bash": {
+      "str_min": 80,
+      "str_max": 300,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 6, 14 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 160, 160 ], "destroy_threshold": 160, "block_unaimed_chance": "75%" }
+    },
+    "extend": { "flags": [ "TRANSPARENT", "REDUCE_SCENT", "MOUNTABLE" ] },
+    "delete": { "flags": [ "NO_SCENT", "BLOCK_WIND" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_brick",
+    "copy-from": "t_brick_wall",
+    "name": "brick fortification",
+    "description": "A solid brick wall with a firing hole built into it, providing an opening to shoot through unimpeded while adjacent to it.  A sturdy source of cover against incoming fire.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "coverage": 80,
+    "bash": {
+      "str_min": 60,
+      "str_max": 160,
+      "sound": "crash!",
+      "sound_fail": "bash!",
+      "ter_set": "t_null",
+      "items": [ { "item": "rock", "count": [ 7, 12 ] }, { "item": "brick", "count": [ 2, 4 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 120, 120 ], "destroy_threshold": 120, "block_unaimed_chance": "75%" }
+    },
+    "extend": { "flags": [ "TRANSPARENT", "REDUCE_SCENT", "MOUNTABLE" ] },
+    "delete": { "flags": [ "NO_SCENT", "BLOCK_WIND" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_adobe",
+    "copy-from": "t_adobe_brick_wall",
+    "name": "adobe fortification",
+    "description": "A solid adobe brick wall with a firing hole built into it, providing an opening to fire through when adjacent to it.  Fairly solid cover against muskets and most small arms alike.",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "coverage": 80,
+    "bash": {
+      "str_min": 45,
+      "str_max": 120,
+      "sound": "crash!",
+      "sound_fail": "bash!",
+      "ter_set": "t_null",
+      "items": [ { "item": "material_soil", "count": [ 6, 15 ] }, { "item": "adobe_brick", "count": [ 2, 4 ] } ],
+      "//": "Stone obstacles have double the expected reduction but lower destroy_threshold in return",
+      "ranged": { "reduction": [ 90, 90 ], "destroy_threshold": 90, "block_unaimed_chance": "75%" }
+    },
+    "extend": { "flags": [ "TRANSPARENT", "REDUCE_SCENT", "MOUNTABLE" ] },
+    "delete": { "flags": [ "NO_SCENT", "BLOCK_WIND" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_domestic",
+    "copy-from": "t_wall",
+    "name": "plastered wooden fortification",
+    "description": "A wooden wall faced with plaster, with a firing hole punched into it.  You can fire through unimpeded if you're adjacent to it.  It might slow incoming fire down a bit if it hits the support beams, but don't count on it.",
+    "symbol": "LINE_OXOX",
+    "color": "light_gray",
+    "coverage": 80,
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_null",
+      "items": "wall_bash_results",
+      "//": "Reduction ranges from 1x to 2x the half-built version, idea is make it worse off than wooden walls on average but a chance to hit something more solid.",
+      "ranged": { "reduction": [ 8, 16 ], "destroy_threshold": 210, "block_unaimed_chance": "75%" }
+    },
+    "extend": { "flags": [ "TRANSPARENT", "REDUCE_SCENT", "MOUNTABLE" ] },
+    "delete": { "flags": [ "NO_SCENT", "BLOCK_WIND" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_domestic_r",
+    "copy-from": "t_fortification_domestic",
+    "name": "plastered red fortification",
+    "description": "A plastered wooden wall painted red, with a firing hole punched into it.  You can fire through unimpeded if you're adjacent to it.  It might slow incoming fire down a bit if it hits the support beams, but don't count on it.",
+    "symbol": "LINE_OXOX",
+    "color": "red",
+    "looks_like": "t_wall_r",
+    "extend": { "flags": [ "CHIP_FORTIFICATION" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_domestic_w",
+    "copy-from": "t_fortification_domestic",
+    "name": "plastered white fortification",
+    "description": "A plastered wooden wall painted white, with a firing hole punched into it.  You can fire through unimpeded if you're adjacent to it.  It might slow incoming fire down a bit if it hits the support beams, but don't count on it.",
+    "symbol": "LINE_OXOX",
+    "color": "white",
+    "looks_like": "t_wall_w",
+    "extend": { "flags": [ "CHIP_FORTIFICATION" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_domestic_b",
+    "copy-from": "t_fortification_domestic",
+    "name": "plastered blue fortification",
+    "description": "A plastered wooden wall painted blue, with a firing hole punched into it.  You can fire through unimpeded if you're adjacent to it.  It might slow incoming fire down a bit if it hits the support beams, but don't count on it.",
+    "symbol": "LINE_OXOX",
+    "color": "blue",
+    "looks_like": "t_wall_b",
+    "extend": { "flags": [ "CHIP_FORTIFICATION" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_domestic_g",
+    "copy-from": "t_fortification_domestic",
+    "name": "plastered green fortification",
+    "description": "A plastered wooden wall painted green, with a firing hole punched into it.  You can fire through unimpeded if you're adjacent to it.  It might slow incoming fire down a bit if it hits the support beams, but don't count on it.",
+    "symbol": "LINE_OXOX",
+    "color": "green",
+    "looks_like": "t_wall_g",
+    "extend": { "flags": [ "CHIP_FORTIFICATION" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_domestic_y",
+    "copy-from": "t_fortification_domestic",
+    "name": "plastered yellow fortification",
+    "description": "A plastered wooden wall painted yellow, with a firing hole punched into it.  You can fire through unimpeded if you're adjacent to it.  It might slow incoming fire down a bit if it hits the support beams, but don't count on it.",
+    "symbol": "LINE_OXOX",
+    "color": "yellow",
+    "looks_like": "t_wall_y",
+    "extend": { "flags": [ "CHIP_FORTIFICATION" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_domestic_P",
+    "copy-from": "t_fortification_domestic",
+    "name": "plastered pink fortification",
+    "description": "A plastered wooden wall painted pink, with a firing hole punched into it.  You can fire through unimpeded if you're adjacent to it.  It might slow incoming fire down a bit if it hits the support beams, but don't count on it.",
+    "symbol": "LINE_OXOX",
+    "color": "pink",
+    "looks_like": "t_wall_P",
+    "extend": { "flags": [ "CHIP_FORTIFICATION" ] }
+  },
+  {
+    "type": "terrain",
+    "id": "t_fortification_domestic_p",
+    "copy-from": "t_fortification_domestic",
+    "name": "plastered purple fortification",
+    "description": "A plastered wooden wall painted purple, with a firing hole punched into it.  You can fire through unimpeded if you're adjacent to it.  It might slow incoming fire down a bit if it hits the support beams, but don't count on it.",
+    "symbol": "LINE_OXOX",
+    "color": "magenta",
+    "looks_like": "t_wall_p",
+    "extend": { "flags": [ "CHIP_FORTIFICATION" ] }
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "type": "mod_tileset",
+    "compatibility": [ "UNDEAD_PEOPLE_BASE", "UNDEAD_PEOPLE" ],
+    "tiles-new": [
+      {
+        "file": "external_tileset/External_Tileset_DP_terrain_normal.png",
+        "tiles": [
+          {
+            "id": "t_paddy",
+            "fg": 0,
+            "rotates": true,
+            "multitile": true,
+            "additional_tiles": [
+              { "id": "center", "fg": 1 },
+              { "id": "corner", "fg": [ 2, 3, 4, 5 ] },
+              { "id": "t_connection", "fg": [ 12, 13, 14, 15 ] },
+              { "id": "edge", "fg": [ 8, 9 ] },
+              { "id": "end_piece", "fg": [ 10, 11, 6, 7 ] },
+              { "id": "unconnected", "fg": 16 }
+            ]
+          },
+          { "id": "t_niter_bed_fresh", "fg": 17 },
+          { "id": "t_niter_bed_ready", "fg": 18 },
+          { "id": "t_shrub_blueberry_season_spring", "fg": 19 },
+          { "id": "t_shrub_blueberry_season_summer", "fg": 20 },
+          { "id": "t_shrub_strawberry_season_spring", "fg": 21 },
+          { "id": "t_shrub_strawberry_season_summer", "fg": 22 },
+          { "id": "t_door_metal_welded", "fg": 23 },
+          { "id": "t_door_metal_welded_peephole", "fg": 24 },
+          { "id": "t_door_metal_welded_lab", "fg": 25 },
+          { "id": "t_door_metal_welded_bulkhead", "fg": 26 },
+          { "id": "t_door_metal_welded_bars", "fg": 27 },
+          { "id": "t_fortification_wood", "fg": 28 },
+          { "id": "t_fortification_log", "fg": 29 },
+          { "id": "t_fortification_drystone", "fg": 30 },
+          { "id": "t_fortification_stone", "fg": 31 },
+          { "id": "t_fortification_brick", "fg": 32 },
+          { "id": "t_fortification_adobe", "fg": 33 },
+          { "id": [ "t_adobe_brick_floor", "t_adobe_brick_floor_noroof" ], "fg": 34 },
+          {
+            "id": "t_lake_trunk",
+            "fg": 35,
+            "rotates": false,
+            "multitile": true,
+            "additional_tiles": [
+              { "id": "center", "fg": 35 },
+              { "id": "corner", "fg": [ 36, 37, 38, 39 ] },
+              { "id": "edge", "fg": [ 40, 41 ] },
+              { "id": "end_piece", "fg": [ 42, 43, 44, 45 ] },
+              { "id": "t_connection", "fg": [ 46, 47, 48, 49 ] },
+              { "id": "unconnected", "fg": 50 }
+            ]
+          },
+          {
+            "id": "t_lake_moss",
+            "fg": 51,
+            "rotates": false,
+            "multitile": true,
+            "additional_tiles": [
+              { "id": "center", "fg": 51, "bg": 67 },
+              { "id": "corner", "fg": [ 52, 53, 54, 55 ], "bg": 67 },
+              { "id": "edge", "fg": [ 56, 57 ], "bg": 67 },
+              { "id": "end_piece", "fg": [ 58, 59, 60, 61 ], "bg": 67 },
+              { "id": "t_connection", "fg": [ 62, 63, 64, 65 ], "bg": 67 },
+              { "id": "unconnected", "fg": 66, "bg": 67 }
+            ]
+          },
+          {
+            "id": "t_moss_underground",
+            "fg": 51,
+            "rotates": false,
+            "multitile": true,
+            "additional_tiles": [
+              { "id": "center", "fg": 51, "bg": 68 },
+              { "id": "corner", "fg": [ 52, 53, 54, 55 ], "bg": 68 },
+              { "id": "edge", "fg": [ 56, 57 ], "bg": 68 },
+              { "id": "end_piece", "fg": [ 58, 59, 60, 61 ], "bg": 68 },
+              { "id": "t_connection", "fg": [ 62, 63, 64, 65 ], "bg": 68 },
+              { "id": "unconnected", "fg": 66, "bg": 68 }
+            ]
+          },
+          { "id": "t_fortification_domestic", "fg": 69 },
+          { "id": "t_fortification_domestic_r", "fg": 70 },
+          { "id": "t_fortification_domestic_w", "fg": 71 },
+          { "id": "t_fortification_domestic_b", "fg": 72 },
+          { "id": "t_fortification_domestic_g", "fg": 73 },
+          { "id": "t_fortification_domestic_y", "fg": 74 },
+          { "id": "t_fortification_domestic_P", "fg": 75 },
+          { "id": "t_fortification_domestic_p", "fg": 76 },
+          {
+            "id": "t_wall_paintable",
+            "fg": 77,
+            "rotates": false,
+            "multitile": true,
+            "additional_tiles": [
+              { "id": "center", "fg": 78, "masks": [ { "type": "tint", "fg": 94 } ] },
+              { "id": "corner", "fg": [ 79, 80, 81, 82 ], "masks": [ { "type": "tint", "fg": [ 94, 94, 94, 94 ] } ] },
+              {
+                "id": "t_connection",
+                "fg": [ 89, 90, 91, 92 ],
+                "masks": [ { "type": "tint", "fg": [ 94, 94, 94, 94 ] } ]
+              },
+              { "id": "edge", "fg": [ 83, 84 ], "masks": [ { "type": "tint", "fg": [ 94, 94 ] } ] },
+              {
+                "id": "end_piece",
+                "fg": [ 85, 86, 87, 88 ],
+                "masks": [ { "type": "tint", "fg": [ 94, 94, 94, 94 ] } ]
+              },
+              { "id": "unconnected", "fg": 93, "masks": [ { "type": "tint", "fg": 94 } ] }
+            ]
+          }
+        ],
+        "sprite_width": 32,
+        "sprite_height": 32
+      }
+    ]
+  }
+]

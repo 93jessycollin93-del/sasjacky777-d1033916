@@ -1,0 +1,7 @@
+Sandbox_EN = {
+    Sandbox_RealismOverhaul = "Realism Overhaul",
+    Sandbox_RealismOverhaul_EnableMovement = "Realistic movement (planned)",
+    Sandbox_RealismOverhaul_EnableLighting = "Realistic lighting (planned)",
+    Sandbox_RealismOverhaul_EnableAudio = "Realistic audio (planned)",
+    Sandbox_RealismOverhaul_EnableCameraAdapter = "Report first-person camera status",
+}

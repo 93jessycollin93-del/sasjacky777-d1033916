@@ -1,0 +1,523 @@
+import org.gradle.internal.os.OperatingSystem;
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    //options.compilerArgs << "-Xlint:deprecation"
+}
+
+def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY');
+def buildAsApplication = !buildAsLibrary
+if (buildAsApplication) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def keystorePropertiesFilename = 'keystore.properties'
+if (localProperties.getProperty('keystorePropertiesFilename') != null) {
+    keystorePropertiesFilename = localProperties.getProperty("keystorePropertiesFilename")
+}
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file(keystorePropertiesFilename)
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader('UTF-8') { reader ->
+        keystoreProperties.load(reader)
+    }
+}
+
+def njobs = getProperty("j")
+if (localProperties.getProperty('j') != null) {
+    njobs = localProperties.getProperty("j")
+}
+
+def localize = getProperty("localize").toBoolean()
+if (localProperties.getProperty('localize') != null) {
+    localize = localProperties.getProperty("localize").toBoolean()
+}
+
+def abi_arm_32 = getProperty("abi_arm_32").toBoolean()
+if (localProperties.getProperty('abi_arm_32') != null) {
+    abi_arm_32 = localProperties.getProperty("abi_arm_32").toBoolean()
+}
+
+def abi_arm_64 = getProperty("abi_arm_64").toBoolean()
+if (localProperties.getProperty('abi_arm_64') != null) {
+    abi_arm_64 = localProperties.getProperty("abi_arm_64").toBoolean()
+}
+
+def abi_x86_32 = getProperty("abi_x86_32").toBoolean()
+if (localProperties.getProperty('abi_x86_32') != null) {
+    abi_x86_32 = localProperties.getProperty("abi_x86_32").toBoolean()
+}
+
+def abi_x86_64 = getProperty("abi_x86_64").toBoolean()
+if (localProperties.getProperty('abi_x86_64') != null) {
+    abi_x86_64 = localProperties.getProperty("abi_x86_64").toBoolean()
+}
+
+def override_version = getProperty("override_version")
+if (localProperties.getProperty('override_version') != null) {
+    override_version = localProperties.getProperty("override_version")
+}
+
+def version_header_path = getProperty("version_header_path")
+if (localProperties.getProperty('version_header_path') != null) {
+    version_header_path = localProperties.getProperty("version_header_path")
+}
+
+def override_compileSdkVersion = getProperty("override_compileSdkVersion").toInteger()
+if (localProperties.getProperty('override_compileSdkVersion') != null) {
+    override_compileSdkVersion = localProperties.getProperty("override_compileSdkVersion").toInteger()
+}
+
+def override_minSdkVersion = getProperty("override_minSdkVersion").toInteger()
+if (localProperties.getProperty('override_minSdkVersion') != null) {
+    override_minSdkVersion = localProperties.getProperty("override_minSdkVersion").toInteger()
+}
+
+def override_targetSdkVersion = getProperty("override_targetSdkVersion").toInteger()
+if (localProperties.getProperty('override_targetSdkVersion') != null) {
+    override_targetSdkVersion = localProperties.getProperty("override_targetSdkVersion").toInteger()
+}
+
+def override_ndkVersion = getProperty("override_ndkVersion")
+if (localProperties.getProperty('override_ndkVersion') != null) {
+    override_ndkVersion = localProperties.getProperty('override_ndkVersion')
+}
+
+def override_versionCode = getProperty("override_versionCode")
+if (localProperties.getProperty('override_versionCode') != null) {
+    override_versionCode = localProperties.getProperty('override_versionCode')
+} else {
+    override_versionCode=Integer.valueOf(System.env.UPSTREAM_BUILD_NUMBER ?: 1)
+}
+
+println("Using [              njobs]: $njobs")
+println("Using [           localize]: $localize")
+println("Using [   override_version]: $override_version")
+println("Using [version_header_path]: $version_header_path")
+println("Using [  compileSdkVersion]: $override_compileSdkVersion")
+println("Using [      minSdkVersion]: $override_minSdkVersion")
+println("Using [   targetSdkVersion]: $override_targetSdkVersion")
+println("Using [         ndkVersion]: $override_ndkVersion")
+println("Using [        versionCode]: $override_versionCode")
+println("Using [         abi_arm_32]: $abi_arm_32")
+println("Using [         abi_arm_64]: $abi_arm_64")
+println("Using [         abi_x86_32]: $abi_x86_32")
+println("Using [         abi_x86_64]: $abi_x86_64")
+
+if (!abi_arm_32 && !abi_arm_64 && !abi_x86_32 && !abi_x86_64) {
+    throw new GradleException("All supported ABI properties are set to false!")
+}
+
+def enabledAbis = []
+if (abi_arm_64) enabledAbis << 'arm64-v8a'
+if (abi_arm_32) enabledAbis << 'armeabi-v7a'
+if (abi_x86_64) enabledAbis << 'x86_64'
+if (abi_x86_32) enabledAbis << 'x86'
+
+if (!override_version.isEmpty()) {
+    if (version_header_path.isEmpty()) {
+        throw new GradleException("`version_header_path` cannot be empty when `override_version` is not empty")
+    } else {
+        println("Overriding version number to $override_version using path $version_header_path")
+    }
+}
+
+def projectRoot = './../..'
+def assetsDir = 'src/main/assets'
+def assetsDirWindows = 'src/main/assetsWinHost'
+
+def sdl3Aars = [
+    [name: 'SDL3',        version: '3.4.10', repo: 'SDL',
+     zipSha256: 'f676e29b1b4eb990e24862b6af5f327379dc496c9f5f3e3f48ab75837f95844e'],
+    [name: 'SDL3_image',  version: '3.4.4', repo: 'SDL_image',
+     zipSha256: 'a0d1e27d4529c2bbc3e4ac72d2e6c0dd474b32cfe2586d22c4228a34224d1f57'],
+    [name: 'SDL3_ttf',    version: '3.2.2', repo: 'SDL_ttf',
+     zipSha256: '48e534daf88eec5c7f0c95fa6ca0e8a5f38f5fc7276824573131cebc403ee14c'],
+    [name: 'SDL3_mixer',  version: '3.2.4', repo: 'SDL_mixer',
+     zipSha256: 'b7f9f1ee5162a0492e71941f2cbdc50ec256ef15c0e995ca72c7e519eebd810d'],
+]
+
+task fetchSdl3Aars {
+    description 'Download upstream SDL3 Android AARs, verify SHA256, extract into app/libs.'
+    def libsDir = file('libs')
+    inputs.property('sdl3Aars', sdl3Aars.collect { "${it.name}-${it.version}-${it.zipSha256}" })
+    outputs.dir libsDir
+    doLast {
+        libsDir.mkdirs()
+        def cacheDir = new File(project.buildDir, 'sdl3-aar-cache')
+        cacheDir.mkdirs()
+        sdl3Aars.each { entry ->
+            def aarFile = new File(libsDir, "${entry.name}-${entry.version}.aar")
+            if (aarFile.exists()) {
+                return
+            }
+            def zipName = "${entry.name}-devel-${entry.version}-android.zip"
+            def zipFile = new File(cacheDir, zipName)
+            if (!zipFile.exists()) {
+                def url = "https://github.com/libsdl-org/${entry.repo}/releases/download/release-${entry.version}/${zipName}"
+                println("Downloading ${url}")
+                new URL(url).withInputStream { input ->
+                    zipFile.withOutputStream { output -> output << input }
+                }
+            }
+            def md = java.security.MessageDigest.getInstance('SHA-256')
+            zipFile.eachByte(8192) { buf, len -> md.update(buf, 0, len) }
+            def actualSha = md.digest().collect { String.format('%02x', it) }.join('')
+            if (actualSha != entry.zipSha256) {
+                throw new GradleException("SHA256 mismatch for ${zipName}: expected ${entry.zipSha256}, got ${actualSha}")
+            }
+            copy {
+                from zipTree(zipFile)
+                include "**/${entry.name}-${entry.version}.aar"
+                into libsDir
+                eachFile { it.path = it.name }
+                includeEmptyDirs = false
+            }
+        }
+    }
+}
+
+task makeLocalization(type: Exec) {
+    def args = []
+    if (localize) {
+        println("Building with localization")
+        switch (OperatingSystem.current()) {
+            case OperatingSystem.LINUX:
+                args = ['make', 'localization', 'LANGUAGES=all']
+                break
+            case OperatingSystem.WINDOWS:
+                args = ['sh.exe', 'lang/compile_mo.sh']
+                break
+            default:
+                args = ['echo', 'Building without localization']
+                break
+        }
+    } else {
+        args = ['echo', 'Building without localization']
+        if (OperatingSystem.current() == OperatingSystem.WINDOWS) {
+            args = ['cmd.exe', '/k'] + args
+        }
+    }
+    workingDir projectRoot
+    commandLine args
+}
+
+task generateVersionHeader() {
+    // this taks imitates `make version` while respecting version_header_path
+    if (override_version.isEmpty()) {
+        println("Generating version number to $version_header_path")
+        def output = new ByteArrayOutputStream()
+        exec {
+            workingDir projectRoot
+            commandLine 'git', 'describe', '--tags', '--always', '--dirty', '--match', '"[0-9A-Z]*.[0-9A-Z]*"'
+            standardOutput output
+        }
+        override_version = output.toString()
+        override_version = override_version.split()[0] // strip whitespaces
+    } else {
+        println("Overriding version number to $override_version")
+    }
+
+    def define = "// NOLINT(cata-header-guard)\n#define VERSION \"$override_version\"\n"
+    def versionHeader = new File("$version_header_path")
+    if (!versionHeader.exists() || versionHeader.text != define) {
+        versionHeader.text = define
+    }
+}
+
+task createWindowsJunctionLinks() {
+    onlyIf {
+        OperatingSystem.current() == OperatingSystem.WINDOWS
+    }
+
+    doLast {
+        def mkJunction = { to, from ->
+            def errOut = new ByteArrayOutputStream()
+            exec {
+                commandLine 'cmd', '/k', "mklink /J $to $from"
+                errorOutput errOut
+                standardOutput new ByteArrayOutputStream() // don't print the output
+            }
+            def errString = errOut.toString()
+            if (!errString.isEmpty() && !errString.endsWith('already exists.\r\n')) {
+                // we have an error that is not 'file already exists'
+                errString = errString.substring(0, errString.size() - 2) // discard \r\n
+                throw new GradleException("$errString")
+            }
+        }
+
+        println("Creating junctions for the assets")
+
+        mkdir assetsDirWindows
+        mkdir "$assetsDirWindows/lang"
+
+        def rootDir = projectRoot.replace('/', '\\')
+        def unixAssetsDir = assetsDir.replace('/', '\\')
+        def winAssetsDir = assetsDirWindows.replace('/', '\\')
+        
+        mkJunction("$winAssetsDir\\android", "$unixAssetsDir\\android")
+        for (dir in ['data', 'gfx', 'lang\\mo']) {
+            mkJunction("$winAssetsDir\\$dir", "$rootDir\\$dir")
+        }
+    }
+}
+
+// asset list for the installer, so it needn't walk the APK. rules mirror aapt
+// packaging: default ignore patterns, .gz files stored without the suffix, no broken links
+def assetFileListDir = "$buildDir/generated/assetFileList"
+task generateAssetFileList {
+    dependsOn makeLocalization
+    dependsOn createWindowsJunctionLinks
+    def listFile = file("$assetFileListDir/android/asset_files.txt")
+    outputs.file listFile
+    outputs.upToDateWhen { false }
+    doLast {
+        def assetRoot = file(OperatingSystem.current() == OperatingSystem.WINDOWS ? assetsDirWindows : assetsDir)
+        def packaged = { String name, boolean isDir ->
+            def lower = name.toLowerCase()
+            !( lower.startsWith('.') || ( isDir && lower.startsWith('_') ) ||
+               lower in ['cvs', 'thumbs.db', 'picasa.ini'] || lower.endsWith('.scc') || lower.endsWith('~') )
+        }
+        def assetFiles = new TreeSet<String>()
+        def walk
+        walk = { File dir, String path ->
+            dir.listFiles().each { File child ->
+                String childPath = path + "/" + child.name
+                if (child.isDirectory()) {
+                    if (packaged(child.name, true)) {
+                        walk(child, childPath)
+                    }
+                } else if (child.isFile() && packaged(child.name, false)) {
+                    assetFiles << ( childPath.toLowerCase().endsWith('.gz') ? childPath[0..-4] : childPath )
+                }
+            }
+        }
+        ['data', 'gfx', 'lang'].each { top -> walk(new File(assetRoot, top), top) }
+        listFile.parentFile.mkdirs()
+        listFile.text = assetFiles.join('\n') + '\n'
+    }
+}
+
+preBuild.dependsOn fetchSdl3Aars
+preBuild.dependsOn makeLocalization
+preBuild.dependsOn generateVersionHeader
+preBuild.dependsOn createWindowsJunctionLinks
+preBuild.dependsOn generateAssetFileList
+createWindowsJunctionLinks.dependsOn makeLocalization
+
+android {
+    namespace "com.cleverraven.cataclysmdda"
+    compileSdkVersion override_compileSdkVersion
+    ndkVersion override_ndkVersion
+
+    buildFeatures {
+        prefab true
+    }
+
+    base {
+        archivesName = "cataclysmdda-" + new File("$version_header_path").text.split('\"')[1]
+    }
+
+    defaultConfig {
+        minSdkVersion override_minSdkVersion
+        targetSdkVersion override_targetSdkVersion
+        versionCode Integer.valueOf(override_versionCode)
+        versionName new File("$version_header_path").text.split('\"')[1]
+        if (buildAsApplication) {
+            applicationId "com.cleverraven.cataclysmdda"
+        }
+        resValue "string", "app_name", "Cataclysm DDA"
+
+        splits {
+            // Configures multiple APKs based on ABI.
+            abi {
+                // Enables building multiple APKs per ABI.
+                enable true
+                // Resets the list of ABIs that Gradle should create APKs for to none.
+                reset()
+                // Specifies a list of ABIs that Gradle should create APKs for.
+                if (abi_arm_32) {
+                    include "armeabi-v7a"
+                }
+                if (abi_arm_64) {
+                    include "arm64-v8a"
+                }
+                if (abi_x86_32) {
+                    include "x86"
+                }
+                if (abi_x86_64) {
+                    include "x86_64"
+                }
+                // Specifies that we do not want to also generate a universal APK that includes all ABIs.
+                universalApk false
+            }
+        }
+
+        externalNativeBuild {
+            cmake {
+                abiFilters(*enabledAbis as String[])
+                def cmakeArgs = ["-DANDROID_STL=c++_shared",
+                                 "-DANDROID_ARM_NEON=TRUE",
+                                 "-DCMAKE_JOB_POOLS=compile=$njobs;link=2",
+                                 "-DCMAKE_JOB_POOL_COMPILE=compile",
+                                 "-DCMAKE_JOB_POOL_LINK=link"]
+                def pathEnv = System.getenv("PATH") ?: ""
+                def ccacheNames = System.getProperty("os.name")
+                    .toLowerCase().contains("win") ? ["ccache.exe", "ccache"]
+                                                   : ["ccache"]
+                def ccacheOnPath = pathEnv
+                    .tokenize(File.pathSeparator)
+                    .any { dir -> ccacheNames.any {
+                            name -> new File(dir, name).canExecute() } }
+                if (ccacheOnPath) {
+                    cmakeArgs += ["-DCMAKE_CXX_COMPILER_LAUNCHER=ccache",
+                                  "-DCMAKE_C_COMPILER_LAUNCHER=ccache"]
+                }
+                arguments(*cmakeArgs as String[])
+            }
+        }
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        stable {
+            dimension "version"
+            resValue "string", "app_name", "Cataclysm DDA"
+        }
+        experimental {
+            dimension "version"
+            applicationIdSuffix ".experimental"
+            resValue "string", "app_name", "Cataclysm DDA (experimental)"
+        }
+    }
+
+    signingConfigs {
+        if (keystoreProperties.getProperty('storeFile') != null) {
+            if (file(keystoreProperties.getProperty('storeFile')).exists()) {
+                release {
+                    storeFile file(keystoreProperties.getProperty("storeFile"))
+                    storePassword keystoreProperties.getProperty("storePassword")
+                    keyAlias keystoreProperties.getProperty("keyAlias")
+                    keyPassword keystoreProperties.getProperty("keyPassword")
+                }
+            } else {
+                throw new GradleException("Keystore file " + keystoreProperties.getProperty("storeFile") + " was not found.\n")
+            }
+        }
+        if (keystoreProperties.getProperty('debug_storeFile') != null) {
+            if (file(keystoreProperties.getProperty('debug_storeFile')).exists()) {
+                debug {
+                    storeFile file(keystoreProperties.getProperty("debug_storeFile"))
+                    storePassword keystoreProperties.getProperty("debug_storePassword")
+                    keyAlias keystoreProperties.getProperty("debug_keyAlias")
+                    keyPassword keystoreProperties.getProperty("debug_keyPassword")
+                }
+            } else {
+                throw new GradleException("Keystore file " + keystoreProperties.getProperty("debug_storeFile") + " was not found.\n")
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (signingConfigs.hasProperty("release")) {
+                signingConfig signingConfigs.release
+            }
+            externalNativeBuild {
+                cmake {
+                    arguments "-DCMAKE_BUILD_TYPE=Release"
+                    cFlags "-DNDEBUG", "-DRELEASE", "-Os", "-g"
+                    cppFlags "-DNDEBUG", "-DRELEASE", "-Os", "-g"
+                }
+            }
+            ndk {
+                debugSymbolLevel 'SYMBOL_TABLE'
+            }
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (signingConfigs.hasProperty("debug")) {
+                signingConfig signingConfigs.debug
+            }
+            externalNativeBuild {
+                cmake {
+                    arguments "-DCMAKE_BUILD_TYPE=Debug"
+                    cFlags "-g"
+                    cppFlags "-g"
+                }
+            }
+            ndk {
+                debugSymbolLevel 'FULL'
+            }
+        }
+    }
+    if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
+        externalNativeBuild {
+            cmake {
+                path 'jni/CMakeLists.txt'
+                version '3.22.1'
+            }
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    if (OperatingSystem.current() == OperatingSystem.WINDOWS) {
+        sourceSets.main.assets.srcDirs = ['src/main/assetsWinHost']
+    }
+    sourceSets.main.assets.srcDir assetFileListDir
+
+    if (buildAsLibrary) {
+        libraryVariants.all { variant ->
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith(".aar")) {
+                    def fileName = "$applicationId.aar";
+                    output.outputFile = new File(outputFile.parent, fileName);
+                }
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/res']
+        }
+    }
+    stable {
+    }
+    experimental {
+        resources {
+            srcDirs = ['src/experimental/res']
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    sdl3Aars.each { entry ->
+        implementation files("libs/${entry.name}-${entry.version}.aar")
+    }
+}

@@ -1,0 +1,104 @@
+# ScreenConfig for 800x600
+screen_w = 800
+screen_h = 600
+
+[main_window]
+x = 36
+y = 0
+w = 764
+h = 420
+
+[log_window]
+x = 203
+y = 460
+w = 600
+h = 140
+
+[minimap_window]
+x = 0
+y = 423
+w = 200
+h = 177
+
+[sidebar]
+x = 0
+y = 43
+w = 33
+h = 377
+
+[toolbar]
+x = 203
+y = 423
+w = 102
+h = 34
+
+[shortcut_list]
+x = 308
+y = 423
+w = 600
+h = 34
+
+[hp_indicator]
+x = 52
+y = 338
+w = 80
+h = 15
+
+[mp_indicator]
+x = 52
+y = 360
+w = 80
+h = 15
+
+[sp_indicator]
+x = 52
+y = 382
+w = 80
+h = 15
+
+[floor_info]
+x = 100
+y = 0
+w = 200
+h = 18
+
+[status_info]
+x = 42
+y = 313
+h = 20
+
+[date_info]
+x = 4
+y = 3
+
+[time_info]
+x = 0
+y = 0
+w = 60
+h = 40
+
+[[hborders]]
+x = 0
+y = 420
+len = 800
+
+[[hborders]]
+x = 200
+y = 457
+len = 600
+
+[[vborders]]
+x = 33
+y = 0
+len = 420
+
+[[vborders]]
+x = 200
+y = 422
+len = 177
+
+[[vborders]]
+x = 305
+y = 423
+len = 34
+

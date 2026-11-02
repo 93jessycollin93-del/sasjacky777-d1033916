@@ -1,0 +1,342 @@
+[
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_GENERIC_SPELL_MUTATION",
+    "//energy_amount": "optional, how much stamina you spend on activation of the mutation - EoC works exclusively with stamina, to consume calories, fatigue or thirst use corresponding booleans in mutation; default zero if you don't need to consume stamina",
+    "//prep_time": "time you spend to prepare the activation, in seconds. Use 0 to make activation instant.  Decimals are allowed, 0.5 means 50 moves",
+    "//spell_to_cast": "spell that would be casted if activation is successful",
+    "//message_success": "message that would be printed if activation is successful",
+    "//message_fail": "message, that would be printed, if you have less stamina than required",
+    "condition": {
+      "and": [
+        { "expects_vars": [ "prep_time", "spell_to_cast", "message_success", "message_fail" ] },
+        { "math": [ "u_val('stamina') > _energy_amount" ] }
+      ]
+    },
+    "effect": [
+      { "turn_cost": { "context_val": "prep_time" } },
+      { "math": [ "u_val('stamina') -= _energy_amount" ] },
+      { "run_eocs": [ "EOC_GENERIC_SPELL_MUTATION_ACT" ] }
+    ],
+    "false_effect": [ { "u_message": { "context_val": "message_fail" }, "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_GENERIC_SPELL_MUTATION_ACT",
+    "effect": [
+      {
+        "u_cast_spell": { "id": { "context_val": "spell_to_cast" }, "message": { "context_val": "message_success" }, "min_level": 1 },
+        "targeted": true
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_BIOLUM3_activated",
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "prep_time": 3,
+          "spell_to_cast": "spell_spit_flare",
+          "message_success": { "i18n": true, "str": "You launch a glob of bioluminescent material!" },
+          "message_fail": { "i18n": true, "str": "Your body is too starved to activate your bioluminescent flare." }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_SLIME_SPRAY",
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "prep_time": 1,
+          "spell_to_cast": "spell_slime_spray",
+          "message_success": { "i18n": true, "str": "You spit out some goo onto your enemies!" },
+          "message_fail": { "i18n": true, "str": "Your body is too starved to activate your slime spray." }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_FELINE_LEAP",
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "u_has_effect": "immobilization" } },
+        { "not": { "u_has_effect": "stunned" } },
+        { "not": { "u_has_effect": "beartrap" } },
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
+      ]
+    },
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 1400,
+          "prep_time": 1,
+          "spell_to_cast": "spell_feline_leap",
+          "message_success": {
+            "i18n": true,
+            "str": "You squat down, build up tension in your legs, then release, launching yourself quite a distance."
+          },
+          "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
+        }
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't move properly, so leaping is out of the question." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_SHORT_LEAP",
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "u_has_effect": "immobilization" } },
+        { "not": { "u_has_effect": "stunned" } },
+        { "not": { "u_has_effect": "beartrap" } },
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
+      ]
+    },
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 1800,
+          "prep_time": 2,
+          "spell_to_cast": "spell_short_leap",
+          "message_success": { "i18n": true, "str": "You take a big leap forward." },
+          "message_fail": { "i18n": true, "str": "You  are too tired to perform a jump." }
+        }
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't move properly, so leaping is out of the question." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_CRUSHING_LEAP",
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "u_has_effect": "immobilization" } },
+        { "not": { "u_has_effect": "stunned" } },
+        { "not": { "u_has_effect": "beartrap" } },
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_underwater" }
+      ]
+    },
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 2000,
+          "prep_time": 3,
+          "spell_to_cast": "spell_crushing_leap",
+          "message_success": { "i18n": true, "str": "You crouch down and leap forward with all your might." },
+          "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
+        }
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't move properly, so leaping is out of the question." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_AVIAN_LEAP",
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "u_has_effect": "immobilization" } },
+        { "not": { "u_has_effect": "stunned" } },
+        { "not": { "u_has_effect": "beartrap" } },
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
+      ]
+    },
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 1900,
+          "prep_time": 1,
+          "spell_to_cast": "spell_avian_leap",
+          "message_success": { "i18n": true, "str": "You leap forward, talons ready to strike." },
+          "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
+        }
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't move properly, so leaping is out of the question." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_RAPTOR_LEAP",
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "u_has_effect": "immobilization" } },
+        { "not": { "u_has_effect": "stunned" } },
+        { "not": { "u_has_effect": "beartrap" } },
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
+      ]
+    },
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 1900,
+          "prep_time": 1,
+          "spell_to_cast": "spell_raptor_leap",
+          "message_success": { "i18n": true, "str": "You leap forward, talons ready to strike." },
+          "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
+        }
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't move properly, so leaping is out of the question." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_INSECT_LEAP",
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "u_has_effect": "immobilization" } },
+        { "not": { "u_has_effect": "stunned" } },
+        { "not": { "u_has_effect": "beartrap" } },
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
+      ]
+    },
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 1400,
+          "prep_time": 1,
+          "spell_to_cast": "spell_insect_leap",
+          "message_success": { "i18n": true, "str": "You launch yourself forward, wings buzzing." },
+          "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
+        }
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't move properly, so leaping is out of the question." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_WHIPPING_TONGUE_PULL",
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 600,
+          "prep_time": 1,
+          "spell_to_cast": "spell_whipping_tongue_pull",
+          "message_success": { "i18n": true, "str": "Your tongue launches out to snag your target." },
+          "message_fail": { "i18n": true, "str": "You are too tired to catch anything with your tongue." }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_HARPOON_TONGUE_STAB",
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 600,
+          "prep_time": 1,
+          "spell_to_cast": "spell_harpoon_tongue_stab",
+          "message_success": { "i18n": true, "str": "Your tongue launches out to spear your target." },
+          "message_fail": { "i18n": true, "str": "You are too tired to catch anything with your tongue." }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_BULL_CHARGE",
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "u_has_effect": "immobilization" } },
+        { "not": { "u_has_effect": "stunned" } },
+        { "not": { "u_has_effect": "beartrap" } },
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
+      ]
+    },
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 1800,
+          "prep_time": 1,
+          "spell_to_cast": "spell_bull_charge",
+          "message_success": { "i18n": true, "str": "You lower your head and charge." },
+          "message_fail": { "i18n": true, "str": "You are too tired to run." }
+        }
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't move properly, so charging is out of the question." } ]
+  }
+]

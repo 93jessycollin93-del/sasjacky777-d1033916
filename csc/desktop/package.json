@@ -1,0 +1,99 @@
+{
+  "name": "collinsurvivalcraft",
+  "productName": "CollinSurvivalCraft",
+  "version": "2.3.0",
+  "description": "CollinSurvivalCraft (CSC) — an original block-building survival game, on your own computer.",
+  "author": "Collin",
+  "private": true,
+  "type": "module",
+  "main": "main.mjs",
+  "desktopName": "collinsurvivalcraft.desktop",
+  "scripts": {
+    "prepare-app": "node scripts/prepare.mjs",
+    "icon": "node scripts/make-icon.mjs",
+    "start": "npm run prepare-app && electron .",
+    "dist": "npm run prepare-app && electron-builder",
+    "dist:win": "npm run prepare-app && electron-builder --win",
+    "dist:mac": "npm run prepare-app && electron-builder --mac",
+    "dist:linux": "npm run prepare-app && electron-builder --linux",
+    "relay": "node relay.mjs"
+  },
+  "devDependencies": {
+    "electron": "44.4.5",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.collin.survivalcraft",
+    "productName": "CollinSurvivalCraft",
+    "copyright": "CollinSurvivalCraft — an original game inspired by Minecraft. Not affiliated with Mojang or Microsoft.",
+    "publish": null,
+    "files": [
+      "main.mjs",
+      "preload.cjs",
+      "relay.mjs",
+      "app/**/*",
+      "build/icon.png"
+    ],
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "CollinSurvivalCraft",
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${version}.${ext}"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.games"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Game",
+      "syncDesktopName": true
+    }
+  }
+}

@@ -1,0 +1,25 @@
+(
+    object_type: "item",
+    id: "delivery-chest",
+    
+    image: (
+        path: "delivery-chest.png",
+        copyright: "T.Okubo",
+    ),
+    
+    item: (
+        item_kind: "container",
+        group: "agriculture",
+        basic_price: 1000,
+        w: 100000,
+        gen_weight: 0,
+        gen_level: 0,
+        attrs: [
+            Container (
+                selector: "*",
+                capacity: 10000000,
+                function: DeliveryChest,
+            )
+        ]
+    ),
+)

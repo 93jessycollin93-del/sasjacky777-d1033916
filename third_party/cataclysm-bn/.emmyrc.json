@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/9e681265e467fd434a0e19653d0823e1116a5240/crates/emmylua_code_analysis/resources/schema.json",
+  "completion": {
+    "autoRequire": false,
+    "callSnippet": false,
+    "enable": true,
+    "postfix": "@"
+  },
+  "runtime": {
+    "requirePattern": [ "?.lua", "?/init.lua", "./?.lua", "./?/init.lua", "../?.lua", "../?/init.lua" ]
+  },
+  "workspace": {
+    "ignoreDir": [ "src", "build", "out", "android/app/build" ],
+    "ignoreGlobs": [ "tests/lua/**" ],
+    "library": [ "./lua_annotations.lua" ],
+    "workspaceRoots": [ "data/json", "data/mods/test_lua_require" ],
+    "moduleMap": [ { "pattern": "^\\./(.*)$", "replace": "$1" }, { "pattern": "^\\.\\./(.*)$", "replace": "$1" } ]
+  },
+  "diagnostics": {
+    "enable": true,
+    "globals": [ "test_data", "catadoc", "doc_gen_func" ],
+    "severity": {
+      "param-type-mismatch": "error",
+      "undefined-field": "error"
+    }
+  }
+}

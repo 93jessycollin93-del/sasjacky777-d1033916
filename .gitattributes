@@ -1,0 +1,10 @@
+# Shell scripts must keep LF. This repo is worked on with core.autocrlf=true, and
+# a hook checked out with CRLF fails on Linux and macOS with a "bad interpreter"
+# error that names no useful cause. Scoped deliberately to these paths: a
+# repo-wide renormalisation would rewrite every tracked file in one diff.
+.githooks/* text eol=lf
+*.sh        text eol=lf
+
+# The guidance model ships with the app. GitHub rejects a plain blob over
+# 100 MB, so the weights are tracked with Git LFS (see public/models/README).
+public/models/**/*.gguf filter=lfs diff=lfs merge=lfs -text

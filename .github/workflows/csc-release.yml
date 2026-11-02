@@ -1,0 +1,128 @@
+# Builds CollinSurvivalCraft — the solo copy of the game at /craft — for
+# people to download and keep: a Windows installer and portable .exe, a macOS
+# .dmg, a Linux AppImage, and one .html file that plays offline from disk.
+#
+#   Actions → CollinSurvivalCraft downloads → Run workflow
+#
+# and the files appear under the run's Artifacts. Pushing a tag named
+# csc-v<version> (csc-v1.1.0) does the same and attaches them to a GitHub
+# Release, which is the page to send a friend.
+#
+# Each installer is built on its own operating system: NSIS needs Windows (on
+# Linux it needs wine), a .dmg needs macOS. None of them is code-signed, so
+# Windows SmartScreen and macOS Gatekeeper will ask before the first launch —
+# docs/CSC.md ("The solo copy") says what to click.
+name: CollinSurvivalCraft downloads
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["csc-v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  game:
+    name: Test and build the game
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Game tests
+        run: npx vitest run src/test/craft- src/test/csc-
+      - name: Build (for the desktop app and web servers)
+        run: npm run csc:build
+      - name: Build (one offline file)
+        run: |
+          npm run csc:single
+          mkdir -p out
+          cp csc/dist-single/index.html out/CollinSurvivalCraft.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: game-dist
+          path: csc/dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CollinSurvivalCraft-single-file
+          path: out/CollinSurvivalCraft.html
+
+  desktop:
+    name: Desktop app (${{ matrix.os }})
+    needs: game
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: --win
+            files: |
+              csc/desktop/release/*.exe
+          - os: macos-latest
+            target: --mac
+            files: |
+              csc/desktop/release/*.dmg
+          - os: ubuntu-latest
+            target: --linux
+            files: |
+              csc/desktop/release/*.AppImage
+              csc/desktop/release/*.tar.gz
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: csc/desktop/package-lock.json
+      - uses: actions/download-artifact@v4
+        with:
+          name: game-dist
+          path: csc/dist
+      - name: Install Electron
+        working-directory: csc/desktop
+        run: npm ci
+      - name: Package
+        working-directory: csc/desktop
+        env:
+          # Unsigned: without this electron-builder hunts the keychain for an identity and fails the build.
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: |
+          npm run prepare-app
+          npx electron-builder ${{ matrix.target }} --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CollinSurvivalCraft-${{ runner.os }}
+          path: ${{ matrix.files }}
+          if-no-files-found: error
+
+  release:
+    name: Attach to the release
+    if: startsWith(github.ref, 'refs/tags/csc-v')
+    needs: [game, desktop]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: CollinSurvivalCraft-*
+          path: files
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: CollinSurvivalCraft ${{ github.ref_name }}
+          files: files/*
+          body: |
+            CollinSurvivalCraft (CSC), the solo copy of the game.
+
+            - **Windows:** `CollinSurvivalCraft-Setup-*.exe` installs it; `CollinSurvivalCraft-Portable-*.exe` runs without installing.
+            - **macOS:** open the `.dmg` and drag the app to Applications (Intel and Apple silicon are separate files).
+            - **Linux:** make the `.AppImage` executable and run it.
+            - **Anywhere:** `CollinSurvivalCraft.html` plays in a browser, straight from the file.
+
+            None of these is code-signed, so the first launch asks for confirmation.

@@ -1,0 +1,286 @@
+[
+  {
+    "type": "ITEM",
+    "abstract": "mutagen_sample",
+    "symbol": "q",
+    "color": "red",
+    "name": { "str": "abstract mutagen sample" },
+    "description": "Carefully collected tissue samples from deep within the vitals of some unlucky organism.",
+    "price": "10 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "flesh" ],
+    "flags": [ "NO_SALVAGE", "MUTAGEN_SAMPLE" ],
+    "weight": "114 g",
+    "volume": "250 ml",
+    "category": "spare_parts"
+  },
+  {
+    "type": "ITEM",
+    "id": "alpha_sample",
+    "copy-from": "mutagen_sample",
+    "color": "red",
+    "name": { "str": "alpha sample" },
+    "description": "A neatly arranged collection of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "hflesh", "hblood" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "batrachian_sample",
+    "copy-from": "mutagen_sample",
+    "color": "green",
+    "name": { "str": "batrachian sample" },
+    "description": "A wet clump of tissue samples from deep within the vitals of some unlucky amphibian.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "beast_sample",
+    "copy-from": "mutagen_sample",
+    "color": "light_red",
+    "name": { "str": "beast sample" },
+    "description": "A heaving mass of tissue samples from deep within the vitals of some unlucky creature.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "fur" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "bird_sample",
+    "copy-from": "mutagen_sample",
+    "color": "cyan",
+    "name": { "str": "avian sample" },
+    "description": "A thinly sliced collection of tissue samples from deep within the vitals of some unlucky bird.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "feathers" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "cattle_sample",
+    "copy-from": "mutagen_sample",
+    "color": "brown",
+    "name": { "str": "bovoid sample" },
+    "description": "A thick slab of tissue samples from deep within the vitals of some unlucky ungulate.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "fur" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "cephalopod_sample",
+    "copy-from": "mutagen_sample",
+    "color": "black",
+    "name": { "str": "cephalopod sample" },
+    "description": "A bizarrely arranged collection of tissue samples from deep within the vitals of some unlucky cephalopod.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "chimera_sample",
+    "copy-from": "mutagen_sample",
+    "color": "white",
+    "name": { "str": "chimera sample" },
+    "description": "A hideous confusion of tissue samples from deep within the vitals of several unlucky creatures.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "fur", "feathers", "scales" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "elfa_sample",
+    "copy-from": "mutagen_sample",
+    "color": "light_green",
+    "name": { "str": "sylvan sample" },
+    "description": "A faintly luminescent of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "hflesh", "hblood", "vegetable" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "feline_sample",
+    "copy-from": "mutagen_sample",
+    "color": "light_gray",
+    "name": { "str": "feline sample" },
+    "description": "A fuzzy clump collection of tissue samples from deep within the vitals of some unlucky feline.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "fur" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "fish_sample",
+    "copy-from": "mutagen_sample",
+    "color": "yellow",
+    "name": { "str": "piscine sample" },
+    "description": "A silvery collection of tissue samples from deep within the vitals of some unlucky fish.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "gastropod_sample",
+    "copy-from": "mutagen_sample",
+    "color": "brown_cyan",
+    "name": { "str": "gastropod sample" },
+    "description": "A slimy collection of tissue samples from deep within the vitals of some unlucky gastropod.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "human_sample",
+    "copy-from": "mutagen_sample",
+    "color": "black_red",
+    "name": { "str": "human sample" },
+    "description": "A collection of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "hflesh", "hblood" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "insect_sample",
+    "copy-from": "mutagen_sample",
+    "color": "brown",
+    "name": { "str": "insect sample" },
+    "description": "A disgusting collection of tissue samples from deep within the vitals of some unlucky insect.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "iflesh", "chitin" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "lizard_sample",
+    "copy-from": "mutagen_sample",
+    "color": "green_cyan",
+    "name": { "str": "reptilian sample" },
+    "description": "A coiled mass of tissue samples from deep within the vitals of some unlucky reptile.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "scales" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "canine_sample",
+    "copy-from": "mutagen_sample",
+    "color": "brown",
+    "name": { "str": "canine sample" },
+    "description": "A group of tissue samples from deep within the vitals of some unlucky canine.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "fur" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "medical_sample",
+    "copy-from": "mutagen_sample",
+    "color": "magenta",
+    "name": { "str": "medical sample" },
+    "description": "A pulsating collection of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
+    "material": [ "hflesh", "hblood" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "mouse_sample",
+    "copy-from": "mutagen_sample",
+    "color": "brown",
+    "name": { "str": "murine sample" },
+    "description": "A tiny clump of tissue samples from deep within the vitals of some unlucky rodent.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "fur" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "plant_sample",
+    "copy-from": "mutagen_sample",
+    "color": "green",
+    "name": { "str": "plant sample" },
+    "description": "A woody mat of tissue samples from deep within some unlucky plant.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "vegetable", "wood" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "raptor_sample",
+    "copy-from": "mutagen_sample",
+    "color": "red",
+    "name": { "str": "theropod sample" },
+    "description": "A mixed-up collection of tissue samples from deep within the vitals of some unlucky bird and reptile.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "feathers", "scales" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "rabbit_sample",
+    "copy-from": "mutagen_sample",
+    "color": "light_gray",
+    "name": { "str": "lagomorph sample" },
+    "description": "A furry little collection of tissue samples from deep within the vitals of some unlucky rabbit.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "fur" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "rat_sample",
+    "copy-from": "mutagen_sample",
+    "color": "brown",
+    "name": { "str": "rattine sample" },
+    "description": "A gristly collection of tissue samples from deep within the vitals of some unlucky rodent.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood", "fur" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "slime_sample",
+    "copy-from": "mutagen_sample",
+    "color": "light_green",
+    "name": { "str": "slime sample" },
+    "description": "A weird little blob.  It looks almost alive.",
+    "looks_like": "medical_sample",
+    "material": [ "slime" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "spider_sample",
+    "copy-from": "mutagen_sample",
+    "color": "dark_gray",
+    "name": { "str": "aranean sample" },
+    "description": "A fine web of tissue samples from deep within the vitals of some unlucky arachnid.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "chitin", "flesh" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "troglobite_sample",
+    "copy-from": "mutagen_sample",
+    "color": "light_gray",
+    "name": { "str": "troglobite sample" },
+    "description": "A deathly pale collection of tissue samples from deep within the vitals of some subterranean creature.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "ursine_sample",
+    "copy-from": "mutagen_sample",
+    "color": "brown",
+    "name": { "str": "ursine sample" },
+    "description": "A dense mass of tissue samples from deep within the vitals of some unlucky bear.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "fur" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "crustacean_sample",
+    "copy-from": "mutagen_sample",
+    "color": "red",
+    "name": { "str": "crustacean sample" },
+    "description": "A sinewy collection of tissue samples from deep within the vitals of some unlucky crustacean.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "chitin" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "chiropteran_sample",
+    "copy-from": "mutagen_sample",
+    "color": "brown",
+    "name": { "str": "chiropteran sample" },
+    "description": "A bloody collection of tissue samples from deep within the vitals of some unlucky bat.  Somehow, the sample appears to be alive.",
+    "looks_like": "medical_sample",
+    "material": [ "flesh", "blood" ]
+  }
+]

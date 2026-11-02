@@ -1,0 +1,14 @@
+[
+  {
+    "type": "ammunition_type",
+    "id": "crt_pellets",
+    "name": ".117 pellets",
+    "default": "crt_pellet"
+  },
+  {
+    "type": "ammunition_type",
+    "id": "pulsesb",
+    "name": "pulse ammo",
+    "default": "pulsesb"
+  }
+]

@@ -1,0 +1,496 @@
+[
+  {
+    "type": "enchantment",
+    "id": "ENCH_DEBUG_TAIL",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "gain": "debug_tail" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ENCH_DEBUG_ONLY_HEAD",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "torso" },
+      { "lose": "arm_l" },
+      { "lose": "arm_r" },
+      { "lose": "leg_l" },
+      { "lose": "leg_r" },
+      { "lose": "foot_r" },
+      { "lose": "foot_l" },
+      { "lose": "hand_l" },
+      { "lose": "hand_r" }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ENCH_DEBUG_BIG_HEAD",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "head" }, { "gain": "big_head" } ]
+  },
+  {
+    "id": "ENCH_DEBUG_WEIGHT_MODIFIER",
+    "type": "enchantment",
+    "condition": "ALWAYS",
+    "values": [ { "value": "WEIGHT", "multiply": -0.5 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "SQUEAKY_ANKLES",
+    "condition": "ALWAYS",
+    "values": [ { "value": "FOOTSTEP_NOISE", "multiply": 1.0 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "THERMAL_VISION_GOOD",
+    "condition": "ACTIVE",
+    "has": "WORN",
+    "special_vision": [
+      {
+        "condition": { "and": [ "u_see_npc_loc", "npc_is_warm" ] },
+        "distance": 60,
+        "precise": true,
+        "descriptions": [
+          {
+            "id": "infrared_creature_tiny",
+            "text_condition": { "math": [ "n_val('size') == 1" ] },
+            "symbol": ".",
+            "text": "You see a tiny figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_small",
+            "text_condition": { "math": [ "n_val('size') == 2" ] },
+            "symbol": ",",
+            "text": "You see a small figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_medium",
+            "text_condition": { "math": [ "n_val('size') == 3" ] },
+            "symbol": "o",
+            "text": "You see a medium figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_large",
+            "text_condition": { "math": [ "n_val('size') == 4" ] },
+            "symbol": "O",
+            "text": "You see a large figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_huge",
+            "text_condition": { "math": [ "n_val('size') == 5" ] },
+            "symbol": "&",
+            "text": "You see a huge figure radiating heat."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "THERMAL_VISION_GOOD_PASSIVE",
+    "condition": "ALWAYS",
+    "special_vision": [
+      {
+        "condition": { "and": [ "u_see_npc_loc", "npc_is_warm" ] },
+        "distance": 60,
+        "precise": true,
+        "descriptions": [
+          {
+            "id": "infrared_creature_tiny",
+            "text_condition": { "math": [ "n_val('size') == 1" ] },
+            "symbol": ".",
+            "text": "You see a tiny figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_small",
+            "text_condition": { "math": [ "n_val('size') == 2" ] },
+            "symbol": ",",
+            "text": "You see a small figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_medium",
+            "text_condition": { "math": [ "n_val('size') == 3" ] },
+            "symbol": "o",
+            "text": "You see a medium figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_large",
+            "text_condition": { "math": [ "n_val('size') == 4" ] },
+            "symbol": "O",
+            "text": "You see a large figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_huge",
+            "text_condition": { "math": [ "n_val('size') == 5" ] },
+            "symbol": "&",
+            "text": "You see a huge figure radiating heat."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "THERMAL_VISION_LEAFNOSE",
+    "condition": {
+      "not": {
+        "or": [
+          { "u_has_effect": "smoke", "bodypart": "mouth" },
+          { "u_has_effect": "asthma" },
+          { "u_has_effect": "tpollen" },
+          { "u_has_effect": "hay_fever" },
+          "u_is_underwater"
+        ]
+      }
+    },
+    "special_vision": [
+      {
+        "condition": { "and": [ "u_see_npc_loc", "npc_is_warm" ] },
+        "distance": 10,
+        "descriptions": [ { "id": "infrared_creature_medium", "symbol": "o", "text": "You sense a creature with your thermal nostrils." } ]
+      }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "THERMAL_VISION_REPTILIAN_IR",
+    "special_vision": [
+      {
+        "condition": { "and": [ "u_see_npc_loc", "npc_is_warm" ] },
+        "distance": 14,
+        "precise": true,
+        "descriptions": [
+          {
+            "id": "infrared_creature_tiny",
+            "text_condition": { "math": [ "n_val('size') == 1" ] },
+            "symbol": ".",
+            "text": "You see a tiny figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_small",
+            "text_condition": { "math": [ "n_val('size') == 2" ] },
+            "symbol": ",",
+            "text": "You see a small figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_medium",
+            "text_condition": { "math": [ "n_val('size') == 3" ] },
+            "symbol": "o",
+            "text": "You see a medium figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_large",
+            "text_condition": { "math": [ "n_val('size') == 4" ] },
+            "symbol": "O",
+            "text": "You see a large figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_huge",
+            "text_condition": { "math": [ "n_val('size') == 5" ] },
+            "symbol": "&",
+            "text": "You see a huge figure radiating heat."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ELECTRIC_VISION",
+    "condition": "ALWAYS",
+    "special_vision": [
+      {
+        "condition": { "test_eoc": "EOC_IS_ELECTRIC" },
+        "distance": 1000,
+        "descriptions": [
+          {
+            "id": "electric_creature_sense",
+            "symbol": "?",
+            "color": "c_cyan",
+            "text": "You sense something emitting electricity here."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "nvg_great_mech",
+    "condition": "ALWAYS",
+    "values": [ { "value": "NIGHT_VIS", "add": 14 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "nvg_great",
+    "name": { "str": "Night Vision Goggles" },
+    "description": "You are wearing night vision goggles which allow you to see very well in the dark, though at the cost of some detail.",
+    "condition": "ACTIVE",
+    "has": "WORN",
+    "values": [ { "value": "PERCEPTION", "add": -1 }, { "value": "NIGHT_VIS", "add": 18 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "nvg_good",
+    "name": { "str": "Night Vision Goggles" },
+    "description": "You are wearing night vision goggles which allow you to see quite well in the dark, though at the cost of some detail.",
+    "condition": "ACTIVE",
+    "has": "WORN",
+    "values": [ { "value": "PERCEPTION", "add": -1 }, { "value": "NIGHT_VIS", "add": 16 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "nvg_normal",
+    "name": { "str": "Night Vision Goggles" },
+    "description": "You are wearing night vision goggles which allow you to see in the dark, though at the cost of some detail.",
+    "condition": "ACTIVE",
+    "has": "WORN",
+    "values": [ { "value": "PERCEPTION", "add": -1 }, { "value": "NIGHT_VIS", "add": 12 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "nvg_bad",
+    "name": { "str": "Night Vision Goggles" },
+    "description": "You are wearing night vision goggles which allow you to see poorly in the dark, though at the cost of some detail.",
+    "condition": "ACTIVE",
+    "has": "WORN",
+    "values": [ { "value": "PERCEPTION", "add": -1 }, { "value": "NIGHT_VIS", "add": 10 } ]
+  },
+  {
+    "id": "ench_climate_control_warm",
+    "type": "enchantment",
+    "name": { "str": "Cold Climate Control" },
+    "description": "You are wearing equipment that helps handle harsh climates.",
+    "has": "WORN",
+    "condition": "ALWAYS",
+    "values": [ { "value": "CLIMATE_CONTROL_HEAT", "add": 50 } ]
+  },
+  {
+    "id": "ench_climate_control_all",
+    "name": { "str": "Complete Climate Control" },
+    "description": "You are wearing equipment that helps handle harsh climates.",
+    "type": "enchantment",
+    "has": "WORN",
+    "condition": "ACTIVE",
+    "values": [ { "value": "CLIMATE_CONTROL_HEAT", "add": 50 }, { "value": "CLIMATE_CONTROL_CHILL", "add": 50 } ]
+  },
+  {
+    "id": "ench_climate_control_all_permanent",
+    "name": { "str": "Complete Climate Control" },
+    "description": "You are wearing equipment that helps handle harsh climates.",
+    "type": "enchantment",
+    "has": "WORN",
+    "condition": "ALWAYS",
+    "values": [ { "value": "CLIMATE_CONTROL_HEAT", "add": 50 }, { "value": "CLIMATE_CONTROL_CHILL", "add": 50 } ]
+  },
+  {
+    "id": "ench_exo_strength",
+    "type": "enchantment",
+    "name": { "str": "EXO Frame Strength" },
+    "description": "You are wearing equipment that gives 10 strength.",
+    "has": "WORN",
+    "condition": "ACTIVE",
+    "values": [ { "value": "STRENGTH", "add": 10 } ]
+  },
+  {
+    "id": "ench_meteor_armor",
+    "type": "enchantment",
+    "name": { "str": "Hyperdense" },
+    "description": "Your armor's massive weight makes it nearly impossible to be knocked over or pushed back.",
+    "has": "WORN",
+    "condition": "ALWAYS",
+    "values": [ { "value": "KNOCKBACK_RESIST", "add": 1.0 }, { "value": "KNOCKDOWN_RESIST", "add": 1.0 } ]
+  },
+  {
+    "id": "ench_meteor_mask",
+    "type": "enchantment",
+    "name": { "str": "Detect Evil" },
+    "description": "Your armor lets you detect otherworldly presence with ease.",
+    "has": "WORN",
+    "condition": "ALWAYS",
+    "special_vision": [
+      {
+        "condition": {
+          "or": [ { "npc_has_species": "HORROR" }, { "npc_has_species": "NETHER" }, { "npc_has_species": "nether_player_hate" } ]
+        },
+        "distance": 10,
+        "descriptions": [ { "id": "nether_creature_sense", "symbol": "?", "color": "c_pink", "text": "You sense an otherworldy danger here." } ]
+      }
+    ]
+  },
+  {
+    "id": "ench_dampened_steps",
+    "type": "enchantment",
+    "name": { "str": "Dampened Steps" },
+    "description": "You are wearing equipment that muffles your footsteps.",
+    "has": "WORN",
+    "condition": "ACTIVE",
+    "values": [ { "value": "FOOTSTEP_NOISE", "multiply": -0.67 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_wings_bird",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "arm_l" },
+      { "lose": "arm_r" },
+      { "lose": "hand_r" },
+      { "lose": "hand_l" },
+      { "gain": "wing_bird_l" },
+      { "gain": "wing_bird_r" }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_gastropod_foot",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "foot_l" }, { "lose": "foot_r" }, { "lose": "leg_l" }, { "lose": "leg_r" }, { "gain": "gastropod_foot" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_gastropod_foot_bonuses",
+    "condition": { "not": { "u_has_move_mode": "prone" } },
+    "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_fish_tail",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "gain": "fish_tail" }, { "lose": "long_tail" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_long_tail",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "gain": "long_tail" }, { "lose": "fish_tail" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_eyes_frog",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "eyes" }, { "gain": "eyes_frog" } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_leg_tentacles",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "foot_l" },
+      { "lose": "foot_r" },
+      { "lose": "leg_l" },
+      { "lose": "leg_r" },
+      { "gain": "cephalopod_arm_1" },
+      { "gain": "cephalopod_arm_2" },
+      { "gain": "cephalopod_arm_3" },
+      { "gain": "cephalopod_arm_4" },
+      { "gain": "cephalopod_arm_5" },
+      { "gain": "cephalopod_arm_6" }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_arm_tentacles",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "hand_l" },
+      { "lose": "hand_r" },
+      { "lose": "arm_l" },
+      { "lose": "arm_r" },
+      { "gain": "cephalopod_tentacle_l" },
+      { "gain": "cephalopod_tentacle_r" }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_crab_legs",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [
+      { "lose": "foot_l" },
+      { "lose": "foot_r" },
+      { "lose": "leg_l" },
+      { "lose": "leg_r" },
+      { "gain": "crab_leg_1" },
+      { "gain": "crab_leg_2" },
+      { "gain": "crab_leg_3" },
+      { "gain": "crab_leg_4" }
+    ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_hooves",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "foot_l" }, { "lose": "foot_r" }, { "gain": "hoof_l" }, { "gain": "hoof_r" } ],
+    "values": [ { "value": "FOOTSTEP_NOISE", "multiply": 0.2 } ]
+  },
+  {
+    "id": "ench_wings_insect_active",
+    "type": "enchantment",
+    "name": { "str": "Insect Wings (Buzzing)" },
+    "description": "Your rapidly buzzing wings propel you with extra speed.",
+    "condition": { "and": [ { "not": "u_is_underwater" } ] },
+    "values": [ { "value": "REGEN_STAMINA", "add": -110 }, { "value": "MOVE_COST", "multiply": -0.25 } ]
+  },
+  {
+    "id": "ench_quadruped_movement_bipedal",
+    "//": "A movement penalty for if you're a full quadruped on two legs.",
+    "type": "enchantment",
+    "condition": {
+      "and": [
+        { "u_has_flag": "QUADRUPED_RUN" },
+        { "or": [ { "u_has_move_mode": "walk" }, "u_can_drop_weapon" ] },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": "u_is_in_water" },
+        { "not": "u_is_underwater" }
+      ]
+    },
+    "values": [ { "value": "MOVE_COST", "multiply": 0.15 }, { "value": "CARRY_WEIGHT", "multiply": -0.1 } ]
+  },
+  {
+    "id": "ench_quadruped_movement_full_crouch",
+    "//": "For quadrupeds with all four of their animal limbs.  We should avoid giving this to every animal mutant, as it helps keep lines distinct.",
+    "type": "enchantment",
+    "condition": {
+      "and": [
+        { "u_has_flag": "QUADRUPED_CROUCH" },
+        { "u_has_flag": "QUADRUPED_RUN" },
+        { "or": [ { "u_has_move_mode": "crouch" } ] },
+        { "not": "u_can_drop_weapon" }
+      ]
+    },
+    "values": [ { "value": "MOVE_COST", "multiply": -0.45 }, { "value": "CARRY_WEIGHT", "multiply": 0.1 } ],
+    "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
+  },
+  {
+    "id": "ench_quadruped_movement_full_run",
+    "//": "For quadrupeds with all four of their animal limbs.  We should avoid giving this to every animal mutant, as it helps keep lines distinct.",
+    "type": "enchantment",
+    "condition": {
+      "and": [
+        { "u_has_flag": "QUADRUPED_CROUCH" },
+        { "u_has_flag": "QUADRUPED_RUN" },
+        { "u_has_move_mode": "run" },
+        { "not": "u_can_drop_weapon" }
+      ]
+    },
+    "values": [ { "value": "MOVE_COST", "multiply": -0.15 }, { "value": "CARRY_WEIGHT", "multiply": 0.1 } ],
+    "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
+  },
+  {
+    "id": "ench_quadruped_movement_half",
+    "//": "For quadrupeds who only have their front paws.  Makes crouch-walking a bit faster, but that's all.",
+    "type": "enchantment",
+    "condition": {
+      "and": [
+        { "u_has_flag": "QUADRUPED_CROUCH" },
+        { "not": { "u_has_flag": "QUADRUPED_RUN" } },
+        { "u_has_move_mode": "crouch" },
+        { "not": "u_can_drop_weapon" }
+      ]
+    },
+    "values": [ { "value": "MOVE_COST", "multiply": -0.3 } ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_hands_webbed",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "hand_r" }, { "lose": "hand_l" }, { "gain": "hand_webbed_l" }, { "gain": "hand_webbed_r" } ]
+  }
+]

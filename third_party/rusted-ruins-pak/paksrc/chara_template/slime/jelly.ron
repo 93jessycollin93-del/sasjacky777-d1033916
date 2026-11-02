@@ -1,0 +1,32 @@
+(
+    object_type: "chara_template",
+    id: "jelly",
+    
+    image: (
+        path: "jelly.png",
+        copyright: "T.Okubo",
+        w: 24,
+        h: 48,
+    ),
+    
+    chara_template: (
+        race: "slime",
+        class: "animal",
+        faction: "monster",
+        gen_weight: 100,
+        gen_level: 1,
+        default_ai_kind: "melee",
+        skill_bonus: {},
+        base_hp: 24,
+        base_mp: 10,
+        str: 7,
+        vit: 11,
+        dex: 6,
+        int: 8,
+        wil: 5,
+        cha: 12,
+        spd: 50,
+        carry: 2,
+        travel_speed: 2,
+    ),
+)

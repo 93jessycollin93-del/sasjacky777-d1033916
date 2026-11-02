@@ -1,0 +1,724 @@
+#include "locations.h"
+
+#include "character.h"
+#include "debug.h"
+#include "detached_ptr.h"
+#include "game.h"
+#include "item.h"
+#include "itype.h"
+#include "iuse_actor.h"
+#include "location_ptr.h"
+#include "map/map.h"
+#include "map/mapbuffer.h"
+#include "map/submap.h"
+#include "monster.h"
+#include "npc.h"
+#include "player.h"
+#include "rot.h"
+#include "vehicle/veh_type.h"
+#include "vehicle/vehicle.h"
+#include "vehicle/vehicle_part.h"
+#include "vehicle/vpart_position.h"
+#include "vehicle/vpart_range.h"
+#include "weather/weather.h"
+
+namespace
+{
+
+auto resident_tile_lookup() -> mapbuffer_lookup_options
+{
+    return {
+        .mode = mapbuffer_lookup_mode::resident_only,
+    };
+}
+
+const item *cost_split_helper( const item *it, int qty )
+{
+    if( !it->count_by_charges() || qty <= 0 || qty >= it->charges ) {
+        return it;
+    }
+    item *split = item::spawn_temporary( *it );
+    split->charges = qty;
+    return split;
+}
+
+} // namespace
+
+
+detached_ptr<item> fake_item_location::detach( item * )
+{
+    debugmsg( "Attempted to detach a fake item" );
+    return detached_ptr<item>();
+}
+
+void fake_item_location::attach( detached_ptr<item> && )
+{
+    debugmsg( "Attempted to attach to a fake location" );
+}
+
+bool fake_item_location::is_loaded( const item * ) const
+{
+    return false; //Loaded means in the reality bubble so no
+}
+
+tripoint_bub_ms fake_item_location::bub_pos( const item * ) const
+{
+    debugmsg( "Attempted to find the position of a fake item" );
+    return tripoint_bub_ms::zero();
+}
+
+tripoint_abs_ms fake_item_location::abs_pos( const item * ) const
+{
+    debugmsg( "Attempted to find the position of a fake item" );
+    return tripoint_abs_ms::zero();
+}
+
+dimension_id fake_item_location::get_dimension( const item * ) const
+{
+    debugmsg( "Attempted to find the dimension of a fake item" );
+    return dimension_id{};
+}
+
+item_location_type fake_item_location::where() const
+{
+    debugmsg( "Attempted to get the where of a fake item" );
+    return item_location_type::invalid;
+}
+
+int fake_item_location::obtain_cost( const Character &, int, const item * ) const
+{
+    debugmsg( "Attempted to get the obtain cost of a fake item" );
+    return 0;
+}
+
+std::string fake_item_location::describe( const Character *, const item * ) const
+{
+    return "Error: Nowhere";
+}
+
+std::string temp_item_location::describe( const Character *, const item * ) const
+{
+    return "You shouldn't see this";
+}
+detached_ptr<item> temp_item_location::detach( item *it )
+{
+    debugmsg( "Attempted to detach a fake item\nPlease report this as a bug" );
+    return item::spawn( *it );
+}
+
+void temp_item_location::attach( detached_ptr<item> &&it )
+{
+    g->add_fake_item( std::move( it ) );
+}
+
+bool temp_item_location::is_loaded( const item * ) const
+{
+    return false;
+}
+
+tripoint_bub_ms temp_item_location::bub_pos( const item * ) const
+{
+    return tripoint_bub_ms::zero();
+}
+
+tripoint_abs_ms temp_item_location::abs_pos( const item * ) const
+{
+    return tripoint_abs_ms::zero();
+}
+
+dimension_id temp_item_location::get_dimension( const item * ) const
+{
+    return dimension_id{};
+}
+
+item_location_type temp_item_location::where() const
+{
+    return item_location_type::character;
+}
+
+int temp_item_location::obtain_cost( const Character &, int, const item * ) const
+{
+    return 100;
+}
+
+detached_ptr<item> character_item_location::detach( item *it )
+{
+    return holder->inv_remove_item( it );
+}
+
+void character_item_location::attach( detached_ptr<item> &&obj )
+{
+    holder->i_add( std::move( obj ) );
+}
+
+bool character_item_location::is_loaded( const item * ) const
+{
+    return holder->is_loaded();
+}
+
+tripoint_bub_ms character_item_location::bub_pos( const item * ) const
+{
+    return holder->bub_pos();
+}
+
+tripoint_abs_ms character_item_location::abs_pos( const item * ) const
+{
+    return holder->abs_pos();
+}
+
+dimension_id character_item_location::get_dimension( const item * ) const
+{
+    return holder->get_dimension();
+}
+
+item_location_type character_item_location::where() const
+{
+    return item_location_type::character;
+}
+
+int character_item_location::obtain_cost( const Character &ch, int qty,
+        const item *it ) const
+{
+    const item *split_stack = cost_split_helper( it, qty );
+    return dynamic_cast<const player *>( &ch )->item_handling_cost( *split_stack, true,
+            INVENTORY_HANDLING_PENALTY );
+}
+
+std::string character_item_location::describe( const Character *ch, const item *it ) const
+{
+    if( ch == holder ) {
+        auto parents = holder->parents( *it );
+        if( !parents.empty() && holder->is_worn( *parents.back() ) ) {
+            return parents.back()->type_name();
+
+        } else if( holder->is_worn( *it ) ) {
+            return _( "worn" );
+
+        } else {
+            return _( "inventory" );
+        }
+    } else {
+        return holder->name;
+    }
+}
+
+npc_mission_item_location::npc_mission_item_location( npc *h ) : character_item_location( h ) {};
+
+detached_ptr<item> npc_mission_item_location::detach( item *it )
+{
+    npc *as_npc = static_cast<npc *>( holder );
+    return as_npc->companion_mission_inv.remove_item( it );
+}
+
+void npc_mission_item_location::attach( detached_ptr<item> &&obj )
+{
+    npc *as_npc = static_cast<npc *>( holder );
+    as_npc->companion_mission_inv.add_item( std::move( obj ), false );
+}
+
+detached_ptr<item> wield_item_location::detach( item *it )
+{
+    for( std::pair<const bodypart_str_id, bodypart> &part : holder->get_body() ) {
+        if( &*part.second.wielding.wielded == it ) {
+            detached_ptr<item> d = part.second.wielding.wielded.release();
+            return d;
+        }
+    }
+    debugmsg( "Could not find wielded item for detach" );
+    return detached_ptr<item>();
+}
+
+void wield_item_location::attach( detached_ptr<item> &&obj )
+{
+    auto &body = holder->get_body();
+    auto iter = body.find( body_part_arm_r );
+    if( iter != body.end() ) {
+        bodypart &part = holder->get_part( body_part_arm_r );
+        part.wielding.wielded = std::move( obj );
+    }
+}
+
+int wield_item_location::obtain_cost( const Character &ch, int qty, const item *it ) const
+{
+    const item *split_stack = cost_split_helper( it, qty );
+    return dynamic_cast<const player *>( &ch )->item_handling_cost( *split_stack, false, 0 );
+}
+
+std::string wield_item_location::describe( const Character *ch, const item * ) const
+{
+    if( ch == holder ) {
+        return _( "wield" );
+    }
+    return holder->get_name();
+}
+
+bool wield_item_location::is_loaded( const item * ) const
+{
+    return holder->is_loaded();
+}
+
+tripoint_bub_ms wield_item_location::bub_pos( const item * ) const
+{
+    return holder->bub_pos();
+}
+
+tripoint_abs_ms wield_item_location::abs_pos( const item * ) const
+{
+    return holder->abs_pos();
+}
+
+dimension_id wield_item_location::get_dimension( const item * ) const
+{
+    return holder->get_dimension();
+}
+
+item_location_type wield_item_location::where( ) const
+{
+    return item_location_type::character;
+}
+
+detached_ptr<item> worn_item_location::detach( item *it )
+{
+    detached_ptr<item> res;
+    res = holder->worn.remove( it );
+    if( !res ) {
+        debugmsg( "Failed to find worn item in detach" );
+    }
+    return res;
+}
+
+
+void worn_item_location::attach( detached_ptr<item> &&obj )
+{
+    holder->add_worn( std::move( obj ) );
+}
+
+int worn_item_location::obtain_cost( const Character &ch, int qty, const item *it ) const
+{
+    const item *split_stack = cost_split_helper( it, qty );
+    return dynamic_cast<const player *>( &ch )->item_handling_cost( *split_stack, false,
+            INVENTORY_HANDLING_PENALTY / 2 );
+}
+
+std::string worn_item_location::describe( const Character *ch, const item * ) const
+{
+    if( ch == holder ) {
+        return _( "worn" );
+    }
+    return holder->name;
+}
+
+tile_item_location::tile_item_location( const tripoint_abs_ms &position,
+                                        const dimension_id &dim_id )
+{
+    pos_ = position;
+    dim_ = dim_id;
+}
+
+detached_ptr<item> tile_item_location::detach( item *it )
+{
+    detached_ptr<item> res = MAPBUFFER_REGISTRY.get( dim_ ).remove_item( pos_, it,
+                             resident_tile_lookup() );
+    if( res ) {
+        return res;
+    }
+    debugmsg( "Could not find item in tile detach" );
+    return detached_ptr<item>();
+}
+
+void tile_item_location::attach( detached_ptr<item> &&obj )
+{
+    MAPBUFFER_REGISTRY.get( dim_ ).add_item_or_charges( pos_, std::move( obj ), {
+        .lookup = resident_tile_lookup(),
+    } );
+}
+
+bool tile_item_location::is_loaded( const item * ) const
+{
+    return MAPBUFFER_REGISTRY.get( dim_ ).lookup_submap_in_memory( project_to<coords::sm>( pos_ ) );
+}
+
+tripoint_bub_ms tile_item_location::bub_pos( const item * ) const
+{
+    return abs_to_bub( pos_ );
+}
+
+tripoint_abs_ms tile_item_location::abs_pos( const item * ) const
+{
+    return pos_;
+}
+
+dimension_id tile_item_location::get_dimension( const item * ) const
+{
+    return dim_;
+}
+
+void tile_item_location::set_dimension( const dimension_id &dim )
+{
+    dim_ = dim;
+}
+
+item_location_type tile_item_location::where() const
+{
+    return item_location_type::map;
+}
+
+int tile_item_location::obtain_cost( const Character &ch, int qty, const item *it ) const
+{
+    const item *split_stack = cost_split_helper( it, qty );
+    int mv = dynamic_cast<const player *>( &ch )->item_handling_cost( *split_stack, true,
+             MAP_HANDLING_PENALTY );
+    mv += 100 * rl_dist( ch.abs_pos(), pos_ );
+    return mv;
+}
+
+std::string tile_item_location::describe( const Character *ch, const item * ) const
+{
+    map &here = get_map();
+    const auto local = abs_to_map_local( here, pos_ );
+    std::string res = here.name( local );
+    if( ch ) {
+        res += std::string( " " ) += direction_suffix( ch->bub_pos().raw(), abs_to_bub( pos_ ).raw() );
+    }
+    return res;
+}
+
+void tile_item_location::move_by( tripoint_rel_ms offset )
+{
+    pos_ += offset;
+}
+
+bool monster_item_location::is_loaded( const item * ) const
+{
+    return on->is_loaded();
+}
+
+tripoint_bub_ms monster_item_location::bub_pos( const item * ) const
+{
+    return on->bub_pos();
+}
+
+tripoint_abs_ms monster_item_location::abs_pos( const item * ) const
+{
+    return on->abs_pos();
+}
+
+dimension_id monster_item_location::get_dimension( const item * ) const
+{
+    return on->get_dimension();
+}
+
+item_location_type monster_item_location::where() const
+{
+    return item_location_type::monster;
+}
+
+int monster_item_location::obtain_cost( const Character &, int, const item * ) const
+{
+    debugmsg( "Tried to find the obtain cost of an item on a monster" );
+    return 0;
+}
+
+std::string monster_item_location::describe( const Character *, const item * ) const
+{
+    return "on monster";
+}
+
+detached_ptr<item> monster_item_location::detach( item *it )
+{
+    return on->remove_item( it );
+}
+
+void monster_item_location::attach( detached_ptr<item> &&obj )
+{
+    on->add_item( std::move( obj ) );
+}
+
+detached_ptr<item> monster_component_item_location::detach( item *it )
+{
+    return on->remove_corpse_component( *it );
+}
+
+void monster_component_item_location::attach( detached_ptr<item> &&obj )
+{
+    on->add_corpse_component( std::move( obj ) );
+}
+
+detached_ptr<item> monster_tied_item_location::detach( item * )
+{
+    return on->remove_tied_item();
+}
+
+void monster_tied_item_location::attach( detached_ptr<item> &&obj )
+{
+    on->set_tied_item( std::move( obj ) );
+}
+
+detached_ptr<item> monster_tack_item_location::detach( item * )
+{
+    return on->remove_tack_item( );
+}
+
+void monster_tack_item_location::attach( detached_ptr<item> &&obj )
+{
+    on->set_tack_item( std::move( obj ) );
+}
+
+detached_ptr<item> monster_armor_item_location::detach( item * )
+{
+    return on->remove_armor_item( );
+}
+
+void monster_armor_item_location::attach( detached_ptr<item> &&obj )
+{
+    on->set_armor_item( std::move( obj ) );
+}
+
+detached_ptr<item> monster_storage_item_location::detach( item * )
+{
+    return on->remove_storage_item( );
+}
+
+void monster_storage_item_location::attach( detached_ptr<item> &&obj )
+{
+    on->set_storage_item( std::move( obj ) );
+}
+
+detached_ptr<item> monster_battery_item_location::detach( item * )
+{
+    return on->remove_battery_item( );
+}
+
+void monster_battery_item_location::attach( detached_ptr<item> &&obj )
+{
+    on->set_battery_item( std::move( obj ) );
+}
+
+bool vehicle_item_location::is_loaded( const item * ) const
+{
+    if( !veh || !veh->is_loaded() ) {
+        return false;
+    }
+    const vehicle_part *const part = veh->find_part_hack( hack_id );
+    if( !part ) {
+        return false;
+    }
+
+    //Have to check the bounds, the vehicle might be half outside the bubble
+    return get_map().inbounds( veh->mount_to_bubble( part->mount ) );
+}
+
+tripoint_bub_ms vehicle_item_location::bub_pos( const item * ) const
+{
+    if( const vehicle_part *const part = veh->find_part_hack( hack_id ) ) {
+        return veh->mount_to_bubble( part->mount );
+    }
+    return veh->bub_ms_location();
+}
+
+tripoint_abs_ms vehicle_item_location::abs_pos( const item * ) const
+{
+    if( const vehicle_part *const part = veh->find_part_hack( hack_id ) ) {
+        return veh->mount_to_abs( part->mount );
+    }
+    return veh->abs_ms_location();
+}
+
+dimension_id vehicle_item_location::get_dimension( const item * ) const
+{
+    return veh->get_dimension();
+}
+
+item_location_type vehicle_item_location::where() const
+{
+    return item_location_type::vehicle;
+}
+
+detached_ptr<item> vehicle_item_location::detach( item *it )
+{
+    const int part_index = veh->get_part_id_hack( hack_id );
+    if( part_index < 0 ) {
+        debugmsg( "vehicle_item_location::detach: no part for hack_id %d", hack_id );
+        return detached_ptr<item>();
+    }
+    const auto item_pos = veh->mount_to_bubble( veh->part( part_index ).mount );
+    const auto temperature = rot::temp::for_part( *veh, part_index );
+    detached_ptr<item> ret = veh->remove_item( part_index, it );
+    if( ret ) {
+        ret = item::actualize_rot( std::move( ret ), item_pos, temperature, get_weather() );
+    }
+    veh->invalidate_mass();
+    return ret;
+}
+
+void vehicle_item_location::attach( detached_ptr<item> &&obj )
+{
+    const int part_index = veh->get_part_id_hack( hack_id );
+    if( part_index >= 0 ) {
+        obj = veh->add_item( part_index, std::move( obj ) );
+        return;
+    }
+    debugmsg( "vehicle_item_location::attach: no part for hack_id %d", hack_id );
+}
+
+auto vehicle_item_location::storage_temperature() const -> temperature_flag
+{
+    const int part_index = veh->get_part_id_hack( hack_id );
+    return part_index >= 0 ? rot::temp::for_part( *veh,
+            part_index ) : temperature_flag::TEMP_NORMAL;
+}
+
+int vehicle_item_location::obtain_cost( const Character &ch, int qty, const item *it ) const
+{
+    const item *obj = cost_split_helper( it, qty );
+    int mv = dynamic_cast<const player *>( &ch )->item_handling_cost( *obj, true,
+             VEHICLE_HANDLING_PENALTY );
+    const vehicle_part *const part = veh->find_part_hack( hack_id );
+    const tripoint_bub_ms part_pos = part ? veh->mount_to_bubble( part->mount ) :
+                                     veh->bub_ms_location();
+    mv += 100 * rl_dist( ch.bub_pos(), part_pos );
+    return mv;
+}
+
+std::string vehicle_item_location::describe( const Character *ch, const item * ) const
+{
+    const int part_index = veh->get_part_id_hack( hack_id );
+    if( part_index < 0 ) {
+        return "Error: missing vehicle part";
+    }
+    vpart_position part_pos( *veh, part_index );
+    std::string res;
+    if( auto label = part_pos.get_label() ) {
+        res = colorize( *label, c_light_blue ) + " ";
+    }
+    if( auto cargo_part = part_pos.part_with_feature( "CARGO", true ) ) {
+        res += cargo_part->part().name();
+    } else {
+        return "Error: vehicle part without storage";
+    }
+    if( ch ) {
+        res += " " + direction_suffix( ch->bub_pos().raw(), part_pos.pos().raw() );
+    }
+    return res;
+}
+
+detached_ptr<item> vehicle_base_item_location::detach( item * )
+{
+    debugmsg( "Attempted to detach a vehicle base part" );
+    return detached_ptr<item>();
+}
+
+void vehicle_base_item_location::attach( detached_ptr<item> && )
+{
+    debugmsg( "Tried to attach to a vehicle base location" );
+}
+
+int vehicle_base_item_location::obtain_cost( const Character &, int, const item * ) const
+{
+    debugmsg( "Attempted to find the obtain cost of a vehicle part's base item" );
+    return 0;
+}
+
+std::string vehicle_base_item_location::describe( const Character *, const item * ) const
+{
+    return "Error: Vehicle base part";
+}
+
+detached_ptr<item> contents_item_location::detach( item *it )
+{
+
+    detached_ptr<item> ret = container->contents.remove_top( it );
+    container->on_contents_changed();
+    return ret;
+}
+
+void contents_item_location::attach( detached_ptr<item> &&obj )
+{
+    container->contents.insert_item( std::move( obj ) );
+    container->on_contents_changed();
+}
+
+bool contents_item_location::is_loaded( const item * ) const
+{
+    return container->is_loaded();
+}
+
+void contents_item_location::on_changed( const item * ) const
+{
+    return container->on_contents_changed();
+}
+
+
+item_location_type contents_item_location::where() const
+{
+    return item_location_type::container;
+}
+
+int contents_item_location::obtain_cost( const Character &ch, int qty, const item *it ) const
+{
+    if( container->get_use( "holster" ) ) {
+        auto ptr = dynamic_cast<const holster_actor *>
+                   ( container->type->get_use( "holster" )->get_actor_ptr() );
+        return dynamic_cast<const player *>( &ch )->item_handling_cost( *it, false, ptr->draw_cost );
+    } else if( container->get_use( "bandolier" ) ) {
+        auto ptr = dynamic_cast<const bandolier_actor *>
+                   ( container->type->get_use( "bandolier" )->get_actor_ptr() );
+        return dynamic_cast<const player *>( &ch )->item_handling_cost( *it, false, ptr->draw_cost );
+    }
+
+    return INVENTORY_HANDLING_PENALTY + container->obtain_cost( ch, qty );
+}
+
+tripoint_bub_ms contents_item_location::bub_pos( const item * ) const
+{
+    return container->bub_pos();
+}
+
+tripoint_abs_ms contents_item_location::abs_pos( const item * ) const
+{
+    return container->abs_pos();
+}
+
+dimension_id contents_item_location::get_dimension( const item * ) const
+{
+    return dimension_id{}; // TODO
+}
+
+std::string contents_item_location::describe( const Character *, const item * ) const
+{
+    return string_format( _( "inside %s" ), container->tname() );
+}
+
+item *contents_item_location::parent() const
+{
+    return container;
+}
+
+detached_ptr<item> component_item_location::detach( item *it )
+{
+    return container->remove_component( *it );
+}
+
+void component_item_location::attach( detached_ptr<item> &&obj )
+{
+    return container->add_component( std::move( obj ) );
+}
+
+partial_con_item_location::partial_con_item_location( const tripoint_bub_ms &position,
+        const dimension_id &dim_id ) :
+    tile_item_location( bub_to_abs( position ), dim_id ) {}
+
+partial_con_item_location::partial_con_item_location( const tripoint_abs_ms &position,
+        const dimension_id &dim_id ) :
+    tile_item_location( position, dim_id ) {}
+
+detached_ptr<item> partial_con_item_location::detach( item * )
+{
+    debugmsg( "Tried to detach an item from a partial construction" );
+    return detached_ptr<item>();
+}
+
+void partial_con_item_location::attach( detached_ptr<item> && )
+{
+    debugmsg( "Tried to attach an item to a partial construction" );
+}

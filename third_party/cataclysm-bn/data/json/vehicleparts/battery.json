@@ -1,0 +1,266 @@
+[
+  {
+    "type": "vehicle_part",
+    "id": "storage_battery_mount",
+    "name": { "str": "swappable storage battery case" },
+    "symbol": "O",
+    "color": "light_gray",
+    "broken_symbol": "#",
+    "broken_color": "red",
+    "damage_modifier": 80,
+    "durability": 300,
+    "description": "A battery case for storage batteries.  Assists in lifting a storage battery into position and wiring it up, allowing quick installation or removal.",
+    "item": "it_battery_mount",
+    "location": "fuel_source",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "30 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
+      "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "60 m", "using": [ [ "welding_standard", 5 ], [ "steel_tiny", 1 ] ] }
+    },
+    "flags": [ "BATTERY_MOUNT" ],
+    "breaks_into": [
+      { "item": "steel_lump", "prob": 50 },
+      { "item": "steel_chunk", "count": [ 1, 2 ] },
+      { "item": "scrap", "count": [ 0, 3 ] }
+    ],
+    "damage_reduction": { "all": 8 }
+  },
+  {
+    "id": "battery_car",
+    "type": "vehicle_part",
+    "name": { "str": "car battery" },
+    "item": "battery_car",
+    "fuel_type": "battery",
+    "symbol": "o",
+    "color": "yellow",
+    "broken_color": "red",
+    "durability": 120,
+    "description": "A battery for storing electrical power, and discharging it to power electrical devices built into the vehicle.",
+    "folded_volume": "10 L",
+    "breaks_into": [
+      { "item": "steel_lump", "count": [ 6, 9 ] },
+      { "item": "steel_chunk", "count": [ 6, 9 ] },
+      { "item": "scrap", "count": [ 6, 9 ] }
+    ],
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 0 ] ], "time": "50 s", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "50 s", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "repair": {
+        "skills": [ [ "mechanics", 3 ] ],
+        "time": "600 s",
+        "using": [ [ "soldering_standard", 5 ], [ "vehicle_repair_electronics", 1 ], [ "plastics", 1 ] ]
+      }
+    },
+    "flags": [ "FOLDABLE", "SHOCK_RESISTANT" ]
+  },
+  {
+    "id": "battery_motorbike",
+    "copy-from": "battery_car",
+    "type": "vehicle_part",
+    "name": { "str": "motorbike battery" },
+    "item": "battery_motorbike",
+    "durability": 100,
+    "folded_volume": "4 L",
+    "breaks_into": [
+      { "item": "steel_lump", "count": [ 4, 7 ] },
+      { "item": "steel_chunk", "count": [ 4, 7 ] },
+      { "item": "scrap", "count": [ 4, 7 ] }
+    ]
+  },
+  {
+    "id": "battery_motorbike_small",
+    "copy-from": "battery_car",
+    "type": "vehicle_part",
+    "name": { "str": "motorbike battery, small" },
+    "item": "battery_motorbike_small",
+    "durability": 30,
+    "folded_volume": "2 L",
+    "breaks_into": [
+      { "item": "steel_lump", "count": [ 4, 7 ] },
+      { "item": "steel_chunk", "count": [ 4, 7 ] },
+      { "item": "scrap", "count": [ 4, 7 ] }
+    ]
+  },
+  {
+    "id": "large_storage_battery",
+    "copy-from": "storage_battery",
+    "type": "vehicle_part",
+    "name": { "str": "very large storage battery" },
+    "item": "large_storage_battery",
+    "durability": 600,
+    "breaks_into": [
+      { "item": "steel_lump", "count": [ 10, 20 ] },
+      { "item": "steel_chunk", "count": [ 5, 10 ] },
+      { "item": "scrap", "count": [ 5, 10 ] },
+      { "item": "small_storage_battery", "count": [ 40, 160 ] }
+    ],
+    "requirements": {
+      "repair": {
+        "skills": [ [ "electronics", 4 ] ],
+        "time": "50 m",
+        "using": [ [ "vehicle_screw", 1 ], [ "storage_battery", 6 ], [ "soldering_standard", 16 ] ]
+      }
+    }
+  },
+  {
+    "id": "large_storage_battery_removable",
+    "copy-from": "large_storage_battery",
+    "type": "vehicle_part",
+    "name": { "str": "swappable very large storage battery" },
+    "item": "large_storage_battery",
+    "location": "on_battery_mount",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 0 ] ], "time": "10 s", "using": [  ] },
+      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "10 s", "using": [  ] },
+      "repair": {
+        "skills": [ [ "electronics", 4 ] ],
+        "time": "50 m",
+        "using": [ [ "vehicle_screw", 1 ], [ "storage_battery", 6 ], [ "soldering_standard", 16 ] ]
+      }
+    },
+    "description": "A battery for storing electrical power, and discharging it to power electrical devices built into the vehicle.  This one is mounted on a quick release framework that assists in loading and unloading the battery, allowing it to be easily swapped.",
+    "flags": [ "NEEDS_BATTERY_MOUNT", "NO_LIFT_REQ" ]
+  },
+  {
+    "id": "medium_storage_battery",
+    "copy-from": "storage_battery",
+    "type": "vehicle_part",
+    "name": { "str": "medium storage battery" },
+    "item": "medium_storage_battery",
+    "difficulty": 1,
+    "durability": 250,
+    "folded_volume": "2500 ml",
+    "breaks_into": [ { "item": "scrap", "count": [ 1, 4 ] }, { "item": "small_storage_battery", "count": [ 4, 16 ] } ],
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 0 ] ], "time": "200 s", "using": "vehicle_screw" },
+      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "200 s", "using": "vehicle_screw" },
+      "repair": {
+        "skills": [ [ "electronics", 4 ] ],
+        "time": "25 m",
+        "using": [ [ "vehicle_screw", 1 ], [ "storage_battery", 1 ], [ "soldering_standard", 3 ] ]
+      }
+    },
+    "extend": { "flags": [ "FOLDABLE" ] }
+  },
+  {
+    "id": "sea_scooter_battery",
+    "copy-from": "medium_storage_battery",
+    "type": "vehicle_part",
+    "name": { "str": "sea scooter battery" },
+    "item": "sea_scooter_battery",
+    "extend": { "flags": [ "NOINSTALL" ] }
+  },
+  {
+    "id": "small_storage_battery",
+    "copy-from": "storage_battery",
+    "type": "vehicle_part",
+    "name": { "str": "small storage battery" },
+    "item": "small_storage_battery",
+    "difficulty": 1,
+    "durability": 100,
+    "folded_volume": "500 ml",
+    "breaks_into": [ { "item": "scrap", "count": [ 1, 2 ] } ],
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 0 ] ], "time": "100 s", "using": [  ] },
+      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "100 s", "using": [  ] },
+      "repair": {  }
+    },
+    "extend": { "flags": [ "FOLDABLE", "SHOCK_RESISTANT" ] }
+  },
+  {
+    "id": "storage_battery",
+    "type": "vehicle_part",
+    "name": { "str": "large storage battery" },
+    "item": "storage_battery",
+    "location": "fuel_source",
+    "fuel_type": "battery",
+    "symbol": "O",
+    "color": "yellow",
+    "broken_color": "red",
+    "durability": 300,
+    "description": "A battery for storing electrical power, and discharging it to power electrical devices built into the vehicle.",
+    "damage_modifier": 80,
+    "breaks_into": [
+      { "item": "steel_lump", "count": [ 5, 10 ] },
+      { "item": "steel_chunk", "count": [ 5, 10 ] },
+      { "item": "scrap", "count": [ 5, 10 ] },
+      { "item": "small_storage_battery", "count": [ 20, 80 ] }
+    ],
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "600 s", "using": [ [ "welding_standard", 5 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "300 s", "using": "vehicle_weld_removal" },
+      "repair": {
+        "skills": [ [ "electronics", 4 ] ],
+        "time": "50 m",
+        "using": [ [ "vehicle_screw", 1 ], [ "storage_battery", 3 ], [ "soldering_standard", 8 ] ]
+      }
+    }
+  },
+  {
+    "id": "storage_battery_removable",
+    "copy-from": "storage_battery",
+    "type": "vehicle_part",
+    "name": { "str": "swappable large storage battery" },
+    "item": "storage_battery",
+    "location": "on_battery_mount",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 0 ] ], "time": "10 s", "using": [  ] },
+      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "10 s", "using": [  ] }
+    },
+    "description": "A battery for storing electrical power, and discharging it to power electrical devices built into the vehicle.  This one is mounted on a quick release framework that assists in loading and unloading the battery, allowing it to be easily swapped.",
+    "flags": [ "NEEDS_BATTERY_MOUNT", "NO_LIFT_REQ" ]
+  },
+  {
+    "type": "vehicle_part",
+    "id": "recharge_station",
+    "name": { "str": "recharging station" },
+    "symbol": "o",
+    "color": "light_green",
+    "broken_symbol": "#",
+    "broken_color": "blue",
+    "damage_modifier": 10,
+    "durability": 20,
+    "description": "A device for recharging batteries, capable of higher output than most consumer models.  When turned on, it charges any rechargeable batteries (battery cells, lead-acid batteries, etc) placed directly in the attached storage space.",
+    "bonus": 600,
+    "item": "recharge_station",
+    "location": "on_cargo",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ], [ "electronics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_screw", 1 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ], [ "electronics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_screw", 1 ] ] },
+      "repair": {
+        "skills": [ [ "mechanics", 4 ] ],
+        "time": "30 m",
+        "using": [ [ "adhesive", 1 ], [ "vehicle_repair_electronics", 1 ] ]
+      }
+    },
+    "flags": [ "INTERNAL", "RECHARGE", "FOLDABLE", "SHOCK_RESISTANT" ],
+    "folded_volume": "2 L",
+    "breaks_into": [
+      { "item": "steel_chunk", "count": [ 0, 2 ] },
+      { "item": "scrap", "count": [ 1, 2 ] },
+      { "item": "cable", "charges": [ 1, 3 ] }
+    ],
+    "damage_reduction": { "all": 10 }
+  },
+  {
+    "type": "vehicle_part",
+    "id": "battery_charger",
+    "name": { "str": "battery charger" },
+    "durability": 5,
+    "description": "A small, low-power consumer device for recharging batteries.  It slowly charges any rechargeable batteries (battery cells, lead-acid batteries, etc) placed directly in the attached storage space.",
+    "bonus": 15,
+    "item": "battery_charger",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "using": [ [ "vehicle_screw", 1 ] ] },
+      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "5 m", "using": [ [ "vehicle_screw", 1 ] ] },
+      "repair": {
+        "skills": [ [ "mechanics", 3 ] ],
+        "time": "30 m",
+        "using": [ [ "adhesive", 1 ], [ "vehicle_repair_electronics", 1 ] ]
+      }
+    },
+    "folded_volume": "250 ml",
+    "breaks_into": "ig_vp_device",
+    "copy-from": "recharge_station"
+  }
+]

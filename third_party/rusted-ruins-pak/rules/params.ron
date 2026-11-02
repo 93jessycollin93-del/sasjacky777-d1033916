@@ -1,0 +1,17 @@
+(
+    minutes_per_turn_normal: 0.5,
+    regionmap_tile_size: 4.0,
+    skill_bonus: {
+        Awful: (-1.0, 0),
+        VeryBad: (-0.6, 0),
+        Bad: (-0.4, 0),
+        SlightlyBad: (-0.2, 0),
+        None: (0.0, 0),
+        SlightlyGood: (0.05, 1),
+        Good: (0.1, 2),
+        VeryGood: (0.2, 4),
+        Excellent: (0.3, 6),
+        Superb: (0.5, 10),
+    },
+    magic_device_base_power: 1000,
+)

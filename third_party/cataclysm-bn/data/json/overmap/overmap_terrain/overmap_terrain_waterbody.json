@@ -1,0 +1,116 @@
+[
+  {
+    "type": "overmap_terrain",
+    "id": "lake_shore",
+    "copy-from": "generic_water",
+    "name": "lake shore",
+    "sym": "#",
+    "color": "light_blue",
+    "see_cost": 1,
+    "flags": [ "NO_ROTATE", "LAKE_SHORE", "SOURCE_DRINK" ],
+    "mapgen": [ { "method": "builtin", "name": "lake_shore" } ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "cove_shoal",
+    "copy-from": "generic_water",
+    "name": "shoal",
+    "sym": "#",
+    "color": "i_blue",
+    "flags": [ "LAKE_SHORE", "SOURCE_DRINK" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "lake_underwater_shore",
+    "copy-from": "generic_water",
+    "name": "lake shore (submerged)",
+    "sym": "#",
+    "color": "light_blue",
+    "see_cost": 1,
+    "flags": [ "NO_ROTATE", "LAKE_SHORE", "SOURCE_DRINK" ],
+    "mapgen": [ { "method": "builtin", "name": "lake_shore" } ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "lake_surface",
+    "copy-from": "generic_water",
+    "name": "lake",
+    "sym": "#",
+    "color": "blue",
+    "see_cost": 1,
+    "spawns": { "group": "GROUP_RIVER", "population": [ 1, 3 ], "chance": 15 },
+    "flags": [ "NO_ROTATE", "LAKE", "SOURCE_DRINK" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "lake_water_cube",
+    "copy-from": "generic_water",
+    "name": "lake (submerged)",
+    "sym": "#",
+    "color": "blue",
+    "see_cost": 1,
+    "flags": [ "NO_ROTATE", "LAKE", "SOURCE_DRINK" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "lake_bed",
+    "copy-from": "generic_water",
+    "name": "lake bed (submerged)",
+    "sym": "#",
+    "color": "cyan",
+    "see_cost": 1,
+    "flags": [ "NO_ROTATE", "LAKE", "SOURCE_DRINK" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "lake_bed_lab_entrance_roof" ],
+    "name": "lake bed (submerged)",
+    "sym": "#",
+    "looks_like": "lake_bed",
+    "color": "blue",
+    "see_cost": 1
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "lake_bed_lab_entrance", "lake_bed_lab_entrance_airlock" ],
+    "name": "sunken lab entrance",
+    "sym": "L",
+    "color": "green",
+    "see_cost": 1
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
+      "cargo_ship_a",
+      "cargo_ship_b",
+      "cargo_ship_c",
+      "cargo_ship_1_a",
+      "cargo_ship_1_b",
+      "cargo_ship_1_c",
+      "cargo_ship_2_a",
+      "cargo_ship_2_b",
+      "cargo_ship_2_c"
+    ],
+    "name": "sunken cargo ship",
+    "sym": "S",
+    "color": "light_gray",
+    "see_cost": 1
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [ "wooden_shipwreck_a", "wooden_shipwreck_b" ],
+    "copy-from": "cargo_ship_a",
+    "name": "sunken ship",
+    "color": "brown"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "kraken_lair",
+    "name": "kraken nest",
+    "sym": "K",
+    "color": "red",
+    "looks_like": "shipwreck_river_1",
+    "see_cost": 5,
+    "flags": [ "RISK_HIGH" ]
+  }
+]

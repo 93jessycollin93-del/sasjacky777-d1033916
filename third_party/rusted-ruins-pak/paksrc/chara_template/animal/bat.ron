@@ -1,0 +1,32 @@
+(
+    object_type: "chara_template",
+    id: "bat",
+    
+    image: (
+        path: "bat.png",
+        copyright: "T.Okubo",
+        w: 24,
+        h: 48,
+    ),
+    
+    chara_template: (
+        race: "animal",
+        class: "animal",
+        faction: "monster",
+        gen_weight: 150,
+        gen_level: 3,
+        default_ai_kind: "melee",
+        skill_bonus: {},
+        base_hp: 30,
+        base_mp: 20,
+        str: 8,
+        vit: 10,
+        dex: 15,
+        int: 6,
+        wil: 7,
+        cha: 10,
+        spd: 120,
+        carry: 1,
+        travel_speed: 4,
+    ),
+)

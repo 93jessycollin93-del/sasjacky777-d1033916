@@ -1,0 +1,31 @@
+# Projects vendored whole into third_party/<name>/ by scripts/vendor.sh.
+# Each is upstream's tracked tree at exactly this commit, never edited here:
+# `scripts/vendor.sh --check` proves it. To move one, run
+# `scripts/vendor.sh <name> <commit>` rather than editing this file.
+#
+# name        url                                           commit
+filmcraft     https://github.com/storytold/filmcraft        ca36cf9a6af29ca6de15ebcbfbd052e6470fef8c
+# FilmCraft's one git dependency, at the commit its Cargo.toml pins
+# (src/test/third-party.test.ts fails if the two drift apart).
+craft-libs    https://github.com/storytold/craft-libs       5c874d51eeb3de70e735c8ce87a59a7dedd47675
+
+# The ten most-starred open-world crafting survival games on GitHub (October
+# 2026), ranked in docs/THIRD_PARTY.md. Luanti is the engine VoxeLibre runs on:
+# together they are one game, and neither is playable as survival alone.
+luanti            https://github.com/luanti-org/luanti               5bb520ba544536c4c2914bc0a5ad386e758d7036
+voxelibre         https://github.com/VoxeLibre/VoxeLibre             4492ce6ff8d856daa4567abe2ea689f4e7a39842
+cataclysm-dda     https://github.com/CleverRaven/Cataclysm-DDA       afe69bd280f3104955752d472ae95f252e488c34
+cubyz             https://github.com/PixelGuys/Cubyz                 457147a75e38f5bb32f7488b09904a183996c414
+# Its NBT library is a submodule (SirCmpwn/fNbt); vendor.sh fetches it at the
+# commit TrueCraft pins, into the path `git clone --recursive` would.
+truecraft         https://github.com/ddevault/TrueCraft              cd0ed366580160dc58ff93603da158c161eb3ad6
+cataclysm-bn      https://github.com/cataclysmbn/Cataclysm-BN        4fd1dbea600c50e6a1471e26c30b27a67d5e6680
+crafter           https://github.com/danijar/crafter                 e04542a2159f1aad3d4c5ad52e8185717380ee3a
+# Minicraft+'s main branch is mid-rewrite and upstream says so; this is the
+# head of 2.3.0-dev, the branch its README names as the latest working build.
+minicraft-plus    https://github.com/MinicraftPlus/minicraft-plus-revived  4dc00332e24a727b96be7b885d5cbbdd9c85263c
+rusted-ruins      https://github.com/garkimasera/rusted-ruins       44c786930be83685b99297a3ce757b042ec8d333
+# Rusted Ruins' game data (items, maps, art, text), kept in its own repository.
+rusted-ruins-pak  https://github.com/garkimasera/rusted-ruins-pak   380de845eee7a64e849a03e194e588a755011716
+cataclysm-tlg     https://github.com/Cataclysm-TLG/Cataclysm-TLG     436e2453fdf1bde8ad30ceb11bc4b3943e14fb6e
+manicdigger       https://github.com/manicdigger/manicdigger         0635de1d6d6817c30b74fd2c0399a359009fb9e6

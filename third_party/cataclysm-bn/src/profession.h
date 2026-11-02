@@ -1,0 +1,161 @@
+#pragma once
+
+#include <list>
+#include <optional>
+#include <map>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "pldata.h"
+#include "string_id.h"
+#include "translations.h"
+#include "type_id.h"
+
+template<typename T>
+class generic_factory;
+
+class item;
+class JsonObject;
+class avatar;
+class player;
+
+template<typename T>
+class detached_ptr;
+
+class profession
+{
+    public:
+        using StartingSkill = std::pair<skill_id, int>;
+        using StartingSkillList = std::vector<StartingSkill>;
+        struct age_range {
+            int min;
+            int max;
+        };
+        struct itypedec {
+            itype_id type_id;
+            /** Snippet id, @see snippet_library. */
+            snippet_id snip_id;
+            // compatible with when this was just a std::string
+            itypedec( const std::string &t ) : type_id( t ), snip_id( snippet_id::NULL_ID() ) {
+            }
+            itypedec( const std::string &t, const snippet_id &d ) : type_id( t ), snip_id( d ) {
+            }
+        };
+        using itypedecvec = std::vector<itypedec>;
+        friend class string_id<profession>;
+        friend class generic_factory<profession>;
+
+    private:
+        profession_id id;
+        bool was_loaded = false;
+
+        translation _name_male;
+        translation _name_female;
+        translation _description_male;
+        translation _description_female;
+        signed int _point_cost = 0;
+
+        // TODO: In professions.json, replace lists of itypes (legacy) with item groups
+        itypedecvec legacy_starting_items;
+        itypedecvec legacy_starting_items_male;
+        itypedecvec legacy_starting_items_female;
+        item_group_id _starting_items = item_group_id( "EMPTY_GROUP" );
+        item_group_id _starting_items_male = item_group_id( "EMPTY_GROUP" );
+        item_group_id _starting_items_female = item_group_id( "EMPTY_GROUP" );
+        std::set<itype_id> no_bonus;
+
+        std::vector<addiction> _starting_addictions;
+        std::vector<bionic_id> _starting_CBMs;
+        std::vector<trait_id> _starting_traits;
+        std::set<trait_id> _forbidden_traits;
+        std::set<bionic_id> _forbidden_bionics;
+        std::set<spell_id> _forbidden_spells;
+        std::set<trait_id> _allowed_traits;
+        std::set<bionic_id> _allowed_bionics;
+        std::set<spell_id> _allowed_spells;
+        bool _forbids_bionics;
+        bool _forbids_spells;
+        std::vector<mtype_id> _starting_pets;
+        std::vector<npc_class_id> _starting_npcs;
+        vproto_id _starting_vehicle = vproto_id::NULL_ID();
+        // the int is what level the spell starts at
+        std::map<spell_id, int> _starting_spells;
+        std::set<std::string> flags; // flags for some special properties of the profession
+        StartingSkillList  _starting_skills;
+        std::vector<mission_type_id> _missions; // starting missions for profession
+
+        void check_item_definitions( const itypedecvec &items ) const;
+
+        void load( const JsonObject &jo, const std::string &src );
+
+    public:
+        static constexpr auto min_age = 16;
+        static constexpr auto max_age = 55;
+        //these three aren't meant for external use, but had to be made public regardless
+        profession();
+
+        static void load_profession( const JsonObject &jo, const std::string &src );
+        static void load_item_substitutions( const JsonObject &jo );
+
+        // these should be the only ways used to get at professions
+        static const profession_id &generic(); // gives id of generic, default profession
+        static const std::vector<profession> &get_all();
+
+        static bool has_initialized();
+        // clear profession map, every profession pointer becomes invalid!
+        static void reset();
+        /** calls @ref check_definition for each profession */
+        static void check_definitions();
+        /** Check that item/CBM/addiction/skill definitions are valid. */
+        void check_definition() const;
+
+        const profession_id &ident() const;
+        std::string gender_appropriate_name( bool male ) const;
+        std::string description( bool male ) const;
+        signed int point_cost() const;
+        std::optional<signed int> starting_cash() const;
+        std::vector<detached_ptr<item>> items( bool male, const std::vector<trait_id> &traits ) const;
+        std::vector<addiction> addictions() const;
+        vproto_id vehicle() const;
+        std::vector<mtype_id> pets() const;
+        std::vector<bionic_id> CBMs() const;
+        StartingSkillList skills() const;
+        const std::vector<mission_type_id> &missions() const;
+        std::vector<npc_class_id> npcs() const;
+
+        std::map<spell_id, int> spells() const;
+
+        std::optional<signed int> _starting_cash = std::nullopt;
+        std::optional<age_range> _starting_age_range;
+        auto starting_age_range() const -> std::optional<age_range>;
+
+        /**
+         * Check if this type of profession has a certain flag set.
+         *
+         * Current flags: none
+         */
+        bool has_flag( const std::string &flag ) const;
+
+        bool is_locked_trait( const trait_id &trait ) const;
+        bool is_forbidden_trait( const trait_id &trait ) const;
+        bool is_allowed_trait( const trait_id &trait ) const;
+        std::vector<trait_id> get_locked_traits() const;
+        std::set<trait_id> get_forbidden_traits() const;
+        std::set<trait_id> get_allowed_traits() const;
+
+        bool is_locked_bionic( const bionic_id &bionic ) const;
+        bool is_forbidden_bionic( const bionic_id &bionic ) const;
+        bool is_allowed_bionic( const bionic_id &bionic ) const;
+        bool forbids_bionics() const;
+        std::vector<bionic_id> get_locked_bionics() const;
+        std::set<bionic_id> get_forbidden_bionics() const;
+        std::set<bionic_id> get_allowed_bionics() const;
+
+        bool is_forbidden_spell( const spell_id &spell ) const;
+        bool is_allowed_spell( const spell_id &spell ) const;
+        bool forbids_spells() const;
+        std::set<spell_id> get_forbidden_spells() const;
+        std::set<spell_id> get_allowed_spells() const;
+};

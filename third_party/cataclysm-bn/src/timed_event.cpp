@@ -1,0 +1,375 @@
+#include "timed_event.h"
+
+#include "action_time_scale.h"
+#include "avatar.h"
+#include "avatar_action.h"
+#include "debug.h"
+#include "enums.h"
+#include "event.h"
+#include "event_bus.h"
+#include "faction.h"
+#include "game.h"
+#include "game_constants.h"
+#include "int_id.h"
+#include "line.h"
+#include "map/map.h"
+#include "map/mapdata.h"
+#include "map_iterator.h"
+#include "memorial_logger.h"
+#include "messages.h"
+#include "monster.h"
+#include "morale_types.h"
+#include "options.h"
+#include "profile.h"
+#include "rng.h"
+#include "sounds.h"
+#include "text_snippets.h"
+#include "translations.h"
+#include "type_id.h"
+
+#include <algorithm>
+#include <array>
+#include <memory>
+#include <optional>
+#include <vector>
+
+static const itype_id itype_petrified_eye( "petrified_eye" );
+
+static const mtype_id mon_amigara_horror( "mon_amigara_horror" );
+static const mtype_id mon_copbot( "mon_copbot" );
+static const mtype_id mon_dark_wyrm( "mon_dark_wyrm" );
+static const mtype_id mon_dermatik( "mon_dermatik" );
+static const mtype_id mon_eyebot( "mon_eyebot" );
+static const mtype_id mon_riotbot( "mon_riotbot" );
+static const mtype_id mon_sewer_snake( "mon_sewer_snake" );
+static const mtype_id mon_spider_cellar_giant( "mon_spider_cellar_giant" );
+static const mtype_id mon_spider_widow_giant( "mon_spider_widow_giant" );
+
+timed_event::timed_event( timed_event_type e_t, const time_point &w, int f_id, tripoint_abs_sm p )
+    : type( e_t )
+    , when( w )
+    , faction_id( f_id )
+    , map_point( p )
+{
+}
+
+void timed_event::actualize()
+{
+    switch( type ) {
+        case TIMED_EVENT_HELP:
+            debugmsg( "Currently disabled while NPC and monster factions are being rewritten." );
+            break;
+
+        case TIMED_EVENT_ROBOT_ATTACK: {
+            const auto u_pos = g->u.abs_sm_pos();
+            if( rl_dist( u_pos, map_point ) <= 4 ) {
+                const mtype_id &robot_type = one_in( 2 ) ? mon_copbot : mon_riotbot;
+
+                g->events().send<event_type::becomes_wanted>( g->u.getID() );
+                point_bub_ms rob( u_pos.x() > map_point.x() ? 0 - SEEX * 2 : SEEX * 4,
+                                  u_pos.y() > map_point.y() ? 0 - SEEY * 2 : SEEY * 4 );
+                g->place_critter_at( robot_type, tripoint_bub_ms( rob, g->u.bub_pos().z() ) );
+            }
+        }
+        break;
+
+        case TIMED_EVENT_SPAWN_WYRMS: {
+            if( g->get_levz() >= 0 ) {
+                return;
+            }
+            g->memorial().add(
+                pgettext( "memorial_male", "Drew the attention of more dark wyrms!" ),
+                pgettext( "memorial_female", "Drew the attention of more dark wyrms!" ) );
+            // 50% chance to spawn a dark wyrm near every orifice on the level.
+            for( const tripoint_bub_ms &p : g->m.points_on_zlevel() ) {
+                if( g->m.ter( p ) == ter_id( "t_orifice" ) ) {
+                    g->place_critter_around( mon_dark_wyrm, p, 1 );
+                }
+            }
+            // You could drop the flag, you know.
+            if( g->u.has_amount( itype_petrified_eye, 1 ) ) {
+                sound_event se;
+                se.origin = g->u.bub_pos();
+                se.volume = 100;
+                se.category = sounds::sound_t::alert;
+                se.description = _( "a tortured scream!" );
+                se.from_monster = true;
+                se.monfaction = g->u.get_faction()->mon_faction;
+                se.faction = g->u.get_faction()->id;
+                se.id = "shout";
+                se.variant = "scream_tortured";
+                sounds::sound( se );
+                if( !g->u.is_deaf() ) {
+                    add_msg( _( "The eye you're carrying lets out a tortured scream!" ) );
+                    g->u.add_morale( MORALE_SCREAM, -15, 0, 30_minutes, 30_seconds );
+                }
+            }
+        }
+        break;
+
+        case TIMED_EVENT_AMIGARA: {
+            g->events().send<event_type::angers_amigara_horrors>();
+            int num_horrors = rng( 3, 5 );
+            std::optional<tripoint_bub_ms> fault_point;
+            bool horizontal = false;
+            for( const tripoint_bub_ms &p : g->m.points_on_zlevel() ) {
+                if( g->m.ter( p ) == t_fault ) {
+                    fault_point = p;
+                    horizontal = g->m.ter( p + tripoint_east ) == t_fault || g->m.ter( p + tripoint_west ) == t_fault;
+                    break;
+                }
+            }
+            for( int i = 0; fault_point && i < num_horrors; i++ ) {
+                for( int tries = 0; tries < 10; ++tries ) {
+                    auto monp = g->u.bub_pos();
+                    if( horizontal ) {
+                        monp.x() = rng( fault_point->x(), fault_point->x() + 2 * SEEX - 8 );
+                        for( int n = -1; n <= 1; n++ ) {
+                            if( g->m.ter( tripoint_bub_ms( monp.x(), fault_point->y() + n, monp.z() ) ) == t_rock_floor ) {
+                                monp.y() = fault_point->y() + n;
+                            }
+                        }
+                    } else {
+                        // Vertical fault
+                        monp.y() = rng( fault_point->y(), fault_point->y() + 2 * SEEY - 8 );
+                        for( int n = -1; n <= 1; n++ ) {
+                            if( g->m.ter( tripoint_bub_ms( fault_point->x() + n, monp.y(), monp.z() ) ) == t_rock_floor ) {
+                                monp.x() = fault_point->x() + n;
+                            }
+                        }
+                    }
+                    if( g->place_critter_at( mon_amigara_horror, monp ) ) {
+                        break;
+                    }
+                }
+            }
+        }
+        break;
+
+        case TIMED_EVENT_ROOTS_DIE:
+            g->events().send<event_type::destroys_triffid_grove>();
+            for( const tripoint_bub_ms &p : g->m.points_on_zlevel() ) {
+                if( g->m.ter( p ) == t_root_wall && one_in( 3 ) ) {
+                    g->m.ter_set( p, t_underbrush );
+                }
+            }
+            break;
+
+        case TIMED_EVENT_TEMPLE_OPEN: {
+            g->events().send<event_type::opens_temple>();
+            bool saw_grate = false;
+            for( const tripoint_bub_ms &p : g->m.points_on_zlevel() ) {
+                if( g->m.ter( p ) == t_grate ) {
+                    g->m.ter_set( p, t_stairs_down );
+                    if( !saw_grate && g->u.sees( p ) ) {
+                        saw_grate = true;
+                    }
+                }
+            }
+            if( saw_grate ) {
+                add_msg( _( "The nearby grates open to reveal a staircase!" ) );
+            }
+        }
+        break;
+
+        case TIMED_EVENT_TEMPLE_FLOOD: {
+            bool flooded = false;
+
+            auto &flood_lc = g->m.access_cache( g->get_levz() );
+            const int flood_sy = flood_lc.cache_y;
+            auto flood_buf = std::vector<ter_id>( static_cast<size_t>( flood_lc.cache_x ) * flood_sy );
+            for( const tripoint_bub_ms &p : g->m.points_on_zlevel() ) {
+                flood_buf[p.x() * flood_sy + p.y()] = g->m.ter( p );
+            }
+            for( const tripoint_bub_ms &p : g->m.points_on_zlevel() ) {
+                if( g->m.ter( p ) == t_water_sh ) {
+                    bool deepen = false;
+                    for( const tripoint_bub_ms &w : points_in_radius( p, 1 ) ) {
+                        if( g->m.ter( w ) == t_water_dp ) {
+                            deepen = true;
+                            break;
+                        }
+                    }
+                    if( deepen ) {
+                        flood_buf[p.x() * flood_sy + p.y()] = t_water_dp;
+                        flooded = true;
+                    }
+                } else if( g->m.ter( p ) == t_rock_floor ) {
+                    bool flood = false;
+                    for( const tripoint_bub_ms &w : points_in_radius( p, 1 ) ) {
+                        if( g->m.ter( w ) == t_water_dp || g->m.ter( w ) == t_water_sh ) {
+                            flood = true;
+                            break;
+                        }
+                    }
+                    if( flood ) {
+                        flood_buf[p.x() * flood_sy + p.y()] = t_water_sh;
+                        flooded = true;
+                    }
+                }
+            }
+            if( !flooded ) {
+                // We finished flooding the entire chamber!
+                return;
+            }
+            // Check if we should print a message
+            if( flood_buf[g->u.bub_pos().x() * flood_sy + g->u.bub_pos().y()] != g->m.ter( g->u.bub_pos() ) ) {
+                if( flood_buf[g->u.bub_pos().x() * flood_sy + g->u.bub_pos().y()] == t_water_sh ) {
+                    add_msg( m_warning, _( "Water quickly floods up to your knees." ) );
+                    g->memorial().add(
+                        pgettext( "memorial_male", "Water level reached knees." ),
+                        pgettext( "memorial_female", "Water level reached knees." ) );
+                } else {
+                    // Must be deep water!
+                    add_msg( m_warning, _( "Water fills nearly to the ceiling!" ) );
+                    g->memorial().add(
+                        pgettext( "memorial_male", "Water level reached the ceiling." ),
+                        pgettext( "memorial_female", "Water level reached the ceiling." ) );
+                    avatar_action::swim( g->m, g->u, g->u.bub_pos() );
+                }
+            }
+            // flood_buf is filled with correct tiles; now copy them back to g->m
+            for( const tripoint_bub_ms &p : g->m.points_on_zlevel() ) {
+                g->m.ter_set( p, flood_buf[p.x() * flood_sy + p.y()] );
+            }
+            g->timed_events.add( TIMED_EVENT_TEMPLE_FLOOD,
+                                 calendar::turn + rng( 2_turns, 3_turns ) );
+        }
+        break;
+
+        case TIMED_EVENT_TEMPLE_SPAWN: {
+            static const std::array<mtype_id, 4> temple_monsters = { {
+                    mon_sewer_snake, mon_dermatik, mon_spider_widow_giant, mon_spider_cellar_giant
+                }
+            };
+            const mtype_id &montype = random_entry( temple_monsters );
+            g->place_critter_around( montype, g->u.bub_pos(), 2 );
+        }
+        break;
+
+        default:
+            // Nothing happens for other events
+            break;
+    }
+}
+
+void timed_event::per_turn()
+{
+    switch( type ) {
+        case TIMED_EVENT_WANTED: {
+            // About once every 5 minutes. Suppress in classic zombie mode.
+            if( g->get_levz() >= 0 && one_in( 50 ) && !get_option<bool>( "DISABLE_ROBOT_RESPONSE" ) ) {
+                auto place = g->m.random_outdoor_tile();
+                if( place.x() == -1 && place.y() == -1 ) {
+                    // We're safely indoors!
+                    return;
+                }
+                g->place_critter_at( mon_eyebot, place );
+                if( g->u.sees( place ) ) {
+                    add_msg( m_warning, _( "An eyebot swoops down nearby!" ) );
+                }
+                // One eyebot per trigger is enough, really
+                when = calendar::turn;
+            }
+        }
+        break;
+
+        case TIMED_EVENT_SPAWN_WYRMS:
+            if( g->get_levz() >= 0 ) {
+                when -= action_time_scale::calendar_duration_this_tick();
+                return;
+            }
+            if( action_time_scale::once_every_this_tick( time_duration::from_seconds( rng( 2, 3 ) ) ) &&
+                !g->u.is_deaf() ) {
+                add_msg( m_warning, _( "You hear screeches from the rock above and around you!" ) );
+            }
+            break;
+
+        case TIMED_EVENT_AMIGARA:
+            if( action_time_scale::once_every_this_tick( time_duration::from_seconds( rng( 2, 3 ) ) ) ) {
+                add_msg( m_warning, _( "The entire cavern shakes!" ) );
+            }
+            break;
+
+        case timed_event_type::AMIGARA_WHISPERS: {
+            bool faults = false;
+            for( const tripoint_bub_ms &p : g->m.points_on_zlevel() ) {
+                if( g->m.ter( p ) == t_fault ) {
+                    faults = true;
+                    break;
+                }
+            }
+
+            if( action_time_scale::once_every_this_tick( 10_seconds ) && faults ) {
+                add_msg( m_info, "You hear someone whispering \"%s\"",
+                         SNIPPET.random_from_category( "amigara_whispers" ).value_or( translation() ) );
+            }
+        }
+        break;
+
+        case TIMED_EVENT_TEMPLE_OPEN:
+            if( action_time_scale::once_every_this_tick( time_duration::from_seconds( rng( 2, 3 ) ) ) ) {
+                add_msg( m_warning, _( "The earth rumbles." ) );
+            }
+            break;
+
+        default:
+            // Nothing happens for other events
+            break;
+    }
+}
+
+void timed_event_manager::process()
+{
+    ZoneScoped;
+    for( auto it = events.begin(); it != events.end(); ) {
+        it->per_turn();
+        if( it->when <= calendar::turn ) {
+            it->actualize();
+            it = events.erase( it );
+        } else {
+            it++;
+        }
+    }
+}
+
+void timed_event_manager::add( const timed_event_type type, const time_point &when,
+                               const int faction_id )
+{
+    add( type, when, faction_id, g->u.abs_sm_pos() );
+}
+
+void timed_event_manager::add( const timed_event_type type, const time_point &when,
+                               const int faction_id,
+                               const tripoint_abs_sm &where )
+{
+    events.emplace_back( type, when, faction_id, where );
+}
+
+bool timed_event_manager::queued( const timed_event_type type ) const
+{
+    return const_cast<timed_event_manager &>( *this ).get( type ) != nullptr;
+}
+
+auto timed_event_manager::next_event_time() const -> std::optional<time_point>
+{
+    if( events.empty() ) {
+        return std::nullopt;
+    }
+
+    auto next_time = events.front().when;
+    for( const timed_event &event : events ) {
+        next_time = std::min( next_time, event.when );
+    }
+    return next_time;
+}
+
+timed_event *timed_event_manager::get( const timed_event_type type )
+{
+    for( auto &e : events ) {
+        if( e.type == type ) {
+            return &e;
+        }
+    }
+    return nullptr;
+}

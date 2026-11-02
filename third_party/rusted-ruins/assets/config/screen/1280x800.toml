@@ -1,0 +1,104 @@
+# ScreenConfig for 1280x800
+screen_w = 1280
+screen_h = 800
+
+[main_window]
+x = 36
+y = 0
+w = 1244 # 1280 - 36
+h = 620 # 800 - 180
+
+[log_window]
+x = 203
+y = 660
+w = 1080
+h = 177
+
+[minimap_window]
+x = 0
+y = 623
+w = 200
+h = 177
+
+[sidebar]
+x = 0
+y = 43
+w = 33
+h = 577
+
+[toolbar]
+x = 203
+y = 623
+w = 102
+h = 34
+
+[shortcut_list]
+x = 308
+y = 623
+w = 600
+h = 34
+
+[hp_indicator]
+x = 52
+y = 538
+w = 80
+h = 15
+
+[mp_indicator]
+x = 52
+y = 560
+w = 80
+h = 15
+
+[sp_indicator]
+x = 52
+y = 582
+w = 80
+h = 15
+
+[floor_info]
+x = 100
+y = 0
+w = 200
+h = 18
+
+[status_info]
+x = 42
+y = 513
+h = 20
+
+[date_info]
+x = 4
+y = 3
+
+[time_info]
+x = 0
+y = 0
+w = 60
+h = 40
+
+[[hborders]]
+x = 0
+y = 620
+len = 1280
+
+[[hborders]]
+x = 200
+y = 657
+len = 1080
+
+[[vborders]]
+x = 33
+y = 0
+len = 620
+
+[[vborders]]
+x = 200
+y = 622
+len = 177
+
+[[vborders]]
+x = 305
+y = 623
+len = 34
+

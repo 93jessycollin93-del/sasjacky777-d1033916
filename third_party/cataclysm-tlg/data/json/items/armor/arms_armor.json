@@ -1,0 +1,1276 @@
+[
+  {
+    "id": "2byarm_guard",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "2-by-arm guards", "str_pl": "pairs of 2-by-arm guards" },
+    "description": "A pair of improvised arm guards made from broken pieces of a plank that are tied to your arms with rags and string.  They offer good protection, but are really uncomfortable to wear.",
+    "weight": "300 g",
+    "volume": "1500 ml",
+    "price": "5 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "wood" ],
+    "symbol": "[",
+    "looks_like": "arm_splint",
+    "color": "brown",
+    "warmth": 5,
+    "material_thickness": 3,
+    "flags": [ "OUTER", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 16,
+        "coverage": 80,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "carpet_arm_guards",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "carpet arm guards", "str_pl": "pairs of carpet arm guards" },
+    "description": "Small squares of carpet rolled around your upper and lower arms.  Armor of the truly desperate or crafty.",
+    "weight": "1360 g",
+    "//": "The weight assumes four squares of carpet of about 25cm x 20cm.",
+    "volume": "3 L",
+    "price": "20 cent",
+    "price_postapoc": "10 cent",
+    "to_hit": 1,
+    "material": [ "carpet_pile", "plastic" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "red",
+    "warmth": 35,
+    "material_thickness": 4,
+    "environmental_protection": 1,
+    "flags": [ "OUTER", "NO_REPAIR" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 16,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_upper_r", "arm_upper_l" ]
+      }
+    ]
+  },
+  {
+    "id": "carpet_bracers",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "carpet bracers", "str_pl": "pairs of carpet bracers" },
+    "description": "Small squares of carpet rolled around your lower arms.  The bare minimum to hopefully stop a bite or two.",
+    "weight": "680 g",
+    "//": "The weight assumes two squares of carpet of about 25cm x 20cm.",
+    "volume": "2 L",
+    "price": "10 cent",
+    "price_postapoc": "5 cent",
+    "to_hit": 1,
+    "material": [ "carpet_pile", "plastic" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "red",
+    "warmth": 35,
+    "material_thickness": 4,
+    "environmental_protection": 1,
+    "flags": [ "OUTER", "NO_REPAIR" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "carpet_pile", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 9,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ]
+  },
+  {
+    "id": "armguard_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chitin arm guards", "str_pl": "pairs of chitin arm guards" },
+    "description": "A pair of arm guards made from the exoskeletons of insects.  Light and durable.",
+    "weight": "392 g",
+    "volume": "2500 ml",
+    "price": "200 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "chitin" ],
+    "symbol": "[",
+    "looks_like": "armguard_hard",
+    "color": "brown",
+    "warmth": 5,
+    "material_thickness": 3,
+    "environmental_protection": 2,
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 8,
+        "coverage": 85,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "xl_armguard_chitin",
+    "copy-from": "armguard_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "chitin arm guards", "str_pl": "pairs of chitin arm guards" },
+    "proportional": { "weight": 1.25, "volume": 1.23 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_armguard_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "armguard_chitin",
+    "name": { "str": "chitin arm guards", "str_pl": "pairs of chitin arm guards" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "armguard_acidchitin",
+    "copy-from": "armguard_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "price_postapoc": "12 USD 50 cent",
+    "name": { "str": "biosilicified chitin arm guards", "str_pl": "pairs of biosilicified chitin arm guards" },
+    "description": "A pair of arm guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
+    "material": [ "acidchitin" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 9,
+        "coverage": 85,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
+      }
+    ],
+    "melee_damage": { "bash": 5 }
+  },
+  {
+    "id": "xl_armguard_acidchitin",
+    "copy-from": "armguard_acidchitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "biosilicified chitin arm guards", "str_pl": "pairs of biosilicified chitin arm guards" },
+    "proportional": { "weight": 1.25, "volume": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_armguard_acidchitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "armguard_acidchitin",
+    "name": { "str": "biosilicified chitin arm guards", "str_pl": "pairs of biosilicified chitin arm guards" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "cloth_arms_padded",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "cloth-padded sleeves", "str_pl": "pairs of cloth-padded sleeves" },
+    "description": "The sleeves of a thick shirt, with a bunch of cloth sewn in to act as extra padding.",
+    "weight": "400 g",
+    "volume": "1500 ml",
+    "price_postapoc": "1 USD",
+    "to_hit": -2,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "light_gray",
+    "armor": [
+      {
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 98,
+        "encumbrance": 16
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
+        "encumbrance": 16,
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 90, "thickness": 1.0 }
+        ]
+      }
+    ],
+    "warmth": 35,
+    "material_thickness": 3,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE" ]
+  },
+  {
+    "id": "armguard_hard",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "hard arm guards", "str_pl": "pairs of hard arm guards" },
+    "description": "A pair of neoprene arm sleeves covered with molded plastic sheaths.",
+    "weight": "350 g",
+    "volume": "3 L",
+    "price": "35 USD",
+    "price_postapoc": "10 USD",
+    "to_hit": 1,
+    "material": [ "plastic", "neoprene" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "dark_gray",
+    "warmth": 20,
+    "material_thickness": 3,
+    "environmental_protection": 1,
+    "flags": [ "OUTER", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 12,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
+        "material": [
+          { "type": "plastic", "covered_by_mat": 90, "thickness": 1.5 },
+          { "type": "neoprene", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ],
+        "material": [
+          { "type": "plastic", "covered_by_mat": 50, "thickness": 1.5 },
+          { "type": "neoprene", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_upper_l", "arm_upper_r" ],
+        "material": [
+          { "type": "plastic", "covered_by_mat": 90, "thickness": 1.5 },
+          { "type": "neoprene", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "coverage": 80
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "xl_armguard_hard",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "hard arm guards", "str_pl": "pairs of hard arm guards" },
+    "weight": "550 g",
+    "volume": "4 L",
+    "copy-from": "armguard_hard",
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_armguard_hard",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "armguard_hard",
+    "name": { "str": "hard arm guards", "str_pl": "pairs of hard arm guards" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "leather_arm_guards",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "leather arm guards", "str_pl": "pairs of leather arm guards" },
+    "description": "A set of tough leather braces and poleyns that provide protection against blades and teeth alike.",
+    "weight": "750 g",
+    "volume": "800 ml",
+    "price": "40 USD",
+    "price_postapoc": "10 USD",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "brown",
+    "warmth": 25,
+    "material_thickness": 4,
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 9,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "leather_arm_guards_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather arm guards", "str_pl": "pairs of leather arm guards" },
+    "copy-from": "leather_arm_guards",
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "leather_arm_guards_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "leather_arm_guards",
+    "name": { "str": "leather arm guards", "str_pl": "pairs of leather arm guards" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "paper_vambraces",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "paper vambraces", "str_pl": "pairs of paper vambraces" },
+    "description": "Bracers made of stacked sheets of paper held together with duct tape.",
+    "weight": "360 g",
+    "volume": "500 ml",
+    "price": "2 USD 30 cent",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "paper" ],
+    "symbol": "[",
+    "looks_like": "leather_arm_guards",
+    "color": "blue",
+    "warmth": 5,
+    "material_thickness": 3,
+    "flags": [ "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 9,
+        "coverage": 80,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ]
+  },
+  {
+    "id": "tire_bracers",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "tire bracers", "str_pl": "pairs of tire bracers" },
+    "description": "Improvised forearm guards made of thick chunks of tire held together with duct tape.",
+    "weight": "2400 g",
+    "volume": "2 L",
+    "price": "23 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "rubber" ],
+    "symbol": "[",
+    "looks_like": "leather_arm_guards",
+    "color": "light_gray",
+    "warmth": 5,
+    "material_thickness": 4,
+    "flags": [ "OUTER", "NONCONDUCTIVE" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 8,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "tire_bracers_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "XL tire bracers", "str_pl": "pairs of XL tire bracers" },
+    "copy-from": "tire_bracers",
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE" ] }
+  },
+  {
+    "id": "tire_bracers_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_bracers",
+    "name": { "str": "XS tire bracers", "str_pl": "pairs of XS tire bracers" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE" ] }
+  },
+  {
+    "id": "sheet_metal_bracers",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "sheet metal bracers", "str_pl": "pairs of sheet metal bracers" },
+    "description": "Leather bracers with sheet metal affixed over them, perfect for a metal concert at the end of the world.",
+    "weight": "3064 g",
+    "volume": "4750 ml",
+    "price": "200 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": 1,
+    "material": [ "steel", "leather" ],
+    "symbol": "[",
+    "looks_like": "leather_vambraces",
+    "color": "light_gray",
+    "warmth": 10,
+    "flags": [ "OUTER" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 8,
+        "coverage": 95,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 3, "cut": 1 }
+  },
+  {
+    "id": "sheet_metal_bracers_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "sheet metal bracers", "str_pl": "pairs of sheet metal bracers" },
+    "copy-from": "sheet_metal_bracers",
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "sheet_metal_bracers_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "sheet_metal_bracers",
+    "name": { "str": "sheet metal bracers", "str_pl": "pairs of sheet metal bracers" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "tire_arm_guards",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "tire arm guards", "str_pl": "pairs of tire arm guards" },
+    "description": "A pair of arm guards made from thick chunks of tire secured by simple strings; the loose collection of rubber plates provides decent but not the most convenient protection.",
+    "weight": "4800 g",
+    "volume": "4750 ml",
+    "price": "200 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": 1,
+    "material": [ "rubber" ],
+    "symbol": "[",
+    "looks_like": "leather_arm_guards",
+    "color": "light_gray",
+    "warmth": 10,
+    "material_thickness": 4,
+    "flags": [ "OUTER", "NONCONDUCTIVE" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 21,
+        "coverage": 80,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_upper_r", "arm_upper_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "tire_arm_guards_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_arm_guards",
+    "name": { "str": "tire arm guards", "str_pl": "pairs of tire arm guards" },
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "tire_arm_guards_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "tire_arm_guards",
+    "name": { "str": "tire arm guards", "str_pl": "pairs of tire arm guards" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "armguard_soft",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "neoprene arm sleeves", "str_pl": "pairs of neoprene arm sleeves" },
+    "description": "A pair of soft neoprene arm sleeves.  Often used in contact sports.",
+    "weight": "258 g",
+    "volume": "1500 ml",
+    "price": "12 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": 1,
+    "material": [ "neoprene", "spandex" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "light_red",
+    "warmth": 20,
+    "material_thickness": 2,
+    "environmental_protection": 1,
+    "flags": [ "SKINTIGHT", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 6,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
+        "coverage": 95
+      },
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ], "coverage": 100 },
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ], "coverage": 80 },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 5,
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "encumbrance": 16,
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ]
+      },
+      {
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xl_armguard_soft",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "neoprene arm sleeves", "str_pl": "pairs of neoprene arm sleeves" },
+    "weight": "330 g",
+    "volume": "1750 ml",
+    "copy-from": "armguard_soft",
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_armguard_soft",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "armguard_soft",
+    "name": { "str": "neoprene arm sleeves", "str_pl": "pairs of neoprene arm sleeves" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "gambeson_sleeve",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "quilted sleeves", "str_pl": "pairs of quilted sleeves" },
+    "description": "Medieval cloth armor for the arms consisting of a pair of quilted sleeves stuffed with batting.  Adjustable ties along their length allow them to be worn under or over other gear.  Activate to change thier fit.",
+    "weight": "2250 g",
+    "volume": "1000 ml",
+    "price": "12 USD",
+    "price_postapoc": "4 USD",
+    "to_hit": 1,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "light_gray",
+    "warmth": 50,
+    "material_thickness": 5,
+    "flags": [ "VARSIZE", "STURDY" ],
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Loosen",
+      "target": "gambeson_sleeve_loose",
+      "msg": "You loosen the fit of your sleeves."
+    },
+    "armor": [
+      {
+        "material": [
+          { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 98,
+        "encumbrance": 28
+      },
+      {
+        "material": [
+          { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 }
+        ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
+        "encumbrance": 28
+      }
+    ]
+  },
+  {
+    "id": "gambeson_sleeve_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "gambeson sleeves", "str_pl": "pairs of gambeson sleeves" },
+    "copy-from": "gambeson_sleeve",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] },
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Loosen",
+      "target": "gambeson_sleeve_xl_loose",
+      "msg": "You loosen the fit of your sleeves."
+    }
+  },
+  {
+    "id": "gambeson_sleeve_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "gambeson sleeves", "str_pl": "pairs of gambeson sleeves" },
+    "copy-from": "gambeson_sleeve",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] },
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Loosen",
+      "target": "gambeson_sleeve_xs_loose",
+      "msg": "You loosen the fit of your sleeves."
+    }
+  },
+  {
+    "id": "gambeson_sleeve_loose",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "quilted sleeves", "str_pl": "pairs of quilted sleeves" },
+    "description": "Medieval cloth armor for the arms consisting of a pair of quilted sleeves stuffed with batting.  Adjustable ties along their length allow them to be worn under or over other gear.  Activate to change thier fit.",
+    "weight": "2250 g",
+    "volume": "1000 ml",
+    "price": "12 USD",
+    "price_postapoc": "4 USD",
+    "to_hit": 1,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "light_gray",
+    "warmth": 50,
+    "material_thickness": 5,
+    "flags": [ "VARSIZE", "STURDY", "OUTER" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 98,
+        "encumbrance": 28
+      },
+      {
+        "material": [
+          { "type": "cotton_quilted", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 2 }
+        ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95
+      }
+    ],
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Tighten",
+      "target": "gambeson_sleeve",
+      "msg": "You tighten the fit of your sleeves."
+    }
+  },
+  {
+    "id": "gambeson_sleeve_xl_loose",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "quilted sleeves (loose)", "str_pl": "pairs of quilted sleeves (loose)" },
+    "copy-from": "gambeson_sleeve",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] },
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Tighten",
+      "target": "gambeson_sleeve_xl",
+      "msg": "You tighten the fit of your sleeves."
+    }
+  },
+  {
+    "id": "gambeson_sleeve_xs_loose",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "quilted sleeves (loose)", "str_pl": "pairs of quilted sleeves (loose)" },
+    "copy-from": "gambeson_sleeve",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] },
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Tighten",
+      "target": "gambeson_sleeve_xs",
+      "msg": "You tighten the fit of your sleeves."
+    }
+  },
+  {
+    "id": "chainmail_sleeves",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
+    "description": "Protective sleeves made of interlocking links of steel wire.  The fit can be adjusted to allow them to serve as outerwear.",
+    "weight": "3515 g",
+    "volume": "847 ml",
+    "longest_side": "9 cm",
+    "price": "100 USD",
+    "price_postapoc": "20 USD",
+    "to_hit": -1,
+    "material": [ "steel_chain" ],
+    "symbol": "[",
+    "looks_like": "armguard_metal",
+    "color": "light_red",
+    "warmth": 10,
+    "flags": [ "STURDY", "NORMAL" ],
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_sleeves_loose",
+      "menu_text": "Loosen"
+    },
+    "armor": [
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ],
+        "coverage": 70,
+        "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_upper_l", "arm_upper_r" ],
+        "coverage": 100,
+        "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_elbow_l", "arm_elbow_r" ],
+        "coverage": 100,
+        "encumbrance": 4
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_lower_l", "arm_lower_r" ],
+        "coverage": 95,
+        "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "coverage": 98,
+        "encumbrance": 10
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "coverage": 95
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "chainmail_sleeves_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_sleeves",
+    "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_sleeves_loose_xs",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "chainmail_sleeves_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_sleeves",
+    "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_sleeves_loose_xl",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "chainmail_sleeves_loose",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_sleeves",
+    "name": { "str": "chainmail sleeves (loose)", "str_pl": "pairs of chainmail sleeves (loose)" },
+    "description": "Protective sleeves made of interlocking links of steel wire.  The fit can be adjusted to fit closer to the body.",
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_sleeves",
+      "menu_text": "Tighten"
+    },
+    "delete": { "flags": [ "NORMAL" ] },
+    "extend": { "flags": [ "OUTER" ] }
+  },
+  {
+    "id": "chainmail_sleeves_loose_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_sleeves_xs",
+    "name": { "str": "XS chainmail sleeves (loose)", "str_pl": "pairs of XS chainmail sleeves" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_sleeves_xs",
+      "menu_text": "Tighten"
+    },
+    "delete": { "flags": [ "NORMAL" ] },
+    "extend": { "flags": [ "OUTER" ] }
+  },
+  {
+    "id": "chainmail_sleeves_loose_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_sleeves_xl",
+    "name": { "str": "chainmail sleeves (loose)", "str_pl": "pairs of chainmail sleeves (loose)" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_sleeves_xl",
+      "menu_text": "Tighten"
+    },
+    "delete": { "flags": [ "NORMAL" ] },
+    "extend": { "flags": [ "OUTER" ] }
+  },
+  {
+    "id": "elbow_pads",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "elbow pads", "str_pl": "pairs of elbow pads" },
+    "description": "A pair of elbow pads made of stout plastic and spandex.",
+    "weight": "110 g",
+    "volume": "750 ml",
+    "price": "35 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "plastic", "spandex" ],
+    "symbol": "[",
+    "looks_like": "armguard_hard",
+    "color": "dark_gray",
+    "material_thickness": 5,
+    "flags": [ "WATER_FRIENDLY", "OUTER" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 4 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_elbow_l", "arm_elbow_r" ],
+        "coverage": 100,
+        "encumbrance": 3
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "bronze_vambraces",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "bronze vambraces", "str_pl": "pairs of bronze vambraces" },
+    "description": "A pair of bronze bracers with a simple leather lining.",
+    "weight": "2270 g",
+    "volume": "5250 ml",
+    "price": "400 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "bronze", "leather" ],
+    "symbol": "[",
+    "looks_like": "armguard_lightplate",
+    "color": "yellow",
+    "warmth": 15,
+    "material_thickness": 2,
+    "flags": [ "OUTER", "STURDY" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 8,
+        "coverage": 95,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 5 }
+  },
+  {
+    "id": "bronze_vambraces_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "bronze_vambraces",
+    "name": { "str": "bronze vambraces", "str_pl": "pairs of bronze vambraces" },
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "bronze_vambraces_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "bronze_vambraces",
+    "name": { "str": "bronze vambraces", "str_pl": "pairs of bronze vambraces" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "leather_vambraces",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "leather vambraces", "str_pl": "pairs of leather vambraces" },
+    "description": "A pair of light leather bracers, often used in archery.",
+    "weight": "362 g",
+    "volume": "1 L",
+    "price": "20 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "leather_arm_guards",
+    "color": "brown",
+    "warmth": 10,
+    "material_thickness": 3,
+    "environmental_protection": 1,
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 6,
+        "coverage": 95,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "leather_vambraces_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather vambraces", "str_pl": "pairs of leather vambraces" },
+    "weight": "531 g",
+    "volume": "1250 ml",
+    "copy-from": "leather_vambraces",
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "leather_vambraces_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "leather_vambraces",
+    "name": { "str": "leather vambraces", "str_pl": "pairs of leather vambraces" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "armguard_cut_resistant",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "description": "A long, stretchy pair of Kevlar sleeves with thumbholes.  These were often used by loggers and landscapers for protection from thorns and chainsaw accidents.",
+    "weight": "220 g",
+    "volume": "410 ml",
+    "price": "12 USD",
+    "price_postapoc": "2 USD",
+    "to_hit": 1,
+    "material": [ "kevlar" ],
+    "symbol": "[",
+    "looks_like": "arm_warmers",
+    "color": "yellow",
+    "warmth": 10,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 4,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
+        "coverage": 95
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ],
+        "coverage": 100
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_upper_l", "arm_upper_r" ],
+        "coverage": 10
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
+        "coverage": 5,
+        "encumbrance": 10
+      },
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_tip", "cephalopod_tentacle_r_tip" ],
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "armguard_cut_resistant_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "copy-from": "armguard_cut_resistant",
+    "weight": "330 g",
+    "volume": "615 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "armguard_cut_resistant_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cut-resistant sleeves", "str_pl": "pairs of cut-resistant sleeves" },
+    "copy-from": "armguard_cut_resistant",
+    "weight": "110 g",
+    "volume": "205 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
+  },
+  {
+    "id": "platemail_arm_guards",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "plate arm guards", "str_pl": "pairs of plate arm guards" },
+    "description": "Overlapping steel plates which strap to the upper and lower arms.  They don't cover the shoulders.",
+    "weight": "3333 g",
+    "volume": "2916 ml",
+    "price": "600 USD",
+    "price_postapoc": "120 USD",
+    "to_hit": -5,
+    "symbol": "[",
+    "looks_like": "leather_arm_guards",
+    "material": [ "steel" ],
+    "color": "light_gray",
+    "warmth": 10,
+    "longest_side": "60 cm",
+    "material_thickness": 1.3,
+    "flags": [ "OUTER", "STURDY", "CONDUCTIVE" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "leather", "covered_by_mat": 2, "thickness": 1.0 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_r", "arm_upper_l" ],
+        "coverage": 85,
+        "encumbrance": 12
+      }
+    ],
+    "melee_damage": { "bash": 6 }
+  },
+  {
+    "id": "platemail_arm_guards_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "plate arm guards", "str_pl": "pairs of plate arm guards" },
+    "copy-from": "platemail_arm_guards",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "platemail_arm_guards_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "plate arm guards", "str_pl": "pairs of plate arm guards" },
+    "copy-from": "platemail_arm_guards",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "platemail_pauldrons",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "plate pauldrons", "str_pl": "pairs of plate pauldrons" },
+    "description": "Domed steel plates that strap down over the shoulders, offering solid protection at the cost of mobility.",
+    "weight": "1667 g",
+    "volume": "1452 ml",
+    "price": "300 USD",
+    "price_postapoc": "60 USD",
+    "to_hit": -5,
+    "symbol": "[",
+    "looks_like": "leather_arm_guards",
+    "material": [ "steel" ],
+    "color": "light_gray",
+    "warmth": 10,
+    "longest_side": "60 cm",
+    "material_thickness": 1.3,
+    "flags": [ "OUTER", "STURDY", "CONDUCTIVE", "UNRESTRICTED" ],
+    "armor": [
+      {
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ],
+        "coverage": 100,
+        "encumbrance": 4
+      }
+    ],
+    "melee_damage": { "bash": 6 }
+  },
+  {
+    "id": "platemail_pauldrons_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "plate pauldrons", "str_pl": "pairs of plate pauldrons" },
+    "copy-from": "platemail_pauldrons",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "platemail_pauldrons_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "plate pauldrons", "str_pl": "pairs of plate pauldrons" },
+    "copy-from": "platemail_pauldrons",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "leather_pauldrons",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "leather pauldrons", "str_pl": "pairs of leather pauldrons" },
+    "description": "Shoulder guards made of thick leather.  They're a little restrictive, but provide important protection.",
+    "weight": "600 g",
+    "volume": "600 ml",
+    "price": "30 USD",
+    "price_postapoc": "6 USD",
+    "to_hit": -5,
+    "symbol": "[",
+    "looks_like": "leather_arm_guards",
+    "material": [ "leather" ],
+    "color": "brown",
+    "warmth": 10,
+    "longest_side": "60 cm",
+    "material_thickness": 4,
+    "flags": [ "OUTER", "STURDY", "UNRESTRICTED" ],
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ],
+        "coverage": 100,
+        "encumbrance": 4
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "leather_pauldrons_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather pauldrons", "str_pl": "pairs of leather pauldrons" },
+    "copy-from": "leather_pauldrons",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "leather_pauldrons_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather pauldrons", "str_pl": "pairs of leather pauldrons" },
+    "copy-from": "leather_pauldrons",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "armor_riot_arm",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "riot bracers", "str_pl": "pairs of riot bracers" },
+    "description": "Hard forearm guards used by riot police.",
+    "weight": "500 g",
+    "volume": "2500 ml",
+    "price": "100 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": -3,
+    "material": [ "thermo_resin", "plastic_pad" ],
+    "symbol": "[",
+    "looks_like": "armguard_hard",
+    "color": "dark_gray",
+    "warmth": 20,
+    "longest_side": "40 cm",
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 3,
+        "coverage": 90,
+        "material": [
+          { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.75 },
+          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 5 }
+        ],
+        "specifically_covers": [ "arm_lower_l", "arm_lower_r", "arm_elbow_l", "arm_elbow_r" ]
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  }
+]

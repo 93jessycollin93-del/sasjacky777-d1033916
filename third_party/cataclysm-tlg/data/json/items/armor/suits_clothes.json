@@ -1,0 +1,925 @@
+[
+  {
+    "id": "bondage_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "bondage suit" },
+    "description": "A bodysuit of snug black leather.  It has no pockets, but does feature an abundance of unusually located straps and zippers.",
+    "weight": "1000 g",
+    "volume": "3250 ml",
+    "price": "2110 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -3,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "armor_larmor",
+    "color": "dark_gray",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 100, "encumbrance": 20 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": 20 },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 100, "encumbrance": 20 },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 100, "encumbrance": 20 }
+    ],
+    "warmth": 20,
+    "material_thickness": 1,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "SKINTIGHT" ]
+  },
+  {
+    "id": "bodysuit_spandex",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "spandex bodysuit" },
+    "description": "A tight-fitting spandex bodysuit which covers the whole body from neck to toe.",
+    "weight": "408 g",
+    "volume": "2 L",
+    "price": "45 USD",
+    "price_postapoc": "80 cent",
+    "material": [ "spandex" ],
+    "symbol": "[",
+    "color": "blue",
+    "warmth": 15,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "coverage": 100,
+        "covers": [
+          "torso",
+          "arm_l",
+          "arm_r",
+          "hand_l",
+          "hand_r",
+          "leg_l",
+          "leg_r",
+          "foot_l",
+          "foot_r",
+          "cephalopod_tentacle_l",
+          "cephalopod_tentacle_r"
+        ],
+        "encumbrance": 14
+      }
+    ],
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "samus_zero_suit_blue",
+        "name": { "str": "futuristic blue bodysuit" },
+        "description": "This spandex bodysuit is colored neon blue and has a bright pink symbol on the back.  Perfect for hunting space pirates and parasitic aliens.",
+        "color": "cyan",
+        "weight": 25
+      },
+      {
+        "id": "superhero_suit_blue",
+        "name": { "str": "blue spandex bodysuit" },
+        "description": "A spandex suit predominantly colored blue, invoking the likeness of a comic book hero.",
+        "color": "blue",
+        "weight": 25
+      },
+      {
+        "id": "superhero_suit_red",
+        "name": { "str": "red spandex bodysuit" },
+        "description": "A spandex suit predominantly colored red, invoking the likeness of a comic book anti-hero.",
+        "color": "dark_gray",
+        "weight": 20
+      },
+      {
+        "id": "superhero_suit_green",
+        "name": { "str": "green spandex bodysuit" },
+        "description": "A spandex suit predominantly colored green, invoking the likeness of a comic book character.",
+        "color": "green",
+        "weight": 15
+      },
+      {
+        "id": "superhero_suit_purple",
+        "name": { "str": "purple spandex bodysuit" },
+        "description": "A spandex suit predominantly colored purple, invoking the likeness of a comic book character.",
+        "color": "magenta",
+        "weight": 15
+      },
+      {
+        "id": "superhero_suit_pink",
+        "name": { "str": "pink spandex bodysuit" },
+        "description": "A spandex suit predominantly colored pink, invoking the likeness of a comic book heroine.",
+        "color": "light_red",
+        "weight": 15
+      },
+      {
+        "id": "bondage_suit",
+        "name": { "str": "spandex catsuit" },
+        "description": "A skin-tight bodysuit, all in black.",
+        "color": "dark_gray",
+        "weight": 20
+      },
+      {
+        "id": "skeleton_suit",
+        "name": { "str": "skeleton bodysuit" },
+        "description": "This spandex bodysuit is colored jet-black and has a skeleton design printed on it.",
+        "color": "dark_gray",
+        "weight": 15
+      },
+      {
+        "id": "flag_suit",
+        "name": { "str": "flag bodysuit" },
+        "description": "This spandex bodysuit is printed with an American flag pattern.",
+        "color": "light_red",
+        "weight": 5
+      }
+    ]
+  },
+  {
+    "id": "denim_overalls",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "denim overalls", "str_pl": "pairs of denim overalls" },
+    "description": "A pair of denim pants with a front apron and shoulder straps across the back.  They're tough and have plenty of storage space.",
+    "//": "16.5 oz heavy denim overalls, modeled after the work overalls despite the description.",
+    "weight": "1200 g",
+    "volume": "3300 ml",
+    "price": "65 USD 50 cent",
+    "price_postapoc": "8 USD",
+    "to_hit": -3,
+    "material": [ "denim" ],
+    "symbol": "[",
+    "color": "light_blue",
+    "armor": [
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 100, "encumbrance": [ 14, 16 ] },
+      { "covers": [ "torso" ], "coverage": 70, "encumbrance": [ 10, 12 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "800 ml",
+        "max_contains_weight": "1600 g",
+        "max_length": "18 cm",
+        "moves": 70
+      }
+    ],
+    "warmth": 18,
+    "material_thickness": 0.75,
+    "flags": [ "VARSIZE", "POCKETS", "STURDY" ]
+  },
+  {
+    "id": "jumpsuit_long",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "long-sleeved jumpsuit" },
+    "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
+    "weight": "558 g",
+    "volume": "3500 ml",
+    "price": "95 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "light_blue",
+    "armor": [
+      { "covers": [ "torso", "leg_l", "leg_r" ], "coverage": 95, "encumbrance": [ 5, 6 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 5, 9 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 95, "encumbrance": [ 5, 9 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "warmth": 10,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "POCKETS" ],
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "standard",
+        "name": { "str": "long-sleeved jumpsuit" },
+        "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
+        "weight": 0
+      },
+      {
+        "id": "flag_suit",
+        "name": { "str": "American flag jumpsuit" },
+        "description": "A long-sleeved jumpsuit printed all over with the stars and stripes of the US flag.",
+        "color": "light_red"
+      },
+      {
+        "id": "mummy_suit",
+        "name": { "str": "mummy suit" },
+        "description": "A long-sleeved jumpsuit made to look like a mummy's tattered wrappings.",
+        "color": "light_gray"
+      },
+      {
+        "id": "clown_suit",
+        "name": { "str": "clown suit" },
+        "description": "A colorful and ridiculous costume fit for a clown.",
+        "color": "yellow"
+      },
+      {
+        "id": "ninja_suit",
+        "name": { "str": "ninja costume" },
+        "description": "A one-piece costume meant to resemble the popular depiction of a ninja.",
+        "color": "dark_gray"
+      }
+    ]
+  },
+  {
+    "id": "jumpsuit_long_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "long-sleeved jumpsuit" },
+    "copy-from": "jumpsuit_long",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] },
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "standard",
+        "name": { "str": "long-sleeved jumpsuit" },
+        "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
+        "weight": 0
+      }
+    ]
+  },
+  {
+    "id": "jumpsuit_long_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "long-sleeved jumpsuit" },
+    "copy-from": "jumpsuit_long",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] },
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "standard",
+        "name": { "str": "XS long-sleeved jumpsuit" },
+        "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
+        "weight": 0
+      }
+    ]
+  },
+  {
+    "id": "jumpsuit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "jumpsuit" },
+    "description": "A lightweight short-sleeved bodysuit.  It's comfortable and has a decent amount of pocket space.",
+    "weight": "610 g",
+    "volume": "3500 ml",
+    "price": "89 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -3,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "touring_suit",
+    "color": "yellow",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 5, 6 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 40, "encumbrance": [ 1, 1 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 30, "encumbrance": [ 1, 1 ] },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 95, "encumbrance": [ 5, 9 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      }
+    ],
+    "warmth": 5,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "POCKETS" ]
+  },
+  {
+    "id": "jumpsuit_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "jumpsuit" },
+    "copy-from": "jumpsuit",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "jumpsuit_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "jumpsuit" },
+    "copy-from": "jumpsuit",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "technician_coveralls",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str_sp": "work coveralls" },
+    "description": "A long-sleeved jumpsuit made of chemical-resistant synthetics.  Offers solid protection from everyday dangers on the job and plenty of pockets for easy storage.",
+    "weight": "1328 g",
+    "volume": "1000 ml",
+    "price": "100 USD",
+    "price_postapoc": "10 USD",
+    "to_hit": -3,
+    "material": [ "nylon" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "light_gray",
+    "environmental_protection": 3,
+    "armor": [
+      {
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 } ],
+        "covers": [ "torso" ],
+        "encumbrance": [ 9, 13 ],
+        "coverage": 100
+      },
+      {
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 } ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "encumbrance": [ 9, 10 ],
+        "specifically_covers": [
+          "arm_shoulder_l",
+          "arm_shoulder_r",
+          "arm_upper_l",
+          "arm_upper_r",
+          "arm_lower_l",
+          "arm_lower_r",
+          "leg_hip_l",
+          "leg_hip_r",
+          "leg_upper_l",
+          "leg_upper_r",
+          "leg_lower_l",
+          "leg_lower_r",
+          "cephalopod_tentacle_l_base",
+          "cephalopod_tentacle_r_base",
+          "cephalopod_tentacle_l_tip",
+          "cephalopod_tentacle_r_tip"
+        ],
+        "coverage": 95
+      },
+      {
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
+        "encumbrance": [ 0, 0 ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "arm_elbow_l", "arm_elbow_r" ],
+        "coverage": 70
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "warmth": 15,
+    "material_thickness": 0.5,
+    "flags": [ "VARSIZE", "POCKETS", "STURDY", "RAINPROOF" ]
+  },
+  {
+    "id": "technician_coveralls_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "XL work coveralls" },
+    "copy-from": "technician_coveralls",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE" ] }
+  },
+  {
+    "id": "technician_coveralls_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "XS work coveralls" },
+    "copy-from": "technician_coveralls",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE" ] }
+  },
+  {
+    "id": "subsuit_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "subject suit" },
+    "description": "A short-sleeved yellow garment resembling a hospital gown.  A variety of plastic snaps pin its two halves together around the body and could seemingly be adjusted to fit just about anyone, or anything...",
+    "weight": "810 g",
+    "volume": "5 L",
+    "price": "110 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -3,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "yellow",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 8, 12 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 40, "encumbrance": [ 4, 4 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 50, "encumbrance": [ 4, 4 ] },
+      {
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "coverage": 70,
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ],
+        "encumbrance": [ 5, 8 ]
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 40,
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": [ 3, 6 ]
+      },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 60, "encumbrance": [ 8, 10 ] }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 }
+    ],
+    "warmth": 15,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "POCKETS", "OVERSIZE", "SOFT" ]
+  },
+  {
+    "id": "subsuit_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "XS subject suit" },
+    "description": "A short-sleeved yellow garment resembling a hospital gown, sized for a very young child.  A variety of plastic snaps pin its two halves together around the body and could seemingly be adjusted to fit just about anyone, or anything...",
+    "weight": "810 g",
+    "volume": "5 L",
+    "price": "110 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -3,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "yellow",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 8, 12 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 50, "encumbrance": [ 4, 4 ] },
+      { "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ], "coverage": 50, "encumbrance": [ 4, 4 ] },
+      {
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "coverage": 70,
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ],
+        "encumbrance": [ 5, 8 ]
+      },
+      {
+        "covers": [ "gastropod_foot" ],
+        "coverage": 40,
+        "specifically_covers": [ "gastropod_foot_upper" ],
+        "encumbrance": [ 3, 6 ]
+      },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 60, "encumbrance": [ 8, 10 ] }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 }
+    ],
+    "warmth": 15,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "POCKETS", "UNDERSIZE", "SOFT" ]
+  },
+  {
+    "id": "union_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "union suit" },
+    "description": "An old-fashioned one-piece suit of full-body long underwear that helps to maintain body temperature.",
+    "weight": "168 g",
+    "volume": "1 L",
+    "price": "25 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "light_gray",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": 8 },
+      { "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 8 }
+    ],
+    "warmth": 10,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "SKINTIGHT" ]
+  },
+  {
+    "id": "fursuit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "fursuit" },
+    "description": "A full-body costume in the form of an anthropomorphic animal.  It is quite encumbering and has little storage but is very warm.",
+    "weight": "7033 g",
+    "volume": "12 L",
+    "price": "2500 USD",
+    "price_postapoc": "10 USD",
+    "to_hit": -3,
+    "material": [ "spandex", "cotton", "faux_fur" ],
+    "symbol": "[",
+    "color": "light_gray",
+    "armor": [
+      {
+        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "encumbrance": [ 26, 30 ]
+      },
+      { "covers": [ "mouth", "eyes" ], "coverage": 95, "encumbrance": [ 26, 26 ] },
+      { "covers": [ "head" ], "coverage": 100, "encumbrance": [ 26, 26 ] }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 }
+    ],
+    "warmth": 50,
+    "material_thickness": 2,
+    "environmental_protection": 2,
+    "flags": [ "OUTER" ],
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "wolf_fursuit",
+        "name": { "str": "wolf mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic wolf.  It is quite encumbering and very warm.",
+        "color": "dark_gray",
+        "weight": 20
+      },
+      {
+        "id": "tiger_fursuit",
+        "name": { "str": "tiger mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic tiger.  It is quite encumbering and very warm.",
+        "color": "brown",
+        "weight": 20
+      },
+      {
+        "id": "cat_fursuit",
+        "name": { "str": "cat mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic cat.  It is quite encumbering and very warm.",
+        "color": "brown",
+        "weight": 20
+      },
+      {
+        "id": "lion_fursuit",
+        "name": { "str": "tiger mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic lion.  It is quite encumbering and very warm.",
+        "color": "brown",
+        "weight": 20
+      },
+      {
+        "id": "bear_fursuit",
+        "name": { "str": "bear mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic bear.  It is quite encumbering and very warm.",
+        "color": "brown",
+        "weight": 10
+      },
+      {
+        "id": "fox_fursuit",
+        "name": { "str": "fox mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic fox.  It is quite encumbering and very warm.",
+        "color": "brown",
+        "weight": 20
+      },
+      {
+        "id": "dog_fursuit",
+        "name": { "str": "dog mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic dog.  It is quite encumbering and very warm.",
+        "color": "dark_gray",
+        "weight": 20
+      },
+      {
+        "id": "eagle_fursuit",
+        "name": { "str": "eagle mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic eagle.  It is quite encumbering and very warm.",
+        "color": "brown",
+        "weight": 20
+      },
+      {
+        "id": "rabbit_fursuit",
+        "name": { "str": "rabbit mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic rabbit.  It is quite encumbering and very warm.",
+        "color": "light_gray",
+        "weight": 20
+      },
+      {
+        "id": "rat_fursuit",
+        "name": { "str": "rat mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic rat.  It is quite encumbering and very warm.",
+        "color": "dark_gray",
+        "weight": 4
+      },
+      {
+        "id": "fantasy_fursuit",
+        "name": { "str": "fantasy mascot costume" },
+        "description": "A full-body mascot-style costume in the form of some imaginary species of furry cartoon character.  It is quite encumbering and very warm.",
+        "weight": 60
+      },
+      {
+        "id": "horse_fursuit",
+        "name": { "str": "horse mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic horse.  It is quite encumbering and very warm.",
+        "color": "brown",
+        "weight": 60
+      },
+      {
+        "id": "chicken_fursuit",
+        "name": { "str": "chicken mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic chicken.  It is quite encumbering and very warm.",
+        "color": "light_gray",
+        "weight": 60
+      },
+      {
+        "id": "bull_fursuit",
+        "name": { "str": "bull mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic bull.  It is quite encumbering and very warm.",
+        "color": "red",
+        "weight": 60
+      },
+      {
+        "id": "monster_fursuit",
+        "name": { "str": "monster mascot costume" },
+        "description": "A full-body mascot-style costume in the form of some sort of big fuzzy monster.  It is quite encumbering and very warm.",
+        "color": "light_red",
+        "weight": 60
+      }
+    ]
+  },
+  {
+    "id": "mascot_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "mascot suit" },
+    "description": "A full-body costume in the form of a cartoon character.  It is quite encumbering and very warm.",
+    "weight": "7033 g",
+    "volume": "12 L",
+    "price": "2500 USD",
+    "price_postapoc": "10 USD",
+    "to_hit": -3,
+    "material": [ "spandex", "cotton" ],
+    "symbol": "[",
+    "color": "light_gray",
+    "armor": [
+      {
+        "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 100,
+        "encumbrance": [ 26, 30 ]
+      },
+      { "covers": [ "mouth", "eyes" ], "coverage": 95, "encumbrance": [ 26, 26 ] },
+      { "covers": [ "head" ], "coverage": 100, "encumbrance": [ 26, 26 ] }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 }
+    ],
+    "warmth": 50,
+    "material_thickness": 2,
+    "environmental_protection": 2,
+    "flags": [ "OUTER" ],
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "shark_costume",
+        "name": { "str": "shark mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic shark.  It is quite encumbering and very warm.",
+        "color": "cyan",
+        "weight": 20
+      },
+      {
+        "id": "fish_costume",
+        "name": { "str": "fish mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic fish.  It is quite encumbering and very warm.",
+        "color": "cyan",
+        "weight": 10
+      },
+      {
+        "id": "dino_costume",
+        "name": { "str": "dinosaur mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic dinosaur.  It is quite encumbering and very warm.",
+        "color": "green",
+        "weight": 20
+      },
+      {
+        "id": "dragon_costume",
+        "name": { "str": "dragon mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic dragon.  It is quite encumbering and very warm.",
+        "color": "green",
+        "weight": 20
+      },
+      {
+        "id": "spartan_costume",
+        "name": { "str": "spartan mascot costume" },
+        "description": "A full-body mascot-style costume in the form of a caricaturized ancient greek warrior.  It is quite encumbering and very warm.",
+        "color": "red",
+        "weight": 5
+      },
+      {
+        "id": "pizza_costume",
+        "name": { "str": "pizza mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic slice of pizza.  It is quite encumbering and very warm.",
+        "color": "light_red",
+        "weight": 5
+      },
+      {
+        "id": "revolutionary_costume",
+        "name": { "str": "revolutionary mascot costume" },
+        "description": "A full-body mascot-style costume in the form of a caricaturized continental soldier, circa 1776.  It is quite encumbering and very warm.",
+        "color": "blue",
+        "weight": 5
+      }
+    ]
+  },
+  {
+    "id": "wool_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "thick wool onesie" },
+    "description": "A hefty bodysuit made of wool, perfect for the winter months.",
+    "weight": "883 g",
+    "volume": "3 L",
+    "price": "80 USD",
+    "price_postapoc": "3 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "touring_suit",
+    "color": "dark_gray",
+    "armor": [
+      { "covers": [ "torso", "leg_l", "leg_r" ], "coverage": 100, "encumbrance": 15 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 90, "encumbrance": 15 },
+      { "covers": [ "head" ], "coverage": 60, "encumbrance": 10 },
+      { "covers": [ "foot_l", "foot_r" ], "coverage": 100, "encumbrance": 15 }
+    ],
+    "warmth": 50,
+    "material_thickness": 0.6,
+    "flags": [ "VARSIZE" ]
+  },
+  {
+    "id": "zentai",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "zentai" },
+    "description": "Short for 'zenshin taitsu', a zentai is a form-fitting full-body spandex garment.  Though it covers your face, you can see through the thin fabric.  With a couple of these and some friends, you could put on some kabuki or harass a rival sports team.",
+    "weight": "600 g",
+    "volume": "500 ml",
+    "price": "25 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "spandex" ],
+    "symbol": "[",
+    "color": "dark_gray",
+    "warmth": 15,
+    "material_thickness": 0.08,
+    "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
+    "armor": [
+      {
+        "coverage": 100,
+        "covers": [ "head", "torso", "arm_l", "arm_r", "hand_l", "hand_r", "leg_l", "leg_r", "foot_l", "foot_r" ],
+        "encumbrance": 14
+      },
+      { "coverage": 100, "covers": [ "mouth", "eyes" ], "encumbrance": 30 }
+    ]
+  }
+]

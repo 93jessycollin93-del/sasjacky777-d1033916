@@ -1,0 +1,173 @@
+[
+  {
+    "type": "snippet",
+    "category": "health_great",
+    "text": [
+      "You feel great!  It doesn't seem like wounds could even slow you down for more than a day.",
+      "Within moments you're ready and up.  You don't feel like anything could stop you today!",
+      "Your eyes open and your entire body feels like it is just bursting with energy to burn!",
+      "You feel like a rubber ball; whatever hits you, you'll just bounce back!",
+      "You're up and you feel fantastic.  No sickness is going to keep you down today!",
+      "You wake up feeling invincible, ready to take on any challenge that comes your way.",
+      "Your body feels as light as a feather, every movement effortless and smooth.",
+      "Getting up comes easy to you, your muscles revitalized after your rest.",
+      "You're up and your little pains from before seem to have faded away rather quickly.",
+      "You feel a powerful sense of well-being, as if every cell in your body is thriving."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "health_very_good",
+    "text": [
+      "You're up and going rather quickly, and all the little aches from yesterday are gone.",
+      "You get up feeling pretty good, as if all your little aches were fading faster.",
+      "Getting up comes easy to you, your muscles revitalized after your rest.",
+      "You're up and your little pains from before seem to have faded away rather quickly.",
+      "Awareness comes fast, your body coming quickly to attention after your rest.",
+      "You feel refreshed and ready to start the day with enthusiasm.",
+      "Your body feels rejuvenated, as if you've been given a new lease on life.",
+      "You wake up feeling revitalized, your energy levels high and stable.",
+      "Any lingering fatigue from yesterday has vanished, leaving you feeling strong and capable.",
+      "You stretch and feel a wonderful sense of vitality coursing through your body."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "health_good",
+    "text": [
+      "You feel good.  Healthy living does seem to have some rewards.",
+      "Getting out of bed doesn't seem too hard today.  You could get used to this!",
+      "Alertness comes somewhat fast, and your muscles stretch easier than before you went to bed.",
+      "You feel extra alert, and your body feels ready to go.",
+      "Your body stretches with ease, and you feel ready to take on the world.",
+      "You wake up feeling clear-headed and ready to tackle the day ahead.",
+      "Your body feels responsive and agile, making movement a pleasure.",
+      "You stretch and feel a pleasant sense of readiness in your muscles.",
+      "You feel energized and alert, ready to face whatever the day throws at you.",
+      "You wake up with a sense of purpose, feeling good about the day ahead."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "health_bad",
+    "text": [
+      "You feel cruddy.  Maybe you should consider eating a bit healthier.",
+      "You stretch, but your muscles don't seem to be doing so good today.",
+      "You wake up bleary-eyed and lethargic.",
+      "It's harder to get up today.",
+      "You wake up feeling grouchy and foggy-headed.",
+      "Do you really need to get up yet?",
+      "You feel stiff and a little out of it."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "health_very_bad",
+    "text": [
+      "Getting out of bed only comes with great difficulty, and your muscles resist the movement.",
+      "Getting up seems like it should be easy, but all you want to do is lie there.",
+      "You wake up feeling like crap. Maybe you should take better care of yourself.",
+      "Alertness seems flighty today, and your body argues when you move towards it.",
+      "You're up, but your body seems like it would rather stay in bed.",
+      "You wake up feeling logy and your stomach is sour.",
+      "Every movement feels like a chore, your muscles aching with every step.",
+      "Your eyes are crusty and your mouth is dry.  Another day of this shit.",
+      "Your body feels heavy and uncooperative, resisting every effort to get up.",
+      "You wake up with a sense of dread, knowing today will be a struggle."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "health_horrible",
+    "text": [
+      "A part of you wishes you hadn't woken up.  Your aching body immediately protests.",
+      "You feel awful, and every ache from yesterday is still there.",
+      "you feel stiff and sore all over.",
+      "Bleary-eyed and half-asleep, you consider why you are doing this to yourself.",
+      "Awareness seems to only come with a battle… and your body seems to be on its side.",
+      "You wake up feeling like you've been hit by a truck, every part of your body protesting.",
+      "Your stomach feels sour, a sensation you can almost taste on the back of your tongue.",
+      "Every joint and muscle screams in protest as you try to get up."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "empty_starving",
+    "text": [
+      "You're too weak to be hungry anymore.  Is this what starving to death feels like?",
+      "Your body feels like it's eating itself from the inside out.",
+      "Every movement feels like a monumental effort, your limbs trembling from weakness.",
+      "You can't remember the last time you had a proper meal, and it's starting to take its toll.",
+      "You feel a deep, gnawing emptiness in your stomach that never goes away."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "starving",
+    "text": [
+      "Even though you've eaten not too long ago you still feel drained of energy.  It will take more than that to get you back up.",
+      "You feel like a bottomless pit, no amount of food seems to satisfy your hunger.",
+      "Your body is crying out for nourishment, every cell feeling the lack of sustenance.",
+      "You feel dizzy and lightheaded from the constant hunger.",
+      "Your hands tremble as you try to find something, anything, to eat."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "empty_emaciated",
+    "text": [
+      "Your empty stomach gnaws at you.  You really need something to eat.",
+      "You feel like a shadow of your former self, your body wasting away.",
+      "You feel a deep, bone-deep weariness, as if your body is giving up.",
+      "Your muscles are wasting away, leaving you feeling weak and frail."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "emaciated",
+    "text": [
+      "Your body is little more than skin and bones.",
+      "You feel a constant, gnawing hunger that never seems to go away.",
+      "Every movement is an effort, your body weak and frail.",
+      "You feel like you're wasting away, your body slowly consuming itself."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "empty_malnourished",
+    "text": [
+      "You feel weak due to malnutrition.",
+      "You have got to get something to eat.",
+      "You feel sluggish and you can't stop thinking about food.",
+      "You feel achey and tired."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "malnourished",
+    "text": [
+      "Despite having something in your stomach, you're still craving more.",
+      "You can tell you're not getting enough to eat lately.",
+      "Your thoughts keep drifting back to food.",
+      "You feel achey and tired."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "empty_low_cal",
+    "text": [
+      "Your stomach cramps, as if desperate for food.",
+      "You feel a persistent sense of fatigue, your body struggling to function.",
+      "You feel a constant sense of hunger, your body desperate for calories."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "low_cal",
+    "text": [
+      "Whatever you're eating, it's not enough.  Your body needs more energy.",
+      "You feel a persistent sense of fatigue, your body struggling to function.",
+      "You feel a constant sense of hunger, your body desperate for calories."
+    ]
+  }
+]

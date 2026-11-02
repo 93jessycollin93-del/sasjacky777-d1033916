@@ -1,0 +1,5 @@
+name=Realism Overhaul
+id=RealismOverhaul
+description=Realism toggles for Build 42. Presentation stays on the client; gameplay rules are decided by the server. First-person camera is delegated to pz3d when present and is otherwise unavailable. All features start off.
+versionMin=42.21.0
+author=SAS-JACKY

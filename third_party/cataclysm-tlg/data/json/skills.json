@@ -1,0 +1,319 @@
+[
+  {
+    "type": "skill",
+    "id": "swimming",
+    "name": { "str": "athletics" },
+    "description": "Your athletic ability, including swimming, climbing, rowing, balancing, cycling, and how much you can carry.  Athletic skill governs general kinesthetics and also improves your overall cardio fitness and stamina.",
+    "display_category": "display_interaction",
+    "sort_rank": 21000,
+    "companion_skill_practice": [ { "skill": "", "weight": 5 }, { "skill": "gathering", "weight": 5 }, { "skill": "trapping", "weight": 5 } ]
+  },
+  {
+    "type": "skill",
+    "id": "computer",
+    "name": { "str": "computers" },
+    "description": "Your skill in accessing and manipulating computers.  Higher levels can allow a user to navigate complex software systems and even bypass their security, or program and operate drones and other robots.",
+    "display_category": "display_interaction",
+    "sort_rank": 22000
+  },
+  {
+    "type": "skill",
+    "id": "traps",
+    "name": { "str": "devices" },
+    "description": "Your skill in setting, detecting, disabling, repairing, and crafting fine devices like security systems, traps, locks, some firearm components, and explosives..",
+    "companion_survival_rank_factor": 1,
+    "display_category": "display_interaction",
+    "sort_rank": 23000,
+    "companion_skill_practice": [ { "skill": "", "weight": 15 }, { "skill": "gathering", "weight": 15 }, { "skill": "trapping", "weight": 80 } ]
+  },
+  {
+    "type": "skill",
+    "id": "survival",
+    "name": { "str": "ecology" },
+    "description": "Your skill at dealing with your environment.  This includes working with plants and animals, exploring, making fire, and scouting.",
+    "companion_survival_rank_factor": 1,
+    "display_category": "display_interaction",
+    "sort_rank": 24000,
+    "companion_skill_practice": [
+      { "skill": "", "weight": 80 },
+      { "skill": "gathering", "weight": 80 },
+      { "skill": "trapping", "weight": 15 },
+      { "skill": "hunting", "weight": 15 },
+      { "skill": "menial", "weight": 10 },
+      { "skill": "construction", "weight": 10 },
+      { "skill": "recruiting", "weight": 25 },
+      { "skill": "combat", "weight": 10 }
+    ]
+  },
+  {
+    "type": "skill",
+    "id": "mechanics",
+    "name": { "str": "mechanics" },
+    "description": "Your skill in engineering, plumbing, and working with simple or complex machines.  It's frequently useful for crafting and often essential for construction and vehicle work.",
+    "companion_industry_rank_factor": 1,
+    "display_category": "display_interaction",
+    "sort_rank": 26000,
+    "companion_skill_practice": [ { "skill": "menial", "weight": 10 }, { "skill": "construction", "weight": 20 } ]
+  },
+  {
+    "type": "skill",
+    "id": "firstaid",
+    "name": { "str": "medicine" },
+    "description": "Your skill in effecting medical treatment.  Higher levels allow better use of medicines and items like bandages and first aid kits, and reduce the failure and complication rates of medical procedures.",
+    "companion_survival_rank_factor": 1,
+    "companion_industry_rank_factor": 1,
+    "display_category": "display_interaction",
+    "sort_rank": 25000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 10 }, { "skill": "combat", "weight": 10 } ]
+  },
+  {
+    "type": "skill",
+    "id": "speech",
+    "name": { "str": "socializing" },
+    "description": "Your skill in speaking to other people.  Covers ability in boasting, flattery, threats, persuasion, lies, bartering, and other facets of interpersonal communication.  Works best in conjunction with a high level of intelligence.",
+    "companion_survival_rank_factor": 1,
+    "display_category": "display_interaction",
+    "sort_rank": 27000,
+    "companion_skill_practice": [ { "skill": "recruiting", "weight": 15 }, { "skill": "recruiting", "weight": 70 } ]
+  },
+  {
+    "type": "skill",
+    "id": "driving",
+    "name": { "str": "vehicles" },
+    "description": "Your skill in operating and steering a vehicle in motion, from cars and boats to helicopters and horse-drawn carriages.  A higher level allows greater control over vehicles at higher speeds and reduces the penalty of shooting while driving.",
+    "display_category": "display_interaction",
+    "consumes_focus": false,
+    "sort_rank": 28000
+  },
+  {
+    "type": "skill",
+    "id": "fabrication",
+    "name": { "str": "fabrication" },
+    "description": "Your skill in working with raw materials and shaping them into useful objects.  This skill covers the widest variety of crafting and construction projects.",
+    "companion_industry_rank_factor": 1,
+    "display_category": "display_crafting",
+    "sort_rank": 17000,
+    "companion_skill_practice": [
+      { "skill": "", "weight": 10 },
+      { "skill": "gathering", "weight": 10 },
+      { "skill": "trapping", "weight": 10 },
+      { "skill": "menial", "weight": 60 },
+      { "skill": "construction", "weight": 70 }
+    ]
+  },
+  {
+    "type": "skill",
+    "id": "cooking",
+    "name": { "str": "cooking" },
+    "description": "Your skill in combining food ingredients to make other, tastier food items.  Also includes food preservation and safety, brewing, butchery, and more.",
+    "companion_industry_rank_factor": 1,
+    "display_category": "display_crafting",
+    "sort_rank": 16000,
+    "companion_skill_practice": [ { "skill": "menial", "weight": 15 } ]
+  },
+  {
+    "type": "skill",
+    "id": "tailor",
+    "name": { "str": "tailoring" },
+    "description": "Your skill in the craft and repair of clothing, bags, blankets and other textiles.  Affects knitting, sewing, stitching, weaving, and nearly anything else involving a needle and thread.",
+    "companion_industry_rank_factor": 1,
+    "display_category": "display_crafting",
+    "sort_rank": 20000,
+    "companion_skill_practice": [ { "skill": "menial", "weight": 15 } ]
+  },
+  {
+    "type": "skill",
+    "id": "electronics",
+    "name": { "str": "electronics" },
+    "description": "Your skill in dealing with electrical systems, used in the craft and repair of objects with electrical components.  This skill is an important part of installing and managing bionic implants.",
+    "companion_industry_rank_factor": 1,
+    "display_category": "display_crafting",
+    "sort_rank": 18000
+  },
+  {
+    "type": "skill",
+    "id": "archery",
+    "name": { "str": "archery" },
+    "description": "Your skill in using bow weapons, from hand-carved self bows to complex crossbows.  They require strength to load, but practiced archers may learn proficiencies to offset this.",
+    "tags": [ "combat_skill" ],
+    "time_to_attack": { "min_time": 20, "base_time": 50, "time_reduction_per_level": 3 },
+    "companion_combat_rank_factor": 1,
+    "companion_survival_rank_factor": 1,
+    "display_category": "display_ranged",
+    "sort_rank": 9000,
+    "companion_skill_practice": [
+      { "skill": "", "weight": 5 },
+      { "skill": "gathering", "weight": 5 },
+      { "skill": "trapping", "weight": 5 },
+      { "skill": "hunting", "weight": 45 },
+      { "skill": "combat", "weight": 15 }
+    ]
+  },
+  {
+    "type": "skill",
+    "id": "gun",
+    "name": { "str": "marksmanship" },
+    "description": "Your overall skill in using ranged weapons of any kind.  With higher levels, this general experience increases accuracy with any bows or firearms, but is secondary to practice with the type of ranged weapon in question.",
+    "tags": [ "combat_skill" ],
+    "display_category": "display_ranged",
+    "sort_rank": 7000,
+    "companion_skill_practice": [ { "skill": "gathering", "weight": 60 }, { "skill": "combat", "weight": 5 } ]
+  },
+  {
+    "type": "skill",
+    "id": "launcher",
+    "name": { "str": "launchers" },
+    "description": "Heavy weapons like flamethrowers, grenade launchers, and mortars have a variety of applications and may carry immense destructive power, but they are cumbersome and difficult to manage.",
+    "tags": [ "combat_skill" ],
+    "time_to_attack": { "min_time": 30, "base_time": 100, "time_reduction_per_level": 5 },
+    "display_category": "display_ranged",
+    "sort_rank": 14000
+  },
+  {
+    "type": "skill",
+    "id": "pistol",
+    "name": { "str": "handguns" },
+    "description": "Handguns have poor accuracy compared to rifles, but are usually quick to fire and reload faster than other guns.  Though they lack the punch and long-range capabilities of most rifles, a handgun may be fired one-handed.",
+    "tags": [ "combat_skill" ],
+    "time_to_attack": { "min_time": 20, "base_time": 30, "time_reduction_per_level": 1 },
+    "display_category": "display_ranged",
+    "sort_rank": 10000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 25 } ]
+  },
+  {
+    "type": "skill",
+    "id": "rifle",
+    "name": { "str": "rifles" },
+    "description": "Rifles have terrific range and accuracy compared to other firearms, but can prove difficult to use in in close combat.",
+    "tags": [ "combat_skill" ],
+    "time_to_attack": { "min_time": 20, "base_time": 30, "time_reduction_per_level": 1 },
+    "display_category": "display_ranged",
+    "sort_rank": 12000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 45 } ]
+  },
+  {
+    "type": "skill",
+    "id": "shotgun",
+    "name": { "str": "shotguns" },
+    "description": "Shotguns typically fire a burst of pellets which are surprisingly accurate and tremendously damaging to soft targets, but less effective against armor.  They make reliable hunting tools or close-quarters weapons.",
+    "tags": [ "combat_skill" ],
+    "time_to_attack": { "min_time": 20, "base_time": 30, "time_reduction_per_level": 1 },
+    "display_category": "display_ranged",
+    "sort_rank": 13000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 25 } ]
+  },
+  {
+    "type": "skill",
+    "id": "smg",
+    "name": { "str": "submachine guns" },
+    "description": "Submachine guns are lightweight and capable of operating with one hand, like pistols.  This makes them ideal for close-quarters engagements, where burst or fully automatic fire tends to make up for small caliber ammunition.",
+    "tags": [ "combat_skill" ],
+    "time_to_attack": { "min_time": 20, "base_time": 30, "time_reduction_per_level": 1 },
+    "display_category": "display_ranged",
+    "sort_rank": 11000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 25 } ]
+  },
+  {
+    "type": "skill",
+    "id": "throw",
+    "name": { "str": "throwing" },
+    "description": "Your skill in throwing objects or creatures over a distance, or in operating weapons like slings which operate on similar principles.  Higher ranks allow farther, harder, and more accurate throws.",
+    "tags": [ "combat_skill" ],
+    "time_to_attack": { "min_time": 50, "base_time": 220, "time_reduction_per_level": 25 },
+    "display_category": "display_ranged",
+    "sort_rank": 8000
+  },
+  {
+    "type": "skill",
+    "id": "melee",
+    "name": { "str": "melee" },
+    "description": "Your skill and finesse in hand-to-hand combat, both with and without a weapon.  Higher levels can significantly increase the accuracy and effectiveness of your physical attacks, as well as improving your defenses.",
+    "tags": [ "combat_skill" ],
+    "time_to_attack": { "min_time": 50, "base_time": 200, "time_reduction_per_level": 20 },
+    "companion_combat_rank_factor": 1,
+    "display_category": "display_melee",
+    "sort_rank": 1000,
+    "companion_skill_practice": [
+      { "skill": "", "weight": 5 },
+      { "skill": "gathering", "weight": 5 },
+      { "skill": "trapping", "weight": 5 },
+      { "skill": "hunting", "weight": 10 },
+      { "skill": "recruiting", "weight": 5 },
+      { "skill": "combat", "weight": 20 }
+    ]
+  },
+  {
+    "type": "skill",
+    "id": "bashing",
+    "name": { "str": "bashing weapons" },
+    "description": "Your skill in fighting with blunt weaponry, from rocks and sticks to baseball bats and the butts of rifles.  Bashing damage tends to be reliable even against many types of armor.",
+    "tags": [ "combat_skill" ],
+    "companion_combat_rank_factor": 1,
+    "display_category": "display_melee",
+    "sort_rank": 3000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 10 }, { "skill": "combat", "weight": 10 } ]
+  },
+  {
+    "type": "skill",
+    "id": "cutting",
+    "name": { "str": "cutting weapons" },
+    "description": "Your skill in fighting with weaponry designed to cut, hack and slash an opponent.  Cutting damage tends to be very high, but armor is especially effective against it.  High skill and knowledge of enemy weak points can overcome this.",
+    "tags": [ "combat_skill" ],
+    "companion_combat_rank_factor": 1,
+    "display_category": "display_melee",
+    "sort_rank": 4000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 10 }, { "skill": "combat", "weight": 10 } ]
+  },
+  {
+    "type": "skill",
+    "id": "stabbing",
+    "name": { "str": "stabbing weapons" },
+    "description": "Your skill in fighting with weapons designed to puncture.  Stabbing damage has many of the strengths of cut, but is better at overcoming armor.  In exchange, it requires more skill and stabbing weapons tend to be harder to use.  Skill and perception reduce the chance of your weapon lodging in an enemy.",
+    "tags": [ "combat_skill" ],
+    "companion_combat_rank_factor": 1,
+    "display_category": "display_melee",
+    "sort_rank": 5000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 10 }, { "skill": "combat", "weight": 10 } ]
+  },
+  {
+    "type": "skill",
+    "id": "dodge",
+    "name": { "str": "dodging" },
+    "description": "Your ability to dodge an oncoming threat, be it an enemy's attack, a triggered trap, or a falling rock.  This skill is also used in attempts to fall gracefully, and for other acrobatic feats.  The number to the left is your total dodge score including modifiers, on the right are your raw ranks.",
+    "tags": [ "combat_skill" ],
+    "display_category": "display_melee",
+    "sort_rank": 6000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 15 }, { "skill": "combat", "weight": 20 } ]
+  },
+  {
+    "type": "skill",
+    "id": "unarmed",
+    "name": { "str": "unarmed combat" },
+    "description": "Your skill in fighting empty-handed.  This includes basic punches and kicks as well as advanced martial arts techniques, grappling, and attacks made with mutated body parts such as horns, fangs, and claws.  Items like steel-toed boots, leather gloves, and brass knuckles may also be worn to increase unarmed damage.",
+    "tags": [ "combat_skill" ],
+    "companion_combat_rank_factor": 1,
+    "companion_survival_rank_factor": 1,
+    "display_category": "display_melee",
+    "sort_rank": 2000,
+    "companion_skill_practice": [ { "skill": "hunting", "weight": 10 }, { "skill": "combat", "weight": 10 } ]
+  },
+  {
+    "type": "skill",
+    "id": "chemistry",
+    "name": { "str": "science" },
+    "description": "Your ability to safely and methodically handle the practical side of laboratory work, as well as your general understanding of the principles of the physical sciences, particularly chemistry.",
+    "companion_industry_rank_factor": 1,
+    "display_category": "display_crafting",
+    "sort_rank": 19000,
+    "companion_skill_practice": [ { "skill": "menial", "weight": 15 } ]
+  },
+  {
+    "type": "skill",
+    "id": "weapon",
+    "name": { "str": "weapon" },
+    "description": "seeing this is a bug",
+    "tags": [ "contextual_skill" ],
+    "display_category": "none",
+    "sort_rank": 500000
+  }
+]

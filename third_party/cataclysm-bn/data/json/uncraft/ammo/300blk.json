@@ -1,0 +1,19 @@
+[
+  {
+    "result": "300blk_ss",
+    "type": "uncraft",
+    "skill_used": "fabrication",
+    "difficulty": 5,
+    "skills_required": [ "gun", 5 ],
+    "time": "2 m",
+    "qualities": [ { "id": "PULL", "level": 2 } ],
+    "components": [
+      [ [ "lead", 5 ] ],
+      [ [ "300blk_casing", 1 ] ],
+      [ [ "smrifle_primer", 1 ] ],
+      [ [ "gunpowder", 6 ] ],
+      [ [ "copper", 2 ] ]
+    ],
+    "charges": 1
+  }
+]

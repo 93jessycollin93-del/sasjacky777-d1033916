@@ -1,0 +1,193 @@
+[
+  {
+    "type": "effect_on_condition",
+    "id": "scenario_bad_day",
+    "effect": [
+      { "u_add_effect": "flu", "intensity": 1, "duration": "1000 minutes" },
+      { "u_add_effect": "drunk", "intensity": 1, "duration": "270 minutes" },
+      {
+        "u_add_morale": "morale_feeling_bad",
+        "bonus": -100,
+        "max_bonus": -100,
+        "duration": "50 minutes",
+        "decay_start": "50 minutes"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "scenario_infected",
+    "effect": [
+      { "u_add_effect": "infected", "intensity": 1, "duration": "PERMANENT", "target_part": "RANDOM" },
+      { "assign_mission": "MISSION_INFECTED_START_FIND_ANTIBIOTICS" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "scenario_fungal_infection",
+    "effect": [ { "u_add_effect": "fungus", "intensity": 1, "duration": "PERMANENT", "target_part": "RANDOM" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "scenario_paralyzepoison",
+    "effect": [ { "u_add_effect": "paralyzepoison", "intensity": 3, "duration": "10 minutes" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "scenario_portal_dependent",
+    "effect": [
+      {
+        "run_eocs": [ "EOC_PORTAL_DEPENDENT_MESSAGES_BAD", "EOC_PORTAL_DEPENDENT_FOCUS_BAD", "EOC_PORTAL_DEPENDENT_DAMAGE_CONSTANT" ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "scenario_mansion_pursuit",
+    "effect": [
+      {
+        "u_spawn_monster": "GROUP_MANSION_ARMORED",
+        "group": true,
+        "real_count": 1,
+        "min_radius": 30,
+        "max_radius": 45,
+        "indoor_only": true
+      },
+      {
+        "u_spawn_monster": "GROUP_MANSION_START",
+        "group": true,
+        "real_count": 2,
+        "min_radius": 20,
+        "max_radius": 35,
+        "indoor_only": true
+      },
+      {
+        "u_spawn_monster": "GROUP_MANSION_START",
+        "group": true,
+        "real_count": 2,
+        "min_radius": 25,
+        "max_radius": 40,
+        "indoor_only": true
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_BANISH_SELF",
+    "effect": [ { "u_cast_spell": { "id": "BEGONE_SHADOW" } } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_BANISH_MANSION_MONSTERS",
+    "//": "Banish half the mapgen monsters from the mansion to make room for special scenario ferals",
+    "effect": [
+      {
+        "npc_run_monster_eocs": [
+          {
+            "id": "EOC_BANISH_MONSTERS_AROUND_MANSION_CENTER",
+            "condition": { "math": [ "rand(1) == 0" ] },
+            "effect": { "run_eocs": "EOC_BANISH_SELF" }
+          }
+        ],
+        "monster_range": 36
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_SPAWN_MANSION_MONSTERS",
+    "//": "Spawn special scenario ferals out from the center of the mansion",
+    "effect": [
+      {
+        "u_spawn_monster": "GROUP_MANSION_ARMORED",
+        "group": true,
+        "real_count": 1,
+        "min_radius": 0,
+        "max_radius": 36,
+        "target_var": { "u_val": "mansion_centre" },
+        "indoor_only": true
+      },
+      {
+        "u_spawn_monster": "GROUP_MANSION_START",
+        "group": true,
+        "real_count": 20,
+        "min_radius": 0,
+        "max_radius": 36,
+        "target_var": { "u_val": "mansion_centre" },
+        "indoor_only": true
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "scenario_surrounded_zombie",
+    "effect": [ { "u_spawn_monster": "GROUP_ZOMBIE", "group": true, "real_count": 5, "min_radius": 12, "max_radius": 30 } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "scenario_surrounded_zombie_heavy",
+    "effect": [ { "u_spawn_monster": "GROUP_ZOMBIE", "group": true, "real_count": 10, "min_radius": 14, "max_radius": 30 } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_lone_survivor",
+    "effect": [
+      {
+        "u_message": "They are all dead.  The group you were surviving with has been annihilated.  Their bodies are still nearby.  You are the last one left alive and their screams will haunt you.",
+        "type": "warning",
+        "popup": true
+      },
+      {
+        "u_add_morale": "morale_feeling_bad",
+        "bonus": -100,
+        "max_bonus": -100,
+        "duration": "1440 minutes",
+        "decay_start": "180 minutes"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_scenario_drunk",
+    "effect": [
+      { "u_add_effect": "drunk", "intensity": 1, "duration": "270 minutes" },
+      {
+        "u_add_morale": "morale_feeling_bad",
+        "bonus": -50,
+        "max_bonus": -50,
+        "duration": "50 minutes",
+        "decay_start": "50 minutes"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_scenario_blood",
+    "effect": [ { "mapgen_update": "SCENARIO_BLOOD" } ]
+  },
+  {
+    "type": "mapgen",
+    "update_mapgen_id": "SCENARIO_BLOOD",
+    "object": { "place_fields": [ { "field": "fd_blood", "x": [ 5, 20 ], "y": [ 5, 20 ], "intensity": [ 1, 3 ], "repeat": 10 } ] }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_scenario_fire",
+    "effect": [ { "mapgen_update": "SCENARIO_FIRE" } ]
+  },
+  {
+    "type": "mapgen",
+    "update_mapgen_id": "SCENARIO_FIRE",
+    "object": { "place_fields": [ { "field": "fd_fire", "x": [ 3, 20 ], "y": [ 3, 20 ], "intensity": [ 1, 3 ], "repeat": 15 } ] }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_scenario_smoke",
+    "effect": [ { "mapgen_update": "SCENARIO_SMOKE" } ]
+  },
+  {
+    "type": "mapgen",
+    "update_mapgen_id": "SCENARIO_SMOKE",
+    "object": { "place_fields": [ { "field": "fd_smoke", "x": [ 3, 20 ], "y": [ 3, 20 ], "intensity": [ 1, 3 ], "repeat": 60 } ] }
+  }
+]

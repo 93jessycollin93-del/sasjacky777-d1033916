@@ -1,0 +1,92 @@
+[
+  {
+    "id": "SUS_hunting_archery",
+    "type": "item_group",
+    "//": "items found in an archery space",
+    "subtype": "collection",
+    "entries": [
+      { "item": "compbow", "prob": 30 },
+      { "item": "compbow_high", "prob": 10 },
+      { "item": "compbow_low", "prob": 20 },
+      { "item": "compcrossbow", "prob": 35 },
+      { "item": "rep_compcrossbow", "prob": 20 },
+      { "item": "pistol_crossbow", "prob": 20 },
+      { "item": "recurbow", "prob": 25 },
+      { "item": "longbow", "prob": 15 },
+      { "item": "woodgreatbow", "prob": 2 },
+      { "item": "shortbow", "prob": 2 },
+      { "item": "compositebow", "prob": 1 },
+      { "item": "latchet_crossbow", "prob": 1 },
+      { "item": "huge_crossbow", "prob": 1 },
+      { "item": "quiver_takedown_bow", "prob": 1 },
+      { "item": "bow_sling", "prob": 10 }
+    ]
+  },
+  {
+    "id": "SUS_hunting_rifle",
+    "type": "item_group",
+    "//": "items found in a rifle hunting space",
+    "subtype": "collection",
+    "entries": [
+      { "group": "modular_ar15", "prob": 150, "charges": [ 0, 30 ] },
+      { "item": "marlin_9a", "prob": 20, "charges": [ 0, 19 ] },
+      { "item": "remington700_270", "prob": 10, "charges": [ 0, 4 ] },
+      { "item": "remington_700", "prob": 40, "charges": [ 0, 4 ] },
+      { "item": "ruger_1022", "prob": 70, "charges": [ 0, 10 ] },
+      { "item": "ruger_mini", "prob": 10, "charges": [ 0, 5 ] },
+      { "item": "win70", "prob": 20, "charges": [ 0, 3 ] },
+      { "item": "colt_lightning", "prob": 2, "charges": [ 0, 10 ] },
+      { "item": "henry_big_boy", "prob": 2, "charges": [ 0, 10 ] },
+      { "item": "weatherby_5", "prob": 2, "charges": [ 0, 3 ] },
+      { "item": "single_sling", "prob": 10 }
+    ]
+  },
+  {
+    "id": "hunting_lodge_weapons",
+    "type": "item_group",
+    "//": "items found in a shotgun hunting space",
+    "subtype": "distribution",
+    "entries": [
+      { "group": "guns_shotgun_common", "prob": 30 },
+      { "group": "SUS_hunting_rifle", "prob": 20 },
+      { "group": "SUS_hunting_archery", "prob": 15 }
+    ]
+  },
+  {
+    "id": "cannibal_weapons",
+    "type": "item_group",
+    "//": "items found in a most dangerous game space",
+    "subtype": "distribution",
+    "entries": [
+      { "group": "guns_shotgun_common", "prob": 30, "dirt": [ 0, 3000 ] },
+      { "group": "SUS_hunting_rifle", "prob": 20, "dirt": [ 0, 3000 ] },
+      { "group": "guns_smg_rare", "prob": 15, "dirt": [ 0, 3000 ] }
+    ]
+  },
+  {
+    "id": "cannibal_food",
+    "type": "item_group",
+    "subtype": "collection",
+    "entries": [
+      { "item": "machete", "prob": 20 },
+      { "item": "knife_meat_cleaver", "prob": 10 },
+      { "item": "knife_butcher", "prob": 10 },
+      { "group": "preserved_food", "prob": 10 },
+      { "group": "dry_goods", "prob": 20 },
+      { "item": "meat_smoked", "components": [ "human_flesh" ], "prob": 80 },
+      { "item": "meat_smoked", "components": [ "mutant_human_flesh" ], "prob": 2 },
+      { "item": "meat_smoked", "components": [ "mutant_meat" ], "prob": 10 },
+      { "item": "meat_smoked", "prob": 10 },
+      { "item": "human_flesh", "prob": 20 },
+      { "item": "mutant_human_flesh", "prob": 5 },
+      { "item": "mutant_meat", "prob": 10 },
+      { "item": "bone_human", "prob": 60 },
+      { "item": "bone", "prob": 60 },
+      { "item": "skull_human", "prob": 10 },
+      { "item": "skull_canis", "prob": 5 },
+      { "item": "skull_cervine", "prob": 2 },
+      { "item": "skull_feline_small", "prob": 2 },
+      { "group": "SUS_pantry", "prob": 5 }
+    ]
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "method": "json",
+    "om_terrain": "house_duplex7",
+    "type": "mapgen",
+    "weight": 200,
+    "object": {
+      "fill_ter": "t_floor",
+      "rows": [
+        "...[..`..........`......",
+        "......`..........`..[...",
+        ".....p`....[.....`p.....",
+        "..#oo#`.%%.%%.%%.`#oo#..",
+        "..#JJ#`..........`#JJ#..",
+        "..oO˙#*#oo####oo#*#˙Oo..",
+        "..o5˙˙˙˙˙˙hh|Yh˙˙˙˙˙5o..",
+        "..#F˙˙˙˙˙˙ff|hfh˙˙˙˙F#..",
+        "..#12347˙˙hh|hf˙71234#..",
+        "..#||||6˙˙˙Y|˙˙˙6||||#..",
+        "..#s@@||  ||||  ||  s#..",
+        "..o @@|    i|R  R| @@o..",
+        "..o   +  A i|s   + @@o..",
+        "..#TdD| ee i|H  x|D d#..",
+        "..#|||| ee ||H  x||||#..",
+        "..#yx ? ee |TH   + II#..",
+        "..o   | A  |E    |  Ao..",
+        "..#HHH|   A|RR  y|d@@#..",
+        ".^#|||| |+||||+||||||#^.",
+        "..#I    |¨¨9|t¨¨+  A #..",
+        "..oIE  P|tS8|98S| NNUo..",
+        "..##oo*##########*oo##..",
+        ".....```........```.....",
+        "...........[............"
+      ],
+      "palettes": [
+        "standard_domestic_palette",
+        "parameterized_linoleum_color_kitchen",
+        "parameterized_linoleum_color_bathroom",
+        "standard_domestic_landscaping_palette"
+      ],
+      "terrain": {
+        "Y": { "param": "linoleum_color_kitchen", "fallback": "t_linoleum_white" },
+        "h": { "param": "linoleum_color_kitchen", "fallback": "t_linoleum_white" },
+        "f": { "param": "linoleum_color_kitchen", "fallback": "t_linoleum_white" }
+      },
+      "furniture": { "?": "f_beaded_door" },
+      "place_item": [
+        { "item": "television", "x": 16, "y": 13 },
+        { "item": "television", "x": 4, "y": 15 },
+        { "item": "stereo", "x": 11, "y": 12 }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": "house_duplex7_roof",
+    "object": {
+      "fill_ter": "t_shingle_flat_roof",
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "  ----            ----  ",
+        "  -..-            -..-  ",
+        "  -..--------------..-  ",
+        "  -..................-  ",
+        "  -..................-  ",
+        "  -..................-  ",
+        "  -..................-  ",
+        "  -..................-  ",
+        "  -..N......&........-  ",
+        "  -..................-  ",
+        "  -..................-  ",
+        "  -..................-  ",
+        "  -..................-  ",
+        "  -......&....=......-  ",
+        "  -..................-  ",
+        "  5..................5  ",
+        "  -.....=............-  ",
+        "  -..................-  ",
+        "  --------------------  ",
+        "                        ",
+        "                        "
+      ],
+      "palettes": [ "roof_palette" ],
+      "terrain": { ".": "t_shingle_flat_roof" }
+    }
+  }
+]

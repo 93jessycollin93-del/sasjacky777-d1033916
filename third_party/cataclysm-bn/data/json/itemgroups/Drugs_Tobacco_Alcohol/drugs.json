@@ -1,0 +1,257 @@
+[
+  {
+    "id": "drugs_analgesic",
+    "type": "item_group",
+    "//": "Painkillers balanced according to rarity excluding illicit drugs",
+    "items": [ [ "aspirin", 150 ], [ "codeine", 30 ], [ "tramadol", 30 ], [ "morphine", 5 ], [ "oxycodone", 20 ] ]
+  },
+  {
+    "id": "drugs_heal_simple",
+    "type": "item_group",
+    "//": "Common healing items found almost everywhere",
+    "items": [
+      [ "1st_aid", 4 ],
+      [ "1st_aid_deluxe", 1 ],
+      [ "aspirin", 50 ],
+      [ "bandages", 50 ],
+      { "item": "cotton_ball", "prob": 40, "container-item": "box_small", "charges": 20 },
+      [ "disinfectant", 20 ],
+      [ "chem_hydrogen_peroxide", 30 ],
+      [ "eyedrops", 10 ],
+      [ "medical_gauze", 20 ],
+      [ "medical_tape", 20 ],
+      [ "pepto", 20 ],
+      [ "saline", 10 ],
+      [ "weak_antibiotic", 30 ]
+    ]
+  },
+  {
+    "id": "drugs_antibiotics",
+    "type": "item_group",
+    "//": "antibiotics used for the MISSION_GET_ANTIBIOTICS quest",
+    "items": [ [ "antibiotics", 100 ], [ "strong_antibiotic", 75 ], [ "panacea", 50 ] ]
+  },
+  {
+    "id": "drugs_emergency",
+    "type": "item_group",
+    "//": "Medical consumables for emergency use excluduing painkillers",
+    "items": [ [ "adrenaline_injector", 50 ], [ "inhaler", 100 ], [ "quikclot", 50 ], [ "smoxygen_tank", 70 ] ]
+  },
+  {
+    "id": "drugs_misc",
+    "type": "item_group",
+    "//": "Drugs not contained within any other category",
+    "items": [ [ "bfipowder", 100 ], [ "dayquil", 50 ], [ "nyquil", 50 ], [ "vaccine_shot", 50 ], [ "lactaid", 50 ] ]
+  },
+  {
+    "id": "drugs_pharmacy",
+    "type": "item_group",
+    "//": "Drugs stocked by a pharmacy including prescription medications",
+    "items": [
+      { "group": "drugs_analgesic", "prob": 100 },
+      { "group": "drugs_heal_simple", "prob": 100 },
+      { "group": "drugs_misc", "prob": 100 },
+      { "group": "drugs_rare", "prob": 100 }
+    ]
+  },
+  {
+    "id": "drugs_vending",
+    "type": "item_group",
+    "//": "Drugs that weren't bought during the panic",
+    "items": [
+      { "group": "drugs_heal_simple", "prob": 100 },
+      { "group": "drugs_misc", "prob": 100 },
+      { "item": "tramadol", "prob": 10 },
+      { "item": "codeine", "prob": 5 }
+    ]
+  },
+  {
+    "id": "drugs_rare",
+    "type": "item_group",
+    "//": "Rare and/or valuable drugs excluding painkillers",
+    "items": [
+      [ "adderall", 100 ],
+      [ "antibiotics", 100 ],
+      [ "strong_antibiotic", 45 ],
+      [ "antifungal", 100 ],
+      [ "antiparasitic", 100 ],
+      [ "diazepam", 100 ],
+      [ "calcium_tablet", 100 ],
+      [ "inj_vitb", 100 ],
+      [ "inj_iron", 100 ],
+      [ "prozac", 100 ],
+      [ "thorazine", 100 ],
+      [ "ghb", 100 ],
+      [ "xanax", 100 ],
+      [ "purifier", 3 ],
+      [ "iv_purifier", 1 ],
+      [ "purifier_smart_shot", 1 ]
+    ]
+  },
+  {
+    "id": "drugs_soldier",
+    "type": "item_group",
+    "subtype": "distribution",
+    "//": "Healing items appropriate for soldiers and other paramilitary forces",
+    "entries": [
+      { "item": "1st_aid_ifak", "prob": 40 },
+      { "item": "1st_aid_deluxe", "prob": 10 },
+      { "item": "antibiotics", "prob": 20 },
+      { "item": "bandages", "prob": 100 },
+      { "item": "morphine", "prob": 20 },
+      { "item": "quikclot", "prob": 20 },
+      { "item": "smoxygen_tank", "prob": 20 },
+      { "item": "tramadol", "prob": 20 },
+      {
+        "distribution": [
+          { "item": "rx12_injector", "charges": [ 0, 2 ], "prob": 10 },
+          { "item": "ampoule", "charges": 2, "prob": 40 },
+          { "item": "rx11_stimpack", "charges": [ 0, 5 ], "prob": 10 },
+          { "item": "stimpack_ammo", "charges": 5, "prob": 40 }
+        ],
+        "prob": 5
+      }
+    ]
+  },
+  {
+    "id": "jar_weed",
+    "type": "item_group",
+    "//": "For sale display appropriate packaging",
+    "subtype": "distribution",
+    "items": [
+      { "item": "weed", "charges": [ 4, 7 ], "prob": 200, "container-item": "jar_glass" },
+      { "item": "weed", "charges": [ 28, 112 ], "prob": 100, "container-item": "jar_3l_glass" }
+    ]
+  },
+  {
+    "id": "weed_accessories",
+    "type": "item_group",
+    "//": "Processed weed and weed accessories",
+    "items": [
+      [ "pipe_glass", 50 ],
+      [ "pipe_glass_bong", 50 ],
+      { "item": "rolling_paper", "prob": 70, "charges": 32 },
+      { "item": "light_battery_cell", "charges": 100, "container-item": "dab_pen", "prob": 20 },
+      [ "nectar_collector", 10 ]
+    ]
+  },
+  {
+    "id": "dispensary",
+    "type": "item_group",
+    "//": "Processed weed ONLY",
+    "items": [
+      [ "joint", 50 ],
+      [ "thc_liquid", 20 ],
+      [ "thc_wax", 20 ],
+      { "item": "light_battery_cell", "charges": 100, "container-item": "dab_pen", "prob": 20 },
+      [ "dab_pen_disposable", 30 ],
+      [ "candy3_weed", 20 ],
+      { "group": "jar_weed", "prob": 100 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "softdrugs",
+    "items": [
+      [ "bandages", 50 ],
+      { "item": "cotton_ball", "prob": 50, "container-item": "box_small", "charges-min": 1, "charges-max": 20 },
+      [ "1st_aid", 28 ],
+      [ "1st_aid_deluxe", 7 ],
+      [ "saline", 25 ],
+      [ "contacts", 10 ],
+      [ "vitamins", 75 ],
+      [ "gummy_vitamins", 25 ],
+      [ "calcium_tablet", 75 ],
+      [ "aspirin", 85 ],
+      [ "caffeine", 25 ],
+      [ "pills_sleep", 15 ],
+      [ "iodine", 5 ],
+      [ "prussian_blue", 5 ],
+      [ "dayquil", 70 ],
+      [ "nyquil", 70 ],
+      [ "lactaid", 35 ],
+      [ "disinfectant", 35 ],
+      [ "vaccine_shot", 10 ],
+      {
+        "item": "protein_powder",
+        "prob": 12,
+        "container-item": "bottle_plastic_small",
+        "charges-min": 1,
+        "charges-max": 9
+      },
+      [ "caff_gum", 10 ],
+      [ "oxygen_tank", 20 ],
+      [ "smoxygen_tank", 5 ],
+      [ "eyedrops", 35 ],
+      [ "shavingkit", 5 ],
+      [ "elec_hairtrimmer", 2 ],
+      [ "nic_gum", 25 ],
+      [ "weak_antibiotic", 30 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "harddrugs",
+    "items": [
+      [ "inhaler", 14 ],
+      [ "codeine", 15 ],
+      [ "oxycodone", 4 ],
+      [ "morphine", 4 ],
+      [ "tramadol", 11 ],
+      [ "xanax", 10 ],
+      [ "adderall", 10 ],
+      [ "thorazine", 7 ],
+      [ "prozac", 10 ],
+      [ "antibiotics", 25 ],
+      [ "strong_antibiotic", 5 ],
+      [ "antifungal", 2 ],
+      [ "antiparasitic", 3 ],
+      [ "survnote", 1 ],
+      [ "diazepam", 4 ],
+      [ "syringe", 8 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "baddrugs",
+    "items": [
+      [ "meth", 14 ],
+      [ "codeine", 15 ],
+      [ "oxycodone", 7 ],
+      [ "morphine", 3 ],
+      [ "adderall", 10 ],
+      [ "coke", 8 ],
+      [ "meth", 2 ],
+      [ "heroin", 1 ],
+      [ "ghb", 2 ],
+      [ "sizzurp", 4 ],
+      [ "syringe", 8 ],
+      [ "crack", 8 ],
+      [ "lsd", 10 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "smokedrugs",
+    "items": [
+      [ "weed", 20 ],
+      [ "joint", 20 ],
+      [ "seed_weed", 20 ],
+      [ "cig", 60 ],
+      [ "tobacco", 30 ],
+      [ "chaw", 20 ],
+      [ "seed_tobacco", 5 ],
+      [ "cigar", 10 ],
+      [ "handrolled_cig", 10 ],
+      [ "ecig", 20 ],
+      [ "dab_pen_disposable", 20 ],
+      { "item": "light_battery_cell", "charges": 100, "container-item": "dab_pen", "prob": 20 },
+      [ "advanced_ecig", 10 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "meth_ingredients",
+    "items": [ [ "dayquil", 2 ], [ "aspirin", 40 ], [ "adderall", 5 ], [ "energy_drink", 2 ], [ "caffeine", 20 ] ]
+  }
+]

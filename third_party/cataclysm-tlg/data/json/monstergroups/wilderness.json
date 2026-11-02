@@ -1,0 +1,861 @@
+[
+  {
+    "type": "monstergroup",
+    "name": "GROUP_CAVE",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_bat", "weight": 600, "cost_multiplier": 3, "pack_size": [ 1, 4 ] },
+      { "group": "GROUP_BEARS", "weight": 100, "cost_multiplier": 10, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_mutant_experimental", "weight": 25, "cost_multiplier": 3 },
+      { "monster": "mon_mole_cricket", "weight": 60, "cost_multiplier": 3 },
+      { "monster": "mon_woodlouse", "weight": 60, "cost_multiplier": 3, "pack_size": [ 1, 4 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_FOREST",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_WILDERNESS_FOREST_MAMMAL", "weight": 75, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_MAMMAL",
+        "weight": 75,
+        "ends": "12 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_MAMMAL",
+        "weight": 75,
+        "ends": "28 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_MAMMAL",
+        "weight": 75,
+        "ends": "112 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_MAMMAL",
+        "weight": 75,
+        "ends": "360 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "group": "GROUP_WILDERNESS_FOREST_MAMMAL_WINTER", "weight": 75, "conditions": [ "WINTER" ] },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_MAMMAL_WINTER",
+        "weight": 75,
+        "ends": "12 days",
+        "conditions": [ "WINTER" ]
+      },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_MAMMAL_WINTER",
+        "weight": 75,
+        "ends": "28 days",
+        "conditions": [ "WINTER" ]
+      },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_MAMMAL_WINTER",
+        "weight": 75,
+        "ends": "112 days",
+        "conditions": [ "WINTER" ]
+      },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_MAMMAL_WINTER",
+        "weight": 75,
+        "ends": "360 days",
+        "conditions": [ "WINTER" ]
+      },
+      { "group": "GROUP_WILDERNESS_FOREST_BIRD", "weight": 300 },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_INSECT_HARMLESS",
+        "weight": 65,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "group": "GROUP_WILDERNESS_FOREST_INSECT", "weight": 100, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_INSECT",
+        "weight": 80,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "20 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_INSECT",
+        "weight": 75,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "180 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_FOREST_INSECT",
+        "weight": 75,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "360 days"
+      },
+      { "group": "GROUP_WILDERNESS_FOREST_ZOMBIE", "weight": 50, "starts": "12 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_ZOMBIE", "weight": 50, "starts": "28 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_ZOMBIE", "weight": 20, "starts": "112 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_ZOMBIE", "weight": 50, "starts": "360 days" },
+      {
+        "monster": "mon_rattlesnake",
+        "weight": 3,
+        "cost_multiplier": 5,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "monster": "mon_bullfrog", "weight": 10, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      { "monster": "mon_big_bullfrog", "weight": 7, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FOREST_MAMMAL",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_bat", "weight": 20, "cost_multiplier": 2, "pack_size": [ 1, 4 ] },
+      { "group": "GROUP_BEARS", "weight": 1, "cost_multiplier": 10, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_zombear", "weight": 1, "cost_multiplier": 10, "pack_size": [ 1, 3 ], "starts": "20 days" },
+      { "group": "GROUP_PIGS", "weight": 1, "cost_multiplier": 2, "pack_size": [ 1, 6 ] },
+      { "group": "GROUP_SHEEP", "weight": 1, "cost_multiplier": 2, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_zombie_sheep", "weight": 1, "cost_multiplier": 2, "pack_size": [ 1, 4 ], "starts": "10 days" },
+      { "group": "GROUP_STRAY_CATS", "weight": 10 },
+      { "group": "GROUP_STRAY_CATS", "weight": 3, "pack_size": [ 2, 8 ] },
+      { "monster": "mon_ferret", "weight": 1, "cost_multiplier": 5 },
+      { "monster": "mon_chipmunk", "weight": 40, "cost_multiplier": 0, "pack_size": [ 1, 2 ] },
+      { "group": "GROUP_STRAY_DOGS", "weight": 20, "cost_multiplier": 25, "pack_size": [ 1, 6 ] },
+      { "group": "GROUP_HORSES_STABLES", "weight": 1, "cost_multiplier": 35, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_groundhog", "weight": 30, "cost_multiplier": 5, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_rabbit", "weight": 80, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_squirrel", "weight": 120, "cost_multiplier": 0, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_weasel", "weight": 5, "cost_multiplier": 5 },
+      { "monster": "mon_raccoon", "weight": 10, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_opossum", "weight": 10, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_skunk", "weight": 10, "cost_multiplier": 0, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_rat", "weight": 50, "cost_multiplier": 0, "pack_size": [ 1, 5 ] },
+      { "group": "GROUP_WILDERNESS_FOREST_MAMMAL_WINTER", "weight": 22 },
+      { "group": "GROUP_WILDERNESS_FOREST_MAMMAL_MUTANT", "weight": 4 },
+      { "group": "GROUP_WILDERNESS_FOREST_MAMMAL_MUTANT", "weight": 8, "starts": "30 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_MAMMAL_MUTANT", "weight": 16, "starts": "90 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_MAMMAL_MUTANT", "weight": 32, "starts": "120 days" },
+      { "group": "GROUP_WILDERNESS_FOREST_MAMMAL_MUTANT", "weight": 64, "starts": "240 days" }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FOREST_MAMMAL_WINTER",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_bobcat", "weight": 7, "cost_multiplier": 2 },
+      { "group": "GROUP_BOARS", "weight": 2, "cost_multiplier": 2, "pack_size": [ 1, 4 ] },
+      { "group": "GROUP_DEER", "weight": 4, "cost_multiplier": 2, "pack_size": [ 1, 5 ] },
+      { "monster": "mon_fox", "weight": 1, "cost_multiplier": 0 },
+      { "monster": "mon_coyote", "weight": 2, "cost_multiplier": 2, "pack_size": [ 1, 8 ] },
+      { "group": "GROUP_MOOSE", "weight": 1, "cost_multiplier": 3, "pack_size": [ 1, 3 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FOREST_MAMMAL_MUTANT",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_DEER_MUT_SPIDERS", "weight": 4, "cost_multiplier": 2, "pack_size": [ 1, 3 ] },
+      { "group": "GROUP_TUSKED_MOOSE", "weight": 1, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_bear_mutant_3headed", "weight": 1, "cost_multiplier": 10 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FOREST_BIRD",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_bluejay", "weight": 2, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_crow", "weight": 5, "cost_multiplier": 0, "pack_size": [ 1, 8 ] },
+      { "monster": "mon_crow_mutant_small", "weight": 2, "cost_multiplier": 0, "pack_size": [ 1, 6 ] },
+      { "monster": "mon_raven", "weight": 5, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_robin", "weight": 4, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_sparrow", "weight": 5, "cost_multiplier": 0, "pack_size": [ 1, 12 ] },
+      { "monster": "mon_pigeon", "weight": 1, "cost_multiplier": 0, "pack_size": [ 1, 6 ] },
+      { "monster": "mon_turkey", "weight": 6, "cost_multiplier": 2, "pack_size": [ 1, 6 ] },
+      {
+        "monster": "mon_duck",
+        "weight": 4,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 4 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_goose",
+        "weight": 4,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 4 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "monster": "mon_woodpecker", "weight": 5, "cost_multiplier": 0, "pack_size": [ 1, 3 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FOREST_INSECT_HARMLESS",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_fly_small", "weight": 2, "cost_multiplier": 0 },
+      { "monster": "mon_aphid", "weight": 3, "pack_size": [ 1, 5 ], "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FOREST_INSECT",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_fly_small", "weight": 1, "cost_multiplier": 0 },
+      { "monster": "mon_spider_jumping_small", "weight": 1, "cost_multiplier": 0 },
+      { "monster": "mon_spider_wolf_small", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_mantis_small", "weight": 3, "cost_multiplier": 10 },
+      { "monster": "mon_aphid", "weight": 1, "pack_size": [ 1, 5 ], "cost_multiplier": 0 },
+      { "monster": "mon_woodlouse", "weight": 1, "cost_multiplier": 3 },
+      { "monster": "mon_butterfly", "weight": 1, "cost_multiplier": 3 },
+      { "monster": "mon_moth", "weight": 1, "cost_multiplier": 3 },
+      { "monster": "mon_cicada", "weight": 1, "cost_multiplier": 3 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FIELD_MAMMAL",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_bat", "weight": 2, "cost_multiplier": 2, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_dog", "weight": 3, "cost_multiplier": 2, "pack_size": [ 1, 4 ] },
+      { "group": "GROUP_BEARS", "weight": 1, "cost_multiplier": 15 },
+      { "monster": "mon_zombear", "weight": 1, "cost_multiplier": 15, "starts": "20 days" },
+      { "group": "GROUP_SHEEP", "weight": 1, "cost_multiplier": 4, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_zombie_sheep", "weight": 1, "cost_multiplier": 4, "pack_size": [ 1, 4 ], "starts": "10 days" },
+      { "group": "GROUP_STRAY_CATS", "weight": 10 },
+      { "group": "GROUP_STRAY_CATS", "weight": 3, "pack_size": [ 2, 8 ] },
+      { "group": "GROUP_STRAY_DOGS", "weight": 20, "cost_multiplier": 25, "pack_size": [ 1, 6 ] },
+      { "group": "GROUP_HORSES_STABLES", "weight": 1, "cost_multiplier": 35, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_groundhog", "weight": 30, "cost_multiplier": 5, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_rabbit", "weight": 80, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_squirrel", "weight": 100, "cost_multiplier": 0, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_weasel", "weight": 5, "cost_multiplier": 5 },
+      { "monster": "mon_raccoon", "weight": 5, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_opossum", "weight": 15, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_skunk", "weight": 12, "cost_multiplier": 0, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_rat", "weight": 55, "cost_multiplier": 0, "pack_size": [ 1, 5 ] },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 22 },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_MUTANT", "weight": 1 },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_MUTANT", "weight": 2, "starts": "30 days" },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_MUTANT", "weight": 4, "starts": "90 days" },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_MUTANT", "weight": 8, "starts": "120 days" },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_MUTANT", "weight": 12, "starts": "240 days" }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_BOARS", "weight": 1, "cost_multiplier": 2, "pack_size": [ 1, 4 ] },
+      { "group": "GROUP_DEER", "weight": 1, "cost_multiplier": 2, "pack_size": [ 1, 5 ] },
+      { "monster": "mon_fox", "weight": 1, "cost_multiplier": 0 },
+      { "monster": "mon_coyote", "weight": 4, "cost_multiplier": 2, "pack_size": [ 1, 8 ] },
+      { "group": "GROUP_MOOSE", "weight": 1, "cost_multiplier": 3, "pack_size": [ 1, 3 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FIELD_MAMMAL_MUTANT",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_DEER_MUT_SPIDERS", "weight": 4, "cost_multiplier": 2, "pack_size": [ 1, 3 ] },
+      { "group": "GROUP_TUSKED_MOOSE", "weight": 1, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_bear_mutant_3headed", "weight": 1, "cost_multiplier": 10 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FIELD_BIRD",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_bluejay", "weight": 1, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_crow", "weight": 10, "cost_multiplier": 0, "pack_size": [ 1, 8 ] },
+      { "monster": "mon_crow_mutant_small", "weight": 5, "cost_multiplier": 0, "pack_size": [ 1, 6 ] },
+      { "monster": "mon_raven", "weight": 2, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_robin", "weight": 8, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_sparrow", "weight": 10, "cost_multiplier": 0, "pack_size": [ 1, 12 ] },
+      { "monster": "mon_pigeon", "weight": 4, "cost_multiplier": 0, "pack_size": [ 1, 6 ] },
+      { "monster": "mon_turkey", "weight": 3, "cost_multiplier": 2, "pack_size": [ 1, 6 ] },
+      {
+        "monster": "mon_duck",
+        "weight": 3,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 4 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_goose",
+        "weight": 3,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 4 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FIELD_INSECT_HARMLESS",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_fly_small", "weight": 2, "cost_multiplier": 0 },
+      { "monster": "mon_aphid", "weight": 3, "pack_size": [ 1, 5 ], "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FIELD_INSECT",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_fly_small", "weight": 1, "cost_multiplier": 0 },
+      { "monster": "mon_spider_jumping_small", "weight": 2, "cost_multiplier": 0 },
+      { "monster": "mon_spider_wolf_small", "weight": 1, "cost_multiplier": 0 },
+      { "monster": "mon_lady_bug", "weight": 1, "cost_multiplier": 10 },
+      { "monster": "mon_aphid", "weight": 1, "pack_size": [ 1, 5 ], "cost_multiplier": 0 },
+      { "monster": "mon_locust_small", "weight": 1, "pack_size": [ 3, 9 ], "cost_multiplier": 0 },
+      { "monster": "mon_grasshopper_small", "weight": 1, "pack_size": [ 1, 3 ], "cost_multiplier": 0 },
+      { "monster": "mon_woodlouse", "weight": 1, "cost_multiplier": 3 },
+      { "monster": "mon_butterfly", "weight": 1, "cost_multiplier": 3 },
+      { "monster": "mon_antlion_giant", "weight": 2, "cost_multiplier": 5 },
+      { "group": "GROUP_WASP_FORAGER", "weight": 1, "cost_multiplier": 6 },
+      { "monster": "mon_moth", "weight": 2, "cost_multiplier": 3 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FIELD_ZOMBIE",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_zeer", "weight": 4, "cost_multiplier": 12, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_zeer", "weight": 7, "cost_multiplier": 9, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zeer_frail", "weight": 2, "cost_multiplier": 5, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zombear", "weight": 2, "cost_multiplier": 10 },
+      { "monster": "mon_zombie_dog", "weight": 2, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_horse", "weight": 1, "cost_multiplier": 19, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zombie_horse_lame", "weight": 1, "cost_multiplier": 8 },
+      { "monster": "mon_zoose", "weight": 1, "cost_multiplier": 10 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_FOREST_ZOMBIE",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_zeer", "weight": 5, "cost_multiplier": 12, "pack_size": [ 1, 5 ] },
+      { "monster": "mon_zeer", "weight": 7, "cost_multiplier": 9, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zeer_frail", "weight": 3, "cost_multiplier": 5, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zombear", "weight": 3, "cost_multiplier": 10 },
+      { "monster": "mon_zombie_dog", "weight": 3, "cost_multiplier": 2 },
+      { "monster": "mon_zombie_horse", "weight": 1, "cost_multiplier": 19, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zombie_horse_lame", "weight": 1, "cost_multiplier": 8 },
+      { "monster": "mon_zoose", "weight": 1, "cost_multiplier": 10 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_FIELD",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL", "weight": 5, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_MAMMAL",
+        "weight": 5,
+        "ends": "28 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_MAMMAL",
+        "weight": 5,
+        "ends": "112 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_MAMMAL",
+        "weight": 5,
+        "ends": "360 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 5, "conditions": [ "WINTER" ] },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 5, "ends": "12 days", "conditions": [ "WINTER" ] },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 5, "ends": "112 days", "conditions": [ "WINTER" ] },
+      { "group": "GROUP_WILDERNESS_FIELD_MAMMAL_WINTER", "weight": 5, "ends": "360 days", "conditions": [ "WINTER" ] },
+      { "group": "GROUP_WILDERNESS_FIELD_BIRD", "weight": 20 },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_INSECT_HARMLESS",
+        "weight": 4,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "group": "GROUP_WILDERNESS_FIELD_INSECT", "weight": 7, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_INSECT",
+        "weight": 6,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "20 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_INSECT",
+        "weight": 5,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "180 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_INSECT",
+        "weight": 5,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "360 days"
+      },
+      { "group": "GROUP_WILDERNESS_FIELD_ZOMBIE", "weight": 3, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_ZOMBIE",
+        "weight": 3,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "20 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_ZOMBIE",
+        "weight": 3,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "112 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_FIELD_ZOMBIE",
+        "weight": 3,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "360 days"
+      },
+      { "monster": "mon_zombie_dog", "weight": 1, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "group": "GROUP_ZOMBIE", "weight": 3, "cost_multiplier": 4, "pack_size": [ 1, 10 ] },
+      { "group": "GROUP_VANILLA_DORMANT", "weight": 3, "cost_multiplier": 4, "pack_size": [ 1, 4 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_RIVER",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_beaver", "weight": 8, "cost_multiplier": 10, "pack_size": [ 1, 3 ] },
+      {
+        "monster": "mon_mink",
+        "weight": 3,
+        "cost_multiplier": 20,
+        "pack_size": [ 1, 2 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_muskrat",
+        "weight": 8,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 5 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_otter",
+        "weight": 5,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 4 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_duck",
+        "weight": 20,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 4 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_goose",
+        "weight": 20,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 4 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_pseudo_dormant_zombie_swimmer_base",
+        "weight": 1,
+        "cost_multiplier": 3,
+        "pack_size": [ 1, 8 ]
+      },
+      { "monster": "mon_zhark", "weight": 1, "cost_multiplier": 25, "starts": "12 days", "pack_size": [ 1, 3 ] },
+      { "monster": "mon_zhark", "weight": 2, "cost_multiplier": 25, "starts": "112 days", "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_eel", "weight": 6, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_bowfin", "weight": 6, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_bullhead", "weight": 6, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_goldfish", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_gar_longnose", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_burbot", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_sturgeon_lake", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_sturgeon_shortnose", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_pickerel_american", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_bullhead_yellow", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_whitefish_round", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_brown_trout", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_brook_trout", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_lake_trout", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_rainbow_trout", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_kokanee_salmon", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_walleye", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_pumpkinseed", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_redbreast", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_green_sunfish", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_rock_bass", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_calico_bass", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_warmouth", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_channel_catfish", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_white_catfish", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_muskellunge", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_white_sucker", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_grass_carp", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_fallfish", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_carp", "weight": 4, "cost_multiplier": 10, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_pike", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_sbass", "weight": 10, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_perch", "weight": 10, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_salmon", "weight": 6, "cost_multiplier": 8, "pack_size": [ 4, 6 ] },
+      { "monster": "mon_fish_lbass", "weight": 6, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_pbass", "weight": 10, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_bluegill", "weight": 10, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_whitefish", "weight": 10, "cost_multiplier": 2, "pack_size": [ 4, 6 ] },
+      { "monster": "mon_fish_pickerel", "weight": 6, "cost_multiplier": 10, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_dragonfly_naiad", "weight": 10, "cost_multiplier": 2, "ends": "28 days" },
+      {
+        "monster": "mon_dragonfly_naiad",
+        "weight": 30,
+        "cost_multiplier": 3,
+        "starts": "28 days",
+        "pack_size": [ 1, 4 ]
+      },
+      { "monster": "mon_strider_small", "weight": 13, "cost_multiplier": 3, "pack_size": [ 2, 4 ] },
+      { "monster": "mon_goose", "weight": 15, "cost_multiplier": 5, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_coot", "weight": 15, "cost_multiplier": 5, "pack_size": [ 1, 6 ] },
+      { "monster": "mon_moorhen", "weight": 15, "cost_multiplier": 5, "pack_size": [ 1, 6 ] },
+      { "monster": "mon_cormorant", "weight": 15, "cost_multiplier": 5, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_grebe", "weight": 15, "cost_multiplier": 5, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_diving_larva", "weight": 7, "cost_multiplier": 2, "starts": "12 days" },
+      { "monster": "mon_diving_larva", "weight": 18, "cost_multiplier": 3, "starts": "2 days", "pack_size": [ 1, 3 ] },
+      { "monster": "mon_water_scorpion_larva", "weight": 8, "cost_multiplier": 2, "ends": "28 days" },
+      {
+        "monster": "mon_water_scorpion_larva",
+        "weight": 15,
+        "cost_multiplier": 3,
+        "starts": "28 days",
+        "pack_size": [ 1, 3 ]
+      },
+      { "monster": "mon_diving_beetle_small", "weight": 2, "cost_multiplier": 10 },
+      { "monster": "mon_water_scorpion", "weight": 2, "cost_multiplier": 10 },
+      { "monster": "mon_mutant_tadpole", "weight": 15, "conditions": [ "SUMMER", "AUTUMN" ] },
+      { "monster": "mon_bullfrog", "weight": 15, "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      { "monster": "mon_big_bullfrog", "weight": 8 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_OCEAN_SHORE",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_pseudo_dormant_zombie_swimmer_base", "weight": 1, "cost_multiplier": 3, "pack_size": [ 1, 8 ] },
+      { "monster": "mon_ocean_zhark", "weight": 2, "cost_multiplier": 25, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_eel", "weight": 6, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_pbass", "weight": 10, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_bluefish", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_blackfish", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_porgy", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_flounder", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_mackerel", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_lobster", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 1 ] },
+      { "monster": "mon_fish_salmon", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 6 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_OCEAN_DEEP",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_ocean_zhark", "weight": 4, "cost_multiplier": 25, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_cod", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_haddock", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_bluefin_tuna", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_halibut", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_pollock", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_flounder", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_mackerel", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_salmon", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 6 ] },
+      { "monster": "mon_fish_pbass", "weight": 5, "cost_multiplier": 3, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_bluefish", "weight": 3, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_blackfish", "weight": 3, "cost_multiplier": 8, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fish_lobster", "weight": 6, "cost_multiplier": 8, "pack_size": [ 1, 1 ] },
+      { "monster": "mon_fish_porgy", "weight": 3, "cost_multiplier": 8, "pack_size": [ 1, 3 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_SWAMP",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      {
+        "group": "GROUP_WILDERNESS_SWAMP_INSECT",
+        "weight": 100,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "12 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_SWAMP_INSECT",
+        "weight": 100,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "28 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_SWAMP_INSECT",
+        "weight": 100,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "112 days"
+      },
+      {
+        "group": "GROUP_WILDERNESS_SWAMP_INSECT",
+        "weight": 100,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ],
+        "starts": "360 days"
+      },
+      {
+        "monster": "mon_lemming",
+        "weight": 50,
+        "pack_size": [ 2, 7 ],
+        "ends": "360 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_slug_forest",
+        "weight": 15,
+        "cost_multiplier": 2,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_snail_forest",
+        "weight": 15,
+        "cost_multiplier": 2,
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "monster": "mon_mutant_tadpole", "weight": 50, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_bullfrog", "weight": 40, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_big_bullfrog", "weight": 12 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_WILDERNESS_SWAMP_INSECT",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_firefly", "weight": 25, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_mosquito_small", "weight": 50, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_fly_small", "weight": 20, "cost_multiplier": 0 },
+      { "monster": "mon_dragonfly_giant", "weight": 50, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_centipede_small", "weight": 30, "cost_multiplier": 2 },
+      { "monster": "mon_dermatik", "weight": 30, "cost_multiplier": 2 },
+      { "monster": "mon_crayfish_small", "weight": 18 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_PARK_ANIMAL",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_crow", "weight": 70, "cost_multiplier": 0 },
+      { "monster": "mon_crow_mutant_small", "weight": 40, "pack_size": [ 1, 9 ], "cost_multiplier": 10 },
+      { "monster": "mon_raven", "weight": 45, "cost_multiplier": 0 },
+      { "monster": "mon_pigeon", "weight": 50, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_bluejay", "weight": 25, "cost_multiplier": 0 },
+      { "monster": "mon_cardinal", "weight": 25, "cost_multiplier": 0 },
+      { "monster": "mon_dragonfly_giant", "weight": 5, "cost_multiplier": 10 },
+      { "monster": "mon_robin", "weight": 35, "cost_multiplier": 0 },
+      { "monster": "mon_sparrow", "weight": 90, "cost_multiplier": 0, "pack_size": [ 1, 6 ] },
+      { "group": "GROUP_STRAY_CATS", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_chipmunk", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_fox", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_rabbit", "weight": 90, "cost_multiplier": 0 },
+      { "monster": "mon_rabbit_domestic", "weight": 2, "cost_multiplier": 0 },
+      { "monster": "mon_squirrel", "weight": 90, "cost_multiplier": 0 },
+      { "monster": "mon_skunk", "weight": 2, "cost_multiplier": 0 },
+      { "monster": "mon_mantis_small", "weight": 5, "cost_multiplier": 10 },
+      { "monster": "mon_fly_small", "weight": 2, "cost_multiplier": 0 },
+      { "monster": "mon_lady_bug", "weight": 8, "cost_multiplier": 10 },
+      { "monster": "mon_aphid", "weight": 20, "cost_multiplier": 0 },
+      { "monster": "mon_locust_small", "weight": 15, "pack_size": [ 3, 9 ], "cost_multiplier": 0 },
+      { "monster": "mon_grasshopper_small", "weight": 30, "cost_multiplier": 0 },
+      { "monster": "mon_antlion_giant", "weight": 5, "cost_multiplier": 10 },
+      { "monster": "mon_woodpecker", "weight": 25, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_ROOF_ANIMAL",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_crow", "weight": 65, "pack_size": [ 1, 7 ], "cost_multiplier": 0 },
+      { "monster": "mon_crow_mutant_small", "weight": 55, "pack_size": [ 1, 9 ] },
+      { "monster": "mon_crow_mutant", "weight": 45, "pack_size": [ 1, 3 ], "starts": "14 days" },
+      { "monster": "mon_raven", "weight": 35, "cost_multiplier": 0 },
+      { "monster": "mon_robin", "weight": 25, "cost_multiplier": 0 },
+      { "monster": "mon_sparrow", "weight": 25, "cost_multiplier": 0 },
+      { "monster": "mon_pigeon", "weight": 40, "cost_multiplier": 0, "pack_size": [ 1, 7 ] },
+      { "group": "GROUP_STRAY_CATS", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_chipmunk", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_squirrel", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_chicken", "weight": 10 },
+      { "monster": "mon_turkey", "weight": 10 },
+      {
+        "monster": "mon_raccoon",
+        "weight": 25,
+        "cost_multiplier": 0,
+        "pack_size": [ 1, 3 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_opossum",
+        "weight": 25,
+        "cost_multiplier": 0,
+        "pack_size": [ 1, 3 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      {
+        "monster": "mon_bat",
+        "weight": 20,
+        "cost_multiplier": 0,
+        "pack_size": [ 1, 3 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "monster": "mon_woodpecker", "weight": 25, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_POND_ANIMAL",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_rabbit", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_squirrel", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_bullfrog", "weight": 100, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_POND_BIRD",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_duck", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_goose", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_goose", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_coot", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_moorhen", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_cormorant", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_grebe", "weight": 50, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_POND_FISH",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_POND_FISH_2", "weight": 200, "cost_multiplier": 0 },
+      { "monster": "mon_strider_small", "weight": 30, "cost_multiplier": 0, "pack_size": [ 1, 6 ] },
+      { "monster": "mon_water_scorpion_larva", "weight": 30, "cost_multiplier": 0 },
+      { "monster": "mon_mutant_tadpole", "weight": 50, "pack_size": [ 1, 2 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_POND_FISH_2",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_fish_bluegill", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_fish_carp", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_fish_goldfish", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_fish_sbass", "weight": 50, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_BIRDFEEDER",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_bluejay", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_cardinal", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_robin", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_sparrow", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_squirrel", "weight": 25, "cost_multiplier": 0 },
+      { "monster": "mon_woodpecker", "weight": 50, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_STREAM",
+    "is_animal": true,
+    "monsters": [
+      { "group": "GROUP_STREAM_SMALL", "weight": 30 },
+      { "group": "GROUP_STREAM_BIRDS", "weight": 30 },
+      { "group": "GROUP_STREAM_DOMESTIC", "weight": 2 }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_STREAM_DOMESTIC",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_goat", "weight": 1, "pack_size": [ 1, 4 ] },
+      { "monster": "mon_chicken", "weight": 10, "pack_size": [ 1, 6 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_STREAM_BIRDS",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_duck", "weight": 20, "pack_size": [ 1, 4 ], "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      { "monster": "mon_goose", "weight": 15, "pack_size": [ 2, 4 ] },
+      { "monster": "mon_coot", "weight": 15, "pack_size": [ 2, 4 ] },
+      { "monster": "mon_moorhen", "weight": 15, "pack_size": [ 2, 4 ] },
+      { "monster": "mon_cormorant", "weight": 15, "pack_size": [ 2, 4 ] },
+      { "monster": "mon_grebe", "weight": 15, "pack_size": [ 2, 4 ] }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_STREAM_SMALL",
+    "is_animal": true,
+    "monsters": [
+      {
+        "monster": "mon_otter",
+        "weight": 5,
+        "cost_multiplier": 5,
+        "pack_size": [ 1, 5 ],
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
+      { "monster": "mon_mink", "weight": 3, "pack_size": [ 1, 2 ], "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      { "monster": "mon_beaver", "weight": 8, "pack_size": [ 1, 3 ] }
+    ]
+  }
+]

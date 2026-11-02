@@ -1,0 +1,2718 @@
+[
+  {
+    "id": "bastsandals",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cord sandals", "str_pl": "pairs of cord sandals" },
+    "description": "Lightweight sandals made from wound cord.  They offer little in the way of protection, but keep you cool during warmer months.",
+    "weight": "68 g",
+    "volume": "250 ml",
+    "price": "30 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "flip_flops",
+    "color": "brown",
+    "material_thickness": 2,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 34,
+        "coverage": 40
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 90,
+        "rigid": true,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ]
+  },
+  {
+    "id": "boots",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "boots", "str_pl": "pairs of boots" },
+    "description": "A relatively lightweight pair of leather boots.",
+    "weight": "1060 g",
+    "volume": "2500 ml",
+    "price": "100 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": -1,
+    "symbol": "[",
+    "looks_like": "dress_shoes",
+    "color": "dark_gray",
+    "warmth": 20,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "encumbrance": 22,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "xl_boots",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "boots", "str_pl": "pairs of boots" },
+    "copy-from": "boots",
+    "proportional": { "weight": 1.25, "volume": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_boots",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots",
+    "looks_like": "boots",
+    "name": { "str": "boots", "str_pl": "pairs of boots" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "boots_bunker",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "turnout boots", "str_pl": "pairs of turnout boots" },
+    "description": "A pair of steel-toed rubber boots, the sort worn by firefighters.",
+    "weight": "1930 g",
+    "volume": "3500 ml",
+    "price": "130 USD",
+    "price_postapoc": "15 USD",
+    "to_hit": 2,
+    "symbol": "[",
+    "looks_like": "boots_steel",
+    "color": "dark_gray",
+    "warmth": 35,
+    "environmental_protection": 8,
+    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 2.25 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 2.25 }
+        ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 2.25 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 2.25 }
+        ],
+        "encumbrance": 45,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 2.25 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 2.25 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "chitin_sollerets",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chitin sollerets", "str_pl": "pairs of chitin sollerets" },
+    "description": "A pair of bizarre-looking boot covers made from overlapping layers of giant arthropod shell.",
+    "weight": "900 g",
+    "volume": "500 ml",
+    "price_postapoc": "3 USD",
+    "to_hit": -1,
+    "material": [ { "type": "chitin", "portion": 9 }, { "type": "leather", "portion": 1 } ],
+    "symbol": "[",
+    "color": "brown",
+    "flags": [ "STURDY", "BELTED" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [
+          { "type": "chitin", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "leather", "covered_by_mat": 1, "thickness": 2.0 }
+        ],
+        "encumbrance": 4,
+        "coverage": 90
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "chitin_sollerets_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chitin_sollerets",
+    "name": { "str": "chitin sollerets", "str_pl": "pairs of chitin sollerets" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "chitin_sollerets_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chitin_sollerets",
+    "name": { "str": "chitin sollerets", "str_pl": "pairs of chitin sollerets" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "acidchitin_sollerets",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "biosilicified chitin sollerets", "str_pl": "pairs of biosilicified chitin sollerets" },
+    "description": "A pair of bizarre-looking boot covers made from overlapping layers of giant arthropod shell.  The material seems unusually hard, with an almost glassy sheen.",
+    "weight": "1200 g",
+    "volume": "500 ml",
+    "price_postapoc": "3 USD",
+    "to_hit": -1,
+    "material": [ { "type": "acidchitin", "portion": 9 }, { "type": "leather", "portion": 1 } ],
+    "symbol": "[",
+    "color": "green",
+    "flags": [ "STURDY", "BELTED" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [
+          { "type": "acidchitin", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "leather", "covered_by_mat": 1, "thickness": 2.0 }
+        ],
+        "encumbrance": 4,
+        "coverage": 90
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "acidchitin_sollerets_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "acidchitin_sollerets",
+    "name": { "str": "biosilicified chitin sollerets", "str_pl": "pairs of biosilicified chitin sollerets" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "acidchitin_sollerets_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "acidchitin_sollerets",
+    "name": { "str": "biosilicified chitin sollerets", "str_pl": "pairs of biosilicified chitin sollerets" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "boots_combat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "combat boots", "str_pl": "pairs of combat boots" },
+    "//": "These are not punk rock boots, they're a vague example of typical US army temperate weather boot. Rockers wear boots or steel-toed boots.",
+    "description": "Solid but surprisingly lightweight boots made from a combination of suede and nylon duck.  Possibly the most important part of a service member's uniform.",
+    "weight": "1060 g",
+    "volume": "2 L",
+    "price": "70 USD",
+    "price_postapoc": "15 USD",
+    "to_hit": -1,
+    "symbol": "[",
+    "looks_like": "boots",
+    "color": "dark_gray",
+    "warmth": 25,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 70, "thickness": 1.25 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 2 }
+        ],
+        "encumbrance": 0,
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 70, "thickness": 1.25 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 2 }
+        ],
+        "encumbrance": 24,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 } ],
+        "coverage": 100,
+        "encumbrance": 0
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "foot_protectors_eod",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "EOD foot protectors", "str_pl": "pairs of EOD foot protectors" },
+    "description": "Armored foot protectors constructed from steel and Nomex for use by explosive ordnance disposal technicians.",
+    "weight": "1220 g",
+    "volume": "3 L",
+    "price": "500 USD",
+    "price_postapoc": "70 USD",
+    "warmth": 10,
+    "material": [ "plastic_pad", "nomex" ],
+    "symbol": "[",
+    "color": "light_gray",
+    "material_thickness": 14,
+    "flags": [ "STURDY", "BELTED" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "encumbrance": 34,
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 1 },
+          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 15 }
+        ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_l",
+          "foot_heel_l",
+          "foot_ankle_r",
+          "foot_heel_r",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "boots_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "fur boots", "str_pl": "pairs of fur boots" },
+    "description": "Leather boots, lined with fur for warmth.",
+    "weight": "1890 g",
+    "volume": "4500 ml",
+    "price": "140 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "leather", "fur" ],
+    "symbol": "[",
+    "looks_like": "boots",
+    "color": "brown",
+    "warmth": 60,
+    "material_thickness": 3,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "fur", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "fur", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": 30,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "xl_boots_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "fur boots", "str_pl": "pairs of fur boots" },
+    "copy-from": "boots_fur",
+    "proportional": { "weight": 1.15, "volume": 1.15 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_boots_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots_fur",
+    "name": { "str": "fur boots", "str_pl": "pairs of fur boots" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "boots_faux_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "faux fur boots", "str_pl": "pairs of faux fur boots" },
+    "description": "Boots made of durable nylon duck with faux fur lining for warmth.",
+    "weight": "1890 g",
+    "volume": "4500 ml",
+    "price": "140 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "nylon", "faux_fur" ],
+    "symbol": "[",
+    "looks_like": "boots_fur",
+    "color": "brown",
+    "warmth": 40,
+    "material_thickness": 3,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "faux_fur", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": 30,
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "faux_fur", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "xl_boots_faux_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "faux fur boots", "str_pl": "pairs of faux fur boots" },
+    "copy-from": "boots_faux_fur",
+    "proportional": { "weight": 1.15, "volume": 1.15 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_boots_faux_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots_faux_fur",
+    "name": { "str": "faux fur boots", "str_pl": "pairs of faux fur boots" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "boots_hiking",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "hiking boots", "str_pl": "pairs of hiking boots" },
+    "description": "Tough yet light boots made of leather facing over sythetic uppers, intended for outdoor activity.",
+    "weight": "980 g",
+    "volume": "2500 ml",
+    "price": "140 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": -1,
+    "material": [ "leather", "nylon", "rubber" ],
+    "symbol": "[",
+    "looks_like": "boots",
+    "color": "brown",
+    "warmth": 18,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 80, "thickness": 2.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 40, "thickness": 2.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 20,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "boots_rubber",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "rubber boots", "str_pl": "pairs of rubber boots" },
+    "description": "A pair of rubber work boots, often used while cleaning with caustic materials.",
+    "weight": "1200 g",
+    "volume": "3500 ml",
+    "price": "80 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": 2,
+    "symbol": "[",
+    "looks_like": "boots",
+    "color": "dark_gray",
+    "warmth": 10,
+    "material_thickness": 3,
+    "environmental_protection": 12,
+    "flags": [ "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3.0 } ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 3.0 } ],
+        "encumbrance": 25,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "boots_steel",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "steel-toed boots", "str_pl": "pairs of steel-toed boots" },
+    "description": "Heavy boots made of chemical-resistant treated leather with steel toecaps.  Great for the jobsite or for stomping the undead",
+    "weight": "2220 g",
+    "volume": "3 L",
+    "price": "120 USD",
+    "price_postapoc": "10 USD",
+    "to_hit": -1,
+    "symbol": "[",
+    "looks_like": "boots_combat",
+    "color": "brown",
+    "warmth": 30,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE", "RAINPROOF", "NONCONDUCTIVE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "encumbrance": 30,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "sneakers_steel",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "steel-toed sneakers", "str_pl": "pairs of steel-toed sneakers" },
+    "description": "A descendant of the classic steeltoed boot, this modern footwear has become popular amongst working class people over the last couple of decades.",
+    "weight": "900 g",
+    "volume": "1500 ml",
+    "longest_side": "254 mm",
+    "price": "120 USD",
+    "price_postapoc": "9 USD 25 cent",
+    "material": [ "nylon", "steel" ],
+    "to_hit": -1,
+    "symbol": "[",
+    "looks_like": "sneakers",
+    "color": "light_blue",
+    "warmth": 9,
+    "environmental_protection": 3,
+    "flags": [ "NONCONDUCTIVE", "VARSIZE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1 } ],
+        "encumbrance": 20,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "coverage": 60
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "boots_western",
+    "copy-from": "boots",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "western boots", "str_pl": "pairs of western boots" },
+    "description": "Stiff leather cowboy boots with pointed toes and a low heel.  The wide cuffs could be used as ad hoc pockets, or maybe even holsters.",
+    "price_postapoc": "7 USD 50 cent",
+    "material": [ "leather_treated" ],
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "600 g", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "600 g", "moves": 80 }
+    ],
+    "use_action": { "type": "holster" },
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 34,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "boots_winter",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "winter boots", "str_pl": "pairs of winter boots" },
+    "description": "Wool-lined boots designed for warmth.",
+    "weight": "1640 g",
+    "volume": "3500 ml",
+    "price": "70 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "vinyl", "wool" ],
+    "symbol": "[",
+    "looks_like": "boots",
+    "color": "light_gray",
+    "warmth": 80,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "wool", "covered_by_mat": 100, "thickness": 2.5 }
+        ],
+        "encumbrance": 38,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l" ],
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 2.5 },
+          { "type": "wool", "covered_by_mat": 100, "thickness": 2.5 }
+        ],
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "xl_boots_winter",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "winter boots", "str_pl": "pairs of winter boots" },
+    "copy-from": "boots_winter",
+    "proportional": { "weight": 1.3, "volume": 1.3 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xs_boots_winter",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "boots_winter",
+    "name": { "str": "winter boots", "str_pl": "pairs of winter boots" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "cleats",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cleats", "str_pl": "pairs of cleats" },
+    "description": "Sport shoes with hard undersides and studs on the bottom designed to dig into grass.",
+    "weight": "860 g",
+    "volume": "1500 ml",
+    "price": "70 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "material": [ "cotton", "leather" ],
+    "symbol": "[",
+    "looks_like": "sneakers",
+    "color": "light_gray",
+    "warmth": 8,
+    "material_thickness": 2,
+    "flags": [ "VARSIZE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 30,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_l", "foot_ankle_r" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "coverage": 40
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "cut": 1 }
+  },
+  {
+    "id": "golf_shoes",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "golf shoes", "str_pl": "pairs of golf shoes" },
+    "description": "Snug sport shoes with hard ridges on the bottom.",
+    "weight": "820 g",
+    "volume": "1500 ml",
+    "price": "65 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "cotton", "leather" ],
+    "symbol": "[",
+    "looks_like": "dress_shoes",
+    "color": "light_gray",
+    "warmth": 15,
+    "material_thickness": 2,
+    "flags": [ "VARSIZE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 24,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "coverage": 60
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "clogs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "wooden clogs", "str_pl": "pairs of wooden clogs" },
+    "description": "Known as klompen in the Netherlands and sabots in France, these wooden shoes have endured through the ages due to their simple design and durability.",
+    "weight": "916 g",
+    "volume": "1250 ml",
+    "price": "40 USD",
+    "price_postapoc": "1 USD 50 cent",
+    "to_hit": -2,
+    "material": [ "wood" ],
+    "symbol": "[",
+    "looks_like": "leathersandals",
+    "color": "yellow",
+    "warmth": 5,
+    "material_thickness": 4,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 46,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_arch_l", "foot_arch_r", "foot_heel_l", "foot_heel_r" ],
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 80
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "clownshoes",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "clown shoes", "str_pl": "pairs of clown shoes" },
+    "description": "Gigantic shoes fit for a clown.  They would be very difficult to run in, and fighting in them seems like a terrible idea.",
+    "weight": "1140 g",
+    "volume": "3500 ml",
+    "price": "5 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -1,
+    "material": [ "vinyl" ],
+    "symbol": "[",
+    "looks_like": "sneakers",
+    "color": "light_red",
+    "warmth": 10,
+    "material_thickness": 2.5,
+    "environmental_protection": 2,
+    "flags": [ "NORMAL", "OUTER", "REQUIRES_BALANCE" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_l", "foot_toes_r" ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 1.25 } ],
+        "encumbrance": 45,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 1.25 } ],
+        "coverage": 60
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "dress_shoes",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "dress shoes", "str_pl": "pairs of dress shoes" },
+    "description": "Fancy leather shoes, not designed for running.",
+    "weight": "870 g",
+    "volume": "1500 ml",
+    "price": "120 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": 1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "sneakers",
+    "color": "dark_gray",
+    "warmth": 10,
+    "material_thickness": 2.0,
+    "flags": [ "VARSIZE", "FANCY", "NORMAL", "OUTER", "RAINPROOF" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2 } ],
+        "encumbrance": 36,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 40
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 1 }
+  },
+  {
+    "id": "flip_flops",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "flip-flops", "str_pl": "pairs of flip-flops" },
+    "description": "Simple sandals.  Somewhat difficult to run in.",
+    "weight": "62 g",
+    "volume": "850 ml",
+    "price": "5 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "symbol": "[",
+    "looks_like": "leathersandals",
+    "color": "blue",
+    "material_thickness": 1,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 1 } ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
+        "coverage": 80,
+        "encumbrance": 50,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ]
+  },
+  {
+    "id": "flip_flops_exp",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "expensive flip-flops", "str_pl": "pairs of expensive flip-flops" },
+    "description": "These flip-flops are branded with a designer logo.  It does not make them any easier to run in.",
+    "weight": "170 g",
+    "volume": "850 ml",
+    "price": "105 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "material": [ "rubber", "leather" ],
+    "symbol": "[",
+    "looks_like": "flip_flops",
+    "color": "brown",
+    "material_thickness": 1,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS", "FANCY" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1 } ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
+        "coverage": 80,
+        "encumbrance": 50,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ]
+  },
+  {
+    "id": "footrags",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "foot wraps", "str_pl": "pairs of foot wraps" },
+    "description": "Rags tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
+    "weight": "56 g",
+    "volume": "250 ml",
+    "price": "5 USD",
+    "price_postapoc": "10 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "white",
+    "warmth": 5,
+    "material_thickness": 0.4,
+    "flags": [ "SKINTIGHT", "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      { "encumbrance": 10, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 4,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
+  },
+  {
+    "id": "footrags_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "fur foot wraps", "str_pl": "pairs of fur foot wraps" },
+    "description": "Fur pelts tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
+    "weight": "135 g",
+    "volume": "500 ml",
+    "price": "7 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "fur" ],
+    "symbol": "[",
+    "looks_like": "socks_wool",
+    "color": "brown",
+    "warmth": 20,
+    "material_thickness": 1.5,
+    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 6,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
+  },
+  {
+    "id": "footrags_faux_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "faux fur foot wraps", "str_pl": "pairs of faux fur foot wraps" },
+    "description": "Faux fur patches tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
+    "weight": "135 g",
+    "volume": "500 ml",
+    "price": "7 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "faux_fur" ],
+    "symbol": "[",
+    "looks_like": "socks_wool",
+    "color": "brown",
+    "warmth": 18,
+    "material_thickness": 1.5,
+    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 6,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
+  },
+  {
+    "id": "footrags_leather",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather foot wraps", "str_pl": "pairs of leather foot wraps" },
+    "description": "Leather patches tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
+    "weight": "120 g",
+    "volume": "500 ml",
+    "price": "5 USD 25 cent",
+    "price_postapoc": "50 cent",
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "brown",
+    "warmth": 10,
+    "material_thickness": 1.5,
+    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 5,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
+  },
+  {
+    "id": "footrags_wool",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "wool foot wraps", "str_pl": "pairs of wool foot wraps" },
+    "description": "Felt patches tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
+    "weight": "56 g",
+    "volume": "250 ml",
+    "price": "5 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "socks_wool",
+    "color": "blue",
+    "warmth": 15,
+    "material_thickness": 0.6,
+    "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      { "encumbrance": 11, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 5,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
+  },
+  {
+    "id": "footrags_nomex",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Nomex foot wraps", "str_pl": "pairs of Nomex foot wraps" },
+    "description": "Strips of fireproof fabric that can be tied around the feet.  These leave a lot to be desired, but they might be better than nothing.",
+    "weight": "56 g",
+    "volume": "250 ml",
+    "price": "5 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "nomex" ],
+    "symbol": "[",
+    "looks_like": "socks_nomex",
+    "color": "blue",
+    "warmth": 15,
+    "material_thickness": 0.4,
+    "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      { "encumbrance": 10, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 4,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
+  },
+  {
+    "id": "geta",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "geta", "str_pl": "pairs of geta" },
+    "description": "A pair of Japanese clogs consisting of solid wooden soles and toe straps to hold them on.",
+    "weight": "460 g",
+    "volume": "1 L",
+    "price": "65 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "symbol": "[",
+    "looks_like": "clogs",
+    "color": "yellow",
+    "warmth": 5,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 2 } ],
+        "coverage": 20
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 80,
+        "encumbrance": 38,
+        "layers": [ "OUTER", "NORMAL", "BELTED" ]
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "heels",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "heels", "str_pl": "pairs of heels" },
+    "description": "A pair of high heeled shoes, impractical for running or fighting.",
+    "weight": "640 g",
+    "volume": "750 ml",
+    "price": "40 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "material": [ "vinyl" ],
+    "symbol": "[",
+    "looks_like": "dress_shoes",
+    "color": "dark_gray",
+    "flags": [ "VARSIZE", "FANCY", "NORMAL", "OUTER", "NO_SALVAGE" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 1 } ],
+        "coverage": 80
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
+        "coverage": 100,
+        "encumbrance": 50,
+        "layers": [ "OUTER", "NORMAL", "BELTED" ]
+      }
+    ],
+    "melee_damage": { "bash": 2, "stab": 1 }
+  },
+  {
+    "id": "knee_high_boots",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "knee-high boots", "str_pl": "pairs of knee-high boots" },
+    "description": "Boots with a cuff that extends up to the knee.  Their heels are sensibly low, but still don't look terribly suited to running away from monsters during the end of the world.",
+    "weight": "1520 g",
+    "volume": "3750 ml",
+    "longest_side": "33 cm",
+    "price": "80 USD",
+    "price_postapoc": "12 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "boots_combat",
+    "color": "black",
+    "warmth": 20,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
+        "coverage": 100,
+        "encumbrance": 32,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_l",
+          "foot_ankle_r"
+        ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_lower_l", "leg_lower_r" ],
+        "coverage": 90,
+        "encumbrance": 20,
+        "layers": [ "OUTER" ]
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "motor_police_boots",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "motorcycle police boots", "str_pl": "pairs of motorcycle police boots" },
+    "description": "Custom-made knee-high leather boots issued to motor officers.  Warm, durable and quite tough.",
+    "weight": "1520 g",
+    "volume": "3750 ml",
+    "price": "80 USD",
+    "price_postapoc": "12 USD 50 cent",
+    "to_hit": -1,
+    "symbol": "[",
+    "looks_like": "knee_high_boots",
+    "color": "dark_gray",
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100,
+        "encumbrance": 24,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_l",
+          "foot_ankle_r"
+        ],
+        "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_lower_l", "leg_lower_r" ],
+        "coverage": 90,
+        "encumbrance": 20,
+        "layers": [ "OUTER" ]
+      }
+    ],
+    "warmth": 20,
+    "material_thickness": 2,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "STURDY" ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "leathersandals",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "leather sandals", "str_pl": "pairs of leather sandals" },
+    "description": "Sturdy leather hiking sandals with a heel strap, suitable for outdoor adventuring in warm weather.",
+    "weight": "675 g",
+    "//": "weight is based on an average of between 1 and 2 lbs for various hiking sandals IRL.",
+    "volume": "250 ml",
+    "price": "40 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": -2,
+    "symbol": "[",
+    "looks_like": "flip_flops",
+    "color": "brown",
+    "material_thickness": 1.5,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "encumbrance": 34,
+        "coverage": 40
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "coverage": 20
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "coverage": 95
+      }
+    ]
+  },
+  {
+    "id": "lowtops",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "lowtop tennis shoes", "str_pl": "pairs of lowtop tennis shoes" },
+    "description": "Lightweight shoes made of cloth and rubber.",
+    "weight": "114 g",
+    "volume": "750 ml",
+    "price": "15 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "to_hit": -2,
+    "symbol": "[",
+    "looks_like": "sneakers",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 1.5,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "encumbrance": 12,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "coverage": 10
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "mocassins",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "moccasins", "str_pl": "pairs of moccasins" },
+    "description": "A type of traditional Native American footwear sewn out of leather.",
+    "weight": "230 g",
+    "volume": "500 ml",
+    "price": "50 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "leathersandals",
+    "color": "brown",
+    "warmth": 12,
+    "material_thickness": 1.0,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 14,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "coverage": 80
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "rigid": true,
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "mocassins_fur",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "fur moccasins", "str_pl": "pairs of fur moccasins" },
+    "description": "A type of traditional Native American footwear sewn out of fur.",
+    "weight": "230 g",
+    "volume": "500 ml",
+    "price": "50 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "fur" ],
+    "symbol": "[",
+    "looks_like": "leathersandals",
+    "color": "brown",
+    "warmth": 20,
+    "material_thickness": 1.0,
+    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 16,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "coverage": 80
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100,
+        "rigid": true
+      }
+    ]
+  },
+  {
+    "id": "motorbike_boots",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "motorcycle boots", "str_pl": "pairs of motorcycle boots" },
+    "description": "A pair of durable boots used by dirt bikers and motorcyclists.",
+    "weight": "2125 g",
+    "volume": "2 L",
+    "price": "80 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "material": [ "kevlar", "nylon" ],
+    "symbol": "[",
+    "looks_like": "boots_steel",
+    "color": "dark_gray",
+    "warmth": 35,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE", "RAINPROOF" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 } ],
+        "coverage": 100,
+        "encumbrance": 24
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.25 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.25 }
+        ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.25 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.25 }
+        ],
+        "coverage": 100
+      }
+    ],
+    "melee_damage": { "bash": 5 }
+  },
+  {
+    "id": "roller_blades",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "rollerblades", "str_pl": "pairs of rollerblades" },
+    "description": "A pair of inline skates.  Very fast on flat floors, but they make it hard to move on rough terrain, take hits, or dodge effectively.",
+    "weight": "1640 g",
+    "volume": "3750 ml",
+    "price": "85 USD",
+    "price_postapoc": "25 USD",
+    "to_hit": -2,
+    "material": [ "plastic", "steel", "nylon" ],
+    "symbol": "[",
+    "looks_like": "rollerskates",
+    "color": "light_gray",
+    "warmth": 20,
+    "material_thickness": 3,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "ROLLER_INLINE", "REQUIRES_BALANCE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "plastic", "covered_by_mat": 45, "thickness": 1.5 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": 40,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "steel", "covered_by_mat": 10, "thickness": 2.0 },
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 6.0 }
+        ],
+        "coverage": 100,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ]
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "rollerskates",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "rollerskates", "str_pl": "pairs of rollerskates" },
+    "description": "An old-fashioned pair of leather rollerskates with steel frames.  While quite fast on flat floors, they make it difficult to take hits or to move on rough terrain.",
+    "weight": "2720 g",
+    "volume": "3 L",
+    "price": "85 USD",
+    "price_postapoc": "15 USD",
+    "to_hit": -2,
+    "material": [ "plastic", "steel", "leather" ],
+    "symbol": "[",
+    "looks_like": "roller_blades",
+    "color": "brown",
+    "warmth": 30,
+    "material_thickness": 3,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF", "ROLLER_QUAD", "REQUIRES_BALANCE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": 38,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 6.0 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 2.0 }
+        ],
+        "coverage": 100,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ]
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "shoes_birchbark",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "birchbark shoes", "str_pl": "pairs of birchbark shoes" },
+    "description": "Simple shoes woven from strips of flexible bark from a birch tree.  They're not especially comfortable, but might be better than going barefoot.",
+    "weight": "345 g",
+    "volume": "500 ml",
+    "price": "35 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "wood", "dry_plant" ],
+    "symbol": "[",
+    "looks_like": "clogs",
+    "color": "light_gray",
+    "warmth": 10,
+    "material_thickness": 1.0,
+    "flags": [ "VARSIZE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "dry_plant", "covered_by_mat": 100, "thickness": 0.3 } ],
+        "encumbrance": 42,
+        "coverage": 98
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "dry_plant", "covered_by_mat": 100, "thickness": 0.3 } ],
+        "coverage": 80
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 0.3 } ],
+        "coverage": 98
+      }
+    ]
+  },
+  {
+    "id": "shoes_bowling",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "bowling shoes", "str_pl": "pairs of bowling shoes" },
+    "description": "A pair of flat-soled shoes for use in bowling alleys.",
+    "weight": "840 g",
+    "volume": "1500 ml",
+    "price": "40 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "vinyl", "cotton" ],
+    "symbol": "[",
+    "looks_like": "dress_shoes",
+    "color": "light_blue",
+    "warmth": 20,
+    "material_thickness": 2,
+    "flags": [ "VARSIZE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1 }
+        ],
+        "encumbrance": 28,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1 }
+        ],
+        "coverage": 20
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 3.0 } ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "slippers",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "slippers", "str_pl": "pairs of slippers" },
+    "description": "Soft indoor shoes that keep your feet warm.  They're not great for much else.",
+    "weight": "70 g",
+    "volume": "250 ml",
+    "price": "6 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "socks_wool",
+    "color": "brown",
+    "warmth": 25,
+    "flags": [ "VARSIZE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "encumbrance": 50,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "coverage": 90
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "coverage": 10
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "shoes_slip_on",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "slip-on shoes", "str_pl": "pairs of slip-on shoes" },
+    "description": "Lightweight cloth shoes with no ties, meant to be worn without socks.",
+    "weight": "420 g",
+    "volume": "1200 ml",
+    "price": "50 USD",
+    "price_postapoc": "1 USD 75 cent",
+    "material": [ "nylon", "rubber" ],
+    "symbol": "[",
+    "looks_like": "shoes_bowling",
+    "color": "light_blue",
+    "warmth": 4,
+    "flags": [ "VARSIZE", "NORMAL", "OUTER", "PADDED" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.7 } ],
+        "encumbrance": 20,
+        "coverage": 80
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "sneakers",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "sneakers", "str_pl": "pairs of sneakers" },
+    "description": "Athletic shoes, designed for running.",
+    "weight": "840 g",
+    "volume": "1500 ml",
+    "price": "100 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "nylon", "rubber" ],
+    "symbol": "[",
+    "looks_like": "shoes_bowling",
+    "color": "light_blue",
+    "warmth": 8,
+    "material_thickness": 1,
+    "flags": [ "VARSIZE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1 } ],
+        "encumbrance": 14,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "coverage": 60
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 } ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "straw_sandals",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "straw sandals", "str_pl": "pairs of straw sandals" },
+    "description": "Sandals made from straw cordage.  Not very comfortable, but can keep your feet safe.",
+    "weight": "70 g",
+    "volume": "500 ml",
+    "price": "20 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "symbol": "[",
+    "looks_like": "leathersandals",
+    "color": "light_gray",
+    "material_thickness": 1,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [ { "type": "dry_plant", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 38,
+        "coverage": 20
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "dry_plant", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "coverage": 100,
+        "rigid": true
+      }
+    ]
+  },
+  {
+    "id": "thigh_high_boots",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "thigh-high boots", "str_pl": "pairs of thigh-high boots" },
+    "description": "High-heeled boots that extend all the way up past the knees, these are the sort of thing you would have seen on a stripper or at a halloween party.",
+    "weight": "1540 g",
+    "volume": "4250 ml",
+    "price": "80 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": -1,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "boots",
+    "color": "dark_gray",
+    "warmth": 20,
+    "material_thickness": 2,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "RAINPROOF" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l"
+        ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 2 } ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "coverage": 100,
+        "encumbrance": 48,
+        "layers": [ "OUTER", "NORMAL", "BELTED" ]
+      },
+      {
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_lower_l", "leg_lower_r", "leg_knee_l", "leg_knee_r" ],
+        "coverage": 100,
+        "encumbrance": 20,
+        "layers": [ "OUTER" ]
+      },
+      {
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "encumbrance": 0,
+        "coverage": 50,
+        "covers": [ "leg_r", "leg_l" ],
+        "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
+        "layers": [ "OUTER" ]
+      }
+    ],
+    "melee_damage": { "bash": 2, "stab": 1 }
+  },
+  {
+    "id": "roller_shoes_off",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "heelys (off)", "str_pl": "pairs of heelys (off)" },
+    "description": "A pair of sneakers with integrated wheels hidden in their very thick soles.  Currently the wheels are retracted, making these almost normal lace-up athletic shoes.",
+    "weight": "840 g",
+    "volume": "1500 ml",
+    "price": "100 USD",
+    "price_postapoc": "12 USD 50 cent",
+    "material": [ "nylon", "rubber", "plastic" ],
+    "symbol": "[",
+    "looks_like": "sneakers",
+    "color": "light_blue",
+    "warmth": 20,
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Extend wheels",
+      "target": "roller_shoes_on",
+      "msg": "You pop the wheels out.",
+      "moves": 500
+    },
+    "flags": [ "VARSIZE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "encumbrance": 18,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "coverage": 60
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 },
+          { "type": "plastic", "covered_by_mat": 15, "thickness": 6.0 }
+        ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "roller_shoes_on",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "heelys (on)", "str_pl": "pairs of heelys (on)" },
+    "description": "A pair of sneakers with integrated wheels, currently the wheels are out, allowing you to swiftly roll around on flat terrain.  You should probably pop them back in before you try fighting or going off-road.",
+    "weight": "840 g",
+    "volume": "1500 ml",
+    "price": "100 USD",
+    "price_postapoc": "12 USD 50 cent",
+    "material": [ "nylon" ],
+    "symbol": "[",
+    "looks_like": "sneakers",
+    "color": "light_blue",
+    "warmth": 20,
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Retract wheels",
+      "target": "roller_shoes_off",
+      "msg": "You pop the wheels back in.",
+      "moves": 500
+    },
+    "flags": [ "VARSIZE", "ROLLER_ONE", "REQUIRES_BALANCE", "OUTER", "NORMAL" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_r", "foot_toes_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "encumbrance": 40,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "coverage": 60
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "plastic", "covered_by_mat": 15, "thickness": 6.0 },
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 }
+        ],
+        "coverage": 100,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ]
+      }
+    ]
+  },
+  {
+    "id": "platemail_sollerets",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "plate sollerets", "str_pl": "pairs of plate sollerets" },
+    "description": "Also known as sabatons, these steel boot covers are meant to be strapped on over a pair of shoes.",
+    "weight": "1801 g",
+    "volume": "500 ml",
+    "price": "50 USD 12 cent",
+    "price_postapoc": "20 USD",
+    "to_hit": -1,
+    "material": [ "steel" ],
+    "symbol": "[",
+    "color": "light_red",
+    "flags": [ "STURDY", "BELTED" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 5,
+        "coverage": 90
+      }
+    ],
+    "melee_damage": { "bash": 6 }
+  },
+  {
+    "id": "platemail_sollerets_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_sollerets",
+    "name": { "str": "plate sollerets", "str_pl": "pairs of plate sollerets" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "platemail_sollerets_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "platemail_sollerets",
+    "name": { "str": "plate sollerets", "str_pl": "pairs of plate sollerets" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "nomex_socks",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
+    "description": "A snug-fitting pair of stockings made from thin and lightweight Nomex fabric.",
+    "weight": "200 g",
+    "volume": "750 ml",
+    "price": "20 USD",
+    "price_postapoc": "1 USD",
+    "to_hit": -5,
+    "material": [ "nomex" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "light_gray",
+    "warmth": 5,
+    "material_thickness": 0.5,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "SKINTIGHT", "STURDY" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_sole_r",
+          "foot_sole_l"
+        ],
+        "material": [ { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "coverage": 100,
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "coverage": 98
+      }
+    ]
+  },
+  {
+    "id": "xlnomex_socks",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
+    "weight": "300 g",
+    "volume": "1000 ml",
+    "copy-from": "nomex_socks",
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xsnomex_socks",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "nomex_socks",
+    "name": { "str": "flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "socks",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "socks", "str_pl": "pairs of socks" },
+    "description": "Socks.  Put 'em on your feet.",
+    "weight": "32 g",
+    "volume": "250 ml",
+    "price": "2 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "socks_wool",
+    "color": "white",
+    "warmth": 5,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_sole_r",
+          "foot_sole_l"
+        ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.3 } ],
+        "coverage": 100,
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.3 } ],
+        "coverage": 98
+      }
+    ]
+  },
+  {
+    "id": "xlsocks",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "socks", "str_pl": "pairs of socks" },
+    "weight": "58 g",
+    "volume": "250 ml",
+    "copy-from": "socks",
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xssocks",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "socks",
+    "name": { "str": "socks", "str_pl": "pairs of socks" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "socks_ankle",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "ankle socks", "str_pl": "pairs of ankle socks" },
+    "description": "Short socks, commonly used for sports.  These are designed to protect your feet from friction, not temperature.",
+    "weight": "25 g",
+    "volume": "200 ml",
+    "price": "1 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "light_gray",
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_sole_r",
+          "foot_sole_l"
+        ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 } ],
+        "coverage": 100,
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 } ],
+        "coverage": 60
+      }
+    ]
+  },
+  {
+    "id": "socks_bag",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "bag socks", "str_pl": "pairs of bag socks" },
+    "description": "A pair of disposable plastic bags, adapted to be used as socks.",
+    "weight": "6 g",
+    "volume": "250 ml",
+    "price": "50 cent",
+    "price_postapoc": "10 cent",
+    "material": [ "vinyl" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "light_blue",
+    "material_thickness": 0.02,
+    "flags": [ "WATERPROOF", "OVERSIZE", "UNRESTRICTED", "SOFT", "ALLOWS_NATURAL_ATTACKS" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_sole_r",
+          "foot_sole_l"
+        ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.01 } ],
+        "encumbrance": 15,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.01 } ],
+        "coverage": 20
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "hoof_frog_r", "hoof_frog_l", "hoof_sole_r", "hoof_sole_l", "hoof_toe_r", "hoof_toe_l" ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.01 } ],
+        "encumbrance": 15,
+        "coverage": 100
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "hoof_fetlock_r", "hoof_fetlock_l" ],
+        "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.01 } ],
+        "coverage": 20
+      }
+    ]
+  },
+  {
+    "id": "socks_bowling",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "disposable bowling socks", "str_pl": "pairs of disposable bowling socks" },
+    "description": "Cheap socks designed to be worn once and then thrown away.  They keep your feet clean, but are too thin to give any protection.",
+    "weight": "20 g",
+    "volume": "250 ml",
+    "price": "50 cent",
+    "price_postapoc": "10 cent",
+    "material": [ "spandex" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "white",
+    "warmth": 2,
+    "flags": [ "SKINTIGHT", "FRAGILE" ],
+    "material_thickness": 0.02,
+    "armor": [ { "encumbrance": 2, "coverage": 80, "covers": [ "foot_l", "foot_r" ] } ]
+  },
+  {
+    "id": "socks_wool",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "wool socks", "str_pl": "pairs of wool socks" },
+    "description": "Warm socks made of wool.",
+    "weight": "44 g",
+    "volume": "250 ml",
+    "price": "12 USD",
+    "price_postapoc": "1 USD 50 cent",
+    "material": [ "wool" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "blue",
+    "warmth": 30,
+    "material_thickness": 0.3,
+    "flags": [ "VARSIZE", "SKINTIGHT", "NO_SALVAGE" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_sole_r",
+          "foot_sole_l"
+        ],
+        "material": [ { "type": "wool", "covered_by_mat": 100, "thickness": 0.3 } ],
+        "coverage": 100,
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "wool", "covered_by_mat": 100, "thickness": 0.3 } ],
+        "coverage": 98
+      }
+    ]
+  },
+  {
+    "id": "xlsocks_wool",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "wool socks", "str_pl": "pairs of wool socks" },
+    "weight": "77 g",
+    "volume": "500 ml",
+    "copy-from": "socks_wool",
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "xssocks_wool",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "socks_wool",
+    "name": { "str": "wool socks", "str_pl": "pairs of wool socks" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "stockings",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "thigh socks", "str_pl": "pairs of thigh socks" },
+    "description": "Long socks that reach above the knees.",
+    "weight": "90 g",
+    "volume": "250 ml",
+    "price": "5 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "dark_gray",
+    "warmth": 10,
+    "material_thickness": 0.1,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      { "encumbrance": 2, "coverage": 100, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_lower_l", "leg_lower_r", "leg_knee_l", "leg_knee_r" ],
+        "coverage": 100,
+        "encumbrance": 2
+      },
+      { "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_upper_l", "leg_upper_r" ], "coverage": 60 }
+    ]
+  },
+  {
+    "id": "stockings_tent_legs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cephalopod socks", "str_pl": "sets of cephalopod socks" },
+    "description": "A collection of thigh socks sewn too slender for human legs, but ideal for keeping the many arms of a cephalopod warm.",
+    "weight": "150 g",
+    "volume": "500 ml",
+    "price": "0 USD",
+    "price_postapoc": "5 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "dark_gray",
+    "warmth": 10,
+    "material_thickness": 0.1,
+    "flags": [ "SKINTIGHT" ],
+    "armor": [
+      {
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_1_tip",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_2_tip",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_3_tip",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_4_tip",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_5_tip",
+          "cephalopod_arm_6_base",
+          "cephalopod_arm_6_tip"
+        ],
+        "coverage": 100,
+        "encumbrance": 6
+      }
+    ]
+  },
+  {
+    "id": "stockings_tent_legs_vinyl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "plastic cephalopod sleeves", "str_pl": "sets of plastic cephalopod sleeves" },
+    "description": "A bunch of slender tubes of plastic sheeting.  These could be used to keep the many arms of a cephalopod reasonably safe from environmental hazards.",
+    "weight": "300 g",
+    "volume": "900 ml",
+    "price": "0 USD",
+    "price_postapoc": "5 cent",
+    "material": [ "vinyl" ],
+    "symbol": "[",
+    "looks_like": "leg_warmers",
+    "color": "white",
+    "warmth": 10,
+    "material_thickness": 0.4,
+    "environmental_protection": 12,
+    "flags": [ "NORMAL" ],
+    "armor": [
+      {
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ],
+        "coverage": 95,
+        "encumbrance": 11
+      },
+      {
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_tip",
+          "cephalopod_arm_2_tip",
+          "cephalopod_arm_3_tip",
+          "cephalopod_arm_4_tip",
+          "cephalopod_arm_5_tip",
+          "cephalopod_arm_6_tip"
+        ],
+        "coverage": 100,
+        "encumbrance": 0
+      }
+    ]
+  },
+  {
+    "id": "tabi_dress",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "tabi", "str_pl": "pairs of tabi" },
+    "description": "A pair of black tabi, as worn with traditional Japanese clothes.",
+    "weight": "50 g",
+    "volume": "250 ml",
+    "price": "25 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "dark_gray",
+    "warmth": 5,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_sole_r",
+          "foot_sole_l"
+        ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 } ],
+        "coverage": 100,
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 } ],
+        "coverage": 98
+      }
+    ]
+  },
+  {
+    "id": "tabi_gi",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "gi tabi", "str_pl": "pairs of gi tabi" },
+    "description": "A pair of white tabi, as used by martial arts practitioners.",
+    "weight": "50 g",
+    "volume": "250 ml",
+    "price": "25 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "socks",
+    "color": "white",
+    "warmth": 5,
+    "material_thickness": 0.2,
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_sole_r",
+          "foot_sole_l"
+        ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 } ],
+        "coverage": 100,
+        "encumbrance": 2
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.2 } ],
+        "coverage": 98
+      }
+    ]
+  }
+]

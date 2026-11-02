@@ -1,0 +1,29 @@
+[package]
+name = "rusted-ruins-rules"
+version = "0.1.0"
+edition = "2021"
+authors = ["T. Okubo <t.okubo.rx78+devel@gmail.com>"]
+
+[lib]
+name = "rusted_ruins_rules"
+crate-type = ["rlib"]
+
+[dependencies]
+anyhow = "1"
+serde = "1"
+serde_derive = "1"
+ron = "0.8"
+serde_with = "2"
+smallvec = "1"
+log = "0.4"
+once_cell = "1"
+ordered-float = { version = "3", features = ["rand", "serde"] }
+
+tile-geom = { git = "https://github.com/garkimasera/tile-geom.git" }
+
+[dependencies.rusted-ruins-common]
+path = "../common"
+features = ["global_state_obj"]
+
+[dependencies.rusted-ruins-map-generator]
+path = "../map-generator"

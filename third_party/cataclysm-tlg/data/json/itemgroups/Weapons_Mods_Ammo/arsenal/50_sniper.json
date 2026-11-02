@@ -1,0 +1,30 @@
+[
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_50bmg_sniper_gun&mags&cans",
+    "subtype": "collection",
+    "items": [ { "group": "milspec_arsenal_50bmg_sniper_gun&ammo" } ]
+  },
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_50bmg_sniper_gun&ammo",
+    "subtype": "collection",
+    "items": [ { "group": "milspec_arsenal_50bmg_sniper_gun&mags" } ]
+  },
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_50bmg_sniper_gun&mags",
+    "subtype": "collection",
+    "items": [
+      { "group": "nested_m107a1_no_ammo", "count": 1 },
+      { "group": "nested_m107a1_no_ammo", "count": 1, "prob": 40 },
+      { "group": "nested_m107a1_no_ammo", "count": 1, "prob": 10 }
+    ]
+  },
+  {
+    "id": "nested_m107a1_no_ammo",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [ { "item": "m107a1" }, { "item": "m107a1mag", "count": [ 0, 3 ] } ]
+  }
+]

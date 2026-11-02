@@ -1,0 +1,50 @@
+[
+  {
+    "id": "rebar_plate",
+    "type": "GENERIC",
+    "category": "veh_parts",
+    "name": { "str": "rebar grate" },
+    "description": "Interlocked sections of rebar that allows for light and effective reinforcement of vehicle sections.",
+    "weight": "2200 g",
+    "volume": "3 L",
+    "price": "750 cent",
+    "price_postapoc": "5 USD",
+    "to_hit": -1,
+    "bashing": 6,
+    "material": [ "steel" ],
+    "symbol": "]",
+    "color": "light_cyan"
+  },
+  {
+    "id": "spring_plate",
+    "type": "GENERIC",
+    "category": "veh_parts",
+    "name": { "str": "shock absorber" },
+    "description": "This makeshift combination of springs and scrap, when attached to a vehicle section, protects that section from impacts.  The springs can absorb a surprising amount of damage.",
+    "weight": "22540 g",
+    "volume": "3 L",
+    "price": "13 USD",
+    "price_postapoc": "750 cent",
+    "to_hit": -1,
+    "bashing": 6,
+    "material": [ "steel" ],
+    "symbol": "]",
+    "color": "light_cyan"
+  },
+  {
+    "id": "NBC_seal",
+    "type": "GENERIC",
+    "category": "veh_parts",
+    "name": { "str": "NBC seal" },
+    "description": "A series of lead-based gaskets, seals and other things meant to keep all Nuclear, Biological, and Chemical contaminants out of a vehicle.  Installing this on a tile will protect people seated there from toxic gas and radiation.",
+    "weight": "8000 g",
+    "volume": "1 L",
+    "price": "50 USD",
+    "price_postapoc": "1500 cent",
+    "to_hit": -1,
+    "bashing": 6,
+    "material": [ "rubber", "lead" ],
+    "symbol": "]",
+    "color": "light_cyan"
+  }
+]

@@ -1,0 +1,31 @@
+[
+  {
+    "type": "snippet",
+    "category": "<mi-go_harvest>",
+    "text": [
+      "On close examination, the mi-go's rigid carapace is more of a pellicle, as though its spongy insides have merely dried into a hard crust where exposed to the air.",
+      "The smell emanating from the specimen is a noxious combination of chlorine and acetone.  There's none of the rot-stink or typical smells you'd expect from an animal carcass.",
+      "A network of sacs and vessels carry different fluids through the mi-go's body, any of which you might call \"blood\".  One is thin and clear with a grayish cast, while another is thick, foamy, and bubblegum pink, almost like Pepto-Bismol.",
+      "The mi-go's body is seemingly composed of a single material that merely varies in density.  It's as hard as bone at its core, spongy and almost gelatinous through the middle, and hard and crusty at the exterior.  Is this all the same tissue?",
+      "The \"skeleton\" of this creature is almost a single solid piece, merely softening at the joints to allow the limbs to bend."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "<mi-go_harvest_deeper>",
+    "text": [
+      "The creature contains a lot of irregular clumps of tissue that must serve as its organs, but it's difficult to guess at their purpose.",
+      "Large pores all over the body connect short sections of tubing to small balloon-like organs throughout the body, possibly serving as its respiratory system.",
+      "Owing to its many limbs and hard carapace, it is at first tempting to compare the mi-go to an insect.  Up close, there's little resemblance to be had.  Its multijointed legs are more akin to tentacles, a comparison that's easy to make because it also has a few of those.",
+      "The front of the creature's head, riddled with eyestalks and antennae, folds open under gentle pressure to reveal a rippling interior like ruched mortadella.  Perhaps this structure is how the creatures vocalize.",
+      "Tiny clumps of white crystal are buried throughout the creature's tissue like so many kidney stones.  They don't look functional, but then again, how would you know?",
+      "There's nothing that resembles an animal brain anywhere in the creature.  Whatever it used to interpret the world and make decisions is simply beyond your understanding.",
+      "Many short tentacles with rasping tips hang from beneath the subject's head.  They're too small to serve as weapons, and it would be tempting to assume these are how it eats if it had any apparent digestive tract."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "<mi-go_harvest>",
+    "text": [ "<mi-go_harvest>", "<mi-go_harvest_deeper>", "<mi-go_harvest>  <mi-go_harvest_deeper>" ]
+  }
+]

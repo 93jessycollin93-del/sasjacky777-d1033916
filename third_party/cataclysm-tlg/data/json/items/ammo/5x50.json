@@ -1,0 +1,53 @@
+[
+  {
+    "id": "5x50dart",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
+    "name": { "str": "RA110 5x50mm flechette" },
+    "description": "The Rivtech 5x50mm flechette round is a fin-stabilized steel needle packed into a plastic sabot which breaks apart shortly after the round clears the chamber.  The resulting cartridge is far lighter and produces lower recoil than a conventional round, while the projectile makes up for its low mass with extreme velocity and long range.",
+    "weight": "5 g",
+    "volume": "144 ml",
+    "price": "11 USD 25 cent",
+    "material": [ "plastic", "powder", "steel" ],
+    "symbol": "=",
+    "color": "green",
+    "count": 100,
+    "stack_size": 45,
+    "ammo_type": "5x50",
+    "casing": "5x50_hull",
+    "range": 28,
+    "damage": { "damage_type": "bullet", "amount": 24, "armor_penetration": 14 },
+    "dispersion": 10,
+    "recoil": 120,
+    "loudness": 80,
+    "flags": [ "IRREPLACEABLE_CONSUMABLE" ],
+    "price_postapoc": "18 USD",
+    "effects": [ "COOKOFF", "NEVER_MISFIRES" ]
+  },
+  {
+    "id": "5x50heavy",
+    "copy-from": "5x50dart",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
+    "name": { "str": "RA119 5x50mm penetrator" },
+    "description": "The Rivtech 5x50mm penetrator round is a fin-stabilized armor-penetrating tungsten needle packed into a plastic sabot which breaks apart shortly after the round clears the chamber.  The resulting cartridge is far lighter and produces lower recoil than a conventional round, while the projectile makes up for its low mass with extreme velocity and long range.",
+    "weight": "6 g",
+    "price": "16 USD 88 cent",
+    "price_postapoc": "24 USD",
+    "loudness": 90,
+    "relative": { "range": -5, "damage": { "damage_type": "bullet", "amount": 27, "armor_penetration": 28 }, "dispersion": 9 },
+    "proportional": { "recoil": 1.1 }
+  },
+  {
+    "id": "reloaded_5x50dart",
+    "copy-from": "5x50dart",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
+    "name": { "str": "5x50mm flechette, reloaded", "str_pl": "5x50mm flechettes, reloaded" },
+    "price_postapoc": "12 USD",
+    "description": "The Rivtech 5x50mm flechette round is a fin-stabilized steel needle packed into a plastic sabot which breaks apart shortly after the round clears the chamber.  The resulting cartridge is far lighter and produces lower recoil than a conventional round, while the projectile makes up for its low mass with extreme velocity and long range.  This one has been hand-reloaded by a lucky survivor or perhaps a pre-Cataclysm corporate spy, leading to slightly inferior performance compared to factory-produced ammo.",
+    "effects": [ "COOKOFF", "RECYCLED" ],
+    "relative": { "range": -15, "dispersion": 40 },
+    "proportional": { "price": 0.7, "damage": { "damage_type": "bullet", "amount": 0.9, "armor_penetration": 0.7 }, "recoil": 0.9 }
+  }
+]

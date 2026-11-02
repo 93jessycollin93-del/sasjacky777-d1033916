@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Condenser catalog",
+  "type": "object",
+  "required": ["version", "presets"],
+  "properties": {
+    "version": { "const": 1 },
+    "generatedFrom": { "type": "string" },
+    "presets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id","name","category","mathFormula","description","instruction","efficiencyRating","reductionRange","outputKind"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "category": { "enum": ["semantic", "logical", "cybernetic", "cognitive"] },
+          "mathFormula": { "type": "string" },
+          "description": { "type": "string", "minLength": 1 },
+          "instruction": { "type": "string", "minLength": 1 },
+          "efficiencyRating": { "type": "string", "pattern": "^[0-9]+-[0-9]+%$" },
+          "reductionRange": {
+            "type": "array", "minItems": 2, "maxItems": 2,
+            "items": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "outputKind": {
+            "enum": ["prose","axioms","graph","table","tree","timeline","truth-table","dialectic","gaps","xml","code","decision-tree"]
+          }
+        }
+      }
+    }
+  }
+}

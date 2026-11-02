@@ -1,0 +1,30 @@
+[
+  {
+    "seq": 1,
+    "action": "create",
+    "payload": "{\"at\": \"2026-10-10T06:27:32.120482+00:00\", \"actor\": \"aaaaaaaa-0000-0000-0000-000000000001\", \"after\": {\"id\": \"11111111-2222-3333-4444-555555555555\", \"rule\": \"Never deceive the owner — not even kindly. 🙂 \\\"quotes\\\" \\\\ backslash\", \"title\": \"No deception\", \"enabled\": true, \"category\": \"honesty\", \"created_at\": \"2026-10-10T06:27:32.120482+00:00\", \"sort_order\": 0, \"updated_at\": \"2026-10-10T06:27:32.120482+00:00\"}, \"action\": \"create\", \"before\": null, \"moral_id\": \"11111111-2222-3333-4444-555555555555\"}",
+    "prev_hash": "genesis",
+    "hash": "93ad0733b05be7e6bf4604f20acc2fc8e7182f4c669575802a70dbeefdd814e6"
+  },
+  {
+    "seq": 2,
+    "action": "update",
+    "payload": "{\"at\": \"2026-10-10T06:27:32.120482+00:00\", \"actor\": \"aaaaaaaa-0000-0000-0000-000000000001\", \"after\": {\"id\": \"11111111-2222-3333-4444-555555555555\", \"rule\": \"Never deceive the owner — not even kindly. 🙂 \\\"quotes\\\" \\\\ backslash\", \"title\": \"No deception\", \"enabled\": false, \"category\": \"honesty\", \"created_at\": \"2026-10-10T06:27:32.120482+00:00\", \"sort_order\": 0, \"updated_at\": \"2026-10-10T06:27:32.120482+00:00\"}, \"action\": \"update\", \"before\": {\"id\": \"11111111-2222-3333-4444-555555555555\", \"rule\": \"Never deceive the owner — not even kindly. 🙂 \\\"quotes\\\" \\\\ backslash\", \"title\": \"No deception\", \"enabled\": true, \"category\": \"honesty\", \"created_at\": \"2026-10-10T06:27:32.120482+00:00\", \"sort_order\": 0, \"updated_at\": \"2026-10-10T06:27:32.120482+00:00\"}, \"moral_id\": \"11111111-2222-3333-4444-555555555555\"}",
+    "prev_hash": "93ad0733b05be7e6bf4604f20acc2fc8e7182f4c669575802a70dbeefdd814e6",
+    "hash": "bc6787e2cee8dc6f347ce8368fee6c9bd8b0684485c1157d12551a520e677110"
+  },
+  {
+    "seq": 3,
+    "action": "seal",
+    "payload": "{\"at\": \"2026-10-10T06:27:32.120482+00:00\", \"note\": \"Jackie here— sealed\", \"actor\": \"aaaaaaaa-0000-0000-0000-000000000001\", \"action\": \"seal\", \"moral_id\": null, \"persona_fp\": \"abc\"}",
+    "prev_hash": "bc6787e2cee8dc6f347ce8368fee6c9bd8b0684485c1157d12551a520e677110",
+    "hash": "94371fdbf9737a6e0d8823eab15f144a1f96e8fedee4557fa1984d08a259c5f8"
+  },
+  {
+    "seq": 4,
+    "action": "delete",
+    "payload": "{\"at\": \"2026-10-10T06:27:32.120482+00:00\", \"actor\": \"aaaaaaaa-0000-0000-0000-000000000001\", \"after\": null, \"action\": \"delete\", \"before\": {\"id\": \"11111111-2222-3333-4444-555555555555\", \"rule\": \"Never deceive the owner — not even kindly. 🙂 \\\"quotes\\\" \\\\ backslash\", \"title\": \"No deception\", \"enabled\": false, \"category\": \"honesty\", \"created_at\": \"2026-10-10T06:27:32.120482+00:00\", \"sort_order\": 0, \"updated_at\": \"2026-10-10T06:27:32.120482+00:00\"}, \"moral_id\": \"11111111-2222-3333-4444-555555555555\"}",
+    "prev_hash": "94371fdbf9737a6e0d8823eab15f144a1f96e8fedee4557fa1984d08a259c5f8",
+    "hash": "cd1e141eca3ea83c50ef73e83a71737294025f280c0f9894dcffae3fd2895150"
+  }
+]

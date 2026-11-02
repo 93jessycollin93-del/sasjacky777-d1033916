@@ -1,0 +1,1033 @@
+[
+  {
+    "result": "gauntlets_chitin",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "tailor",
+    "difficulty": 6,
+    "skills_required": [ [ "fabrication", 3 ] ],
+    "time": "10 h",
+    "autolearn": true,
+    "book_learn": [ [ "textbook_arthropod", 5 ] ],
+    "reversible": true,
+    "using": [ [ "armor_chitin", 8 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
+    "proficiencies": [
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_chitinworking" },
+      { "proficiency": "prof_articulation" }
+    ]
+  },
+  {
+    "result": "xs_gauntlets_chitin",
+    "type": "recipe",
+    "copy-from": "gauntlets_chitin",
+    "time": "10 h",
+    "using": [ [ "armor_chitin", 6 ], [ "strap_small", 1 ], [ "clasps", 1 ] ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ]
+  },
+  {
+    "result": "xl_gauntlets_chitin",
+    "type": "recipe",
+    "copy-from": "gauntlets_chitin",
+    "time": "11 h 15 m",
+    "using": [ [ "armor_chitin", 12 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ]
+  },
+  {
+    "result": "gauntlets_acidchitin",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "tailor",
+    "difficulty": 7,
+    "skills_required": [ [ "fabrication", 3 ], [ "chemistry", 2 ] ],
+    "time": "10 h",
+    "autolearn": true,
+    "book_learn": [ [ "textbook_arthropod", 6 ] ],
+    "reversible": true,
+    "using": [ [ "armor_acidchitin", 8 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
+    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_articulation" } ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
+    "components": [ [ [ "cordage_superior", 1, "LIST" ] ] ]
+  },
+  {
+    "result": "xs_gauntlets_acidchitin",
+    "type": "recipe",
+    "copy-from": "gauntlets_acidchitin",
+    "time": "9 h",
+    "using": [ [ "armor_acidchitin", 6 ], [ "strap_small", 1 ], [ "clasps", 1 ] ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
+    "components": [ [ [ "cordage_superior", 2, "LIST" ] ] ]
+  },
+  {
+    "result": "xl_gauntlets_acidchitin",
+    "type": "recipe",
+    "copy-from": "gauntlets_acidchitin",
+    "time": "12 h",
+    "using": [ [ "armor_acidchitin", 12 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
+    "components": [ [ [ "cordage_superior", 2, "LIST" ] ] ]
+  },
+  {
+    "result": "leather_gauntlets",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 5,
+    "time": "9 h",
+    "book_learn": [ [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ], [ "textbook_mesoam", 4 ] ],
+    "using": [ [ "sewing_standard", 12 ], [ "tailoring_leather_small", 4 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" },
+      { "proficiency": "prof_articulation" }
+    ]
+  },
+  {
+    "result": "leather_gauntlets_xs",
+    "type": "recipe",
+    "copy-from": "leather_gauntlets",
+    "time": "8 h",
+    "using": [ [ "sewing_standard", 9 ], [ "tailoring_leather_small", 3 ] ]
+  },
+  {
+    "result": "leather_gauntlets_xl",
+    "type": "recipe",
+    "copy-from": "leather_gauntlets",
+    "time": "10 h",
+    "using": [ [ "sewing_standard", 16 ], [ "tailoring_leather_small", 6 ] ]
+  },
+  {
+    "result": "gloves_bag",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "1 m",
+    "autolearn": true,
+    "components": [ [ [ "plastic_shopping_bag", 2 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "gloves_fingerless",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "16 m",
+    "autolearn": true,
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "gloves_leather", 1 ] ] ]
+  },
+  {
+    "result": "gloves_fingerless",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "id_suffix": "from patches",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 3,
+    "time": "4 h",
+    "autolearn": true,
+    "book_learn": [ [ "manual_tailor", 2 ], [ "textbook_tailor", 2 ], [ "recipe_melee", 2 ] ],
+    "using": [ [ "sewing_standard", 5 ], [ "tailoring_leather_small", 1 ] ],
+    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
+  },
+  {
+    "result": "gloves_fingerless_mod",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "skills_required": [ "fabrication", 1 ],
+    "time": "24 m",
+    "autolearn": true,
+    "using": [ [ "sewing_standard", 10 ] ],
+    "qualities": [ { "id": "HAMMER", "level": 2 } ],
+    "components": [ [ [ "gloves_fingerless", 1 ] ], [ [ "scrap", 2 ] ] ]
+  },
+  {
+    "result": "gloves_fsurvivor",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "tailor",
+    "difficulty": 8,
+    "skills_required": [ "fabrication", 6 ],
+    "time": "20 h",
+    "autolearn": true,
+    "using": [ [ "tailoring_leather_small", 2 ], [ "tailoring_nomex_sheet", 2 ], [ "tailoring_kevlar_sheet", 1 ] ],
+    "tools": [ [ [ "rubber_spray_can", 3 ] ] ],
+    "proficiencies": [
+      { "proficiency": "prof_closures_waterproofing" },
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_polymerworking" }
+    ],
+    "components": [ [ [ "duct_tape", 120 ] ], [ [ "nomex_gloves", 1 ], [ "fire_gauntlets", 1 ] ] ]
+  },
+  {
+    "result": "gloves_fsurvivor_xs",
+    "type": "recipe",
+    "copy-from": "gloves_fsurvivor",
+    "time": "20 h",
+    "using": [ [ "tailoring_leather_small", 1 ], [ "tailoring_nomex_sheet", 1 ], [ "tailoring_kevlar_sheet", 1 ] ],
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
+    "components": [ [ [ "duct_tape", 90 ] ], [ [ "nomex_gloves", 1 ], [ "fire_gauntlets", 1 ] ] ]
+  },
+  {
+    "result": "gloves_fsurvivor_xl",
+    "type": "recipe",
+    "copy-from": "gloves_fsurvivor",
+    "time": "22 h 45 m",
+    "using": [ [ "tailoring_leather_small", 3 ], [ "tailoring_nomex_sheet", 3 ], [ "tailoring_kevlar_sheet", 2 ] ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
+    "components": [ [ [ "duct_tape", 170 ] ], [ [ "nomex_gloves", 1 ], [ "fire_gauntlets", 1 ] ] ]
+  },
+  {
+    "result": "gloves_fur",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 6,
+    "time": "9 h",
+    "autolearn": true,
+    "book_learn": [ [ "manual_tailor", 1 ], [ "textbook_survival", 1 ], [ "pocket_survival", 1 ] ],
+    "using": [ [ "tailoring_fur_patch", 3 ] ],
+    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ]
+  },
+  {
+    "result": "xs_gloves_fur",
+    "type": "recipe",
+    "copy-from": "gloves_fur",
+    "time": "9 h",
+    "using": [ [ "tailoring_fur_patch", 2 ] ]
+  },
+  {
+    "result": "xl_gloves_fur",
+    "type": "recipe",
+    "copy-from": "gloves_fur",
+    "time": "10 h 10 m",
+    "using": [ [ "tailoring_fur_patch", 5 ] ]
+  },
+  {
+    "result": "gloves_faux_fur",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 6,
+    "time": "9 h",
+    "autolearn": true,
+    "book_learn": [ [ "manual_tailor", 1 ], [ "textbook_survival", 1 ], [ "pocket_survival", 1 ], [ "recipe_fauxfur", 1 ] ],
+    "using": [ [ "tailoring_faux_fur_patch", 3 ] ],
+    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ]
+  },
+  {
+    "result": "xs_gloves_faux_fur",
+    "type": "recipe",
+    "copy-from": "gloves_faux_fur",
+    "time": "9 h",
+    "using": [ [ "tailoring_faux_fur_patch", 2 ] ]
+  },
+  {
+    "result": "xl_gloves_faux_fur",
+    "type": "recipe",
+    "copy-from": "gloves_faux_fur",
+    "time": "10 h 10 m",
+    "using": [ [ "tailoring_faux_fur_patch", 5 ] ]
+  },
+  {
+    "result": "gloves_wsurvivor_nofur",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "tailor",
+    "difficulty": 7,
+    "skills_required": [ "fabrication", 5 ],
+    "time": "20 h",
+    "autolearn": true,
+    "using": [ [ "sewing_standard", 50 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_closures_waterproofing" },
+      { "proficiency": "prof_polymerworking" },
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_articulation" }
+    ],
+    "tools": [ [ [ "rubber_spray_can", 3 ] ] ],
+    "components": [
+      [ [ "duct_tape", 80 ] ],
+      [ [ "faux_fur_patch", 4 ] ],
+      [ [ "kevlar_patch", 8 ] ],
+      [ [ "gloves_tactical", 1 ], [ "gloves_faux_fur", 1 ], [ "gloves_light", 1 ] ]
+    ]
+  },
+  {
+    "result": "gloves_wsurvivor_nofur_xs",
+    "type": "recipe",
+    "copy-from": "gloves_wsurvivor_nofur",
+    "time": "20 h",
+    "using": [ [ "sewing_standard", 37 ], [ "tailoring_kevlar_sheet", 1 ] ],
+    "components": [
+      [ [ "duct_tape", 60 ] ],
+      [ [ "faux_fur_patch", 3 ] ],
+      [ [ "kevlar_patch", 6 ] ],
+      [ [ "gloves_tactical", 1 ], [ "xs_gloves_faux_fur", 1 ], [ "xs_gloves_light", 1 ] ]
+    ],
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ]
+  },
+  {
+    "result": "gloves_wsurvivor_nofur_xl",
+    "type": "recipe",
+    "copy-from": "gloves_wsurvivor_nofur",
+    "time": "26 h",
+    "using": [ [ "sewing_standard", 75 ], [ "tailoring_kevlar_sheet", 2 ] ],
+    "components": [
+      [ [ "duct_tape", 120 ] ],
+      [ [ "duct_tape", 80 ] ],
+      [ [ "faux_fur_patch", 6 ] ],
+      [ [ "kevlar_patch", 12 ] ],
+      [ [ "gloves_tactical", 1 ], [ "xl_gloves_faux_fur", 1 ], [ "xl_gloves_light", 1 ] ]
+    ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ]
+  },
+  {
+    "result": "gloves_leather",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 2,
+    "time": "8 h",
+    "autolearn": true,
+    "book_learn": [ [ "manual_tailor", 1 ], [ "mag_tailor", 0 ], [ "textbook_survival", 1 ], [ "pocket_survival", 1 ] ],
+    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
+    "using": [ [ "tailoring_leather_small", 2 ] ]
+  },
+  {
+    "result": "xs_gloves_leather",
+    "type": "recipe",
+    "copy-from": "gloves_leather",
+    "time": "8 h",
+    "using": [ [ "tailoring_leather_small", 1 ] ]
+  },
+  {
+    "result": "xl_gloves_leather",
+    "type": "recipe",
+    "copy-from": "gloves_leather",
+    "time": "9 h",
+    "using": [ [ "tailoring_leather_small", 3 ] ]
+  },
+  {
+    "result": "gloves_light",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "5 h",
+    "autolearn": true,
+    "using": [ [ "tailoring_cotton_sheet", 4 ] ]
+  },
+  {
+    "result": "xs_gloves_light",
+    "type": "recipe",
+    "copy-from": "gloves_light",
+    "time": "5 h",
+    "using": [ [ "tailoring_cotton_sheet", 3 ] ]
+  },
+  {
+    "result": "xl_gloves_light",
+    "type": "recipe",
+    "copy-from": "gloves_light",
+    "time": "5 h 40 m",
+    "using": [ [ "tailoring_cotton_sheet", 6 ] ]
+  },
+  {
+    "result": "gloves_liner",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "4 h",
+    "book_learn": [ [ "manual_tailor", 1 ], [ "mag_tailor", 0 ], [ "textbook_survival", 2 ], [ "pocket_survival", 2 ] ],
+    "using": [ [ "tailoring_cotton_sheet", 1 ] ]
+  },
+  {
+    "result": "xs_gloves_liner",
+    "type": "recipe",
+    "copy-from": "gloves_liner",
+    "time": "4 h",
+    "using": [ [ "tailoring_cotton_sheet", 1 ] ]
+  },
+  {
+    "result": "xl_gloves_liner",
+    "type": "recipe",
+    "copy-from": "gloves_liner",
+    "time": "4 h 30 m",
+    "using": [ [ "tailoring_cotton_sheet", 2 ] ]
+  },
+  {
+    "result": "gloves_survivor_fingerless",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "tailor",
+    "time": "30 m",
+    "autolearn": true,
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "gloves_survivor", 1 ] ] ]
+  },
+  {
+    "result": "gloves_survivor_fingerless_xs",
+    "type": "recipe",
+    "copy-from": "gloves_survivor_fingerless",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "gloves_survivor_xs", 1 ] ] ]
+  },
+  {
+    "result": "gloves_survivor_fingerless_xl",
+    "type": "recipe",
+    "copy-from": "gloves_survivor_fingerless",
+    "time": "40 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "gloves_survivor_xl", 1 ] ] ]
+  },
+  {
+    "result": "gloves_survivor",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "tailor",
+    "difficulty": 6,
+    "skills_required": [ "fabrication", 4 ],
+    "time": "20 h",
+    "autolearn": true,
+    "using": [ [ "sewing_standard", 50 ], [ "tailoring_leather_small", 6 ], [ "tailoring_kevlar_sheet", 1 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_closures_waterproofing" },
+      { "proficiency": "prof_polymerworking" },
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" },
+      { "proficiency": "prof_articulation" }
+    ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
+    "components": [
+      [ [ "duct_tape", 80 ] ],
+      [ [ "leather_patch", 4 ] ],
+      [ [ "kevlar_patch", 8 ] ],
+      [ [ "gloves_leather", 1 ], [ "leather_gauntlets", 1 ], [ "gloves_tactical", 1 ], [ "gloves_light", 1 ] ]
+    ]
+  },
+  {
+    "result": "gloves_survivor_xs",
+    "type": "recipe",
+    "copy-from": "gloves_survivor",
+    "time": "20 h",
+    "using": [ [ "sewing_standard", 37 ], [ "tailoring_leather_small", 4 ], [ "tailoring_kevlar_sheet", 1 ] ],
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
+    "components": [
+      [ [ "duct_tape", 60 ] ],
+      [ [ "leather_patch", 3 ] ],
+      [ [ "kevlar_patch", 6 ] ],
+      [
+        [ "xs_gloves_leather", 1 ],
+        [ "leather_gauntlets_xs", 1 ],
+        [ "gloves_tactical", 1 ],
+        [ "xs_gloves_light", 1 ]
+      ]
+    ]
+  },
+  {
+    "result": "gloves_wool",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "6 h",
+    "autolearn": true,
+    "proficiencies": [ { "proficiency": "prof_knitting" }, { "proficiency": "prof_knitting_speed" } ],
+    "using": [ [ "tailoring_wool_knitting", 100 ] ]
+  },
+  {
+    "result": "xs_gloves_wool",
+    "type": "recipe",
+    "copy-from": "gloves_wool",
+    "time": "6 h",
+    "using": [ [ "tailoring_wool_knitting", 75 ] ]
+  },
+  {
+    "result": "xl_gloves_wool",
+    "type": "recipe",
+    "copy-from": "gloves_wool",
+    "time": "6 h 45 m",
+    "using": [ [ "tailoring_wool_knitting", 140 ] ]
+  },
+  {
+    "result": "gloves_wool_fingerless",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "4 h",
+    "autolearn": true,
+    "proficiencies": [ { "proficiency": "prof_knitting" }, { "proficiency": "prof_knitting_speed" } ],
+    "using": [ [ "tailoring_wool_knitting", 83 ] ]
+  },
+  {
+    "result": "gloves_wool_fingerless",
+    "id_suffix": "from_gloves",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "2 m",
+    "autolearn": true,
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "gloves_wool", 1 ] ] ]
+  },
+  {
+    "copy-from": "gloves_wool_fingerless",
+    "result": "xs_gloves_wool_fingerless",
+    "type": "recipe",
+    "using": [ [ "tailoring_wool_knitting", 62 ] ]
+  },
+  {
+    "result": "xs_gloves_wool_fingerless",
+    "id_suffix": "from_gloves",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "2 m",
+    "autolearn": true,
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "xs_gloves_wool", 1 ] ] ]
+  },
+  {
+    "copy-from": "gloves_wool_fingerless",
+    "result": "xl_gloves_wool_fingerless",
+    "type": "recipe",
+    "using": [ [ "tailoring_wool_knitting", 116 ] ]
+  },
+  {
+    "result": "xl_gloves_wool_fingerless",
+    "id_suffix": "from_gloves",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "2 m",
+    "autolearn": true,
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "xl_gloves_wool", 1 ] ] ]
+  },
+  {
+    "result": "gloves_work",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 2,
+    "time": "8 h",
+    "book_learn": [ [ "manual_tailor", 2 ], [ "mag_tailor", 3 ], [ "textbook_survival", 2 ] ],
+    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
+    "using": [ [ "sewing_standard", 6 ], [ "tailoring_leather_small", 2 ] ]
+  },
+  {
+    "result": "gloves_wraps",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "1 m",
+    "reversible": true,
+    "autolearn": true,
+    "components": [ [ [ "cotton_sheet", 2 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
+  },
+  {
+    "result": "gloves_wraps_nomex",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "1 m",
+    "reversible": true,
+    "autolearn": true,
+    "components": [ [ [ "nomex_sheet", 2 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
+  },
+  {
+    "result": "gloves_wraps_fur",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "1 m 30 s",
+    "reversible": true,
+    "autolearn": true,
+    "components": [ [ [ "fur_sheet", 2 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
+  },
+  {
+    "result": "gloves_wraps_faux_fur",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "1 m 30 s",
+    "reversible": true,
+    "autolearn": true,
+    "components": [ [ [ "faux_fur_sheet", 2 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
+  },
+  {
+    "result": "gloves_wraps_leather",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "1 m 30 s",
+    "reversible": true,
+    "autolearn": true,
+    "components": [ [ [ "leather_sheet", 2 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
+  },
+  {
+    "result": "gloves_wraps_wool",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "1 m",
+    "reversible": true,
+    "autolearn": true,
+    "components": [ [ [ "felt_sheet", 2 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
+  },
+  {
+    "result": "gloves_wsurvivor",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "tailor",
+    "difficulty": 7,
+    "skills_required": [ "fabrication", 5 ],
+    "time": "20 h",
+    "autolearn": true,
+    "using": [ [ "sewing_standard", 50 ], [ "tailoring_fur_patch", 4 ], [ "tailoring_kevlar_sheet", 1 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_closures_waterproofing" },
+      { "proficiency": "prof_polymerworking" },
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_furriery" },
+      { "proficiency": "prof_articulation" }
+    ],
+    "tools": [ [ [ "rubber_spray_can", 3 ] ] ],
+    "components": [
+      [ [ "duct_tape", 80 ] ],
+      [ [ "leather_patch", 4 ] ],
+      [ [ "fur_patch", 4 ] ],
+      [ [ "kevlar_patch", 8 ] ],
+      [
+        [ "gloves_fur", 1 ],
+        [ "gloves_leather", 1 ],
+        [ "leather_gauntlets", 1 ],
+        [ "gloves_tactical", 1 ],
+        [ "gloves_light", 1 ]
+      ]
+    ]
+  },
+  {
+    "result": "gloves_wsurvivor_xs",
+    "type": "recipe",
+    "copy-from": "gloves_wsurvivor",
+    "time": "20 h",
+    "using": [ [ "sewing_standard", 37 ], [ "tailoring_fur_patch", 3 ], [ "tailoring_kevlar_sheet", 1 ] ],
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
+    "components": [
+      [ [ "duct_tape", 60 ] ],
+      [ [ "leather_patch", 3 ] ],
+      [ [ "fur_patch", 3 ] ],
+      [ [ "kevlar_patch", 6 ] ],
+      [
+        [ "xs_gloves_fur", 1 ],
+        [ "xs_gloves_leather", 1 ],
+        [ "leather_gauntlets_xs", 1 ],
+        [ "gloves_tactical", 1 ],
+        [ "xs_gloves_light", 1 ]
+      ]
+    ]
+  },
+  {
+    "result": "gloves_wsurvivor_xl",
+    "type": "recipe",
+    "copy-from": "gloves_wsurvivor",
+    "time": "22 h 30 m",
+    "using": [ [ "sewing_standard", 75 ], [ "tailoring_fur_patch", 5 ], [ "tailoring_kevlar_sheet", 2 ] ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
+    "components": [
+      [ [ "duct_tape", 120 ] ],
+      [ [ "leather_patch", 6 ] ],
+      [ [ "fur_patch", 6 ] ],
+      [ [ "kevlar_patch", 12 ] ],
+      [
+        [ "xl_gloves_fur", 1 ],
+        [ "xl_gloves_leather", 1 ],
+        [ "leather_gauntlets_xl", 1 ],
+        [ "gloves_tactical", 1 ],
+        [ "xl_gloves_light", 1 ]
+      ]
+    ]
+  },
+  {
+    "result": "gloves_survivor_xl",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "tailor",
+    "difficulty": 6,
+    "skills_required": [ "fabrication", 4 ],
+    "time": "22h 30 m",
+    "autolearn": true,
+    "using": [ [ "sewing_standard", 100 ], [ "tailoring_leather_small", 16 ], [ "tailoring_kevlar_sheet", 2 ] ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
+    "proficiencies": [
+      { "proficiency": "prof_closures_waterproofing" },
+      { "proficiency": "prof_polymerworking" },
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" },
+      { "proficiency": "prof_articulation" }
+    ],
+    "components": [
+      [ [ "duct_tape", 120 ] ],
+      [ [ "leather_patch", 6 ] ],
+      [ [ "kevlar_patch", 12 ] ],
+      [
+        [ "xl_gloves_leather", 1 ],
+        [ "leather_gauntlets_xl", 1 ],
+        [ "gloves_tactical", 1 ],
+        [ "xl_gloves_light", 1 ]
+      ]
+    ]
+  },
+  {
+    "result": "mittens",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "50 m",
+    "autolearn": true,
+    "reversible": true,
+    "proficiencies": [ { "proficiency": "prof_knitting" }, { "proficiency": "prof_knitting_speed" } ],
+    "using": [ [ "tailoring_wool_knitting", 36 ] ]
+  },
+  {
+    "result": "mittens_xs",
+    "type": "recipe",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 1,
+    "time": "40 m",
+    "autolearn": true,
+    "reversible": true,
+    "proficiencies": [ { "proficiency": "prof_knitting" }, { "proficiency": "prof_knitting_speed" } ],
+    "using": [ [ "tailoring_wool_knitting", 18 ] ]
+  },
+  {
+    "result": "nomex_gloves",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 6,
+    "time": "8 h",
+    "proficiencies": [ { "proficiency": "prof_polymerworking" } ],
+    "book_learn": [ [ "textbook_fireman", 6 ], [ "textbook_tailor", 5 ], [ "tailor_portfolio", 5 ] ],
+    "using": [ [ "tailoring_nomex_sheet", 2 ] ]
+  },
+  {
+    "result": "sockmitts",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "time": "1 m",
+    "autolearn": true,
+    "reversible": true,
+    "components": [ [ [ "socks", 1 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_RESIZE", "NO_TRAIN", "NO_FAIL" ]
+  },
+  {
+    "result": "wool_sockmitts",
+    "type": "recipe",
+    "copy-from": "sockmitts",
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "socks_wool", 1 ] ] ]
+  },
+  {
+    "result": "nomex_sockmitts",
+    "type": "recipe",
+    "copy-from": "sockmitts",
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "nomex_socks", 1 ] ] ]
+  },
+  {
+    "result": "thermal_gloves",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "electronics",
+    "difficulty": 4,
+    "skills_required": [ "tailor", 2 ],
+    "time": "2 h",
+    "book_learn": [ [ "textbook_fabrication", 3 ], [ "tailor_portfolio", 4 ], [ "textbook_tailor", 3 ], [ "atomic_survival", 3 ] ],
+    "using": [ [ "sewing_standard", 8 ], [ "soldering_standard", 20 ] ],
+    "proficiencies": [ { "proficiency": "prof_elec_soldering" } ],
+    "components": [
+      [ [ "cotton_patch", 4 ], [ "gloves_light", 1 ], [ "gloves_liner", 1 ] ],
+      [ [ "element", 2 ], [ "crude_heating_element", 3 ] ],
+      [ [ "cable", 2 ] ]
+    ]
+  },
+  {
+    "result": "wetsuit_gloves",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "tailor",
+    "difficulty": 4,
+    "time": "6 h",
+    "book_learn": [ [ "textbook_tailor", 4 ], [ "manual_tailor", 5 ], [ "tailor_portfolio", 4 ] ],
+    "using": [ [ "tailoring_neoprene_sheet", 4 ], [ "tailoring_spandex_sheet", 5 ] ],
+    "//": "Should use fabric_neoprene when the tailoring recipe audit is done.",
+    "proficiencies": [ { "proficiency": "prof_elastics" }, { "proficiency": "prof_closures_waterproofing" } ],
+    "components": [ [ [ "rubber_cement", 1 ] ] ]
+  },
+  {
+    "result": "xl_wetsuit_gloves",
+    "type": "recipe",
+    "copy-from": "wetsuit_gloves",
+    "time": "9 h",
+    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "tailoring_nylon_sheet", 8 ] ],
+    "components": [ [ [ "rubber_cement", 2 ] ] ]
+  },
+  {
+    "result": "xs_wetsuit_gloves",
+    "type": "recipe",
+    "copy-from": "wetsuit_gloves",
+    "time": "5 h",
+    "using": [ [ "tailoring_neoprene_sheet", 3 ], [ "tailoring_nylon_sheet", 4 ] ],
+    "components": [ [ [ "rubber_cement", 1 ] ] ]
+  },
+  {
+    "result": "wetsuit_gloves_thick",
+    "type": "recipe",
+    "copy-from": "wetsuit_gloves",
+    "difficulty": 5,
+    "time": "9 h",
+    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "tailoring_nylon_sheet", 10 ] ],
+    "components": [ [ [ "rubber_cement", 1 ] ] ]
+  },
+  {
+    "result": "xl_wetsuit_gloves_thick",
+    "type": "recipe",
+    "copy-from": "wetsuit_gloves_thick",
+    "time": "14 h",
+    "using": [ [ "tailoring_neoprene_sheet", 8 ], [ "tailoring_nylon_sheet", 15 ] ],
+    "components": [ [ [ "rubber_cement", 2 ] ] ]
+  },
+  {
+    "result": "xs_wetsuit_gloves_thick",
+    "type": "recipe",
+    "copy-from": "wetsuit_gloves_thick",
+    "time": "7 h",
+    "using": [ [ "tailoring_neoprene_sheet", 5 ], [ "tailoring_nylon_sheet", 8 ] ],
+    "components": [ [ [ "rubber_cement", 1 ] ] ]
+  },
+  {
+    "result": "chainmail_gloves",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "fabrication",
+    "difficulty": 7,
+    "time": "2 h",
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "book_arms_india", 7 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
+    "proficiencies": [ { "proficiency": "prof_chain_armour" } ],
+    "using": [ [ "armor_chainmail_assembling", 1 ], [ "strap_small", 2 ] ]
+  },
+  {
+    "result": "chainmail_gloves_xs",
+    "type": "recipe",
+    "copy-from": "chainmail_gloves",
+    "time": "2 h",
+    "using": [ [ "armor_chainmail_assembling", 1 ], [ "strap_small", 1 ] ]
+  },
+  {
+    "result": "chainmail_gloves_xl",
+    "type": "recipe",
+    "copy-from": "chainmail_gloves",
+    "time": "2 h 15 m",
+    "using": [ [ "armor_chainmail_assembling", 2 ], [ "strap_small", 2 ] ]
+  },
+  {
+    "result": "gloves_studded",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_WEAPON",
+    "subcategory": "CSC_WEAPON_UNARMED",
+    "skill_used": "tailor",
+    "difficulty": 3,
+    "time": "30 m",
+    "autolearn": true,
+    "using": [ [ "sewing_standard", 4 ] ],
+    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
+    "components": [ [ [ "gloves_light", 1 ], [ "gloves_liner", 1 ] ], [ [ "gloves_leather", 1 ] ], [ [ "scrap", 4 ] ] ]
+  },
+  {
+    "result": "xl_gloves_studded",
+    "type": "recipe",
+    "copy-from": "gloves_studded",
+    "time": "30 m",
+    "using": [ [ "sewing_standard", 4 ] ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
+    "components": [ [ [ "gloves_light", 1 ], [ "gloves_liner", 1 ] ], [ [ "gloves_leather", 1 ] ], [ [ "scrap", 6 ] ] ]
+  },
+  {
+    "result": "xs_gloves_studded",
+    "type": "recipe",
+    "copy-from": "gloves_studded",
+    "time": "30 m",
+    "using": [ [ "sewing_standard", 4 ] ],
+    "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
+    "components": [ [ [ "gloves_light", 1 ], [ "gloves_liner", 1 ] ], [ [ "gloves_leather", 1 ] ], [ [ "scrap", 2 ] ] ]
+  },
+  {
+    "result": "platemail_gauntlets",
+    "type": "recipe",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "fabrication",
+    "difficulty": 6,
+    "time": "35 h",
+    "book_learn": [ [ "textbook_armwest", 7 ] ],
+    "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
+    "qualities": [ { "id": "CHISEL", "level": 3 } ],
+    "tools": [ [ [ "swage", -1 ] ] ],
+    "proficiencies": [
+      { "proficiency": "prof_armorsmithing" },
+      { "proficiency": "prof_closures", "time_multiplier": 1.25, "skill_penalty": 0.15 },
+      { "proficiency": "prof_metalworking" },
+      { "proficiency": "prof_articulation" },
+      { "proficiency": "prof_blacksmithing" }
+    ]
+  },
+  {
+    "result": "platemail_gauntlets_xl",
+    "type": "recipe",
+    "copy-from": "platemail_gauntlets",
+    "time": "38 h",
+    "using": [ [ "blacksmithing_standard", 16 ], [ "steel_standard", 4 ], [ "strap_small", 4 ], [ "clasps", 2 ] ],
+    "qualities": [ { "id": "CHISEL", "level": 3 } ],
+    "tools": [ [ [ "swage", -1 ] ] ]
+  },
+  {
+    "result": "platemail_gauntlets_xs",
+    "type": "recipe",
+    "copy-from": "platemail_gauntlets",
+    "time": "32 h",
+    "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ], [ "strap_small", 1 ], [ "clasps", 2 ] ],
+    "qualities": [ { "id": "CHISEL", "level": 3 } ],
+    "tools": [ [ [ "swage", -1 ] ] ]
+  },
+  {
+    "result": "brigandine_gloves",
+    "type": "recipe",
+    "activity_level": "BRISK_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HANDS",
+    "skill_used": "fabrication",
+    "difficulty": 5,
+    "time": "6 h",
+    "book_learn": [ [ "textbook_armwest", 5 ] ],
+    "using": [ [ "tailoring_canvas_sheet", 2 ], [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ], [ "fastener_small", 2 ] ],
+    "qualities": [ { "id": "CHISEL", "level": 3 }, { "id": "DRILL", "level": 3 } ],
+    "tools": [ [ [ "swage", -1 ] ], [ [ "hotcut_any", 1, "LIST" ] ] ],
+    "proficiencies": [
+      { "proficiency": "prof_armorsmithing" },
+      { "proficiency": "prof_closures", "time_multiplier": 1.25, "skill_penalty": 0.15 },
+      { "proficiency": "prof_metalworking" },
+      { "proficiency": "prof_blacksmithing" }
+    ]
+  },
+  {
+    "result": "brigandine_gloves_xl",
+    "type": "recipe",
+    "copy-from": "brigandine_gloves",
+    "time": "7 h",
+    "using": [ [ "tailoring_canvas_sheet", 2 ], [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ], [ "fastener_small", 2 ] ],
+    "qualities": [ { "id": "CHISEL", "level": 3 }, { "id": "DRILL", "level": 3 } ],
+    "tools": [ [ [ "swage", -1 ] ], [ [ "hotcut_any", 1, "LIST" ] ] ]
+  },
+  {
+    "result": "brigandine_gloves_xs",
+    "type": "recipe",
+    "copy-from": "brigandine_gloves",
+    "time": "5 h",
+    "using": [ [ "tailoring_canvas_sheet", 2 ], [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ], [ "fastener_small", 2 ] ],
+    "qualities": [ { "id": "CHISEL", "level": 3 }, { "id": "DRILL", "level": 3 } ],
+    "tools": [ [ [ "swage", -1 ] ], [ [ "hotcut_any", 1, "LIST" ] ] ]
+  }
+]

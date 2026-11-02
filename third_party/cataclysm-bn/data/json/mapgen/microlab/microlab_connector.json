@@ -1,0 +1,332 @@
+[
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ "microlab_under_connector" ],
+    "object": { "fill_ter": "t_rock" }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ "microlab_sub_connector" ],
+    "weight": 1000,
+    "object": {
+      "fill_ter": "t_concrete",
+      "rows": [
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################"
+      ],
+      "palettes": [ "microlab" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ "microlab_rock_border" ],
+    "weight": 1000,
+    "object": {
+      "fill_ter": "t_concrete",
+      "rows": [
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################"
+      ],
+      "palettes": [ "microlab" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ "microlab_sub_station" ],
+    "weight": 1000,
+    "object": {
+      "fill_ter": "t_concrete",
+      "rows": [
+        "___gTgggTg____gTgggTg___",
+        "___IXIIIXI____IXIIIXI___",
+        "___gTgggTg____gTgggTg___",
+        "___gTgggTg____gTgggTg___",
+        "___IXIIIXI____IXIIIXI___",
+        "#__gTgggTg____gTgggTg__#",
+        "##_gTgggTg____gTgggTg_##",
+        "##|gpgggpg____gpgggpg|##",
+        "##|                  |##",
+        "##|^ hhhh  YY  hhhh ^|##",
+        "##|^                ^|##",
+        "##|^ hhhh      hhhh ^|##",
+        "##|^                ^|##",
+        "##||(((((|    ||||||||##",
+        "###|l ddd( YY |#########",
+        "###|l  hd( YY |#########",
+        "###|l    (    |#########",
+        "###||5(((||55G|||||||###",
+        "###|B          VV ^^|###",
+        "###|B      YY      ?|###",
+        "###|B dddd YY    t ?|###",
+        "###|B d hd         ?|###",
+        "###|B          t? ^^|###",
+        "###||||||||22||||||||###"
+      ],
+      "palettes": [ "microlab" ],
+      "terrain": {
+        "_": [ [ "t_rock_floor", 9 ], "t_moss_underground" ],
+        "G": "t_card_science",
+        "g": "t_railroad_rubble",
+        "I": "t_railroad_tie",
+        "p": "t_buffer_stop",
+        "T": "t_railroad_track",
+        "X": "t_railroad_track_on_tie"
+      },
+      "items": {
+        "l": [ { "item": "guns_milspec", "chance": 10 }, { "item": "ammo_milspec", "chance": 70 } ],
+        "t": { "item": "magazines", "chance": 90 }
+      },
+      "place_vehicles": [
+        { "vehicle": "trains_lab_entrance", "x": 7, "y": 5, "chance": 25, "rotation": 90 },
+        { "vehicle": "trains_lab_entrance", "x": 16, "y": 1, "chance": 25, "rotation": 270 }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": [ "microlab_generic_sub_entry" ],
+    "weight": 1000,
+    "object": {
+      "fill_ter": "t_concrete",
+      "rows": [
+        "|||||||||||  |||||||||||",
+        " cc  c    |  |^BBB|     ",
+        " cc  c   c|  |   h|r i  ",
+        "         c|  |  dd|r c  ",
+        " FFFFccccc|  |   h|r c  ",
+        "|||||||||||YY|[===||    ",
+        " FF c|^???^       V| c  ",
+        "    c|?           V| c  ",
+        "    c|? tt         | i  ",
+        "    c|             |    ",
+        "|5||||    dddd     |==2|",
+        "    Y2    d hd     2Y   ",
+        "    Y2    ^^^^     2Y   ",
+        "|2||||    ||||    ^|((2|",
+        "    r|            ^|    ",
+        "cc  r|n^^^        ^|^   ",
+        "cc hc||||||YY|[====| h  ",
+        "    c|FFFF|  | h ^B|6tt ",
+        "|||||||22||22|dd  B|||||",
+        "          |  |h  nB|FFF ",
+        "   c6  6c |  |||||||    ",
+        "   cc  cc |  |6h        ",
+        "   cc  cc 2  |c  ccccc  ",
+        "          |  |          "
+      ],
+      "palettes": [ "microlab" ],
+      "terrain": { "G": "t_card_science" },
+      "items": {
+        "l": [ { "item": "guns_milspec", "chance": 10 }, { "item": "ammo_milspec", "chance": 70 } ],
+        "t": { "item": "magazines", "chance": 90 }
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "microlab_generic_surface_connector" ] ],
+    "method": "json",
+    "object": {
+      "fill_ter": "t_concrete",
+      "rows": [
+        "     |    |  |cccc|     ",
+        "     |=[==|  ||||||     ",
+        "  ((2|    |  2    2  i  ",
+        "  (  | cci|  2    2  c  ",
+        "  (@@|    |  ||||||  c  ",
+        "|||||| cci|  |rrrr|     ",
+        " F|F (    |  |    2  c  ",
+        " F|F ( cci|  ||||||  c  ",
+        " F|F 2    |  |rrrr|  i  ",
+        "  |F |rrrr|  |    2     ",
+        "|5|||||||||22|||||||||||",
+        "    2      YY      5TYY ",
+        "    2      YY      5 YY ",
+        "|2||||^???    yyyyy|(((|",
+        "    r|t       y    5 dd|",
+        "cc  r|V tt    yyyyy| hl|",
+        "cc hc|t       y    |||||",
+        "    c|^???    yyyyy|###|",
+        "|||||||||||  ^|((22|||#|",
+        " rrcc| hd^=  ^|eeeeee|#|",
+        "    c| dd =  ^|eeeeee|#|",
+        " c6 6|B   =  ^|EeeeeE|#|",
+        " cc r|B   [  ^|eeeeee|#|",
+        "     |    |22|||||||||||"
+      ],
+      "palettes": [ "microlab" ],
+      "terrain": { "e": "t_elevator", "E": "t_elevator_control" },
+      "items": {
+        "l": [ { "item": "guns_milspec", "chance": 10 }, { "item": "ammo_milspec", "chance": 70 } ],
+        "t": { "item": "magazines", "chance": 90 }
+      },
+      "monster": { "T": { "monster": "mon_turret_light" } }
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "microlab_generic_vent_shaft_connector" ] ],
+    "method": "json",
+    "object": {
+      "fill_ter": "t_concrete",
+      "rows": [
+        "     |    |  |cccc|     ",
+        "     |=[==|  ||||||     ",
+        "  ((2|    |  2 Y  2  i  ",
+        "  (  | cci|  2 Y  2  c  ",
+        " 6|@@||||||||||||||  c  ",
+        "||||||pppppppppppp|     ",
+        " F|%       YY    p|  c  ",
+        " F|%  ppppppppS  p|  c  ",
+        " F|%             S|  i  ",
+        "  |%    |||  ||   |     ",
+        "|5|||===|||44||   |||22|",
+        "   ^|www|wwwww|    2 YY ",
+        "   ^|www|wwwww|%   2 YY ",
+        "||4||===|wwwww%%   |||||",
+        " |      |w<www|    |###|",
+        "c|l     |||||||    |###|",
+        "c|l l             6|||||",
+        " |l l        %Spppppppp|",
+        "||||||||||||||||||||||#|",
+        " rrcc| hd^=^^=      ^|#|",
+        "    c| dd =  = Y  dh |#|",
+        " c6 6|B   =  = Y hd 6|#|",
+        " cc r|B   [  [      ^|#|",
+        "     ||||||  |||||||||||"
+      ],
+      "palettes": [ "microlab" ],
+      "terrain": { "p": "t_sewage_pipe", "w": "t_water_pool_shallow", "%": "t_machinery_heavy", "S": "t_sewage_pump" },
+      "items": { "l": { "item": "sewage_plant", "chance": 75 } }
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "microlab_generic_surface" ] ],
+    "method": "json",
+    "object": {
+      "fill_ter": "t_thconc_floor",
+      "rows": [
+        " yyyyyyyyyyyyyyyyyyyyyy ",
+        " yyyyyyyyyyyyyyyyyyyyyy ",
+        " y____________________y ",
+        " y____________________y ",
+        " y____________________y ",
+        " ||||||||||22|yyyyyyyyy ",
+        " |         SS|________y ",
+        " |         SS|________y ",
+        " |         SS|________y ",
+        " |         SS|________y ",
+        " |   |((((|22||555555|y ",
+        " |   |........|ZZZZZZ|  ",
+        " |   |..dddd..|......|  ",
+        " |   |^.d.hd..5ZZZZZZ|  ",
+        " |   |||||||..5......|  ",
+        " |   (V.??....GZZZZZZ|  ",
+        " |   (t.......|......|  ",
+        " |   (^???....|ZZZZZZ|  ",
+        " |   ||||||..^|ZZZZZZ|  ",
+        " |   |.hd^=..^|eeeeee|  ",
+        " |   |.dd.=..^|eeeeee|  ",
+        " |   |B...=..^|EeeeeE|  ",
+        " |   |B...[..^|eeeeee|  ",
+        " |||||||||||||||||||||  "
+      ],
+      "palettes": [ "microlab" ],
+      "terrain": {
+        "e": "t_elevator",
+        "E": "t_elevator_control",
+        " ": "t_region_groundcover",
+        "_": "t_pavement",
+        "S": "t_sidewalk",
+        ".": "t_thconc_floor",
+        "Z": "t_thconc_y",
+        "G": "t_card_science"
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ [ "microlab_generic_surface_roof" ] ],
+    "method": "json",
+    "object": {
+      "fill_ter": "t_concrete",
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  ",
+        "     .................  "
+      ],
+      "terrain": { " ": "t_open_air", ".": "t_concrete" }
+    }
+  }
+]

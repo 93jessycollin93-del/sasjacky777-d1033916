@@ -1,0 +1,16 @@
+[
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "mon_zombie_prisoner_death_drops",
+    "entries": [
+      { "item": "longshirt_costume", "variant": "shirt_striped", "damage": [ -1, 5 ] },
+      { "item": "pants_costume", "variant": "pants_striped", "damage": [ -1, 5 ] },
+      { "item": "bandana", "damage": [ -1, 5 ], "prob": 5 },
+      { "group": "clothing_glasses", "prob": 10 },
+      { "group": "underwear", "damage": [ -1, 5 ] },
+      { "group": "clothing_prisoner_shoes", "damage": [ -1, 5 ] },
+      { "group": "contraband", "prob": 30 }
+    ]
+  }
+]

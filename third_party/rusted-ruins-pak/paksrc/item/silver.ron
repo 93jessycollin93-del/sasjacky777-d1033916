@@ -1,0 +1,18 @@
+(
+    object_type: "item",
+    id: "!silver",
+    
+    image: (
+        path: "silver.png",
+        copyright: "T.Okubo",
+    ),
+    
+    item: (
+        item_kind: "object",
+        group: "~silver",
+        basic_price: 1,
+        w: 0,
+        gen_weight: 10,
+        gen_level: 0,
+    ),
+)

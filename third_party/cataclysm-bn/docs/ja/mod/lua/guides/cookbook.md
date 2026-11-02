@@ -1,0 +1,748 @@
+# Lua スクリプティングクックブック
+
+Lua API に慣れて、使い方を学ぶのに役立つコードスニペットです。
+これらのサンプルをテストするには、バッククォート(\`\`)キーを押してゲーム内Luaコンソールにコードを貼り付けてください。
+
+## アイテム
+
+### インベントリ内の全ての装備および着用アイテムのリストを取得する
+
+```lua
+local you = gapi.get_avatar()
+local items = you:all_items(false)
+
+for _, item in pairs(items) do
+  local status = ""
+  if you:is_wielding(item) then
+    status = "装備中: "
+  elseif you:is_wearing(item) then
+    status = "着用中: "
+  end
+  print(status .. item:tname(1, false, 0))
+end
+```
+
+<details>
+<summary>出力例</summary>
+
+```
+装備中: スマートフォン
+着用中: ブラジャー
+着用中: パンティー
+着用中: ソックス
+着用中: ジーンズ
+着用中: 長袖シャツ
+着用中: スニーカー
+着用中: メッセンジャーバッグ
+着用中: 腕時計
+ポケットナイフ
+マッチ本
+きれいな水（プラスチック製ボトル）
+きれいな水
+```
+
+</details>
+
+## モンスター
+
+### プレイヤーの近くに犬をスポーンする
+
+```lua
+local avatar = gapi.get_avatar()
+local coords = avatar:get_pos_ms()
+local dog_mtype = MtypeId.new("mon_dog_bcollie")
+local doggy = gapi.place_monster_around(dog_mtype, coords, 5)
+if doggy == nil then
+    gdebug.log_info("犬をスポーンできませんでした :(")
+else
+    gdebug.log_info(string.format("犬を %s にスポーンしました", doggy:get_pos_ms()))
+end
+```
+
+## 戦闘
+
+### 格闘技が使用された時に詳細情報を表示する
+
+まずは関数を定義します。
+
+```lua
+on_creature_performed_technique = function(params)
+  local char = params.char
+  local technique = params.technique
+  local target = params.target
+  local damage_instance = params.damage_instance
+  local move_cost = params.move_cost
+  gdebug.log_info(
+          string.format(
+                  "%s が %s を %s に対して使用しました (DI: %s , MC: %s)",
+                  char:get_name(),
+                  technique.name,
+                  target:get_name(),
+                  damage_instance:total_damage(),
+                  move_cost
+          )
+  )
+end
+```
+
+その後、フックを関数に一度だけ接続します。
+
+```lua
+game.add_hook("on_creature_performed_technique", function(...) return on_creature_performed_technique(...) end)
+```
+
+<details>
+<summary>出力例</summary>
+
+```
+Ramiro Waters が Power Hit を zombie に対して使用しました (DI: 27.96 , MC: 58)
+```
+
+</details>
+
+## アイテムの耐久性
+
+### アイテムのダメージをチェックして修正する
+
+```lua
+local you = gapi.get_avatar()
+local wielding = you:all_items(false)[1]
+print(wielding:get_damage())
+print(wielding:get_damage_level(4))
+wielding:mod_damage(2000)
+print(wielding:get_damage_level(4))
+```
+
+## モンスター
+
+### モンスターのインベントリにアイテムを追加する
+
+```lua
+local target_monster = -- [[ あなたのモンスター参照 ]]
+local scraps = gapi.create_item(ItypeId.new("scrap"), 3)
+target_monster:as_monster():add_item(scraps)
+```
+
+### モンスターとの対話をランダムに止める
+
+Lua コンソールに次のコードを貼り付けると、モンスターとの対話が
+50% の確率で失敗するようになります:
+
+```lua
+game.add_hook("on_try_monster_interaction", function(params)
+    local monster = params.monster
+
+    gapi.add_msg(string.format("あなたは %s に話しかけようとします", monster:get_name()))
+    if math.random(2) == 1 then
+        gapi.add_msg(MsgType.warning, string.format("あなたは %s と対話するにはシャイすぎます!", monster:get_name()))
+        return false
+    end
+end)
+```
+
+`false` を返すと通常のペット、メカ、友好的モンスターとの対話を止め、`true` を返すと
+そのまま続行します。
+
+## NPC
+
+### NPCの生成と削除
+
+```lua
+local player = gapi.get_avatar()
+local map = gapi.get_map()
+local player_pos = player:get_pos_ms()
+local place_point = player_pos:xy() + Point.new(0, 2)
+local new_npc = map:place_npc(place_point, "thug")
+
+-- 後でNPCを静かに削除できます
+new_npc:erase()
+```
+
+### NPCへの操作切り替えに反応する
+
+プレイヤーが仲間NPCの操作に切り替えた後でmodの状態を更新したい場合は
+`on_control_npc` フックを使います。このフックは切り替え後に実行されるため、
+現在操作中のキャラクターは `gapi.get_avatar()` で取得します。
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_control_npc", function(...) return mod.on_control_npc(...) end)
+
+mod.on_control_npc = function(params)
+    local controlled = gapi.get_avatar()
+
+    gapi.add_msg(MsgType.good, string.format("現在 %s を操作しています。", controlled:get_name()))
+end
+```
+
+## 次元
+
+### 現在の次元を確認する
+
+```lua
+local map = gapi.get_map()
+
+print("game dimension:", gapi.get_current_dimension_id())
+print("map dimension:", map:get_bound_dimension())
+print("is far-away point out of bounds:", map:is_out_of_bounds(coords.tripoint_bub_ms(500, 500, 0)))
+```
+
+### ポケットディメンションへ入って再入場する
+
+新しいポケットディメンションを作る時は `world_type` と両方の境界を渡します。
+任意の `overmap_terrain` は `bounds_min_omt` 基準の z/y/x テーブルです。
+そのディメンションが現在のセッションでロードされたままなら、再入場には
+`dimension_id` と `target_omt` だけで足ります。
+
+```lua
+home_dimension = "sky_island_home"
+overworld_pos = gapi.get_avatar():abs_pos()
+home_omt = overworld_pos:to_omt()
+local home_bounds_radius = coords.tripoint_rel_omt(2, 2, 0)
+
+local entered = gapi.place_player_dimension_at({
+  dimension_id = home_dimension,
+  target_omt = home_omt,
+  world_type = "pocket_dimension",
+  bounds_min_omt = home_omt - home_bounds_radius,
+  bounds_max_omt = home_omt + home_bounds_radius,
+  boundary_terrain = "t_pd_border",
+  boundary_overmap_terrain = "pd_border",
+  overmap_terrain = {
+    {
+      { "forest", "field", "forest" },
+      { "field", "field", "field" },
+      { "forest", "field", "forest" },
+    },
+  },
+})
+
+if entered then
+  gapi.add_msg("Pocket home loaded.")
+end
+```
+
+### オーバーワールドへ戻る
+
+入場前に保存した `overworld_pos` を使うと、元のマスへ正確に戻れます。
+
+```lua
+gapi.place_player_dimension_at({
+  dimension_id = "",
+  target_ms = overworld_pos,
+})
+```
+
+帰還後は、ロード済みポケットディメンションの ID と目的地だけで再入場できます。
+
+```lua
+local reentered = gapi.place_player_dimension_at({
+  dimension_id = home_dimension,
+  target_omt = home_omt,
+})
+```
+
+### 遠征ディメンションをリセットまたは削除する
+
+統合対象の
+[CBN-Sky-Island 遠征フロー](https://github.com/graysonchao/CBN-Sky-Island/blob/main/teleport.lua)では、
+[issue #9589](https://github.com/cataclysmbn/Cataclysm-BN/issues/9589)を解決するために
+遠征地形を新しく生成する必要があります。遠征にプライマリ以外のディメンション ID を割り当て、
+オーバーワールドへ戻って mod の状態を更新してから、生成データをリセットします。
+
+```lua
+local expedition_dimension = "sky_island_expedition"
+local storage = game.mod_storage[game.current_mod]
+local returned = gapi.place_player_dimension_at({
+  dimension_id = "",
+  target_ms = overworld_pos,
+})
+
+if returned then
+  storage.is_away_from_home = false
+  gapi.reset_dimension(expedition_dimension)
+end
+```
+
+プライマリのオーバーワールドは削除できないため、どちらのクリーンアップ関数も `""` を拒否します。
+`reset_dimension` は再入場に必要なディメンションメタデータを維持しますが、
+`delete_dimension` を使った場合、次の入場時に生成オプションをすべて再指定する必要があります。
+クリーンアップはディメンションデータを削除する前に完全な保存を行うため、
+永続 Lua 状態を先に更新してください。
+
+## 天気フック
+
+### 天気の変化に反応する
+
+まず、preload.lua でフックをセットアップします:
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_weather_changed", function(...) mod.weather_changed_alert(...) end)
+game.add_hook("on_weather_updated", function(...) mod.weather_report(...) end)
+```
+
+次に、main.lua でハンドラーを定義します:
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+
+-- 天気が変わる時に呼び出される(例: 晴れ -> 雨)
+mod.weather_changed_alert = function(params)
+    local msg = string.format(
+        "天気が %s から %s に変わりました!",
+        params.old_weather_id,
+        params.weather_id
+    )
+    gdebug.log_info(msg)
+end
+
+-- 5分ごとに現在の天気データと共に呼び出される
+mod.weather_report = function(params)
+    local msg = string.format(
+        "現在の天気: %s, 温度: %.1f°C, 風: %d, 湿度: %d%%",
+        params.weather_id,
+        params.temperature,
+        params.windspeed,
+        params.humidity
+    )
+    gdebug.log_info(msg)
+end
+```
+
+## 遠距離戦闘
+
+### 発砲と投げたアイテムに反応する
+
+まず、preload.lua でフックをセットアップします:
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_shoot", function(...) return mod.on_shoot_fun(...) end)
+game.add_hook("on_throw", function(...) return mod.on_throw_fun(...) end)
+```
+
+次に、main.lua でハンドラーを定義します:
+
+```lua
+local mod = game.mod_runtime[game.current_mod]
+
+mod.on_shoot_fun = function(params)
+    ---@type Item
+    local gun = params.gun
+    ---@type Item
+    local ammo_item = params.ammo
+    local ammo = ItypeId.NULL_ID()
+    if not ammo_item then
+        ammo = gun:ammo_current()
+    else
+        ammo = ammo_item:get_type()
+    end
+    local shoot_noise = ammo:obj():slot_ammo().loudness
+    gdebug.log_info(string.format("銃音: %d.", shoot_noise))
+end
+
+mod.on_throw_fun = function(params)
+    ---@type Character
+    local thrower = params.thrower
+    ---@type Item
+    local thrown = params.thrown
+    if thrown:is_gun() then
+        gdebug.log_info("おい！銃は投げるものではないぞ!")
+    end
+end
+```
+
+## オーバーマップクエリ
+
+### オーバーマップ上のアイテムを検索して操作する
+
+```lua
+-- 特定の場所のオーバーマップ上の全てのアイテムを検索
+local om_pos = OmPos.new(0, 0, 0)
+local items = gapi.overmap_find_items_around(om_pos, 0)
+
+-- マップからアイテムを取得して、マップがアンロードされても Lua に保持
+local map_pos = MapPos.new(100, 100, 0)
+local item = gapi.get_map():find_item_at(map_pos)
+if item then
+    local detached = gapi.create_detached_item(item)
+    -- 後で位置に再度アタッチできます
+    local reattached = gapi.reattach_item(detached, map_pos)
+end
+
+-- 同じマップ内でアイテムを移動
+local source_pos = MapPos.new(100, 100, 0)
+local dest_pos = MapPos.new(110, 110, 0)
+gapi.get_map():move_item_at(source_pos, dest_pos)
+```
+
+## 死亡フック
+
+### モンスターの死亡をトラッキング
+
+```lua
+-- preload.lua 内
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_mon_death", function(...) return mod.on_mon_death(...) end)
+```
+
+```lua
+-- main.lua 内
+local mod = game.mod_runtime[game.current_mod]
+
+mod.on_mon_death = function(params)
+    ---@type Creature
+    local monster = params.creature
+    ---@type Character|nil
+    local killer = params.killer
+
+    local killer_name = killer and killer:get_name() or "不明"
+    gdebug.log_info(string.format("%s は %s に殺されました", monster:get_name(), killer_name))
+end
+```
+
+### キャラクターの死亡をトラッキング
+
+```lua
+-- preload.lua 内
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_char_death", function(...) return mod.on_char_death(...) end)
+```
+
+```lua
+-- main.lua 内
+local mod = game.mod_runtime[game.current_mod]
+
+mod.on_char_death = function(params)
+    ---@type Character
+    local char = params.char
+    ---@type Character|nil
+    local killer = params.killer
+
+    if char == gapi.get_avatar() then
+        gdebug.log_info("あなたは死にました！")
+    end
+end
+```
+
+## キャラクターのコンバットスタッツ
+
+### 攻撃とスタミナのコストを取得する
+
+```lua
+local you = gapi.get_avatar()
+local items = you:all_items(false)
+
+for _, item in pairs(items) do
+    print(
+        item:tname(1, false, 0)
+        .. " { 攻撃コスト: " .. item:attack_cost()
+        .. ", スタミナコスト: " .. item:stamina_cost()
+        .. ", 近接スタミナコスト: " .. you:get_melee_stamina_cost(item)
+        .. " }"
+    )
+end
+
+-- 特殊能力をチェック
+print("Uncanny dodge: " .. (you:uncanny_dodge() and "はい" or "いいえ"))
+```
+
+## キャラクターの魔法
+
+### 新しい呪文を学び、忘れる
+
+呪文を学ぶ:
+
+```lua
+local u = gapi.get_avatar()
+local km = u:get_magic()
+local ex_sp = SpellTypeId.new("example_template")
+km:learn_spell(ex_sp, u, true) -- learn forced
+print( km:knows_spell(ex_sp) ) -- check
+```
+
+呪文を忘れる:
+
+```lua
+local u = gapi.get_avatar()
+local km = u:get_magic()
+local ex_sp = SpellTypeId.new("example_template")
+km:forget_spell(ex_sp)         -- forget
+print( km:knows_spell(ex_sp) ) -- check again
+```
+
+## ダイナミックアイテムアクション
+
+すべてのアイテム、バイオニック、変異のコールバックテーブルは文字列 ID をキーとし、任意のコールバック関数のテーブルを受け取ります。各コールバックは名前付きフィールドを持つ単一の `params` テーブルを受け取ります。
+
+### game.iuse_functions
+
+| コールバック | params フィールド     |
+| ------------ | --------------------- |
+| `use`        | `user`, `item`, `pos` |
+| `can_use`    | `user`, `item`, `pos` |
+
+`use` は `int`（移動単位の時間コスト）を返します。`can_use` は `bool` を返します。
+
+```lua
+game.iuse_functions["my_custom_item"] = {
+    use = function(params)
+        local user = params.user
+        local item = params.item
+        gdebug.log_info("使用中: " .. item:tname(1))
+        return 0  -- 移動単位での時間コストを返す
+    end,
+
+    can_use = function(params)
+        -- 使用を許可する場合は true、禁止する場合は false を返す
+        return true
+    end
+}
+```
+
+### アイテムのライフサイクルコールバック
+
+いくつかの追加コールバックテーブルを使うと、アイテムイベントに反応できます。
+
+### game.iwieldable_functions
+
+| コールバック                             | params フィールド           |
+| ---------------------------------------- | --------------------------- |
+| `on_wield`                               | `user`, `item`, `move_cost` |
+| `on_unwield`, `can_wield`, `can_unwield` | `user`, `item`              |
+
+---
+### game.iwearable_functions
+| コールバック | params フィールド |
+|-----------|---------------|
+| `on_wear`, `on_takeoff`, `can_wear`, `can_takeoff` | `user`, `item` |
+---
+
+### game.iequippable_functions
+
+| コールバック            | params フィールド                          |
+| ----------------------- | ------------------------------------------ |
+| `on_durability_change`  | `user`, `item`, `old_damage`, `new_damage` |
+| `on_repair`, `on_break` | `user`, `item`                             |
+
+---
+### game.istate_functions
+| コールバック            | params フィールド         |
+|--------------------- | --------------------- |
+| `on_tick`, `on_drop` | `user`, `item`, `pos` |
+| `on_pickup`          | `user`, `item`        |
+---
+
+### game.imelee_functions
+
+| コールバック      | params フィールド                           |
+| ----------------- | ------------------------------------------- |
+| `on_melee_attack` | `user`, `target`, `item`                    |
+| `on_hit`          | `user`, `target`, `item`, `damage_instance` |
+| `on_block`        | `user`, `source`, `item`, `damage_blocked`  |
+| `on_miss`         | `user`, `item`                              |
+
+---
+### game.iranged_functions
+| コールバック                             | params フィールド                         |
+| ------------------------------------- | ------------------------------------- |
+| `on_fire`                             | `user`, `item`, `target_pos`, `shots` |
+| `on_reload`, `can_fire`, `can_reload` | `user`, `item`                        |
+---
+
+`can_*` コールバックは `bool` を返します — アクションを止めるには `false` を返します。
+
+```lua
+game.iwieldable_functions["cursed_sword"] = {
+    on_wield = function(params)
+        gdebug.log_info(params.user:get_name() .. " draws " .. params.item:tname(1))
+    end,
+    can_unwield = function(params)
+        -- Cursed sword can't be put down
+        return false
+    end
+}
+```
+
+### バイオニックコールバック
+
+`game.bionic_functions` はバイオニック文字列 ID をキーとします。各コールバックは単一の `params` テーブルを受け取ります。
+
+| コールバック    | params フィールド   | 発生時                     |
+| --------------- | ------------------- | -------------------------- |
+| `on_activate`   | `user`, `bionic`    | バイオニック有効化後       |
+| `on_deactivate` | `user`, `bionic`    | バイオニック無効化後       |
+| `on_installed`  | `user`, `bionic_id` | バイオニックインストール後 |
+| `on_removed`    | `user`, `bionic_id` | バイオニック削除後         |
+
+```lua
+game.bionic_functions["bio_laser"] = {
+    on_activate = function(params)
+        gdebug.log_info(params.user:get_name() .. " activated bio_laser")
+    end,
+    on_installed = function(params)
+        gdebug.log_info("Installed: " .. tostring(params.bionic_id))
+    end
+}
+```
+
+### 変異コールバック
+
+`game.mutation_functions` は特性文字列 ID をキーとします。
+
+| コールバック    | params フィールド  | 発生時               |
+| --------------- | ------------------ | -------------------- |
+| `on_activate`   | `user`, `trait_id` | 変異が有効になった後 |
+| `on_deactivate` | `user`, `trait_id` | 変異が無効になった後 |
+| `on_gain`       | `user`, `trait_id` | 変異を獲得した後     |
+| `on_loss`       | `user`, `trait_id` | 変異を失った後       |
+
+```lua
+game.mutation_functions["TRAIT_QUICK"] = {
+    on_gain = function(params)
+        gdebug.log_info(params.user:get_name() .. " gained " .. tostring(params.trait_id))
+    end,
+    on_loss = function(params)
+        gdebug.log_info(params.user:get_name() .. " lost " .. tostring(params.trait_id))
+    end
+}
+```
+
+## より多くのコンバットフック
+
+### 回避、ブロック、および技のイベントに反応する
+
+```lua
+-- preload.lua 内
+local mod = game.mod_runtime[game.current_mod]
+game.add_hook("on_creature_dodged", function(...) return mod.on_creature_dodged(...) end)
+game.add_hook("on_creature_blocked", function(...) return mod.on_creature_blocked(...) end)
+game.add_hook("on_creature_performed_technique", function(...) return mod.on_creature_performed_technique(...) end)
+game.add_hook("on_creature_melee_attacked", function(...) return mod.on_creature_melee_attacked(...) end)
+```
+
+```lua
+-- main.lua 内
+local mod = game.mod_runtime[game.current_mod]
+
+mod.on_creature_dodged = function(params)
+    ---@type Character
+    local char = params.char
+    ---@type Creature
+    local source = params.source
+    local difficulty = params.difficulty
+    gdebug.log_info(string.format("%s は %s を回避しました (DC: %d)", char:get_name(), source:get_name(), difficulty))
+end
+
+mod.on_creature_blocked = function(params)
+    ---@type Character
+    local char = params.char
+    ---@type Creature
+    local source = params.source
+    local bodypart_id = params.bodypart_id
+    local damage_blocked = params.damage_blocked
+    gdebug.log_info(string.format(
+        "%s は %s を %s でブロックしました (ブロック: %.1f ダメージ)",
+        char:get_name(),
+        source:get_name(),
+        bodypart_id,
+        damage_blocked
+    ))
+end
+
+mod.on_creature_melee_attacked = function(params)
+    ---@type Character
+    local char = params.char
+    ---@type Creature
+    local target = params.target
+    if params.success then
+        gdebug.log_info(string.format("%s は %s にヒットしました", char:get_name(), target:get_name()))
+    else
+        gdebug.log_info(string.format("%s は %s をミスしました", char:get_name(), target:get_name()))
+    end
+end
+```
+
+## キャラクターのトラップ認識
+
+### トラップの確認と記憶
+
+まず、位置にトラップを設定します:
+
+```lua
+local u = gapi.get_avatar()
+local m = gapi.get_map()
+local pos = u:get_pos_ms()
+local pos4x = pos + Tripoint.new(4, 0, 0)
+-- tr_landmine_buried は可視性が 20 です。見つけるのが非常に難しいです。
+local mine = TrapId.new("tr_landmine_buried"):int_id()
+m:set_trap_at(pos4x, mine)
+print(tostring(u:knows_trap(pos4x)))
+```
+
+次に、キャラクターがトラップを認識するようにします:
+
+```lua
+local u = gapi.get_avatar()
+local m = gapi.get_map()
+local pos = u:get_pos_ms()
+local pos4x = pos + Tripoint.new(4, 0, 0)
+u:add_known_trap(pos4x, m:get_trap_at(pos4x))
+print(tostring(u:knows_trap(pos4x)))
+```
+
+2番目のスクリプトを実行した後、トラップを踏まずにその位置を見ることができます。
+
+## 時間と空間
+
+### 太陽と月、屋内と屋外
+
+```lua
+local u_pos = gapi.get_avatar():get_pos_ms()
+local map = gapi.get_map()
+local now = gapi.current_turn()
+
+-- Found the key name from MoonPhase entries
+local moon = ""
+for name, num in pairs(MoonPhase) do
+   if num == now:moon_phase() then
+      moon = name
+   end
+end
+
+print( "Are you outside?: " .. tostring(map:is_outside(u_pos)) )
+print( "Are you sheltered?: " .. tostring(map:is_sheltered(u_pos)) )
+print( "Today moon phase is: " .. moon )
+print( "Sunset time is: " .. now:sunset():to_string_time_of_day() )
+```
+
+## アイテムタイプ情報
+
+### ItypeId 経由のアイテムタイププロパティのクエリ
+
+```lua
+local item_type = ItypeId.new("9mm")
+
+-- アイテムタイプオブジェクト(ItypeRaw)を取得
+local itype_raw = item_type:obj()
+
+-- アイテムタイプ固有のデータにアクセス(例: 弾薬)
+if itype_raw:slot_ammo() then
+    local ammo_data = itype_raw:slot_ammo()
+    print("弾薬ダメージ: " .. ammo_data.damage)
+    print("弾薬射程: " .. ammo_data.range)
+end
+
+-- コンテイナの場合
+if itype_raw:slot_container() then
+    local container_data = itype_raw:slot_container()
+    print("容量: " .. container_data.capacity)
+end
+
+-- ツールの場合
+if itype_raw:slot_tool() then
+    local tool_data = itype_raw:slot_tool()
+    print("ツール品質: " .. tool_data.quality)
+end
+```

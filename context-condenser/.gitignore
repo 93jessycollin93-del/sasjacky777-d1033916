@@ -1,0 +1,3 @@
+node_modules/
+.cce-vault/
+*.log

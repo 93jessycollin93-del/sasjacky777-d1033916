@@ -1,0 +1,96 @@
+[
+  {
+    "type": "item_group",
+    "id": "custom_trash",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "mag_porn", "prob": 10 },
+      { "group": "ammo_pocket_batteries", "prob": 10 },
+      { "item": "television", "prob": 20, "damage": [ 1, 4 ] },
+      { "item": "two_way_radio", "prob": 10, "damage": [ 1, 4 ] },
+      { "item": "eyedrops", "prob": 10 },
+      { "item": "rag", "prob": 20 },
+      { "item": "rag_bloody", "prob": 20 },
+      { "item": "coffeemaker", "prob": 20, "damage": [ 1, 4 ] },
+      { "item": "microwave", "prob": 20, "damage": [ 1, 4 ] }
+    ]
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ "cs_city_dump_small" ],
+    "method": "json",
+    "object": {
+      "fill_ter": "t_region_soil",
+      "rows": [
+        "          oooo          ",
+        "        P oooo XX XX    ",
+        "  --------++++--------  ",
+        "  -*^^,,,,oooo,,,,**,-  ",
+        "  -***,^,,oooo^X,,,**-  ",
+        "  -*,v*,^,oooo,,*^,*,-  ",
+        "  -,,**,v,oooo^,**,,,-  ",
+        "  -^,**,*,oooo,,,**^,-  ",
+        "  -^,*,*,,oooo,,*^*,,-  ",
+        "  -,,**,SSoooo,****,,-  ",
+        "  -,**,*,*====*,***,,-  ",
+        "  -,,*,^**,*,*,,*,,,^-  ",
+        "  -^,*,****,,,***^*v,-  ",
+        "  -,*,,***,*,v*****,*-  ",
+        "  -,,*,*****,*,*,**,*-  ",
+        "  -vv***,*****,^**B**-  ",
+        "  -,^********,,***B,,-  ",
+        "  -*,BB^**,*,,v**^**,-  ",
+        "  -*,,,***,******,**,-  ",
+        "  -,*^****^,,,,**,***-  ",
+        "  -***,,,,,^,,*,*,*,*-  ",
+        "  --------------------  ",
+        "                        ",
+        "                        "
+      ],
+      "terrain": {
+        " ": "t_region_groundcover",
+        "P": "t_region_groundcover",
+        ",": "t_region_soil",
+        "-": "t_fence_barbed",
+        "+": "t_chaingate_l",
+        "^": "t_dirtmound",
+        "v": "t_pit_glass",
+        "o": "t_concrete"
+      },
+      "furniture": {
+        "S": "f_sofa",
+        "X": "f_dumpster",
+        "B": "f_bathtub",
+        "=": "f_barricade_road",
+        "*": [
+          "f_sink",
+          "f_fridge",
+          "f_glass_fridge",
+          "f_oven",
+          [ "f_wreckage", 10 ],
+          "f_ash",
+          [ "f_rubble_rock", 10 ],
+          [ "f_rubble", 10 ],
+          "f_toilet",
+          "f_exercise",
+          "f_washer",
+          "f_dryer",
+          "f_freezer",
+          "f_hay",
+          "f_trashcan",
+          "f_crate_o"
+        ],
+        "P": "f_sign"
+      },
+      "place_vehicles": [
+        { "vehicle": "pickup", "x": 11, "y": 5, "rotation": 270, "chance": 30 },
+        { "vehicle": "bicycle", "x": 5, "y": 1, "rotation": 0, "chance": 40 }
+      ],
+      "items": {
+        ",": [ { "item": "custom_trash", "chance": 5 }, { "item": "trash", "chance": 5 }, { "item": "trash_forest", "chance": 5 } ],
+        "X": { "item": "trash_dumpster", "chance": 80 }
+      },
+      "place_signs": [ { "signage": "Municipal City Dump", "x": 8, "y": 1 } ]
+    }
+  }
+]

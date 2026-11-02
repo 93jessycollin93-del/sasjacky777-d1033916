@@ -194,6 +194,19 @@ next model resumes from the exact cut point.
 cooldowns, and spend against each cap — the same payload the gateway serves at
 `GET /status`.
 
+The gateway (`router_final.py`) serves:
+
+| Endpoint | Body back | Who calls it |
+| --- | --- | --- |
+| `POST /api/generate` | `result`, `model_used`, `trace` | the original gateway callers |
+| `POST /api/generate/stream` | SSE `delta` frames, then `done` | anything that wants tokens as they come |
+| `POST /chat/completions` | OpenAI-shaped `choices[0].message.content`, plus the above | the agent runtime (`Jackie/core/engine`) |
+| `POST /complete/auto` | `response`, plus the above | the runtime's `auto()` |
+| `GET /ready`, `/health`, `/system`, `/status` | probes, hardware, live quota | health checks and dashboards |
+
+All four `POST`s go through the same ladder, and refuse with a 503 whose body
+names why rather than a 200 carrying an empty answer.
+
 ## Tests
 
 ```

@@ -7,6 +7,7 @@ so the request handling is testable without FastAPI installed.
 
 import json
 import logging
+import time
 from typing import Any, Dict, List, Optional
 
 from .errors import NoProviderAvailable
@@ -120,6 +121,42 @@ def result_payload(result: RoutingResult) -> Dict[str, Any]:
     }
 
 
+def chat_completion_payload(result: RoutingResult) -> Dict[str, Any]:
+    """OpenAI-shaped body for ``/chat/completions``.
+
+    The agent runtime (``Jackie/core/engine/fs/jackie_router_client.py``) posts
+    here and reads ``choices[0].message.content``. When ``router_final.py``
+    became a thin shell over this library the endpoint was left behind on the
+    command-station branches, so every agent call 404'd against the router the
+    runtime ships with. The legacy fields ride along so a caller written for
+    ``/api/generate`` can read either.
+    """
+    return {
+        "id": f"jackierouter-{int(time.time() * 1000)}",
+        "object": "chat.completion",
+        "model": result.model,
+        "choices": [
+            {
+                "index": 0,
+                "message": {"role": "assistant", "content": result.text},
+                "finish_reason": "stop",
+            }
+        ],
+        **result_payload(result),
+        "usage": {
+            "prompt_tokens": result.usage.input_tokens,
+            "completion_tokens": result.usage.output_tokens,
+            "input_tokens": result.usage.input_tokens,
+            "output_tokens": result.usage.output_tokens,
+        },
+    }
+
+
+def auto_complete_payload(result: RoutingResult) -> Dict[str, Any]:
+    """Body for ``/complete/auto``: the runtime's ``auto()`` reads ``response``."""
+    return {"response": result.text, **result_payload(result)}
+
+
 def failure_payload(error: NoProviderAvailable) -> Dict[str, Any]:
     return {
         "error": str(error),
@@ -156,8 +193,7 @@ def create_app(router: Optional[Router] = None):
 
     app = FastAPI(title="Jackie Router", version="0.1.0")
 
-    @app.post("/api/generate")
-    async def generate(request: Request):
+    async def routed(request: Request, shape):
         payload = await request.json()
         route_request = build_request(payload)
         try:
@@ -169,7 +205,20 @@ def create_app(router: Optional[Router] = None):
             logger.warning("no provider could serve the request: %s", exc)
             return JSONResponse(status_code=503, content=failure_payload(exc))
         logger.info("served by %s (%d handoffs)", result.provider, result.handoffs)
-        return result_payload(result)
+        return shape(result)
+
+    @app.post("/api/generate")
+    async def generate(request: Request):
+        return await routed(request, result_payload)
+
+    @app.post("/chat/completions")
+    async def chat_completions(request: Request):
+        """What the agent runtime calls — the same ladder as /api/generate."""
+        return await routed(request, chat_completion_payload)
+
+    @app.post("/complete/auto")
+    async def complete_auto(request: Request):
+        return await routed(request, auto_complete_payload)
 
     @app.get("/ready")
     async def ready():

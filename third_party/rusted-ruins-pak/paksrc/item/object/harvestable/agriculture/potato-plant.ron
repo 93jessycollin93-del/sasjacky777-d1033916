@@ -1,0 +1,35 @@
+(
+    object_type: "item",
+    id: "potato-plant",
+    
+    image: (
+        path: "potato-plant.png",
+        copyright: "T.Okubo",
+        w: 48,
+        h: 48,
+        grid_nx: 3,
+        grid_ny: 2,
+        n_pattern: 5,
+        variation_rule: Growing,
+    ),
+    
+    item: (
+        item_kind: "object",
+        group: "crop",
+        basic_price: 0,
+        w: 10000,
+        gen_weight: 0,
+        gen_level: 0,
+        attrs: [
+            Plant(
+                growing_duration: "7d",
+                required_fertility: 80,
+            ),
+            Harvest(
+                kind: Plant,
+                items: [("potato", 5, 10)],
+                difficulty: 0,
+            ),
+        ]
+    ),
+)

@@ -1,0 +1,71 @@
+#pragma once
+
+#include <list>
+#include <optional>
+
+#include "coordinates.h"
+#include "calendar.h"
+
+enum timed_event_type : int {
+    TIMED_EVENT_NULL,
+    TIMED_EVENT_HELP,
+    TIMED_EVENT_WANTED,
+    TIMED_EVENT_ROBOT_ATTACK,
+    TIMED_EVENT_SPAWN_WYRMS,
+    TIMED_EVENT_AMIGARA,
+    AMIGARA_WHISPERS,
+    TIMED_EVENT_ROOTS_DIE,
+    TIMED_EVENT_TEMPLE_OPEN,
+    TIMED_EVENT_TEMPLE_FLOOD,
+    TIMED_EVENT_TEMPLE_SPAWN,
+    TIMED_EVENT_DIM,
+    TIMED_EVENT_ARTIFACT_LIGHT,
+    NUM_TIMED_EVENT_TYPES
+};
+
+struct timed_event {
+    timed_event_type type = TIMED_EVENT_NULL;
+    /** On which turn event should be happening. */
+    time_point when = calendar::turn_zero;
+    /** Which faction is responsible for handling this event. */
+    int faction_id = -1;
+    /** Where the event happens, in global submap coordinates */
+    tripoint_abs_sm map_point = tripoint_abs_sm( tripoint_min );
+
+    timed_event( timed_event_type e_t, const time_point &w, int f_id, tripoint_abs_sm p );
+
+    // When the time runs out
+    void actualize();
+    // Every turn
+    void per_turn();
+};
+
+class timed_event_manager
+{
+    private:
+        std::list<timed_event> events;
+
+    public:
+        /**
+         * Add an entry to the event queue. Parameters are basically passed
+         * through to @ref timed_event::timed_event.
+         */
+        void add( timed_event_type type, const time_point &when, int faction_id = -1 );
+        /**
+         * Add an entry to the event queue. Parameters are basically passed
+         * through to @ref timed_event::timed_event.
+         */
+        void add( timed_event_type type, const time_point &when, int faction_id,
+                  const tripoint_abs_sm &where );
+        /// @returns Whether at least one element of the given type is queued.
+        bool queued( timed_event_type type ) const;
+        /// @returns One of the queued events of the given type, or `nullptr`
+        /// if no event of that type is queued.
+        timed_event *get( timed_event_type type );
+        /// @returns The next queued event time, or std::nullopt when no events are queued.
+        auto next_event_time() const -> std::optional<time_point>;
+        /// Process all queued events, potentially altering the game state and
+        /// modifying the event queue.
+        void process();
+};
+

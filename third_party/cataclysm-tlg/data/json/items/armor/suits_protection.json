@@ -1,0 +1,1588 @@
+[
+  {
+    "id": "boiled_leather_armor_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "suit of boiled leather armor", "str_pl": "suits of boiled leather armor" },
+    "description": "A suit of armor constructed in a similar fashion to plate mail, but made of leather which has been boiled until stiff.  It's lighter and cooler than standard leather, but less flexible, making it harder to move in.",
+    "weight": "3200 g",
+    "volume": "6600 ml",
+    "price": "260 USD",
+    "price_postapoc": "30 USD",
+    "to_hit": -5,
+    "material": [ "leather_boiled" ],
+    "symbol": "[",
+    "longest_side": "60 cm",
+    "color": "brown",
+    "armor": [
+      {
+        "covers": [ "torso" ],
+        "coverage": 95,
+        "encumbrance": 24,
+        "material": [ { "type": "leather_boiled", "covered_by_mat": 100, "thickness": 2.5 } ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 18,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
+      },
+      {
+        "material": [ { "type": "leather_boiled", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
+        "coverage": 100,
+        "encumbrance": 8
+      },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 14 }
+    ],
+    "warmth": 20,
+    "material_thickness": 2.5,
+    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL" ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "armor_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chitin armor" },
+    "description": "Lightweight leg and body armor made from the exoskeletons of giant arthropods.",
+    "weight": "2632 g",
+    "volume": "5800 ml",
+    "price": "1200 USD",
+    "price_postapoc": "30 USD",
+    "to_hit": -5,
+    "material": [ "chitin" ],
+    "symbol": "[",
+    "color": "brown",
+    "warmth": 10,
+    "longest_side": "60 cm",
+    "material_thickness": 3,
+    "flags": [ "STURDY", "OUTER", "ALLOWS_TAIL" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 90, "encumbrance": 11 },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 90,
+        "encumbrance": 5,
+        "specifically_covers": [ "leg_upper_r", "leg_upper_l", "leg_hip_r", "leg_hip_l" ]
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "xl_armor_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "chitin armor" },
+    "copy-from": "armor_chitin",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "armor_chitin_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "armor_chitin",
+    "looks_like": "armor_chitin",
+    "name": { "str": "chitin armor" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "flags": [ "STURDY", "OUTER", "UNDERSIZE", "PREFIX_XS" ]
+  },
+  {
+    "id": "armor_acidchitin",
+    "copy-from": "armor_chitin",
+    "looks_like": "armor_chitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "biosilicified chitin armor" },
+    "description": "Leg and body armor crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
+    "material": [ "acidchitin" ],
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 90, "encumbrance": 14 },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 90,
+        "encumbrance": 6,
+        "specifically_covers": [ "leg_upper_r", "leg_upper_l", "leg_hip_r", "leg_hip_l" ]
+      }
+    ],
+    "environmental_protection": 2,
+    "price_postapoc": "35 USD",
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "xl_armor_acidchitin",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "biosilicified chitin armor" },
+    "copy-from": "armor_acidchitin",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "armor_acidchitin_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "armor_acidchitin",
+    "looks_like": "armor_acidchitin",
+    "name": { "str": "biosilicified chitin armor" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "platemail_suit_faraday",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "Faraday platemail" },
+    "description": "This full suit of medieval platemail, complete with a chain hood and plastic face shield, has been strapped over some kind of cleansuit and strung with copper wiring.",
+    "weight": "15 kg",
+    "volume": "17500 ml",
+    "price": "600 USD",
+    "price_postapoc": "120 USD",
+    "to_hit": -5,
+    "material": [ "steel", "steel_chain", "soft_rubber" ],
+    "symbol": "[",
+    "color": "light_gray",
+    "warmth": 20,
+    "longest_side": "60 cm",
+    "flags": [ "STURDY", "GROUNDING", "ONLY_ONE" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "head" ],
+        "coverage": 100,
+        "encumbrance": 21,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "eyes" ],
+        "coverage": 100,
+        "encumbrance": 10,
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "mouth" ],
+        "coverage": 100,
+        "encumbrance": 5,
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 97, "thickness": 2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": 29,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 70, "thickness": 2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 2 }
+        ],
+        "encumbrance": 26,
+        "coverage": 100,
+        "covers": [ "hand_l", "hand_r" ],
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 85, "thickness": 2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 100,
+        "encumbrance": 27,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 85, "thickness": 2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 100,
+        "encumbrance": 27,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 90, "thickness": 2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_ankle_l",
+          "foot_ankle_r",
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "coverage": 100,
+        "encumbrance": 30,
+        "layers": [ "OUTER", "NORMAL", "BELTED" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6 } ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ],
+    "melee_damage": { "bash": 6 }
+  },
+  {
+    "id": "platemail_suit_faraday_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "XL Faraday platemail" },
+    "copy-from": "platemail_suit_faraday",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE" ] }
+  },
+  {
+    "id": "platemail_suit_faraday_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "XS Faraday platemail" },
+    "copy-from": "platemail_suit_faraday",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE" ] }
+  },
+  {
+    "id": "armor_samurai",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "ō-yoroi" },
+    "description": "An ornamental suit of Japanese samurai armor.",
+    "weight": "20000 g",
+    "volume": "17000 ml",
+    "price": "900 USD",
+    "price_postapoc": "80 USD",
+    "to_hit": -5,
+    "material": [ "iron", "leather" ],
+    "symbol": "[",
+    "color": "brown",
+    "longest_side": "60 cm",
+    "armor": [
+      {
+        "covers": [ "torso" ],
+        "coverage": 95,
+        "encumbrance": 38,
+        "material": [
+          { "type": "iron", "covered_by_mat": 70, "thickness": 1.8 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 }
+        ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 90,
+        "encumbrance": 36,
+        "material": [
+          { "type": "iron", "covered_by_mat": 70, "thickness": 1.8 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 }
+        ],
+        "specifically_covers": [ "arm_lower_l", "arm_lower_r", "arm_upper_r", "arm_upper_l" ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 90,
+        "encumbrance": 0,
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 } ],
+        "specifically_covers": [ "arm_elbow_l", "arm_elbow_r", "arm_shoulder_l", "arm_shoulder_r" ]
+      },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 85,
+        "encumbrance": 36,
+        "material": [
+          { "type": "iron", "covered_by_mat": 40, "thickness": 1.8 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 }
+        ],
+        "specifically_covers": [ "leg_lower_l", "leg_lower_r", "leg_upper_l", "leg_upper_r" ]
+      },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 85,
+        "encumbrance": 0,
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.6 } ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r", "leg_knee_l", "leg_knee_r" ]
+      }
+    ],
+    "warmth": 35,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL" ],
+    "melee_damage": { "bash": 5 }
+  },
+  {
+    "id": "armor_samurai_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str_sp": "ō-yoroi" },
+    "copy-from": "armor_samurai",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "armor_samurai_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "armor_samurai",
+    "name": { "str_sp": "ō-yoroi" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "beekeeping_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "beekeeping suit" },
+    "description": "A white suit commonly worn by professional beekeepers with straps on your ankles and wrists to prevent bees from flying in.  It's not a very tough fabric, but it's lightweight and has plenty of storage thanks to a chest pocket.",
+    "weight": "1587 g",
+    "volume": "3500 ml",
+    "price": "120 USD",
+    "price_postapoc": "1 USD",
+    "to_hit": -5,
+    "material": [ "nylon", "cotton" ],
+    "symbol": "[",
+    "looks_like": "hazmat_suit",
+    "color": "white",
+    "longest_side": "12 cm",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 10, 15 ] },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 100, "encumbrance": [ 10, 12 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 100, "encumbrance": [ 10, 10 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 120
+      }
+    ],
+    "warmth": 25,
+    "material_thickness": 1.5,
+    "environmental_protection": 1,
+    "flags": [ "VARSIZE", "OUTER" ]
+  },
+  {
+    "id": "chainmail_hauberk",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "chainmail hauberk" },
+    "description": "A knee-length long-sleeved tunic made of interlocking steel rings.  It can be adjusted to be worn as outerwear.",
+    "weight": "11227 g",
+    "volume": "12000 ml",
+    "longest_side": "16 cm",
+    "price": "359 USD 88 cent",
+    "price_postapoc": "30 USD",
+    "to_hit": -1,
+    "material": [ "steel_chain" ],
+    "symbol": "[",
+    "looks_like": "boiled_leather_armor_suit",
+    "color": "light_red",
+    "warmth": 0,
+    "flags": [ "STURDY", "ALLOWS_TAIL", "NORMAL" ],
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_hauberk_loose",
+      "menu_text": "Loosen"
+    },
+    "//": "Some suits have better coverage than separates because the parts are all attached to each other, leaving fewer gaps.",
+    "armor": [
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "coverage": 95,
+        "encumbrance": 10
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "coverage": 100
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "arm_r", "arm_l" ],
+        "coverage": 95,
+        "encumbrance": 10
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
+        "coverage": 100,
+        "encumbrance": 1
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
+        "coverage": 95,
+        "encumbrance": 2
+      },
+      {
+        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
+        "coverage": 40,
+        "encumbrance": 2
+      }
+    ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "chainmail_hauberk_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "chainmail hauberk" },
+    "copy-from": "chainmail_hauberk",
+    "looks_like": "chainmail_hauberk",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_hauberk_loose_xl",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "chainmail_hauberk_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_hauberk",
+    "looks_like": "chainmail_hauberk",
+    "name": { "str": "chainmail hauberk" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a looser fit.",
+      "target": "chainmail_hauberk_loose_xs",
+      "menu_text": "Loosen"
+    },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "chainmail_hauberk_loose",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "chainmail hauberk (loose)" },
+    "description": "A knee-length long-sleeved tunic made of interlocking steel rings.  It can be adjusted to fit closer to the body.",
+    "copy-from": "chainmail_hauberk",
+    "looks_like": "chainmail_hauberk",
+    "extend": { "flags": [ "OUTER" ] },
+    "delete": { "flags": [ "NORMAL" ] },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_hauberk",
+      "menu_text": "Tighten"
+    }
+  },
+  {
+    "id": "chainmail_hauberk_loose_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "chainmail hauberk (loose)" },
+    "copy-from": "chainmail_hauberk_loose",
+    "looks_like": "chainmail_hauberk",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_hauberk_xl",
+      "menu_text": "Tighten"
+    },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "chainmail_hauberk_loose_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_hauberk_loose",
+    "looks_like": "chainmail_hauberk",
+    "name": { "str": "chainmail hauberk (loose)" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "use_action": {
+      "type": "transform",
+      "msg": "You adjust your mail for a closer fit.",
+      "target": "chainmail_hauberk_xs",
+      "menu_text": "Tighten"
+    },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "chainmail_suit_faraday",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "Faraday chainmail" },
+    "description": "Jury-rigged armor made by affixing a full-body suit of chainmail over a rubber cleansuit, with copper wire threaded through to create a low impedence route to the ground that doesn't travel through the wearer.  It is hot, heavy, and uncomfortable, and the plastic face shield doesn't help.",
+    "weight": "22697 g",
+    "volume": "7980 ml",
+    "longest_side": "35 cm",
+    "material": [ "steel_chain", "soft_rubber" ],
+    "symbol": "[",
+    "color": "light_red",
+    "warmth": 30,
+    "armor": [
+      {
+        "material": [
+          { "type": "steel_chain", "covered_by_mat": 95, "thickness": 1.2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 2 }
+        ],
+        "covers": [ "hand_l", "hand_r" ],
+        "coverage": 100,
+        "encumbrance": 23,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "steel_chain", "covered_by_mat": 97, "thickness": 1.2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "head" ],
+        "coverage": 100,
+        "encumbrance": 21,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "eyes" ],
+        "coverage": 100,
+        "encumbrance": 10,
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "mouth" ],
+        "coverage": 100,
+        "encumbrance": 5,
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "steel_chain", "covered_by_mat": 95, "thickness": 1.2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "coverage": 100,
+        "encumbrance": 21,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "steel_chain", "covered_by_mat": 95, "thickness": 1.2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "arm_r", "arm_l" ],
+        "coverage": 100,
+        "encumbrance": 21,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 100,
+        "encumbrance": 21,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_l", "foot_ankle_r" ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL", "BELTED" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 3 } ],
+        "encumbrance": 25,
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6 } ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ],
+    "flags": [ "GROUNDING" ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "chainmail_suit_faraday_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_suit_faraday",
+    "name": { "str": "Faraday chainmail" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "chainmail_suit_faraday_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "chainmail_suit_faraday",
+    "name": { "str": "Faraday chainmail" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "cleansuit",
+    "repairs_like": "bunker_coat",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "cleansuit" },
+    "description": "A hooded boiler suit, complete with bulky gloves and boots, that covers everything but the face in impermeable rubber fabric.  Though not designed to stand up to combat, it should protect from chemicals, radiation, and other environmental hazards.  A tag advises the user to wear an activated gas mask while working in these conditions.",
+    "weight": "2100 g",
+    "volume": "2500 ml",
+    "price": "77 USD",
+    "price_postapoc": "12 USD 50 cent",
+    "material": [ "soft_rubber" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "white",
+    "warmth": 15,
+    "longest_side": "12 cm",
+    "material_thickness": 1,
+    "environmental_protection": 10,
+    "flags": [ "VARSIZE", "WATERPROOF", "RAD_RESIST" ],
+    "armor": [
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 2 } ],
+        "covers": [ "hand_l", "hand_r" ],
+        "coverage": 100,
+        "encumbrance": 26,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "covers": [ "head" ],
+        "coverage": 100,
+        "encumbrance": 22
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "coverage": 100,
+        "encumbrance": 22
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "coverage": 100
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "covers": [ "arm_r", "arm_l" ],
+        "coverage": 100,
+        "encumbrance": 22
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 100,
+        "encumbrance": 22
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_l", "foot_ankle_r" ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 3 } ],
+        "encumbrance": 49,
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6 } ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ]
+  },
+  {
+    "id": "entry_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "entry suit" },
+    "description": "An aluminized whole-body garment worn by firefighters and foundry workers as protection against flames.",
+    "weight": "2900 g",
+    "volume": "6 L",
+    "price": "2405 USD",
+    "price_postapoc": "25 USD",
+    "material": [ "nomex", "kevlar" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "light_gray",
+    "warmth": 30,
+    "longest_side": "30 cm",
+    "environmental_protection": 7,
+    "//": "This should require a separate SCBA system for breathing smoke/900 degree air, but currently doesn't because of how enviro is coded.",
+    "//1": "todo: Duplicate how gasmasks work but make them run on air tanks. Make that a requirement for breathing in hot air.",
+    "flags": [ "VARSIZE", "WATERPROOF", "GAS_PROOF", "STURDY", "OUTER", "SUN_GLASSES" ],
+    "qualities": [ [ "GLARE", 1 ] ],
+    "armor": [
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "fiberglass", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "carbonfiber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "hand_l", "hand_r" ],
+        "coverage": 100,
+        "encumbrance": 38,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "fiberglass", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "carbonfiber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "head" ],
+        "coverage": 100,
+        "encumbrance": 28,
+        "layers": [ "OUTER", "NORMAL", "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "aluminum", "covered_by_mat": 10, "thickness": 2 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 4 }
+        ],
+        "covers": [ "eyes" ],
+        "coverage": 100,
+        "encumbrance": 55,
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "aluminum", "covered_by_mat": 10, "thickness": 2 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 4 }
+        ],
+        "covers": [ "mouth" ],
+        "coverage": 100,
+        "encumbrance": 5,
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "fiberglass", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "carbonfiber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "coverage": 100,
+        "encumbrance": 38,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "fiberglass", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "carbonfiber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "fiberglass", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "carbonfiber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "arm_r", "arm_l" ],
+        "coverage": 100,
+        "encumbrance": 38,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "fiberglass", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "carbonfiber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 100,
+        "encumbrance": 38,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "fiberglass", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "carbonfiber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "foot_l", "foot_r" ],
+        "coverage": 100,
+        "encumbrance": 50,
+        "layers": [ "OUTER", "NORMAL", "BELTED" ]
+      }
+    ]
+  },
+  {
+    "id": "xl_entry_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "entry suit" },
+    "copy-from": "entry_suit",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "entry_suit_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "entry_suit",
+    "looks_like": "entry_suit",
+    "name": { "str": "entry suit" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "bite_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "canine bite suit" },
+    "description": "Designed to stop the injuries of dog bites, this thick, one piece suit is often used in the rehabilitation of abused animals and in training dogs by the police and military.  A base layer of aramid fabric has had strips of soft body armor sewn into it to mimic quilting, and to soften the blunt of animals jumping, slashing, or pouncing on the wearer.",
+    "weight": "11556 g",
+    "volume": "8255 ml",
+    "price": "200 USD",
+    "price_postapoc": "2 USD",
+    "to_hit": -5,
+    "material": [ "cotton", "kevlar" ],
+    "symbol": "[",
+    "looks_like": "coat_winter",
+    "color": "light_gray",
+    "warmth": 50,
+    "material_thickness": 4,
+    "flags": [ "STURDY", "NONCONDUCTIVE", "NORMAL", "OUTER" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 4 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": 38
+      },
+      {
+        "material": [
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 4 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_upper_l", "arm_lower_l", "arm_upper_r", "arm_lower_r" ],
+        "coverage": 100,
+        "encumbrance": 38
+      },
+      {
+        "material": [
+          { "type": "kevlar", "covered_by_mat": 70, "thickness": 4 },
+          { "type": "denim", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_elbow_l", "arm_shoulder_l", "arm_elbow_r", "arm_shoulder_r" ],
+        "coverage": 100
+      },
+      {
+        "material": [
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 4 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 3 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 100,
+        "encumbrance": 38
+      }
+    ]
+  },
+  {
+    "id": "hazmat_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "hazmat suit" },
+    "description": "An impermeable full-body garment with a clear plastic face shield, rubber gloves, and boots, looking like a soft, puffy space suit.  It looks fragile, but a tag on the interior explains that it will provide excellent protection from radiation, pathogens, chemicals, toxins, and even electrical discharge, so long as it's in good condition.",
+    "weight": "5000 g",
+    "volume": "17 L",
+    "price": "1175 USD",
+    "price_postapoc": "15 USD",
+    "material": [ "soft_rubber" ],
+    "symbol": "[",
+    "looks_like": "beekeeping_suit",
+    "color": "yellow",
+    "warmth": 40,
+    "material_thickness": 2.5,
+    "//1": "TODO: Suits like this require negative pressure and air tanks to work. See also the entry suit.",
+    "//2": "Mask includes vinyl to keep it from being uncomfortable. Todo: make PADDED work per BP.",
+    "environmental_protection": 20,
+    "flags": [ "VARSIZE", "RAINPROOF", "GAS_PROOF", "GROUNDING", "RAD_PROOF" ],
+    "armor": [
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [ "hand_l", "hand_r" ],
+        "coverage": 100,
+        "encumbrance": 48,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "covers": [ "head" ],
+        "coverage": 100,
+        "encumbrance": 42,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "eyes" ],
+        "coverage": 100,
+        "encumbrance": 42,
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.1 }
+        ],
+        "covers": [ "mouth" ],
+        "coverage": 100,
+        "encumbrance": 10,
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "coverage": 100,
+        "encumbrance": 42
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "coverage": 100
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "covers": [ "arm_r", "arm_l" ],
+        "coverage": 100,
+        "encumbrance": 42
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 100,
+        "encumbrance": 42
+      },
+      {
+        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_l", "foot_ankle_r" ],
+        "coverage": 100,
+        "encumbrance": 25,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 3 } ],
+        "encumbrance": 25,
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6 } ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ]
+  },
+  {
+    "id": "nomex_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "flame-resistant suit" },
+    "description": "A snug body suit made from thin and lightweight Nomex fire-resistant fabric.  Tough yet breathable, it is light and comfortable to wear under clothing.",
+    "weight": "688 g",
+    "volume": "1500 ml",
+    "price": "130 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": -5,
+    "material": [ "nomex" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "light_gray",
+    "warmth": 5,
+    "material_thickness": 0.5,
+    "environmental_protection": 2,
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "SKINTIGHT", "STURDY" ],
+    "armor": [ { "encumbrance": 12, "coverage": 100, "covers": [ "leg_l", "leg_r", "torso", "arm_l", "arm_r" ] } ]
+  },
+  {
+    "id": "xl_nomex_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "flame-resistant suit" },
+    "copy-from": "nomex_suit",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "nomex_suit_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "nomex_suit",
+    "looks_like": "nomex_suit",
+    "name": { "str": "flame-resistant suit" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "robofac_enviro_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "conductive NBC suit" },
+    "description": "A glossy boiler suit complete with rubber gloves and steel-toed boots, this getup is the sort of thing you might see in a documentary about Chernobyl.  It lacks any branding, but a label on the inside explains that the suit is flame-resistant, chemical resistant, and when paired with a gas mask, could provide protection from biological agents and radioactive particles.  A bold warning mentions that suit only protects from electric shock while the wearer is grounded and the suit is worn properly.",
+    "weight": "4000 g",
+    "volume": "14 L",
+    "price": "1175 USD",
+    "price_postapoc": "20 USD",
+    "material": [ "soft_rubber", "nomex", "rubber" ],
+    "symbol": "[",
+    "looks_like": "cleansuit",
+    "color": "brown",
+    "armor": [
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "hand_l", "hand_r" ],
+        "coverage": 100,
+        "encumbrance": 50,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "head" ],
+        "coverage": 100,
+        "encumbrance": 40
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "coverage": 100,
+        "encumbrance": 42
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "coverage": 100
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "arm_r", "arm_l" ],
+        "coverage": 100,
+        "encumbrance": 42
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 100,
+        "encumbrance": 42
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_l", "foot_ankle_r" ],
+        "coverage": 100,
+        "encumbrance": 0,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "encumbrance": 49,
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "steel", "covered_by_mat": 80, "thickness": 1.0 }
+        ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 6 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 80 }
+    ],
+    "warmth": 30,
+    "environmental_protection": 20,
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Wear casually",
+      "msg": "You slip out of the top of the suit and tie the sleeves around your waist.",
+      "target": "robofac_enviro_suit_casual"
+    },
+    "flags": [ "VARSIZE", "RAINPROOF", "GAS_PROOF", "RAD_PROOF", "GROUNDING", "STURDY" ]
+  },
+  {
+    "id": "robofac_enviro_suit_casual",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "conductive NBC suit (unzipped)", "str_pl": "conductive NBC suit (unzipped)" },
+    "description": "A glossy boiler suit complete with rubber gloves and steel-toed boots, this getup is the sort of thing you might see in a documentary about Chernobyl.  It lacks any branding, but a label on the inside explains that the suit is flame-resistant, chemical resistant, and when paired with a gas mask, could provide protection from biological agents and radioactive particles.  A bold warning mentions that suit only protects from electric shock while the wearer is grounded and the suit is worn properly.",
+    "weight": "4000 g",
+    "volume": "14 L",
+    "price": "1175 USD",
+    "price_postapoc": "20 USD",
+    "material": [ "soft_rubber", "nomex", "rubber" ],
+    "symbol": "[",
+    "looks_like": "cargo_pants",
+    "color": "brown",
+    "armor": [
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 100,
+        "encumbrance": 42
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_ankle_l", "foot_ankle_r" ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "encumbrance": 49,
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_r", "foot_toes_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "steel", "covered_by_mat": 80, "thickness": 1.0 }
+        ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      },
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
+        "material": [
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 6 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
+        "coverage": 100,
+        "layers": [ "OUTER", "NORMAL" ]
+      }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 80 }
+    ],
+    "warmth": 30,
+    "environmental_protection": 20,
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Wear casually",
+      "msg": "You pull the upper part of the suit along with its gloves hood on and zip it up securely.",
+      "target": "robofac_enviro_suit"
+    },
+    "flags": [ "VARSIZE", "RAINPROOF" ]
+  },
+  {
+    "id": "xedra_enviro_suit",
+    "copy-from": "robofac_enviro_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "activity suit" },
+    "description": "A single-piece brown and orange environmental suit, tailored in a way that slightly recalls a military flight suit.  It requires a separate gas mask for full protection.",
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Wear casually",
+      "msg": "You slip out of the top of the suit and tie the sleeves around your waist.",
+      "target": "xedra_enviro_suit_casual"
+    }
+  },
+  {
+    "id": "xedra_enviro_suit_casual",
+    "copy-from": "robofac_enviro_suit_casual",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "activity suit (unzipped)", "str_pl": "activity suits (unzipped)" },
+    "description": "A single-piece brown and orange environmental suit, tailored in a way that slightly recalls a military flight suit.  The upper portion has been tied around the waist casually.",
+    "use_action": {
+      "type": "transform",
+      "menu_text": "Wear normally",
+      "msg": "You untie the sleeves and put back on the top of the suit.",
+      "target": "xedra_enviro_suit"
+    }
+  },
+  {
+    "id": "stillsuit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR", "ARTIFACT" ],
+    "name": { "str": "WS-47G moisture retention suit" },
+    "description": "The WebbStar moisture retention suit utilizes advanced technology to prevent up to 30% of moisture loss through perspiration.  The suit is powered by the micro-motions of the body, especially breathing and walking motions.  Because of this, your walking speed is impaired while wearing it.",
+    "weight": "3481 g",
+    "volume": "7500 ml",
+    "price": "45000 USD",
+    "price_postapoc": "20 USD",
+    "material": [ "neoprene", "spandex" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "dark_gray",
+    "warmth": 15,
+    "material_thickness": 1,
+    "flags": [ "VARSIZE", "SKINTIGHT", "HOOD", "WATERPROOF", "MUNDANE", "ONLY_ONE" ],
+    "passive_effects": [ { "has": "WORN", "values": [ { "value": "THIRST", "multiply": -0.3 }, { "value": "MOVE_COST", "multiply": 0.1 } ] } ],
+    "armor": [ { "encumbrance": 18, "coverage": 95, "covers": [ "foot_l", "foot_r", "leg_l", "leg_r", "torso", "arm_l", "arm_r" ] } ]
+  },
+  {
+    "id": "suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "suit" },
+    "description": "A suit of formal attire.  Makes the apocalypse a truly gentlemanly experience.",
+    "weight": "1587 g",
+    "volume": "4750 ml",
+    "price": "200 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": -5,
+    "material": [ "wool", "cotton" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "light_gray",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 7, 13 ] },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 95, "encumbrance": [ 7, 10 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 7, 7 ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "700 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "15 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "700 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "15 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "250 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 120
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "250 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 120
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "12 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "250 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "10 cm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "250 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "10 cm",
+        "moves": 100
+      }
+    ],
+    "warmth": 25,
+    "material_thickness": 0.8,
+    "flags": [ "VARSIZE", "FANCY", "POCKETS", "OUTER" ]
+  },
+  {
+    "id": "touring_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "track touring suit" },
+    "description": "A lightweight leather bodysuit with padding in high-impact areas, meant for motorcyclists out on the track.  Though weaker than more modern Kevlar motorcycle gear, it is lightweight and can be worn under other gear.",
+    "weight": "4700 g",
+    "volume": "6500 ml",
+    "price": "580 USD",
+    "price_postapoc": "10 USD",
+    "to_hit": -5,
+    "material": [ "leather", "plastic_pad" ],
+    "symbol": "[",
+    "looks_like": "jumpsuit",
+    "color": "light_red",
+    "armor": [
+      {
+        "material": [
+          { "type": "plastic_pad", "covered_by_mat": 50, "thickness": 5.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.3 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 98,
+        "encumbrance": [ 28, 28 ]
+      },
+      {
+        "material": [
+          { "type": "plastic_pad", "covered_by_mat": 40, "thickness": 5.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.3 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 98,
+        "encumbrance": [ 28, 28 ]
+      },
+      {
+        "material": [
+          { "type": "plastic_pad", "covered_by_mat": 40, "thickness": 5.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.3 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 98,
+        "encumbrance": [ 28, 28 ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "800 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "13 cm",
+        "moves": 120
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "800 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "13 cm",
+        "moves": 120
+      }
+    ],
+    "warmth": 30,
+    "material_thickness": 4.3,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "POCKETS" ],
+    "melee_damage": { "bash": 2 }
+  },
+  {
+    "id": "officer_uniform",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "dress uniform" },
+    "description": "A military officer's dress uniform from before the Cataclysm, complete with rank and ribbons.  Just looking at it gives you an air of authority.  Perhaps not the most practical military wear, but a very stylish option.",
+    "weight": "1653 g",
+    "volume": "4750 ml",
+    "price": "224 USD",
+    "price_postapoc": "5 USD 50 cent",
+    "to_hit": -5,
+    "material": [ "cotton" ],
+    "symbol": "[",
+    "looks_like": "suit",
+    "color": "black",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 7, 13 ] },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 95, "encumbrance": [ 7, 10 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 7, 7 ] }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "700 ml", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "700 ml", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 120 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 120 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "350 ml", "max_contains_weight": "1 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "350 ml", "max_contains_weight": "1 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 100 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 100 }
+    ],
+    "warmth": 15,
+    "material_thickness": 0.5,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY" ]
+  },
+  {
+    "id": "mil_flight_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "military flight suit" },
+    "description": "A long-sleeved jumpsuit worn by military pilots.  It's made of nomex, rendering it fireproof.",
+    "weight": "1315 g",
+    "volume": "4687 ml",
+    "price": "220 USD 65 cent",
+    "price_postapoc": "5 USD",
+    "to_hit": -3,
+    "material": [ "nomex" ],
+    "symbol": "[",
+    "looks_like": "touring_suit",
+    "color": "green",
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 6, 10 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 50, "encumbrance": [ 6, 6 ] },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 80, "encumbrance": [ 6, 10 ] }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "700 ml", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "700 ml", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 100 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "250 ml", "max_contains_weight": "1 kg", "moves": 100 }
+    ],
+    "warmth": 25,
+    "material_thickness": 0.5,
+    "flags": [ "VARSIZE", "POCKETS" ]
+  }
+]

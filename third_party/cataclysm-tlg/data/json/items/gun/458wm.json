@@ -1,0 +1,17 @@
+[
+  {
+    "id": "win70_458",
+    "copy-from": "win70",
+    "looks_like": "win70",
+    "type": "ITEM",
+    "subtypes": [ "GUN" ],
+    "name": { "str": "Winchester Model 70 Safari rifle" },
+    "description": "A bolt-action sporting rifle for hunting dangerous game, chambered in the powerful .458 Winchester Magnum cartridge.",
+    "weight": "4082 g",
+    "volume": "3205 ml",
+    "price": "1760 USD",
+    "price_postapoc": "50 USD",
+    "ammo": [ "458wm" ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "458wm": 3 } } ]
+  }
+]

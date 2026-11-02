@@ -1,0 +1,34 @@
+(
+    object_type: "item",
+    id: "turnip-plant",
+    
+    image: (
+        path: "turnip-plant.png",
+        copyright: "T.Okubo",
+        w: 48,
+        h: 48,
+        grid_nx: 3,
+        grid_ny: 2,
+        n_pattern: 4,
+        variation_rule: Growing,
+    ),
+    
+    item: (
+        item_kind: "object",
+        group: "crop",
+        basic_price: 0,
+        w: 10000,
+        gen_weight: 0,
+        gen_level: 0,
+        attrs: [
+            Plant(
+                growing_duration: "5d",
+            ),
+            Harvest(
+                kind: Plant,
+                items: [("turnip", 1, 2)],
+                difficulty: 0,
+            ),
+        ]
+    ),
+)

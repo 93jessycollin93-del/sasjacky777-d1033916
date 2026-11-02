@@ -1,0 +1,73 @@
+[
+  {
+    "id": "4570_sp",
+    "type": "AMMO",
+    "name": { "str": ".45-70 SP" },
+    "description": ".45-70 Government ammunition loaded with a 305 grain soft point round.  One of the oldest cartridges still in use, it is still a favorite for large game hunting at short ranges.",
+    "weight": "35 g",
+    "volume": "250 ml",
+    "price": "125 cent",
+    "price_postapoc": "8 USD",
+    "material": [ "brass", "powder" ],
+    "symbol": "+",
+    "color": "green",
+    "count": 20,
+    "stack_size": 20,
+    "ammo_type": "4570",
+    "casing": "4570_casing",
+    "range": 48,
+    "//": "Balanced as FMJ.",
+    "damage": { "damage_type": "bullet", "amount": 57, "armor_penetration": 25 },
+    "dispersion": 20,
+    "recoil": 4300,
+    "loudness": 166,
+    "speed": 410,
+    "effects": [ "COOKOFF" ]
+  },
+  {
+    "id": "4570_pen",
+    "copy-from": "4570_sp",
+    "type": "AMMO",
+    "name": { "str": ".45-70 +P penetrator" },
+    "description": ".45-70 Government +P ammunition loaded with a 305 grain solid copper or brass penetrator projectile.  Designed for maximum penetration through thick hide and bone while maintaining ideal wounding characteristics.",
+    "price": "175 cent",
+    "price_postapoc": "6 USD",
+    "count": 10,
+    "loudness": 165,
+    "speed": 600,
+    "//": "Balanced as +P.",
+    "relative": { "range": 2, "damage": { "damage_type": "bullet", "amount": 14 }, "recoil": 300 }
+  },
+  {
+    "id": "4570_low",
+    "copy-from": "4570_sp",
+    "type": "AMMO",
+    "name": { "str": ".45-70 LFN cowboy" },
+    "description": ".45-70 Government ammunition loaded with a 405 grain lead flat nose bullet to original specifications for safe use in antique firearms.  Quite a bit less powerful than modern ammo, but still packs a punch.",
+    "//": "As blackpowder except armor penetration and recoil are in between standard and BP, with price adjusted to reflect that plus lack of fouling",
+    "loudness": 164,
+    "proportional": {
+      "price": 0.75,
+      "price_postapoc": 0.75,
+      "damage": { "damage_type": "bullet", "amount": 0.8, "armor_penetration": 0.76 },
+      "recoil": 0.9,
+      "dispersion": 1.2
+    },
+    "extend": { "effects": [ "RECYCLED" ] }
+  },
+  {
+    "id": "reloaded_4570_bp",
+    "copy-from": "4570_sp",
+    "type": "AMMO",
+    "name": { "str": ".45-70, black powder" },
+    "description": ".45-70 Government ammunition loaded with a 405 grain lead flat nose bullet using black powder to original specifications.  Quite a bit less powerful and a lot dirtier than modern ammo, but still packs a punch.  This one has been hand-loaded.",
+    "proportional": {
+      "price": 0.5,
+      "price_postapoc": 0.5,
+      "damage": { "damage_type": "bullet", "amount": 0.8, "armor_penetration": 0.5 },
+      "recoil": 0.76,
+      "dispersion": 1.2
+    },
+    "extend": { "effects": [ "RECYCLED", "MUZZLE_SMOKE", "BLACKPOWDER" ] }
+  }
+]

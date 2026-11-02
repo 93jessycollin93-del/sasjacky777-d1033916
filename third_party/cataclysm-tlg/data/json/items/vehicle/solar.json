@@ -1,0 +1,154 @@
+[
+  {
+    "//": "Assumed to be ~0.5 m x 0.5 m to fit in a vehicle tile",
+    "type": "ITEM",
+    "id": "solar_panel",
+    "name": { "str": "solar panel" },
+    "description": "An electronic device that can convert solar radiation into electric power.  Useful for a vehicle or a static power grid.",
+    "//1": [
+      "66 in x 40 in x 2 in = 68 L solar panels weigh 40 lbs, for density of ~210 g/L",
+      "If this is 0.5 m x 0.5 m x 5 cm, it has a volume of 12.5 L, and a weight of 2.63 kg",
+      "Numbers from https://modernize.com/homeowner-resources/solar/average-solar-panel-dimensions-and-sizes"
+    ],
+    "weight": "2630 g",
+    "longest_side": "50 cm",
+    "to_hit": -4,
+    "color": "yellow",
+    "symbol": "]",
+    "material": [ "tempered_glass" ],
+    "volume": "12500 ml",
+    "flags": [ "NO_REPAIR", "WATER_BREAK" ],
+    "category": "veh_parts",
+    "price": "900 USD",
+    "price_postapoc": "10 USD",
+    "melee_damage": { "bash": 1 }
+  },
+  {
+    "//": "Four solar panels stuck together to fit in 1 m x 1 m",
+    "type": "ITEM",
+    "id": "ground_solar_panel",
+    "name": { "str": "solar panel array" },
+    "description": "A collection of four solar panels, ready to get to work converting solar radiation into electric power.  Install them to use them in a static power grid.",
+    "copy-from": "solar_panel",
+    "proportional": { "weight": 4, "volume": 4, "price": 4, "price_postapoc": 4, "longest_side": 2 }
+  },
+  {
+    "type": "ITEM",
+    "copy-from": "solar_panel",
+    "id": "folding_solar_panel",
+    "name": { "str": "folding solar panel" },
+    "description": "A portable solar panel which can be easily deployed to charge batteries on the go, though it's less efficient than a stationary panel would be.",
+    "weight": "5700 g",
+    "volume": "7473 ml",
+    "longest_side": "53 cm",
+    "use_action": { "type": "deploy_appliance", "base": "folding_solar_panel_deployed" },
+    "price": "280 USD",
+    "price_postapoc": "5 USD"
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
+    "copy-from": "folding_solar_panel",
+    "id": "folding_solar_panel_deployed",
+    "name": { "str": "deployed folding solar panel" },
+    "//": [
+      "Deployed version of the above. Shouldn't spawn in game.",
+      "Has a little hacky battery pocket so it can charge phones and the like"
+    ],
+    "ammo_type": [ "battery" ],
+    "capacity": 1,
+    "flags": [ "NO_SALVAGE", "NO_UNLOAD", "NO_RELOAD", "RECHARGE" ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 1 } } ]
+  },
+  {
+    "type": "ITEM",
+    "copy-from": "folding_solar_panel",
+    "id": "folding_solar_panel_v2",
+    "name": { "str": "advanced folding solar panel" },
+    "description": "A portable solar panel which can be easily deployed to charge batteries on the go, though it's less efficient than a stationary panel would be.  This is a higher-end monocrystalline model.",
+    "weight": "17500 g",
+    "volume": "39400 ml",
+    "longest_side": "83 cm",
+    "use_action": { "type": "deploy_appliance", "base": "folding_solar_panel_v2_deployed" },
+    "price": "320 USD",
+    "price_postapoc": "20 USD"
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
+    "copy-from": "folding_solar_panel_v2",
+    "id": "folding_solar_panel_v2_deployed",
+    "name": { "str": "deployed advanced folding solar panel" },
+    "//": [
+      "Deployed version of the above. Shouldn't spawn in game.",
+      "Has a little hacky battery pocket so it can charge phones and the like"
+    ],
+    "ammo_type": [ "battery" ],
+    "capacity": 1,
+    "flags": [ "NO_SALVAGE", "NO_UNLOAD", "NO_RELOAD", "RECHARGE" ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 1 } } ]
+  },
+  {
+    "type": "ITEM",
+    "id": "reinforced_solar_panel",
+    "name": { "str": "reinforced solar panel" },
+    "description": "A solar panel that has been reinforced to protect the delicate solar cells from zombies or errant baseballs.  This causes this panel to produce slightly less power than normal.",
+    "weight": "24153 g",
+    "color": "light_blue",
+    "material": [ "tempered_glass", "steel" ],
+    "volume": "16000 ml",
+    "price": "1200 USD",
+    "price_postapoc": "15 USD",
+    "copy-from": "solar_panel"
+  },
+  {
+    "//": "Assumed to be ~0.5 m x 0.5 m to fit in a vehicle tile",
+    "type": "ITEM",
+    "id": "solar_panel_v2",
+    "name": { "str": "advanced solar panel" },
+    "description": "An electronic device that can convert solar radiation into electric power.  This one is a high-performance type made with monocrystalline silicon cells.",
+    "price": "1900 USD",
+    "price_postapoc": "30 USD",
+    "copy-from": "solar_panel"
+  },
+  {
+    "//": "Four advanced solar panels stuck together for 1 m x 1 m area",
+    "type": "ITEM",
+    "id": "ground_solar_panel_v2",
+    "name": { "str": "advanced solar panel array" },
+    "description": "A collection of four smaller solar panels, ready to convert solar radiation into electric power.  These panels are high-performance, made with monocrystalline silicon cells.",
+    "copy-from": "solar_panel_v2",
+    "proportional": { "price": 4, "price_postapoc": 4, "weight": 4, "volume": 4, "longest_side": 2 }
+  },
+  {
+    "type": "ITEM",
+    "id": "reinforced_solar_panel_v2",
+    "name": { "str": "advanced reinforced solar panel" },
+    "description": "A high-performance solar panel with sturdy brackets and wire guards across its face, trading efficiency for durability.",
+    "price": "2400 USD",
+    "price_postapoc": "35 USD",
+    "copy-from": "reinforced_solar_panel"
+  },
+  {
+    "type": "ITEM",
+    "id": "solar_cell",
+    "name": { "str": "solar cell" },
+    "description": "A small electronic device that can convert solar radiation into electric power.  This one is a common, inexpensive type made of polycrystalline silicon.",
+    "weight": "500 g",
+    "symbol": ";",
+    "volume": "250 ml",
+    "category": "spare_parts",
+    "price": "50 USD",
+    "price_postapoc": "1 USD",
+    "copy-from": "solar_panel"
+  },
+  {
+    "type": "ITEM",
+    "id": "solar_cell_v2",
+    "name": { "str": "advanced solar cell" },
+    "description": "A small electronic device that can convert solar radiation into electric power.  This one is a high-performance type made of monocrystalline silicon.",
+    "price": "150 USD",
+    "price_postapoc": "3 USD",
+    "copy-from": "solar_cell"
+  }
+]

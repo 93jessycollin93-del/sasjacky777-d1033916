@@ -111,3 +111,24 @@ def test_system_endpoint_describes_the_machine(client):
 def test_ready_still_reports_gpu_presence(client):
     body = client.get("/ready").json()
     assert set(body) >= {"status", "gpu_available", "gpus", "npu_available", "providers"}
+
+
+def test_chat_completions_fails_over_and_answers_like_an_openai_endpoint(client):
+    response = client.post("/chat/completions", json={"messages": [{"role": "user", "content": "hi"}], "pod_id": "chat"})
+    assert response.status_code == 200
+    body = response.json()
+    assert body["choices"][0]["message"]["content"] == "carried on"
+    assert body["handoffs"] == 1
+
+
+def test_complete_auto_takes_a_bare_prompt(client):
+    response = client.post("/complete/auto", json={"prompt": "hi", "model": "auto"})
+    assert response.status_code == 200
+    assert response.json()["response"] == "carried on"
+
+
+def test_chat_completions_refuses_with_the_reason_not_a_blank_answer(client):
+    response = client.post("/chat/completions", json={"prompt": "hi", "model": "nonexistent"})
+    assert response.status_code == 503
+    assert "choices" not in response.json()
+    assert response.json()["trace"][0]["detail"] == "pinned provider is not configured"

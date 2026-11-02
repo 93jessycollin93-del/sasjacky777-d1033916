@@ -1,0 +1,295 @@
+[
+  {
+    "id": "longcoat_survivor",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "survivor longcoat" },
+    "description": "A full-length Kevlar armored coat painted with a layer of butyl rubber to ward off inclement weather and chemical attacks.  Comfortable, durable, and great for storage.",
+    "weight": "2592 g",
+    "volume": "9500 ml",
+    "price": "400 USD",
+    "price_postapoc": "80 USD",
+    "to_hit": -1,
+    "material": [ "soft_rubber", "nylon", "kevlar" ],
+    "symbol": "[",
+    "looks_like": "longcoat_survivor",
+    "color": "brown",
+    "armor": [
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "torso", "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "coverage": 95,
+        "encumbrance": [ 8, 13 ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 86,
+        "encumbrance": [ 5, 6 ],
+        "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "gastropod_foot" ],
+        "coverage": 78,
+        "encumbrance": [ 4, 5 ],
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "long_tail" ],
+        "coverage": 86,
+        "encumbrance": [ 5, 6 ],
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "coverage": 86,
+        "encumbrance": [ 5, 6 ],
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped",
+          "crab_leg_1_draped",
+          "crab_leg_2_draped",
+          "crab_leg_3_draped",
+          "crab_leg_4_draped"
+        ],
+        "layers": [ "BELTED" ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "3 L",
+        "max_contains_weight": "6 kg",
+        "max_item_length": "31 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "3 L",
+        "max_contains_weight": "6 kg",
+        "max_item_length": "31 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1 L",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "25 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1 L",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "25 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "800 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "13 cm",
+        "moves": 120
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "800 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "13 cm",
+        "moves": 120
+      }
+    ],
+    "warmth": 30,
+    "environmental_protection": 5,
+    "flags": [ "VARSIZE", "POCKETS", "COLLAR", "STURDY", "RAINPROOF", "OUTER" ]
+  },
+  {
+    "id": "longcoat_survivor_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "survivor longcoat" },
+    "copy-from": "longcoat_survivor",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "longcoat_survivor_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "longcoat_survivor",
+    "name": { "str": "survivor longcoat" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "sleeveless_longcoat_survivor",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "sleeveless survivor longcoat" },
+    "//": "The general guideline for sleeveless longcoats is the components, volume, weight, time to craft, and value are 15% lower (rounded down) than the original.  Making it from an original takes 50% the time.",
+    "description": "A sleeveless Kevlar armored coat painted with a layer of butyl rubber to ward off inclement weather and chemical attacks.  Comfortable, durable, and great for storage.",
+    "weight": "2203 g",
+    "volume": "8 L",
+    "price": "340 USD",
+    "price_postapoc": "45 USD",
+    "to_hit": -1,
+    "material": [ "soft_rubber", "nylon", "kevlar" ],
+    "symbol": "[",
+    "looks_like": "longcoat_survivor",
+    "color": "brown",
+    "armor": [
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 95,
+        "encumbrance": [ 8, 13 ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "coverage": 86,
+        "encumbrance": [ 5, 6 ],
+        "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "gastropod_foot" ],
+        "coverage": 78,
+        "encumbrance": [ 4, 5 ],
+        "specifically_covers": [ "gastropod_foot_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "covers": [ "long_tail" ],
+        "coverage": 86,
+        "encumbrance": [ 5, 6 ],
+        "specifically_covers": [ "long_tail_draped" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+        ],
+        "coverage": 86,
+        "encumbrance": [ 5, 6 ],
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6",
+          "crab_leg_1",
+          "crab_leg_2",
+          "crab_leg_3",
+          "crab_leg_4"
+        ],
+        "specifically_covers": [
+          "cephalopod_arm_1_draped",
+          "cephalopod_arm_2_draped",
+          "cephalopod_arm_3_draped",
+          "cephalopod_arm_4_draped",
+          "cephalopod_arm_5_draped",
+          "cephalopod_arm_6_draped",
+          "crab_leg_1_draped",
+          "crab_leg_2_draped",
+          "crab_leg_3_draped",
+          "crab_leg_4_draped"
+        ],
+        "layers": [ "BELTED" ]
+      }
+    ],
+    "pocket_data": [
+      { "pocket_type": "CONTAINER", "max_contains_volume": "3 L", "max_contains_weight": "6 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "3 L", "max_contains_weight": "6 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "1 L", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "1 L", "max_contains_weight": "2 kg", "moves": 80 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "1 kg", "moves": 120 },
+      { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "1 kg", "moves": 120 }
+    ],
+    "warmth": 20,
+    "environmental_protection": 5,
+    "flags": [ "VARSIZE", "POCKETS", "COLLAR", "STURDY", "RAINPROOF", "OUTER" ]
+  },
+  {
+    "id": "sleeveless_longcoat_survivor_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "XL sleeveless survivor longcoat" },
+    "copy-from": "sleeveless_longcoat_survivor",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE" ] }
+  },
+  {
+    "id": "sleeveless_longcoat_survivor_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "sleeveless_longcoat_survivor",
+    "name": { "str": "XS sleeveless survivor longcoat" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE" ] }
+  }
+]

@@ -1,0 +1,30 @@
+(
+    object_type: "chara_template",
+    id: "llama",
+    
+    image: (
+        path: "llama.png",
+        copyright: "T.Okubo",
+    ),
+    
+    chara_template: (
+        race: "animal",
+        class: "animal",
+        faction: "monster",
+        gen_weight: 50,
+        gen_level: 1,
+        default_ai_kind: "melee",
+        skill_bonus: {},
+        base_hp: 150,
+        base_mp: 20,
+        str: 18,
+        vit: 22,
+        dex: 11,
+        int: 10,
+        wil: 12,
+        cha: 14,
+        spd: 100,
+        carry: 3,
+        travel_speed: 4,
+    ),
+)

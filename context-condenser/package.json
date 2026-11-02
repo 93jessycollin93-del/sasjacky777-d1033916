@@ -1,0 +1,19 @@
+{
+  "name": "context-condenser",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Context condensing engine with anchored dehydration and real rehydration.",
+  "engines": { "node": ">=22.6" },
+  "bin": {
+    "cce": "./packages/cli/cce.ts",
+    "cce-mcp": "./packages/mcp/server.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "validate:catalog": "node --experimental-strip-types packages/condensers/validate.ts",
+    "extract:catalog": "node tools/extract-catalog.mjs",
+    "cce": "node --experimental-strip-types packages/cli/cce.ts",
+    "mcp": "node --experimental-strip-types packages/mcp/server.ts"
+  }
+}

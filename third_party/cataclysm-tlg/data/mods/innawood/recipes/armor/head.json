@@ -1,0 +1,42 @@
+[
+  {
+    "result": "helmet_skull",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HEAD",
+    "skill_used": "tailor",
+    "difficulty": 4,
+    "time": "4 h",
+    "autolearn": true,
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "skull_canis", 1 ] ] ],
+    "using": [ [ "tailoring_leather_sheet_simple", 2 ] ],
+    "byproducts": [ [ "leather_patch", 3 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" },
+      { "proficiency": "prof_closures_waterproofing" },
+      { "proficiency": "prof_carving" }
+    ]
+  },
+  {
+    "result": "goggles_welding",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_HEAD",
+    "skill_used": "mechanics",
+    "difficulty": 2,
+    "skills_required": [ "fabrication", 1 ],
+    "time": "1 h",
+    "autolearn": true,
+    "book_learn": [ [ "textbook_fabrication", 3 ], [ "welding_book", 3 ] ],
+    "components": [
+      [ [ "goggles_ski", 1 ], [ "goggles_swim", 1 ], [ "glasses_safety", 1 ], [ "glass_goggles", 1 ] ],
+      [ [ "eclipse_glasses", 1 ], [ "glass_tinted", 3 ] ],
+      [ [ "duct_tape", 40 ], [ "medical_tape", 40 ], [ "super_glue", 2 ] ]
+    ],
+    "proficiencies": [ { "proficiency": "prof_plasticworking" } ]
+  }
+]

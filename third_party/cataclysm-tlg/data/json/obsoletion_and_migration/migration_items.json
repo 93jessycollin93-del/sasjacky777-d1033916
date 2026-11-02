@@ -1,0 +1,4404 @@
+[
+  {
+    "type": "MIGRATION",
+    "id": "wizard_cane_cheap_on",
+    "replace": "cane_toy",
+    "variant": "cane_toy_wizard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wizard_cane",
+    "replace": "cane_toy",
+    "variant": "cane_toy_wizard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wizard_cane_on",
+    "replace": "cane_toy",
+    "variant": "cane_toy_wizard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "makeshift_crutches",
+    "replace": "crutches_wooden"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "hammer_sledge_heavy",
+    "replace": "hammer_sledge"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "hammer_sledge_short",
+    "replace": "hammer_sledge_engineer"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "homewrecker",
+    "replace": "hammer_sledge"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "glass_macuahuitl",
+    "replace": "macuahuitl_glass"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "teeth_macuahuitl",
+    "replace": "macuahuitl_glass"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "aztec_sword_scrap",
+    "replace": "macuahuitl_glass"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "aztec_sword_stone",
+    "replace": "macuahuitl_glass"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "aztec_sword",
+    "replace": "macuahuitl_steel"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "steel_staff",
+    "replace": "i_staff"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lucern_hammer",
+    "replace": "lucerne_hammer"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lucern_hammerfake",
+    "replace": "lucerne_hammerfake"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mace_pipe",
+    "replace": "pipe"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mace_pipelarge",
+    "replace": "pipe"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "makeshift_sap",
+    "replace": "blackjack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "PR24-extended",
+    "replace": "baton-extended"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "PR24-retracted",
+    "replace": "baton"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "shillelagh_fake",
+    "replace": "cane"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ax_sheets_bolted",
+    "replace": "street_sign"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ax_sheets_welded",
+    "replace": "street_sign"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bokken_fake",
+    "replace": "bokken"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bokken_inferior",
+    "replace": "bokken"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "aztec_spear_glass",
+    "replace": "spear_wood"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "aztec_spear_scrap",
+    "replace": "spear_steel"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "aztec_spear_stone",
+    "replace": "spear_stone"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "disinrag",
+    "replace": "cotton_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "disincotton_ball",
+    "replace": "cotton_ball"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "jedi_cloak",
+    "replace": "cloak_costume"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pointed_hat",
+    "replace": "wizard_hat_costume"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wolfsuit",
+    "replace": "fursuit",
+    "variant": "wolf_fursuit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "dinosuit",
+    "replace": "mascot_suit",
+    "variant": "dino_costume"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "dragonsuit",
+    "replace": "mascot_suit",
+    "variant": "dragon_costume"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sharksuit",
+    "replace": "mascot_suit",
+    "variant": "shark_costume"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "felinesuit",
+    "replace": "fursuit",
+    "variant": "tiger_fursuit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "jumpsuit_skeleton",
+    "replace": "bodysuit_spandex",
+    "variant": "skeleton_suit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "jumpsuit_skeleton_zipped",
+    "replace": "bodysuit_spandex",
+    "variant": "skeleton_suit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "robofac_jumpsuit",
+    "replace": "jumpsuit",
+    "variant": "standard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mummy_jumpsuit",
+    "replace": "jumpsuit_long",
+    "variant": "mummy_suit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "clown_suit",
+    "replace": "jumpsuit_long",
+    "variant": "clown_suit"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheriffshirt",
+    "replace": "shirt_western"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sinister_dress",
+    "replace": "dress_costume",
+    "variant": "sinister_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sinister_dress_short",
+    "replace": "dress_costume_skimpy",
+    "variant": "gothic_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "maid_dress",
+    "replace": "dress_costume_skimpy",
+    "variant": "maid_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "maid_dress_short",
+    "replace": "dress_costume_skimpy",
+    "variant": "maid_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mummy_dress",
+    "replace": "dress_costume_skimpy",
+    "variant": "gothic_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ninja_dress",
+    "replace": "kimono"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ninja_dress_short",
+    "replace": "dress_costume_skimpy",
+    "variant": "gothic_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "witch_dress",
+    "replace": "dress_costume",
+    "variant": "sinister_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "witch_dress_long",
+    "replace": "dress_costume",
+    "variant": "siniter_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "witch_dress_short",
+    "replace": "dress_costume_skimpy",
+    "variant": "gothic_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "trousers_ninja",
+    "replace": "sweatpants"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "striped_shirt",
+    "replace": "longshirt_costume",
+    "variant": "shirt_striped"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "striped_pants",
+    "replace": "pants_costume",
+    "variant": "pants_striped"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pants_checkered",
+    "replace": "pants_costume",
+    "variant": "pants_checkered"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "heavy_crowbar",
+    "replace": "crowbar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "integrated_chitin3",
+    "replace": "integrated_chitin2"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "integrated_chitin3_claws",
+    "replace": "gloves_claws"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "integrated_talons",
+    "replace": "gloves_claws"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "integrated_claws_rat",
+    "replace": "gloves_claws"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "integrated_claws_st",
+    "replace": "gloves_claws"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bee_dress",
+    "replace": "dress_costume_skimpy",
+    "variant": "bee_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plated_leather_armor_suit",
+    "replace": "armor_samurai"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plated_leather_armor_suit_xs",
+    "replace": "armor_samurai_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plated_leather_armor_suit_xl",
+    "replace": "armor_samurai_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tireplate",
+    "replace": "tire_cuirass"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "survivor_machete",
+    "replace": "machete"
+  },
+  {
+    "id": "flatbread_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "bread_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "brown_bread_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "buttered_toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "jam_toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "peanut_butter_toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "toad_in_a_hole_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "PBJ_Toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_fairy_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "soup_blood_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "fried_egg_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "deluxe_fried_egg_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "chilidogs_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "hotdogs_newyork_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "cheeseburger_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "hamburger_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sloppyjoe_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "blood_pancakes_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_cheese_grilled_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_deluxe_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_reuben_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_cucumber_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_cheese_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_jam_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_jam_cheese_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_jam_butter_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_honey_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_vegetable_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_t_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_pb_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_pbj_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_pbh_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_pbm_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "fish_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "blt_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "chicken_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "hotdogs_cooked_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_egg_salad_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_sauce_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "chicken_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_vegetable_cheese_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "superglue",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue",
+    "contents": [ { "id": "super_glue", "count": 10 } ]
+  },
+  {
+    "id": "stabilizer",
+    "type": "MIGRATION",
+    "replace": "rail_laser_sight"
+  },
+  {
+    "id": "stabilizer_mod",
+    "type": "MIGRATION",
+    "replace": "rail_laser_sight"
+  },
+  {
+    "id": "ar_pistol",
+    "type": "MIGRATION",
+    "replace": "modular_ar_pistol"
+  },
+  {
+    "id": "miner_hat",
+    "type": "MIGRATION",
+    "replace": "hat_hard"
+  },
+  {
+    "id": "small_squeeze_tube",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "bottle_plastic_tiny_glue",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "big_portable_fridge",
+    "type": "MIGRATION",
+    "replace": "minifridge"
+  },
+  {
+    "id": "big_portable_freezer",
+    "type": "MIGRATION",
+    "replace": "chest_minifreezer"
+  },
+  {
+    "id": "arrow_wood_rubber",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_small_game_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_wood_rubber",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_heavy_fire_hardened_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_heavy_field_point_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_wood_heavy",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_metal_sharpened_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood_bodkin"
+  },
+  {
+    "id": "arrow_field_point_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood_bodkin"
+  },
+  {
+    "id": "arrow_metal_target",
+    "type": "MIGRATION",
+    "replace": "arrow_metal"
+  },
+  {
+    "id": "takedown_recurbow",
+    "type": "MIGRATION",
+    "replace": "recurbow"
+  },
+  {
+    "id": "takedown_recurbow_folded",
+    "type": "MIGRATION",
+    "replace": "recurbow_folded"
+  },
+  {
+    "id": "reflexcurvebow",
+    "type": "MIGRATION",
+    "replace": "recurbow"
+  },
+  {
+    "id": "utility_knife_folding",
+    "type": "MIGRATION",
+    "replace": "knife_folding"
+  },
+  {
+    "id": "bolt_simple_small_game",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_wood_small_game",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_metal",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_makeshift",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_steel_target",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "diamond_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "garnet_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "amethyst_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "aquamarine_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "emerald_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "alexandrite_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "ruby_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "peridot_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "sapphire_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "tourmaline_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "citrine_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "cowrie_hair_beads",
+    "type": "MIGRATION",
+    "replace": "wooden_hair_beads"
+  },
+  {
+    "id": "platinum_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "amethyst_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "aquamarine_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "diamond_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "emerald_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "alexandrite_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "peridot_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "sapphire_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "tourmaline_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "citrine_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "blue_topaz_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "blue_topaz_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "opal_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "pearl_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "onyx_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "garnet_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "diamond_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "garnet_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "amethyst_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "aquamarine_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "emerald_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "alexandrite_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "ruby_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "peridot_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "sapphire_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "tourmaline_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "citrine_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "blue_topaz_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "opal_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "pearl_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "onyx_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "garnet_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "amethyst_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "aquamarine_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "emerald_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "alexandrite_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "ruby_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "peridot_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "sapphire_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "tourmaline_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "citrine_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "blue_topaz_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "opal_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "pearl_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "onyx_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "garnet_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "amethyst_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "aquamarine_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "emerald_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "alexandrite_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "ruby_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "peridot_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "sapphire_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "tourmaline_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "citrine_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "blue_topaz_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "opal_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "pearl_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "onyx_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "garnet_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "amethyst_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "aquamarine_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "emerald_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "alexandrite_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "ruby_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "peridot_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "sapphire_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "tourmaline_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "citrine_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "blue_topaz_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "opal_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "pearl_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "onyx_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "garnet_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "amethyst_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "aquamarine_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "emerald_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "alexandrite_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "ruby_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "peridot_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "sapphire_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "tourmaline_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "citrine_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "blue_topaz_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "opal_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "pearl_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "onyx_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "garnet_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "amethyst_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "aquamarine_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "emerald_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "alexandrite_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "ruby_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "peridot_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "sapphire_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "tourmaline_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "citrine_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "blue_topaz_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "opal_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "pearl_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "onyx_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "garnet_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "amethyst_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "aquamarine_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "emerald_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "alexandrite_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "ruby_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "peridot_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "sapphire_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "tourmaline_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "citrine_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "blue_topaz_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "opal_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "pearl_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "onyx_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "garnet_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "amethyst_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "aquamarine_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "emerald_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "alexandrite_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "ruby_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "peridot_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "sapphire_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "tourmaline_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "citrine_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "blue_topaz_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "opal_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "pearl_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "onyx_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "garnet_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "amethyst_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "aquamarine_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "emerald_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "alexandrite_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "ruby_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "peridot_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "sapphire_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "tourmaline_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "citrine_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "blue_topaz_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "opal_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "pearl_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "onyx_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "garnet_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "amethyst_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "aquamarine_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "emerald_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "alexandrite_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "ruby_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "peridot_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "sapphire_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "tourmaline_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "citrine_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "blue_topaz_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "opal_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "pearl_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "onyx_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "garnet_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "amethyst_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "aquamarine_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "emerald_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "alexandrite_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "ruby_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "peridot_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "sapphire_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "tourmaline_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "citrine_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "blue_topaz_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "opal_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "pearl_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "onyx_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "garnet_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "amethyst_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "aquamarine_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "emerald_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "alexandrite_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "ruby_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "peridot_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "sapphire_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "tourmaline_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "citrine_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "blue_topaz_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "opal_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "pearl_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "onyx_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "gold_hair_beads",
+    "type": "MIGRATION",
+    "replace": "wooden_hair_beads"
+  },
+  {
+    "id": "silver_hair_beads",
+    "type": "MIGRATION",
+    "replace": "wooden_hair_beads"
+  },
+  {
+    "id": "garnet_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "amethyst_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "aquamarine_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "emerald_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "alexandrite_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "ruby_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "peridot_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "sapphire_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "tourmaline_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "citrine_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "blue_topaz_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "opal_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "pearl_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "onyx_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "copper_locket",
+    "type": "MIGRATION",
+    "replace": "silver_locket"
+  },
+  {
+    "id": "platinum_locket",
+    "type": "MIGRATION",
+    "replace": "gold_locket"
+  },
+  {
+    "id": "platinum_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "platinum_hairpin",
+    "type": "MIGRATION",
+    "replace": "gold_hairpin"
+  },
+  {
+    "id": "platinum_ear",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "garnet_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "amethyst_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "aquamarine_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "emerald_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "alexandrite_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "ruby_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "peridot_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "sapphire_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "tourmaline_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "citrine_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "blue_topaz_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "opal_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "pearl_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "onyx_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "garnet_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "amethyst_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "aquamarine_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "emerald_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "alexandrite_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "ruby_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "peridot_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "sapphire_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "tourmaline_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "citrine_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "blue_topaz_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "opal_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "pearl_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "onyx_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "garnet_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "amethyst_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "aquamarine_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "emerald_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "alexandrite_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "ruby_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "peridot_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "sapphire_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "tourmaline_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "citrine_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "blue_topaz_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "opal_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "pearl_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "onyx_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "ear_spool",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "gold_ear",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "silver_ear",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "copper_ear",
+    "type": "MIGRATION",
+    "replace": "copper_earring"
+  },
+  {
+    "id": "opal_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "pearl_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "onyx_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "garnet_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "diamond_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "garnet_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "amethyst_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "aquamarine_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "emerald_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "alexandrite_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "ruby_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "peridot_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "sapphire_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "tourmaline_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "citrine_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "blue_topaz_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "opal_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "pearl_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "onyx_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "silver_ear",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "pizza_veggy",
+    "type": "MIGRATION",
+    "replace": "pizza_vegetable"
+  },
+  {
+    "id": "mre_veggy",
+    "type": "MIGRATION",
+    "replace": "mre_vegetarian_taco"
+  },
+  {
+    "id": "dry_veggy",
+    "type": "MIGRATION",
+    "replace": "dry_vegetable"
+  },
+  {
+    "id": "soup_veggy",
+    "type": "MIGRATION",
+    "replace": "soup_vegetable"
+  },
+  {
+    "id": "deluxe_veggy_rice",
+    "type": "MIGRATION",
+    "replace": "deluxe_vegetable_rice"
+  },
+  {
+    "id": "veggy_tainted",
+    "type": "MIGRATION",
+    "replace": "vegetable_tainted"
+  },
+  {
+    "id": "veggy",
+    "type": "MIGRATION",
+    "replace": "leaves"
+  },
+  {
+    "id": "vegetable",
+    "type": "MIGRATION",
+    "replace": "leaves"
+  },
+  {
+    "id": "soup_veggy",
+    "type": "MIGRATION",
+    "replace": "soup_vegetable"
+  },
+  {
+    "id": "curry_veggy",
+    "type": "MIGRATION",
+    "replace": "curry_vegetable"
+  },
+  {
+    "id": "veggy_salad",
+    "type": "MIGRATION",
+    "replace": "vegetable_salad"
+  },
+  {
+    "id": "veggy_pickled",
+    "type": "MIGRATION",
+    "replace": "vegetable_pickled"
+  },
+  {
+    "id": "pie_veggy",
+    "type": "MIGRATION",
+    "replace": "pie_vegetable"
+  },
+  {
+    "id": "veggy_wild",
+    "type": "MIGRATION",
+    "replace": "vegetable_wild"
+  },
+  {
+    "id": "veggy_aspic",
+    "type": "MIGRATION",
+    "replace": "vegetable_aspic"
+  },
+  {
+    "id": "veggy_salted",
+    "type": "MIGRATION",
+    "replace": "vegetable_salted"
+  },
+  {
+    "id": "veggy_cooked",
+    "type": "MIGRATION",
+    "replace": "vegetable_wild_cooked"
+  },
+  {
+    "id": "vegetable_cooked",
+    "type": "MIGRATION",
+    "replace": "vegetable_wild_cooked"
+  },
+  {
+    "id": "plant_sac",
+    "type": "MIGRATION",
+    "replace": "vegetable_tainted"
+  },
+  {
+    "id": "samosa_veggy",
+    "type": "MIGRATION",
+    "replace": "samosa_vegetable"
+  },
+  {
+    "id": "pemmican_veggy",
+    "type": "MIGRATION",
+    "replace": "pemmican_vegetable"
+  },
+  {
+    "id": "rehydrated_veggy",
+    "type": "MIGRATION",
+    "replace": "rehydrated_vegetable"
+  },
+  {
+    "id": "veggy_wild_cooked",
+    "type": "MIGRATION",
+    "replace": "vegetable_wild_cooked"
+  },
+  {
+    "id": "sandwich_veggy_cheese",
+    "type": "MIGRATION",
+    "replace": "sandwich_vegetable_cheese"
+  },
+  {
+    "id": "sandwich_veggy",
+    "type": "MIGRATION",
+    "replace": "sandwich_vegetable"
+  },
+  {
+    "id": "dry_veggy_tainted",
+    "type": "MIGRATION",
+    "replace": "dry_vegetable_tainted"
+  },
+  {
+    "id": "seed_veggy_wild",
+    "type": "MIGRATION",
+    "replace": "seed_vegetable_wild"
+  },
+  {
+    "id": "sushi_veggyroll",
+    "type": "MIGRATION",
+    "replace": "sushi_vegetableroll"
+  },
+  {
+    "id": "deluxe_veggy_beans",
+    "type": "MIGRATION",
+    "replace": "deluxe_vegetable_beans"
+  },
+  {
+    "id": "deluxe_veggy_beansnrice",
+    "type": "MIGRATION",
+    "replace": "deluxe_vegetable_beansnrice"
+  },
+  {
+    "id": "veggy_pickled_fried",
+    "type": "MIGRATION",
+    "replace": "vegetable_pickled_fried"
+  },
+  {
+    "id": "cufflinks_intricate",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "spear_spike",
+    "type": "MIGRATION",
+    "replace": "spear_wood"
+  },
+  {
+    "id": "spear_wood_simple",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "spear_pipe",
+    "type": "MIGRATION",
+    "replace": "spear_wood"
+  },
+  {
+    "id": "simple_spear_pipe",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "spear_steel_crude",
+    "type": "MIGRATION",
+    "replace": "spear_knife"
+  },
+  {
+    "id": "spear_knife_crude",
+    "type": "MIGRATION",
+    "replace": "spear_wood"
+  },
+  {
+    "id": "spear_knife_proper",
+    "type": "MIGRATION",
+    "replace": "spear_knife"
+  },
+  {
+    "id": "spear_rebar",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "sharp_rebar",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "pointed_rebar",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "spear_dory",
+    "type": "MIGRATION",
+    "replace": "spear_bronze"
+  },
+  {
+    "id": "yoghurt",
+    "type": "MIGRATION",
+    "replace": "yogurt"
+  },
+  {
+    "id": "spear_homemade_halfpike",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "egg_goose_canadian",
+    "type": "MIGRATION",
+    "replace": "egg_goose"
+  },
+  {
+    "id": "peanutbutter_imitation",
+    "type": "MIGRATION",
+    "replace": "peanutbutter"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_hole",
+    "to_ter": "t_open_air"
+  },
+  {
+    "type": "trap_migration",
+    "from_trap": "tr_ledge",
+    "to_trap": "tr_null"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_sunglasses",
+    "replace": "bio_armor_eyes"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_soporific",
+    "replace": "bio_sleep_shutdown"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_gills",
+    "replace": "bio_purifier"
+  },
+  {
+    "id": "generator_7500w",
+    "type": "MIGRATION",
+    "replace": "diesel_generator"
+  },
+  {
+    "id": "active_backup_generator",
+    "type": "MIGRATION",
+    "replace": "diesel_generator"
+  },
+  {
+    "id": "workbench_with_recharger",
+    "type": "MIGRATION",
+    "replace": "workbench"
+  },
+  {
+    "id": "violin_golden",
+    "type": "MIGRATION",
+    "replace": "violin"
+  },
+  {
+    "id": "krar_golden",
+    "type": "MIGRATION",
+    "replace": "krar"
+  },
+  {
+    "id": "egg_stag_beetle",
+    "type": "MIGRATION",
+    "replace": "egg_grasshopper"
+  },
+  {
+    "id": "compact_ASRG_containment",
+    "type": "MIGRATION",
+    "replace": "egg_grasshopper"
+  },
+  {
+    "id": "surv_rocket_launcher",
+    "type": "MIGRATION",
+    "replace": "pipe"
+  },
+  {
+    "id": "spiked_rocket",
+    "type": "MIGRATION",
+    "replace": "pipe"
+  },
+  {
+    "id": "incendiary_hm_rocket",
+    "type": "MIGRATION",
+    "replace": "pipe"
+  },
+  {
+    "id": "explosive_hm_rocket",
+    "type": "MIGRATION",
+    "replace": "pipe"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "water_wheel",
+    "to": "solar_panel"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "atomic_lamp",
+    "to": "atomic_light"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "xl_water_wheel",
+    "to": "solar_panel"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "wind_turbine",
+    "to": "solar_panel"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "xl_wind_turbine",
+    "to": "solar_panel"
+  },
+  {
+    "id": "homemade_toasterpastry",
+    "type": "MIGRATION",
+    "replace": "strudel"
+  },
+  {
+    "id": "homemade_toasterpastry2",
+    "type": "MIGRATION",
+    "replace": "strudel"
+  },
+  {
+    "id": "toasterpastryfrozen",
+    "type": "MIGRATION",
+    "replace": "strudel"
+  },
+  {
+    "id": "toasterpastry",
+    "type": "MIGRATION",
+    "replace": "strudel"
+  },
+  {
+    "id": "toastem2",
+    "type": "MIGRATION",
+    "replace": "toastem"
+  },
+  {
+    "id": "toastem3",
+    "type": "MIGRATION",
+    "replace": "toastem"
+  },
+  {
+    "id": "toastem4",
+    "type": "MIGRATION",
+    "replace": "toastem"
+  },
+  {
+    "id": "chips2",
+    "type": "MIGRATION",
+    "replace": "chips"
+  },
+  {
+    "id": "chips3",
+    "type": "MIGRATION",
+    "replace": "chips"
+  },
+  {
+    "id": "leather_hide",
+    "type": "MIGRATION",
+    "replace": "leather_sheet"
+  },
+  {
+    "id": "muzzle_brake_mod",
+    "type": "MIGRATION",
+    "replace": "muzzle_brake"
+  },
+  {
+    "id": "stone_pouch",
+    "type": "MIGRATION",
+    "replace": "grenade_pouch"
+  },
+  {
+    "id": "leather_stone_pouch",
+    "type": "MIGRATION",
+    "replace": "grenade_pouch"
+  },
+  {
+    "id": "gartersheath1",
+    "type": "MIGRATION",
+    "replace": "gartersheath"
+  },
+  {
+    "id": "gartersheath2",
+    "type": "MIGRATION",
+    "replace": "gartersheath"
+  },
+  {
+    "id": "nomad_rig",
+    "type": "MIGRATION",
+    "replace": "chestrig"
+  },
+  {
+    "id": "nomad_rig_on",
+    "type": "MIGRATION",
+    "replace": "chestrig"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "katana_inferior",
+    "replace": "katana"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "katana_fake",
+    "replace": "katana"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wakizashi_inferior",
+    "replace": "wakizashi"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wakizashi_fake",
+    "replace": "wakizashi"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "naginata_inferior",
+    "replace": "naginata"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "naginata_inferior",
+    "replace": "naginata"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pike_inferior",
+    "replace": "pike"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pike_fake",
+    "replace": "pike"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanto_inferior",
+    "replace": "tanto"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanto_fake",
+    "replace": "tanto"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "jian_inferior",
+    "replace": "jian"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "jian_fake",
+    "replace": "jian"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scimitar_inferior",
+    "replace": "talwar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scimitar_fake",
+    "replace": "talwar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scimitar",
+    "replace": "talwar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wakizashi_inferior",
+    "replace": "wakizashi"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wakizashi_fake",
+    "replace": "wakizashi"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lucern_hammerfake",
+    "replace": "lucerne_hammer"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "kirpan_cheap",
+    "replace": "kirpan"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mace_fake",
+    "replace": "mace"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rapier_fake",
+    "replace": "rapier"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "battleaxe_fake",
+    "replace": "battleaxe"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "backpack_hunting",
+    "replace": "backpack_hiking"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "backpack_giant",
+    "replace": "bigback"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "methed_alcohol",
+    "replace": "denat_alcohol"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bone_demihuman",
+    "replace": "bone"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_cracklins",
+    "replace": "cracklins"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_meat_scrap",
+    "replace": "meat_scrap"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_lung",
+    "replace": "lung"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutant_bug_lungs",
+    "replace": "mutant_lung"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_heart",
+    "replace": "heart"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_liver",
+    "replace": "liver"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_marrow",
+    "replace": "human_marrow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_brain",
+    "replace": "human_brain"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_kidney",
+    "replace": "human_kidney"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_lung",
+    "replace": "human_lung"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "raw_demihumanleather",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_fat",
+    "replace": "fat"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_tallow",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_lard",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_flesh",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_blood",
+    "replace": "blood"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_cooked",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_stomach_boiled",
+    "replace": "stomach_boiled"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "small_demihuman_stomach_boiled",
+    "replace": "small_stomach_boiled"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_stomach",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "small_demihuman_stomach",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_fat",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bone_mi-go",
+    "replace": "meat_mi-go"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bone_mi-go",
+    "replace": "meat_mi-go"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sword_crude",
+    "replace": "sword_metal"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sword_crude_large",
+    "replace": "sword_metal_large"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sword_nail",
+    "replace": "sword_wood"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lajatang",
+    "replace": "halberd"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "spear_forked",
+    "replace": "spear_wood"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "makeshift_halberd",
+    "replace": "makeshift_glaive"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "broken_science_bot",
+    "replace": "broken_skitterbot"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bot_science_bot",
+    "replace": "bot_skitterbot"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tallow_tainted",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "dandelionburdock_tea",
+    "replace": "dandelion_tea"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "spezi",
+    "replace": "cola"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rootbeer_brewed",
+    "replace": "rootbeer"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "atomic_coffee",
+    "replace": "coffee"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "energy_drink_atomic",
+    "replace": "colamdew"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "drink_royrogers",
+    "replace": "cola"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "drink_shirleytemple",
+    "replace": "lemonlime"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "orangeade",
+    "replace": "lemonade"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "orangeade_powder",
+    "replace": "lemonade_powder"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "grapeade_powder",
+    "replace": "lemonade_powder"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "grapeade",
+    "replace": "lemonade"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "oj_fresh",
+    "replace": "oj"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sparkling_peach",
+    "replace": "sparkling"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sparkling_pomegranate",
+    "replace": "sparkling"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_plate",
+    "replace": "boots_steel"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_boots_plate",
+    "replace": "xl_boots"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xs_boots_plate",
+    "replace": "xs_boots"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_chitin",
+    "replace": "chitin_sollerets"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_chitin_xl",
+    "replace": "chitin_sollerets_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_chitin_xs",
+    "replace": "chitin_sollerets_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_acidchitin",
+    "replace": "acidchitin_sollerets"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_acidchitin_xl",
+    "replace": "acidchitin_sollerets_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_acidchitin_xs",
+    "replace": "acidchitin_sollerets_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "small_repairkit",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "large_repairkit",
+    "replace": "heavy_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "escape_stone",
+    "replace": "pebble"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "calming_stone",
+    "replace": "pebble"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "unstable_rift",
+    "replace": "pebble"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "louverture",
+    "replace": "mace"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pulverizer",
+    "replace": "hammer_sledge"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "steel_lump",
+    "replace": "steel_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_copper",
+    "replace": "copper_fragment"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "chunk_cast_iron",
+    "replace": "iron_fragment"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lump_cast_iron",
+    "replace": "iron_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_cotton",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_nomex",
+    "replace": "thread_nomex"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_kevlar",
+    "replace": "thread_kevlar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_neoprene",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_nylon",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_canvas",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_felt",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_leather",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_fur",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_faux_fur",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_lycra",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_carpet",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_denim",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bigframe_pack",
+    "replace": "frame_pack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cotton_patchwork",
+    "replace": "cotton_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nylon",
+    "replace": "nylon_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_nylon",
+    "replace": "nylon_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "patch_lycra",
+    "replace": "spandex_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_lycra",
+    "replace": "spandex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_lycra_patchwork",
+    "replace": "spandex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_denim",
+    "replace": "denim_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_denim_patchwork",
+    "replace": "denim_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_leather_patchwork",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_fur_patchwork",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanned_pelt",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_faux_fur_patchwork",
+    "replace": "faux_fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_canvas_patchwork",
+    "replace": "canvas_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_leather",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_faux_fur",
+    "replace": "faux_fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_canvas",
+    "replace": "canvas_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_nomex",
+    "replace": "nomex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_nomex_patchwork",
+    "replace": "nomex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_neoprene_patchwork",
+    "replace": "neoprene_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_nylon_patchwork",
+    "replace": "nylon_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_kevlar_layered",
+    "replace": "kevlar_sheet_layered"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_kevlar_patchwork",
+    "replace": "kevlar_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_kevlar",
+    "replace": "kevlar_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_cotton_patchwork",
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_cotton",
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bodysuit_lycra",
+    "replace": "bodysuit_spandex"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lycra_patch",
+    "replace": "spandex_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lycra_sheet_patchwork",
+    "replace": "spandex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lycra_sheet",
+    "replace": "spandex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_cotton_patch",
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_lampoil",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_armor_arms",
+    "replace": "bio_carbon"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_armor_legs",
+    "replace": "bio_weight"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_fuel_cell_gasoline",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_ethanol",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_ethanol",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_fuel_cell_gasoline",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_lampoil",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_armor_arms",
+    "to": "bio_carbon"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_armor_legs",
+    "to": "bio_weight"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_ethanol_tank",
+    "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_oil_tank",
+    "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_gasoline_tank",
+    "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cotton_sheet_patchwork",
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "felt_sheet_patchwork",
+    "replace": "felt_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nomex_sheet_patchwork",
+    "replace": "nomex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "spandex_sheet_patchwork",
+    "replace": "spandex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "kevlar_sheet_patchwork",
+    "replace": "kevlar_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nylon_sheet_patchwork",
+    "replace": "nylon_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leather_sheet_patchwork",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "fur_sheet_patchwork",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "faux_fur_sheet_patchwork",
+    "replace": "faux_fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "canvas_sheet_patchwork",
+    "replace": "canvas_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "denim_sheet_patchwork",
+    "replace": "denim_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leather",
+    "replace": "leather_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "fur",
+    "replace": "fur_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nomex",
+    "replace": "nomex_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "neoprene",
+    "replace": "neoprene_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "faux_fur",
+    "replace": "faux_fur_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "kevlar",
+    "replace": "ballistic_vest_concealable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rigid_kevlar_plate",
+    "replace": "kevlar_plate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_felt",
+    "replace": "felt_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_bronze",
+    "replace": "bronze_fragment"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lard",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutant_lard",
+    "replace": "mutant_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutant_human_lard",
+    "replace": "mutant_human_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "human_lard",
+    "replace": "human_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cooking_oil2",
+    "replace": "cooking_oil"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "ap_fridge",
+    "to": "ap_apartment_fridge"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "ap_freezer",
+    "to": "ap_chest_freezer"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "car_light_plus_battery_cell",
+    "to": "battery_car"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "car_medium_plus_battery_cell",
+    "to": "battery_car"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "light_plus_battery_cell",
+    "replace": "light_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "light_disposable_cell",
+    "replace": "light_battery_cell"
+  },
+  {
+    "id": "light_minus_atomic_battery_cell",
+    "type": "MIGRATION",
+    "replace": "light_minus_battery_cell"
+  },
+  {
+    "id": "light_atomic_battery_cell",
+    "type": "MIGRATION",
+    "replace": "light_battery_cell"
+  },
+  {
+    "id": "medium_atomic_battery_cell",
+    "type": "MIGRATION",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "id": "medium_dry_cell",
+    "type": "MIGRATION",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "id": "heavy_dry_cell",
+    "type": "MIGRATION",
+    "replace": "heavy_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wearable_big_light",
+    "replace": "wearable_light"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wearable_big_light_on",
+    "replace": "wearable_light_on"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "foldable_aisle",
+    "to": "wooden_aisle"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "minireactor",
+    "to": "minifridge"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rad_monitor",
+    "replace": "wristwatch"
+  },
+  {
+    "id": "bottle_plastic_tiny_glue",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "bottle_plastic_tiny_glue",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "diving_flashlight_variable_on_low",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_variable_on_med",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_variable_on_hi",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_variable",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight"
+  },
+  {
+    "id": "diving_flashlight_small_hipower_on",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_small_on",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_small_hipower",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight"
+  },
+  {
+    "id": "diving_flashlight_small",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight"
+  },
+  {
+    "id": "gas_charger_on",
+    "type": "MIGRATION",
+    "replace": "UPS_off"
+  },
+  {
+    "id": "gas_charger",
+    "type": "MIGRATION",
+    "replace": "UPS_off"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "medium_disposable_cell",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "heavy_disposable_cell",
+    "replace": "heavy_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "turtleneck_shirt_rolled",
+    "replace": "turtleneck_shirt"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "turtleneck_rolled",
+    "replace": "turtleneck"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "hallula",
+    "replace": "bread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "medium_plus_battery_cell",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "candy3gator",
+    "replace": "candy3"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cow_candy",
+    "replace": "candy3"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "atomic_lamp",
+    "replace": "atomic_light"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "atomic_lamp_off",
+    "replace": "atomic_light_off"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "dynamite_bomb",
+    "replace": "dynamite_bundle"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "dynamite_bomb_act",
+    "replace": "dynamite_bundle_act"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "soapy_water",
+    "replace": "water"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bandages_makeshift_bleached",
+    "replace": "bandages_makeshift_sanitized"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bandages_makeshift_boiled",
+    "replace": "bandages_makeshift_sanitized"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lupine_sample",
+    "replace": "canine_sample"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_1",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_20_223",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_5_shot",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_5_slug",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_5_beanbag",
+    "replace": "ammo_box_small"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_2",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_100_9mm_fmj",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_100_9mm_jhp",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_3",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_10_338",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_20_300wm",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_30_300blk",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_3_clips",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_20_308",
+    "replace": "ammo_box"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_4",
+    "replace": "ammo_box_big"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_20_338",
+    "replace": "ammo_box_big"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "ammo_box_army_10_50bmg",
+    "replace": "ammo_box_big"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sewage",
+    "replace": "water_sewage"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanning_hide",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanning_pelt",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "water_purifying",
+    "replace": "water_clean"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "solarpack",
+    "replace": "backpack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "solarpack_on",
+    "replace": "backpack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "brick_kiln",
+    "replace": "kiln"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "material_aluminium_ingot",
+    "replace": "aluminum_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "chem_aluminium_powder",
+    "replace": "aluminum_powder"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "chem_aluminium_sulphate",
+    "replace": "aluminum_sulfate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bread_flour",
+    "replace": "flour"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "huge_atomic_battery_cell",
+    "replace": "heavy_atomic_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "weather_reader",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "blade_trap",
+    "replace": "blade"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutagen_lupine",
+    "replace": "mutagen_canine"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "iv_mutagen_lupine",
+    "replace": "iv_mutagen_canine"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "multi_cooker",
+    "replace": "hotplate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bot_turret_searchlight",
+    "replace": "lens"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "dressage_whip",
+    "replace": "riding_crop"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "combatsaw_off",
+    "replace": "chainsaw_off"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "e_combatsaw_off",
+    "replace": "elec_chainsaw_off"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "combatsaw_on",
+    "replace": "chainsaw_on"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "e_combatsaw_on",
+    "replace": "elec_chainsaw_on"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "isherwood_herbal_remedies",
+    "replace": "textbook_herbal_remedies"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "reinforced_glass_sheet",
+    "replace": "tempered_glass_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "reinforced_glass_pane",
+    "replace": "tempered_glass_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lifestraw",
+    "replace": "plastic_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "poppy_bud",
+    "replace": "poppy_pod"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "poppy_pain",
+    "replace": "opium_tar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "poppy_sleep",
+    "replace": "opium_tar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "poppy_cough",
+    "replace": "opium_tar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "patchwork_scarf_headwrap",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "patchwork_scarf_loose",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_patchwork_scarf",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_patchwork_scarf_loose",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_patchwork_scarf_headwrap",
+    "replace": "patchwork_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "knit_scarf_loose",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "knit_scarf_headwrap",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_knit_scarf",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_knit_scarf_loose",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_knit_scarf_headwrap",
+    "replace": "knit_scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_loose",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_headwrap",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_long",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_long_headwrap",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_long_loose",
+    "replace": "scarf"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_loose",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_headwrap",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_long",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_long_headwrap",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_fur_long_loose",
+    "replace": "scarf_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_loose",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_headwrap",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_long",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_long_headwrap",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scarf_faux_fur_long_loose",
+    "replace": "scarf_faux_fur"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "marloss_scarf",
+    "replace": "keffiyeh"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cola_meth",
+    "replace": "pure_meth"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "benelli_sa",
+    "replace": "m2"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "benelli_tsa",
+    "replace": "m2"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "button_horn",
+    "replace": "button_bone"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "heavy_steel_ballistic_plate",
+    "replace": "steel_esapi_plate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "steel_ballistic_plate",
+    "replace": "steel_esapi_plate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_ballistic_vest_steel",
+    "replace": "plate_carrier_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_ballistic_vest",
+    "replace": "plate_carrier_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xlkevlar",
+    "replace": "ballistic_vest_concealable_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wash_kit",
+    "replace": "washboard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "undershirt",
+    "replace": "tank_top"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "clay_quern",
+    "replace": "rock_quern"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_farmor",
+    "replace": "leather_cuirass"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_armor_farmor",
+    "replace": "leather_cuirass_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_farmor_xs",
+    "replace": "leather_cuirass_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_faux_farmor",
+    "replace": "leather_cuirass"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_armor_faux_farmor",
+    "replace": "leather_cuirass_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "armor_faux_farmor_xs",
+    "replace": "leather_cuirass_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "peppermeat",
+    "replace": "meat_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperfat",
+    "replace": "meat_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "peppermutant",
+    "replace": "mutant_meat_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperscrap",
+    "replace": "meat_scrap_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperscrap_mutant",
+    "replace": "mutant_meat_scrap_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperbone",
+    "replace": "cooked_marrow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pepperhuman",
+    "replace": "human_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "peppermutant_human",
+    "replace": "mutant_human_cooked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "meat_salted",
+    "replace": "jerky"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "salted_fish",
+    "replace": "fish_smoked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "salted_mollusk",
+    "replace": "mollusk_smoked"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_harness_dog",
+    "replace": "leather_harness_dog"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_armor_cow",
+    "replace": "leather_armor_cow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leatherbone_armor_horse",
+    "replace": "leather_armor_horse"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "javelin_fletched",
+    "replace": "javelin_iron"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "javelin_fletched_bronze",
+    "replace": "javelin"
+  },
+  {
+    "type": "field_type_migration",
+    "from_field": "fd_fungal_haze",
+    "to_field": "fd_spores"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bellyband",
+    "replace": "bellywrap"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plaguedoctor_robe",
+    "replace": "cassock"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wrench_large",
+    "replace": "wrench"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "engine_electric_small",
+    "to": "engine_electric_medium"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "hide_tainted_bag",
+    "replace": "hide_bag"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "swag_bag",
+    "replace": "bag_canvas"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "suitcase_m",
+    "replace": "suitcase"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "suitcase_l",
+    "replace": "suitcase_large"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "folded_trashcan_large",
+    "replace": "roller_bin"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "UPS_OFF",
+    "replace": "UPS_off"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "UPS_ON",
+    "replace": "UPS_off"
+  },
+  {
+    "id": "junk_platemail_suit",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass"
+  },
+  {
+    "id": "platemail_suit",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass"
+  },
+  {
+    "id": "platemail_suit_xl",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass_xl"
+  },
+  {
+    "id": "platemail_suit_xs",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass_xs"
+  },
+  {
+    "id": "chainmail_suit",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk"
+  },
+  {
+    "id": "chainmail_suit_xl",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_xl"
+  },
+  {
+    "id": "chainmail_suit_xs",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_xs"
+  },
+  {
+    "id": "chainmail_junk_sleeves",
+    "type": "MIGRATION",
+    "replace": "chainmail_sleeves"
+  },
+  {
+    "id": "chainmail_junk_sleeves_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_sleeves_loose"
+  },
+  {
+    "id": "chainmail_junk_gloves",
+    "type": "MIGRATION",
+    "replace": "chainmail_gloves"
+  },
+  {
+    "id": "chainmail_junk_coif",
+    "type": "MIGRATION",
+    "replace": "chainmail_coif"
+  },
+  {
+    "id": "chainmail_junk_chausses",
+    "type": "MIGRATION",
+    "replace": "chainmail_chausses"
+  },
+  {
+    "id": "chainmail_junk_aventail",
+    "type": "MIGRATION",
+    "replace": "chainmail_aventail"
+  },
+  {
+    "id": "chainmail_junk_hauberk",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk"
+  },
+  {
+    "id": "chainmail_junk_hauberk_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_loose"
+  },
+  {
+    "id": "chainmail_junk_vest",
+    "type": "MIGRATION",
+    "replace": "chainmail_vest"
+  },
+  {
+    "id": "chainmail_junk_vest_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_vest_loose"
+  },
+  {
+    "id": "chainmail_skirt_budget",
+    "type": "MIGRATION",
+    "replace": "chainmail_skirt"
+  },
+  {
+    "id": "chainmail_skirt_budget_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_skirt_loose"
+  },
+  {
+    "id": "5l_budget_steel",
+    "type": "MIGRATION",
+    "replace": "5l_steel"
+  },
+  {
+    "id": "10l_budget_steel",
+    "type": "MIGRATION",
+    "replace": "10l_steel"
+  },
+  {
+    "id": "budget_steel_fragment",
+    "type": "MIGRATION",
+    "replace": "steel_fragment"
+  },
+  {
+    "id": "budget_steel_chunk",
+    "type": "MIGRATION",
+    "replace": "steel_chunk"
+  },
+  {
+    "id": "armor_riot",
+    "type": "MIGRATION",
+    "replace": "armor_riot_torso"
+  },
+  {
+    "id": "armor_tiresuit",
+    "type": "MIGRATION",
+    "replace": "tire_cuirass"
+  },
+  {
+    "id": "wrapper_foil_roll",
+    "type": "MIGRATION",
+    "replace": "aluminum_foil_roll"
+  },
+  {
+    "id": "harmonica_holder",
+    "type": "MIGRATION",
+    "replace": "harmonica"
+  }
+]

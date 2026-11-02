@@ -1,0 +1,443 @@
+[
+  {
+    "id": "lsurvivor_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "light survivor suit" },
+    "description": "Body armor handmade from a durable coverall with quilted Kevlar lining.  It's tough and chemical-resistant, but not waterproofed and it likely won't stand up to gunfire.",
+    "weight": "4000 g",
+    "volume": "5800 ml",
+    "price": "1100 USD",
+    "price_postapoc": "50 USD",
+    "material": [ { "type": "nylon", "portion": 5 }, { "type": "kevlar", "portion": 5 } ],
+    "to_hit": -3,
+    "symbol": "[",
+    "looks_like": "touring_suit",
+    "color": "green",
+    "//": "A mechanic's polyester boiler suit with a bunch of cut up Kevlar from cut-resistant garments sewn underneath.  No rubber, so it's breathable.",
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "encumbrance": [ 2, 2 ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_throat" ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
+        ],
+        "encumbrance": [ 14, 22 ],
+        "covers": [ "torso" ],
+        "coverage": 100
+      },
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
+        ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
+        "encumbrance": [ 14, 18 ],
+        "specifically_covers": [
+          "arm_shoulder_l",
+          "arm_shoulder_r",
+          "arm_upper_l",
+          "arm_upper_r",
+          "arm_lower_l",
+          "arm_lower_r",
+          "leg_hip_l",
+          "leg_hip_r",
+          "leg_upper_l",
+          "leg_upper_r",
+          "leg_lower_l",
+          "leg_lower_r"
+        ],
+        "coverage": 98
+      },
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
+        ],
+        "covers": [ "cephalopod_tentacle_r", "cephalopod_tentacle_l" ],
+        "encumbrance": [ 14, 18 ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
+        ],
+        "covers": [ "cephalopod_tentacle_r", "cephalopod_tentacle_l" ],
+        "encumbrance": [ 14, 18 ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.25 }
+        ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
+        "encumbrance": [ 0, 0 ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "arm_elbow_l", "arm_elbow_r" ],
+        "coverage": 70
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "warmth": 7,
+    "environmental_protection": 3,
+    "flags": [ "VARSIZE", "POCKETS", "STURDY" ]
+  },
+  {
+    "id": "lsurvivor_suit_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "light survivor suit" },
+    "copy-from": "lsurvivor_suit",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "lsurvivor_suit_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "light survivor suit" },
+    "copy-from": "lsurvivor_suit",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "survivor_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "survivor suit" },
+    "description": "Body armor handmade from a durable coverall with quilted Kevlar lining and a rubberized coating.  It provides good all-around protection from many of the hazards of the Cataclysm.",
+    "weight": "4500 g",
+    "volume": "6000 ml",
+    "price": "1800 USD",
+    "price_postapoc": "200 USD",
+    "material": [ { "type": "soft_rubber", "portion": 1 }, { "type": "nylon", "portion": 5 }, { "type": "kevlar", "portion": 5 } ],
+    "to_hit": -3,
+    "symbol": "[",
+    "looks_like": "touring_suit",
+    "color": "green",
+    "//": "A mechanic's polyester boiler suit with a bunch of cut up Kevlar from cut-resistant garments sewn underneath.  A layer of butyl rubber (e.g. Flexseal) is sprayed over almost the entire exterior surface of the garment.",
+    "armor": [
+      {
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "encumbrance": [ 2, 2 ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_throat" ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 86, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
+        ],
+        "encumbrance": [ 16, 24 ],
+        "covers": [ "torso" ],
+        "coverage": 100
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 90, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
+        ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
+        "encumbrance": [ 16, 20 ],
+        "specifically_covers": [
+          "arm_shoulder_l",
+          "arm_shoulder_r",
+          "arm_upper_l",
+          "arm_upper_r",
+          "arm_lower_l",
+          "arm_lower_r",
+          "leg_hip_l",
+          "leg_hip_r",
+          "leg_upper_l",
+          "leg_upper_r",
+          "leg_lower_l",
+          "leg_lower_r"
+        ],
+        "coverage": 98
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 90, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
+        ],
+        "covers": [ "cephalopod_tentacle_r", "cephalopod_tentacle_l" ],
+        "encumbrance": [ 14, 18 ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.25 }
+        ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
+        "encumbrance": [ 0, 0 ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "arm_elbow_l", "arm_elbow_r" ],
+        "coverage": 70
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "warmth": 25,
+    "environmental_protection": 7,
+    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY" ]
+  },
+  {
+    "id": "survivor_suit_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "survivor suit" },
+    "copy-from": "survivor_suit",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "survivor_suit_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "survivor suit" },
+    "copy-from": "survivor_suit",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "fsurvivor_suit",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str": "survivor firesuit" },
+    "description": "Handcrafted armor made from a flame-resistant jumpsuit with additional Kevlar padding and strategically placed butyl rubber coating.  It protects from brief exposure to flames as well as many other Cataclysmic hazards, though additional armor will be needed to stop bullets.",
+    "weight": "4500 g",
+    "volume": "6800 ml",
+    "price": "2000 USD",
+    "price_postapoc": "50 USD",
+    "to_hit": -3,
+    "material": [ { "type": "soft_rubber", "portion": 1 }, { "type": "nomex", "portion": 5 }, { "type": "kevlar", "portion": 5 } ],
+    "symbol": "[",
+    "looks_like": "survivor_suit",
+    "color": "light_gray",
+    "//": "Essentially a firefighter's jumpsuit with cut-resistant Kevlar sewn in as a liner.  Butyl rubber is sprayed over parts of the exterior, but it's limited to help prevent overheating.",
+    "armor": [
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": [ 2, 2 ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_throat" ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 60, "thickness": 0.1 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 100,
+        "encumbrance": [ 16, 22 ]
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 60, "thickness": 0.1 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
+        ],
+        "covers": [ "cephalopod_tentacle_r", "cephalopod_tentacle_l" ],
+        "encumbrance": [ 14, 18 ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 60, "thickness": 0.1 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "cotton", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
+        ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
+        "coverage": 98,
+        "encumbrance": [ 16, 20 ]
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "warmth": 20,
+    "environmental_protection": 4,
+    "flags": [ "VARSIZE", "WATERPROOF", "POCKETS", "RAINPROOF", "STURDY" ]
+  },
+  {
+    "id": "fsurvivor_suit_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "survivor firesuit" },
+    "copy-from": "fsurvivor_suit",
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "fsurvivor_suit_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "survivor firesuit" },
+    "copy-from": "fsurvivor_suit",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  }
+]

@@ -1,0 +1,150 @@
+name: CI
+
+# There was no continuous check on this repository — the only workflow was
+# "Add guidance weights", which does something else entirely. Nothing ran
+# install, lint, typecheck, tests or build on a push, which is how the
+# Playwright config came to reference a package that is in neither
+# package.json nor the lockfile without anyone noticing.
+
+on:
+  push:
+    branches: ["SAS-JACKY"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app:
+    name: Lint, typecheck, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      # `npm ci` rather than `npm install`: it fails when package.json and the
+      # lockfile disagree, which is the class of problem this job exists to
+      # catch early.
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit -p tsconfig.app.json
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      # The MCP edge function is generated from src/lib/mcp by a Vite plugin.
+      # If someone edits the generated file directly, the next build silently
+      # reverts it -- so a build that changes tracked files is a real problem
+      # and should stop here rather than in production.
+      - name: Generated files are up to date
+        run: |
+          if ! git diff --quiet -- supabase/functions/mcp/index.ts; then
+            echo "::error::supabase/functions/mcp/index.ts is out of date with src/lib/mcp."
+            echo "Edit the sources under src/lib/mcp and commit the regenerated bundle."
+            git --no-pager diff -- supabase/functions/mcp/index.ts
+            exit 1
+          fi
+
+      # Skipped while e2e/ has no specs. Playwright exits non-zero on an empty
+      # suite, and its webServer would build and serve the app to run nothing,
+      # so gating on the specs existing keeps the job honest and fast. It starts
+      # running by itself the moment someone adds the first spec.
+      - name: E2E
+        run: |
+          if [ -z "$(find e2e -name '*.spec.ts' -print -quit)" ]; then
+            echo "No Playwright specs in e2e/ yet - skipping."
+            exit 0
+          fi
+          npx playwright install --with-deps chromium
+          npx playwright test
+
+  python:
+    name: Router stack and agent runtime
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      # 3.9 is the floor `pyproject.toml` declares, so it is the version worth
+      # testing on: the agent runtime arrived here with a `TaskNode | None`
+      # annotation that is a TypeError below 3.10, and nothing would have
+      # caught it on a newer interpreter.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      - name: Install pytest
+        run: python -m pip install --quiet --upgrade pip pytest
+
+      # Reads `testpaths` from pyproject: tests/ and command_station/tools/.
+      # jackierouter has no third-party dependencies in its core, by design, so
+      # there is nothing else to install.
+      - name: Tests
+        run: python -m pytest -q
+
+  condenser:
+    name: Context condenser
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # node:test with --experimental-strip-types; package.json says >=22.6.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Tests
+        working-directory: context-condenser
+        run: npm test
+
+  database:
+    name: Database authorization probes
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      # Replays the real migration chain and then attempts, as a second
+      # signed-in user, every cross-tenant move the security review asked us to
+      # prove impossible. RLS policies and table grants are not reachable from
+      # any TypeScript check, so without this they are only ever reviewed by eye.
+      - name: Start PostgreSQL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-16 postgresql-16-pgvector
+          export PATH=/usr/lib/postgresql/16/bin:$PATH
+          sudo -u postgres pg_ctlcluster 16 main start || true
+          sudo -u postgres psql -c "ALTER SYSTEM SET port = 5433;" || true
+          sudo -u postgres pg_ctlcluster 16 main restart || true
+
+      - name: Authorization probes
+        env:
+          PGHOST: /var/run/postgresql
+          PGPORT: "5433"
+          PGUSER: postgres
+        run: |
+          # The probes run as the postgres OS user, which has no route into the
+          # runner's home directory: psql could not open a single .sql file, so
+          # this job failed on "Permission denied" at the first one and has
+          # never actually checked a policy. Open the traverse bit on each
+          # ancestor and read on the tree, rather than moving the checkout.
+          dir="$GITHUB_WORKSPACE"
+          while [ "$dir" != "/" ]; do sudo chmod a+x "$dir"; dir="$(dirname "$dir")"; done
+          sudo chmod -R a+rX "$GITHUB_WORKSPACE/scripts" "$GITHUB_WORKSPACE/supabase"
+          sudo -u postgres -E ./scripts/db-authz-test.sh

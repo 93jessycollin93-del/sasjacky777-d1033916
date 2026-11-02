@@ -1,0 +1,51 @@
+[
+  {
+    "type": "item_group",
+    "id": "robofac_basic_trade",
+    "subtype": "distribution",
+    "entries": [
+      { "group": "textbooks", "prob": 80 },
+      { "group": "electronics", "prob": 80 },
+      { "group": "science", "prob": 80 },
+      { "group": "robofac_basic_robots", "prob": 80 },
+      { "group": "robofac_id_cards", "prob": 80 },
+      { "group": "robofac_basic_grenades", "prob": 80 },
+      { "group": "cop_armory", "prob": 80 },
+      { "group": "ammo_any_batteries_full", "prob": 80 },
+      { "group": "bionics_common", "prob": 80 },
+      { "group": "bionics_mil", "prob": 10 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "robofac_id_cards",
+    "subtype": "distribution",
+    "items": [ [ "id_science", 90 ], [ "id_military", 5 ], [ "id_industrial", 5 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "robofac_basic_grenades",
+    "subtype": "distribution",
+    "items": [ [ "grenade_emp", 70 ], [ "scrambler", 30 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "robofac_basic_robots",
+    "subtype": "distribution",
+    "items": [ [ "bot_tazer_hack", 40 ], [ "bot_manhack", 40 ], [ "bot_skitterbot", 25 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "robofac_robots",
+    "subtype": "distribution",
+    "items": [ [ "bot_robofac_skittergun", 40 ], [ "robofac_robotrig", 50 ] ]
+  },
+  {
+    "id": "nano_templates",
+    "type": "item_group",
+    "//": "a group of nano templates for one of the missions",
+    "container-item": "box_small_wood",
+    "subtype": "collection",
+    "entries": [ { "item": "template_armor" }, { "item": "template_photonics" } ]
+  }
+]

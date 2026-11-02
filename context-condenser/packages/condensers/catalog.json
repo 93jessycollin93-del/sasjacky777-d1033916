@@ -1,0 +1,426 @@
+{
+  "version": 1,
+  "generatedFrom": "KnowledgeCompressorApp.tsx",
+  "presets": [
+    {
+      "id": "gist_core",
+      "name": "Executive Gist Core",
+      "category": "semantic",
+      "mathFormula": "G(x) = \\lim_{n \\to k} S(x_n)",
+      "description": "Distills paragraphs into single-sentence semantic anchors with maximal contextual retention.",
+      "instruction": "Condense the text down to its absolute core message in exactly one or two dense, punchy sentences. Retain critical proper nouns and outcomes. Absolutely no introductions or polite phrasing.",
+      "efficiencyRating": "85-95%",
+      "reductionRange": [
+        0.85,
+        0.95
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "first_principles",
+      "name": "First-Principles Decomposer",
+      "category": "logical",
+      "mathFormula": "F_p(X) = \\{ a \\in X \\mid \\forall b, b \\not\\vdash a \\}",
+      "description": "Deconstructs arguments into fundamental axioms, truths, and derived logical statements.",
+      "instruction": "Deconstruct this information into its fundamental constituent axioms (self-evident truths) and logical deductions. Present them as numbered axioms [A1, A2] and derived conclusions [C1, C2] representing the core reasoning chain.",
+      "efficiencyRating": "75-80%",
+      "reductionRange": [
+        0.75,
+        0.8
+      ],
+      "outputKind": "axioms"
+    },
+    {
+      "id": "taxonomic_ontology",
+      "name": "Taxonomic Ontology Matrix",
+      "category": "cognitive",
+      "mathFormula": "T(C) = \\langle C, \\le, R \\rangle",
+      "description": "Groups ideas, technologies, or subjects into high-density hierarchical definitions.",
+      "instruction": "Structure the text content into a strict nested taxonomical tree. Use clean indentation and prefix relationships with taxonomy parent-child roles (e.g., Domain -> Family -> Class -> Concept) to define structural boundaries.",
+      "efficiencyRating": "70-75%",
+      "reductionRange": [
+        0.7,
+        0.75
+      ],
+      "outputKind": "tree"
+    },
+    {
+      "id": "token_sparsifier",
+      "name": "RAG Token Sparsifier",
+      "category": "cybernetic",
+      "mathFormula": "S(t) = \\{ w_i \\in t \\mid I(w_i) > \\theta \\}",
+      "description": "Filters conversational fluff, adjectives, and lexical stop-words to output bare-metal keywords.",
+      "instruction": "Act as a RAG vector context sparsifier. Strips out all conversational filler, preachy transitions, polite adjectives, and generic adverbs. Re-write the text as high-density structured keyword-fact pairings containing only high-information value terms.",
+      "efficiencyRating": "90-95%",
+      "reductionRange": [
+        0.9,
+        0.95
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "shannon_entropy_filter",
+      "name": "Shannon Entropy Filter",
+      "category": "cybernetic",
+      "mathFormula": "H(X) = -\\sum P(x_i) \\log_2 P(x_i)",
+      "description": "Identifies high-entropy informational sequences while discarding repetitive lexical chains.",
+      "instruction": "Analyze the text as a source of information. Identify the statements or elements that present the highest novel informational density (highest entropy). Output ONLY those high-entropy fact vectors, omitting repetitive, standard background assumptions.",
+      "efficiencyRating": "80-85%",
+      "reductionRange": [
+        0.8,
+        0.85
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "system_prompt_builder",
+      "name": "Claude XML Prompt Builder",
+      "category": "cognitive",
+      "mathFormula": "P_{opt}(S) = \\psi(S) \\otimes XML_{tags}",
+      "description": "Translates long guidelines or procedures into optimized, tagged XML prompts for LLMs.",
+      "instruction": "Convert these guidelines/rules into a highly structured, production-ready system prompt for an LLM. Wrap distinct operational boundaries in XML tags (e.g. <context>, <rules>, <output_schema>). Make it dense and highly authoritative.",
+      "efficiencyRating": "65-75%",
+      "reductionRange": [
+        0.65,
+        0.75
+      ],
+      "outputKind": "xml"
+    },
+    {
+      "id": "feynman_reducer",
+      "name": "Feynman Explainer Reducer",
+      "category": "semantic",
+      "mathFormula": "F_e(J) = \\phi(J) \\to S_{simple}",
+      "description": "Translates specialized jargon into ultra-clear, high-impact analogies.",
+      "instruction": "De-jargonize the content completely. Translate complex technical terminology into simple, elegant, high-impact visual analogies (the \"Feynman technique\"). Explain the concept to a complete beginner using 60% fewer words while preserving the absolute core mechanics.",
+      "efficiencyRating": "80-88%",
+      "reductionRange": [
+        0.8,
+        0.88
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "cyber_auditor",
+      "name": "OSINT Cyber-Auditor Digest",
+      "category": "cybernetic",
+      "mathFormula": "A(s) = \\{ IP, Domain, CVE \\}",
+      "description": "Extracts systems metadata, CVE descriptors, network identifiers, and IPs.",
+      "instruction": "Extract all systems metadata, network indicators (IPs, CIDRs, domains, hashes), protocol descriptors, and CVE/security references. Organize them into a strict cybernetic audit list with short threat indicators.",
+      "efficiencyRating": "90-92%",
+      "reductionRange": [
+        0.9,
+        0.92
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "cognitive_map",
+      "name": "Node-Edge Cognitive Map",
+      "category": "cognitive",
+      "mathFormula": "G = (V, E)",
+      "description": "Structures semantic connections into a clean graph of nodes and relational edges.",
+      "instruction": "Map the semantic connections of this text into a clean relational graph represented as text-based Nodes (V) and directed Edges (E). Format: \"Node A -> (relation) -> Node B\" to represent cognitive linkages.",
+      "efficiencyRating": "75-82%",
+      "reductionRange": [
+        0.75,
+        0.82
+      ],
+      "outputKind": "graph"
+    },
+    {
+      "id": "fact_densifier",
+      "name": "Heuristic Fact-Densifier",
+      "category": "logical",
+      "mathFormula": "D_{fact} = \\frac{F_{unique}}{W_{count}}",
+      "description": "Cross-references and merges overlapping statements to minimize logical redundancy.",
+      "instruction": "Parse the input text. Cross-reference all claims and facts. Merge overlapping or related statements into unified, extremely dense \"atomic truth statements\". Eliminate all redundant phrasing and fluff.",
+      "efficiencyRating": "82-88%",
+      "reductionRange": [
+        0.82,
+        0.88
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "code_boilerplate_stripper",
+      "name": "Code-Boilerplate Stripper",
+      "category": "logical",
+      "mathFormula": "C_{raw} = C_{full} \\setminus C_{boilerplate}",
+      "description": "Compresses source files down to core algorithmic pathways, stripping trivial imports.",
+      "instruction": "Review the provided code or technical outline. Strip away trivial standard imports, boilerplate class declarations, getters/setters, and generic comments. Retain and optimize ONLY the core algorithmic state transitions or business logic blocks.",
+      "efficiencyRating": "88-93%",
+      "reductionRange": [
+        0.88,
+        0.93
+      ],
+      "outputKind": "code"
+    },
+    {
+      "id": "swot_vectorizer",
+      "name": "SWOT Vectorizer",
+      "category": "semantic",
+      "mathFormula": "S(x) = \\{S, W, O, T\\}",
+      "description": "Restructures descriptions into an immediate, high-fidelity strategic quadrant.",
+      "instruction": "Analyze this narrative and restructure it into a highly focused, dense Strategic SWOT Matrix. Provide exactly 3 bullet-points for Strengths, Weaknesses, Opportunities, and Threats, highlighting core technical or strategic realities.",
+      "efficiencyRating": "78-85%",
+      "reductionRange": [
+        0.78,
+        0.85
+      ],
+      "outputKind": "table"
+    },
+    {
+      "id": "dialectic_core",
+      "name": "Socratic Dialectic Core",
+      "category": "logical",
+      "mathFormula": "D(t) = T \\oplus A \\to S",
+      "description": "Isolates the core arguments: Thesis, Antithesis, and resulting Synthesis.",
+      "instruction": "Analyze the debates, claims, or text. Extract the \"Thesis\" (the primary claim), the \"Antithesis\" (the core counterarguments or constraints), and reconcile them into a dense, advanced \"Synthesis\" summarizing the path forward.",
+      "efficiencyRating": "85-90%",
+      "reductionRange": [
+        0.85,
+        0.9
+      ],
+      "outputKind": "dialectic"
+    },
+    {
+      "id": "chronological_sequencer",
+      "name": "Chronological Timeline Sequencer",
+      "category": "cognitive",
+      "mathFormula": "T_{seq} = \\{ t_i \\mid t_i \\le t_{i+1} \\}",
+      "description": "Converts unstructured logs or narratives into sequential timestamped vectors.",
+      "instruction": "Reorganize this text into a strict, sequentially ordered timeline. Map events, milestones, or timestamps chronologically from earliest to latest, with high-density bullet descriptions of what occurred.",
+      "efficiencyRating": "80-87%",
+      "reductionRange": [
+        0.8,
+        0.87
+      ],
+      "outputKind": "timeline"
+    },
+    {
+      "id": "dijkstra_pruner",
+      "name": "Dijkstra Decision Pruner",
+      "category": "logical",
+      "mathFormula": "P_{path}(x) = \\min(Cost(x))",
+      "description": "Analyzes logical paths in the text and prunes dead, speculative, or conversational branches.",
+      "instruction": "Examine the decision-making narrative or instructions. Identify the absolute optimal \"critical path\" to the objective. Prune away all speculative options, defensive caveats, and dead-end logic branches, returning ONLY the high-efficiency roadmap.",
+      "efficiencyRating": "84-89%",
+      "reductionRange": [
+        0.84,
+        0.89
+      ],
+      "outputKind": "decision-tree"
+    },
+    {
+      "id": "hofstadter_map",
+      "name": "Hofstadter Loop Map",
+      "category": "cognitive",
+      "mathFormula": "L_{self} = \\{ f(f(x)) \\to x \\}",
+      "description": "Exposes recursive loops, nested dependencies, and self-references.",
+      "instruction": "Map out the self-referencing feedback loops, recursive properties, or nested dependencies in the text. Highlight how variables or components affect each other cyclically in a clean, structured outline.",
+      "efficiencyRating": "70-78%",
+      "reductionRange": [
+        0.7,
+        0.78
+      ],
+      "outputKind": "graph"
+    },
+    {
+      "id": "leibniz_characteristica",
+      "name": "Leibniz Characteristica Core",
+      "category": "logical",
+      "mathFormula": "C(a) = \\prod p_i^{a_i}",
+      "description": "Maps predicates and attributes into mathematical logic values.",
+      "instruction": "Map the subject and predicates of this text into precise, logical attributes. List each primary entity and define its absolute logical properties, conditions, and operations as structured boolean characteristics.",
+      "efficiencyRating": "74-82%",
+      "reductionRange": [
+        0.74,
+        0.82
+      ],
+      "outputKind": "axioms"
+    },
+    {
+      "id": "pareto_extractor",
+      "name": "Pareto 80/20 Key Extractor",
+      "category": "semantic",
+      "mathFormula": "P(80) \\propto V(20)",
+      "description": "Strips away the 80% conversational fluff to yield the 20% high-leverage data.",
+      "instruction": "Extract the high-impact \"20%\" core facts or ideas that generate 80% of the value of this text. Represent them as highly concentrated bullet points, and scrap the remaining 80% explanatory bulk entirely.",
+      "efficiencyRating": "85-92%",
+      "reductionRange": [
+        0.85,
+        0.92
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "anharmonic_filter",
+      "name": "Anharmonic Padding Filter",
+      "category": "semantic",
+      "mathFormula": "F_{pad}(t) = t \\setminus \\sum Noise",
+      "description": "Eliminates throat-clearing statements, polite introductions, and conversational fluff.",
+      "instruction": "Perform an anharmonic filter: strip out all intros (\"Sure, I can help\", \"As an AI...\"), throat-clearing sentences, background summaries, polite conclusions, and standard filler. Return ONLY the structural core content.",
+      "efficiencyRating": "92-97%",
+      "reductionRange": [
+        0.92,
+        0.97
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "cybernetic_feedback",
+      "name": "Cybernetic Feedback Loop Mapper",
+      "category": "cybernetic",
+      "mathFormula": "F_{back} = \\Delta Input \\times Gain",
+      "description": "Extracts systems cause-and-effect as closed loops with positive/negative indicators.",
+      "instruction": "Parse the system description. Construct a list of feedback loops. Identify the inputs, sensors, outputs, and gain vectors, classifying them as (+) Positive Reinforcing or (-) Negative Stabilizing loops.",
+      "efficiencyRating": "76-84%",
+      "reductionRange": [
+        0.76,
+        0.84
+      ],
+      "outputKind": "graph"
+    },
+    {
+      "id": "boolean_truth_reducer",
+      "name": "Boolean Truth Reducer",
+      "category": "logical",
+      "mathFormula": "f(A, B, C) \\to Q_{min}",
+      "description": "Converts procedural condition scripts into minimized boolean instructions.",
+      "instruction": "Review the conditional instructions, rules, or procedural steps. Simplify them down to their absolute minimal logical conditions. Express the flow as clean, pseudo-code Boolean logic statements (e.g. IF A AND (B OR NOT C) THEN DO X).",
+      "efficiencyRating": "82-90%",
+      "reductionRange": [
+        0.82,
+        0.9
+      ],
+      "outputKind": "truth-table"
+    },
+    {
+      "id": "zipf_law_parser",
+      "name": "Zipf-Law Vocabulary Parser",
+      "category": "semantic",
+      "mathFormula": "f(r) = \\frac{C}{r^s}",
+      "description": "Ranks and filters words based on rank-frequency, pruning extreme outliers to maximize impact.",
+      "instruction": "Filter the vocabulary of this text based on rank-frequency. Replace redundant or overly simple filler verbs and nouns with highly specific, single semantic terms. Synthesize the text using highly targeted, dense vocabulary.",
+      "efficiencyRating": "80-86%",
+      "reductionRange": [
+        0.8,
+        0.86
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "mece_divider",
+      "name": "MECE Division Synthesizer",
+      "category": "cognitive",
+      "mathFormula": "S = \\bigcup S_i, S_i \\cap S_j = \\emptyset",
+      "description": "Partitions complex topics into Mutually Exclusive and Collectively Exhaustive categories.",
+      "instruction": "Divide the entire information of this document into distinct categories that are strictly MECE (Mutually Exclusive, Collectively Exhaustive). Ensure there is absolutely no overlap between categories, yet they cover the whole text.",
+      "efficiencyRating": "78-84%",
+      "reductionRange": [
+        0.78,
+        0.84
+      ],
+      "outputKind": "tree"
+    },
+    {
+      "id": "entropy_maxima",
+      "name": "Information Density Maxima",
+      "category": "cybernetic",
+      "mathFormula": "M_D = \\max \\left(\\frac{I}{W}\\right)",
+      "description": "Calculates and outputs the absolute mathematical limit of meaning per character.",
+      "instruction": "Compress this text to its absolute theoretical mathematical limit of density. Eliminate spacing, helper verbs, and punctuation where possible to form a highly optimized, raw semantic packet of data that remains humanly decipherable.",
+      "efficiencyRating": "92-96%",
+      "reductionRange": [
+        0.92,
+        0.96
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "superposition_mapper",
+      "name": "Superposition State Mapper",
+      "category": "cognitive",
+      "mathFormula": "|\\psi\\rangle = \\alpha|0\\rangle + \\beta|1\\rangle",
+      "description": "Structures claims into co-existing alternate hypotheses with weight margins.",
+      "instruction": "Analyze the speculative claims or data. Map them as a \"Quantum Superposition\" of multiple competing theories or states. List each hypothesis and allocate an informational weight percentage (e.g., State A: 40% vs State B: 60%) based on text evidence.",
+      "efficiencyRating": "72-80%",
+      "reductionRange": [
+        0.72,
+        0.8
+      ],
+      "outputKind": "graph"
+    },
+    {
+      "id": "godel_completeness_finder",
+      "name": "Gödelian Incompleteness Finder",
+      "category": "logical",
+      "mathFormula": "G \\vdash \\neg Con(T)",
+      "description": "Extracts unstated assumptions, logical contradictions, and limits of the text.",
+      "instruction": "Analyze this document. Instead of summarizing what is there, extract the \"Incompleteness\": what is left unstated, what underlying assumptions are unproved, and where are the inherent logical contradictions or boundaries of the claim.",
+      "efficiencyRating": "70-76%",
+      "reductionRange": [
+        0.7,
+        0.76
+      ],
+      "outputKind": "gaps"
+    },
+    {
+      "id": "semantic_vector_block",
+      "name": "Vectorized Semantic Context",
+      "category": "semantic",
+      "mathFormula": "\\vec{v} = \\sum w_i \\vec{e}_i",
+      "description": "Transforms multi-turn explanations into a singular, vectorized high-dimensional chunk.",
+      "instruction": "Compile all content into a singular, tightly structured vector-style semantic chunk. Structure key concepts as dimension coordinates with direct, rich value assignments. Perfect for direct feeding into high-efficiency embeddings.",
+      "efficiencyRating": "88-94%",
+      "reductionRange": [
+        0.88,
+        0.94
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "cybernetic_gain_shifter",
+      "name": "Cybernetic Shifter",
+      "category": "cybernetic",
+      "mathFormula": "G_{shift} = \\frac{A}{1 + A\\beta}",
+      "description": "Modulates explanation gain to output dense operational parameters.",
+      "instruction": "Convert this descriptive content into a highly detailed set of strict operational parameters, configurations, and tuning thresholds. Translate generic prose into specific operational values.",
+      "efficiencyRating": "80-85%",
+      "reductionRange": [
+        0.8,
+        0.85
+      ],
+      "outputKind": "prose"
+    },
+    {
+      "id": "axiom_assembler",
+      "name": "Axiomatic Assembler",
+      "category": "logical",
+      "mathFormula": "\\mathcal{A} = \\{ \\alpha_1, \\alpha_2, ... \\}",
+      "description": "Compiles technical assertions into mathematically sound operational axioms.",
+      "instruction": "Synthesize the claims or instructions into a set of mathematically rigid axiomatic rules. Express each rule with strict logical quantifiers and absolute assertions that can be used for automated system validation.",
+      "efficiencyRating": "76-83%",
+      "reductionRange": [
+        0.76,
+        0.83
+      ],
+      "outputKind": "axioms"
+    },
+    {
+      "id": "quantum_entangler",
+      "name": "Semantic Entangler Matrix",
+      "category": "cognitive",
+      "mathFormula": "E(\\rho) = -\\text{Tr}(\\rho \\log_2 \\rho)",
+      "description": "Exposes non-local semantic links where concepts in separate sections are entangled.",
+      "instruction": "Review the text. Map out \"semantic entanglement\": cross-references and dependencies between non-adjacent concepts or systems in different sections of the document. Show how changes in Module A inevitably force state changes in Module B.",
+      "efficiencyRating": "74-81%",
+      "reductionRange": [
+        0.74,
+        0.81
+      ],
+      "outputKind": "graph"
+    }
+  ]
+}

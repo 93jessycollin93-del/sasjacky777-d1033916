@@ -1,0 +1,749 @@
+#include "activity_handlers.h"
+
+#include <algorithm>
+#include <cstdlib>
+#include <iterator>
+#include <optional>
+#include <set>
+#include <stdexcept>
+#include <string>
+#include <type_traits>
+#include <unordered_set>
+#include <utility>
+
+#include "calendar.h"
+#include "cata_utility.h"
+#include "character.h"
+#include "coordinates.h"
+#include "creature.h"
+#include "creature_tracker.h"
+#include "cuboid_rectangle.h"
+#include "debug.h"
+#include "enums.h"
+#include "flag.h"
+#include "game_constants.h"
+#include "game_inventory.h"
+#include "iexamine.h"
+#include "item.h"
+#include "item_location.h"
+#include "itype.h"
+#include "iuse.h"
+#include "iuse_actor.h"
+#include "map.h"
+#include "mapdata.h"
+#include "messages.h"
+#include "monster.h"
+#include "overmap_ui.h"
+#include "pathfinding.h"
+#include "player_activity.h"
+#include "pocket_type.h"
+#include "point.h"
+#include "ret_val.h"
+#include "skill.h"
+#include "string_formatter.h"
+#include "temp_crafting_inventory.h"
+#include "translations.h"
+#include "type_id.h"
+#include "uilist.h"
+#include "units.h"
+#include "vehicle.h"
+#include "vpart_position.h"
+#include "weather.h"
+
+static const activity_id ACT_FILL_LIQUID( "ACT_FILL_LIQUID" );
+static const activity_id ACT_REPAIR_ITEM( "ACT_REPAIR_ITEM" );
+static const activity_id ACT_TRAVELLING( "ACT_TRAVELLING" );
+
+static const ammotype ammo_battery( "battery" );
+
+static const flag_id json_flag_IRREMOVABLE( "IRREMOVABLE" );
+static const flag_id json_flag_PSEUDO( "PSEUDO" );
+
+static const furn_str_id furn_f_compost_empty( "f_compost_empty" );
+static const furn_str_id furn_f_compost_full( "f_compost_full" );
+static const furn_str_id furn_f_fvat_empty( "f_fvat_empty" );
+static const furn_str_id furn_f_fvat_wood_empty( "f_fvat_wood_empty" );
+static const furn_str_id furn_f_fvat_wood_full( "f_fvat_wood_full" );
+
+static const itype_id itype_battery( "battery" );
+static const itype_id itype_pseudo_magazine( "pseudo_magazine" );
+static const itype_id itype_pseudo_magazine_mod( "pseudo_magazine_mod" );
+
+using namespace activity_handlers;
+
+const std::map< activity_id, std::function<void( player_activity *, Character * )> >
+activity_handlers::do_turn_functions = {
+    { ACT_FILL_LIQUID, fill_liquid_do_turn },
+    { ACT_REPAIR_ITEM, repair_item_do_turn },
+    { ACT_TRAVELLING, travel_do_turn }
+};
+
+const std::map< activity_id, std::function<void( player_activity *, Character * )> >
+activity_handlers::finish_functions = {
+    { ACT_REPAIR_ITEM, repair_item_finish }
+};
+
+bool activity_handlers::resume_for_multi_activities( Character &you )
+{
+    if( !you.backlog.empty() ) {
+        player_activity &back_act = you.backlog.front();
+        if( back_act.is_multi_type() ) {
+            you.assign_activity( back_act );
+            return true;
+        }
+    }
+    return false;
+}
+
+void activity_handlers::fill_liquid_do_turn( player_activity *act, Character *you )
+{
+    player_activity &act_ref = *act;
+    try {
+        // 1. Gather the source item.
+        vehicle *source_veh = nullptr;
+        map &here = get_map();
+        const tripoint_bub_ms source_pos = here.get_bub( act_ref.coords.at( 0 ) );
+        map_stack source_stack = here.i_at( source_pos );
+        map_stack::iterator on_ground;
+        monster *source_mon = nullptr;
+        item liquid;
+        const liquid_source_type source_type = static_cast<liquid_source_type>( act_ref.values.at( 0 ) );
+        int part_num = -1;
+        int veh_charges = 0;
+        switch( source_type ) {
+            case liquid_source_type::VEHICLE:
+                source_veh = veh_pointer_or_null( here.veh_at( source_pos ) );
+                if( source_veh == nullptr ) {
+                    throw std::runtime_error( "could not find source vehicle for liquid transfer" );
+                }
+                deserialize_from_string( liquid, act_ref.str_values.at( 0 ) );
+                part_num = static_cast<int>( act_ref.values.at( 1 ) );
+                veh_charges = liquid.charges;
+                break;
+            case liquid_source_type::INFINITE_MAP:
+                deserialize_from_string( liquid, act_ref.str_values.at( 0 ) );
+                liquid.charges = item::INFINITE_CHARGES;
+                break;
+            case liquid_source_type::MAP_ITEM:
+                if( static_cast<size_t>( act_ref.values.at( 1 ) ) >= source_stack.size() ) {
+                    throw std::runtime_error( "could not find source item on ground for liquid transfer" );
+                }
+                on_ground = source_stack.begin();
+                std::advance( on_ground, act_ref.values.at( 1 ) );
+                liquid = *on_ground;
+                break;
+            case liquid_source_type::MONSTER:
+                Creature *c = get_creature_tracker().creature_at( source_pos );
+                source_mon = dynamic_cast<monster *>( c );
+                if( source_mon == nullptr ) {
+                    debugmsg( "could not find source creature for liquid transfer" );
+                    act_ref.set_to_null();
+                }
+                deserialize_from_string( liquid, act_ref.str_values.at( 0 ) );
+                liquid.charges = 1;
+                break;
+        }
+
+        // Vehicle siphoning is slower than other liquid transfers
+        const units::volume volume_per_second = source_type == liquid_source_type::VEHICLE
+                                                ? units::from_liter( 0.25F )
+                                                : units::from_liter( 4.0F / 6.0F );
+        const int charges_per_second = std::max( 1, liquid.charges_per_volume( volume_per_second ) );
+        liquid.charges = std::min( charges_per_second, liquid.charges );
+        const int original_charges = liquid.charges;
+        if( liquid.has_temperature() && units::to_joule_per_gram( liquid.specific_energy ) < 0 ) {
+            liquid.set_item_temperature( std::max( get_weather().get_temperature( you->pos_bub() ),
+                                                   temperatures::cold ) );
+        }
+
+        // 2. Transfer charges.
+        const vehicle *veh = nullptr;
+        size_t part;
+        switch( static_cast<liquid_target_type>( act_ref.values.at( 2 ) ) ) {
+            case liquid_target_type::VEHICLE: {
+                const optional_vpart_position vp = here.veh_at( here.get_bub( act_ref.coords.at( 1 ) ) );
+                if( act_ref.values.size() > 4 && vp ) {
+                    const vpart_reference vpr( vp->vehicle(), act_ref.values[4] );
+                    veh = &vp->vehicle();
+                    part = act_ref.values[4];
+                    if( source_veh &&
+                        source_veh->fuel_left( here, liquid.typeId(), ( veh ? std::function<bool( const vehicle_part & )> { [&]( const vehicle_part & pa )
+                {
+                    return &veh->part( part ) != &pa;
+                    }
+                                                                                                                          } : return_true<const vehicle_part &> ) ) <= 0 ) {
+                        act_ref.set_to_null();
+                        return;
+                    }
+                    you->pour_into( vpr, liquid );
+
+                } else {
+                    throw std::runtime_error( "could not find target vehicle for liquid transfer" );
+                }
+                break;
+            }
+            case liquid_target_type::CONTAINER:
+                you->pour_into( act_ref.targets.at( 0 ), liquid, true, true );
+                break;
+            case liquid_target_type::MAP:
+                if( iexamine::has_keg( here.get_bub( act_ref.coords.at( 1 ) ) ) ) {
+                    iexamine::pour_into_keg( here.get_bub( act_ref.coords.at( 1 ) ), liquid, false );
+                } else {
+                    here.add_item_or_charges( here.get_bub( act_ref.coords.at( 1 ) ), liquid );
+                    you->add_msg_if_player( _( "You pour %1$s onto the ground." ), liquid.tname() );
+                    liquid.charges = 0;
+                }
+                break;
+            case liquid_target_type::MONSTER:
+                liquid.charges = 0;
+                break;
+        }
+
+        const int removed_charges = original_charges - liquid.charges;
+        if( removed_charges == 0 ) {
+            // Nothing has been transferred, target must be full.
+            act_ref.set_to_null();
+            return;
+        }
+
+        // 3. Remove charges from source.
+        switch( source_type ) {
+            case liquid_source_type::VEHICLE:
+                if( part_num != -1 ) {
+                    const vehicle_part &pt = source_veh->part( part_num );
+                    if( pt.is_leaking() && !pt.ammo_remaining( ) ) {
+                        act_ref.set_to_null(); // leaky tank spilled while we were transferring
+                        return;
+                    }
+                    source_veh->drain( here, part_num, removed_charges );
+                    liquid.charges = veh_charges - removed_charges;
+                    // If there's no liquid left in this tank we're done, otherwise
+                    // we need to update our liquid serialization to reflect how
+                    // many charges are actually left for the next time we come
+                    // around this loop.
+                    if( !liquid.charges ) {
+                        act_ref.set_to_null();
+                    } else {
+                        if( act_ref.str_values.empty() ) {
+                            act_ref.str_values.emplace_back( );
+                        }
+                        act_ref.str_values[0] = serialize( liquid );
+                    }
+                } else {
+                    source_veh->drain( here, liquid.typeId(), removed_charges,
+                                       ( veh ? std::function<bool( vehicle_part & )> { [&]( vehicle_part & pa )
+                    {
+                        return &veh->part( part ) != &pa;
+                    }
+                                                                                     } : return_true<vehicle_part &> ) );
+                }
+                break;
+            case liquid_source_type::MAP_ITEM:
+                on_ground->charges -= removed_charges;
+                if( on_ground->charges <= 0 ) {
+                    source_stack.erase( on_ground );
+                    if( here.ter( source_pos )->has_examine( iexamine::gaspump ) ) {
+                        add_msg( _( "With a clang and a shudder, the %s pump goes silent." ),
+                                 liquid.type_name( 1 ) );
+                    } else if( const furn_id &f = here.furn( source_pos ); f->has_examine( iexamine::fvat_full ) ) {
+                        add_msg( _( "You squeeze the last drops of %s from the vat." ),
+                                 liquid.type_name( 1 ) );
+                        map_stack items_here = here.i_at( source_pos );
+                        if( items_here.empty() ) {
+                            if( f == furn_f_fvat_wood_full ) {
+                                here.furn_set( source_pos, furn_f_fvat_wood_empty );
+                            } else {
+                                here.furn_set( source_pos, furn_f_fvat_empty );
+                            }
+                        }
+                    } else if( f->has_examine( iexamine::compost_full ) ) {
+                        add_msg( _( "You squeeze the last drops of %s from the tank." ),
+                                 liquid.type_name( 1 ) );
+                        map_stack items_here = here.i_at( source_pos );
+                        if( items_here.empty() ) {
+                            if( f == furn_f_compost_full ) {
+                                here.furn_set( source_pos, furn_f_compost_empty );
+                            }
+                        }
+                    } else if( iexamine::has_keg( source_pos ) ) {
+                        add_msg( _( "You squeeze the last drops of %1$s from the %2$s." ),
+                                 liquid.type_name( 1 ), here.furnname( source_pos ) );
+                    }
+                    act_ref.set_to_null();
+                }
+                break;
+            case liquid_source_type::INFINITE_MAP:
+                // nothing, the liquid source is infinite
+                break;
+            case liquid_source_type::MONSTER:
+                // liquid source charges handled in monexamine::milk_source
+                if( liquid.charges == 0 ) {
+                    act_ref.set_to_null();
+                }
+                break;
+        }
+
+        if( removed_charges < original_charges ) {
+            // Transferred less than the available charges -> target must be full
+            act_ref.set_to_null();
+        }
+
+    } catch( const std::runtime_error &err ) {
+        debugmsg( "error in activity data: \"%s\"", err.what() );
+        act_ref.set_to_null();
+        return;
+    }
+}
+
+namespace
+{
+enum class repeat_type : int {
+    // INIT should be zero. In some scenarios (vehicle welder), activity value default to zero.
+    INIT = 0,       // Haven't found repeat value yet.
+    ONCE = 1,       // Attempt repair (and refit if possible) just once
+    // value 2 obsolete - previously used for reinforcement
+    FULL = 3,       // Continue repairing until damage==0 (and until refitted if possible)
+    EVENT = 4,      // Continue repairing (and refit if possible) until something interesting happens
+    REFIT_ONCE = 5, // Try refitting once, but don't repair
+    REFIT_FULL = 6, // Continue refitting until item fits, but don't repair
+    CANCEL = 7,     // Stop repeating
+};
+
+using I = std::underlying_type_t<repeat_type>;
+constexpr bool operator>=( const I &lhs, const repeat_type &rhs )
+{
+    return lhs >= static_cast<I>( rhs );
+}
+
+constexpr bool operator<=( const I &lhs, const repeat_type &rhs )
+{
+    return lhs <= static_cast<I>( rhs );
+}
+
+constexpr I operator-( const repeat_type &lhs, const repeat_type &rhs )
+{
+    return static_cast<I>( lhs ) - static_cast<I>( rhs );
+}
+} // namespace
+
+static repeat_type repeat_menu( const std::string &title, repeat_type last_selection,
+                                const bool can_refit )
+{
+    uilist rmenu;
+    rmenu.text = title;
+
+    rmenu.addentry( static_cast<int>( repeat_type::ONCE ), true, '1',
+                    can_refit ? _( "Attempt to refit or repair once" ) : _( "Attempt to repair once" ) );
+    rmenu.addentry( static_cast<int>( repeat_type::FULL ), true, '2',
+                    can_refit ? _( "Repeat until refitted and fully repaired" ) : _( "Repeat until fully repaired" ) );
+    rmenu.addentry( static_cast<int>( repeat_type::EVENT ), true, '3',
+                    can_refit ? _( "Refit or repair until success/failure/level up" ) :
+                    _( "Repair until success/failure/level up" ) );
+    rmenu.addentry( static_cast<int>( repeat_type::REFIT_ONCE ), can_refit, '4',
+                    _( "Attempt to refit once" ) );
+    rmenu.addentry( static_cast<int>( repeat_type::REFIT_FULL ), can_refit, '5',
+                    _( "Repeat until refitted" ) );
+    rmenu.addentry( static_cast<int>( repeat_type::INIT ), true, '6', _( "Back to item selection" ) );
+
+    rmenu.selected = last_selection - repeat_type::ONCE;
+    rmenu.query();
+
+    if( rmenu.ret >= repeat_type::INIT && rmenu.ret <= repeat_type::REFIT_FULL ) {
+        return static_cast<repeat_type>( rmenu.ret );
+    }
+
+    return repeat_type::CANCEL;
+}
+
+// HACK: This is a part of a hack to provide pseudo items for long repair activity
+// Note: similar hack could be used to implement all sorts of vehicle pseudo-items
+//  and possibly CBM pseudo-items too.
+namespace
+{
+struct weldrig_hack {
+    std::optional<vpart_reference> part;
+    item pseudo;
+
+    weldrig_hack() : part( std::nullopt ) { }
+
+    bool init( const player_activity &act ) {
+        map &here = get_map();
+        if( act.coords.empty() || act.str_values.size() < 2 ) {
+            return false;
+        }
+
+        const optional_vpart_position vp = here.veh_at( here.get_bub( act.coords[0] ) );
+        if( !vp ) {
+            return false;
+        }
+
+        itype_id tool_id( act.get_str_value( 1, "" ) );
+        pseudo = item( tool_id, calendar::turn );
+        part = vp->part_with_tool( here, tool_id );
+        return part.has_value();
+    }
+
+    item &get_item() {
+        map &here = get_map();
+
+        if( !part ) {
+            // null item should be handled just fine
+            return null_item_reference();
+        }
+        pseudo.set_flag( json_flag_PSEUDO );
+        item mag_mod( itype_pseudo_magazine_mod );
+        mag_mod.set_flag( json_flag_IRREMOVABLE );
+        if( !pseudo.put_in( mag_mod, pocket_type::MOD ).success() ) {
+            debugmsg( "tool %s has no space for a %s, this is likely a bug",
+                      pseudo.typeId().str(), mag_mod.type->nname( 1 ) );
+        }
+        itype_id mag_type;
+        if( pseudo.can_link_up() ) {
+            mag_type = itype_pseudo_magazine;
+        } else {
+            mag_type = pseudo.magazine_default();
+        }
+        item mag( mag_type );
+        mag.clear_items(); // no initial ammo
+        if( !pseudo.put_in( mag, pocket_type::MAGAZINE_WELL ).success() ) {
+            debugmsg( "inserting %s into %s's MAGAZINE_WELL pocket failed",
+                      mag.typeId().str(), pseudo.typeId().str() );
+            return null_item_reference();
+        }
+        pseudo.ammo_set( itype_battery, part->vehicle().drain( here,  itype_battery,
+                         pseudo.ammo_capacity( ammo_battery ),
+                         return_true< vehicle_part &>, false ) ); // no cable loss since all of this is virtual
+        return pseudo;
+    }
+
+    void clean_up() {
+        if( !part ) {
+            return;
+        }
+
+        map &here = get_map();
+
+        part->vehicle().charge_battery( here, pseudo.ammo_remaining( ),
+                                        false ); // return unused charges without cable loss
+    }
+
+    ~weldrig_hack() {
+        clean_up();
+    }
+};
+} // namespace
+
+void activity_handlers::repair_item_finish( player_activity *act, Character *you )
+{
+    ::repair_item_finish( act, you, false );
+}
+
+void repair_item_finish( player_activity *act, Character *you, bool no_menu )
+{
+    map &here = get_map();
+    const std::string iuse_name_string = act->get_str_value( 0, "repair_item" );
+    repeat_type repeat = static_cast<repeat_type>( act->get_value( 0,
+                         static_cast<int>( repeat_type::INIT ) ) );
+    weldrig_hack w_hack;
+    item_location *ploc = nullptr;
+
+    if( !act->targets.empty() ) {
+        ploc = act->targets.data();
+    }
+    item *main_tool = &( !w_hack.init( *act ) ?
+                         ploc ?
+                         **ploc : you->i_at( act->index ) : w_hack.get_item() );
+    if( main_tool == nullptr ) {
+        debugmsg( "Empty main tool for repair" );
+        act->set_to_null();
+        return;
+    }
+    item *used_tool = main_tool->get_usable_item( iuse_name_string );
+    if( used_tool == nullptr ) {
+        debugmsg( "Lost tool used for long repair" );
+        act->set_to_null();
+        return;
+    }
+
+    const use_function *use_fun = used_tool->get_use( iuse_name_string );
+    // TODO: De-uglify this block. Something like get_use<iuse_actor_type>() maybe?
+    const repair_item_actor *actor = dynamic_cast<const repair_item_actor *>
+                                     ( use_fun->get_actor_ptr() );
+    if( actor == nullptr ) {
+        debugmsg( "iuse_actor type descriptor and actual type mismatch" );
+        act->set_to_null();
+        return;
+    }
+
+    // Valid Repeat choice and target, attempt repair.
+    if( repeat != repeat_type::INIT && act->targets.size() >= 2 ) {
+        item_location &fix_location = act->targets[1];
+        if( !fix_location ) {
+            // The item could disappear for various reasons: moved by follower, burned up, eaten by a grue, etc.
+            you->add_msg_if_player( m_warning, _( "You can no longer find the item to repair." ) );
+            act->set_to_null();
+            return;
+        }
+
+        // Remember our level: we want to stop retrying on level up
+        const int old_level = you->get_skill_level( actor->used_skill );
+        const repair_item_actor::attempt_hint attempt = actor->repair( *you, *used_tool,
+                fix_location, repeat == repeat_type::REFIT_ONCE || repeat == repeat_type::REFIT_FULL );
+        // Warning: The above call to `repair_item_actor::repair` might
+        // invalidate the item and the item_location, for example when
+        // spilling items from spillable containers. It is therefore
+        // important that we don't use `fix_location` in code below
+        // here without first checking whether it is still valid.
+
+        // If the item being repaired has been destroyed stop further
+        // processing in case the items being used for the repair was
+        // contained by the item being repaired, which will result
+        // in the tool being invalid
+        if( attempt == repair_item_actor::AS_DESTROYED ) {
+            act->set_to_null();
+            return;
+        }
+
+        if( attempt != repair_item_actor::AS_CANT ) {
+            const tripoint_bub_ms tool_pos = ( ploc && ploc->where() == item_location::type::map )
+                                             ? ploc->pos_bub( here )
+                                             : you->pos_bub( here );
+            used_tool->consume_tool_uses( 1, here, tool_pos, you );
+        }
+
+        // TODO: Allow setting this in the actor
+        // TODO: Don't use charges_to_use: welder has 50 charges per use, soldering iron has 1
+        if( !used_tool->ammo_sufficient( you ) ) {
+            you->add_msg_if_player( _( "Your %1$s ran out of charges." ), used_tool->tname() );
+            act->set_to_null();
+            return;
+        }
+
+        // Print message explaining why we stopped
+        // But only if we didn't destroy the item (because then it's obvious)
+        const bool destroyed = attempt == repair_item_actor::AS_DESTROYED;
+        const bool cannot_continue_repair = attempt == repair_item_actor::AS_CANT || destroyed ||
+                                            !fix_location ||
+                                            !actor->can_repair_target( *you, *fix_location, !destroyed, true );
+        if( cannot_continue_repair ) {
+            // Cannot continue to repair target, select another target.
+            // **Warning**: as soon as the item is popped back, it is destroyed and can't be used anymore!
+            act->targets.pop_back();
+        }
+
+        const bool event_happened = attempt == repair_item_actor::AS_FAILURE ||
+                                    attempt == repair_item_actor::AS_SUCCESS ||
+                                    old_level != static_cast<int>( you->get_skill_level( actor->used_skill ) );
+        const bool can_refit = !destroyed && !cannot_continue_repair &&
+                               fix_location->has_flag( flag_VARSIZE ) &&
+                               !fix_location->has_flag( flag_FIT );
+
+        const bool need_input =
+            ( repeat == repeat_type::ONCE ) ||
+            ( repeat == repeat_type::EVENT && event_happened ) ||
+            ( repeat == repeat_type::FULL && cannot_continue_repair ) ||
+            ( repeat == repeat_type::REFIT_ONCE ) ||
+            ( repeat == repeat_type::REFIT_FULL && !can_refit );
+        if( need_input ) {
+            repeat = repeat_type::INIT;
+            if( no_menu ) {
+                act->set_to_null();
+                return;
+            }
+        }
+    }
+    // Check tool is valid before we query target and Repeat choice.
+    if( !actor->can_use_tool( *you, *used_tool, true ) ) {
+        act->set_to_null();
+        return;
+    }
+
+    // target selection and validation.
+    while( act->targets.size() < 2 ) {
+        item_location item_loc = game_menus::inv::repair( *you, actor, main_tool );
+
+        if( item_loc == item_location::nowhere ) {
+            you->add_msg_if_player( m_info, _( "Never mind." ) );
+            act->set_to_null();
+            return;
+        }
+        if( actor->can_repair_target( *you, *item_loc, true, true ) ) {
+            act->targets.emplace_back( item_loc );
+            repeat = repeat_type::INIT;
+        }
+    }
+
+    const item &fix = *act->targets[1];
+    const bool can_refit = fix.has_flag( flag_VARSIZE ) && !fix.has_flag( flag_FIT );
+    if( repeat == repeat_type::INIT ) {
+        const int level = you->get_skill_level( actor->used_skill );
+        repair_item_actor::repair_type action_type = actor->default_action( fix, level );
+        if( action_type == repair_item_actor::RT_NOTHING ) {
+            you->add_msg_if_player( _( "You won't learn anything more by doing that." ) );
+        }
+
+        const std::pair<float, float> chance = actor->repair_chance( *you, fix, action_type );
+        if( chance.first <= 0.0f ) {
+            action_type = repair_item_actor::RT_PRACTICE;
+        }
+
+        std::string title = string_format( _( "%s %s\n" ),
+                                           repair_item_actor::action_description( action_type ),
+                                           fix.tname() );
+        ammotype current_ammo;
+        std::string ammo_name;
+        if( used_tool->has_flag( flag_USE_UPS ) || used_tool->has_link_data() ) {
+            ammo_name = _( "battery" );
+            current_ammo = ammo_battery;
+        } else if( used_tool->has_flag( flag_USES_BIONIC_POWER ) ) {
+            ammo_name = _( "bionic power" );
+
+        } else {
+            const itype_id ammo_id = used_tool->ammo_current().is_null()
+                                     ? used_tool->ammo_default() : used_tool->ammo_current();
+            if( const std::optional<ammotype> at = item::ammotype_of( ammo_id ) ) {
+                current_ammo = *at;
+            }
+            ammo_name = item::nname( used_tool->ammo_current() );
+        }
+
+        int ammo_remaining = used_tool->ammo_remaining_linked( here, you );
+
+        std::set<itype_id> valid_entries = actor->get_valid_repair_materials( fix );
+        const temp_crafting_inventory &crafting_inv = you->crafting_inventory();
+        std::function<bool( const item & )> filter;
+        if( fix.is_filthy() ) {
+            filter = []( const item & component ) {
+                return component.allow_crafting_component();
+            };
+        } else {
+            filter = is_crafting_component;
+        }
+        std::vector<std::string> material_list;
+        for( const auto &component_id : valid_entries ) {
+            if( item::count_by_charges( component_id ) ) {
+                if( crafting_inv.has_charges( component_id, 1 ) ) {
+                    material_list.push_back( string_format( _( "%s (%d)" ), item::nname( component_id ),
+                                                            crafting_inv.charges_of( component_id ) ) );
+                }
+            } else if( crafting_inv.has_amount( component_id, 1, false, filter ) ) {
+                material_list.push_back( string_format( _( "%s (%d)" ), item::nname( component_id ),
+                                                        crafting_inv.amount_of( component_id, false ) ) );
+            }
+        }
+
+        const int per_use = used_tool->expected_cost_per_use();
+        title += used_tool->is_tool() && used_tool->has_flag( flag_USES_NEARBY_AMMO )
+                 ? string_format( _( "Charges: <color_light_blue>%d</color> %s (%d per use)\n" ),
+                                  ammo_remaining,
+                                  ammo_name,
+                                  per_use )
+                 : string_format( _( "Charges: <color_light_blue>%d/%d</color> %s (%d per use)\n" ),
+                                  ammo_remaining, used_tool->ammo_capacity( current_ammo, true ),
+                                  ammo_name,
+                                  per_use );
+        title += string_format( _( "Materials available: %s\n" ), string_join( material_list, ", " ) );
+        title += string_format( _( "Skill used: <color_light_blue>%s (%d)</color>\n" ),
+                                actor->used_skill.obj().name(), level );
+        title += string_format( _( "Success chance: <color_light_blue>%.1f</color>%%\n" ),
+                                100.0f * chance.first );
+        title += string_format( _( "Damage chance: <color_light_blue>%.1f</color>%%" ),
+                                100.0f * chance.second );
+
+        if( act->values.empty() ) {
+            act->values.resize( 1 );
+        }
+        do {
+            repeat = repeat_menu( title, repeat, can_refit );
+
+            if( repeat == repeat_type::CANCEL ) {
+                act->set_to_null();
+                return;
+            }
+            act->values[0] = static_cast<int>( repeat );
+            // BACK selected, redo target selection next.
+            if( repeat == repeat_type::INIT ) {
+                you->activity.targets.pop_back();
+                return;
+            }
+            if( repeat == repeat_type::FULL && fix.damage() <= fix.degradation() && !can_refit ) {
+                const char *msg = fix.damage_level() > 0 ?
+                                  _( "Your %s is repaired as much as possible, considering the degradation." ) :
+                                  _( "Your %s is already fully repaired." );
+                you->add_msg_if_player( m_info, msg, fix.tname() );
+                repeat = repeat_type::INIT;
+            }
+        } while( repeat == repeat_type::INIT );
+    }
+    // Otherwise keep retrying
+    act->moves_left = actor->move_cost;
+}
+
+void activity_handlers::travel_do_turn( player_activity *act, Character *you )
+{
+    if( !you->omt_path.empty() ) {
+        you->omt_path.pop_back();
+        if( you->omt_path.empty() ) {
+            you->add_msg_if_player( m_info, _( "You have reached your destination." ) );
+            act->set_to_null();
+            ui::omap::force_quit();
+            return;
+        }
+        const tripoint_abs_omt next_omt = you->omt_path.back();
+        tripoint_abs_ms waypoint;
+        if( you->omt_path.size() == 1 ) {
+            // if next omt is the final one, target its midpoint
+            waypoint = midpoint( project_bounds<coords::ms>( next_omt ) );
+        } else {
+            // otherwise target the middle of the edge nearest to our current location
+            const tripoint_abs_ms cur_omt_mid = midpoint( project_bounds<coords::ms>
+                                                ( you->pos_abs_omt() ) );
+            waypoint = clamp( cur_omt_mid, project_bounds<coords::ms>( next_omt ) );
+        }
+        map &here = get_map();
+        tripoint_bub_ms centre_sub = here.get_bub( waypoint );
+        const std::vector<tripoint_bub_ms> route_to =
+            here.route( *you, pathfinding_target::radius( centre_sub, 2 ) );
+        if( !route_to.empty() ) {
+            const activity_id act_travel = ACT_TRAVELLING;
+            you->set_destination( route_to, player_activity( act_travel ) );
+        } else {
+            you->add_msg_if_player( m_warning, _( "You cannot reach that destination." ) );
+            ui::omap::force_quit();
+        }
+    } else {
+        you->add_msg_if_player( m_info, _( "You have reached your destination." ) );
+        ui::omap::force_quit();
+    }
+    act->set_to_null();
+}
+
+void activity_handlers::repair_item_do_turn( player_activity *act, Character *you )
+{
+    // Moves are decremented based on a combination of speed and good vision (not in the dark, farsighted, etc)
+    const float exertion_mult = you->exertion_adjusted_move_multiplier( act->exertion_level() );
+    const int effective_moves = you->get_moves() / ( you->fine_detail_vision_mod() * exertion_mult );
+    if( effective_moves <= act->moves_left ) {
+        act->moves_left -= effective_moves;
+        you->set_moves( 0 );
+    } else {
+        you->mod_moves( -act->moves_left * you->fine_detail_vision_mod() );
+        act->moves_left = 0;
+    }
+}
+
+template<typename fn>
+static void cleanup_tiles( std::unordered_set<tripoint_abs_ms> &tiles, fn &cleanup )
+{
+    auto it = tiles.begin();
+    map &here = get_map();
+    while( it != tiles.end() ) {
+        auto current = it++;
+
+        const tripoint_bub_ms &tile_loc = here.get_bub( *current );
+
+        if( cleanup( tile_loc ) ) {
+            tiles.erase( current );
+        }
+    }
+}

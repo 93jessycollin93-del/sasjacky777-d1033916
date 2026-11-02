@@ -1,0 +1,29 @@
+[
+  {
+    "type": "proficiency",
+    "id": "prof_parkour",
+    "category": "prof_athletics",
+    "name": { "str": "Parkour" },
+    "description": "You're skilled at clearing obstacles; terrain like railings or counters are as easy for you to move on as solid ground.",
+    "can_learn": true,
+    "time_to_learn": "8 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_skating",
+    "category": "prof_athletics",
+    "name": { "str": "Skating" },
+    "description": "You suffer lower penalties to dodging and are less likely to fall down if hit in melee combat while riding a skateboard or wearing skates.",
+    "can_learn": true,
+    "time_to_learn": "8 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_swimming",
+    "category": "prof_athletics",
+    "name": { "str": "Swimming" },
+    "description": "You are acquainted with the principles of swimming and staying afloat.  This does not necessarily mean you can always swim in all conditions, but it certainly helps.",
+    "can_learn": true,
+    "time_to_learn": "1 h"
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_40x53_gun&mags&cans",
+    "subtype": "collection",
+    "items": [ { "group": "milspec_arsenal_40x53_gun&ammo", "count": [ 0, 1 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_40x53_gun&ammo",
+    "subtype": "collection",
+    "items": [
+      { "group": "milspec_arsenal_40x53_gun&mags" },
+      { "group": "ammo_can_belt40mm_full", "prob": 60, "count": [ 0, 1 ] },
+      { "group": "ammo_can_belt40mm_full", "prob": 20, "count": [ 0, 1 ] }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "milspec_arsenal_40x53_gun&mags",
+    "subtype": "collection",
+    "items": [ { "item": "mark19", "count": 1, "prob": 80 }, { "item": "mark19", "count": 1, "prob": 30 } ]
+  }
+]

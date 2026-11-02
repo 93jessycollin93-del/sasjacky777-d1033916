@@ -1,0 +1,37 @@
+(
+    class_choices: [
+        "archaeologist",
+        "thief",
+        "warrior",
+    ],
+    trait_choices: [
+        "strong",
+        "intelligent",
+        "monk",
+        "beautiful",
+        "weak",
+        "ugly",
+    ],
+    trait_initial_point: 2,
+    start_region: "south-coast",
+    start_pos: (43, 48),
+    start_money: 1000,
+    chara_template_table: {
+        "archaeologist": "archaeologist-m",
+        "thief": "thief-m",
+        "warrior": "warrior-m",
+    },
+    common_initial_skills: [
+        Throwing,
+    ],
+    common_initial_abilities: [
+    ],
+    common_initial_items: [
+        ("hard-biscuit", 8),
+        ("canned-ration", 3),
+    ],
+    initial_date_year: 21,
+    initial_date_month: 12,
+    initial_date_day: 20,
+    initial_date_hour: 1,
+)

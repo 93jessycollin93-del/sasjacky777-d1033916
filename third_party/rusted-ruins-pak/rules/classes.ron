@@ -1,0 +1,226 @@
+{
+    /* default */
+    "": (
+        attr: (
+            base_hp: 0,
+            base_mp: 0,
+            str: 0,
+            vit: 0,
+            dex: 0,
+            int: 0,
+            wil: 0,
+            cha: 0,
+            spd: 0,
+        ),
+        skill_bonus: {
+        },
+    ),
+    /* Available for PC */
+    "archaeologist": (
+        attr: (
+            base_hp: 10,
+            base_mp: 0,
+            str: -2,
+            vit: 2,
+            dex: 4,
+            int: 2,
+            wil: 1,
+            cha: 2,
+            spd: 0,
+        ),
+        skill_bonus: {
+            Whip: Good,
+            Negotiation: SlightlyGood,
+            Art: SlightlyGood,
+        },
+        equips: [
+            (esk: MeleeWeapon, item_selector: "kind/whip"),
+            (esk: RangedWeapon, item_selector: "group/bow"),
+            (esk: Head, item_selector: "group/hat"),
+            (esk: Skin, item_selector: "group/shirt"),
+            (esk: Body, item_selector: "breastplate"),
+            (esk: Legs, item_selector: "group/boots"),
+        ]
+    ),
+    "farmer": (
+        attr: (
+            base_hp: 0,
+            base_mp: -10,
+            str: 1,
+            vit: 2,
+            dex: -2,
+            int: -2,
+            wil: -1,
+            cha: -4,
+            spd: 0,
+        ),
+        skill_bonus: {
+            Plants: Excellent,
+        },
+        equips: [
+            (esk: RangedWeapon, item_selector: "group/bow"),
+            (esk: Head, item_selector: "group/hat"),
+            (esk: Skin, item_selector: "group/shirt"),
+            (esk: Body, item_selector: "breastplate"),
+            (esk: Legs, item_selector: "group/boots"),
+        ]
+    ),
+    "hunter": (
+        attr: (
+            base_hp: 0,
+            base_mp: -10,
+            str: 2,
+            vit: 1,
+            dex: 4,
+            int: -3,
+            wil: -2,
+            cha: -1,
+            spd: 0,
+        ),
+        skill_bonus: {
+            Bow: Good,
+        },
+        equips: [
+            (esk: RangedWeapon, item_selector: "group/bow"),
+            (esk: Head, item_selector: "group/hat"),
+            (esk: Skin, item_selector: "group/shirt"),
+            (esk: Body, item_selector: "breastplate"),
+            (esk: Legs, item_selector: "group/boots"),
+        ]
+    ),
+    "merchant": (
+        attr: (
+            base_hp: 30,
+            base_mp: -20,
+            str: -3,
+            vit: 2,
+            dex: -1,
+            int: 3,
+            wil: -2,
+            cha: 1,
+            spd: 0,
+        ),
+        skill_bonus: {
+            Throwing: Good,
+            Negotiation: VeryGood,
+        },
+        equips: [
+            (esk: Head, item_selector: "group/hat"),
+            (esk: Skin, item_selector: "group/shirt"),
+            (esk: Body, item_selector: "breastplate"),
+            (esk: Legs, item_selector: "group/shoes"),
+        ]
+    ),
+    "thief": (
+        attr: (
+            base_hp: -10,
+            base_mp: 0,
+            str: -2,
+            vit: 0,
+            dex: 4,
+            int: -1,
+            wil: -2,
+            cha: 0,
+            spd: 5,
+        ),
+        skill_bonus: {
+            Throwing: Good,
+        },
+        equips: [
+            (esk: MeleeWeapon, item_selector: "dagger"),
+            (esk: Head, item_selector: "group/hat"),
+            (esk: Skin, item_selector: "group/shirt"),
+            (esk: Body, item_selector: "breastplate"),
+            (esk: Legs, item_selector: "group/boots"),
+        ]
+    ),
+    "warrior": (
+        attr: (
+            base_hp: 20,
+            base_mp: -10,
+            str: 6,
+            vit: 5,
+            dex: 0,
+            int: -2,
+            wil: -3,
+            cha: 0,
+            spd: 0,
+        ),
+        skill_bonus: {
+            Endurance: SlightlyGood,
+            Defence: SlightlyGood,
+            Sword: Good,
+            Spear: Good,
+        },
+        equips: [
+            (esk: MeleeWeapon, item_selector: "kind/sword"),
+            (esk: Head, item_selector: "group/hat"),
+            (esk: Skin, item_selector: "group/shirt"),
+            (esk: Body, item_selector: "breastplate"),
+            (esk: Legs, item_selector: "group/boots"),
+        ]
+    ),
+    /* For NPC */
+    "animal": (
+        attr: (
+            base_hp: 0,
+            base_mp: 0,
+            str: 0,
+            vit: 0,
+            dex: 0,
+            int: 0,
+            wil: 0,
+            cha: 0,
+            spd: 0,
+        ),
+        skill_bonus: {
+            BareHands: SlightlyGood,
+        },
+    ),
+    "civilian": (
+        attr: (
+            base_hp: 0,
+            base_mp: 0,
+            str: -4,
+            vit: -3,
+            dex: 0,
+            int: 0,
+            wil: 0,
+            cha: 0,
+            spd: 0,
+        ),
+        skill_bonus: {
+        },
+    ),
+    "guard": (
+        attr: (
+            base_hp: 0,
+            base_mp: 0,
+            str: 0,
+            vit: 2,
+            dex: 0,
+            int: 0,
+            wil: 0,
+            cha: 0,
+            spd: 0,
+        ),
+        skill_bonus: {
+        },
+    ),
+    "predator": (
+        attr: (
+            base_hp: 0,
+            base_mp: 0,
+            str: 0,
+            vit: 0,
+            dex: 0,
+            int: 0,
+            wil: 0,
+            cha: 0,
+            spd: 0,
+        ),
+        skill_bonus: {
+            BareHands: Good,
+        },
+    ),
+}

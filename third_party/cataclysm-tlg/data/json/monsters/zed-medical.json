@@ -1,0 +1,27 @@
+[
+  {
+    "id": "mon_zombie_medical",
+    "type": "MONSTER",
+    "name": { "str": "zombie medic" },
+    "description": "This shambling corpse is dressed like a medical professional.  It was either a doctor, or only played one on TV.",
+    "copy-from": "mon_zombie",
+    "death_drops": "mon_zombie_medical_death_drops",
+    "color": "blue",
+    "upgrades": { "half_life": 120, "into_group": "GROUP_MEDICAL_UPGRADE" }
+  },
+  {
+    "id": "mon_skeleton_medical",
+    "type": "MONSTER",
+    "description": "A malformed armor of misshapen bone has grown over this zombie, having pushed what remains of the skin out of the way.  The clothes of a medical worker are still draped over it.",
+    "copy-from": "mon_skeleton",
+    "death_drops": "zombie_medical_clothes",
+    "color": "white"
+  },
+  {
+    "id": "mon_zombie_medical_acidic",
+    "type": "MONSTER",
+    "description": "This is the body of a doctor or nurse of some kind.  It's hard to tell now that most of its clothing has corroded away from whatever vile acid its secreting.",
+    "copy-from": "mon_zombie_acidic",
+    "death_drops": "mon_zombie_medical_death_drops"
+  }
+]

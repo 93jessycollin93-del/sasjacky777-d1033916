@@ -1,0 +1,385 @@
+#include "catalua.h"
+#include "catalua_bindings.h"
+#include "catalua_bindings_utils.h"
+#include "catalua_coord.h"
+#include "catalua_impl.h"
+#include "catalua_luna.h"
+#include "catalua_luna_doc.h"
+#include "coordinates.h"
+#include "enums.h"
+#include "fluid_grid.h"
+#include "mongroup.h"
+#include "overmap/overmap_types.h"
+#include "overmap/overmapbuffer.h"
+#include "type_id.h"
+
+#include <algorithm>
+#include <iterator>
+#include <ranges>
+#include <string>
+#include <utility>
+#include <vector>
+
+namespace
+{
+
+auto electric_grid_at_vector( overmapbuffer &buf,
+                              const tripoint_abs_omt &p ) -> std::vector<tripoint_abs_omt>
+{
+    auto points = std::vector<tripoint_abs_omt> {};
+    std::ranges::copy( buf.electric_grid_at( p ), std::back_inserter( points ) );
+    return points;
+}
+
+inline auto fluid_grid_at_vector( const tripoint_abs_omt &p ) -> std::vector<tripoint_abs_omt>
+{
+    auto points = std::vector<tripoint_abs_omt> {};
+    std::ranges::copy( fluid_grid::grid_at( p ), std::back_inserter( points ) );
+    return points;
+}
+
+inline auto fluid_grid_connectivity_at_vector( const tripoint_abs_omt &p ) ->
+std::vector<tripoint_rel_omt>
+{
+    auto points = std::vector<tripoint_rel_omt> {};
+    std::ranges::copy( fluid_grid::grid_connectivity_at( p ), std::back_inserter( points ) );
+    return points;
+}
+
+} // namespace
+
+void cata::detail::reg_overmap( sol::state &lua )
+{
+    // Register overmapbuffer class
+    {
+        DOC( "Global overmap buffer that manages all overmap data" );
+        sol::usertype<overmapbuffer> ut =
+            luna::new_usertype<overmapbuffer>(
+                lua,
+                luna::no_bases,
+                luna::no_constructor
+            );
+
+        DOC( "Get all overmap tiles belonging to the electric grid at the given position" );
+        luna::set_fx( ut, "electric_grid_at",
+                      []( overmapbuffer & buf, const tripoint_abs_omt & p ) ->
+        std::vector<tripoint_abs_omt> {
+            return electric_grid_at_vector( buf, p );
+        } );
+
+        DOC( "Get all electric grid connections from the given position" );
+        luna::set_fx( ut, "electric_grid_connectivity_at",
+                      []( overmapbuffer & buf, const tripoint_abs_omt & p ) ->
+        std::vector<tripoint_rel_omt> {
+            return buf.electric_grid_connectivity_at( p );
+        } );
+
+        DOC( "Add an electric grid connection between two positions" );
+        luna::set_fx( ut, "add_grid_connection",
+        []( overmapbuffer & buf, const tripoint_abs_omt & lhs, const tripoint_abs_omt & rhs ) -> bool {
+            return buf.add_grid_connection( lhs, rhs );
+        } );
+
+        DOC( "Remove an electric grid connection between two positions" );
+        luna::set_fx( ut, "remove_grid_connection",
+        []( overmapbuffer & buf, const tripoint_abs_omt & lhs, const tripoint_abs_omt & rhs ) -> bool {
+            return buf.remove_grid_connection( lhs, rhs );
+        } );
+    }
+
+    // Register omt_find_params struct
+#define UT_CLASS omt_find_params
+    {
+        sol::usertype<UT_CLASS> ut =
+            luna::new_usertype<UT_CLASS>(
+                lua,
+                luna::no_bases,
+                luna::constructors <
+                omt_find_params()
+                > ()
+            );
+
+        DOC( "Vector of (terrain_type, match_type) pairs to search for." );
+        SET_MEMB( types );
+        DOC( "Vector of (terrain_type, match_type) pairs to exclude from search." );
+        SET_MEMB( exclude_types );
+        DOC( "If set, filters by terrain seen status (true = seen only, false = unseen only)." );
+        SET_MEMB( seen );
+        DOC( "If set, filters by terrain explored status (true = explored only, false = unexplored only)." );
+        SET_MEMB( explored );
+        DOC( "If true, restricts search to existing overmaps only." );
+        SET_MEMB( existing_only );
+        // NOTE: om_special field omitted - requires overmap_special type to have comparison operators
+        // TODO: Add om_special field after implementing comparison operators for overmap_special
+        DOC( "If set, limits the number of results returned." );
+        SET_MEMB( max_results );
+        // NOTE: force_sync field omitted - automatically set to true in Lua bindings for thread safety
+
+        DOC( "Helper method to add a terrain type to search for." );
+        luna::set_fx( ut, "add_type",
+        []( omt_find_params & p, const std::string & type, ot_match_type match ) -> void {
+            p.types.emplace_back( type, match );
+        } );
+
+        DOC( "Helper method to add a terrain type to exclude from search." );
+        luna::set_fx( ut, "add_exclude_type",
+        []( omt_find_params & p, const std::string & type, ot_match_type match ) -> void {
+            p.exclude_types.emplace_back( type, match );
+        } );
+
+        DOC( "Set the search range in overmap tiles (min, max)." );
+        luna::set_fx( ut, "set_search_range",
+        []( omt_find_params & p, int min, int max ) -> void {
+            p.search_range = { min, max };
+        } );
+
+        DOC( "Set the search layer range (z-levels)." );
+        luna::set_fx( ut, "set_search_layers",
+        []( omt_find_params & p, int min, int max ) -> void {
+            p.search_layers = std::make_pair( min, max );
+        } );
+    }
+#undef UT_CLASS
+
+    // Register overmapbuffer global library
+    DOC( "Global overmap buffer interface for finding and inspecting overmap terrain." );
+    luna::userlib lib = luna::begin_lib( lua, "overmapbuffer" );
+
+    // Finding methods
+    DOC( "Find all overmap terrain tiles matching the given parameters. Returns TripointAbsOmt values." );
+    luna::set_fx( lib, "find_all",
+    []( const tripoint_abs_omt & origin, omt_find_params params ) -> std::vector<tripoint_abs_omt> {
+        params.force_sync = true;
+        return get_active_overmapbuffer().find_all( origin, params );
+    } );
+
+    DOC( "Find the closest overmap terrain tile matching the given parameters. Returns TripointAbsOmt or nil if not found." );
+    luna::set_fx( lib, "find_closest",
+    []( const tripoint_abs_omt & origin, omt_find_params params ) -> sol::optional<tripoint_abs_omt> {
+        params.force_sync = true;
+        auto result = get_active_overmapbuffer().find_closest( origin, params );
+        if( result == tripoint_abs_omt::min() )
+        {
+            return sol::nullopt;
+        }
+        return result;
+    } );
+
+    DOC( "Find a random overmap terrain tile matching the given parameters. Returns TripointAbsOmt or nil if not found." );
+    luna::set_fx( lib, "find_random",
+    []( const tripoint_abs_omt & origin, omt_find_params params ) -> sol::optional<tripoint_abs_omt> {
+        params.force_sync = true;
+        auto result = get_active_overmapbuffer().find_random( origin, params );
+        if( result == tripoint_abs_omt::min() )
+        {
+            return sol::nullopt;
+        }
+        return result;
+    } );
+
+    // Terrain inspection methods
+    DOC( "Get the overmap terrain type at the given position. Returns an oter_id." );
+    luna::set_fx( lib, "ter",
+                  []( const tripoint_abs_omt & p ) -> oter_id { return get_active_overmapbuffer().ter( p ); } );
+
+    DOC( "Check if the terrain at the given position matches the type and match mode. Returns boolean." );
+    luna::set_fx( lib, "check_ot",
+    []( const std::string & otype, ot_match_type match_type, const tripoint_abs_omt & p ) -> bool {
+        return get_active_overmapbuffer().check_ot( otype, match_type, p );
+    } );
+
+    // Visibility methods
+    DOC( "Check if the terrain at the given position has been seen by the player. Returns boolean." );
+    luna::set_fx( lib, "seen",
+    []( const tripoint_abs_omt & p ) -> bool {
+        return get_active_overmapbuffer().seen( p );
+    } );
+
+    DOC( "Set the seen status of terrain at the given position." );
+    luna::set_fx( lib, "set_seen",
+    []( const tripoint_abs_omt & p, sol::optional<bool> seen_val ) -> void {
+        get_active_overmapbuffer().set_seen( p, seen_val.value_or( true ) );
+    } );
+
+    DOC( "Reveal a square area around a TripointAbsOmt center on the overmap. Returns true if any new tiles were revealed." );
+    DOC( "Optional filter callback receives oter_id and should return true to reveal that tile." );
+    luna::set_fx( lib, "reveal",
+                  []( const tripoint_abs_omt & center, int radius,
+    sol::optional<sol::protected_function> filter_fn ) -> bool {
+        if( filter_fn.has_value() )
+        {
+            auto filter = filter_fn.value();
+            const auto wrapped_filter = [filter]( const oter_id & ter ) -> bool {
+                sol::protected_function_result res = filter( ter );
+                check_func_result( res );
+                return res.get<bool>();
+            };
+            return get_active_overmapbuffer().reveal( center, radius, wrapped_filter );
+        }
+        return get_active_overmapbuffer().reveal( center, radius );
+    } );
+
+    DOC( "Check if the terrain at the given position has been explored by the player. Returns boolean." );
+    luna::set_fx( lib, "is_explored",
+    []( const tripoint_abs_omt & p ) -> bool {
+        return get_active_overmapbuffer().is_explored( p );
+    } );
+
+    DOC( "Get a player note at the given position. Returns string or nil." );
+    luna::set_fx( lib, "get_note",
+    []( const tripoint_abs_omt & p ) -> sol::optional<std::string> {
+        const auto &note_text = get_active_overmapbuffer().note( p );
+        if( note_text.empty() )
+        {
+            return sol::nullopt;
+        }
+        return note_text;
+    } );
+
+    DOC( "Set a player note at the given position. Pass nil or empty string to clear." );
+    luna::set_fx( lib, "set_note",
+    []( const tripoint_abs_omt & pos, const sol::optional<std::string> &note_text ) -> void {
+        if( note_text.has_value() && !note_text->empty() )
+        {
+            get_active_overmapbuffer().add_note( pos, *note_text );
+            return;
+        }
+        get_active_overmapbuffer().delete_note( pos );
+    } );
+
+    // Electric grid methods
+    DOC( "Get all overmap tiles belonging to the electric grid at the given position. Returns TripointAbsOmt values." );
+    luna::set_fx( lib, "electric_grid_at",
+    []( const tripoint_abs_omt & p ) -> std::vector<tripoint_abs_omt> {
+        return electric_grid_at_vector( get_active_overmapbuffer(), p );
+    } );
+
+    DOC( "Get all electric grid connections from the given position. Returns TripointRelOmt offsets." );
+    luna::set_fx( lib, "electric_grid_connectivity_at",
+    []( const tripoint_abs_omt & p ) -> std::vector<tripoint_rel_omt> {
+        return get_active_overmapbuffer().electric_grid_connectivity_at( p );
+    } );
+
+    DOC( "Add an electric grid connection between two positions. Returns true on success." );
+    luna::set_fx( lib, "add_grid_connection",
+    []( const tripoint_abs_omt & lhs, const tripoint_abs_omt & rhs ) -> bool {
+        return get_active_overmapbuffer().add_grid_connection( lhs, rhs );
+    } );
+
+    DOC( "Remove an electric grid connection between two positions. Returns true on success." );
+    luna::set_fx( lib, "remove_grid_connection",
+    []( const tripoint_abs_omt & lhs, const tripoint_abs_omt & rhs ) -> bool {
+        return get_active_overmapbuffer().remove_grid_connection( lhs, rhs );
+    } );
+
+    DOC( "Get all overmap tiles belonging to the fluid grid at the given TripointAbsOmt position. Returns TripointAbsOmt values." );
+    luna::set_fx( lib, "fluid_grid_at", &fluid_grid_at_vector );
+
+    DOC( "Get all fluid grid connections from the given TripointAbsOmt position. Returns TripointRelOmt offsets." );
+    luna::set_fx( lib, "fluid_grid_connectivity_at", &fluid_grid_connectivity_at_vector );
+
+    DOC( "Get the available charges of a liquid in the fluid grid at the given TripointAbsOmt position." );
+    luna::set_fx( lib, "fluid_grid_liquid_charges_at", &fluid_grid::liquid_charges_at );
+
+    DOC( "Drain liquid charges from the fluid grid at the given TripointAbsOmt position. Returns the number removed." );
+    luna::set_fx( lib, "drain_fluid_grid_liquid_charges", &fluid_grid::drain_liquid_charges );
+
+    DOC( "Check whether adding a liquid would contaminate the fluid grid at the given TripointAbsOmt position." );
+    luna::set_fx( lib, "fluid_grid_would_contaminate", &fluid_grid::would_contaminate );
+
+    // Horde and monster group methods
+    DOC( "List monster groups influencing the given overmap tile (absolute OMT coordinates)." );
+    luna::set_fx( lib, "monster_groups_at",
+    []( const tripoint_abs_omt & p ) -> std::vector<mongroup *> {
+        return get_active_overmapbuffer().monsters_at( p );
+    } );
+
+    DOC( "List hordes influencing the given overmap tile (absolute OMT coordinates)." );
+    luna::set_fx( lib, "hordes_at",
+    []( const tripoint_abs_omt & p ) -> std::vector<mongroup *> {
+        auto hordes = std::vector<mongroup *>{};
+        const auto groups = get_active_overmapbuffer().monsters_at( p );
+        std::ranges::copy_if( groups, std::back_inserter( hordes ), []( const mongroup * group )
+        {
+            return group != nullptr && group->horde;
+        } );
+        return hordes;
+    } );
+
+    DOC( "Count hordes influencing the given overmap tile (absolute OMT coordinates)." );
+    luna::set_fx( lib, "horde_count",
+    []( const tripoint_abs_omt & p ) -> int {
+        auto groups = get_active_overmapbuffer().monsters_at( p );
+        return static_cast<int>( std::ranges::count_if( groups, []( const mongroup * group )
+        {
+            return group != nullptr && group->horde;
+        } ) );
+    } );
+
+    DOC( "Check if a horde is present at the given overmap tile." );
+    luna::set_fx( lib, "has_horde",
+    []( const tripoint_abs_omt & p ) -> bool {
+        return get_active_overmapbuffer().has_horde( p );
+    } );
+
+    DOC( "Get the estimated size of the horde at the given overmap tile." );
+    luna::set_fx( lib, "horde_size",
+    []( const tripoint_abs_omt & p ) -> int {
+        return get_active_overmapbuffer().get_horde_size( p );
+    } );
+
+    DOC( "Signal nearby hordes toward an absolute submap position with the given strength." );
+    luna::set_fx( lib, "signal_hordes",
+    []( const tripoint_abs_sm & center_sm, int sig_power ) -> void {
+        get_active_overmapbuffer().signal_hordes( center_sm, sig_power );
+    } );
+
+    DOC( "Advance horde movement across all loaded overmaps." );
+    luna::set_fx( lib, "move_hordes",
+    []() -> void {
+        get_active_overmapbuffer().move_hordes();
+    } );
+
+    DOC( "Create a monster horde at the given absolute OMT position. Pass a table with fields: type (mongroup_id, required), pos (TripointAbsOmt, required), radius (int), population (int), horde (bool), behaviour (string), diffuse (bool), target (TripointAbsOmt)." );
+    luna::set_fx( lib, "create_horde",
+    []( const sol::table & opts ) -> mongroup * {
+        const sol::object type_obj = opts.get<sol::object>( "type" );
+        mongroup_id type_id = mongroup_id::NULL_ID();
+        if( type_obj.is<std::string>() )
+        {
+            type_id = mongroup_id( type_obj.as<std::string>() );
+        } else if( type_obj.is<mongroup_id>() )
+        {
+            type_id = type_obj.as<mongroup_id>();
+        }
+        const sol::optional<tripoint_abs_omt> pos_val = opts.get<sol::optional<tripoint_abs_omt>>( "pos" );
+        if( type_id.is_null() || !pos_val.has_value() )
+        {
+            return nullptr;
+        }
+        const int radius = opts.get_or( "radius", 1 );
+        const int population = opts.get_or( "population", 100 );
+        const bool is_horde = opts.get_or( "horde", true );
+        const std::string behaviour = opts.get_or( "behaviour", std::string( "roam" ) );
+        const bool diffuse = opts.get_or( "diffuse", false );
+        const sol::optional<tripoint_abs_omt> target_omt = opts.get<sol::optional<tripoint_abs_omt>>( "target" );
+
+        const tripoint_abs_sm pos_abs_sm = project_to<coords::sm>( *pos_val );
+        mongroup mg( type_id, pos_abs_sm, radius, population );
+        mg.abs_pos = pos_abs_sm;
+        mg.horde = is_horde;
+        mg.horde_behaviour = behaviour;
+        mg.diffuse = diffuse;
+
+        if( target_omt.has_value() )
+        {
+            const tripoint_abs_sm target_abs_sm = project_to<coords::sm>( *target_omt );
+            mg.target = target_abs_sm;
+            mg.nemesis_target = target_abs_sm;
+        }
+
+        return get_active_overmapbuffer().create_horde( mg );
+    } );
+
+    luna::finalize_lib( lib );
+}

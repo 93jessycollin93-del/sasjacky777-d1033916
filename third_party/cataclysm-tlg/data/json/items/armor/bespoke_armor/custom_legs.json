@@ -1,0 +1,108 @@
+[
+  {
+    "id": "pants_survivor",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "survivor cargo pants" },
+    "description": "A heavy-duty pair of pants custom armored with a kevlar liner and a rubberized coating, offering all-around protection from the myriad threats of the Cataclysm.",
+    "weight": "2100 g",
+    "volume": "3 L",
+    "price": "380 USD",
+    "price_postapoc": "20 USD",
+    "material": [ "soft_rubber", "nylon", "kevlar" ],
+    "symbol": "[",
+    "looks_like": "pants_army",
+    "color": "green",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1250 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "19 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1250 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "19 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1250 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "19 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1250 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "19 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1080 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1080 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "165 mm",
+        "moves": 100
+      }
+    ],
+    "warmth": 15,
+    "material_thickness": 4,
+    "environmental_protection": 7,
+    "flags": [ "VARSIZE", "POCKETS", "STURDY", "RAINPROOF" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 85, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.0 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": [ 14, 21 ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r", "leg_upper_l", "leg_upper_r", "leg_lower_l", "leg_lower_r" ],
+        "coverage": 95
+      },
+      {
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 90, "thickness": 0.1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 },
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.0 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": [ 0, 0 ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
+        "coverage": 70
+      }
+    ]
+  },
+  {
+    "id": "pants_survivor_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "pants_survivor",
+    "name": { "str_sp": "survivor cargo pants" },
+    "proportional": { "weight": 1.25, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "pants_survivor_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "pants_survivor",
+    "name": { "str_sp": "survivor cargo pants" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  }
+]

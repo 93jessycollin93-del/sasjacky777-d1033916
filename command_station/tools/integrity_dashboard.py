@@ -115,17 +115,28 @@ class IntegrityDashboard:
             embedding_files = list(family_path.rglob("embedding_pods*.jsonl"))
             
             total_chunks = 0
+            unreadable = []
             for file_path in context_files:
                 try:
                     with open(file_path, 'r') as f:
                         chunks = len([line for line in f if line.strip()])
                         total_chunks += chunks
-                except:
-                    pass
+                except OSError as exc:
+                    unreadable.append((file_path, exc))
             
             print(f"  Context chunks: {total_chunks} files")
             print(f"  Embedding pods: {len(embedding_files)} files")
-            print(f"  Status: [OK]")
+            # A file that would not open used to be skipped in silence, so the
+            # count came out short and the line below still said [OK]. An
+            # integrity dashboard that under-reports and calls it healthy is
+            # worse than no dashboard.
+            if unreadable:
+                print(f"  Unreadable: {len(unreadable)} file(s) - counts above are a floor")
+                for file_path, exc in unreadable:
+                    print(f"    {file_path}: {exc}")
+                print(f"  Status: [DEGRADED]")
+            else:
+                print(f"  Status: [OK]")
             print()
             
             results.append({

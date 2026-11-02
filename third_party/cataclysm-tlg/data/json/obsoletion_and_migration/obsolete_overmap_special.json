@@ -1,0 +1,47 @@
+[
+  {
+    "type": "overmap_special_migration",
+    "id": "solar_farm",
+    "new_id": "power_station_small"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Cabin_Lapin",
+    "new_id": "Cabin_8"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Occupied Lumbermill",
+    "new_id": "Lumbermill"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "cemetery_lacroix",
+    "new_id": "cemetery_religious"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Isherwood Farm Mutable",
+    "new_id": "Farm Mutable"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Hunting Lodge - Normal",
+    "new_id": "Hunting Lodge"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Occupied Scrap Yard",
+    "new_id": "Scrapyard 1"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Slime Pit",
+    "new_id": "Spider Pit"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "militia lodge",
+    "new_id": "Hunting Lodge - Ferals"
+  }
+]

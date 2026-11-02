@@ -1,0 +1,1 @@
+-- Obsolete compatibility stub. The functionality is provided by the BN core content pack.

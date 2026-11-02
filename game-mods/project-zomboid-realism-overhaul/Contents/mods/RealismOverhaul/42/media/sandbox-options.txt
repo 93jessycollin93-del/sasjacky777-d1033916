@@ -1,0 +1,33 @@
+VERSION = 1,
+
+option RealismOverhaul.EnableMovement
+{
+	type = boolean,
+	default = false,
+	page = RealismOverhaul,
+	translation = RealismOverhaul_EnableMovement,
+}
+
+option RealismOverhaul.EnableLighting
+{
+	type = boolean,
+	default = false,
+	page = RealismOverhaul,
+	translation = RealismOverhaul_EnableLighting,
+}
+
+option RealismOverhaul.EnableAudio
+{
+	type = boolean,
+	default = false,
+	page = RealismOverhaul,
+	translation = RealismOverhaul_EnableAudio,
+}
+
+option RealismOverhaul.EnableCameraAdapter
+{
+	type = boolean,
+	default = true,
+	page = RealismOverhaul,
+	translation = RealismOverhaul_EnableCameraAdapter,
+}

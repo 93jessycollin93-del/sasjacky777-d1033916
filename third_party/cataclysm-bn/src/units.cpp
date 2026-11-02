@@ -1,0 +1,99 @@
+#include <string>
+
+#include "json.h"
+#include "string_formatter.h"
+#include "units.h"
+#include "units_serde.h"
+#include "translations.h"
+
+namespace units
+{
+template<>
+void volume::serialize( JsonOut &jsout ) const
+{
+    if( value_ % 1000 == 0 ) {
+        jsout.write( std::to_string( value_ / 1000 ) + " L" );
+    } else {
+        jsout.write( std::to_string( value_ ) + " ml" );
+    }
+}
+
+template<>
+void mass::serialize( JsonOut &jsout ) const
+{
+    if( value_ % 1000000 == 0 ) {
+        jsout.write( string_format( "%d kg", value_ / 1000000 ) );
+    } else if( value_ % 1000 == 0 ) {
+        jsout.write( string_format( "%d g", value_ / 1000 ) );
+    } else {
+        jsout.write( string_format( "%d mg", value_ ) );
+    }
+}
+
+template<>
+void energy::serialize( JsonOut &jsout ) const
+{
+    if( value_ % 1000 == 0 ) {
+        jsout.write( string_format( "%d kJ", value_ / 1000 ) );
+    } else {
+        jsout.write( string_format( "%d J", value_ ) ) ;
+    }
+}
+
+template<>
+void money::serialize( JsonOut &jsout ) const
+{
+    if( value_ % 100 == 0 ) {
+        jsout.write( string_format( "%d USD", value_ / 100 ) );
+    } else {
+        jsout.write( string_format( "%d cent", value_ / 100 ) );
+    }
+}
+
+template<>
+void sound::serialize( JsonOut &jsout ) const
+{
+    jsout.write( string_format( "%d dB", value_ ) );
+}
+
+template<>
+void money::deserialize( JsonIn &jsin )
+{
+    *this = read_from_json_string<money>( jsin, units::money_units );
+}
+
+template<>
+void sound::deserialize( JsonIn &jsin )
+{
+    *this = read_from_json_string<sound>( jsin, units::sound_units );
+}
+
+template<>
+void energy::deserialize( JsonIn &jsin )
+{
+    *this = read_from_json_string( jsin, units::energy_units );
+}
+
+template<>
+void angle::serialize( JsonOut &jsout ) const
+{
+    jsout.write( string_format( "%f rad", value_ ) );
+}
+
+template<>
+void angle::deserialize( JsonIn &jsin )
+{
+    *this = read_from_json_string( jsin, units::angle_units );
+}
+
+std::string display( const units::energy v )
+{
+    const int kj = units::to_kilojoule( v );
+    const int j = units::to_joule( v );
+    // at least 1 kJ and there is no fraction
+    if( kj >= 1 && float( j ) / kj == 1000 ) {
+        return std::to_string( kj ) + ' ' + pgettext( "energy unit: kilojoule", "kJ" );
+    }
+    return std::to_string( j ) + ' ' + pgettext( "energy unit: joule", "J" );
+}
+} // namespace units

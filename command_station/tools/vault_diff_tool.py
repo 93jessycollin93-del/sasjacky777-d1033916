@@ -50,7 +50,10 @@ class VaultDiffTool:
             family_data = {
                 "files": {},
                 "context_chunks": 0,
-                "embedding_pods": 0
+                "embedding_pods": 0,
+                # Files the scan could not read. Empty is the normal case; a
+                # non-empty list means the counts above are a floor, not a total.
+                "unreadable": []
             }
             
             # Scan GGUF files
@@ -62,14 +65,17 @@ class VaultDiffTool:
                     "modified": file_path.stat().st_mtime
                 }
             
-            # Count context chunks
+            # Count context chunks. A file that will not open is recorded
+            # rather than skipped: silently contributing zero makes a corrupt
+            # or unreadable vault look like a merely smaller one, which is the
+            # opposite of what a diff tool is for.
             for file_path in family_path.rglob("context_chunks*.jsonl"):
                 try:
                     with open(file_path, 'r') as f:
                         chunks = len([line for line in f if line.strip()])
                         family_data["context_chunks"] += chunks
-                except:
-                    pass
+                except OSError as exc:
+                    family_data["unreadable"].append(f"{file_path}: {exc}")
             
             # Count embedding pods
             for file_path in family_path.rglob("embedding_pods*.jsonl"):
@@ -77,8 +83,8 @@ class VaultDiffTool:
                     with open(file_path, 'r') as f:
                         pods = len([line for line in f if line.strip()])
                         family_data["embedding_pods"] += pods
-                except:
-                    pass
+                except OSError as exc:
+                    family_data["unreadable"].append(f"{file_path}: {exc}")
             
             state["model_families"][family] = family_data
         

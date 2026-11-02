@@ -1,0 +1,19 @@
+[
+  {
+    "id": "custom",
+    "type": "vehicle",
+    "name": "custom",
+    "//": "Don't remove this vehicle definition!",
+    "blueprint": [ "H" ],
+    "parts": [ { "x": 0, "y": 0, "part": "frame_vertical_2" } ]
+  },
+  {
+    "id": "none",
+    "type": "vehicle",
+    "name": "custom_empty",
+    "//": "Don't remove this vehicle definition!",
+    "blueprint": [ "H" ],
+    "flags": [ "VEHICLE_UNLOCKED", "VEHICLE_NO_LOCKS", "VEHICLE_NO_HOTWIRE" ],
+    "parts": [  ]
+  }
+]

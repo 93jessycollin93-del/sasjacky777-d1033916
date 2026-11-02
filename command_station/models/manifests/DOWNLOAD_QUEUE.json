@@ -1,0 +1,2333 @@
+{
+ "queue_version": "1.0.0",
+ "about": "Compact AI models to download, in priority order. Source of truth for the app's catalog (src/lib/microai/modelQueue.ts), the rig's downloader (command_station/tools/model_queue.py) and docs/MODEL_QUEUE.md. 'repo' corrects an id that is not a Hugging Face repository as written; repo null means it is published elsewhere ('source').",
+ "sections": {
+  "tier0": "Tier 0 - validate first",
+  "dialogue": "Tiny dialogue and language models",
+  "classification": "Classification and routing",
+  "embeddings": "Embeddings and RAG",
+  "audio": "Audio and speech",
+  "vision": "Vision, detection, segmentation, and depth",
+  "multimodal": "Multimodal, OCR, documents, and asset understanding"
+ },
+ "phases": {
+  "1": [
+   2,
+   1,
+   3,
+   4,
+   8,
+   9,
+   10,
+   11,
+   13,
+   14,
+   16,
+   127,
+   20,
+   19,
+   161
+  ],
+  "2": [
+   5,
+   7,
+   164,
+   49,
+   4,
+   78,
+   82,
+   96,
+   149,
+   157,
+   160,
+   142,
+   140,
+   165,
+   167
+  ],
+  "3": [
+   36,
+   38,
+   39,
+   106,
+   105,
+   99,
+   101,
+   18,
+   155,
+   151,
+   152,
+   137,
+   166,
+   130,
+   163
+  ]
+ },
+ "embedding_tiers": {
+  "fast": [
+   71,
+   10
+  ],
+  "balanced": [
+   11,
+   12,
+   13
+  ],
+  "quality": [
+   78,
+   82,
+   86
+  ]
+ },
+ "accessibility_pipeline": [
+  109,
+  95,
+  99,
+  65,
+  107
+ ],
+ "models": [
+  {
+   "queue": 1,
+   "id": "Qwen/Qwen2.5-0.5B-Instruct",
+   "task": "Small instruction-following NPC brain",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/instruct",
+   "section": "tier0",
+   "priority": "Essential",
+   "device": "qwen2.5-0.5b-instruct",
+   "license": "Apache-2.0",
+   "gguf": {
+    "repos": [
+     "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+     "bartowski/Qwen2.5-0.5B-Instruct-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 2,
+   "id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "task": "Lightweight dialogue and orchestration",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/instruct",
+   "section": "tier0",
+   "priority": "Essential",
+   "device": "smollm2-360m-instruct",
+   "license": "Apache-2.0",
+   "gguf": {
+    "repos": [
+     "HuggingFaceTB/SmolLM2-360M-Instruct-GGUF",
+     "bartowski/SmolLM2-360M-Instruct-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 3,
+   "id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+   "task": "Stronger offline NPC model",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/instruct",
+   "section": "tier0",
+   "priority": "Essential",
+   "device": "smollm2-1.7b-instruct",
+   "license": "Apache-2.0",
+   "gguf": {
+    "repos": [
+     "HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF",
+     "bartowski/SmolLM2-1.7B-Instruct-GGUF",
+     "MaziyarPanahi/SmolLM2-1.7B-Instruct-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 4,
+   "id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+   "task": "Compact coding assistant",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/coding",
+   "section": "tier0",
+   "priority": "Essential",
+   "device": "qwen2.5-coder-1.5b-instruct",
+   "license": "Apache-2.0",
+   "gguf": {
+    "repos": [
+     "Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF",
+     "bartowski/Qwen2.5-Coder-1.5B-Instruct-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 5,
+   "id": "HuggingFaceTB/SmolLM3-3B",
+   "task": "Newer compact reasoning model",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/reasoning",
+   "section": "tier0",
+   "priority": "High",
+   "device": "smollm3-3b",
+   "license": "Apache-2.0",
+   "gguf": {
+    "repos": [
+     "ggml-org/SmolLM3-3B-GGUF",
+     "bartowski/HuggingFaceTB_SmolLM3-3B-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 6,
+   "id": "google/gemma-3-1b-it",
+   "task": "Compact assistant (the 1B is text-only; image input starts at Gemma 3 4B, #164)",
+   "formats": [
+    "GGUF",
+    "TFLite"
+   ],
+   "folder": "text/instruct",
+   "section": "tier0",
+   "priority": "High",
+   "caution": "Gated: accept Google's Gemma terms on Hugging Face first; an anonymous download is refused."
+  },
+  {
+   "queue": 7,
+   "id": "microsoft/Phi-3.5-mini-instruct",
+   "task": "Strong small reasoning model",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/reasoning",
+   "section": "tier0",
+   "priority": "High",
+   "device": "phi-3.5-mini-instruct",
+   "license": "MIT",
+   "gguf": {
+    "repos": [
+     "bartowski/Phi-3.5-mini-instruct-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 8,
+   "id": "openai/whisper-tiny",
+   "task": "Offline speech recognition",
+   "formats": [
+    "ONNX",
+    "TFLite",
+    "Core ML"
+   ],
+   "folder": "audio/whisper",
+   "section": "tier0",
+   "priority": "Essential",
+   "license": "MIT"
+  },
+  {
+   "queue": 9,
+   "id": "openai/whisper-base",
+   "task": "More accurate transcription",
+   "formats": [
+    "ONNX",
+    "TFLite",
+    "Core ML"
+   ],
+   "folder": "audio/whisper",
+   "section": "tier0",
+   "priority": "Essential",
+   "license": "MIT"
+  },
+  {
+   "queue": 10,
+   "id": "sentence-transformers/all-MiniLM-L6-v2",
+   "task": "General-purpose embeddings",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "embeddings/fast",
+   "section": "tier0",
+   "priority": "Essential",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 11,
+   "id": "BAAI/bge-small-en-v1.5",
+   "task": "High-quality small RAG embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "tier0",
+   "priority": "Essential",
+   "license": "MIT"
+  },
+  {
+   "queue": 12,
+   "id": "intfloat/e5-small-v2",
+   "task": "Query/document retrieval",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "tier0",
+   "priority": "High",
+   "license": "MIT"
+  },
+  {
+   "queue": 13,
+   "id": "nomic-ai/nomic-embed-text-v1.5",
+   "task": "Long-context embeddings",
+   "formats": [
+    "ONNX",
+    "GGUF"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "tier0",
+   "priority": "High",
+   "license": "Apache-2.0",
+   "gguf": {
+    "repos": [
+     "nomic-ai/nomic-embed-text-v1.5-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 14,
+   "id": "ultralytics/yolov8n",
+   "task": "Real-time object detection",
+   "formats": [
+    "ONNX",
+    "TFLite",
+    "Core ML"
+   ],
+   "folder": "vision/detection",
+   "section": "tier0",
+   "priority": "Essential",
+   "repo": "Ultralytics/YOLOv8",
+   "note": "Not a repository as written: Ultralytics publishes yolov8n.pt in its GitHub releases and the Ultralytics/YOLOv8 repo, and exports ONNX/TFLite/Core ML with its own tool.",
+   "caution": "AGPL-3.0: an app that ships it must be AGPL too, or hold an Ultralytics licence."
+  },
+  {
+   "queue": 15,
+   "id": "ultralytics/yolov11n",
+   "task": "Newer object detection option",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "vision/detection",
+   "section": "tier0",
+   "priority": "High",
+   "repo": "Ultralytics/YOLO11",
+   "note": "Named YOLO11 (yolo11n.pt), without the v.",
+   "caution": "AGPL-3.0: an app that ships it must be AGPL too, or hold an Ultralytics licence."
+  },
+  {
+   "queue": 16,
+   "id": "google/mobilenet_v3_small",
+   "task": "Mobile image classification",
+   "formats": [
+    "TFLite",
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "tier0",
+   "priority": "Essential",
+   "repo": "timm/mobilenetv3_small_100.lamb_in1k",
+   "note": "Google publishes no MobileNetV3 under this id; timm's port is on Hugging Face, and Keras ships MobileNetV3Small."
+  },
+  {
+   "queue": 17,
+   "id": "microsoft/resnet-18",
+   "task": "Asset classification",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "vision/classification",
+   "section": "tier0",
+   "priority": "High"
+  },
+  {
+   "queue": 18,
+   "id": "facebook/sam-vit-base",
+   "task": "Image segmentation and cutouts",
+   "formats": [
+    "ONNX",
+    "Core ML"
+   ],
+   "folder": "vision/segmentation",
+   "section": "tier0",
+   "priority": "High",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 19,
+   "id": "microsoft/Florence-2-small",
+   "task": "Image and UI description",
+   "formats": [
+    "ONNX",
+    "PyTorch"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "tier0",
+   "priority": "High",
+   "repo": "microsoft/Florence-2-base",
+   "note": "There is no Florence-2-small: Florence-2-base (0.23B) is the smallest.",
+   "license": "MIT"
+  },
+  {
+   "queue": 20,
+   "id": "depth-anything/Depth-Anything-V2-Small",
+   "task": "Monocular depth estimation",
+   "formats": [
+    "ONNX",
+    "Core ML"
+   ],
+   "folder": "vision/depth",
+   "section": "tier0",
+   "priority": "High",
+   "note": "The Transformers-format copy is depth-anything/Depth-Anything-V2-Small-hf.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 21,
+   "id": "roneneldan/TinyStories-1M",
+   "task": "Ultra-tiny NPC dialogue",
+   "formats": [
+    "PyTorch",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue"
+  },
+  {
+   "queue": 22,
+   "id": "roneneldan/TinyStories-3M",
+   "task": "Short NPC stories",
+   "formats": [
+    "PyTorch",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue"
+  },
+  {
+   "queue": 23,
+   "id": "EleutherAI/pythia-70m",
+   "task": "Tiny text generation",
+   "formats": [
+    "GGUF"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 24,
+   "id": "EleutherAI/pythia-160m",
+   "task": "Slightly stronger text generation",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 25,
+   "id": "EleutherAI/pythia-410m",
+   "task": "Small reasoning and code experiments",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 26,
+   "id": "openai-community/gpt2",
+   "task": "Classic baseline generation",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "license": "MIT"
+  },
+  {
+   "queue": 27,
+   "id": "EleutherAI/gpt-neo-125m",
+   "task": "Small text and story generation",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue"
+  },
+  {
+   "queue": 28,
+   "id": "facebook/opt-125m",
+   "task": "Small generative baseline",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue"
+  },
+  {
+   "queue": 29,
+   "id": "facebook/MobileLLM-125M",
+   "task": "Mobile dialogue",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "caution": "Meta's MobileLLM repos ask you to accept a non-commercial research licence on Hugging Face before download."
+  },
+  {
+   "queue": 30,
+   "id": "facebook/MobileLLM-350M",
+   "task": "Stronger mobile dialogue",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "caution": "Meta's MobileLLM repos ask you to accept a non-commercial research licence on Hugging Face before download."
+  },
+  {
+   "queue": 31,
+   "id": "facebook/MobileLLM-600M",
+   "task": "Larger mobile dialogue",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "caution": "Meta's MobileLLM repos ask you to accept a non-commercial research licence on Hugging Face before download."
+  },
+  {
+   "queue": 32,
+   "id": "HuggingFaceTB/SmolLM-135M",
+   "task": "Tiny offline assistant",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "note": "A base model; SmolLM2-135M-Instruct is the chat version that supersedes it.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 33,
+   "id": "HuggingFaceTB/SmolLM-360M",
+   "task": "Compact assistant",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "note": "A base model; SmolLM2-360M-Instruct (#2) is the chat version that supersedes it.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 34,
+   "id": "Cerebras/Cerebras-GPT-111M",
+   "task": "Small completion model",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "repo": "cerebras/Cerebras-GPT-111M",
+   "note": "The organisation is cerebras, lowercase.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 35,
+   "id": "Cerebras/Cerebras-GPT-590M",
+   "task": "Larger orchestration model",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "repo": "cerebras/Cerebras-GPT-590M",
+   "note": "The organisation is cerebras, lowercase.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 36,
+   "id": "state-spaces/mamba-130m",
+   "task": "State-space orchestration",
+   "formats": [
+    "Native PyTorch"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "note": "The Transformers-compatible copy is state-spaces/mamba-130m-hf.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 37,
+   "id": "state-spaces/mamba-370m",
+   "task": "Longer-context experimentation",
+   "formats": [
+    "Native PyTorch"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "note": "The Transformers-compatible copy is state-spaces/mamba-370m-hf.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 38,
+   "id": "RWKV/rwkv-4-169m-pile",
+   "task": "Efficient long-context dialogue",
+   "formats": [
+    "GGUF",
+    "Native"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 39,
+   "id": "RWKV/rwkv-4-430m-pile",
+   "task": "Larger lore and memory model",
+   "formats": [
+    "GGUF",
+    "Native"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 40,
+   "id": "distilbert/distilgpt2",
+   "task": "Small generative text model",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 41,
+   "id": "tiiuae/falcon-rw-1b",
+   "task": "Creative writing",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "note": "A base model, not instruction-tuned.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 42,
+   "id": "stabilityai/stablelm-2-1.6b",
+   "task": "Game lore and dialogue",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "repo": "stabilityai/stablelm-2-1_6b",
+   "note": "Written stablelm-2-1_6b, with an underscore.",
+   "caution": "Stability AI licence: check the model card's terms before any commercial use."
+  },
+  {
+   "queue": 43,
+   "id": "h2oai/h2o-danube3-500m-chat",
+   "task": "Compact chat model",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/instruct",
+   "section": "dialogue",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 44,
+   "id": "bigscience/bloomz-560m",
+   "task": "Multilingual dialogue",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/instruct",
+   "section": "dialogue",
+   "caution": "BigScience RAIL licence: it lists uses you may not put the model to."
+  },
+  {
+   "queue": 45,
+   "id": "bigscience/bloomz-1b1",
+   "task": "Multilingual creative generation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/instruct",
+   "section": "dialogue",
+   "caution": "BigScience RAIL licence: it lists uses you may not put the model to."
+  },
+  {
+   "queue": 46,
+   "id": "facebook/xglm-564M",
+   "task": "Multilingual social dialogue",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "license": "MIT"
+  },
+  {
+   "queue": 47,
+   "id": "allenai/OLMo-300M",
+   "task": "Open small language model",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/tiny",
+   "section": "dialogue",
+   "repo": "allenai/OLMo-1B-hf",
+   "note": "There is no 300M OLMo; the smallest are OLMo 1B and OLMo 2 1B.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 48,
+   "id": "microsoft/phi-2",
+   "task": "Compact reasoning and puzzles",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/reasoning",
+   "section": "dialogue",
+   "license": "MIT",
+   "gguf": {
+    "repos": [
+     "TheBloke/phi-2-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 49,
+   "id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+   "task": "Distilled reasoning",
+   "formats": [
+    "GGUF"
+   ],
+   "folder": "text/reasoning",
+   "section": "dialogue",
+   "note": "Not in the On-device engine: it writes a long thinking section before every answer, which at a phone's CPU speed is minutes before the first word.",
+   "license": "MIT",
+   "gguf": {
+    "repos": [
+     "unsloth/DeepSeek-R1-Distill-Qwen-1.5B-GGUF",
+     "bartowski/DeepSeek-R1-Distill-Qwen-1.5B-GGUF"
+    ],
+    "quants": [
+     "q4_k_m",
+     "q4_0",
+     "q5_k_m",
+     "q8_0"
+    ]
+   }
+  },
+  {
+   "queue": 50,
+   "id": "google/gemma-2-2b-it",
+   "task": "Compact instruction model",
+   "formats": [
+    "GGUF",
+    "TFLite"
+   ],
+   "folder": "text/instruct",
+   "section": "dialogue",
+   "caution": "Gated: accept Google's Gemma terms on Hugging Face first; an anonymous download is refused."
+  },
+  {
+   "queue": 51,
+   "id": "google/gemma-1.1-2b-it",
+   "task": "Offline safety and dialogue",
+   "formats": [
+    "GGUF",
+    "TFLite"
+   ],
+   "folder": "text/instruct",
+   "section": "dialogue",
+   "caution": "Gated: accept Google's Gemma terms on Hugging Face first; an anonymous download is refused."
+  },
+  {
+   "queue": 52,
+   "id": "IBM/granite-3.0-2b-instruct",
+   "task": "Structured reasoning",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "text/instruct",
+   "section": "dialogue",
+   "repo": "ibm-granite/granite-3.0-2b-instruct",
+   "note": "The organisation is ibm-granite.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 53,
+   "id": "prajjwal1/bert-tiny",
+   "task": "Scam classifier",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything.",
+   "license": "MIT"
+  },
+  {
+   "queue": 54,
+   "id": "google/bert_uncased_L-2_H-128_A-2",
+   "task": "Micro-NLP router",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 55,
+   "id": "google/bert_uncased_L-2_H-256_A-4",
+   "task": "Small intent classifier",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 56,
+   "id": "google/bert_uncased_L-4_H-256_A-4",
+   "task": "Dialogue moderation",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 57,
+   "id": "albert/albert-base-v2",
+   "task": "Tiny intent classifier",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 58,
+   "id": "huawei-noah/TinyBERT_General_4L_312D",
+   "task": "Routing and classification",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything."
+  },
+  {
+   "queue": 59,
+   "id": "distilbert/distilbert-base-uncased",
+   "task": "Scam text encoding",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 60,
+   "id": "microsoft/MobileBERT-uncased",
+   "task": "Mobile language classification",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "repo": "google/mobilebert-uncased",
+   "note": "MobileBERT is Google's: google/mobilebert-uncased. A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 61,
+   "id": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+   "task": "Query paraphrasing",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/fast",
+   "section": "classification",
+   "note": "An embedding model: it finds paraphrases, it does not write them.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 62,
+   "id": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+   "task": "Search reranking",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 63,
+   "id": "cross-encoder/ms-marco-MiniLM-L-2-v2",
+   "task": "Faster search reranking",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 64,
+   "id": "MoritzLaurer/Multi-BERT-L-2-mnli-xnli",
+   "task": "Multilingual intent classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "repo": "MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli",
+   "note": "This id could not be confirmed; MoritzLaurer's established small multilingual NLI model is multilingual-MiniLMv2-L6-mnli-xnli."
+  },
+  {
+   "queue": 65,
+   "id": "cardiffnlp/twitter-roberta-base-sentiment-latest",
+   "task": "Sentiment and tone routing",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/classification",
+   "section": "classification"
+  },
+  {
+   "queue": 66,
+   "id": "unitary/toxic-bert",
+   "task": "Moderation classifier",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 67,
+   "id": "facebook/bart-large-mnli",
+   "task": "Zero-shot classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "About 400M parameters: the largest model in this section.",
+   "license": "MIT"
+  },
+  {
+   "queue": 68,
+   "id": "typeform/distilbert-base-uncased-mnli",
+   "task": "Small zero-shot router",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/classification",
+   "section": "classification"
+  },
+  {
+   "queue": 69,
+   "id": "microsoft/deberta-v3-small",
+   "task": "Higher-quality text classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "text/classification",
+   "section": "classification",
+   "note": "A base encoder, not a classifier: it needs fine-tuning on labelled examples before it classifies anything.",
+   "license": "MIT"
+  },
+  {
+   "queue": 70,
+   "id": "sentence-transformers/all-MiniLM-L12-v2",
+   "task": "Stronger small embeddings",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "classification",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 71,
+   "id": "TaylorAI/bge-micro-v2",
+   "task": "Ultra-small memory embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/fast",
+   "section": "embeddings",
+   "license": "MIT"
+  },
+  {
+   "queue": 72,
+   "id": "sentence-transformers/all-MiniLM-L6-v2",
+   "task": "Main small embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/fast",
+   "section": "embeddings",
+   "duplicateOf": 10
+  },
+  {
+   "queue": 73,
+   "id": "sentence-transformers/multi-qa-MiniLM-L6-cos-v1",
+   "task": "QA and log retrieval",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/fast",
+   "section": "embeddings"
+  },
+  {
+   "queue": 74,
+   "id": "BAAI/bge-small-en-v1.5",
+   "task": "Knowledge condensation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "duplicateOf": 11
+  },
+  {
+   "queue": 75,
+   "id": "thenlper/gte-small",
+   "task": "Small semantic embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "license": "MIT"
+  },
+  {
+   "queue": 76,
+   "id": "intfloat/e5-small-v2",
+   "task": "Query/document retrieval",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "duplicateOf": 12
+  },
+  {
+   "queue": 77,
+   "id": "jinaai/jina-embeddings-v2-small-en",
+   "task": "Longer-context retrieval",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 78,
+   "id": "BAAI/bge-base-en-v1.5",
+   "task": "Main RAG base",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/quality",
+   "section": "embeddings",
+   "license": "MIT"
+  },
+  {
+   "queue": 79,
+   "id": "intfloat/e5-base-v2",
+   "task": "Base retrieval embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/quality",
+   "section": "embeddings",
+   "license": "MIT"
+  },
+  {
+   "queue": 80,
+   "id": "thenlper/gte-base",
+   "task": "Base semantic embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/quality",
+   "section": "embeddings",
+   "license": "MIT"
+  },
+  {
+   "queue": 81,
+   "id": "nomic-ai/nomic-embed-text-v1.5",
+   "task": "8k-context memory",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "duplicateOf": 13
+  },
+  {
+   "queue": 82,
+   "id": "mixedbread-ai/mxbai-embed-large-v1",
+   "task": "High-quality compressed retrieval",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/quality",
+   "section": "embeddings",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 83,
+   "id": "jinaai/jina-embeddings-v2-base-en",
+   "task": "Historical log retrieval",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/quality",
+   "section": "embeddings",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 84,
+   "id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+   "task": "Multilingual RAG",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 85,
+   "id": "intfloat/multilingual-e5-small",
+   "task": "Multilingual semantic search",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "license": "MIT"
+  },
+  {
+   "queue": 86,
+   "id": "BAAI/bge-m3",
+   "task": "Multilingual and multi-function retrieval",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/quality",
+   "section": "embeddings",
+   "note": "About 570M parameters.",
+   "license": "MIT"
+  },
+  {
+   "queue": 87,
+   "id": "Snowflake/snowflake-arctic-embed-xs",
+   "task": "Very small retrieval embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/fast",
+   "section": "embeddings",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 88,
+   "id": "Snowflake/snowflake-arctic-embed-s",
+   "task": "Efficient search embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 89,
+   "id": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+   "task": "Stronger instruction-aware embedding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/quality",
+   "section": "embeddings",
+   "note": "1.5B parameters: the largest embedding model in the queue.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 90,
+   "id": "nomic-ai/nomic-embed-text-v2-moe",
+   "task": "Newer efficient embedding option",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "embeddings/balanced",
+   "section": "embeddings",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 91,
+   "id": "openai/whisper-tiny",
+   "task": "Speech input (transcription; Whisper is not a wake-word detector)",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "duplicateOf": 8
+  },
+  {
+   "queue": 92,
+   "id": "openai/whisper-base",
+   "task": "Better offline transcription",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "duplicateOf": 9
+  },
+  {
+   "queue": 93,
+   "id": "openai/whisper-small",
+   "task": "Higher-quality transcription",
+   "formats": [
+    "ONNX",
+    "Core ML"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "license": "MIT"
+  },
+  {
+   "queue": 94,
+   "id": "openai/whisper-medium",
+   "task": "High-accuracy transcription",
+   "formats": [
+    "ONNX",
+    "Core ML"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "note": "769M parameters: a desktop model, not a phone one.",
+   "license": "MIT"
+  },
+  {
+   "queue": 95,
+   "id": "distil-whisper/distil-small.en",
+   "task": "Efficient English transcription",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "license": "MIT"
+  },
+  {
+   "queue": 96,
+   "id": "distil-whisper/distil-medium.en",
+   "task": "Faster medium-quality transcription",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "license": "MIT"
+  },
+  {
+   "queue": 97,
+   "id": "facebook/wav2vec2-base-960h",
+   "task": "Speech representation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "note": "Fine-tuned for English transcription (CTC), so it transcribes as well as representing speech.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 98,
+   "id": "facebook/hubert-base-ls960",
+   "task": "Audio representation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/speaker",
+   "section": "audio",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 99,
+   "id": "speechbrain/spkrec-ecapa-voxceleb",
+   "task": "Speaker identification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/speaker",
+   "section": "audio",
+   "note": "A SpeechBrain checkpoint; ONNX needs an export step.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 100,
+   "id": "microsoft/unispeech-sat-base",
+   "task": "Speaker verification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/speaker",
+   "section": "audio",
+   "note": "The base model; the speaker-verification fine-tune is microsoft/unispeech-sat-base-plus-sv."
+  },
+  {
+   "queue": 101,
+   "id": "laion/clap-htsat-unfused",
+   "task": "Audio-text classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/classification",
+   "section": "audio",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 102,
+   "id": "MIT/ast-finetuned-audioset-10-10-0.4593",
+   "task": "General audio classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/classification",
+   "section": "audio",
+   "license": "BSD-3-Clause"
+  },
+  {
+   "queue": 103,
+   "id": "sanchit-gandhi/whisper-medium-fleurs-lang-id",
+   "task": "Speech-language detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/classification",
+   "section": "audio"
+  },
+  {
+   "queue": 104,
+   "id": "kresnik/wav2vec2-large-xlsr-korean",
+   "task": "Language-specific recognition (Korean)",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio"
+  },
+  {
+   "queue": 105,
+   "id": "suno/bark-small",
+   "task": "Lightweight voice generation",
+   "formats": [
+    "PyTorch"
+   ],
+   "folder": "audio/tts",
+   "section": "audio",
+   "license": "MIT"
+  },
+  {
+   "queue": 106,
+   "id": "facebook/musicgen-small",
+   "task": "Music and loop generation",
+   "formats": [
+    "PyTorch"
+   ],
+   "folder": "audio/music",
+   "section": "audio",
+   "caution": "Weights are CC-BY-NC 4.0: non-commercial."
+  },
+  {
+   "queue": 107,
+   "id": "rhasspy/piper-voices",
+   "task": "Offline text-to-speech voices",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/tts",
+   "section": "audio",
+   "note": "A collection: each voice carries its own licence."
+  },
+  {
+   "queue": 108,
+   "id": "coqui/XTTS-v2",
+   "task": "Voice synthesis and cloning",
+   "formats": [
+    "PyTorch"
+   ],
+   "folder": "audio/tts",
+   "section": "audio",
+   "caution": "Coqui Public Model Licence: non-commercial. Cloning a voice needs its owner's consent."
+  },
+  {
+   "queue": 109,
+   "id": "snakers4/silero-vad",
+   "task": "Voice activity detection",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "audio/vad",
+   "section": "audio",
+   "repo": null,
+   "source": "https://github.com/snakers4/silero-vad",
+   "note": "Published on GitHub, ONNX included, not as a Hugging Face model.",
+   "license": "MIT"
+  },
+  {
+   "queue": 110,
+   "id": "s3prl/uper-emo",
+   "task": "Speech emotion features",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/classification",
+   "section": "audio",
+   "repo": "superb/wav2vec2-base-superb-er",
+   "note": "This id could not be confirmed; superb/wav2vec2-base-superb-er is an established speech-emotion model."
+  },
+  {
+   "queue": 111,
+   "id": "KBLab/wav2vec2-large-voxrex",
+   "task": "Speaker and voice features",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "note": "KBLab's VoxRex is a Swedish speech model: for Swedish transcription, not general speaker features."
+  },
+  {
+   "queue": 112,
+   "id": "faster-whisper",
+   "task": "Efficient Whisper inference (model family)",
+   "formats": [
+    "CTranslate2"
+   ],
+   "folder": "audio/whisper",
+   "section": "audio",
+   "repo": "Systran/faster-whisper-small",
+   "note": "A family: Systran/faster-whisper-tiny, -base, -small, -medium are the CTranslate2 conversions.",
+   "license": "MIT"
+  },
+  {
+   "queue": 113,
+   "id": "ultralytics/yolov5n",
+   "task": "Tiny object detection",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "repo": null,
+   "source": "https://github.com/ultralytics/yolov5/releases",
+   "note": "Published as yolov5n.pt in the ultralytics/yolov5 GitHub releases.",
+   "caution": "AGPL-3.0: an app that ships it must be AGPL too, or hold an Ultralytics licence."
+  },
+  {
+   "queue": 114,
+   "id": "ultralytics/yolov8n",
+   "task": "Newer object detection",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "duplicateOf": 14
+  },
+  {
+   "queue": 115,
+   "id": "ultralytics/yolov11n",
+   "task": "Newer detection baseline",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "duplicateOf": 15
+  },
+  {
+   "queue": 116,
+   "id": "google/mobilenet_v2_1.0_224",
+   "task": "Thumbnail classification",
+   "formats": [
+    "TFLite",
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision"
+  },
+  {
+   "queue": 117,
+   "id": "google/mobilenet_v3_small",
+   "task": "Efficient mobile classification",
+   "formats": [
+    "TFLite"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "duplicateOf": 16
+  },
+  {
+   "queue": 118,
+   "id": "microsoft/resnet-18",
+   "task": "Asset rarity classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "duplicateOf": 17
+  },
+  {
+   "queue": 119,
+   "id": "microsoft/resnet-50",
+   "task": "Stronger asset classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 120,
+   "id": "google/vit-tiny-patch16-224",
+   "task": "Tiny vision transformer",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "repo": "WinKawaks/vit-tiny-patch16-224",
+   "note": "Google publishes no tiny ViT under this id; WinKawaks/vit-tiny-patch16-224 and timm's (#122) are the tiny ones."
+  },
+  {
+   "queue": 121,
+   "id": "google/vit-base-patch16-224",
+   "task": "General image tagging",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 122,
+   "id": "timm/vit_tiny_patch16_224.augreg_in21k",
+   "task": "Compact material classifier",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 123,
+   "id": "google/efficientnet-b0",
+   "task": "Material quality scoring",
+   "formats": [
+    "TFLite",
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 124,
+   "id": "google/efficientnet-lite0",
+   "task": "Mobile material scoring",
+   "formats": [
+    "TFLite"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "repo": null,
+   "source": "https://github.com/tensorflow/tpu/tree/master/models/official/efficientnet/lite",
+   "note": "Not on Hugging Face: TensorFlow publishes EfficientNet-Lite as TFLite."
+  },
+  {
+   "queue": 125,
+   "id": "facebook/sam-vit-base",
+   "task": "Image segmentation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/segmentation",
+   "section": "vision",
+   "duplicateOf": 18
+  },
+  {
+   "queue": 126,
+   "id": "facebook/sam-vit-huge",
+   "task": "Higher-quality segmentation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/segmentation",
+   "section": "vision",
+   "note": "About 640M parameters: not a mobile model.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 127,
+   "id": "ChaoningZhang/MobileSAM",
+   "task": "Fast mobile segmentation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/segmentation",
+   "section": "vision",
+   "repo": null,
+   "source": "https://github.com/ChaoningZhang/MobileSAM",
+   "note": "A GitHub repository with its weights, not a Hugging Face id.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 128,
+   "id": "depth-anything/Depth-Anything-Small",
+   "task": "Small depth estimation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/depth",
+   "section": "vision",
+   "repo": "LiheYoung/depth-anything-small-hf",
+   "note": "Version 1 is published as LiheYoung/depth-anything-small-hf.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 129,
+   "id": "depth-anything/Depth-Anything-V2-Small",
+   "task": "Newer depth estimation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/depth",
+   "section": "vision",
+   "duplicateOf": 20
+  },
+  {
+   "queue": 130,
+   "id": "Intel/dpt-beit-base",
+   "task": "Depth estimation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/depth",
+   "section": "vision",
+   "repo": "Intel/dpt-beit-base-384",
+   "note": "Published with its resolution: Intel/dpt-beit-base-384."
+  },
+  {
+   "queue": 131,
+   "id": "Intel/dpt-swinv2-tiny-256",
+   "task": "Smaller depth estimation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/depth",
+   "section": "vision"
+  },
+  {
+   "queue": 132,
+   "id": "isl-org/MiDaS",
+   "task": "Classic monocular depth",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/depth",
+   "section": "vision",
+   "repo": "Intel/dpt-hybrid-midas",
+   "note": "MiDaS lives on GitHub (isl-org/MiDaS); on Hugging Face it is Intel/dpt-hybrid-midas."
+  },
+  {
+   "queue": 133,
+   "id": "facebook/convnext-tiny-224",
+   "task": "Avatar and asset classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 134,
+   "id": "microsoft/beit-base-patch16-224",
+   "task": "Visual representation",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/embeddings",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 135,
+   "id": "hustvl/yolos-tiny",
+   "task": "Transformer object detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 136,
+   "id": "hustvl/yolos-small",
+   "task": "Larger transformer detector",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 137,
+   "id": "microsoft/table-transformer-detection",
+   "task": "Table detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/documents",
+   "section": "vision",
+   "license": "MIT"
+  },
+  {
+   "queue": 138,
+   "id": "microsoft/table-transformer-structure-recognition",
+   "task": "Table structure parsing",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/documents",
+   "section": "vision",
+   "license": "MIT"
+  },
+  {
+   "queue": 139,
+   "id": "facebook/detr-resnet-50",
+   "task": "General object detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 140,
+   "id": "PekingU/rtdetr_r18vd",
+   "task": "Efficient real-time detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 141,
+   "id": "open-mmlab/mmdetection RTMDet-tiny",
+   "task": "Fast detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "repo": null,
+   "source": "https://github.com/open-mmlab/mmdetection/tree/main/configs/rtmdet",
+   "note": "Published in OpenMMLab's model zoo on GitHub, not as a Hugging Face id.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 142,
+   "id": "IDEA-Research/grounding-dino-tiny",
+   "task": "Text-guided object detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 143,
+   "id": "IDEA-Research/grounding-dino-base",
+   "task": "More accurate text-guided detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/detection",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 144,
+   "id": "nvidia/mit-b0",
+   "task": "Efficient vision backbone (SegFormer's encoder)",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision"
+  },
+  {
+   "queue": 145,
+   "id": "timm/efficientnet_b0",
+   "task": "Efficient image classification",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "repo": "timm/efficientnet_b0.ra_in1k",
+   "note": "timm ids carry their training tag: timm/efficientnet_b0.ra_in1k.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 146,
+   "id": "timm/convnextv2_atto",
+   "task": "Extremely small modern vision model",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "repo": "timm/convnextv2_atto.fcmae_ft_in1k",
+   "note": "timm ids carry their training tag: timm/convnextv2_atto.fcmae_ft_in1k."
+  },
+  {
+   "queue": 147,
+   "id": "timm/mobilevitv2_050",
+   "task": "Mobile vision transformer",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision",
+   "repo": "timm/mobilevitv2_050.cvnets_in1k",
+   "note": "timm ids carry their training tag: timm/mobilevitv2_050.cvnets_in1k."
+  },
+  {
+   "queue": 148,
+   "id": "apple/mobilevit-small",
+   "task": "Apple-friendly mobile vision",
+   "formats": [
+    "Core ML",
+    "ONNX"
+   ],
+   "folder": "vision/classification",
+   "section": "vision"
+  },
+  {
+   "queue": 149,
+   "id": "facebook/dinov2-small",
+   "task": "Image similarity and asset clustering",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/embeddings",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 150,
+   "id": "facebook/dinov2-with-registers-small",
+   "task": "Improved visual embeddings",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/embeddings",
+   "section": "vision",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 151,
+   "id": "segmind/tiny-sd",
+   "task": "Tiny icon generation",
+   "formats": [
+    "Diffusers"
+   ],
+   "folder": "multimodal/generation",
+   "section": "multimodal"
+  },
+  {
+   "queue": 152,
+   "id": "stabilityai/sd-turbo",
+   "task": "Fast image generation",
+   "formats": [
+    "Diffusers"
+   ],
+   "folder": "multimodal/generation",
+   "section": "multimodal",
+   "caution": "Stability AI licence: check the model card's terms before any commercial use."
+  },
+  {
+   "queue": 153,
+   "id": "stabilityai/sdxl-turbo",
+   "task": "Higher-quality fast generation",
+   "formats": [
+    "Diffusers"
+   ],
+   "folder": "multimodal/generation",
+   "section": "multimodal",
+   "caution": "Stability AI licence: check the model card's terms before any commercial use."
+  },
+  {
+   "queue": 154,
+   "id": "segmind/SSD-1B",
+   "task": "Small text-to-image generation",
+   "formats": [
+    "Diffusers"
+   ],
+   "folder": "multimodal/generation",
+   "section": "multimodal",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 155,
+   "id": "lllyasviel/sd-controlnet-depth",
+   "task": "Depth-guided generation",
+   "formats": [
+    "Diffusers"
+   ],
+   "folder": "multimodal/generation",
+   "section": "multimodal"
+  },
+  {
+   "queue": 156,
+   "id": "openai/clip-vit-base-patch32",
+   "task": "Text-to-asset search",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/embeddings",
+   "section": "multimodal",
+   "license": "MIT"
+  },
+  {
+   "queue": 157,
+   "id": "google/siglip-base-patch16-224",
+   "task": "Improved image-text matching",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/embeddings",
+   "section": "multimodal",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 158,
+   "id": "Salesforce/blip-base",
+   "task": "Image captioning",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/captioning",
+   "section": "multimodal",
+   "repo": "Salesforce/blip-image-captioning-base",
+   "note": "Published as Salesforce/blip-image-captioning-base (also #173).",
+   "license": "BSD-3-Clause"
+  },
+  {
+   "queue": 159,
+   "id": "microsoft/Florence-2-small",
+   "task": "Image and UI description",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "duplicateOf": 19
+  },
+  {
+   "queue": 160,
+   "id": "microsoft/Florence-2-base",
+   "task": "Stronger vision-language understanding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "license": "MIT"
+  },
+  {
+   "queue": 161,
+   "id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+   "task": "Tiny visual assistant",
+   "formats": [
+    "ONNX",
+    "Transformers"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 162,
+   "id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+   "task": "Compact visual assistant",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 163,
+   "id": "Qwen/Qwen2.5-VL-3B-Instruct",
+   "task": "Small vision-language reasoning",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal"
+  },
+  {
+   "queue": 164,
+   "id": "google/gemma-3-4b-it",
+   "task": "Compact image-and-text assistant",
+   "formats": [
+    "GGUF"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "caution": "Gated: accept Google's Gemma terms on Hugging Face first; an anonymous download is refused."
+  },
+  {
+   "queue": 165,
+   "id": "naver-clova-ix/donut-base",
+   "task": "Document understanding",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/documents",
+   "section": "multimodal",
+   "license": "MIT"
+  },
+  {
+   "queue": 166,
+   "id": "microsoft/layoutlmv3-base",
+   "task": "Layout-aware document parsing",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/documents",
+   "section": "multimodal",
+   "caution": "CC-BY-NC-SA 4.0: non-commercial, share-alike."
+  },
+  {
+   "queue": 167,
+   "id": "microsoft/trocr-small-printed",
+   "task": "OCR for printed text",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/ocr",
+   "section": "multimodal"
+  },
+  {
+   "queue": 168,
+   "id": "microsoft/trocr-base-printed",
+   "task": "Stronger OCR",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/ocr",
+   "section": "multimodal"
+  },
+  {
+   "queue": 169,
+   "id": "PaddlePaddle/PaddleOCR mobile models",
+   "task": "Fast document OCR",
+   "formats": [
+    "ONNX",
+    "TFLite"
+   ],
+   "folder": "multimodal/ocr",
+   "section": "multimodal",
+   "repo": null,
+   "source": "https://github.com/PaddlePaddle/PaddleOCR",
+   "note": "Published from the PaddleOCR GitHub project, not as one Hugging Face id.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 170,
+   "id": "microsoft/table-transformer-detection",
+   "task": "Table detection",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/documents",
+   "section": "multimodal",
+   "duplicateOf": 137
+  },
+  {
+   "queue": 171,
+   "id": "microsoft/table-transformer-structure-recognition",
+   "task": "Table cell structure",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/documents",
+   "section": "multimodal",
+   "duplicateOf": 138
+  },
+  {
+   "queue": 172,
+   "id": "naver-clova-ix/donut-base-finetuned-cord-v2",
+   "task": "Receipt and structured documents",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/documents",
+   "section": "multimodal",
+   "license": "MIT"
+  },
+  {
+   "queue": 173,
+   "id": "Salesforce/blip-image-captioning-base",
+   "task": "Asset lineage captions",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/captioning",
+   "section": "multimodal",
+   "license": "BSD-3-Clause"
+  },
+  {
+   "queue": 174,
+   "id": "Salesforce/blip-vqa-base",
+   "task": "Visual question answering",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "license": "BSD-3-Clause"
+  },
+  {
+   "queue": 175,
+   "id": "openai/clip-vit-large-patch14",
+   "task": "Higher-quality asset search",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/embeddings",
+   "section": "multimodal",
+   "license": "MIT"
+  },
+  {
+   "queue": 176,
+   "id": "google/siglip-so400m-patch14-384",
+   "task": "Strong image-text retrieval",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "vision/embeddings",
+   "section": "multimodal",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 177,
+   "id": "BAAI/Emu3-Vision",
+   "task": "Vision-language experimentation",
+   "formats": [
+    "Native"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "repo": "BAAI/Emu3-Chat",
+   "note": "No Emu3-Vision: Emu3 ships as BAAI/Emu3-Chat, Emu3-Gen and Emu3-VisionTokenizer, and at 8B it is not compact.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 178,
+   "id": "microsoft/phi-3.5-vision-instruct",
+   "task": "Compact visual reasoning",
+   "formats": [
+    "ONNX",
+    "GGUF"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "repo": "microsoft/Phi-3.5-vision-instruct",
+   "note": "Written Phi-3.5-vision-instruct; about 4.2B parameters.",
+   "license": "MIT"
+  },
+  {
+   "queue": 179,
+   "id": "HuggingFaceTB/SmolVLM-Instruct",
+   "task": "Small visual storytelling",
+   "formats": [
+    "ONNX"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "note": "About 2B parameters.",
+   "license": "Apache-2.0"
+  },
+  {
+   "queue": 180,
+   "id": "Qwen/Qwen2.5-VL-7B-Instruct",
+   "task": "Advanced image and document reasoning",
+   "formats": [
+    "GGUF",
+    "ONNX"
+   ],
+   "folder": "multimodal/vlm",
+   "section": "multimodal",
+   "note": "7B parameters: a desktop GPU model, not a compact one.",
+   "license": "Apache-2.0"
+  }
+ ]
+}

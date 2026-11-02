@@ -1,0 +1,23 @@
+(
+    object_type: "item",
+    id: "recipe-book-cooking",
+    
+    image: (
+        path: "recipe-book-cooking.png",
+        copyright: "T.Okubo",
+    ),
+    
+    item: (
+        item_kind: "readable",
+        group: "recipe-book",
+        basic_price: 2000,
+        w: 400,
+        gen_weight: 15,
+        gen_level: 0,
+        attrs: [
+            Titles(
+                ["recipe_kind:cooking"],
+            )
+        ],
+    ),
+)
