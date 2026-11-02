@@ -719,6 +719,89 @@ export type Database = {
         }
         Relationships: []
       }
+      jackie_connection_secrets: {
+        Row: {
+          ciphertext: string
+          connection_id: string
+          iv: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ciphertext: string
+          connection_id: string
+          iv: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ciphertext?: string
+          connection_id?: string
+          iv?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jackie_connection_secrets_connection_id_fkey"
+            columns: ["connection_id"]
+            isOneToOne: true
+            referencedRelation: "jackie_connections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jackie_connections: {
+        Row: {
+          agents_may_write: boolean
+          auth_name: string | null
+          auth_type: string
+          base_url: string
+          created_at: string
+          description: string
+          id: string
+          name: string
+          operations: Json
+          proposed_by: string | null
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          agents_may_write?: boolean
+          auth_name?: string | null
+          auth_type?: string
+          base_url: string
+          created_at?: string
+          description: string
+          id?: string
+          name: string
+          operations: Json
+          proposed_by?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          agents_may_write?: boolean
+          auth_name?: string | null
+          auth_type?: string
+          base_url?: string
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          operations?: Json
+          proposed_by?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       jackie_control_audit: {
         Row: {
           action_id: string | null
@@ -860,6 +943,45 @@ export type Database = {
         }
         Relationships: []
       }
+      jackie_custom_tools: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          name: string
+          params: Json
+          proposed_by: string | null
+          status: string
+          steps: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          name: string
+          params?: Json
+          proposed_by?: string | null
+          status?: string
+          steps: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          params?: Json
+          proposed_by?: string | null
+          status?: string
+          steps?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       jackie_memory: {
         Row: {
           category: string
@@ -903,6 +1025,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      jackie_skills: {
+        Row: {
+          body: string
+          created_at: string
+          description: string
+          id: string
+          name: string
+          proposed_by: string | null
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          description: string
+          id?: string
+          name: string
+          proposed_by?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          proposed_by?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       jackie_tasks: {
         Row: {
