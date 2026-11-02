@@ -5,3 +5,4 @@ __pycache__/
 router.config.json
 .env
 jackierouter-state.json
+dist
