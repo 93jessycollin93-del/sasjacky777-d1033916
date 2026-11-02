@@ -9,7 +9,7 @@ describe("SANDi's all-apps names", () => {
 
   it("turns three or more words into initials", () => {
     expect(shortAppName("Project Zomboid: Realism Overhaul")).toBe("PZRO");
-    expect(shortAppName("Eru · AdminEconomyDashboard")).toBe("EAED");
+    expect(shortAppName("Eru · AdminEconomyDashboard")).toBe("Eru·AED");
   });
 
   it("lists every app once, with no alias duplicate like a second Workstation", () => {

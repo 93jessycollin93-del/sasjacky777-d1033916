@@ -22,16 +22,21 @@ export interface AppEntry {
 export function nameWords(name: string): string[] {
   return name
     .replace(/\(.*?\)/g, " ")
+    .replace(/^Eru\s*·\s*/, "")
+    // Brand names are one word, not camel-case to split.
+    .replace(/GitHub/g, "Github").replace(/eYe/g, "Eye").replace(/AILab/g, "AI Lab").replace(/APIKeys/g, "API Keys")
     .replace(/([a-z])([A-Z])/g, "$1 $2")
     .split(/[^A-Za-z0-9-]+/)
     .flatMap((w) => (/^[A-Z]-[A-Z]/.test(w) ? [w] : w.split("-")))
     .filter(Boolean);
 }
 
+/** Eru's pages keep an "Eru·" tag so they never collide with Jackie's own. */
 export function shortAppName(name: string): string {
   const words = nameWords(name);
-  if (words.length <= 2) return words.join(" ");
-  return words.map((w) => w[0].toUpperCase()).join("");
+  const tag = /^Eru\s*·/.test(name) ? "Eru·" : "";
+  if (words.length <= 2) return tag + words.join(" ");
+  return tag + words.map((w) => w[0].toUpperCase()).join("");
 }
 
 /** Every app once, aliases dropped, short names unique. */
