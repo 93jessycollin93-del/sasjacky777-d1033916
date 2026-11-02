@@ -106,6 +106,7 @@ frequent event rather than an error.
 | `OLLAMA_API_KEY` | optional | Only if the endpoint is behind auth. |
 | `JACKY_API_BASE` | `jacky-proxy` | Root of the rig's Flask engine. |
 | `JACKY_API_TOKEN` | optional | Bearer token attached to proxied calls. |
+| `JACKIE_LOCK_PEPPER` | generated | Server-only pepper mixed into Answer Lock fingerprints (`jackie-lock`). Never shown or exported. |
 
 All three engines — and `github-sync` — answer **only an account holding the
 `owner` role** (granted by `core-claim` to an allowlisted, verified address).
