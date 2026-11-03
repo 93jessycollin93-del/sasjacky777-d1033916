@@ -28,6 +28,7 @@
     "@ffmpeg/util": "^0.12.2",
     "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^3.10.0",
+    "@huggingface/transformers": "3",
     "@lovable.dev/cloud-auth-js": "^1.1.1",
     "@lovable.dev/mcp-js": "0.26.2",
     "@monaco-editor/react": "^4.7.0",
