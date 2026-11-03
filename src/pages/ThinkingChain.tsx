@@ -219,6 +219,8 @@ export default function ThinkingChain() {
             )}
           </div>
           {diveNote && <p className="text-xs font-mono text-muted-foreground">{diveNote}</p>}
+
+          {plan?.refused.length ? (
             <p className="text-xs font-mono text-destructive" role="alert">
               Kept out by the {DEVICE_BUDGET_MB.total} MB ceiling: {plan.refused.map((b) => b.name).join(", ")} — {plan.reason}
             </p>
