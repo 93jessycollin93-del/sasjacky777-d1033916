@@ -157,9 +157,14 @@ export function normalizeLanAddress(text: string): string | null {
   return `${m[1]}:${port}`;
 }
 
-/** The relay's socket for one room. */
-export function lanUrl(address: string, room: string): string {
-  return `ws://${address}/r/${room}`;
+export type LanRole = "host" | "guest";
+
+/**
+ * The relay's socket for one room. The host opens the world; a guest can only
+ * join one that is open (csc/desktop/relay.mjs), so the role travels in the URL.
+ */
+export function lanUrl(address: string, room: string, role: LanRole = "guest"): string {
+  return `ws://${address}/r/${room}${role === "host" ? "?role=host" : ""}`;
 }
 
 /**
@@ -181,7 +186,7 @@ export class LanTransport implements Transport {
   private attempts = 0;
   readonly ready: Promise<void>;
 
-  constructor(readonly address: string, readonly room: string) {
+  constructor(readonly address: string, readonly room: string, readonly role: LanRole = "guest") {
     if (typeof WebSocket === "undefined") throw new Error("This browser cannot open network sockets, so it cannot play over the local network.");
     this.ready = new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
@@ -196,7 +201,7 @@ export class LanTransport implements Transport {
   private connect(opened?: () => void, failed?: (why: string) => void): void {
     let socket: WebSocket;
     try {
-      socket = new WebSocket(lanUrl(this.address, this.room));
+      socket = new WebSocket(lanUrl(this.address, this.room, this.role));
     } catch (err) {
       failed?.(`"${this.address}" is not an address this game can dial: ${(err as Error).message}`);
       return;
@@ -229,7 +234,11 @@ export class LanTransport implements Transport {
       this.live = false;
       if (this.closing) return;
       if (!this.wasLive) {
-        failed?.(`Could not connect to ${this.address}. Check the address, that the host has opened their world to LAN, and that both computers are on the same network.`);
+        failed?.(
+          this.role === "guest"
+            ? `Could not join world ${this.room} at ${this.address}. Check the address and the world code, that the host has opened their world to LAN, and that both computers are on the same network.`
+            : `Could not connect to ${this.address}. Check the address, and that both computers are on the same network.`,
+        );
         return;
       }
       if (was) for (const h of this.statusHandlers) h(false);
