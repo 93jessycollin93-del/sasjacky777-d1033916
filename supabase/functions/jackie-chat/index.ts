@@ -74,8 +74,8 @@ serve(async (req) => {
     // Charged last, after everything that could refuse for free: a malformed
     // body or a missing key is not a call, and billing it would spend the
     // caller's allowance on the chain's own bookkeeping (rule 5).
-    const denied = await gate(req, "jackie-chat", selectedModel);
-    if (denied) return denied;
+    const admission = await admit(req, "jackie-chat", selectedModel);
+    if (admission instanceof Response) return admission;
     // GPT-5.6 on chat completions runs with reasoning on by default and rejects
     // tool-bearing requests unless effort is explicitly disabled.
     const extraFields = selectedModel.startsWith("openai/gpt-5.6")
@@ -90,7 +90,7 @@ serve(async (req) => {
     if (explicitSystem.length > MAX_SYSTEM_CHARS) {
       return json({ error: "System prompt too large" }, 413);
     }
-    const guarded = await guardedSystemPrompt("jackie-chat", { system: explicitSystem, context });
+    const guarded = await guardedSystemPrompt("jackie-chat", { system: explicitSystem, context, userId: admission.userId });
     const systemPrompt = guarded.prompt;
 
     // A gateway that accepts the connection and then never answers leaves the
@@ -113,7 +113,7 @@ serve(async (req) => {
         body: JSON.stringify({
           model: selectedModel,
           ...extraFields,
-          messages: [{ role: "system", content: systemPrompt }, ...verdict.messages],
+          messages: [{ role: "system", content: systemPrompt }, ...guarded.conversation(verdict.messages)],
           stream: true,
         }),
         signal: controller.signal,
