@@ -973,13 +973,17 @@ async function proposeConnection(sb, userId, args, ctx) {
 }
 
 // src/lib/mcp/result.ts
+function asJson(value) {
+  if (value === void 0) return null;
+  return JSON.parse(JSON.stringify(value));
+}
 function toToolResult(result, key) {
   if (!result.ok) {
     return { content: [{ type: "text", text: result.error }], isError: true };
   }
   return {
     content: [{ type: "text", text: JSON.stringify(result.data) }],
-    structuredContent: { [key]: result.data }
+    structuredContent: { [key]: asJson(result.data) }
   };
 }
 var notAuthenticated = {
@@ -1208,7 +1212,7 @@ var ask_jackie_default = defineTool12({
       callFunction: functionCaller(ctx)
     });
     if (!result.ok) return { content: [{ type: "text", text: result.error }], isError: true };
-    return { content: [{ type: "text", text: result.data.answer }], structuredContent: result.data };
+    return { content: [{ type: "text", text: result.data.answer }], structuredContent: asJson(result.data) };
   }
 });
 
