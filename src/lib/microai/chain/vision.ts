@@ -12,6 +12,65 @@
 export const VISION_MODEL_ID = "HuggingFaceTB/SmolVLM-256M-Instruct";
 export const VISION_MODEL_NAME = "SmolVLM 256M";
 
+export interface VisionWeightsStatus {
+  present: boolean;
+  files: number;
+  /** Says what is on the device, or what has to happen before it can be. */
+  detail: string;
+}
+
+/**
+ * Whether the photo reader's weights are already on this device, without
+ * loading the model.
+ *
+ * transformers.js keeps what it downloads in the browser's own cache, and writes
+ * a cache entry only once a whole file has arrived — so asking the cache for an
+ * ONNX file under this model's name is a real answer, not a guess, and a
+ * download that died halfway does not count as having the model. Asking this
+ * instead of `from_pretrained` matters: loading the model to find out whether
+ * the model is present would pull the runtime and start a download, which is
+ * the opposite of a status check.
+ */
+export async function visionWeightsStatus(): Promise<VisionWeightsStatus> {
+  if (typeof caches === "undefined") {
+    return {
+      present: false,
+      files: 0,
+      detail: "this browser has no cache, so the photo reader cannot be kept on this device",
+    };
+  }
+  let files = 0;
+  let weights = 0;
+  try {
+    for (const name of await caches.keys()) {
+      const cache = await caches.open(name);
+      for (const request of await cache.keys()) {
+        if (!request.url.includes(VISION_MODEL_ID)) continue;
+        files += 1;
+        if (request.url.includes(".onnx")) weights += 1;
+      }
+    }
+  } catch (error) {
+    return {
+      present: false,
+      files,
+      detail: `could not read this browser's cache: ${error instanceof Error ? error.message : String(error)}`,
+    };
+  }
+  if (!weights) {
+    return {
+      present: false,
+      files,
+      detail: `${VISION_MODEL_NAME} is not on this device yet — it downloads once, about 250 MB, while you are online`,
+    };
+  }
+  return {
+    present: true,
+    files,
+    detail: `${VISION_MODEL_NAME} on this device · ${weights} weight file${weights === 1 ? "" : "s"}, ${files} file${files === 1 ? "" : "s"} held`,
+  };
+}
+
 type Loaded = {
   processor: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   model: any; // eslint-disable-line @typescript-eslint/no-explicit-any
