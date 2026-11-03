@@ -3,7 +3,7 @@ import { Store, Coins, Gem, Sparkles } from 'lucide-react';
 import { base44 } from '@/eru/api/base44Client';
 import BazarBalanceCard from '@/eru/components/bazar/BazarBalanceCard';
 import BazarProductCard from '@/eru/components/bazar/BazarProductCard';
-import BazarCheckoutDialog, { priceInGold } from '@/eru/components/bazar/BazarCheckoutDialog';
+import BazarCheckoutDialog from '@/eru/components/bazar/BazarCheckoutDialog';
 import { createPendingTransaction, markPendingVerification, failTransaction } from '@/eru/lib/paymentGuards';
 import { generateTonPaymentRef } from '@/eru/lib/tonPayment';
 import { FALLBACK_TON_USD } from '@/eru/lib/tonConfig';
