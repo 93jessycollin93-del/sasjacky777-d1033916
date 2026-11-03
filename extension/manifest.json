@@ -1,4 +1,8 @@
-{ "manifest_version": 3, "name": "Jackie Quiet Autocorrect", "version": "1.0.0",
-  "description": "Fixes clear misspellings as you type on any site. No pop-ups. Nothing leaves your device.",
-  "permissions": ["storage"], "action": { "default_popup": "popup.html" },
+{ "manifest_version": 3, "name": "Jackie Quiet Autocorrect", "version": "1.1.0",
+  "description": "Fixes clear misspellings as you type on any site. Highlight text and press Alt+J for a Bonsai fix from your own computer. Nothing leaves your device.",
+  "permissions": ["storage", "contextMenus"],
+  "host_permissions": ["http://127.0.0.1:1234/*", "http://localhost:11434/*"],
+  "action": { "default_popup": "popup.html" },
+  "background": { "service_worker": "background.js" },
+  "commands": { "ai-fix": { "suggested_key": { "default": "Alt+J" }, "description": "Fix highlighted text with Bonsai" } },
   "content_scripts": [{ "matches": ["<all_urls>"], "js": ["autocorrect.js"], "all_frames": true }] }
