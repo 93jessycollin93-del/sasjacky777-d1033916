@@ -155,7 +155,14 @@ export function defaultBoundaries(): StationBoundaries {
 }
 
 export function buildStations(boundaries: StationBoundaries): Station[] {
-  const { fetch: fetchImpl, jackyStatus, storageBudgetMB, shellWorker } = boundaries;
+  const {
+    fetch: fetchImpl,
+    jackyStatus,
+    storageBudgetMB,
+    shellWorker,
+    deviceWeights,
+    visionWeights,
+  } = boundaries;
 
   return [
     {
@@ -348,6 +355,28 @@ export function buildStations(boundaries: StationBoundaries): Station[] {
           return `${count} model${count === 1 ? "" : "s"} loaded in the hub`;
         }),
       ),
+    },
+    {
+      id: "bonsai-weights",
+      name: "Bonsai Weights",
+      repo: "yyb84ycgt6-oss/sasjacky777-d1033916",
+      purpose:
+        "The language model itself, held on this device. Until these are here, the on-device rung has nothing to run.",
+      stage: "field",
+      href: "/chain",
+      offline: "full",
+      probe: withTimeout(deviceProbe("this browser's model store", deviceWeights)),
+    },
+    {
+      id: "vision-weights",
+      name: "Photo Reader Weights",
+      repo: "yyb84ycgt6-oss/sasjacky777-d1033916",
+      purpose:
+        "The photo reader's weights on this device — the only way Jackie reads a screen or a photo with no signal.",
+      stage: "field",
+      href: "/chain",
+      offline: "full",
+      probe: withTimeout(deviceProbe("this browser's cache", visionWeights)),
     },
     {
       id: "off-grid-mobile",
