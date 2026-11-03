@@ -33,3 +33,27 @@ document.addEventListener("input",(e)=>{
   const n=c+f.length-m[1].length;el.setSelectionRange(n,n);
   el.dispatchEvent(new Event("input",{bubbles:true}));
 },true);
+
+// AI layer hand-off: remember exactly what was highlighted, so the fix lands
+// on that text and nowhere else.
+let held = null;
+chrome.runtime.onMessage.addListener((msg, _s, reply) => {
+  if (msg.type === "aifix-start") {
+    const el = document.activeElement;
+    if ((el instanceof HTMLTextAreaElement || el instanceof HTMLInputElement) && el.selectionEnd > el.selectionStart) {
+      held = { el, s: el.selectionStart, e: el.selectionEnd, text: el.value.slice(el.selectionStart, el.selectionEnd) };
+    } else {
+      const sel = getSelection(); const t = sel ? String(sel) : "";
+      held = t && sel.rangeCount ? { range: sel.getRangeAt(0).cloneRange(), text: t } : null;
+    }
+    reply(held ? { text: held.text } : {});
+  } else if (msg.type === "aifix-apply" && held) {
+    if (held.el) {
+      const { el, s, e } = held;
+      if (el.value.slice(s, e) === held.text) { el.setRangeText(msg.text, s, e, "end"); el.dispatchEvent(new Event("input", { bubbles: true })); }
+    } else if (held.range.commonAncestorContainer.parentElement?.isContentEditable) {
+      held.range.deleteContents(); held.range.insertNode(document.createTextNode(msg.text));
+    }
+    held = null;
+  }
+});

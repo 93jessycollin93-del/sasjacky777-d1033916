@@ -10,3 +10,4 @@
 - [x] Quiet autocorrect inside Jackie (word list, automatic)
 - [x] Browser extension: same autocorrect on any site, remembers last on/off even with Jackie closed
 - [ ] AI-enhanced autocorrect layer (Bonsai) on top of the word list — next
+- [ ] Discord-style artifact box: turn any text/code into 100+ languages/formats (TS, JSON, JS…) — CKT idea, scope pending
