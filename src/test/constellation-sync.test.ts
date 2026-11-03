@@ -80,6 +80,8 @@ describe("the default sync steps", () => {
         jackyStatus: async () => "engine ok",
         storageBudgetMB: async () => 100_000,
         shellWorker: async () => "shell worker controlling · 1283 files held locally",
+        deviceWeights: async () => "Bonsai 1.7B · 248 MB held on this device",
+        visionWeights: async () => "SmolVLM 256M on this device · 2 weight files, 5 files held",
       }),
       () => false,
     );

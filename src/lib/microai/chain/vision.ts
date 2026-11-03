@@ -12,6 +12,94 @@
 export const VISION_MODEL_ID = "HuggingFaceTB/SmolVLM-256M-Instruct";
 export const VISION_MODEL_NAME = "SmolVLM 256M";
 
+/**
+ * What the download costs, for the owner's on-device ceiling.
+ *
+ * An estimate, and labelled as one: the file is not pinned by this repository
+ * the way Bonsai is, so the honest figure is the one the module's own note
+ * carries. It is used only to decide whether a download still fits under the
+ * 750 MB ceiling — never to claim a file arrived at a particular size, which
+ * `visionWeightsStatus` answers by looking at the cache instead.
+ */
+export const VISION_MODEL_MB = 250;
+
+/**
+ * Bring the photo reader onto this device without asking it to read anything.
+ *
+ * The only way to know the weights are here is to have loaded them once, so
+ * this runs the same lazy loader the chain uses and reports what the cache says
+ * afterwards. It is the download behind an Activate button: the owner's call,
+ * made deliberately, rather than a 250 MB fetch that starts because a page
+ * opened.
+ */
+export async function prepareVisionWeights(
+  opts: { onProgress?: (p: VisionProgress) => void } = {},
+): Promise<string> {
+  await load(opts.onProgress);
+  const status = await visionWeightsStatus();
+  if (!status.present) throw new Error(`${VISION_MODEL_NAME} loaded, but its weights are not in this browser's cache`);
+  return status.detail;
+}
+
+export interface VisionWeightsStatus {
+  present: boolean;
+  files: number;
+  /** Says what is on the device, or what has to happen before it can be. */
+  detail: string;
+}
+
+/**
+ * Whether the photo reader's weights are already on this device, without
+ * loading the model.
+ *
+ * transformers.js keeps what it downloads in the browser's own cache, and writes
+ * a cache entry only once a whole file has arrived — so asking the cache for an
+ * ONNX file under this model's name is a real answer, not a guess, and a
+ * download that died halfway does not count as having the model. Asking this
+ * instead of `from_pretrained` matters: loading the model to find out whether
+ * the model is present would pull the runtime and start a download, which is
+ * the opposite of a status check.
+ */
+export async function visionWeightsStatus(): Promise<VisionWeightsStatus> {
+  if (typeof caches === "undefined") {
+    return {
+      present: false,
+      files: 0,
+      detail: "this browser has no cache, so the photo reader cannot be kept on this device",
+    };
+  }
+  let files = 0;
+  let weights = 0;
+  try {
+    for (const name of await caches.keys()) {
+      const cache = await caches.open(name);
+      for (const request of await cache.keys()) {
+        if (!request.url.includes(VISION_MODEL_ID)) continue;
+        files += 1;
+        if (request.url.includes(".onnx")) weights += 1;
+      }
+    }
+  } catch (error) {
+    return {
+      present: false,
+      files,
+      detail: `could not read this browser's cache: ${error instanceof Error ? error.message : String(error)}`,
+    };
+  }
+  if (!weights) {
+    return {
+      present: false,
+      files,
+      detail: `${VISION_MODEL_NAME} is not on this device yet — it downloads once, about 250 MB, while you are online`,
+    };
+  }
+  return {
+    present: true,
+    files,
+    detail: `${VISION_MODEL_NAME} on this device · ${weights} weight file${weights === 1 ? "" : "s"}, ${files} file${files === 1 ? "" : "s"} held`,
+  };
+}
+
 type Loaded = {
   processor: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   model: any; // eslint-disable-line @typescript-eslint/no-explicit-any

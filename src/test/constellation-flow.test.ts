@@ -18,6 +18,8 @@ const STATIONS = buildStations({
   jackyStatus: async () => "stub",
   storageBudgetMB: async () => 100_000,
   shellWorker: async () => "shell worker controlling · 1283 files held locally",
+  deviceWeights: async () => "Bonsai 1.7B · 248 MB held on this device",
+  visionWeights: async () => "SmolVLM 256M on this device · 2 weight files, 5 files held",
 });
 
 function statuses(overrides: Partial<Record<StationId, StationStatus["state"]>>) {

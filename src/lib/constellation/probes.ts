@@ -78,6 +78,31 @@ export function serviceProbe(
 }
 
 /**
+ * Weights held on this device: a GGUF in the model store a browser keeps for
+ * this app, an ONNX model in its cache. `read` resolves with a line describing
+ * what is there, or throws what is missing and what would put it there.
+ *
+ * Separate from `serviceProbe` on purpose: a service probe asks the network,
+ * and these must give the same answer with the radio off — the rung exists so
+ * the system keeps working without one.
+ */
+export function deviceProbe(
+  method: string,
+  read: (signal?: AbortSignal) => Promise<string>,
+): StationProbe {
+  return {
+    method,
+    async check(signal?: AbortSignal): Promise<StationProbeResult> {
+      try {
+        return { state: "live", detail: await read(signal) };
+      } catch (error) {
+        return { state: "absent", detail: message(error) };
+      }
+    },
+  };
+}
+
+/**
  * Source that is real but cannot be observed from a browser: an iOS app, an
  * Android driver, a C++ inference library. Reporting it `live` because the repo
  * exists would be a lie the panel then repeats, so it reports `declared` — named

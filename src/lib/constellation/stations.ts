@@ -15,9 +15,11 @@ import { OLLAMA_HOST } from "@/lib/localAI";
 import { LM_STUDIO_HOST } from "@/lib/lmStudio";
 import { estimateStorageBudgetMB } from "@/lib/partitions/budget";
 import { MINIMUM_BUDGET_MB, planBudget } from "@/lib/partitions/registry";
+import { BONSAI_ID } from "@/lib/microai/deviceModels";
 import {
   assetProbe,
   declaredProbe,
+  deviceProbe,
   inAppProbe,
   serviceProbe,
   withTimeout,
@@ -39,6 +41,15 @@ export interface StationBoundaries {
    * station that could only be checked in a browser could not be checked at all.
    */
   shellWorker: () => Promise<string>;
+  /**
+   * Resolves with a line describing the language weights held on this device,
+   * or throws what is missing and how it gets there. The weights live in a file
+   * store a browser keeps private to this app, which a test cannot create — so
+   * the read is handed in, and the probe logic around it stays testable.
+   */
+  deviceWeights: () => Promise<string>;
+  /** The same question for the photo reader's weights. */
+  visionWeights: () => Promise<string>;
 }
 
 /**
@@ -120,11 +131,38 @@ export function defaultBoundaries(): StationBoundaries {
       const held = counts.reduce((sum, n) => sum + n, 0);
       return `shell worker controlling · ${held} files held locally`;
     },
+    deviceWeights: async () => {
+      // Imported lazily: this pulls in the inference runtime, and a status
+      // check that downloaded the runtime to ask whether the model is present
+      // would be the same mistake the station table exists to catch.
+      const device = await import("@/lib/microai/bonsaiDevice");
+      const stored = await device.storedModel(BONSAI_ID);
+      if (!stored.supported) throw new Error(device.UNSUPPORTED_BROWSER);
+      if (stored.downloaded) return `Bonsai 1.7B · ${device.BONSAI_MB} MB held on this device`;
+      throw new Error(
+        stored.partial
+          ? "part of Bonsai is on this device, but the download never finished — run it again while you are online"
+          : `${device.NOT_DOWNLOADED} It downloads once while you are online, then answers with the radio off.`,
+      );
+    },
+    visionWeights: async () => {
+      const { visionWeightsStatus } = await import("@/lib/microai/chain/vision");
+      const status = await visionWeightsStatus();
+      if (!status.present) throw new Error(status.detail);
+      return status.detail;
+    },
   };
 }
 
 export function buildStations(boundaries: StationBoundaries): Station[] {
-  const { fetch: fetchImpl, jackyStatus, storageBudgetMB, shellWorker } = boundaries;
+  const {
+    fetch: fetchImpl,
+    jackyStatus,
+    storageBudgetMB,
+    shellWorker,
+    deviceWeights,
+    visionWeights,
+  } = boundaries;
 
   return [
     {
@@ -317,6 +355,28 @@ export function buildStations(boundaries: StationBoundaries): Station[] {
           return `${count} model${count === 1 ? "" : "s"} loaded in the hub`;
         }),
       ),
+    },
+    {
+      id: "bonsai-weights",
+      name: "Bonsai Weights",
+      repo: "yyb84ycgt6-oss/sasjacky777-d1033916",
+      purpose:
+        "The language model itself, held on this device. Until these are here, the on-device rung has nothing to run.",
+      stage: "field",
+      href: "/chain",
+      offline: "full",
+      probe: withTimeout(deviceProbe("this browser's model store", deviceWeights)),
+    },
+    {
+      id: "vision-weights",
+      name: "Photo Reader Weights",
+      repo: "yyb84ycgt6-oss/sasjacky777-d1033916",
+      purpose:
+        "The photo reader's weights on this device — the only way Jackie reads a screen or a photo with no signal.",
+      stage: "field",
+      href: "/chain",
+      offline: "full",
+      probe: withTimeout(deviceProbe("this browser's cache", visionWeights)),
     },
     {
       id: "off-grid-mobile",

@@ -72,6 +72,8 @@ export type StationId =
   | "pod-station"
   | "ollama"
   | "lm-studio"
+  | "bonsai-weights"
+  | "vision-weights"
   | "off-grid-mobile"
   | "llmfarm"
   | "mobile-llm"

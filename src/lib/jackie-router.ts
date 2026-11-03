@@ -275,6 +275,8 @@ async function askDevice(args: RouteChatOptions, modelId: string): Promise<Attem
     };
   }
 
+  if (profile.fromCache) args.onStatus?.("Answering from Jackie's saved profile — no signal needed.");
+
   const result = await device.chatOnDevice({
     modelId,
     system: profile.prompt,
