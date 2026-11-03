@@ -2,7 +2,8 @@
 // Node's own WebSocket and sockets: the relay is a Node program, and the
 // transport is exercised against it for real rather than against a fake.
 import { afterEach, describe, expect, it } from "vitest";
-import { decodeFrames, encodeFrame, startRelay } from "../../csc/desktop/relay.mjs";
+import { request } from "node:http";
+import { decodeFrames, encodeFrame, MAX_MISSES, originAllowed, startRelay } from "../../csc/desktop/relay.mjs";
 import { LanTransport, normalizeLanAddress, type NetMessage } from "@/craft/net/transport";
 
 type Relay = { port: number; addresses: string[]; close: () => Promise<void> };
@@ -35,6 +36,47 @@ const until = async (ok: () => boolean, ms = 3000) => {
     await new Promise((r) => setTimeout(r, 10));
   }
 };
+
+/** Asks the relay for a socket and reports only the status it answered with. */
+function upgradeStatus(port: number, path: string, headers: Record<string, string> = {}): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const req = request({
+      host: "127.0.0.1", port, path,
+      headers: { Connection: "Upgrade", Upgrade: "websocket", "Sec-WebSocket-Version": "13", "Sec-WebSocket-Key": "dGhlIHNhbXBsZSBub25jZQ==", ...headers },
+    });
+    req.on("upgrade", (_res, socket) => { socket.destroy(); resolve(101); });
+    req.on("response", (res) => { res.resume(); resolve(res.statusCode ?? 0); });
+    req.on("error", reject);
+    req.end();
+  });
+}
+
+describe("who the LAN relay lets in", () => {
+  it("refuses a web page on the internet, and admits the game's own pages", async () => {
+    relay = await startRelay({ port: 0, host: "127.0.0.1" });
+    expect(await upgradeStatus(relay.port, "/r/K7QM3X?role=host", { Origin: "https://evil.example.com" })).toBe(403);
+    expect(await upgradeStatus(relay.port, "/r/K7QM3X?role=host", { Origin: "csc://app" })).toBe(101);
+    expect(originAllowed("http://192.168.1.4:8080")).toBe(true);
+    expect(originAllowed("http://8.8.8.8")).toBe(false);
+  });
+
+  it("lets a guest join only a world a host has opened", async () => {
+    relay = await startRelay({ port: 0, host: "127.0.0.1" });
+    expect(await upgradeStatus(relay.port, "/r/NOTOPEN")).toBe(404);
+    const host = link(relay.port, "OPEN22", "host");
+    await host.ready;
+    expect(await upgradeStatus(relay.port, "/r/OPEN22")).toBe(101);
+  });
+
+  it("stops an address that keeps guessing codes, before it can walk them", async () => {
+    relay = await startRelay({ port: 0, host: "127.0.0.1" });
+    const host = link(relay.port, "REAL22", "host");
+    await host.ready;
+    for (let i = 0; i < MAX_MISSES; i++) expect(await upgradeStatus(relay.port, `/r/GUESS${i}`)).toBe(404);
+    // Even the right code is refused once the address is out of guesses.
+    expect(await upgradeStatus(relay.port, "/r/REAL22")).toBe(429);
+  });
+});
 
 describe("LAN play", () => {
   it("carries a message to everyone else in the same world, and to no one in another", async () => {
