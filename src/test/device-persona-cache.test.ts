@@ -35,6 +35,7 @@ describe("answering as Jackie with the radio off", () => {
     offline();
     const second = await fetchDevicePersona();
     expect(second).toMatchObject({ ok: true, prompt: "Guarded Jackie", mode: "persona", fromCache: true });
+    if (!second.ok) throw new Error(`no saved profile: ${second.issue.code}`);
     expect(second.fetchedAt).toBeGreaterThan(0);
   });
 
