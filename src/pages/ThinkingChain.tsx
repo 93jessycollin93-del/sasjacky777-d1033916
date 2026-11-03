@@ -1,12 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Brain, ImagePlus, FilePlus, Play, Square, Trash2, CheckCircle2, XCircle, Loader2, MinusCircle } from "lucide-react";
+import { ArrowLeft, Brain, ImagePlus, FilePlus, Play, Square, Trash2, CheckCircle2, XCircle, Loader2, MinusCircle, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { chatOnDevice } from "@/lib/microai/bonsaiDevice";
 import { runChain, type Ask, type Source, type StepRecord } from "@/lib/microai/chain/chain";
 import { describeImage, VISION_MODEL_NAME } from "@/lib/microai/chain/vision";
 import { clearArchive } from "@/lib/microai/chain/archive";
+import { activateWeights, planActivation, readWeightBlocks, type WeightBlock } from "@/lib/microai/activation";
+import { DEVICE_BUDGET_MB } from "@/lib/microai/budget";
 
 /** Bonsai on this device, one short step at a time, low randomness. */
 const askBonsai: Ask = async ({ system, user, maxTokens }, signal) => {
