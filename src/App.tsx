@@ -207,6 +207,7 @@ const App = () => (
               <Sonner />
             <BrowserRouter>
               <SandboxBanner />
+              <QuietAutocorrect />
               <SandboxCatcher>
                 <Suspense fallback={<RouteFallback />}>
                   <Routes>
