@@ -16,10 +16,15 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# Every job names its image rather than `ubuntu-latest`. When `ubuntu-latest`
+# moved to Ubuntu 26.04, three of these jobs went red together without a line of
+# this repository changing: 26.04 has no Python 3.9 for setup-python (the floor
+# the python job exists to test) and no postgresql-16 package for the database
+# probes. The image should change when someone decides it should.
 jobs:
   app:
     name: Lint, typecheck, test, build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -75,7 +80,7 @@ jobs:
 
   python:
     name: Router stack and agent runtime
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -99,7 +104,7 @@ jobs:
 
   condenser:
     name: Context condenser
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -115,7 +120,7 @@ jobs:
 
   database:
     name: Database authorization probes
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
