@@ -53,5 +53,8 @@ describe("the repository's own files", () => {
       }
     }
     expect(found, "rotate the credential, then remove it; deleting it alone leaves it in history").toEqual([]);
-  });
+    // It reads every tracked file, some of them megabytes of bundled JS: half a
+    // second alone, but 17 seconds once in a full parallel run, where vitest's
+    // 5-second default failed it as "timed out" without having found anything.
+  }, 60_000);
 });

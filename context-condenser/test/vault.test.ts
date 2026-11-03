@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
 import { Vault } from '../packages/vault/vault.ts';
 
 const PARA = 'Distributed systems reduce single points of failure. Consensus mechanisms trade latency for reliability. Eventual consistency is sufficient for most use cases. ';
@@ -88,5 +89,51 @@ test('an encrypted pod does not contain its plaintext on disk', async () => {
     const { podPath } = await import('../packages/vault/vault.ts');
     const onDisk = await readFile(podPath(v.root, stats.sha256));
     assert.equal(onDisk.includes(marker), false, 'plaintext marker must not appear in the sealed pod');
+  });
+});
+
+// Every byte value, including ones no UTF-8 text can contain, across several frames.
+const BINARY = new Uint8Array(70_000).map((_, i) => (i * 37 + (i >> 8)) & 0xff);
+
+test('seals raw bytes and restores them exactly, including bytes that are not UTF-8', async () => {
+  await withVault(async (v) => {
+    const stats = await v.seal(BINARY, { frameSize: 16 * 1024 });
+    assert.ok(stats.frames > 1, 'needs a multi-frame pod');
+    assert.equal(stats.bytes, BINARY.length);
+    assert.equal(stats.sha256, createHash('sha256').update(BINARY).digest('hex'), 'address is the hash of the bytes given');
+    assert.deepEqual(await v.restoreBytes(stats.sha256), BINARY);
+  });
+});
+
+test('a byte span read across a frame boundary returns exactly those bytes', async () => {
+  await withVault(async (v) => {
+    const stats = await v.seal(BINARY, { frameSize: 16 * 1024 });
+    const [start, end] = [16 * 1024 - 100, 16 * 1024 + 100];
+    assert.deepEqual(await v.readBytes(stats.sha256, start, end), BINARY.subarray(start, end));
+  });
+});
+
+test('encrypted raw bytes come back with the passphrase, and not without it', async () => {
+  await withVault(async (v) => {
+    const stats = await v.seal(BINARY, { passphrase: 'pod-pass' });
+    assert.deepEqual(await v.restoreBytes(stats.sha256, 'pod-pass'), BINARY);
+    await assert.rejects(v.restoreBytes(stats.sha256, 'wrong'));
+    await assert.rejects(v.restoreBytes(stats.sha256), /passphrase is required/);
+  });
+});
+
+test('a pod of non-UTF-8 bytes refuses to be read as text instead of mangling it', async () => {
+  await withVault(async (v) => {
+    const stats = await v.seal(Uint8Array.from([0x68, 0x69, 0xff, 0xfe, 0x00, 0x80, 0x41]));
+    await assert.rejects(v.restore(stats.sha256), /not UTF-8 text; read it with restoreBytes/);
+  });
+});
+
+test('the same content sealed as text or as bytes lands at the same address', async () => {
+  await withVault(async (v) => {
+    const asText = await v.seal(BIG);
+    const asBytes = await v.seal(new TextEncoder().encode(BIG));
+    assert.equal(asBytes.sha256, asText.sha256);
+    assert.equal(await v.restore(asBytes.sha256), BIG);
   });
 });

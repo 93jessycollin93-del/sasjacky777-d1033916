@@ -48,9 +48,24 @@ npm run cce -- dehydrate notes.md --out cnd.json
 npm run cce -- rehydrate cnd.json --claim 0
 npm run cce -- rehydrate cnd.json --full
 npm run cce -- chain notes.md      # run the eYe ring
+npm run cce -- seal photo.png      # any file, sealed as raw bytes; prints its sha256
+npm run cce -- restore <sha256> --out photo.png   # the exact bytes back, hash-checked
 npm run cce -- condensers logical
 npm test
 ```
+
+### Text and bytes
+
+The vault seals bytes. `Vault.seal` takes a string (stored as its UTF-8 bytes)
+or a `Uint8Array` (stored as given), and both land at the SHA-256 of those
+bytes. `restoreBytes` and `readBytes` hand the bytes back; `restore` and
+`readSpan` decode them as text, and `restore` refuses a pod that is not UTF-8
+rather than swapping its invalid bytes for U+FFFD.
+
+Condensing is text-only: `dehydrate` and `chain` refuse a file that is not
+UTF-8 and point at `seal`. They used to read every file as text, which
+replaced invalid bytes on the way in — the pod then restored "exactly" bytes
+the file never held.
 
 ### As an MCP server
 
