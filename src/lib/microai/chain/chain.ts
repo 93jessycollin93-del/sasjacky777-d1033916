@@ -23,7 +23,7 @@ export interface Source {
 export type Ask = (
   step: { system: string; user: string; maxTokens: number },
   signal?: AbortSignal,
-) => Promise<{ ok: true; text: string } | { ok: false; error: string }>;
+) => Promise<{ ok: boolean; text?: string; error?: string }>;
 
 export type StepStatus = "running" | "ok" | "failed" | "skipped";
 
@@ -115,7 +115,7 @@ export async function runChain(opts: {
     end(hp, { status: "failed", error: plan.error });
     return fail(`Planning failed: ${plan.error}`);
   }
-  subs = parsePlan(plan.text);
+  subs = parsePlan(plan.text ?? "");
   if (subs.length === 0) subs = [question];
   end(hp, { status: "ok", output: subs.map((s, i) => `${i + 1}. ${s}`).join("\n") });
 
@@ -130,8 +130,8 @@ export async function runChain(opts: {
       end(h, { status: "failed", error: r.error });
       return fail(`Step "${sub}" failed: ${r.error}`);
     }
-    findings.push(`${sub} — ${r.text.trim()}`);
-    end(h, { status: "ok", output: r.text.trim() });
+    findings.push(`${sub} — ${(r.text ?? "").trim()}`);
+    end(h, { status: "ok", output: (r.text ?? "").trim() });
   }
 
   // Combine the findings, which are already short, into one answer.
@@ -142,7 +142,7 @@ export async function runChain(opts: {
     end(hc, { status: "failed", error: combined.error });
     return fail(`Combining failed: ${combined.error}`);
   }
-  const answer = combined.text.trim();
+  const answer = (combined.text ?? "").trim();
   end(hc, { status: "ok", output: answer });
 
   // Check: the model reads its own answer against the notes. A doubt is shown,
@@ -151,7 +151,7 @@ export async function runChain(opts: {
   const hk = begin("check", "Check", checkUser);
   const check = await opts.ask({ system: RULES, user: checkUser, maxTokens: 64 }, opts.signal);
   if (!check.ok) end(hk, { status: "failed", error: check.error });
-  else end(hk, { status: "ok", output: check.text.trim() });
+  else end(hk, { status: "ok", output: (check.text ?? "").trim() });
 
   const note = missing > 0 ? `\n\n(${missing} source${missing === 1 ? "" : "s"} could not be read and were left out.)` : "";
   return { ok: true, answer: answer + note, steps };

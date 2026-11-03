@@ -19,7 +19,7 @@ const askBonsai: Ask = async ({ system, user, maxTokens }, signal) => {
     temperature: 0.2,
     signal,
   });
-  return v.ok ? { ok: true, text } : { ok: false, error: v.error };
+  return v.ok ? { ok: true, text } : { ok: false, error: "error" in v ? String(v.error) : "Bonsai stopped." };
 };
 
 const icon = (s: StepRecord["status"]) =>
