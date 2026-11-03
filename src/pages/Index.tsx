@@ -34,6 +34,7 @@ import {
   type Attachment,
 } from "@/lib/jackie-attachments";
 import { detectSecurityFlag, detectMemoryTier, describeFlag, isCredentialFlag } from "@/lib/jackie-security";
+import { recordExchange } from "@/lib/microai/ledger";
 import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/hooks/useTheme";
 import { voiceManager } from "@/lib/voice-manager";

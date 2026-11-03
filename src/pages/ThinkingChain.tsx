@@ -9,6 +9,7 @@ import { describeImage, VISION_MODEL_NAME } from "@/lib/microai/chain/vision";
 import { clearArchive } from "@/lib/microai/chain/archive";
 import { activateWeights, planActivation, readWeightBlocks, type WeightBlock } from "@/lib/microai/activation";
 import { DEVICE_BUDGET_MB } from "@/lib/microai/budget";
+import { contextFor, dive, ledgerStatus, type LedgerStatus } from "@/lib/microai/ledger";
 
 /** Bonsai on this device, one short step at a time, low randomness. */
 const askBonsai: Ask = async ({ system, user, maxTokens }, signal) => {
