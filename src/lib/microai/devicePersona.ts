@@ -88,9 +88,7 @@ export async function fetchDevicePersona(options: {
     await saveDevicePersona({ userId: userId ?? "", prompt: body.prompt, mode, fetchedAt: Date.now() });
     return { ok: true, prompt: body.prompt, mode };
   } catch (error) {
-    if (options.signal?.aborted) return { ok: false, stopped: true, issue: {
-      code: "UNREACHABLE", title: "Stopped", detail: "The profile request was cancelled.", recovery: "Run again when you are ready.",
-    } };
+    if (options.signal?.aborted) return cancelled();
     if (error instanceof NotSignedInError) return { ok: false, issue: {
       code: "SIGNED_OUT", title: "Sign-in needs attention", detail: error.message,
       recovery: "Sign in to your owner account, then check the connection again.", href: "/auth?next=/",
