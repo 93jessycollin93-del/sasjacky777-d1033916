@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { gate } from "../_shared/entitlement.ts";
+import { admit } from "../_shared/entitlement.ts";
 import { guardedSystemPrompt } from "../_shared/personaGuard.ts";
 
 const corsHeaders = {

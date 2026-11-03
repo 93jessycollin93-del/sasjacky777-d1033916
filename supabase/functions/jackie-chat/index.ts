@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { gate } from "../_shared/entitlement.ts";
+import { admit } from "../_shared/entitlement.ts";
 import { normalizeMessages, resolveModel } from "../_shared/chatRequest.ts";
 import { guardedSystemPrompt } from "../_shared/personaGuard.ts";
 
@@ -28,7 +28,7 @@ function json(body: unknown, status = 200): Response {
  * answered 500 with no CORS headers, the browser was not allowed to read that,
  * and the chat showed "Failed to fetch".
  *
- * `gate` keeps both of those properties — it returns a verdict rather than
+ * `admit` (gate plus the caller's id) keeps both of those properties — it returns a verdict rather than
  * throwing, and every answer carries CORS headers, because a 401 the browser
  * cannot read is indistinguishable from the server being down — and adds the
  * second question: may this person spend the project's model budget right now.
