@@ -41,7 +41,7 @@ npx tsc --noEmit -p tsconfig.app.json    # typecheck
 npm run build                # vite build, ~60s
 
 python3 -m pytest            # Python — 330+, reads pyproject testpaths
-cd context-condenser && npm test         # 44, node:test
+cd context-condenser && npm test         # 51, node:test
 
 npm run dev                  # vite on :8080
 npm run smoke                # route smoke check

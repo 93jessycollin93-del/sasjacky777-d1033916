@@ -80,13 +80,19 @@ export class Vault {
    * Seal plaintext into a pod. Returns the digest of the ORIGINAL bytes —
    * content addressing is over plaintext, so the same source always lands at
    * the same address whether or not it was encrypted.
+   *
+   * Takes raw bytes as well as text. Text is stored as its UTF-8 bytes, so the
+   * same content sealed either way lands at the same address. Bytes are stored
+   * as given: a file that is not UTF-8 text used to be decoded on the way in,
+   * which replaced its invalid bytes with U+FFFD before sealing — the pod then
+   * "restored exactly" something that was never the original.
    */
-  async seal(text: string, opts: SealOptions = {}): Promise<PodStats> {
+  async seal(input: string | Uint8Array, opts: SealOptions = {}): Promise<PodStats> {
     const frameSize = opts.frameSize ?? DEFAULT_FRAME_SIZE;
     const codec = opts.codec ?? 'gzip';
     if (frameSize <= 0) throw new Error('frameSize must be positive');
 
-    const plain = new TextEncoder().encode(text);
+    const plain = typeof input === 'string' ? new TextEncoder().encode(input) : input;
     const sha256 = await sha256Hex(plain);
 
     const encrypted = Boolean(opts.passphrase);
@@ -174,11 +180,16 @@ export class Vault {
    * inflated. Everything else in the pod stays sealed and untouched.
    */
   async readSpan(sha256: string, start: number, end: number, passphrase?: string): Promise<string> {
+    return new TextDecoder().decode(await this.readBytes(sha256, start, end, passphrase));
+  }
+
+  /** The same span read, as the stored bytes rather than decoded text. */
+  async readBytes(sha256: string, start: number, end: number, passphrase?: string): Promise<Uint8Array> {
     const { header, dataStart, path } = await this.readHeader(sha256);
 
     if (start < 0 || end < start) throw new Error(`invalid span [${start}, ${end}]`);
     const clampedEnd = Math.min(end, header.bytes);
-    if (start >= header.bytes) return '';
+    if (start >= header.bytes) return new Uint8Array(0);
 
     const key = header.encrypted ? await deriveKey(requirePass(passphrase), header.kdf!) : null;
 
@@ -207,18 +218,32 @@ export class Vault {
       await fh.close();
     }
 
-    return new TextDecoder().decode(Buffer.concat(pieces.map((p) => Buffer.from(p))));
+    return new Uint8Array(Buffer.concat(pieces.map((p) => Buffer.from(p))));
   }
 
-  /** Full restore, with an integrity check against the stored digest. */
-  async restore(sha256: string, passphrase?: string): Promise<string> {
+  /** Full restore of the original bytes, with an integrity check against the stored digest. */
+  async restoreBytes(sha256: string, passphrase?: string): Promise<Uint8Array> {
     const { header } = await this.readHeader(sha256);
-    const text = await this.readSpan(sha256, 0, header.bytes, passphrase);
-    const actual = await sha256Hex(new TextEncoder().encode(text));
+    const bytes = await this.readBytes(sha256, 0, header.bytes, passphrase);
+    const actual = await sha256Hex(bytes);
     if (actual !== header.sha256) {
       throw new Error(`integrity check failed for ${sha256}: restored bytes hash to ${actual}`);
     }
-    return text;
+    return bytes;
+  }
+
+  /**
+   * Full restore as text. A pod holding bytes that are not UTF-8 is refused
+   * rather than decoded: decoding would swap the invalid bytes for U+FFFD and
+   * hand back text that no longer hashes to the pod's own address.
+   */
+  async restore(sha256: string, passphrase?: string): Promise<string> {
+    const bytes = await this.restoreBytes(sha256, passphrase);
+    try {
+      return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+    } catch {
+      throw new Error(`pod ${sha256} holds bytes that are not UTF-8 text; read it with restoreBytes`);
+    }
   }
 
   /** How many frames a span would touch — the surface area of a read. */

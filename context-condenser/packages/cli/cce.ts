@@ -3,6 +3,8 @@
  * cce — context condenser CLI.
  *
  *   cce dehydrate <file>            seal + condense, print the condensate
+ *   cce seal <file>                 seal any file as raw bytes, print its address
+ *   cce restore <sha256> [--out f]  the sealed bytes back, hash-checked
  *   cce rehydrate <cnd.json> [--claim N | --full]
  *   cce chain <file>                run the eYe sphere ring
  *   cce condensers [category]       list the catalog
@@ -33,6 +35,8 @@ function has(args: string[], name: string): boolean {
 const USAGE = `cce — context condenser
 
   cce dehydrate <file> [--pipeline id,id] [--density 0.2] [--llm] [--out cnd.json]
+  cce seal <file>                    any file, stored as raw bytes
+  cce restore <sha256> [--out file]  the exact bytes back (stdout without --out)
   cce rehydrate <cnd.json> [--claim N] [--full]
   cce chain <file> [--out cnd.json]
   cce condensers [semantic|logical|cybernetic|cognitive]
@@ -48,7 +52,7 @@ async function main(argv: string[]) {
     case 'dehydrate': {
       const file = args[0];
       if (!file) throw new Error('dehydrate needs a file');
-      const text = await readFile(file, 'utf8');
+      const text = await readText(file);
       const pipeline = flag(args, 'pipeline')?.split(',').filter(Boolean);
       const densityRaw = flag(args, 'density');
       const density = densityRaw === undefined ? undefined : Number(densityRaw);
@@ -75,6 +79,30 @@ async function main(argv: string[]) {
       break;
     }
 
+    case 'seal': {
+      const file = args[0];
+      if (!file) throw new Error('seal needs a file');
+      // Raw bytes, never decoded: a binary file survives exactly.
+      const s = await vault.seal(await readFile(file), { passphrase: PASSPHRASE });
+      console.log(`${s.sha256}\n  original   ${s.bytes} bytes\n  stored     ${s.storedBytes} bytes` +
+                  `\n  frames     ${s.frames}\n  encrypted  ${s.encrypted}`);
+      break;
+    }
+
+    case 'restore': {
+      const sha = args[0];
+      if (!sha) throw new Error('restore needs a sha256');
+      const bytes = await vault.restoreBytes(sha, PASSPHRASE);
+      const out = flag(args, 'out');
+      if (out) {
+        await writeFile(out, bytes);
+        console.error(`${bytes.length} bytes -> ${out}`);
+      } else {
+        process.stdout.write(bytes);
+      }
+      break;
+    }
+
     case 'rehydrate': {
       const file = args[0];
       if (!file) throw new Error('rehydrate needs a condensate json file');
@@ -90,7 +118,7 @@ async function main(argv: string[]) {
     case 'chain': {
       const file = args[0];
       if (!file) throw new Error('chain needs a file');
-      const text = await readFile(file, 'utf8');
+      const text = await readText(file);
       const r = await runSphere(vault, DEFAULT_RING, text, { passphrase: PASSPHRASE });
       for (const s of r.steps) {
         console.log(
@@ -131,6 +159,20 @@ async function main(argv: string[]) {
     default:
       console.log(USAGE);
       process.exitCode = cmd ? 1 : 0;
+  }
+}
+
+/**
+ * A file to condense must be text. Reading it with 'utf8' would turn every
+ * invalid byte into U+FFFD without a word, and the condensate would anchor to
+ * text the file never contained — so say so and point at `seal` instead.
+ */
+async function readText(file: string): Promise<string> {
+  const bytes = await readFile(file);
+  try {
+    return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+  } catch {
+    throw new Error(`${file} is not UTF-8 text, so it cannot be condensed; \`cce seal ${file}\` stores it as raw bytes`);
   }
 }
 
