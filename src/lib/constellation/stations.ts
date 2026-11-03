@@ -15,9 +15,11 @@ import { OLLAMA_HOST } from "@/lib/localAI";
 import { LM_STUDIO_HOST } from "@/lib/lmStudio";
 import { estimateStorageBudgetMB } from "@/lib/partitions/budget";
 import { MINIMUM_BUDGET_MB, planBudget } from "@/lib/partitions/registry";
+import { BONSAI_ID } from "@/lib/microai/deviceModels";
 import {
   assetProbe,
   declaredProbe,
+  deviceProbe,
   inAppProbe,
   serviceProbe,
   withTimeout,
@@ -39,6 +41,15 @@ export interface StationBoundaries {
    * station that could only be checked in a browser could not be checked at all.
    */
   shellWorker: () => Promise<string>;
+  /**
+   * Resolves with a line describing the language weights held on this device,
+   * or throws what is missing and how it gets there. The weights live in a file
+   * store a browser keeps private to this app, which a test cannot create — so
+   * the read is handed in, and the probe logic around it stays testable.
+   */
+  deviceWeights: () => Promise<string>;
+  /** The same question for the photo reader's weights. */
+  visionWeights: () => Promise<string>;
 }
 
 /**
