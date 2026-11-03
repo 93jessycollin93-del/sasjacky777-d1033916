@@ -119,11 +119,16 @@ async function load(onProgress?: (p: VisionProgress) => void): Promise<Loaded> {
     const progress_callback = (p: { status?: string; file?: string; progress?: number }) => {
       if (p.status === "progress") onProgress?.({ file: p.file ?? "", fraction: typeof p.progress === "number" ? p.progress / 100 : null });
     };
-    const webgpu = typeof navigator !== "undefined" && "gpu" in navigator;
+    // fp16 needs the GPU's shader-f16 feature; without it the load died with
+    // "webgpu does not support fp16". Such devices get the all-q4 build, which
+    // is also smaller, so the 750 MB ceiling still holds.
+    const gpu = typeof navigator !== "undefined" ? (navigator as { gpu?: { requestAdapter(): Promise<{ features: Set<string> } | null> } }).gpu : undefined;
+    const adapter = gpu ? await gpu.requestAdapter().catch(() => null) : null;
+    const fp16 = !!adapter?.features.has("shader-f16");
     const processor = await lib.AutoProcessor.from_pretrained(VISION_MODEL_ID, { progress_callback });
     const model = await lib.AutoModelForVision2Seq.from_pretrained(VISION_MODEL_ID, {
-      dtype: { embed_tokens: "fp16", vision_encoder: "q4", decoder_model_merged: "q4" },
-      device: webgpu ? "webgpu" : "wasm",
+      dtype: { embed_tokens: fp16 ? "fp16" : "q4", vision_encoder: "q4", decoder_model_merged: "q4" },
+      device: adapter ? "webgpu" : "wasm",
       progress_callback,
     } as Record<string, unknown>);
     return { processor, model, lib };
