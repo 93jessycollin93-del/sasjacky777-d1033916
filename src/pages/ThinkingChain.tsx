@@ -168,7 +168,7 @@ export default function ThinkingChain() {
             <h2 className="text-xs font-mono uppercase text-muted-foreground">On this device</h2>
             {plan && (
               <span className="ml-auto text-xs font-mono text-muted-foreground">
-                {plan.usedMB} of {DEVICE_BUDGET_MB.total} MB used · {plan.headroomMB} MB spare
+                {plan.usedMB} of {DEVICE_BUDGET_MB.total} MB spoken for · {plan.headroomMB} MB spare
               </span>
             )}
           </div>
