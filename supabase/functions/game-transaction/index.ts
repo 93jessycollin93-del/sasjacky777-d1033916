@@ -1,10 +1,17 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.58.0";
+import { decideLedgerEntry, nextBalance, PREMIUM_UPGRADE } from "../_shared/gameLedger.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+function json(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status, headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -114,7 +121,9 @@ serve(async (req) => {
     // ── Dedup Check ──
     if (action === "dedup") {
       const { transaction_id, source } = body;
-      if (!transaction_id || !source) {
+      // "ledger:" ids belong to the claim locks above; a client must not be
+      // able to pre-occupy or probe them through this door.
+      if (!transaction_id || !source || String(transaction_id).startsWith("ledger:") || String(transaction_id).length > 200) {
         return new Response(JSON.stringify({ error: "Missing fields" }), {
           status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
