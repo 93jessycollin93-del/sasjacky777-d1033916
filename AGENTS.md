@@ -67,3 +67,7 @@ prose that explains the reasoning, not bullet fragments; read `git log`.
 
 Never commit one. `LOVABLE_API_KEY`, `JACKY_API_BASE`, `BIONIC_BASE_URL`,
 `OLLAMA_BASE_URL`, `DEEPSEEK_API_KEY` and friends live in Cloud → Secrets.
+
+## Thinking chain
+
+On-device multi-step answers live in `src/lib/microai/chain/`: every step's notes pass through `distribute()` so a step can never exceed Bonsai's window, and originals go to the archivist untouched — compression is extractive only, so a note can lose detail but never invent it.
