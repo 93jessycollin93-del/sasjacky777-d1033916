@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Brain, ImagePlus, FilePlus, Play, Square, Trash2, CheckCircle2, XCircle, Loader2, MinusCircle, Download } from "lucide-react";
+import { ArrowLeft, Brain, ImagePlus, FilePlus, Play, Square, Trash2, CheckCircle2, XCircle, Loader2, MinusCircle, Download, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { chatOnDevice } from "@/lib/microai/bonsaiDevice";
@@ -46,6 +46,35 @@ export default function ThinkingChain() {
   const [progress, setProgress] = useState<Record<string, number | null>>({});
   const [activateNote, setActivateNote] = useState<string | null>(null);
   const plan = useMemo(() => (blocks ? planActivation(blocks) : null), [blocks]);
+  const [ledger, setLedger] = useState<LedgerStatus | null>(null);
+  const [diving, setDiving] = useState(false);
+  const [diveNote, setDiveNote] = useState<string | null>(null);
+
+  // How much of the conversation the fold has not absorbed yet. A slow dive is
+  // the design, not a fallback: reading a week of history is allowed to take a
+  // week, so the panel reports the distance rather than pretending to close it.
+  useEffect(() => {
+    let alive = true;
+    ledgerStatus()
+      .then((s) => { if (alive) setLedger(s); })
+      .catch(() => undefined);
+    return () => { alive = false; };
+  }, []);
+
+  const diveIntoHistory = async () => {
+    setDiving(true);
+    setDiveNote(null);
+    const r = await dive(question.trim() || "everything so far", { maxFolds: 3 }).catch(
+      (e) => ({ folds: 0, turns: 0, caughtUp: false, reason: `The dive could not run: ${e instanceof Error ? e.message : String(e)}` }),
+    );
+    setLedger(await ledgerStatus().catch(() => null));
+    setDiving(false);
+    setDiveNote(
+      r.folds
+        ? `Folded ${r.turns} turns into ${r.folds} note${r.folds === 1 ? "" : "s"}. ${r.caughtUp ? "The fold has reached the newest turn." : r.reason ?? ""}`
+        : r.reason ?? "Nothing was folded.",
+    );
+  };
 
   // What this device already holds, asked once on open. The read is lazy on
   // purpose: it pulls in the inference runtime only to answer, so a page that
@@ -92,6 +121,11 @@ export default function ThinkingChain() {
     setError(null);
     setSteps([]);
     const sources: Source[] = [];
+    // What has already been said arrives as a note, and only when there is
+    // something to say. An empty note would be logged as a failed fetch and the
+    // answer would carry a missing source nobody asked for.
+    const prior = await contextFor(question, 1400).catch(() => "");
+    if (prior.trim()) sources.push({ label: "Conversation ledger", kind: "text", fetch: async () => prior });
     if (pasted.trim()) sources.push({ label: "Pasted notes", kind: "text", fetch: async () => pasted });
     for (const f of files) {
       if (f.type.startsWith("image/")) {
@@ -172,7 +206,19 @@ export default function ThinkingChain() {
             )}
           </div>
 
-          {plan?.refused.length ? (
+          <div className="flex flex-wrap items-center gap-2">
+            <Button size="sm" variant="outline" onClick={diveIntoHistory} disabled={diving || !ledger?.unfolded}>
+              {diving ? <Loader2 size={14} className="animate-spin" /> : <BookOpen size={14} />}
+              {ledger?.unfolded ? `Read ${Math.min(ledger.unfolded, 24)} older turns` : "Nothing older to read"}
+            </Button>
+            {ledger && (
+              <span className="text-xs font-mono text-muted-foreground">
+                {ledger.turns} turns · {ledger.folds} folds · {ledger.chars.toLocaleString()} characters kept{" "}
+                {ledger.where === "device" ? "on this device" : "in memory only"}
+              </span>
+            )}
+          </div>
+          {diveNote && <p className="text-xs font-mono text-muted-foreground">{diveNote}</p>}
             <p className="text-xs font-mono text-destructive" role="alert">
               Kept out by the {DEVICE_BUDGET_MB.total} MB ceiling: {plan.refused.map((b) => b.name).join(", ")} — {plan.reason}
             </p>
