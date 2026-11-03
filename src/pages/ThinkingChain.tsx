@@ -40,6 +40,48 @@ export default function ThinkingChain() {
   const [visionNote, setVisionNote] = useState<string | null>(null);
   const [running, setRunning] = useState(false);
   const stop = useRef<AbortController | null>(null);
+  const [blocks, setBlocks] = useState<WeightBlock[] | null>(null);
+  const [activating, setActivating] = useState(false);
+  const [progress, setProgress] = useState<Record<string, number | null>>({});
+  const [activateNote, setActivateNote] = useState<string | null>(null);
+  const plan = useMemo(() => (blocks ? planActivation(blocks) : null), [blocks]);
+
+  // What this device already holds, asked once on open. The read is lazy on
+  // purpose: it pulls in the inference runtime only to answer, so a page that
+  // never gets pressed costs nothing.
+  useEffect(() => {
+    let alive = true;
+    readWeightBlocks()
+      .then((b) => { if (alive) setBlocks(b); })
+      .catch((e) => {
+        if (alive) setActivateNote(`Could not ask this device what it holds: ${e instanceof Error ? e.message : String(e)}`);
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  // The owner's own click is the only thing that starts a download, and the
+  // ceiling is the only thing that stops one. A failure names itself and leaves
+  // the rest of the plan standing.
+  const activate = async () => {
+    setActivating(true);
+    setActivateNote(null);
+    const report = await activateWeights({
+      onProgress: (block, fraction) => setProgress((p) => ({ ...p, [block.id]: fraction })),
+    });
+    const fresh = await readWeightBlocks().catch(() => null);
+    if (fresh) setBlocks(fresh);
+    setActivating(false);
+    setActivateNote(
+      report.errors.length
+        ? report.errors.join(" ")
+        : report.activated.length
+          ? `On this device now: ${report.activated.join(", ")}.`
+          : report.reason ?? "Nothing new was downloaded.",
+    );
+  };
+
 
   const run = async () => {
     const ac = new AbortController();
@@ -85,6 +127,59 @@ export default function ThinkingChain() {
           Bonsai 1.7B answers in small steps on this device: fetch, archive, compress, plan, reason, combine, check.
           Photos are read by {VISION_MODEL_NAME}, also on this device. Both download once while online, then work offline.
         </p>
+
+        <section className="border border-border rounded-sm p-3 bg-card space-y-2" aria-label="On this device">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xs font-mono uppercase text-muted-foreground">On this device</h2>
+            {plan && (
+              <span className="ml-auto text-xs font-mono text-muted-foreground">
+                {plan.usedMB} of {DEVICE_BUDGET_MB.total} MB used · {plan.headroomMB} MB spare
+              </span>
+            )}
+          </div>
+
+          {blocks === null && !activateNote && (
+            <p className="text-xs font-mono text-muted-foreground">Asking this device what it holds…</p>
+          )}
+
+          {blocks?.map((b) => (
+            <div key={b.id} className="flex items-start gap-2 text-xs font-mono">
+              {b.present ? (
+                <CheckCircle2 size={14} className="text-primary mt-0.5 shrink-0" />
+              ) : (
+                <XCircle size={14} className="text-destructive mt-0.5 shrink-0" />
+              )}
+              <div className="min-w-0">
+                <p>
+                  {b.name} · {b.mb} MB
+                  {progress[b.id] != null && progress[b.id] < 1 && ` · ${Math.round((progress[b.id] ?? 0) * 100)}%`}
+                </p>
+                <p className="text-muted-foreground whitespace-pre-wrap">{b.detail}</p>
+              </div>
+            </div>
+          ))}
+
+          <div className="flex items-center gap-2">
+            <Button size="sm" onClick={activate} disabled={activating || !plan?.missing.length}>
+              {activating ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+              {plan?.missing.length ? `Activate ${plan.missing.length} missing` : "Everything is on this device"}
+            </Button>
+            {activating && (
+              <Button size="sm" variant="ghost" onClick={() => stop.current?.abort()}>
+                <Square size={14} /> Stop
+              </Button>
+            )}
+          </div>
+
+          {plan?.refused.length ? (
+            <p className="text-xs font-mono text-destructive" role="alert">
+              Kept out by the {DEVICE_BUDGET_MB.total} MB ceiling: {plan.refused.map((b) => b.name).join(", ")} — {plan.reason}
+            </p>
+          ) : null}
+
+          {activateNote && <p className="text-xs font-mono text-muted-foreground">{activateNote}</p>}
+        </section>
+
 
         <label className="block space-y-1">
           <span className="text-xs font-mono uppercase text-muted-foreground">Question</span>
