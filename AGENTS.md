@@ -68,6 +68,8 @@ prose that explains the reasoning, not bullet fragments; read `git log`.
 Never commit one. `LOVABLE_API_KEY`, `JACKY_API_BASE`, `BIONIC_BASE_URL`,
 `OLLAMA_BASE_URL`, `DEEPSEEK_API_KEY` and friends live in Cloud → Secrets.
 
-## Thinking chain
+## Thinking chain and the context ceiling
 
 On-device multi-step answers live in `src/lib/microai/chain/`: every step's notes pass through `distribute()` so a step can never exceed Bonsai's window, and originals go to the archivist untouched — compression is extractive only, so a note can lose detail but never invent it.
+
+Conversation context itself has no ceiling. `src/lib/microai/ledger.ts` is an endless append-only stream of every finished exchange, kept on the device: nothing may truncate, drop or refuse a turn to fit a model's window. A step reads a `contextFor()` slice chosen for its own question, and `dive()` folds older stretches extractively over as long a pass as the material needs — a week of reading is a legitimate pass, not a timeout. A fold that processed nothing says so, and clearing a conversation clears the index and the folds, never the archivist's originals.
