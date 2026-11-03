@@ -20,6 +20,8 @@ function stationsWith(overrides: {
   jacky?: string | Error;
   budgetMB?: number | Error;
   shell?: string | Error;
+  deviceWeights?: string | Error;
+  visionWeights?: string | Error;
 }): Station[] {
   return buildStations({
     fetch: async (url) => {
@@ -40,6 +42,14 @@ function stationsWith(overrides: {
     shellWorker: async () => {
       if (overrides.shell instanceof Error) throw overrides.shell;
       return overrides.shell ?? "shell worker controlling · 1283 files held locally";
+    },
+    deviceWeights: async () => {
+      if (overrides.deviceWeights instanceof Error) throw overrides.deviceWeights;
+      return overrides.deviceWeights ?? "Bonsai 1.7B · 248 MB held on this device";
+    },
+    visionWeights: async () => {
+      if (overrides.visionWeights instanceof Error) throw overrides.visionWeights;
+      return overrides.visionWeights ?? "SmolVLM 256M on this device · 2 weight files, 5 files held";
     },
   });
 }
@@ -168,6 +178,8 @@ describe("ConstellationService", () => {
         jackyStatus: probed,
         storageBudgetMB: async () => 100_000,
         shellWorker: async () => "shell worker controlling · 1283 files held locally",
+        deviceWeights: async () => "Bonsai 1.7B · 248 MB held on this device",
+        visionWeights: async () => "SmolVLM 256M on this device · 2 weight files, 5 files held",
       }),
       () => true,
     );
