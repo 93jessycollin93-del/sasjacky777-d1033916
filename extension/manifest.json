@@ -1,0 +1,4 @@
+{ "manifest_version": 3, "name": "Jackie Quiet Autocorrect", "version": "1.0.0",
+  "description": "Fixes clear misspellings as you type on any site. No pop-ups. Nothing leaves your device.",
+  "permissions": ["storage"], "action": { "default_popup": "popup.html" },
+  "content_scripts": [{ "matches": ["<all_urls>"], "js": ["autocorrect.js"], "all_frames": true }] }

@@ -11,7 +11,7 @@ export const FIXES: Record<string, string> = {
   wont: "won't", didnt: "didn't", doesnt: "doesn't", isnt: "isn't", im: "I'm",
   ive: "I've", youre: "you're", thats: "that's", whats: "what's", wasent: "wasn't",
   withought: "without", awnser: "answer", awnsers: "answers", knoledge: "knowledge",
-  enviroment: "environment", embeded: "embedded", untill_: "until", tahts: "that's",
+  enviroment: "environment", embeded: "embedded", tahts: "that's",
   coherant: "coherent", stabelize: "stabilize", recongnize: "recognize",
   easely: "easily", efficently: "efficiently", acheive: "achieve", goverment: "government",
   neccessary: "necessary", accomodate: "accommodate", tommorow: "tomorrow",

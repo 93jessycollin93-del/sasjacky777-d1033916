@@ -7,3 +7,6 @@
 - [ ] Lego blocks: every engine and agent reads/tunes from one shared data pod, so pieces are reusable and re-tunable
 - [ ] Specialized context pods ("poduals") that revolve around one job each, plus min-maxed variants (smallest usable version of each block)
 - [x] Context has no ceiling: the ledger keeps every turn, folds slowly, and a step reads only its own slice. Conversation/coding coherency must be continuous, not capped at 256k. Routers/archive/compressors manage an endless stream (organism-style), even if a pass takes a week over all new and old data.
+- [x] Quiet autocorrect inside Jackie (word list, automatic)
+- [x] Browser extension: same autocorrect on any site, remembers last on/off even with Jackie closed
+- [ ] AI-enhanced autocorrect layer (Bonsai) on top of the word list — next
