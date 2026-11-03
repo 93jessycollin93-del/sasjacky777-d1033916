@@ -131,6 +131,26 @@ export function defaultBoundaries(): StationBoundaries {
       const held = counts.reduce((sum, n) => sum + n, 0);
       return `shell worker controlling · ${held} files held locally`;
     },
+    deviceWeights: async () => {
+      // Imported lazily: this pulls in the inference runtime, and a status
+      // check that downloaded the runtime to ask whether the model is present
+      // would be the same mistake the station table exists to catch.
+      const device = await import("@/lib/microai/bonsaiDevice");
+      const stored = await device.storedModel(BONSAI_ID);
+      if (!stored.supported) throw new Error(device.UNSUPPORTED_BROWSER);
+      if (stored.downloaded) return `Bonsai 1.7B · ${device.BONSAI_MB} MB held on this device`;
+      throw new Error(
+        stored.partial
+          ? "part of Bonsai is on this device, but the download never finished — run it again while you are online"
+          : `${device.NOT_DOWNLOADED} It downloads once while you are online, then answers with the radio off.`,
+      );
+    },
+    visionWeights: async () => {
+      const { visionWeightsStatus } = await import("@/lib/microai/chain/vision");
+      const status = await visionWeightsStatus();
+      if (!status.present) throw new Error(status.detail);
+      return status.detail;
+    },
   };
 }
 
