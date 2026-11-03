@@ -95,19 +95,11 @@ export async function markPendingVerification(transactionId, paidAmount) {
   });
 }
 
-/**
- * Verify transaction and mark as paid (ONLY after payment confirmed)
- * @param {string} transactionId
- * @param {object} metadata - proof data (hash, receipt, etc)
- */
-export async function verifyTransaction(transactionId, metadata = {}) {
-  await base44.entities.Transaction.update(transactionId, {
-    status: 'verified',
-    verified_at: new Date().toISOString(),
-    verified_by: 'system',
-    metadata,
-  });
-}
+// There is deliberately no client-side "mark verified" here. Verification is
+// the step that releases goods, and a browser that could perform it could
+// confirm its own unpaid order (it did, through the Bazar wallet). Only the
+// store's server — an admin action or a signed payment webhook — sets
+// status "verified".
 
 /**
  * Mark transaction as failed
