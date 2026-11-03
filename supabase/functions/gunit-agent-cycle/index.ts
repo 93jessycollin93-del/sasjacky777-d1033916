@@ -32,6 +32,8 @@ async function callAI(apiKey: string, systemPrompt: string, userPrompt: string):
 }
 
 /** Carries a quota refusal out of a cycle, so it is returned as-is rather than as a 500. */
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 class QuotaRefused extends Error {
   constructor(readonly response: Response) {
     super("quota refused");
@@ -134,14 +136,13 @@ serve(async (req) => {
     const score = scoreMatch ? Math.min(10, Math.max(0, parseInt(scoreMatch[1]))) : 5;
 
     // Save improvement
-    const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     await admin.from("gunit_improvements").insert({
       user_id: user.id, goal, execution, analysis, improvement, score,
     });
 
     // Reset agent status
     if (agentId) {
-      await admin.from("gunit_agents").update({ status: "idle" }).eq("id", agentId);
+      await admin.from("gunit_agents").update({ status: "idle" }).eq("id", agentId).eq("user_id", userId);
     }
 
     return new Response(JSON.stringify({ plan, execution, analysis, improvement, score }), {
