@@ -85,33 +85,36 @@ export function planActivation(blocks: WeightBlock[]): ActivationPlan {
  * catch.
  */
 export async function readWeightBlocks(): Promise<WeightBlock[]> {
-  const [device, visionMod, { VISION_MODEL_ID, VISION_MODEL_MB, visionWeightsStatus }] = await Promise.all([
-    import("./bonsaiDevice"),
+  const [{ BONSAI_ID, deviceModelOrDefault }, device, vision] = await Promise.all([
     import("./deviceModels"),
+    import("./bonsaiDevice"),
     import("./chain/vision"),
   ]);
-  const stored = await device.storedModel(visionMod.BONSAI_ID);
-  const vision = await visionWeightsStatus();
+  const spec = deviceModelOrDefault(BONSAI_ID);
+  const stored = await device.storedModel(BONSAI_ID);
+  const status = await vision.visionWeightsStatus();
   return [
     {
       id: "bonsai",
-      name: device.BONSAI_NAME ?? "Bonsai 1.7B",
+      name: spec.name,
       slot: "bonsai",
       mb: device.BONSAI_MB,
       present: stored.downloaded,
-      detail: stored.downloaded
-        ? `${device.BONSAI_MB} MB on this device`
-        : stored.supported
-          ? stored.detail ?? "not on this device yet"
-          : device.UNSUPPORTED_BROWSER,
+      detail: !stored.supported
+        ? device.UNSUPPORTED_BROWSER
+        : stored.downloaded
+          ? `${device.BONSAI_MB} MB on this device`
+          : stored.partial
+            ? "a part of it is here, but the download never finished — run it again while you are online"
+            : device.notDownloaded(spec),
     },
     {
       id: "vision",
-      name: visionMod.VISION_MODEL_NAME ?? "SmolVLM 256M",
+      name: vision.VISION_MODEL_NAME,
       slot: "micro",
-      mb: VISION_MODEL_MB,
-      present: vision.present,
-      detail: vision.detail,
+      mb: vision.VISION_MODEL_MB,
+      present: status.present,
+      detail: status.detail,
     },
   ];
 }

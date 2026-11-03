@@ -12,6 +12,35 @@
 export const VISION_MODEL_ID = "HuggingFaceTB/SmolVLM-256M-Instruct";
 export const VISION_MODEL_NAME = "SmolVLM 256M";
 
+/**
+ * What the download costs, for the owner's on-device ceiling.
+ *
+ * An estimate, and labelled as one: the file is not pinned by this repository
+ * the way Bonsai is, so the honest figure is the one the module's own note
+ * carries. It is used only to decide whether a download still fits under the
+ * 750 MB ceiling — never to claim a file arrived at a particular size, which
+ * `visionWeightsStatus` answers by looking at the cache instead.
+ */
+export const VISION_MODEL_MB = 250;
+
+/**
+ * Bring the photo reader onto this device without asking it to read anything.
+ *
+ * The only way to know the weights are here is to have loaded them once, so
+ * this runs the same lazy loader the chain uses and reports what the cache says
+ * afterwards. It is the download behind an Activate button: the owner's call,
+ * made deliberately, rather than a 250 MB fetch that starts because a page
+ * opened.
+ */
+export async function prepareVisionWeights(
+  opts: { onProgress?: (p: VisionProgress) => void } = {},
+): Promise<string> {
+  await load(opts.onProgress);
+  const status = await visionWeightsStatus();
+  if (!status.present) throw new Error(`${VISION_MODEL_NAME} loaded, but its weights are not in this browser's cache`);
+  return status.detail;
+}
+
 export interface VisionWeightsStatus {
   present: boolean;
   files: number;
