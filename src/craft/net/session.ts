@@ -154,11 +154,11 @@ const finite = (...v: unknown[]) => v.every((n) => typeof n === "number" && Numb
 const int = (v: unknown) => typeof v === "number" && Number.isInteger(v);
 
 /** `address` is the relay's host:port, and only LAN links have one. */
-export function makeTransport(kind: LinkKind, room: string, address?: string): Transport {
+export function makeTransport(kind: LinkKind, room: string, address?: string, role: "host" | "guest" = "guest"): Transport {
   if (kind === "online") return new OnlineTransport(room);
   if (kind === "lan") {
     if (!address) throw new Error("Type the host's address (shown on their Play Together screen) to join over the local network.");
-    return new LanTransport(address, room);
+    return new LanTransport(address, room, role);
   }
   return new DeviceTransport(room);
 }
@@ -207,7 +207,7 @@ export class NetSession implements NetLink {
 
   /** Opens the host's running world to others. */
   static async host(game: Game, kind: LinkKind, room: string, lan?: { address: string; share: string[] }): Promise<NetSession> {
-    const t = makeTransport(kind, room, lan?.address);
+    const t = makeTransport(kind, room, lan?.address, "host");
     await linked(t);
     const s = new NetSession("host", t, room, game.player.id);
     s.shareAddresses = lan?.share ?? [];

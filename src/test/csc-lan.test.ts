@@ -16,8 +16,8 @@ afterEach(async () => {
   relay = null;
 });
 
-function link(port: number, room: string): LanTransport {
-  const t = new LanTransport(`127.0.0.1:${port}`, room);
+function link(port: number, room: string, role: "host" | "guest" = "guest"): LanTransport {
+  const t = new LanTransport(`127.0.0.1:${port}`, room, role);
   open.push(t);
   return t;
 }
@@ -39,10 +39,11 @@ const until = async (ok: () => boolean, ms = 3000) => {
 describe("LAN play", () => {
   it("carries a message to everyone else in the same world, and to no one in another", async () => {
     relay = await startRelay({ port: 0, host: "127.0.0.1" });
-    const host = link(relay.port, "K7QM3X");
+    const host = link(relay.port, "K7QM3X", "host");
+    const stranger = link(relay.port, "ZZZZ22", "host");
+    await Promise.all([host.ready, stranger.ready]);
     const guest = link(relay.port, "K7QM3X");
-    const stranger = link(relay.port, "ZZZZ22");
-    await Promise.all([host.ready, guest.ready, stranger.ready]);
+    await guest.ready;
     const [hostGot, guestGot, strangerGot] = [inbox(host), inbox(guest), inbox(stranger)];
 
     host.send({ t: "b", from: "host", ops: [["st", 1, 2, 3]] });
@@ -55,9 +56,10 @@ describe("LAN play", () => {
 
   it("delivers a chunk-sized message intact, past the 64 KB frame boundary", async () => {
     relay = await startRelay({ port: 0, host: "127.0.0.1" });
-    const a = link(relay.port, "ROOM1");
+    const a = link(relay.port, "ROOM1", "host");
+    await a.ready;
     const b = link(relay.port, "ROOM1");
-    await Promise.all([a.ready, b.ready]);
+    await b.ready;
     const got = inbox(b);
     const data = "x".repeat(70_000);
     a.send({ t: "cp", from: "a", data });
@@ -77,7 +79,7 @@ describe("LAN play", () => {
   it("says when the link drops and when it is back, and sends what waited meanwhile", async () => {
     relay = await startRelay({ port: 0, host: "127.0.0.1" });
     const port = relay.port;
-    const a = link(port, "ROOM1");
+    const a = link(port, "ROOM1", "host");
     await a.ready;
     const status: boolean[] = [];
     a.onStatus((live) => status.push(live));
@@ -88,11 +90,12 @@ describe("LAN play", () => {
     a.send({ t: "chat", from: "a", text: "sent while the relay was down" });
 
     relay = await startRelay({ port, host: "127.0.0.1" });
+    // The host reopens the world on its own; only then can a guest join it.
+    await until(() => status.length === 2, 8000);
+    expect(status).toEqual([false, true]);
     const b = link(port, "ROOM1");
     await b.ready;
     const got = inbox(b);
-    await until(() => status.length === 2, 8000);
-    expect(status).toEqual([false, true]);
     await until(() => got.length === 1);
     expect(got[0].text).toBe("sent while the relay was down");
   }, 15000);
