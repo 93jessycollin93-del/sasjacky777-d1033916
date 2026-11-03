@@ -108,7 +108,7 @@ serve(async (req) => {
     const admission = await admit(req, "jackie-anthropic", selected);
     if (admission instanceof Response) return admission;
 
-    const guarded = await guardedSystemPrompt("jackie-anthropic", { system: explicitSystem, context });
+    const guarded = await guardedSystemPrompt("jackie-anthropic", { system: explicitSystem, context, userId: admission.userId });
 
     const resp = await fetch(BASE, {
       method: "POST",
@@ -124,7 +124,7 @@ serve(async (req) => {
         model: selected,
         max_tokens: MAX_TOKENS,
         system: guarded.prompt,
-        messages: verdict.messages,
+        messages: guarded.conversation(verdict.messages),
         fallbacks: "default",
         stream: true,
       }),

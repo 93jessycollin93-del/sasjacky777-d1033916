@@ -32,6 +32,8 @@ async function callAI(apiKey: string, systemPrompt: string, userPrompt: string):
 }
 
 /** Carries a quota refusal out of a cycle, so it is returned as-is rather than as a 500. */
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 class QuotaRefused extends Error {
   constructor(readonly response: Response) {
     super("quota refused");
@@ -62,11 +64,34 @@ serve(async (req) => {
       });
     }
 
-    const { goal, agentId } = await req.json();
-    if (!goal || typeof goal !== "string") {
-      return new Response(JSON.stringify({ error: "Goal required" }), {
+    const body = await req.json().catch(() => ({}));
+    const goal = typeof body?.goal === "string" ? body.goal.trim() : "";
+    if (!goal || goal.length > 4000) {
+      return new Response(JSON.stringify({ error: goal ? "Goal is too long (4000 characters at most)" : "Goal required" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
+    }
+    const rawAgentId = body?.agentId;
+    if (rawAgentId != null && (typeof rawAgentId !== "string" || !UUID.test(rawAgentId))) {
+      return new Response(JSON.stringify({ error: "agentId must be an agent id" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const agentId: string | null = rawAgentId ?? null;
+    const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+
+    // The service role ignores RLS, so ownership is checked here, before any
+    // write and before any quota is spent: an id from the request body used to
+    // be enough to flip another account's agent to "active".
+    if (agentId) {
+      const { data: owned, error: ownErr } = await admin
+        .from("gunit_agents").select("id").eq("id", agentId).eq("user_id", user.id).maybeSingle();
+      if (ownErr) throw ownErr;
+      if (!owned) {
+        return new Response(JSON.stringify({ error: "No agent with that id belongs to this account" }), {
+          status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
     }
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
@@ -87,10 +112,11 @@ serve(async (req) => {
     };
     const sys = "You are G-UNIT, an AI agent execution system. Be precise, tactical, and thorough.";
 
-    // Update agent status
+    // Update agent status — pinned to the caller even after the check above.
     if (agentId) {
-      const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-      await admin.from("gunit_agents").update({ status: "active", last_run_at: new Date().toISOString() }).eq("id", agentId);
+      await admin.from("gunit_agents")
+        .update({ status: "active", last_run_at: new Date().toISOString() })
+        .eq("id", agentId).eq("user_id", userId);
     }
 
     // Step 1: Plan
@@ -110,14 +136,13 @@ serve(async (req) => {
     const score = scoreMatch ? Math.min(10, Math.max(0, parseInt(scoreMatch[1]))) : 5;
 
     // Save improvement
-    const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     await admin.from("gunit_improvements").insert({
       user_id: user.id, goal, execution, analysis, improvement, score,
     });
 
     // Reset agent status
     if (agentId) {
-      await admin.from("gunit_agents").update({ status: "idle" }).eq("id", agentId);
+      await admin.from("gunit_agents").update({ status: "idle" }).eq("id", agentId).eq("user_id", userId);
     }
 
     return new Response(JSON.stringify({ plan, execution, analysis, improvement, score }), {

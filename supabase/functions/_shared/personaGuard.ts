@@ -18,7 +18,7 @@
  * morals page shows it in red rather than letting it pass as normal (rule 8).
  */
 import { adminClient } from "./entitlement.ts";
-import { clampContext } from "./chatRequest.ts";
+import { carryBrief, clampContext, type ChatTurn } from "./chatRequest.ts";
 import { buildSystemPrompt, PERSONA_SOURCE } from "./persona.ts";
 import {
   buildMoralsBlock, fingerprint, moralsFingerprint, MORALS_UNAVAILABLE, OWN_PROMPT, RIG_PERSONA,
@@ -34,6 +34,12 @@ export interface GuardedPrompt {
   headers: Record<string, string>;
   /** Settles when the attestation is written or has failed. Never rejects. */
   recorded: Promise<void>;
+  /**
+   * The turns to send after the system prompt. Unchanged for the persona with
+   * no brief and for the owner's override; a non-owner's brief is carried at
+   * the front of the first user turn (see carryBrief).
+   */
+  conversation: (turns: readonly ChatTurn[]) => ChatTurn[];
 }
 
 export const ATTESTATION_HEADERS = ["X-Jackie-Mode", "X-Jackie-Persona", "X-Jackie-Morals"] as const;
@@ -101,30 +107,62 @@ function headersFor(mode: PromptMode, personaFp: string, moralsFp: string): Reco
 }
 
 /**
+ * Whether this caller may replace Jackie's persona with a prompt of its own.
+ *
+ * Only the owner: the Agent Lab agents and in-app operators that need a whole
+ * identity of their own ("Scout" answering in strict JSON) are the owner's.
+ * Any other account could sign up and send `system` to tell the model to drop
+ * the persona and the morals, which is exactly what the morals exist to stop.
+ *
+ * Read with the service role, like requireOwner. A failed lookup answers "no":
+ * the request still goes out, on the persona, rather than failing (never throws).
+ */
+async function mayReplacePersona(userId: string | null | undefined): Promise<boolean> {
+  if (!userId) return false;
+  try {
+    const { data, error } = await adminClient()
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .eq("role", "owner")
+      .maybeSingle();
+    if (error) {
+      console.error(`personaGuard: owner lookup failed, keeping the persona: ${error.message}`);
+      return false;
+    }
+    return !!data;
+  } catch (e) {
+    console.error("personaGuard: owner lookup failed, keeping the persona", e);
+    return false;
+  }
+}
+
+/**
  * @param engine   the function's name, as the morals page lists it
  * @param system   the caller's own system prompt, if it sent one (already size-checked)
  * @param context  the caller's memory/project context
+ * @param userId   the admitted caller — decides whether `system` may replace the persona
  */
 export async function guardedSystemPrompt(
   engine: string,
-  opts: { system?: unknown; context?: unknown },
+  opts: { system?: unknown; context?: unknown; userId?: string | null },
 ): Promise<GuardedPrompt> {
   const explicit = typeof opts.system === "string" ? opts.system.trim() : "";
 
-  if (explicit) {
-    // An Agent Lab agent or an in-app operator brings its whole identity in
-    // `system` — by design, so "Scout" is not Jackie under another name. The
+  if (explicit && (await mayReplacePersona(opts.userId))) {
+    // The owner's Agent Lab agent or in-app operator brings its whole identity
+    // in `system` — by design, so "Scout" is not Jackie under another name. The
     // owner's morals are not added: they are Jackie's, and appending prose to a
     // prompt that must answer in strict JSON breaks the agent.
     //
-    // Recorded under one marker, not a hash of the caller's prompt: any signed-in
-    // account can send a system prompt, and keying on its hash let each one add
-    // a row of its own — growing the table, and burying the rows that matter.
+    // Recorded under one marker, not a hash of the caller's prompt, so the
+    // attestation table holds one row per engine, not one per prompt variant.
     return {
       prompt: explicit,
       mode: "override",
       headers: headersFor("override", OWN_PROMPT, "n/a"),
       recorded: attest(engine, "override", OWN_PROMPT, "n/a", null),
+      conversation: (turns) => turns.slice(),
     };
   }
 
@@ -133,11 +171,17 @@ export async function guardedSystemPrompt(
   const personaFp = await fingerprint(PERSONA_SOURCE);
   const mode: PromptMode = morals.error ? "persona-without-morals" : "persona";
   const moralsFp = morals.error ? MORALS_UNAVAILABLE : await moralsFingerprint(morals.block);
+  // A non-owner's `system` is not thrown away — the app's own features send
+  // task briefs that way — but it travels inside the conversation, under the
+  // persona, never as the system prompt.
+  const detail = [morals.error, explicit ? "caller brief carried as a user turn (caller is not the owner)" : null]
+    .filter(Boolean).join("; ") || null;
   return {
     prompt,
     mode,
     headers: headersFor(mode, personaFp, moralsFp),
-    recorded: attest(engine, mode, personaFp, moralsFp, morals.error ?? null),
+    recorded: attest(engine, mode, personaFp, moralsFp, detail),
+    conversation: (turns) => carryBrief(turns, explicit),
   };
 }
 
@@ -156,5 +200,6 @@ export async function guardedRigPrompt(engine: string, prompt: string): Promise<
     mode: "rig",
     headers: headersFor("rig", RIG_PERSONA, moralsFp),
     recorded: attest(engine, "rig", RIG_PERSONA, moralsFp, morals.error ?? null),
+    conversation: (turns) => turns.slice(),
   };
 }

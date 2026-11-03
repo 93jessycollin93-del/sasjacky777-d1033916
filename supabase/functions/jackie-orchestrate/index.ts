@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { gate } from "../_shared/entitlement.ts";
+import { admit } from "../_shared/entitlement.ts";
 import { guardedSystemPrompt } from "../_shared/personaGuard.ts";
 
 const corsHeaders = {
@@ -33,8 +33,8 @@ serve(async (req) => {
     );
   }
 
-  const unauth = await gate(req, "jackie-orchestrate");
-  if (unauth) return unauth;
+  const admission = await admit(req, "jackie-orchestrate");
+  if (admission instanceof Response) return admission;
 
   try {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
@@ -68,7 +68,7 @@ serve(async (req) => {
     // Always its own prompt, never Jackie's persona — so the morals page lists
     // this function among those answering in her name without her morals,
     // instead of it doing so where nobody can see.
-    const guarded = await guardedSystemPrompt("jackie-orchestrate", { system });
+    const guarded = await guardedSystemPrompt("jackie-orchestrate", { system, userId: admission.userId });
 
     const resp = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -80,7 +80,7 @@ serve(async (req) => {
         model,
         messages: [
           { role: "system", content: guarded.prompt },
-          { role: "user", content: prompt },
+          ...guarded.conversation([{ role: "user", content: prompt }]),
         ],
       }),
     });

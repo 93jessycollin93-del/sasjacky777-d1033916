@@ -143,6 +143,7 @@ serve(async (req) => {
     const guarded = await guardedSystemPrompt(FUNCTION_NAME, {
       system: explicitSystem,
       context: payload.context,
+      userId: admission.userId,
     });
     const optionalKey = Deno.env.get("OLLAMA_API_KEY");
     const resp = await fetch(`${base.replace(/\/$/, "")}/api/chat`, {
@@ -153,7 +154,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         model: chosen.model,
-        messages: [{ role: "system", content: guarded.prompt }, ...verdict.messages],
+        messages: [{ role: "system", content: guarded.prompt }, ...guarded.conversation(verdict.messages)],
         stream: true,
       }),
     });

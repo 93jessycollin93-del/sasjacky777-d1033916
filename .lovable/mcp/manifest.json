@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "sdk_version": "0.26.2",
+  "sdk_version": "3.4.0",
   "path": "/functions/v1/mcp",
   "auth": {
     "type": "oauth",
@@ -26,6 +26,7 @@
           "openWorldHint": true
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "message": {
@@ -35,33 +36,32 @@
               "description": "What to say to Jackie."
             },
             "conversation_id": {
-              "type": "string",
-              "description": "Continue this conversation (its recent history is sent)."
+              "description": "Continue this conversation (its recent history is sent).",
+              "type": "string"
             },
             "title": {
-              "type": "string",
-              "description": "Title for a new conversation."
+              "description": "Title for a new conversation.",
+              "type": "string"
             },
             "engine": {
+              "description": "Which engine answers (default cloud). bionic and ollama answer the owner only.",
               "type": "string",
               "enum": [
                 "cloud",
                 "deepseek",
                 "bionic",
                 "ollama"
-              ],
-              "description": "Which engine answers (default cloud). bionic and ollama answer the owner only."
+              ]
             },
             "model": {
-              "type": "string",
-              "description": "Model id for that engine; omit for its default."
+              "description": "Model id for that engine; omit for its default.",
+              "type": "string"
             }
           },
           "required": [
             "message"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -75,27 +75,27 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "status": {
+              "description": "Filter by task status.",
               "type": "string",
               "enum": [
                 "todo",
                 "in_progress",
                 "done",
                 "blocked"
-              ],
-              "description": "Filter by task status."
+              ]
             },
             "limit": {
+              "description": "Max rows to return (default 25).",
               "type": "integer",
               "minimum": 1,
-              "maximum": 100,
-              "description": "Max rows to return (default 25)."
+              "maximum": 100
             }
           },
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -109,6 +109,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "title": {
@@ -117,43 +118,42 @@
               "description": "Short task title."
             },
             "description": {
-              "type": "string",
-              "description": "Optional longer detail."
+              "description": "Optional longer detail.",
+              "type": "string"
             },
             "status": {
+              "description": "Column to start in (default todo).",
               "type": "string",
               "enum": [
                 "todo",
                 "in_progress",
                 "done",
                 "blocked"
-              ],
-              "description": "Column to start in (default todo)."
+              ]
             },
             "priority": {
+              "description": "Priority (default medium).",
               "type": "string",
               "enum": [
                 "low",
                 "medium",
                 "high",
                 "critical"
-              ],
-              "description": "Priority (default medium)."
+              ]
             },
             "category": {
-              "type": "string",
-              "description": "Optional grouping category."
+              "description": "Optional grouping category.",
+              "type": "string"
             },
             "due_date": {
-              "type": "string",
-              "description": "Optional ISO 8601 due date."
+              "description": "Optional ISO 8601 due date.",
+              "type": "string"
             }
           },
           "required": [
             "title"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -168,6 +168,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "id": {
@@ -200,15 +201,14 @@
               "type": "string"
             },
             "due_date": {
-              "type": "string",
-              "description": "ISO 8601 date, or empty string to clear it."
+              "description": "ISO 8601 date, or empty string to clear it.",
+              "type": "string"
             }
           },
           "required": [
             "id"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -223,6 +223,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "id": {
@@ -245,8 +246,7 @@
             "id",
             "status"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -261,6 +261,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "id": {
@@ -272,8 +273,7 @@
           "required": [
             "id"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -287,13 +287,15 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "query": {
-              "type": "string",
-              "description": "Text to match against memory key or value."
+              "description": "Text to match against memory key or value.",
+              "type": "string"
             },
             "category": {
+              "description": "Optional category filter.",
               "type": "string",
               "enum": [
                 "preference",
@@ -302,18 +304,16 @@
                 "pattern",
                 "architecture",
                 "style"
-              ],
-              "description": "Optional category filter."
+              ]
             },
             "limit": {
+              "description": "Max rows to return (default 25).",
               "type": "integer",
               "minimum": 1,
-              "maximum": 100,
-              "description": "Max rows to return (default 25)."
+              "maximum": 100
             }
           },
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -328,6 +328,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "key": {
@@ -341,6 +342,7 @@
               "description": "The fact to remember."
             },
             "category": {
+              "description": "Category (default context).",
               "type": "string",
               "enum": [
                 "preference",
@@ -349,16 +351,14 @@
                 "pattern",
                 "architecture",
                 "style"
-              ],
-              "description": "Category (default context)."
+              ]
             }
           },
           "required": [
             "key",
             "value"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -373,19 +373,19 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "id": {
-              "type": "string",
-              "description": "Memory entry id (uuid)."
+              "description": "Memory entry id (uuid).",
+              "type": "string"
             },
             "key": {
-              "type": "string",
-              "description": "Memory key, when the id is not known."
+              "description": "Memory key, when the id is not known.",
+              "type": "string"
             }
           },
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -399,17 +399,17 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "limit": {
+              "description": "Max rows to return (default 20).",
               "type": "integer",
               "minimum": 1,
-              "maximum": 100,
-              "description": "Max rows to return (default 20)."
+              "maximum": 100
             }
           },
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -423,6 +423,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "id": {
@@ -431,17 +432,16 @@
               "description": "Conversation id (uuid), from list_conversations."
             },
             "limit": {
+              "description": "How many recent messages (default 40).",
               "type": "integer",
               "minimum": 1,
-              "maximum": 200,
-              "description": "How many recent messages (default 40)."
+              "maximum": 200
             }
           },
           "required": [
             "id"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -455,15 +455,15 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "title": {
-              "type": "string",
-              "description": "Conversation title (default 'Agent session')."
+              "description": "Conversation title (default 'Agent session').",
+              "type": "string"
             }
           },
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -478,21 +478,21 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "query": {
-              "type": "string",
-              "description": "Words to filter by (name, title or description)."
+              "description": "Words to filter by (name, title or description).",
+              "type": "string"
             },
             "limit": {
+              "description": "Most to return (default 50).",
               "type": "integer",
               "minimum": 1,
-              "maximum": 100,
-              "description": "Most to return (default 50)."
+              "maximum": 100
             }
           },
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -507,6 +507,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "name": {
@@ -518,8 +519,7 @@
           "required": [
             "name"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -534,6 +534,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "name": {
@@ -565,8 +566,7 @@
             "description",
             "body"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -581,9 +581,10 @@
           "openWorldHint": false
         },
         "inputSchema": {
-          "$schema": "http://json-schema.org/draft-07/schema#",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
-          "properties": {}
+          "properties": {},
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -598,6 +599,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "name": {
@@ -606,22 +608,24 @@
               "description": "The tool's name, from list_custom_tools."
             },
             "args": {
+              "description": "The tool's parameters, by name.",
               "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
               "additionalProperties": {
                 "type": [
                   "string",
                   "number",
                   "boolean"
                 ]
-              },
-              "description": "The tool's parameters, by name."
+              }
             }
           },
           "required": [
             "name"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -636,6 +640,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "name": {
@@ -649,6 +654,8 @@
               "description": "What it does — one line."
             },
             "params": {
+              "description": "Its parameters.",
+              "maxItems": 8,
               "type": "array",
               "items": {
                 "type": "object",
@@ -675,13 +682,12 @@
                 "required": [
                   "name",
                   "type"
-                ],
-                "additionalProperties": false
-              },
-              "maxItems": 8,
-              "description": "Its parameters."
+                ]
+              }
             },
             "steps": {
+              "minItems": 1,
+              "maxItems": 8,
               "type": "array",
               "items": {
                 "type": "object",
@@ -705,16 +711,16 @@
                   },
                   "args": {
                     "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
                     "additionalProperties": {}
                   }
                 },
                 "required": [
                   "action"
-                ],
-                "additionalProperties": false
+                ]
               },
-              "minItems": 1,
-              "maxItems": 8,
               "description": "The actions to run, in order."
             }
           },
@@ -723,8 +729,7 @@
             "description",
             "steps"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -739,9 +744,10 @@
           "openWorldHint": false
         },
         "inputSchema": {
-          "$schema": "http://json-schema.org/draft-07/schema#",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
-          "properties": {}
+          "properties": {},
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -756,6 +762,7 @@
           "openWorldHint": true
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "connection": {
@@ -769,23 +776,25 @@
               "description": "The operation's name."
             },
             "args": {
+              "description": "The operation's parameters, by name.",
               "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
               "additionalProperties": {
                 "type": [
                   "string",
                   "number",
                   "boolean"
                 ]
-              },
-              "description": "The operation's parameters, by name."
+              }
             }
           },
           "required": [
             "connection",
             "operation"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       },
@@ -800,6 +809,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "type": "object",
           "properties": {
             "name": {
@@ -822,20 +832,22 @@
               "description": "https://api.example.com — a public hostname, no IP address."
             },
             "auth_type": {
+              "description": "none, bearer, header or query (default none).",
               "type": "string",
               "enum": [
                 "none",
                 "bearer",
                 "header",
                 "query"
-              ],
-              "description": "none, bearer, header or query (default none)."
+              ]
             },
             "auth_name": {
-              "type": "string",
-              "description": "The header or query parameter the key goes in, for header/query."
+              "description": "The header or query parameter the key goes in, for header/query.",
+              "type": "string"
             },
             "operations": {
+              "minItems": 1,
+              "maxItems": 20,
               "type": "array",
               "items": {
                 "type": "object",
@@ -891,15 +903,16 @@
                           "type": "string"
                         },
                         "maxLength": {
-                          "type": "integer"
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
                         }
                       },
                       "required": [
                         "name",
                         "in",
                         "type"
-                      ],
-                      "additionalProperties": false
+                      ]
                     }
                   }
                 },
@@ -908,11 +921,8 @@
                   "description",
                   "method",
                   "path"
-                ],
-                "additionalProperties": false
-              },
-              "minItems": 1,
-              "maxItems": 20
+                ]
+              }
             }
           },
           "required": [
@@ -922,8 +932,7 @@
             "base_url",
             "operations"
           ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          "additionalProperties": false
         },
         "outputSchema": null
       }

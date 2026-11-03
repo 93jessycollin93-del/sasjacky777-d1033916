@@ -106,7 +106,7 @@ export function openAiCompatHandler(cfg: OpenAiCompatConfig): (req: Request) => 
       const admission = await admit(req, cfg.fn, selected);
       if (admission instanceof Response) return admission;
 
-      const guarded = await guardedSystemPrompt(cfg.fn, { system: explicitSystem, context });
+      const guarded = await guardedSystemPrompt(cfg.fn, { system: explicitSystem, context, userId: admission.userId });
 
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), HEADER_TIMEOUT_MS);
@@ -117,7 +117,7 @@ export function openAiCompatHandler(cfg: OpenAiCompatConfig): (req: Request) => 
           headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
           body: JSON.stringify({
             model: selected,
-            messages: [{ role: "system", content: guarded.prompt }, ...verdict.messages],
+            messages: [{ role: "system", content: guarded.prompt }, ...guarded.conversation(verdict.messages)],
             stream: true,
           }),
           signal: controller.signal,

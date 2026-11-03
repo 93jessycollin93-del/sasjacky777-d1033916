@@ -1,10 +1,17 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.58.0";
+import { decideLedgerEntry, nextBalance, PREMIUM_UPGRADE } from "../_shared/gameLedger.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+function json(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status, headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -38,19 +45,37 @@ serve(async (req) => {
     const { action } = body;
 
     // ── Log Transaction ──
+    // The request says what happened; gameLedger.ts decides how much it was
+    // worth. The amount a client sends is used only for a spend, which can
+    // only lower the balance.
     if (action === "log") {
-      const { record } = body;
-      if (!record?.transaction_type || !record?.currency_type || record?.amount == null) {
-        return new Response(JSON.stringify({ error: "Invalid record" }), {
-          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+      const decision = decideLedgerEntry(body.record);
+      if (!decision.ok) {
+        return json({ logged: false, error: decision.error, code: decision.code }, decision.status);
       }
 
-      const amount = Number(record.amount);
-      if (!Number.isFinite(amount)) {
-        return new Response(JSON.stringify({ error: "Invalid amount" }), {
-          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      if (decision.needsPremium) {
+        const { data: premium, error: premErr } = await admin
+          .from("game_transactions").select("id")
+          .eq("user_id", user.id).eq("transaction_type", "spend")
+          .eq("source", PREMIUM_UPGRADE.source).eq("source_id", PREMIUM_UPGRADE.source_id)
+          .limit(1).maybeSingle();
+        if (premErr) throw premErr;
+        if (!premium) {
+          return json({ logged: false, code: "PREMIUM_NOT_RECORDED", error: "Premium rewards need the premium upgrade on the ledger first" }, 403);
+        }
+      }
+
+      // One claim per tier per account. The lock table's unique key settles a
+      // race that a "look for an earlier row" check would lose.
+      if (decision.onceKey) {
+        const { error: lockErr } = await admin.from("game_purchase_locks").insert({
+          user_id: user.id, transaction_id: decision.onceKey, source: decision.source,
         });
+        if (lockErr?.code === "23505") {
+          return json({ logged: false, code: "ALREADY_CLAIMED", error: "That reward is already on the ledger" }, 409);
+        }
+        if (lockErr) throw lockErr;
       }
 
       // Derive canonical balance from the server-side ledger — never trust the
@@ -59,38 +84,46 @@ serve(async (req) => {
         .from("game_transactions")
         .select("balance_after")
         .eq("user_id", user.id)
-        .eq("currency_type", String(record.currency_type))
+        .eq("currency_type", decision.currency_type)
         .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle();
       if (priorErr) throw priorErr;
 
       const balance_before = Number(prior?.balance_after) || 0;
-      const balance_after = balance_before + amount;
+      const next = nextBalance(balance_before, decision.amount);
+      if (!next.ok) return json({ logged: false, error: next.error, code: next.code, balance: balance_before }, next.status);
+      const balance_after = next.after;
 
       const { error } = await admin.from("game_transactions").insert({
         user_id: user.id,
-        transaction_type: String(record.transaction_type),
-        currency_type: String(record.currency_type),
-        amount,
+        transaction_type: decision.transaction_type,
+        currency_type: decision.currency_type,
+        amount: decision.amount,
         balance_before,
         balance_after,
-        source: String(record.source || "unknown"),
-        source_id: record.source_id ? String(record.source_id) : null,
-        metadata: record.metadata || {},
+        source: decision.source,
+        source_id: decision.source_id,
+        metadata: decision.metadata,
       });
-
-      if (error) throw error;
-      return new Response(JSON.stringify({ logged: true, balance_before, balance_after }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      if (error) {
+        // The claim did not land, so its lock must not keep it from landing later.
+        if (decision.onceKey) {
+          await admin.from("game_purchase_locks").delete()
+            .eq("user_id", user.id).eq("transaction_id", decision.onceKey);
+        }
+        throw error;
+      }
+      return json({ logged: true, amount: decision.amount, balance_before, balance_after });
     }
 
 
     // ── Dedup Check ──
     if (action === "dedup") {
       const { transaction_id, source } = body;
-      if (!transaction_id || !source) {
+      // "ledger:" ids belong to the claim locks above; a client must not be
+      // able to pre-occupy or probe them through this door.
+      if (!transaction_id || !source || String(transaction_id).startsWith("ledger:") || String(transaction_id).length > 200) {
         return new Response(JSON.stringify({ error: "Missing fields" }), {
           status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });

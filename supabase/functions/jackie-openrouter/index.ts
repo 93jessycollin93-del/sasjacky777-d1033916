@@ -98,7 +98,7 @@ serve(async (req) => {
   if (admission instanceof Response) return admission;
 
   try {
-    const guarded = await guardedSystemPrompt(FUNCTION_NAME, { system, context: payload.context });
+    const guarded = await guardedSystemPrompt(FUNCTION_NAME, { system, context: payload.context, userId: admission.userId });
     const resp = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -110,7 +110,7 @@ serve(async (req) => {
       body: JSON.stringify({
         model: chosen.model,
         // Jackie's persona when the caller brings no system prompt of its own (rule 6).
-        messages: [{ role: "system", content: guarded.prompt }, ...verdict.messages],
+        messages: [{ role: "system", content: guarded.prompt }, ...guarded.conversation(verdict.messages)],
         stream: true,
       }),
     });

@@ -109,7 +109,7 @@ serve(async (req) => {
 
     const selected = chosen.model;
 
-    const guarded = await guardedSystemPrompt(FUNCTION_NAME, { system, context });
+    const guarded = await guardedSystemPrompt(FUNCTION_NAME, { system, context, userId: admission.userId });
     const systemPrompt = guarded.prompt;
 
     const apiKey = Deno.env.get("BIONIC_API_KEY");
@@ -130,7 +130,7 @@ serve(async (req) => {
         },
         body: JSON.stringify({
           model: selected,
-          messages: [{ role: "system", content: systemPrompt }, ...verdict.messages],
+          messages: [{ role: "system", content: systemPrompt }, ...guarded.conversation(verdict.messages)],
           stream: true,
         }),
         signal: controller.signal,
