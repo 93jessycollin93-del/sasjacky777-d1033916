@@ -72,6 +72,7 @@ const CURATED: readonly NavPage[] = [
   jackie("swarm", "Swarm", Network, "/swarm"),
   jackie("providers", "Providers", Plug, "/providers"),
   jackie("micro", "Micro-AI", Brain, "/micro"),
+  jackie("chain", "Thinking Chain", Brain, "/chain"),
   jackie("models", "Model Queue", Boxes, "/models"),
   jackie("local-ai", "Local AI", HardDrive, "/local-ai"),
   jackie("jacky-live", "Jacky Live", Activity, "/jacky-live"),

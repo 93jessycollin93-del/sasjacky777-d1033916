@@ -59,6 +59,7 @@ export const CORE_ROUTES: RouteEntry[] = [
   { path: "/jacky-live", label: "Jacky Live", group: "ai" },
   { path: "/keys", label: "API Keys", group: "ai" },
   { path: "/micro", label: "Jacky Micro-AI", group: "ai" },
+  { path: "/chain", label: "Thinking Chain (offline Bonsai + photo reader)", group: "ai" },
   { path: "/micro/board", label: "Micro-Model Board", group: "ai" },
   { path: "/models", label: "Model download queue (180 compact models, and which run here)", group: "ai" },
   { path: "/triage", label: "Build Error Triage", group: "ai" },
