@@ -73,3 +73,6 @@ Never commit one. `LOVABLE_API_KEY`, `JACKY_API_BASE`, `BIONIC_BASE_URL`,
 On-device multi-step answers live in `src/lib/microai/chain/`: every step's notes pass through `distribute()` so a step can never exceed Bonsai's window, and originals go to the archivist untouched — compression is extractive only, so a note can lose detail but never invent it.
 
 Conversation context itself has no ceiling. `src/lib/microai/ledger.ts` is an endless append-only stream of every finished exchange, kept on the device: nothing may truncate, drop or refuse a turn to fit a model's window. A step reads a `contextFor()` slice chosen for its own question, and `dive()` folds older stretches extractively over as long a pass as the material needs — a week of reading is a legitimate pass, not a timeout. A fold that processed nothing says so, and clearing a conversation clears the index and the folds, never the archivist's originals.
+
+## Autocorrect
+`src/lib/autocorrect.ts` is the one word list; `extension/autocorrect.js` carries a copy and `src/test/autocorrect.test.ts` checks they agree, so the app and other sites never correct differently. The word list runs first and automatically; any AI layer only adds on top, never replaces it.
