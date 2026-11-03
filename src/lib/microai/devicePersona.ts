@@ -44,10 +44,21 @@ export async function fetchDevicePersona(options: {
   const controller = new AbortController();
   let timedOut = false;
   const stop = () => controller.abort();
-  if (options.signal?.aborted) stop();
+  const cancelled = (): DevicePersonaResult => ({ ok: false, stopped: true, issue: {
+    code: "UNREACHABLE", title: "Stopped", detail: "The profile request was cancelled.", recovery: "Run again when you are ready.",
+  } });
+  // Checked before the request starts as well as in its failure path: a signal
+  // that is already aborted never fires `abort` again, so a caller who cancelled
+  // while the session was being read would otherwise wait on a fetch that never
+  // runs.
+  if (options.signal?.aborted) return cancelled();
   options.signal?.addEventListener("abort", stop, { once: true });
   const timer = setTimeout(() => { timedOut = true; stop(); }, options.timeoutMs ?? 15_000);
   const userId = await currentUserId();
+  if (options.signal?.aborted) {
+    clearTimeout(timer);
+    return cancelled();
+  }
   try {
     const response = await callEdgeFunction("jackie-device", {
       context: clampContext(options.context, 2_000),
