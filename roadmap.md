@@ -2,8 +2,8 @@
 - [x] Offline thinking chain (fetch/archive/compress/plan/reason/combine/check) on Bonsai — /chain
 - [x] On-device photo reader (SmolVLM 256M) wired into the chain
 - [ ] Workstation end to end — blocked: Jacky server rejects the saved token (401)
-- [ ] Offline profile: serve Jackie's last-good profile from this device when the network is out (personaCache + tests)
-- [ ] Weights & engines activation audit: which model files and runtimes are real vs pointers, what blocks each engine
+- [x] Offline profile: last-good profile served from this device when the network is out (personaCache + tests)
+- [x] Weights & engines activation: on-device panel activates what is missing, ceiling enforced at download (Bonsai verified downloaded; photo reader needs a GPU)
 - [ ] Lego blocks: every engine and agent reads/tunes from one shared data pod, so pieces are reusable and re-tunable
 - [ ] Specialized context pods ("poduals") that revolve around one job each, plus min-maxed variants (smallest usable version of each block)
-- Context has no ceiling: conversation/coding coherency must be continuous, not capped at 256k. Routers/archive/compressors manage an endless stream (organism-style), even if a pass takes a week over all new and old data.
+- [x] Context has no ceiling: the ledger keeps every turn, folds slowly, and a step reads only its own slice. Conversation/coding coherency must be continuous, not capped at 256k. Routers/archive/compressors manage an endless stream (organism-style), even if a pass takes a week over all new and old data.
