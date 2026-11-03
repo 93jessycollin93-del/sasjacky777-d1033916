@@ -9,7 +9,7 @@ import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
 import { functionCaller, supabaseForUser } from "../supabase";
 import { askJackie } from "../../appActions";
-import { notAuthenticated } from "../result";
+import { asJson, notAuthenticated } from "../result";
 
 export default defineTool({
   name: "ask_jackie",
@@ -35,6 +35,6 @@ export default defineTool({
       callFunction: functionCaller(ctx),
     });
     if (!result.ok) return { content: [{ type: "text" as const, text: result.error }], isError: true };
-    return { content: [{ type: "text" as const, text: result.data.answer }], structuredContent: result.data };
+    return { content: [{ type: "text" as const, text: result.data.answer }], structuredContent: asJson(result.data) };
   },
 });
