@@ -132,12 +132,12 @@ describe("LAN play", () => {
     a.send({ t: "chat", from: "a", text: "sent while the relay was down" });
 
     relay = await startRelay({ port, host: "127.0.0.1" });
-    // The host reopens the world on its own; only then can a guest join it.
-    await until(() => status.length === 2, 8000);
-    expect(status).toEqual([false, true]);
-    const b = link(port, "ROOM1");
+    // Another peer is already in the reopened world when a's link comes back.
+    const b = link(port, "ROOM1", "host");
     await b.ready;
     const got = inbox(b);
+    await until(() => status.length === 2, 8000);
+    expect(status).toEqual([false, true]);
     await until(() => got.length === 1);
     expect(got[0].text).toBe("sent while the relay was down");
   }, 15000);
