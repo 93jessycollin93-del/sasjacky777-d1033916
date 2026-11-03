@@ -18,7 +18,7 @@
  * morals page shows it in red rather than letting it pass as normal (rule 8).
  */
 import { adminClient } from "./entitlement.ts";
-import { clampContext } from "./chatRequest.ts";
+import { carryBrief, clampContext, type ChatTurn } from "./chatRequest.ts";
 import { buildSystemPrompt, PERSONA_SOURCE } from "./persona.ts";
 import {
   buildMoralsBlock, fingerprint, moralsFingerprint, MORALS_UNAVAILABLE, OWN_PROMPT, RIG_PERSONA,
@@ -34,6 +34,12 @@ export interface GuardedPrompt {
   headers: Record<string, string>;
   /** Settles when the attestation is written or has failed. Never rejects. */
   recorded: Promise<void>;
+  /**
+   * The turns to send after the system prompt. Unchanged for the persona with
+   * no brief and for the owner's override; a non-owner's brief is carried at
+   * the front of the first user turn (see carryBrief).
+   */
+  conversation: (turns: readonly ChatTurn[]) => ChatTurn[];
 }
 
 export const ATTESTATION_HEADERS = ["X-Jackie-Mode", "X-Jackie-Persona", "X-Jackie-Morals"] as const;
@@ -194,5 +200,6 @@ export async function guardedRigPrompt(engine: string, prompt: string): Promise<
     mode: "rig",
     headers: headersFor("rig", RIG_PERSONA, moralsFp),
     recorded: attest(engine, "rig", RIG_PERSONA, moralsFp, morals.error ?? null),
+    conversation: (turns) => turns.slice(),
   };
 }
