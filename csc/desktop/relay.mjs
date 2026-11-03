@@ -11,7 +11,19 @@
  *     node relay.mjs            # port 25580
  *     node relay.mjs --port 3000
  *
- * Players reach a world at ws://<address>:<port>/r/<WORLD CODE>.
+ * Players reach a world at ws://<address>:<port>/r/<WORLD CODE>; the host
+ * opens it with ?role=host, and a guest can only join a world that is open.
+ *
+ * Who may connect: the relay used to accept any socket for any code, so any
+ * web page a player had open could dial it from their browser, and anyone on
+ * the network could walk the six-letter codes until one answered. Now
+ *   - a browser page may connect only from the game itself (its desktop
+ *     scheme, a file, or a page served from this machine or the local
+ *     network) — never from a site on the internet;
+ *   - a guest's code must name a world a host has already opened, and an
+ *     address that keeps naming worlds that are not open is refused for a
+ *     while, which turns guessing codes from minutes into centuries;
+ *   - a world holds at most MAX_PER_ROOM players.
  */
 import { createHash } from "node:crypto";
 import { createServer } from "node:http";
@@ -24,6 +36,35 @@ const GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
 const MAX_MESSAGE = 1 << 20;
 // A guest whose connection cannot keep up is dropped rather than buffered without end.
 const MAX_BUFFERED = 8 << 20;
+
+// A world is a handful of friends; a room past this is not a game.
+export const MAX_PER_ROOM = 16;
+const MAX_ROOMS = 256;
+// Joins to worlds that are not open, per address, before it waits a while.
+export const MAX_MISSES = 20;
+const MISS_WINDOW_MS = 60_000;
+
+const PRIVATE_HOST = /^(localhost|127(?:\.\d{1,3}){3}|10(?:\.\d{1,3}){3}|192\.168(?:\.\d{1,3}){2}|172\.(?:1[6-9]|2\d|3[01])(?:\.\d{1,3}){2}|169\.254(?:\.\d{1,3}){2}|\[::1\]|[a-z0-9-]+\.local|[a-z0-9-]+)$/i;
+
+/**
+ * Whether a socket's Origin header is the game's own. Browsers always send it,
+ * and a page cannot forge it; programs (the tests, a bot a player wrote) send
+ * none, and the world code still has to be right for them.
+ */
+export function originAllowed(origin, extra = []) {
+  if (origin == null || origin === "" || origin === "null") return true;
+  if (extra.includes(origin)) return true;
+  let url;
+  try {
+    url = new URL(origin);
+  } catch {
+    return false;
+  }
+  if (url.protocol === "csc:" || url.protocol === "file:" || url.protocol === "app:") return true;
+  if (url.protocol !== "http:" && url.protocol !== "https:") return false;
+  // A bare single-label name ("gamebox") is a machine on this network, never a public site.
+  return PRIVATE_HOST.test(url.hostname);
+}
 
 /** The Sec-WebSocket-Accept answer to a client's key (RFC 6455 §4.2.2). */
 export function acceptKey(key) {
@@ -104,10 +145,15 @@ const ROOM = /^\/r\/([A-Z0-9]{1,12})$/;
  * Starts a relay. Resolves once it is listening, with the port it got (pass
  * port 0 for any free one) and a close() that disconnects everyone.
  */
-export function startRelay({ port = DEFAULT_PORT, host = "0.0.0.0", log = () => {} } = {}) {
+export function startRelay({ port = DEFAULT_PORT, host = "0.0.0.0", log = () => {}, allowOrigins = [] } = {}) {
   /** room → the sockets in it */
   const rooms = new Map();
   const sockets = new Set();
+  /** address → { count, resetAt } of joins to worlds that were not open */
+  const misses = new Map();
+  const refuse = (socket, status, text) => {
+    socket.end(`HTTP/1.1 ${status}\r\nContent-Type: text/plain\r\nConnection: close\r\n\r\n${text}\n`);
+  };
 
   const server = createServer((req, res) => {
     // Opening the address in a browser should say what this is, not hang.
@@ -122,7 +168,36 @@ export function startRelay({ port = DEFAULT_PORT, host = "0.0.0.0", log = () => 
     const room = ROOM.exec(path)?.[1];
     const key = req.headers["sec-websocket-key"];
     if (!room || typeof key !== "string" || String(req.headers.upgrade).toLowerCase() !== "websocket") {
-      socket.end("HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain\r\n\r\nExpected a WebSocket at /r/<WORLD CODE>.\n");
+      refuse(socket, "400 Bad Request", "Expected a WebSocket at /r/<WORLD CODE>.");
+      return;
+    }
+    if (!originAllowed(req.headers.origin, allowOrigins)) {
+      log(`refused a page at ${req.headers.origin}`);
+      refuse(socket, "403 Forbidden", "Only the game can join worlds on this relay.");
+      return;
+    }
+    const asHost = new URL(req.url ?? "/", "http://relay").searchParams.get("role") === "host";
+    const from = socket.remoteAddress ?? "?";
+    const now = Date.now();
+    const miss = misses.get(from);
+    if (miss && now < miss.resetAt && miss.count >= MAX_MISSES) {
+      refuse(socket, "429 Too Many Requests", "Too many joins to worlds that are not open. Wait a minute.");
+      return;
+    }
+    if (!rooms.has(room) && !asHost) {
+      const entry = miss && now < miss.resetAt ? miss : { count: 0, resetAt: now + MISS_WINDOW_MS };
+      entry.count += 1;
+      misses.set(from, entry);
+      if (misses.size > 4096) for (const [a, e] of misses) if (now >= e.resetAt) misses.delete(a);
+      refuse(socket, "404 Not Found", `No world is open with the code ${room}.`);
+      return;
+    }
+    if ((rooms.get(room)?.size ?? 0) >= MAX_PER_ROOM) {
+      refuse(socket, "409 Conflict", `World ${room} is full (${MAX_PER_ROOM} players).`);
+      return;
+    }
+    if (!rooms.has(room) && rooms.size >= MAX_ROOMS) {
+      refuse(socket, "503 Service Unavailable", "This relay has as many worlds open as it can hold.");
       return;
     }
     socket.write(
