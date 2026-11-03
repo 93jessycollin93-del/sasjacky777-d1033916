@@ -7,7 +7,7 @@ import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@3.4.0";
 
 // src/lib/mcp/tools/list-tasks.ts
 import { defineTool } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z } from "npm:zod@^4.6.7";
+import { z } from "npm:zod@4.6.7";
 
 // src/lib/mcp/supabase.ts
 import { createClient } from "npm:@supabase/supabase-js@2.100.1";
@@ -1009,7 +1009,7 @@ var list_tasks_default = defineTool({
 
 // src/lib/mcp/tools/create-task.ts
 import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z2 } from "npm:zod@^4.6.7";
+import { z as z2 } from "npm:zod@4.6.7";
 var create_task_default = defineTool2({
   name: "create_task",
   title: "Create task",
@@ -1031,7 +1031,7 @@ var create_task_default = defineTool2({
 
 // src/lib/mcp/tools/update-task.ts
 import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z3 } from "npm:zod@^4.6.7";
+import { z as z3 } from "npm:zod@4.6.7";
 var update_task_default = defineTool3({
   name: "update_task",
   title: "Update task",
@@ -1053,7 +1053,7 @@ var update_task_default = defineTool3({
 
 // src/lib/mcp/tools/update-task-status.ts
 import { defineTool as defineTool4 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z4 } from "npm:zod@^4.6.7";
+import { z as z4 } from "npm:zod@4.6.7";
 var update_task_status_default = defineTool4({
   name: "update_task_status",
   title: "Update task status",
@@ -1071,7 +1071,7 @@ var update_task_status_default = defineTool4({
 
 // src/lib/mcp/tools/delete-task.ts
 import { defineTool as defineTool5 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z5 } from "npm:zod@^4.6.7";
+import { z as z5 } from "npm:zod@4.6.7";
 var delete_task_default = defineTool5({
   name: "delete_task",
   title: "Delete task",
@@ -1086,7 +1086,7 @@ var delete_task_default = defineTool5({
 
 // src/lib/mcp/tools/search-memory.ts
 import { defineTool as defineTool6 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z6 } from "npm:zod@^4.6.7";
+import { z as z6 } from "npm:zod@4.6.7";
 var search_memory_default = defineTool6({
   name: "search_memory",
   title: "Search Jackie memory",
@@ -1105,7 +1105,7 @@ var search_memory_default = defineTool6({
 
 // src/lib/mcp/tools/remember-fact.ts
 import { defineTool as defineTool7 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z7 } from "npm:zod@^4.6.7";
+import { z as z7 } from "npm:zod@4.6.7";
 var remember_fact_default = defineTool7({
   name: "remember_fact",
   title: "Remember a fact",
@@ -1124,7 +1124,7 @@ var remember_fact_default = defineTool7({
 
 // src/lib/mcp/tools/forget-fact.ts
 import { defineTool as defineTool8 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z8 } from "npm:zod@^4.6.7";
+import { z as z8 } from "npm:zod@4.6.7";
 var forget_fact_default = defineTool8({
   name: "forget_fact",
   title: "Forget a fact",
@@ -1142,7 +1142,7 @@ var forget_fact_default = defineTool8({
 
 // src/lib/mcp/tools/list-conversations.ts
 import { defineTool as defineTool9 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z9 } from "npm:zod@^4.6.7";
+import { z as z9 } from "npm:zod@4.6.7";
 var list_conversations_default = defineTool9({
   name: "list_conversations",
   title: "List conversations",
@@ -1159,7 +1159,7 @@ var list_conversations_default = defineTool9({
 
 // src/lib/mcp/tools/read-conversation.ts
 import { defineTool as defineTool10 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z10 } from "npm:zod@^4.6.7";
+import { z as z10 } from "npm:zod@4.6.7";
 var read_conversation_default = defineTool10({
   name: "read_conversation",
   title: "Read conversation",
@@ -1177,7 +1177,7 @@ var read_conversation_default = defineTool10({
 
 // src/lib/mcp/tools/create-conversation.ts
 import { defineTool as defineTool11 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z11 } from "npm:zod@^4.6.7";
+import { z as z11 } from "npm:zod@4.6.7";
 var create_conversation_default = defineTool11({
   name: "create_conversation",
   title: "Create conversation",
@@ -1192,7 +1192,7 @@ var create_conversation_default = defineTool11({
 
 // src/lib/mcp/tools/ask-jackie.ts
 import { defineTool as defineTool12 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z12 } from "npm:zod@^4.6.7";
+import { z as z12 } from "npm:zod@4.6.7";
 var ask_jackie_default = defineTool12({
   name: "ask_jackie",
   title: "Ask Jackie",
@@ -1218,7 +1218,7 @@ var ask_jackie_default = defineTool12({
 
 // src/lib/mcp/tools/list-skills.ts
 import { defineTool as defineTool13 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z13 } from "npm:zod@^4.6.7";
+import { z as z13 } from "npm:zod@4.6.7";
 var list_skills_default = defineTool13({
   name: "list_skills",
   title: "List skills",
@@ -1236,7 +1236,7 @@ var list_skills_default = defineTool13({
 
 // src/lib/mcp/tools/get-skill.ts
 import { defineTool as defineTool14 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z14 } from "npm:zod@^4.6.7";
+import { z as z14 } from "npm:zod@4.6.7";
 var get_skill_default = defineTool14({
   name: "get_skill",
   title: "Load a skill",
@@ -1253,7 +1253,7 @@ var get_skill_default = defineTool14({
 
 // src/lib/mcp/tools/propose-skill.ts
 import { defineTool as defineTool15 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z15 } from "npm:zod@^4.6.7";
+import { z as z15 } from "npm:zod@4.6.7";
 var propose_skill_default = defineTool15({
   name: "propose_skill",
   title: "Propose a skill",
@@ -1287,7 +1287,7 @@ var list_custom_tools_default = defineTool16({
 
 // src/lib/mcp/tools/run-custom-tool.ts
 import { defineTool as defineTool17 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z16 } from "npm:zod@^4.6.7";
+import { z as z16 } from "npm:zod@4.6.7";
 var run_custom_tool_default = defineTool17({
   name: "run_custom_tool",
   title: "Run a custom tool",
@@ -1312,7 +1312,7 @@ var run_custom_tool_default = defineTool17({
 
 // src/lib/mcp/tools/propose-tool.ts
 import { defineTool as defineTool18 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z17 } from "npm:zod@^4.6.7";
+import { z as z17 } from "npm:zod@4.6.7";
 var propose_tool_default = defineTool18({
   name: "propose_tool",
   title: "Propose a custom tool",
@@ -1354,7 +1354,7 @@ var list_connections_default = defineTool19({
 
 // src/lib/mcp/tools/call-connection.ts
 import { defineTool as defineTool20 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z18 } from "npm:zod@^4.6.7";
+import { z as z18 } from "npm:zod@4.6.7";
 var call_connection_default = defineTool20({
   name: "call_connection",
   title: "Call a connection",
@@ -1376,7 +1376,7 @@ var call_connection_default = defineTool20({
 
 // src/lib/mcp/tools/propose-connection.ts
 import { defineTool as defineTool21 } from "npm:@lovable.dev/mcp-js@3.4.0";
-import { z as z19 } from "npm:zod@^4.6.7";
+import { z as z19 } from "npm:zod@4.6.7";
 var propose_connection_default = defineTool21({
   name: "propose_connection",
   title: "Propose a connection",
