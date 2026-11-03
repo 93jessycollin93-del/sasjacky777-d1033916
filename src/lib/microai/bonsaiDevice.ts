@@ -579,6 +579,10 @@ export interface DeviceChatOptions {
   /** A line for the screen while nothing has been written yet; null once text flows. */
   onStatus?: (note: string | null) => void;
   signal?: AbortSignal;
+  /** Cap on the answer. The thinking chain keeps steps short so they never overflow. */
+  maxTokens?: number;
+  /** Randomness. The thinking chain runs low so small steps stay steady. */
+  temperature?: number;
   /** Injected for tests. Real code loads the model. */
   runtime?: () => Promise<DeviceChatRuntime>;
 }
@@ -625,8 +629,8 @@ async function answer(opts: DeviceChatOptions): Promise<Verdict> {
     await runtime.createChatCompletion({
       messages: [{ role: "system", content: opts.system }, ...fitted],
       stream: true,
-      max_tokens: DEVICE_MAX_ANSWER_TOKENS,
-      temperature: 0.7,
+      max_tokens: Math.min(opts.maxTokens ?? DEVICE_MAX_ANSWER_TOKENS, DEVICE_MAX_ANSWER_TOKENS),
+      temperature: opts.temperature ?? 0.7,
       cache_prompt: true,
       return_progress: true,
       // Qwen-family templates (SmolLM3's too) think aloud first unless told
