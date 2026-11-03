@@ -343,3 +343,30 @@ export async function turnOriginal(turn: LedgerTurn): Promise<string | null> {
   const entry = await recall(turn.archivedId);
   return entry?.text ?? null;
 }
+
+/**
+ * Writes one finished exchange onto the stream.
+ *
+ * Called once an answer is complete, from the chat, whatever engine produced it.
+ * The engine and model are recorded because an answer's provenance is part of
+ * what makes it checkable later — "Jackie said X" is weaker than "Bonsai on this
+ * device said X, from these notes". Nothing here waits on the network: the
+ * conversation is the one thing that must survive being offline, and a chat that
+ * only remembers while a server is reachable is a chat with amnesia by default.
+ */
+export async function recordExchange(opts: {
+  question: string;
+  answer: string;
+  engine: string;
+  model?: string | null;
+}): Promise<void> {
+  const question = opts.question.trim();
+  const answer = opts.answer.trim();
+  if (!question || !answer) return;
+  await appendTurn({ role: "user", label: "you", text: question });
+  await appendTurn({
+    role: "assistant",
+    label: `Jackie via ${opts.engine}${opts.model ? ` (${opts.model})` : ""}`,
+    text: answer,
+  });
+}

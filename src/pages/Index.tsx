@@ -1177,6 +1177,14 @@ Keep it concise but thorough. No hype, no false alarm — just truth.`;
         setRunOutcome("complete");
         setEngineStatus(null);
         recordRunEvent(`Answer received from ${findEngine(engine)?.short ?? engine}`, "success");
+        // The exchange goes on the ledger before anything else that follows: the
+        // conversation has no ceiling here, so the record — not the model's
+        // window — is what keeps an old question answerable a week from now.
+        // Fire-and-forget on purpose; a ledger that cannot write must never
+        // hold up an answer the person is already reading.
+        void recordExchange({ question: userText, answer: assistantContent, engine, model }).catch(
+          (e) => console.warn("[jackie] ledger did not take this exchange:", e),
+        );
         const securityFlag = detectSecurityFlag(assistantContent);
         const memoryTier = detectMemoryTier(assistantContent, userText);
 
