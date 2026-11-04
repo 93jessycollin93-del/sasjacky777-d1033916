@@ -69,6 +69,11 @@ serve(async (req) => {
   });
   const { data: { user }, error: authErr } = await userClient.auth.getUser();
   if (authErr || !user) return jsonResponse({ error: "Unauthorized" }, 401);
+  // Guest sessions are throwaway; an API key outlives them and would be a
+  // standing credential nobody can trace back to a person.
+  if (user.is_anonymous) {
+    return jsonResponse({ error: "Create an account to make API keys — guest sessions cannot hold them.", code: "GUEST_NOT_ALLOWED" }, 403);
+  }
 
   const admin = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
