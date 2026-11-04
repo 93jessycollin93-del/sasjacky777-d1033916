@@ -15,6 +15,13 @@
       "when": 1793631570804,
       "tag": "0001_jackie_answer_lock",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793752742540,
+      "tag": "0002_guests_cannot_hold_credentials",
+      "breakpoints": true
     }
   ]
 }
