@@ -19,7 +19,8 @@ function emptyChunk(cx: number, cz: number, fill?: (x: number, y: number, z: num
 }
 
 describe("the art", () => {
-  it("has a painted texture for every face of every block, in every state it can be in", () => {
+  // Paints every block in every state: ~4 s alone, past the 5 s default under the full suite.
+  it("has a painted texture for every face of every block, in every state it can be in", { timeout: 30_000 }, () => {
     const missing = new Set<string>();
     for (const def of allBlocks()) {
       if (def.shape === "none") continue;

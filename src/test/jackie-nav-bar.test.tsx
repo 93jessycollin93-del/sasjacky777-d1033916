@@ -118,7 +118,8 @@ describe("the nav bar", () => {
     expect(localStorage.getItem(navPrefsKey("user-b"))).toBeNull();
   });
 
-  it("takes a widget off the bar when it is switched off", () => {
+  // Renders the whole bar twice: ~4 s alone, past the 5 s default under the full suite.
+  it("takes a widget off the bar when it is switched off", { timeout: 30_000 }, () => {
     renderBar();
     fireEvent.click(within(bar()).getByRole("button", { name: "Customize the nav bar" }));
     const editor = screen.getByRole("dialog", { name: "Customize Nav Bar" });
