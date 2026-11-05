@@ -70,7 +70,8 @@ describe("third_party/", () => {
     }
   }, 30_000);
 
-  it("keeps every symlink pointing inside its own project, never out into this repository or the machine", () => {
+  // Walks every vendored file; under the full suite's parallel load that has run past 5 s.
+  it("keeps every symlink pointing inside its own project, never out into this repository or the machine", { timeout: 30_000 }, () => {
     for (const e of entries) {
       const project = join(dir, e.name);
       for (const f of readdirSync(project, { recursive: true, encoding: "utf8" })) {
