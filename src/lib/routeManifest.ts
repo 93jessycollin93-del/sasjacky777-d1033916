@@ -30,6 +30,7 @@ export const CORE_ROUTES: RouteEntry[] = [
   { path: "/skills", label: "Skills & tools for Jackie's agents", group: "ai" },
   { path: "/pc", label: "The PC", group: "core" },
   { path: "/pc-apps", label: "PC App Library", group: "core" },
+  { path: "/artifacts", label: "Artifact Library (every saved artifact, sandboxed)", group: "core" },
   { path: "/repair", label: "Repair Bay", group: "core" },
   { path: "/bridge", label: "Local Bridge (terminal + model vault)", group: "core" },
   { path: "/play", label: "Play", group: "core" },
