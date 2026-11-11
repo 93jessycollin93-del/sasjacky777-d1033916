@@ -78,6 +78,7 @@ const RouterMesh = lazy(() => import("./pages/RouterMesh"));
 const RouterMeshDocs = lazy(() => import("./pages/RouterMeshDocs"));
 const PCDesktop = lazy(() => import("./pages/PCDesktop"));
 const PcApps = lazy(() => import("./pages/PcApps"));
+const ArtifactLibrary = lazy(() => import("./pages/ArtifactLibrary"));
 const PathRouter = lazy(() => import("./pages/PathRouter"));
 const Workstation = lazy(() => import("./pages/Workstation"));
 const Guide = lazy(() => import("./pages/Guide"));
@@ -297,6 +298,14 @@ const App = () => (
                     element={
                       <ProtectedRoute>
                         <PcApps />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/artifacts"
+                    element={
+                      <ProtectedRoute>
+                        <ArtifactLibrary />
                       </ProtectedRoute>
                     }
                   />

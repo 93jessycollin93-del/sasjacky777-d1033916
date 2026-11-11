@@ -61,7 +61,10 @@ export default defineConfig(({ mode }) => ({
         // assets/src/** holds the raw source text GitHub Sync compares
         // against, one chunk per file. It is read on demand by one page;
         // precaching it cost every visitor ~20 MB on first load.
-        globIgnores: ["**/pc-os/**", "**/models/**", "**/*.wasm", "**/assets/src/**"],
+        // artifact-library/** is the Artifact Library: ~40 MB of saved apps and
+        // their thumbnails. A visitor opens a handful; the runtime rules below
+        // keep those offline from the first time they are opened.
+        globIgnores: ["**/pc-os/**", "**/models/**", "**/*.wasm", "**/assets/src/**", "**/artifact-library/**"],
         navigateFallback: "/index.html",
         // /pc-os/index.html is a real navigation when the PC is opened in its
         // own tab. Without this it would fall back to Jackie's shell offline,
@@ -72,6 +75,25 @@ export default defineConfig(({ mode }) => ({
             urlPattern: ({ request }) => request.mode === "navigate",
             handler: "NetworkFirst",
             options: { cacheName: "eye-html", networkTimeoutSeconds: 4 },
+          },
+          {
+            // Artifact files and thumbnails are named by their content hash, so
+            // a cached copy can never be stale: an import that changes one
+            // writes a new name. Ahead of the generic asset rule, whose 300-entry
+            // cap the library's thumbnails alone would churn through.
+            urlPattern: ({ url, sameOrigin }) => sameOrigin && /^\/artifact-library\/(?:files|thumbs)\//.test(url.pathname),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "eye-artifacts",
+              expiration: { maxEntries: 1000, maxAgeSeconds: 60 * 60 * 24 * 365 },
+            },
+          },
+          {
+            // The catalog changes with every import, so the network wins when
+            // it answers; offline, the last catalog still opens the cached files.
+            urlPattern: ({ url, sameOrigin }) => sameOrigin && url.pathname === "/artifact-library/catalog.json",
+            handler: "NetworkFirst",
+            options: { cacheName: "eye-artifact-catalog", networkTimeoutSeconds: 4 },
           },
           {
             urlPattern: ({ url, sameOrigin }) =>

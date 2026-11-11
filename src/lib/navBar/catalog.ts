@@ -78,6 +78,7 @@ const CURATED: readonly NavPage[] = [
   jackie("jacky-live", "Jacky Live", Activity, "/jacky-live"),
   jackie("pc", "The PC", Monitor, "/pc"),
   jackie("pc-apps", "PC Apps", AppWindow, "/pc-apps"),
+  jackie("artifacts", "Artifacts", Library, "/artifacts"),
   jackie("bridge", "Bridge", Terminal, "/bridge"),
   jackie("repair", "Repair Bay", Wrench, "/repair"),
   jackie("mesh", "Router Mesh", Share2, "/mesh"),
